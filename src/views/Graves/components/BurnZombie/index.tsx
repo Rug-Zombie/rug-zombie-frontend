@@ -26,7 +26,7 @@ const BurnZombieModal: React.FC<BurnZombieModalProps> = ({ pid, updateResult, on
   const { account } = useWeb3React();
 
   const handleBurnZombie = () => {
-    drFrankenstein.methods.depositRug(pid, BIG_TEN.pow(18))
+    drFrankenstein.methods.depositRug(pid, BIG_TEN.pow(18).toString())
       .send({ from: account }).then(()=>{
         updateResult(pid);
         toastSuccess(t("1 ZMBE Burned"))

@@ -70,7 +70,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ pid, updateResult, onDismiss })
 
   const handleDepositRug = () => {
     const convertedStakeAmount = getDecimalAmount(new BigNumber(stakeAmount), rug.decimals);
-    drFrankenstein.methods.depositRug(pid, convertedStakeAmount)
+    drFrankenstein.methods.depositRug(pid, convertedStakeAmount.toString())
       .send({ from: account }).then(()=>{
         updateResult(pid);
         toastSuccess(t(`Deposited ${rug.symbol}`))
