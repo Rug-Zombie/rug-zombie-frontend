@@ -12,24 +12,26 @@ const CardMidContent = styled(Heading).attrs({ scale: 'xl' })`
 `
 const EarnAPRCard: React.FC = () => {
   return (
-    <StyledTotalValueLockedCard>
-      <NavLink exact activeClassName="active" to="/graves" id="farm-apr-cta">
-        <CardBody>
-          <Heading >
-            Earn ZMBE and
-          </Heading>
-          <CardMidContent color="primary">
-            NFTS
-          </CardMidContent>
-          <Flex justifyContent="space-between" style={{width: "100%"}}>
+    <div style={{ paddingBottom: '20px' }}>
+      <StyledTotalValueLockedCard>
+        <NavLink exact activeClassName='active' to='/graves' id='farm-apr-cta'>
+          <CardBody>
             <Heading>
-              in the Graves
+              Earn ZMBE and
             </Heading>
-            <ArrowForwardIcon mt={30} color="primary" style={{float: "left"}}/>
-          </Flex>
-        </CardBody>
-      </NavLink>
-    </StyledTotalValueLockedCard>
+            <CardMidContent color='primary'>
+              NFTS
+            </CardMidContent>
+            <Flex justifyContent='space-between' style={{ width: '100%' }}>
+              <Heading>
+                in the Graves
+              </Heading>
+              <ArrowForwardIcon mt={30} color='primary' style={{ float: 'left' }} />
+            </Flex>
+          </CardBody>
+        </NavLink>
+      </StyledTotalValueLockedCard>
+    </div>
   )
 }
 

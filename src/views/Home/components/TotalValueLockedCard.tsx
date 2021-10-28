@@ -37,20 +37,20 @@ const TotalValueLockedCard: React.FC = () => {
     initialTombData()
   }, [])
   useEffect(() => {
-    if(updatePoolInfo === 0) {
-      initialSpawningPoolData(zombie, {update: updatePoolInfo, setUpdate: setUpdatePoolInfo})
+    if (updatePoolInfo === 0) {
+      initialSpawningPoolData(zombie, { update: updatePoolInfo, setUpdate: setUpdatePoolInfo })
     }
   }, [multi, updatePoolInfo, zombie])
 
 
   const totalSpawningPoolStaked = spawningPools().reduce((accumulator, sp) => {
-    return  sp.poolInfo.totalZombieStaked.plus(accumulator)
+    return sp.poolInfo.totalZombieStaked.plus(accumulator)
   }, BIG_ZERO)
 
   const zombiePrice = zombiePriceUsd()
   let tombsTvl = BIG_ZERO
   tombs().forEach(t => {
-    const {poolInfo: { reserves, lpTotalSupply, totalStaked }} = t
+    const { poolInfo: { reserves, lpTotalSupply, totalStaked } } = t
     const reservesUsd = [getBalanceAmount(reserves[0]).times(zombiePrice), getBalanceAmount(reserves[1]).times(bnbPriceUsd())]
     const bnbLpTokenPrice = reservesUsd[0].plus(reservesUsd[1]).div(lpTotalSupply)
     tombsTvl = tombsTvl.plus(totalStaked.times(bnbLpTokenPrice))
@@ -61,27 +61,28 @@ const TotalValueLockedCard: React.FC = () => {
   const [tvl, setTvl] = useState(tombsTvl.plus(zombieBalance).plus(spawningPoolTvl))
   const newTvl = tombsTvl.plus(zombieBalance).plus(spawningPoolTvl)
   useEffect(() => {
-    if (!tvl.eq(newTvl) || tvl.isNaN() ) {
+    if (!tvl.eq(newTvl) || tvl.isNaN()) {
       setTvl(newTvl)
     }
   }, [newTvl, tvl])
 
   return (
-    <StyledTotalValueLockedCard>
-      <CardBody>
-        <Heading size='lg' mb='24px'>
-          Total Value Locked (TVL)
-        </Heading>
-        <>
-          <Heading size='xl'>{`$${numeral(tvl).format('(0.00 a)')}`}</Heading>
-          <Row>
+    <div style={{ paddingTop: '20px'}}>
+      <StyledTotalValueLockedCard>
+        <CardBody>
+          <Heading size='lg' mb='24px'>
+            Total Value Locked (TVL)
+          </Heading>
+          <>
+            <Heading size='xl'>{`$${numeral(tvl).format('(0.00 a)')}`}</Heading>
+            <Row>
+              <Text fontSize='14px'>Across all Tombs and Graves</Text>
+            </Row>
+          </>
 
-            <Text fontSize='14px'>Across all Tombs and Graves</Text>
-          </Row>
-        </>
-
-      </CardBody>
-    </StyledTotalValueLockedCard>
+        </CardBody>
+      </StyledTotalValueLockedCard>
+    </div>
   )
 }
 
