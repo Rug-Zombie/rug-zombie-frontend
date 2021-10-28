@@ -1,0 +1,33 @@
+.card-collectibles {
+  border: 1px solid rgb(204, 246, 108);
+  box-shadow: rgb(204 246 108) 0px 0px 20px !important;
+}
+.card-active {
+  border-color: #808080;
+  box-shadow: #808080 0px 0px 20px !important;
+}
+ .collectibles-bb {
+  border-bottom: 3px solid #b4bd01;
+ }
+ .collectibles {
+  padding: 24px !important;
+ }
+ video {
+  object-fit: fill;
+}
+
+.collectible-card-video {
+    min-width: 90%;
+    min-height: 100%;
+}
+
+
+.cardHeader{
+  margin: 8px 32px;
+}
+
+@media screen and (min-width: 968px) {
+  .collectibles.gOymta, .collectibles.iJWFDb {
+    grid-template-columns: repeat(16,1fr) !important;
+  }
+}
