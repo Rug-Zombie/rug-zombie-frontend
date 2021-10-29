@@ -111,7 +111,10 @@ const Home: React.FC = () => {
           <StyledButton>{t('BARRACKS')}</StyledButton>
         </BarracksDiv>
         <RugRollDiv>
+          <NavLink exact activeClassName='active' to='/rugroll' id='lottery-pot-banner'
+                   style={{ paddingTop: '8px' }}>
           <StyledButton>{t('RUG ROLL')}</StyledButton>
+          </NavLink>
         </RugRollDiv>
         <BlackMarketDiv>
           <StyledButton>{t('BLACK MARKET')}</StyledButton>

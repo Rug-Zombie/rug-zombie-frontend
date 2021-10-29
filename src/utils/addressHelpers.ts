@@ -105,3 +105,7 @@ export const getInstaBuyAddress = () => {
 export const getTombOverlayAddress = () => {
   return getAddress(addresses.tombOverlay)
 }
+
+export const getRugRollAddress = () => {
+  return getAddress(addresses.rugRoll)
+}

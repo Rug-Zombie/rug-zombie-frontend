@@ -12,14 +12,14 @@ const config: MenuEntry[] = [
     href: `/datalab`,
   },
   {
-    label: 'Barracks',
-    icon: 'PoolIcon',
-    href: `/barracks`,
-  },
-  {
     label: 'Rug Roll',
     icon: 'FarmIcon',
     href: `/rugroll`,
+  },
+  {
+    label: 'Barracks',
+    icon: 'PoolIcon',
+    href: `/barracks`,
   },
   {
     label: 'Black Market',

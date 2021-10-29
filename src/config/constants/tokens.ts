@@ -1,6 +1,11 @@
 const tokens = {
   bnb: {
     symbol: 'BNB',
+    address: {
+      56: 'BNB',
+      97: 'BNB',
+    },
+    decimals: 18,
     projectLink: 'https://www.binance.com/',
   },
   cake: {

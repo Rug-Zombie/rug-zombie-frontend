@@ -1,0 +1,17 @@
+.SelectRuggedToken {
+    background: black;
+    padding: 10px;
+    border: 2px solid white;
+    border-radius: 10px;
+    color: white;
+    width: 100%;
+    font-size: 15px;
+}
+
+.icon {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    border-style: none;
+    margin: 0;
+}
