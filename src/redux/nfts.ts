@@ -553,7 +553,7 @@ const nfts: Nft[] = [
     symbol: 'BABE',
     description: 'Her brains bring all the zomboys to the yard.',
     address: {
-      56: '0x0D8A324D7B8F3e5adDcD50eD18E3e756dcdF756A',
+      56: '0xa6D1442807316e163e7fc739281e3e1b93CF0960',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
 
     },
