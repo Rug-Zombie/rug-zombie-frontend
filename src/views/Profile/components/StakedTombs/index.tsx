@@ -12,6 +12,7 @@ import {
 import { useDrFrankenstein, useMultiCall } from 'hooks/useContract'
 import { BIG_ZERO } from '../../../../utils/bigNumber'
 import { initialTombData } from '../../../../redux/fetch'
+import { getId } from '../../../../utils'
 
 const TableCards = styled(BaseLayout)`
   width: 100%;
@@ -62,7 +63,7 @@ const StakedTombs: React.FC = () => {
 
   const handleHarvest = () => {
     stakedTombs.forEach((t) => {
-      drFrankenstein.methods.withdraw(t.pid, 0)
+      drFrankenstein.methods.withdraw(getId(t.pid), 0)
         .send({ from: account() })
     })
   }
