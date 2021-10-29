@@ -6,6 +6,7 @@ import AnnouncementCard from 'views/Home/components/AnnouncementCard'
 import ZmbeStats from 'views/Home/components/ZmbeStats'
 import TotalValueLockedCard from 'views/Home/components/TotalValueLockedCard'
 import { useWeb3React } from '@web3-react/core'
+import HomeInstabuyCard from './components/HomeInstabuyCard'
 import GraveStakingCard from './components/GraveStakingCard'
 import * as fetch from '../../redux/fetch'
 import WhatsNewCard from './components/WhatsNewCard'
@@ -37,7 +38,11 @@ const Cards = styled(BaseLayout)`
   }
 `
 
-const Home: React.FC = () => {
+interface HomeProps {
+  modalObj: {modal: boolean, setModal: any};
+}
+
+const Home: React.FC<HomeProps> = ({ modalObj }) => {
   useEagerConnect()
   const { account } = useWeb3React()
   useEffect(() => {
@@ -46,28 +51,27 @@ const Home: React.FC = () => {
 
   return (
     <>
-      {/* <NFTBanner/> */}
-      <Title />
-      <Page>
-        <div>
-          <Cards>
-            <GraveStakingCard />
-            <AnnouncementCard />
-          </Cards>
-          <Cards>
-            <Flex flexDirection='column' justifyContent='center' >
-              <EnterGravesCard />
-              <TotalValueLockedCard />
-            </Flex>
-            <VictimPoolsCard />
-
-          </Cards>
-          <Cards>
-            <ZmbeStats />
-            <WhatsNewCard />
-          </Cards>
-        </div>
-      </Page>
+     {/* <NFTBanner/> */}
+    <Title/>
+    <Page>
+      <div>
+        <Cards>
+          <GraveStakingCard />
+          <AnnouncementCard />
+          <HomeInstabuyCard id={43} refresh={() => {
+                // eslint-disable-next-line
+                console.log('refresh')
+              }} modalObj={modalObj} />
+          <VictimPoolsCard />
+        </Cards>
+        <Cards>
+          <EnterGravesCard/>
+          <TotalValueLockedCard/>
+          <ZmbeStats />
+          <WhatsNewCard/>
+        </Cards>
+      </div>
+    </Page>
     </>
   )
 }

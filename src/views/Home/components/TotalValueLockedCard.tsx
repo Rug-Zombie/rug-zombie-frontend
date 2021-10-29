@@ -67,7 +67,6 @@ const TotalValueLockedCard: React.FC = () => {
   }, [newTvl, tvl])
 
   return (
-    <div style={{ paddingTop: '20px'}}>
       <StyledTotalValueLockedCard>
         <CardBody>
           <Heading size='lg' mb='24px'>
@@ -82,7 +81,6 @@ const TotalValueLockedCard: React.FC = () => {
 
         </CardBody>
       </StyledTotalValueLockedCard>
-    </div>
   )
 }
 
