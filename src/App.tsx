@@ -28,6 +28,7 @@ import DataLab from './views/Catacombs/components/DataLab'
 import BlackMarket from './views/Catacombs/components/BlackMarket'
 import Barracks from './views/Catacombs/components/Barracks'
 import RugRoll from './views/Catacombs/components/RugRoll'
+import DayOfDead from './views/DayOfDead'
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page
 const Landing = lazy(() => import('./components/Landing'))
@@ -89,6 +90,8 @@ const App: React.FC = () => {
             <Route exact path={routes.AUCTION}><Mausoleum /></Route>
             <Route exact path={routes.GRAVEYARD}><Graveyard /></Route>
             <Route exact path={routes.PROFILE}><Profile /></Route>
+            <Route exact path={routes.DAYOFDEAD}><DayOfDead /></Route>
+
           </Menu>
         </Switch>
       </SuspenseWithChunkError>

@@ -517,7 +517,7 @@ const spawningPools: SpawningPool[] = [
     type: 'image',
     address: {
       56: '0x637810116bfdEcA4bB38c61D9FeBC5911440B0eF',
-      97: '',
+      97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
     },
     endBlock: 12350000,
     project: {

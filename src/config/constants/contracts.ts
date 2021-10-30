@@ -33,7 +33,7 @@ export default {
     56: '0xa7E5bE955311988cb9d74d0edc4e3bFabA7439B5',
   },
   nftOwnership: {
-    97: '',
+    97: '0x4597A2BC052086109cd6173EEc9B8Ef58dF49829',
     56: '0x156537f9C6eb300A3FDf73cD77d1181CEbFd1c88',
   },
   sousChef: {
@@ -107,5 +107,9 @@ export default {
   rugRoll: {
     56: '0x88D3b5283c7AC9Ee88d002229737c41eA8076016',
     97: '0x40557b30af8F6FcFd3852DE42AD0D2F36a0Bd5a6',
+  },
+  nftSwapper: {
+    56: '0x0Bb3e57FFd5f1a27bD98f87D9890Dc81826475b4',
+    97: '0x889E97403400257454dF59796Fc7A15bB6b9c03a',
   }
 }

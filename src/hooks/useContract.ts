@@ -28,6 +28,7 @@ import {
   getCatacombsContract,
   getInstaBuyContract,
   getTombOverlayContract, getRugRollContract,
+  getNftSwapperContract
 } from 'utils/contractHelpers'
 
 /**
@@ -174,4 +175,9 @@ export const useTombOverlay = () => {
 export const useRugRollContract = () => {
   const web3 = useWeb3()
   return useMemo(() => getRugRollContract(web3), [web3])
+}
+
+export const useNftSwapper = () => {
+  const web3 = useWeb3();
+  return useMemo(() => getNftSwapperContract(web3), [web3]);
 }

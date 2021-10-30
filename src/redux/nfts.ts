@@ -108,7 +108,7 @@ const nfts: Nft[] = [
     description: 'This grave\'s multiplier is suspiciously low, what could frankenstein be planning.',
     address: {
       56: '0x6209E17d98ba2089571476940751802AAc4249e8',
-      97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
+      97: '0xe06DdB8c0cC6c0CB35e252f9c333dCa7b0362Dc4',
 
     },
     totalSupply: BIG_ZERO,
@@ -314,7 +314,7 @@ const nfts: Nft[] = [
     description: 'In your head X2.',
     address: {
       56: '0xABef28a6686A75c24c79fD95d31E7bD9828Ab1B8',
-      97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
+      97: '0x996540168b5981A5a249e44BA4347fd099a6d1e7',
 
     },
     totalSupply: BIG_ZERO,
@@ -474,7 +474,7 @@ const nfts: Nft[] = [
     description: 'If three or more values occur at the maximum frequency, the dataset is multi-modal.',
     address: {
       56: '0x72762C0D0812F157b59CecF0eeC6b1B15d175b97',
-      97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
+      97: '0x71332418219A3529e317806F4E9Ee0B5efe5C30d',
 
     },
     totalSupply: BIG_ZERO,
@@ -785,6 +785,54 @@ const nfts: Nft[] = [
     path: 'https://ipfs.io/ipfs/QmTUNZZSZZSbVtfvDkHFXPr9fuHdXYLnQeTJMTiRMJ7epq',
     type: 'video',
     rarity: 'Legendary',
+    artist: artists.jussjoshinduh,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
+  {
+    id: 49,
+    name: 'Sugar Skull Common',
+    symbol: 'SSKULL',
+    description: 'lo basico',
+    address: {
+      56: '0xe06DdB8c0cC6c0CB35e252f9c333dCa7b0362Dc4',
+      97: '0x4811502B1d2E3695852d331E8e7Ec8acFd18cff3',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmNvGS6bxSueoyMHsxHtt7biEWCLZJ3o9TLHDR9hxHS7m1',
+    type: 'image',
+    rarity: 'Common',
+    artist: artists.jussjoshinduh,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
+  {
+    id: 50,
+    name: 'The Sugar Bunch',
+    symbol: 'SBUNCH',
+    description: 'Tlos tigres chinos',
+    address: {
+      56: '0x344D01D5EADb5eb261c779B4Aa8B821b6Fa15D0B',
+      97: '0x7742D9F34010F5d1015885c5d10ED615DFa2eb53',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmRwEtpb8yxcWBTBCp7UFFH72R2c72fJP4swfjyTyJv7C4',
+    type: 'image',
+    rarity: 'Unommon',
+    artist: artists.jussjoshinduh,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
+  {
+    id: 51,
+    name: 'The Sugar Plex',
+    symbol: 'SPLEX',
+    description: 'la reina',
+    address: {
+      56: '0x29c2aE1acFE7dbADeed503AF38F9A59E7a72A86d',
+      97: '0x701855c54F7084D494DA18157bD164d3AB32a0a0',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmRWcYPzZZt7Z1gk6VPZ9zJS7nAY8xxD6JX3ScdyrqyfR2',
+    type: 'image',
+    rarity: 'Rare',
     artist: artists.jussjoshinduh,
     userInfo: { ...DEFAULT_USER_INFO },
   },

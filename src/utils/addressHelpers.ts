@@ -109,3 +109,7 @@ export const getTombOverlayAddress = () => {
 export const getRugRollAddress = () => {
   return getAddress(addresses.rugRoll)
 }
+
+export const getNftSwapperAddress = () => {
+  return getAddress(addresses.nftSwapper)
+}
