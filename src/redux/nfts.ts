@@ -996,6 +996,22 @@ const nfts: Nft[] = [
     artist: artists.TheLeap3d,
     userInfo: { ...DEFAULT_USER_INFO },
   },
+
+  {
+    id: 52,
+    name: 'Fake Chompers V3',
+    symbol: 'CHOMPERSV3',
+    description: 'Live every week like it\'s shark week.',
+    address: {
+      56: '',
+      97: '0xC888771d64850Aa3f2F854e30d072E78597C799D',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'images/rugZombie/Chompers.webm',
+    type: 'video',
+    rarity: 'Legendary',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts
