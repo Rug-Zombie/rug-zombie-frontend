@@ -275,6 +275,23 @@ const tokens = {
     projectLink: 'https://autoshark.finance/',
     tokenLogo: 'https://bscscan.com/token/images/autoshark_32b.png'
   },
+  diamonds: {
+    symbol: 'DIAMONDS',
+    address: {
+      56: '0x37c4bcf0b8fc6f074be933af7fb9d1dde55f979c',
+      97: '',
+    },
+    decimals: 12,
+  },
+
+  zdiamonds: {
+    symbol: 'ZDIAMONDS',
+    address: {
+      56: '0xCDB6FC41a78ca570e9e27C627eC4a9d165F44A10',
+      97: '',
+    },
+    decimals: 0,
+  },
   horde: {
     symbol: 'HORDE',
     address: {

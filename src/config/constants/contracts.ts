@@ -113,7 +113,7 @@ export default {
     97: '0x889E97403400257454dF59796Fc7A15bB6b9c03a',
   },
   ztokenSwapper: {
-    56: '',
+    56: '0xe9B5206Cf835d0aEC6B05DA9f53a1989033812E2',
     97: '0xb1E96dA5a08423C5f0646C0eBfd135FB896d1477',
   },
 }

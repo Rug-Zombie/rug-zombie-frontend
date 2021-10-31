@@ -4,6 +4,8 @@ import { Card, CardBody, Heading } from '@rug-zombie-libs/uikit';
 import { useTranslation } from 'contexts/Localization';
 import Select, { OptionProps } from 'components/Select/Select';
 import VictimPoolsInfo from './VictimPoolInfo';
+import tokens from '../../../../config/constants/tokens'
+import { getAddress } from '../../../../utils/addressHelpers'
 
 const StyledVictimPoolsCard = styled(Card)`
   background-image: url('/images/zmbe-bg.png');
@@ -19,7 +21,6 @@ const VictimPoolsCard: React.FC = () => {
 
     const options = [
         { label: 'Black Diamond', value: 'BLACK' },
-        { label: 'Test', value: 'TEST', rug: 'XXX', ztoken: 'XXX' }
     ]
 
     const [selectedPool, setSelectedPool] = useState(options[0]);
