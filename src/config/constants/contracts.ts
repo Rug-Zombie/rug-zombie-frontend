@@ -111,5 +111,9 @@ export default {
   nftSwapper: {
     56: '0x0Bb3e57FFd5f1a27bD98f87D9890Dc81826475b4',
     97: '0x889E97403400257454dF59796Fc7A15bB6b9c03a',
-  }
+  },
+  ztokenSwapper: {
+    56: '0xe9B5206Cf835d0aEC6B05DA9f53a1989033812E2',
+    97: '0xb1E96dA5a08423C5f0646C0eBfd135FB896d1477',
+  },
 }

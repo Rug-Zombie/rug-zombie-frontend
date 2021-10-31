@@ -113,3 +113,7 @@ export const getRugRollAddress = () => {
 export const getNftSwapperAddress = () => {
   return getAddress(addresses.nftSwapper)
 }
+
+export const getZTokenSwapperAddress = () => {
+  return getAddress(addresses.ztokenSwapper)
+}
