@@ -94,9 +94,9 @@ const HomeInstabuyCard: React.FC<InstabuyCardProps> = ({ id, modalObj }) => {
     return (
         <StyledInstabuy>
             <StyleCardHeader>                    
-                <Flex justifyContent='center' flexDirection='column' paddingTop='8%' paddingBottom='5%' paddingRight='5%' paddingLeft='5%' height='100%' onClick={openModal}>                        
-                    <Heading size='xl'>
-                        {t('Buy This NFT')}
+                <Flex justifyContent='center' flexDirection='column' paddingTop='8%' paddingBottom='5%' paddingRight='5%' paddingLeft='5%' height='100%' onClick={openModal}>
+                    <Heading size='lg' mb='24px'>
+                        {t('Burn ZMBE with each purchase')}
                     </Heading>
                     {type === 'image' ? <img
                         src={path} alt='nft'
