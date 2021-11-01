@@ -1,16 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
-import { Card, CardBody, Heading, LinkExternal, useModal } from '@rug-zombie-libs/uikit'
+import { CardBody, Heading, LinkExternal, useModal } from '@rug-zombie-libs/uikit'
 import nfts from 'redux/nfts'
 import { Artist } from 'redux/types'
 import ConvertNftModal from './ConvertNftModal'
-
-const StyledNftCard = styled(Card)`
-  align-items: center;
-  display: flex;
-  flex: 1;
-  box-shadow: rgb(204 246 108) 0px 0px 20px;
-`
 
 interface NftCardProps {
     name: string;

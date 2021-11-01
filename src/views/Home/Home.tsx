@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { BaseLayout, Flex } from '@rug-zombie-libs/uikit'
+import { BaseLayout } from '@rug-zombie-libs/uikit'
 import Page from 'components/layout/Page'
 import AnnouncementCard from 'views/Home/components/AnnouncementCard'
 import ZmbeStats from 'views/Home/components/ZmbeStats'

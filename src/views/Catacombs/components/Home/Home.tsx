@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom'
 
 /* eslint-disable */
 
-import { isMobile } from 'react-device-detect'
 import styled from 'styled-components'
 import CatacombsBackgroundDesktopSVG from '../../../../images/CatacombsMain-1920x1080px.svg'
 import CatacombsBackgroundMobileSVG from '../../../../images/CatacombsMain-414x720px.svg'
