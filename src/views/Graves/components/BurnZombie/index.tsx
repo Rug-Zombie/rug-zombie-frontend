@@ -2,7 +2,7 @@
 import React from 'react'
 import { Button, Flex, Image, Modal, Text } from '@rug-zombie-libs/uikit'
 import { useDrFrankenstein } from 'hooks/useContract'
-import { APESWAP_EXCHANGE_URL } from 'config'
+import { AUTOSHARK_EXCHANGE_URL } from 'config'
 import { getZombieAddress } from 'utils/addressHelpers'
 import { BIG_TEN } from 'utils/bigNumber'
 import { useWeb3React } from '@web3-react/core'
@@ -49,7 +49,7 @@ const BurnZombieModal: React.FC<BurnZombieModalProps> = ({ pid, updateResult, on
       Don&apos;t worry, he&apos;s already dead so he won&apos;t feel it.
     </Text>
     {zombieBalance().isZero() ?
-       <Button mt="8px" as="a" href={`${APESWAP_EXCHANGE_URL}/swap?outputCurrency=${getZombieAddress()}`} variant="secondary">
+       <Button mt="8px" as="a" href={`${AUTOSHARK_EXCHANGE_URL}/swap?outputCurrency=${getZombieAddress()}`} variant="secondary">
        Get ZMBE
      </Button> :
       <Button onClick={handleBurnZombie} mt="8px" as="a" variant="secondary">
