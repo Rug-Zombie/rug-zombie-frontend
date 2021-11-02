@@ -569,7 +569,7 @@ const nfts: Nft[] = [
     symbol: 'ZOLOM',
     description: 'Hail Hydra.',
     address: {
-      56: '0x65c8747e82F3CC648045f06a85Dc239D09d8286A',
+      56: '0x835a932909c97bb68160be4547bc196abb73475a',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
 
     },
