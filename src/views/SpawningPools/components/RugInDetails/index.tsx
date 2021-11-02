@@ -6,6 +6,7 @@ import { getFullDisplayBalance } from 'utils/formatBalance'
 import BigNumber from 'bignumber.js';
 import { registerToken } from 'utils/wallet'
 import { bnbPriceUsd, spawningPoolById } from '../../../../redux/get'
+import { formatDuration } from '../../../../utils/timerHelpers'
 
 
 interface RugInDetailsProps {
@@ -16,7 +17,7 @@ interface RugInDetailsProps {
 }
 
 const RugInDetails: React.FC<RugInDetailsProps> = ({ id, account }) => {
-  const { subtitle, poolInfo, project, path, type, withdrawalCooldown, nftRevivalTime, endBlock, artist, rewardToken } = spawningPoolById(id)
+  const { subtitle, poolInfo, project, path, type, withdrawalCooldown, nftRevivalTime, endBlock, artist, rewardToken, endDate } = spawningPoolById(id)
   const spawningPoolContract = useSpawningPool(id);
 
   const [unlockFee, setUnlockFee] = useState(0);
@@ -28,6 +29,8 @@ const RugInDetails: React.FC<RugInDetailsProps> = ({ id, account }) => {
         setUnlockFee(parseFloat(getFullDisplayBalance(new BigNumber(res), tokens.zmbe.decimals, 4)));
       })
   })
+
+  const now = Math.floor(Date.now() / 1000)
 
   return (
     <div key={id} className="rug-indetails">
@@ -87,8 +90,12 @@ const RugInDetails: React.FC<RugInDetailsProps> = ({ id, account }) => {
           <span className="indetails-value">{getFullDisplayBalance(poolInfo.minimumStake)} ZMBE</span>
         </span>
         <span className="indetails-title">
+          NFT Rewards End:
+          <span className="indetails-value">{formatDuration(endDate - now)}</span>
+        </span>
+        <span className="indetails-title">
           <LinkExternal href={`https://bscscan.com/block/countdown/${endBlock}`}>
-            Rewards End Block
+            {rewardToken.symbol} Rewards End Block
           </LinkExternal>
         </span>
         <br />
@@ -101,11 +108,6 @@ const RugInDetails: React.FC<RugInDetailsProps> = ({ id, account }) => {
           )}
         </span>
       </div>
-      {/* <div className="direction-column">
-          <a href="/" target="_blank" className="indetails-link">Tutorials goes to gitbook</a>
-          <a href="/" target="_blank" className="indetails-link">Fees &amp; Tokenomics goes to gitbook page</a>
-          <a href="/" target="_blank" className="indetails-link">View Contract goes to BSC Scan (wait for address)</a>
-        </div> */}
     </div>
   )
 }

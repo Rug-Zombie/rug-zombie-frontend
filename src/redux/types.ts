@@ -139,6 +139,7 @@ export interface SpawningPool {
   address: Address,
   project: any,
   endBlock: number,
+  endDate: number,
   withdrawalCooldown: string,
   nftRevivalTime: string,
   isNew: boolean,

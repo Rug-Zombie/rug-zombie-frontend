@@ -10,8 +10,22 @@ import './SpawningPools.Styles.css'
 import { initialSpawningPoolData, spawningPool } from '../../redux/fetch'
 import * as get from '../../redux/get'
 import { useZombie } from '../../hooks/useContract'
+import SpawningPoolTabButtons from './components/SpawningPoolTabButtons'
+import { spawningPools } from '../../redux/get'
 
 let accountAddress
+const now = Math.floor(Date.now() / 1000)
+
+const filterPools = (i) => {
+  switch(i) {
+    case 0: // Live
+      return spawningPools()
+    case 1: // Ended
+      return spawningPools().filter(sp => sp.endDate < now)
+    default:
+      return spawningPools()
+  }
+}
 
 const SpawningPools: React.FC = () => {
   const { account } = useWeb3React()
@@ -20,6 +34,8 @@ const SpawningPools: React.FC = () => {
   const id = 0
   const [updatePoolInfo, setUpdatePoolInfo] = useState(0)
   const [updateUserInfo, setUpdateUserInfo] = useState(0)
+  const [filter, setFilter] = useState(0)
+  const [stakedOnly, setStakedOnly] = useState(false)
   useEffect(() => {
     if(account) {
       if(updateUserInfo === 0) {
@@ -49,6 +65,8 @@ const SpawningPools: React.FC = () => {
         })
     }
 
+  const visiblePools = stakedOnly ? filterPools(filter).filter(sp => !sp.userInfo.amount.isZero()) : filterPools(filter).filter(sp => sp.endDate > now || filter === 1)
+
   return (
     <>
       <PageHeader background="#101820">
@@ -68,8 +86,9 @@ const SpawningPools: React.FC = () => {
         </Flex>
       </PageHeader>
       <Page>
-      <div>
-        {get.spawningPools().map((g) => {
+        <SpawningPoolTabButtons setFilter={setFilter} stakedOnly={stakedOnly} setStakedOnly={setStakedOnly} />
+        <div>
+        {visiblePools.map((g) => {
           return <Table zombieUsdPrice={get.zombiePriceUsd()}
                         updateResult={updateResult} updateAllowance={updateAllowance} bnbInBusd={bnbInBusd}
                         isAllowance={isAllowance} key={g.id} id={g.id} account={accountAddress} />

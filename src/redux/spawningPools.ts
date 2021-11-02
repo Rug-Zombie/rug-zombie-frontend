@@ -16,6 +16,7 @@ const spawningPools: SpawningPool[] = [
       97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
     },
     endBlock: 14170000,
+    endDate: 1641646800,
     project: {
       name: 'French Connection Finance',
       description: 'French Connection Finance aims to create the world\'s first credit card to cryptocurrency encrypted online payment gateway, which rewards its holders with 9% fully automated BNB reflection on all the transactions made with $FCF during the same 24 hour period.',
@@ -73,6 +74,7 @@ const spawningPools: SpawningPool[] = [
       97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
     },
     endBlock: 13800000,
+    endDate: 1640523600,
     project: {
       name: 'Autoshark',
       description: 'AutoShark Finance is the 1st Cross-Chain Hybrid AMM and Yield Optimizer, offering unparalleled access to farming opportunities through the use of superior yield strategies, auto-compounding vaults, and NFT-powered farming.',
@@ -131,6 +133,7 @@ const spawningPools: SpawningPool[] = [
       97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
     },
     endBlock: 13700000,
+    endDate: 1640188800,
     project: {
       name: 'Bingus Network',
       description: 'The Bingus project was launched as an animal charity / meme token on BSC. Bingus Network aims to save as many animals as possible. A percentage of every Bingus Network transaction is donated to animal shelters and charities and over $120k has been donated since April.',
@@ -188,6 +191,7 @@ const spawningPools: SpawningPool[] = [
       97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
     },
     endBlock: 13620000,
+    endDate: 1639940400,
     project: {
       name: 'Octaplex Network',
       description: 'Octaplex Network is an ecosystem with a unique and revolutionary concept bringing a new template for the future development of DeFi and yield bearing tokens. They aim to create an ecosystem of tokens in which users shall be rewarded and will be able to get special deals by holding their native $PLX token as well as our partner project tokens.',
@@ -245,6 +249,7 @@ const spawningPools: SpawningPool[] = [
       97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
     },
     endBlock: 13566061,
+    endDate: 1639771200,
     project: {
       name: 'AtmosSoft',
       description: 'AtmosSoft is an NFT Play-2-Earn collectible card game where you Earn $ATMSSFT just by playing. NFT Staking and Farming including P2P gameplay to earn a spot in tournaments with prize pools.',
@@ -302,6 +307,7 @@ const spawningPools: SpawningPool[] = [
       97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
     },
     endBlock: 13503600,
+    endDate: 1639576800,
     project: {
       name: 'CryptoMonkey Empire',
       description: 'CryptoMonkey Empire is a Massively Multiplayer Online Real Time Strategy video game. Where you, the player manages monkeys to build an Empire. You will collect resources by raiding other player\'s empires to build up a city and make technological progress. Their MonkeyCoin token is used in game as a resource and your army is used to steal other player\'s cryptocurrency during raids.',
@@ -363,6 +369,7 @@ const spawningPools: SpawningPool[] = [
       97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
     },
     endBlock: 13350000,
+    endDate: 1639101600,
     project: {
       name: 'WalletNow',
       description: 'WalletNow is an advanced crypto portfolio monitoring solution. It aggregates all your DeFi & CeFi investments in a searchable table and actively monitors it with an integrated Telegram Bot. With detailed LP information, impermanent loss and yields calculation, you are always in control of your wallet.',
@@ -416,6 +423,7 @@ const spawningPools: SpawningPool[] = [
       97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
     },
     endBlock: 13140040,
+    endDate: 1638453600,
     project: {
       name: 'Koala Defi',
       description: 'Koala DeFi Finance is a yield farming dapp running on Binance Smart Chain and ApeSwap exchange, with cool new features that let you earn and win LYPTUS tokens. The idea behind this project is to create a safe place for conservative yield farmers. ',
@@ -468,6 +476,7 @@ const spawningPools: SpawningPool[] = [
       97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
     },
     endBlock: 12790000,
+    endDate: 1637366400,
     project: {
       name: 'Main Street',
       description: 'Main Street is a deflationary token that provides its holders with a space to find new high use case tokens in their Neighborhood and Alley, as well as entertainment and games in their Shops.',
@@ -520,6 +529,7 @@ const spawningPools: SpawningPool[] = [
       97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
     },
     endBlock: 12350000,
+    endDate: 1636189527,
     project: {
       name: 'Euler Tools',
       description: 'Euler Tools is a platform to explore and discover blockchain content. With a clean, usable and responsive interface.',
@@ -580,6 +590,7 @@ const spawningPools: SpawningPool[] = [
       97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
     },
     endBlock: 12209400,
+    endDate: 1635608820,
     project: {
       name: 'Gorilla-Fi',
       description: 'Gorilla-Fi is a comprehensive De-Fi earnings ecosystem that allows anyone with a smartphone to earn passive income.',
