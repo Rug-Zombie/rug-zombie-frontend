@@ -4,8 +4,8 @@ import styled from 'styled-components'
 import { BalanceInput, Button, Flex, Image, Modal, Slider, Text } from '@rug-zombie-libs/uikit'
 import useTheme from 'hooks/useTheme'
 import { useDrFrankenstein } from 'hooks/useContract'
-import { BASE_EXCHANGE_URL } from 'config'
-import { getAddress } from 'utils/addressHelpers'
+import { AUTOSHARK_EXCHANGE_URL, BASE_EXCHANGE_URL } from 'config'
+import { getAddress, getZombieAddress } from 'utils/addressHelpers'
 import { getBalanceAmount, getDecimalAmount, getFullDisplayBalance } from 'utils/formatBalance'
 import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
@@ -138,7 +138,7 @@ const StakeZombieModal: React.FC<StakeZombieModalProps> = ({pid, zombieUsdPrice,
         </StyledButton>
     </Flex>
     {zombieBalance.toString() === '0' ?
-       <Button mt="8px" as="a" external href={`${BASE_EXCHANGE_URL}/swap?outputCurrency=${getAddress(tokens.zmbe.address)}`} variant="secondary">
+       <Button mt="8px" as="a" external href={`${AUTOSHARK_EXCHANGE_URL}/swap?outputCurrency=${getZombieAddress()}`} variant="secondary">
        Get ZMBE
      </Button> :
       <Button onClick={handleStakeZmbe} disabled={isDisabled} mt="8px" as="a" variant="secondary">

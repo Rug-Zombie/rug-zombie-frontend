@@ -13,7 +13,7 @@ import { ethers } from 'ethers'
 import { BIG_TEN, BIG_ZERO } from '../../../../../utils/bigNumber'
 import { useRugRollContract, useZombie } from '../../../../../hooks/useContract'
 import { account, zombieBalance } from '../../../../../redux/get'
-import { APESWAP_EXCHANGE_URL } from '../../../../../config'
+import { APESWAP_EXCHANGE_URL, AUTOSHARK_EXCHANGE_URL } from '../../../../../config'
 import { getAddress, getRugRollAddress, getZombieAddress } from '../../../../../utils/addressHelpers'
 import UnlockButton from '../../../../../components/UnlockButton'
 import addresses from '../../../../../config/constants/contracts'
@@ -23,6 +23,7 @@ import { getBep20Contract } from '../../../../../utils/contractHelpers'
 import useWeb3 from '../../../../../hooks/useWeb3'
 import useToast from '../../../../../hooks/useToast'
 import { tokenByAddress } from '../../../../../utils/tokenHelper'
+import { ToastDescriptionWithTx } from '../../../../../components/Toast'
 
 
 const StyledButton = styled(Button)`
@@ -132,13 +133,14 @@ const RugRollCard: React.FC<ViewCardProps> = () => {
     setRugRollPending(true)
     rugRollContract.methods.rugRoll(getAddress(selectedRug.address))
       .send({ from: account() })
-      .then(res => {
+      .then(tx => {
         setRugRollPending(false)
-        const receivedToken = tokenByAddress(res.events.Swapped.returnValues._returnedRug)
+        const receivedToken = tokenByAddress(tx.events.Swapped.returnValues._returnedRug)
         if (receivedToken) {
-          toastSuccess(`Received ${receivedToken.symbol}`)
+          toastSuccess(`Received ${receivedToken.symbol}`,<ToastDescriptionWithTx txHash={tx.transactionHash} />)
         } else {
-          toastSuccess(`Received token`)
+          toastSuccess(`Received token`,<ToastDescriptionWithTx txHash={tx.transactionHash} />)
+
         }
       })
       .catch(() => {
@@ -181,7 +183,7 @@ const RugRollCard: React.FC<ViewCardProps> = () => {
             // eslint-disable-next-line no-nested-ternary
             account() ? zombieBalance().lt(burnAmount) ?
               <Button mt='24px' as='a'
-                      href={`${APESWAP_EXCHANGE_URL}/swap?outputCurrency=${getZombieAddress()}`}
+                      href={`${AUTOSHARK_EXCHANGE_URL}/swap?outputCurrency=${getZombieAddress()}`}
                       variant='secondary' style={{ border: '2px solid white', width: '100%' }}>
                 <Text color='white'>Get ZMBE</Text>
               </Button> : zombieApproval.isZero() ?
