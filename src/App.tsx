@@ -29,6 +29,10 @@ import BlackMarket from './views/Catacombs/components/BlackMarket'
 import Barracks from './views/Catacombs/components/Barracks'
 import RugRoll from './views/Catacombs/components/RugRoll'
 import SwiperProvider from './views/Mausoleum/context/SwiperProvider'
+import DayOfDead from './views/DayOfDead'
+
+import SharkPools from './views/SharkPools'
+
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page
 const Landing = lazy(() => import('./components/Landing'))
@@ -94,7 +98,8 @@ const App: React.FC = () => {
             <Route exact path={routes.AUCTION}><Mausoleum /></Route>
             <Route exact path={routes.GRAVEYARD}><Graveyard /></Route>
             <Route exact path={routes.PROFILE}><Profile /></Route>
-
+            <Route exact path={routes.DAYOFDEAD}><DayOfDead /></Route>
+            <Route exact path={routes.SHARKPOOLS}><SharkPools /></Route>
           </Menu>
         </Switch>
       </SuspenseWithChunkError>

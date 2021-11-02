@@ -965,6 +965,24 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://cosmos.network/',
   },
+  jaws: {
+    symbol: 'JAWS',
+    address: {
+      56: '0xdd97ab35e3c0820215bc85a395e13671d84ccba2',
+      97: '0xCE2DFB3a10f534Fa18c9d15C0239938C06Ab3b24'
+    },
+    decimals: 18,
+    projectLink: 'https://autoshark.finance/'
+  },
+  cjaws: {
+    symbol: 'cJAWS',
+    address: {
+      56: '',
+      97: '0x72DCd01655E8b942DBFF64474Dc5085A50C721a9'
+    },
+    decimals: 18,
+    projectLink: 'https://autoshark.finance/'
+  },
   none: {
     symbol: '',
     address: {

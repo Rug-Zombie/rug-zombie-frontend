@@ -88,7 +88,6 @@ const SpawningPools: React.FC = () => {
       </PageHeader>
       <Page>
       <div>
-        <SharkPool />
         {get.spawningPools().map((g) => {
           return <Table zombieUsdPrice={get.zombiePriceUsd()}
                         updateResult={updateResult} updateAllowance={updateAllowance} bnbInBusd={bnbInBusd}

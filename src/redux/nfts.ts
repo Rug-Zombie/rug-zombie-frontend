@@ -1004,7 +1004,7 @@ const nfts: Nft[] = [
     description: 'Live every week like it\'s shark week.',
     address: {
       56: '',
-      97: '0xC888771d64850Aa3f2F854e30d072E78597C799D',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
     },
     totalSupply: BIG_ZERO,
     path: 'images/rugZombie/Chompers.webm',
