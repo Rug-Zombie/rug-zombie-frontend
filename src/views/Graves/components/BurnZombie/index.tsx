@@ -2,7 +2,7 @@
 import React from 'react'
 import { Button, Flex, Image, Modal, Text } from '@rug-zombie-libs/uikit'
 import { useDrFrankenstein } from 'hooks/useContract'
-import { APESWAP_EXCHANGE_URL, AUTOSHARK_EXCHANGE_URL } from 'config'
+import { AUTOSHARK_EXCHANGE_URL } from 'config'
 import { getZombieAddress } from 'utils/addressHelpers'
 import { BIG_TEN } from 'utils/bigNumber'
 import { useWeb3React } from '@web3-react/core'

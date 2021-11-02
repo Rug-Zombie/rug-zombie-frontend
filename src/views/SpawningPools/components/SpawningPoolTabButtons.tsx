@@ -4,31 +4,19 @@ import {
   ButtonMenu,
   ButtonMenuItem,
   Button,
-  HelpIcon,
   Toggle,
   Text,
   Flex,
   NotificationDot,
-  Link as UiKitLink, useMatchBreakpoints,
+  useMatchBreakpoints,
 } from '@rug-zombie-libs/uikit'
 import { useTranslation } from 'contexts/Localization'
-
-const ButtonText = styled(Text)`
-  display: none;
-
-  ${({ theme }) => theme.mediaQueries.lg} {
-    display: block;
-  }
-`
 
 const StyledButton = styled(Button)`
   flex-grow: 1;
   margin-right: 15px;
 `
 
-const StyledLink = styled(UiKitLink)`
-  width: 100%;
-`
 const FILTERS = ['Live', 'Ended']
 
 const SpawningPoolTabButtons = ({ setFilter, stakedOnly, setStakedOnly }) => {
