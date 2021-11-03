@@ -98,8 +98,8 @@ export const getCatacombsAddress = () => {
   return getAddress(addresses.catacombs)
 }
 
-export const getInstaBuyAddress = () => {
-  return getAddress(addresses.instaBuy)
+export const getInstaBuyAddress = (version: string) => {
+  return getAddress(version === 'v2' ? addresses.instaBuyV2 : addresses.instaBuy)
 }
 
 export const getTombOverlayAddress = () => {

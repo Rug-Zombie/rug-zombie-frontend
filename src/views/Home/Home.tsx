@@ -58,7 +58,7 @@ const Home: React.FC<HomeProps> = ({ modalObj }) => {
         <Cards>
           <GraveStakingCard />
           <AnnouncementCard />
-          <HomeInstabuyCard id={43} refresh={() => {
+          <HomeInstabuyCard id={2} refresh={() => {
                 // eslint-disable-next-line
                 console.log('refresh')
               }} modalObj={modalObj} />

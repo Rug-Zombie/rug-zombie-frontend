@@ -19,6 +19,7 @@ import { BIG_ZERO } from '../../../../utils/bigNumber'
 import { getFullDisplayBalance } from '../../../../utils/formatBalance'
 import useToast from '../../../../hooks/useToast'
 import { getAddress } from '../../../../utils/addressHelpers'
+import { instaBuyById } from '../../../../utils'
 
 
 const StyleDetails = styled.div`
@@ -54,10 +55,11 @@ const initialNftInfo = {
 }
 
 const InstabuyCard: React.FC<InstabuyCardProps> = ({ id, modalObj }) => {
-  const { name, symbol, description, address, path, type, totalSupply } = nftById(id)
+  const { nftId, version } = instaBuyById(id)
+  const { name, symbol, description, address, path, type, totalSupply } = nftById(nftId)
   const [isOpen, setIsOpen] = useState(false)
   const [nftInfo, setNftInfo] = useState(initialNftInfo)
-  const instaBuy = useInstaBuyContract()
+  const instaBuy = useInstaBuyContract(version)
   const { toastSuccess } = useToast()
 
   useEffect(() => {
@@ -132,7 +134,10 @@ const InstabuyCard: React.FC<InstabuyCardProps> = ({ id, modalObj }) => {
             <div className='direction-column' style={{ paddingTop: '5%' }}>
               <span className='indetails-type'>{name}</span>
               <span className='indetails-title'>{description}</span>
-              <span className='indetails-title'>{nftInfo.maxMintsPerUser.toString()} per wallet ({nftInfo.maxMints.minus(totalSupply).toString()} remaining).</span>
+              {!nftInfo.maxMints.isZero() ?
+                <span className='indetails-title'>{nftInfo.maxMintsPerUser.toString()} per wallet ({nftInfo.maxMints.minus(totalSupply).toString()} remaining).</span>:
+              null}
+
             </div>
           }
         </CardFooter>
