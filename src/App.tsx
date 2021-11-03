@@ -29,6 +29,7 @@ import BlackMarket from './views/Catacombs/components/BlackMarket'
 import Barracks from './views/Catacombs/components/Barracks'
 import RugRoll from './views/Catacombs/components/RugRoll'
 import DayOfDead from './views/DayOfDead'
+import SwiperProvider from './views/Mausoleum/context/SwiperProvider'
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page
 const Landing = lazy(() => import('./components/Landing'))
@@ -47,7 +48,7 @@ const App: React.FC = () => {
 
   const [isAuthenticated, setAuthenticated] = useState(false)
   const [, setZombiePrice] = useState(0)
-  const [modal, setModal] = useState( null)
+  const [modal, setModal] = useState(null)
 
 
   useEffect(() => {
@@ -78,11 +79,15 @@ const App: React.FC = () => {
           <Route exact path={routes.SPAWNWITHUS}><SpawnWithUs /></Route>
           <Route exact path={routes.CATACOMBS}><Catacombs /></Route>
           <Route exact path={routes.RUGROLL}><RugRoll /></Route>
-          <Route exact path={routes.DATALAB}><DataLab modalObj={{ modal ,setModal }} /></Route>
+          <Route exact path={routes.DATALAB}>
+            <SwiperProvider>
+              <DataLab modalObj={{ modal, setModal }} />
+            </SwiperProvider>
+          </Route>
           <Route exact path={routes.BLACKMARKET}><BlackMarket /></Route>
           <Route exact path={routes.BARRACKS}><Barracks /></Route>
           <Menu>
-            <Route exact path={routes.HOME}><Home modalObj={{ modal ,setModal }} /></Route>
+            <Route exact path={routes.HOME}><Home modalObj={{ modal, setModal }} /></Route>
             <Route exact path={routes.GRAVES}><Graves /></Route>
             <Route exact path={routes.TOMBS}><Tombs /></Route>
             <Route exact path={routes.SPAWNING_POOLS}><SpawningPools /></Route>

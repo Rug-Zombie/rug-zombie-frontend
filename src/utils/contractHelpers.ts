@@ -69,6 +69,7 @@ import zombieBalanceCheckerAbi from 'config/abi/zombieBalanceChecker.json'
 import catacombsAbi from 'config/abi/catacombs.json'
 import MultiCallAbi from 'config/abi/Multicall.json'
 import instaBuyAbi from 'config/abi/instaBuy.json'
+import instaBuyV2Abi from 'config/abi/instaBuyV2.json'
 import tombOverlayAbi from 'config/abi/tombOverlay.json'
 import rugRollAbi from 'config/abi/rugRollAbi.json'
 import nftSwapperAbi from 'config/abi/nftSwapper.json'
@@ -178,8 +179,8 @@ export const getMulticallContract = (web3?: Web3) => {
   return getContract(MultiCallAbi, getMulticallAddress(), web3)
 }
 
-  export const getInstaBuyContract = (web3?: Web3) => {
-  return getContract(instaBuyAbi, getInstaBuyAddress(), web3)
+export const getInstaBuyContract = (version: string, web3?: Web3) => {
+  return getContract(version === 'v2' ? instaBuyV2Abi : instaBuyAbi, getInstaBuyAddress(version), web3)
 }
 
 export const getTombOverlayContract = (web3?: Web3) => {

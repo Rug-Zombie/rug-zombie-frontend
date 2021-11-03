@@ -2,12 +2,14 @@ import React from 'react'
 import { Flex } from '@catacombs-libs/uikit'
 import styled from 'styled-components'
 import { useMatchBreakpoints } from '@rug-zombie-libs/uikit' // requires a loader
+import { Swiper, SwiperSlide } from 'swiper/react'
 import Menu from '../../../../components/Catacombs/Menu'
 import CatacombsBackgroundDesktopSVG from '../../../../images/CatacombsMain-1920x1080px.svg'
 import CatacombsBackgroundMobileSVG from '../../../../images/CatacombsMain-414x720px.svg'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import Page from '../../../../components/layout/Page'
 import InstabuyCard from './InstabuyCard'
+import useSwiper from '../../../Mausoleum/hooks/useSwiper'
 
 const StyledDiv = styled.div`
   text-align: center;
@@ -21,9 +23,11 @@ const Container = styled.div`
   text-align: center;
   position: absolute;
   top: 15%;
-  width: 25%;
+  width: 100%;
+  height: calc(100vh - 64px);
   min-width: 300px;
-  height: 50%;
+  min-height: calc(100vh - 64px);
+  overflow: hidden;
   @media (max-width: 479px) {
     height: 40%;
     top: 2%;
@@ -32,13 +36,26 @@ const Container = styled.div`
   }
 `
 
+const StyledSwiper = styled.div`
+  .swiper-wrapper {
+    height: 100%;
+    align-items: center;
+    display: flex;
+  }
+
+  .swiper-slide {
+    width: 320px;
+  }
+`
+
 interface DataLabProps {
-  modalObj: {modal: boolean, setModal: any};
+  modalObj: { modal: boolean, setModal: any };
 }
 
-const DataLab: React.FC<DataLabProps>  = ({ modalObj }) => {
+const DataLab: React.FC<DataLabProps> = ({ modalObj }) => {
   const { isLg, isXl } = useMatchBreakpoints()
   const isDesktop = isLg || isXl
+  const { setSwiper } = useSwiper()
 
   return (
     <Menu>
@@ -47,14 +64,42 @@ const DataLab: React.FC<DataLabProps>  = ({ modalObj }) => {
           <img src={CatacombsBackgroundMobileSVG} alt='catacombs-rug-zombie' />
         }
         <Flex justifyContent='center'>
-        <Container>
-          <Page >
-              <InstabuyCard id={43} refresh={() => {
-                // eslint-disable-next-line
-                console.log('refresh')
-              }} modalObj={modalObj}/>
-          </Page>
-        </Container>
+          <Container>
+            <Page>
+              <StyledSwiper>
+                <Swiper
+                  initialSlide={0}
+                  onSwiper={setSwiper}
+                  spaceBetween={64}
+                  slidesPerView='auto'
+                  freeMode
+                  freeModeSticky
+                  centeredSlides
+                  mousewheel
+                  keyboard
+                  resizeObserver
+                >
+                  <SwiperSlide>
+                    <div style={{ paddingTop: '15px', paddingBottom: '15px' }}>
+                      <InstabuyCard id={2} refresh={() => {
+                        // eslint-disable-next-line
+                        console.log('refresh')
+                      }} modalObj={modalObj} />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div style={{ paddingTop: '15px', paddingBottom: '15px' }}>
+
+                      <InstabuyCard id={1} refresh={() => {
+                        // eslint-disable-next-line
+                        console.log('refresh')
+                      }} modalObj={modalObj} />
+                    </div>
+                  </SwiperSlide>
+                </Swiper>
+              </StyledSwiper>
+            </Page>
+          </Container>
         </Flex>
       </StyledDiv>
     </Menu>

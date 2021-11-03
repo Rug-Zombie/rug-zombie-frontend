@@ -581,11 +581,11 @@ const nfts: Nft[] = [
   },
   {
     id: 36,
-    name: 'The Eye of the Bingus',
+    name: 'The Eye of Bingus',
     symbol: 'EYE-OF-BINGUS',
     description: 'Oh my gosh, that guy has a mullet!',
     address: {
-      56: '0x0e57816deb67dA534e7C2D29cb3A0c02594a195b',
+      56: '0xA626c9CE2FcCAeD9C604Ebd38C4545c153D051E5',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
 
     },
@@ -847,6 +847,22 @@ const nfts: Nft[] = [
     },
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/QmcGGXw3FiX61ALeZdSNyx2MKiquVZhF489jMJJto7rMLu',
+    type: 'image',
+    rarity: 'Special',
+    artist: artists.none,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
+  {
+    id: 53,
+    name: 'Sergeant Ser Silverback',
+    symbol: 'SERGEANT',
+    description: 'Tonight, we\'ll see the good and evil inside everyone.',
+    address: {
+      56: '0xE1D5868ce6B10b0E213A66a360F59c0298218603',
+      97: '0x701855c54F7084D494DA18157bD164d3AB32a0a0',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmXXu2ThiBQf3GiUQMwSLoVk5e4ifhmZJSYzAAbUndj7fw',
     type: 'image',
     rarity: 'Special',
     artist: artists.none,

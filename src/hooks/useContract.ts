@@ -162,9 +162,9 @@ export const useCatacombsContract = () => {
   return useMemo(() => getCatacombsContract(web3), [web3])
 }
 
-export const useInstaBuyContract = () => {
+export const useInstaBuyContract = (version) => {
   const web3 = useWeb3()
-  return useMemo(() => getInstaBuyContract(web3), [web3])
+  return useMemo(() => getInstaBuyContract(version, web3), [version, web3])
 }
 
 export const useTombOverlay = () => {
