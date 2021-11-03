@@ -581,11 +581,11 @@ const nfts: Nft[] = [
   },
   {
     id: 36,
-    name: 'The Eye of the Bingus',
+    name: 'The Eye of Bingus',
     symbol: 'EYE-OF-BINGUS',
     description: 'Oh my gosh, that guy has a mullet!',
     address: {
-      56: '0x0e57816deb67dA534e7C2D29cb3A0c02594a195b',
+      56: '0xA626c9CE2FcCAeD9C604Ebd38C4545c153D051E5',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
 
     },
