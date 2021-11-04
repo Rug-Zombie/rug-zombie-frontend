@@ -90,7 +90,6 @@ const App: React.FC = () => {
             <Route exact path={routes.AUCTION}><Mausoleum /></Route>
             <Route exact path={routes.GRAVEYARD}><Graveyard /></Route>
             <Route exact path={routes.PROFILE}><Profile /></Route>
-            <Route exact path={routes.DAYOFDEAD}><DayOfDead /></Route>
 
           </Menu>
         </Switch>
