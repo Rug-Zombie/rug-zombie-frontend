@@ -22,11 +22,6 @@ const config: MenuEntry[] = [
     href: '/spawning_pools'
   },
   {
-    label: 'DoD Swap',
-    icon: 'TradeIcon',
-    href: '/dayofdead',
-  },
-  {
     label: 'Mausoleum (BETA)',
     icon: 'PredictionsIcon',
     href: '/mausoleum',
