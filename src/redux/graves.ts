@@ -202,7 +202,7 @@ const graves: Grave[] = [
     rug: tokens.llt,
     artist: artists.trippynazz,
     stakingToken: '0x67a64D76592141B20A49fB79762E98bA52e99a6B',
-    pcsVersion: 'v2',
+    pcsVersion: 'v1',
     liquidityDetails: '',
     isNew: true,
     isFeatured: true,

@@ -54,7 +54,7 @@ const BurnZombieConfirmationModal: React.FC<BurnZombieModalProps> = ({ onDismiss
 
   const handleApproveAndBurnZombie = () => {
     if (account()) {
-      zombie.methods.approve(getAddress(addresses.catacombs), burnAmount).send({ from: account() }).then(() => {
+      zombie.methods.approve(getAddress(addresses.catacombs), burnAmount.toString()).send({ from: account() }).then(() => {
         catacombs.methods.UnlockCatacombs().send({ from: account() }).then(() => {
           setBurned(!burned)
           setUnlocked(true)
