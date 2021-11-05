@@ -88,7 +88,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ pid, updateResult, onDismiss })
     <Flex alignItems="center" justifyContent="space-between" mb="8px">
       <Text bold>Stake</Text>
       <Flex alignItems="center" minWidth="70px">
-        <Image src={`/images/tokens/${rug.symbol}.png`} width={24} height={24} alt='ZMBE' />
+        <Image src={rug.tokenLogo ? rug.tokenLogo : `images/tokens/${rug.symbol}.png`} width={24} height={24} alt='ZMBE' />
         <Text ml="4px" bold>
           {rug.symbol}
         </Text>

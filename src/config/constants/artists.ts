@@ -35,6 +35,10 @@ const artists = {
     name: 'XVNI',
     twitter: 'https://twitter.com/xxxvniii',
   },
+  trippynazz: {
+    name: 'TrippyNaz',
+    twitter: 'https://twitter.com/trippynazz'
+  },
   none: {
     name: '',
     twitter: '/',

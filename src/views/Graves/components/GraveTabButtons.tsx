@@ -29,7 +29,7 @@ const StyledButton = styled(Button)`
 const StyledLink = styled(UiKitLink)`
   width: 100%;
 `
-const FILTERS = ['All', 'Featured', 'Legendary', 'Rare', 'Uncommon', 'Common', 'Retired']
+const FILTERS = ['All', 'Legendary', 'Rare', 'Uncommon', 'Common', 'NFT Only', 'Retired']
 
 const GraveTabButtons = ({ setFilter, stakedOnly, setStakedOnly }) => {
   const { t } = useTranslation()
@@ -62,13 +62,6 @@ const GraveTabButtons = ({ setFilter, stakedOnly, setStakedOnly }) => {
           <NotificationDot>
             <ButtonMenuItem>
               <Text color="tertiary" bold>
-              {t('Featured')}
-              </Text>
-            </ButtonMenuItem>
-          </NotificationDot>
-          <NotificationDot>
-            <ButtonMenuItem>
-              <Text color="tertiary" bold>
               {t('Legendary')}
               </Text>
             </ButtonMenuItem>
@@ -94,6 +87,13 @@ const GraveTabButtons = ({ setFilter, stakedOnly, setStakedOnly }) => {
               </Text>
             </ButtonMenuItem>
           </NotificationDot>
+            <NotificationDot>
+              <ButtonMenuItem>
+                <Text color="tertiary" bold>
+                  {t('NFT Only')}
+                </Text>
+              </ButtonMenuItem>
+            </NotificationDot>
             <NotificationDot>
               <ButtonMenuItem>
                 <Text color="tertiary" bold>

@@ -101,6 +101,7 @@ export interface Grave {
   nft?: string,
   nftConverterPid?: number,
   graveNftToken?: string,
+  additionalDetails?: any[],
   rug: Token,
   artist: Artist,
   pcsVersion: string,
@@ -111,7 +112,6 @@ export interface Grave {
   rarity: string,
   isFeatured?: boolean
   isRetired?: boolean
-
 }
 
 export interface Tomb {
