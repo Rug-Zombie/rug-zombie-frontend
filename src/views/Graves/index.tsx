@@ -29,7 +29,7 @@ const filterGraves = (i) => {
     case 5: // NFT Only
       return graves().filter(g => g.poolInfo.allocPoint === 0)
     case 6: // Retired
-      return graves().filter(g => g.isRetired && g.poolInfo.allocPoint > 0)
+      return graves().filter(g => g.isRetired)
     default:
       return graves()
   }

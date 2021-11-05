@@ -139,7 +139,6 @@ const graves: Grave[] = [
     nftConverterPid: 0,
     graveNftToken: "0x22e42D9425b55FD2262bfF72a316bb052DDb2a77",
     nft: "Basic Zombie",
-    isNew: true,
     isFeatured: true,
     rarity: "Rare",
     userInfo: { ...userInfo },
@@ -191,11 +190,11 @@ const graves: Grave[] = [
   },
   {
     pid: {
-      56: 32,
+      56: 33,
       97: 1,
     },
     name: 'LifeLine Token Common',
-    subtitle: 'Randall-Farm',
+    subtitle: 'Jonathan',
     path: 'https://ipfs.io/ipfs/QmQ7C6m85qWCjBnMyMHeuhf8xgYwcKjzr2iihvgwi9Yk6T',
     type: 'image',
     withdrawalCooldown: '3 days',
@@ -213,7 +212,7 @@ const graves: Grave[] = [
   },
   {
     pid: {
-      56: 33,
+      56: 32,
       97: 1,
     },
     name: 'Bullish Jackpot Token Common',
