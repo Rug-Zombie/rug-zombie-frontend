@@ -1,11 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PageHeader from 'components/PageHeader';
 import { Flex, Heading, LinkExternal } from '@rug-zombie-libs/uikit';
+import { account } from 'redux/get';
 import Page from 'components/layout/Page';
-import sharkpools from './SharkSetup';
+import { initialSharkPoolData, sharkPool } from 'redux/fetch';
+import * as get from 'redux/get';
 import Table from './Table';
 
 const SharkPools: React.FC = () => {
+    const [updatePoolInfo, setUpdatePoolInfo] = useState(0);
+    const [updateUserInfo, setUpdateUserInfo] = useState(0);
+
+    const wallet = account();
+
+    useEffect(() => {
+        if(wallet) {
+            if(updateUserInfo === 0) {
+                initialSharkPoolData({update: updateUserInfo, setUpdate: setUpdateUserInfo});
+            }
+        } else if(updatePoolInfo === 0) {
+            initialSharkPoolData({update: updatePoolInfo, setUpdate: setUpdatePoolInfo});
+        }
+    
+    }, [ wallet, updatePoolInfo, updateUserInfo ]);
+
+    const updateResult = (id: number) => {
+        sharkPool(id);
+    };
+
     return (
         <>
             <PageHeader background="#101820">
@@ -15,9 +37,9 @@ const SharkPools: React.FC = () => {
                             Shark Pools
                         </Heading>
                         <Heading size='md' color='text'>
-                            Special NFT Only staking pools.<br/>
-                            The zombies hobbled this together using some torn blueprints with the word &apos;BARR&apos; 
-                            written at the top.
+                            Special NFT Only Pools<br />
+                            The zombies have hobbled this together using torn blueprints they found with the word `&apos;BARR`&apos; 
+                            written along the top.
                         </Heading>
                         <br/>
                         <LinkExternal href="https://autoshark.finance/">
@@ -28,13 +50,13 @@ const SharkPools: React.FC = () => {
             </PageHeader>
             <Page>
                 <div>
-                    {sharkpools.map((g) => {
-                        return <Table id={g.id} />
+                    {get.sharkPools().map((a) => {
+                        return <Table id={a.id} updateResult={updateResult} />
                     })}
                 </div>
             </Page>
         </>
-    )
-}
+    );
+};
 
 export default SharkPools;

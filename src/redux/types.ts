@@ -157,6 +157,36 @@ export interface SpawningPool {
   poolInfo: SpawningPoolInfo,
 }
 
+export interface SharkPoolInfo {
+  unlockFee: BigNumber,
+  minStake: BigNumber,
+  maxStake: BigNumber,
+  depositTaxRate: number,
+  requiresDeposit: boolean,
+  totalStaked: BigNumber,
+  minStakeTime: BigNumber,
+}
+
+export interface SharkPoolUserInfo {
+  stakedAmount: BigNumber,
+  paidUnlock: boolean,
+  paidDeposit: boolean,
+  nftMintDate: BigNumber
+}
+
+export interface SharkPool {
+  id: number,
+  name: string,
+  isNew: boolean,
+  address: Address,
+  nft: number,
+  stakeToken: Token,
+  depositToken: Token,
+  geckoId?: string,
+  poolInfo: SharkPoolInfo
+  userInfo: SharkPoolUserInfo
+}
+
 export interface Auction {
   id: number,
   aid: number,
