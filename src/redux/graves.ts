@@ -227,6 +227,12 @@ const graves: Grave[] = [
     stakingToken: '0x651d914f7e5dbBBC6c968A4C822b319b10054747',
     pcsVersion: 'v2',
     liquidityDetails: '',
+    additionalDetails: [
+      {
+        name: 'SPONSORED BY MAIN ST.',
+        url: tokens.mainst.projectLink,
+      },
+    ],
     isNew: true,
     isFeatured: true,
     rarity: "Common",
@@ -274,9 +280,7 @@ const graves: Grave[] = [
     stakingToken: '0x58a7AE39deeAb5e7ad10EC9E9e575ab6b466ec6d',
     pcsVersion: 'v1',
     liquidityDetails: '',
-    isEnding: false,
     isFeatured: true,
-    isNew: true,
     rarity: "Rare",
     userInfo: { ...userInfo },
     poolInfo: { ...poolInfo },
