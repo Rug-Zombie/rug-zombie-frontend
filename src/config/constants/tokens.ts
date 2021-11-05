@@ -263,7 +263,42 @@ const tokens = {
     },
     decimals: 9,
     projectLink: 'https://bingus.io/',
-    tokenLogo: ''
+  },
+  pokecoin: {
+    symbol: 'POKECOIN',
+    address: {
+      56: '0x8364c57ba219dfbc8033f1368123f29beb75b4dc',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: '',
+  },
+  zombie_no_relation: {
+    symbol: 'Zombie (No Relation)',
+    address: {
+      56: '0x99d6b719D78f75A0A8f34d7443630dF58973fF41',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: '',
+  },
+  llt: {
+    symbol: 'LLT',
+    address: {
+      56: '0xd37c1417da7bf5b02ffdea8d5427022dc88a0ee2',
+      97: '',
+    },
+    decimals: 8,
+    projectLink: '',
+  },
+  bjt: {
+    symbol: 'BJT',
+    address: {
+      56: '0x37f3ef4e065f3415d1b6f9284389cc9d9439f658',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: '',
   },
   fins: {
     symbol: 'FINS',

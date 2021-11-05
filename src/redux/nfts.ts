@@ -350,7 +350,7 @@ const nfts: Nft[] = [
 
     },
     totalSupply: BIG_ZERO,
-    path: 'images/rugZombie/Electric Zombie.png',
+    path: 'images/rugZombie/Electric Zombie (No Relation).png',
     type: 'image',
     rarity: 'Rare',
     userInfo: { ...DEFAULT_USER_INFO },

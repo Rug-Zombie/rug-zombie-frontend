@@ -17,19 +17,19 @@ let accountAddress
 const filterGraves = (i) => {
   switch(i) {
     case 0: // All
-      return graves()
-    case 1: // Featured
-      return graves().filter(g => g.isFeatured)
-    case 2: // Legendary
-      return graves().filter(g => g.rarity === "Legendary")
-    case 3: // Rare
-      return graves().filter(g => g.rarity === "Rare")
-    case 4: // Uncommon
-      return graves().filter(g => g.rarity === "Uncommon")
-    case 5: // Common
-      return graves().filter(g => g.rarity === "Common")
+      return graves().filter(g => g.poolInfo.allocPoint > 0)
+    case 1: // Legendary
+      return graves().filter(g => g.rarity === "Legendary" && g.poolInfo.allocPoint > 0)
+    case 2: // Rare
+      return graves().filter(g => g.rarity === "Rare" && g.poolInfo.allocPoint > 0)
+    case 3: // Uncommon
+      return graves().filter(g => g.rarity === "Uncommon" && g.poolInfo.allocPoint > 0)
+    case 4: // Common
+      return graves().filter(g => g.rarity === "Common" && g.poolInfo.allocPoint > 0)
+    case 5: // NFT Only
+      return graves().filter(g => g.poolInfo.allocPoint === 0)
     case 6: // Retired
-      return graves().filter(g => g.isRetired)
+      return graves().filter(g => g.isRetired && g.poolInfo.allocPoint > 0)
     default:
       return graves()
   }

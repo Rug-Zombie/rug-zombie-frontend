@@ -84,7 +84,7 @@ const TableList: React.FC<TableListProps> = (props: TableListProps) => {
                       rug !== tokens.none && rug !== tokens.zmbe ?
                       <>
                         <img src="images/rugZombie/BasicZombie.png" alt="basicicon" className="icon" />
-                        <img src={`images/tokens/${rug.symbol}.png`} alt="rugicon" className="icon" />
+                        <img src={rug.tokenLogo ? rug.tokenLogo : `images/tokens/${rug.symbol}.png`} alt="rugicon" className="icon" />
                       </>
                       : <><img src="images/tokens/clear.png" alt="clearicon" className="icon" />
                         <img src="images/rugZombie/BasicZombie.png" alt="rugicon" className="icon" /></>}

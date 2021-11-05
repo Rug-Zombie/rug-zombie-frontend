@@ -28,7 +28,6 @@ import DataLab from './views/Catacombs/components/DataLab'
 import BlackMarket from './views/Catacombs/components/BlackMarket'
 import Barracks from './views/Catacombs/components/Barracks'
 import RugRoll from './views/Catacombs/components/RugRoll'
-import DayOfDead from './views/DayOfDead'
 import SwiperProvider from './views/Mausoleum/context/SwiperProvider'
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page

@@ -2,7 +2,26 @@
 import tokens from '../config/constants/tokens'
 import artists from '../config/constants/artists'
 import { BIG_ZERO } from '../utils/bigNumber'
-import { Grave } from './types'
+import { Grave, PoolInfo, UserInfo } from './types'
+
+const userInfo: UserInfo = {
+  paidUnlockFee: false,
+  tokenWithdrawalDate: 0,
+  nftRevivalDate: 0,
+  rugDeposited: BIG_ZERO,
+  amount: BIG_ZERO,
+  pendingZombie: BIG_ZERO,
+}
+
+const poolInfo: PoolInfo = {
+  lpToken: undefined,
+  unlockFee: BIG_ZERO,
+  minimumStake: BIG_ZERO,
+  totalStakingTokenStaked: BIG_ZERO,
+  withdrawCooldown: 0,
+  nftRevivalTime: 0,
+  allocPoint: 0
+}
 
 const graves: Grave[] = [
   {
@@ -24,23 +43,8 @@ const graves: Grave[] = [
     isEnding: false,
     isClosed: false,
     rarity: "Common",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -61,23 +65,8 @@ const graves: Grave[] = [
     isClosed: true,
     isRetired: true,
     rarity: "Common",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -101,23 +90,8 @@ const graves: Grave[] = [
     graveNftToken: "0x22e42D9425b55FD2262bfF72a316bb052DDb2a77",
     nft: "Basic Zombie",
     rarity: "Uncommon",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -141,23 +115,8 @@ const graves: Grave[] = [
     graveNftToken: "0xE30043524ADb329169b11eDfe833a9beDd4D2A11",
     nft: "Zombie Horde",
     rarity: "Rare",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -183,23 +142,96 @@ const graves: Grave[] = [
     isNew: true,
     isFeatured: true,
     rarity: "Rare",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
+  },
+  {
+    pid: {
+      56: 30,
+      97: 1,
     },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
+    name: 'PokeCoin Common',
+    subtitle: 'Zomball',
+    path: 'https://ipfs.io/ipfs/QmYsk7hJcPAdvSEyQZd9aC3iWq1KCN6UHVsEGvbNifY5rn',
+    type: 'image',
+    withdrawalCooldown: '3 days',
+    nftRevivalTime: '7 days',
+    rug: tokens.pokecoin,
+    artist: artists.trippynazz,
+    stakingToken: '0xC9b0e59BC061Ce842Abb4693cad10Be1b09E9196',
+    pcsVersion: 'v2',
+    liquidityDetails: '',
+    isNew: true,
+    isFeatured: true,
+    rarity: "Common",
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
+  },
+  {
+    pid: {
+      56: 31,
+      97: 1,
     },
+    name: 'Zombie Farm Common',
+    subtitle: 'Randall-Farm',
+    path: 'https://ipfs.io/ipfs/QmVg8ZnNjqP2iXZLWuGACJ1aT9ehHkw8PuaJ4n8XtLccwn',
+    type: 'image',
+    withdrawalCooldown: '3 days',
+    nftRevivalTime: '7 days',
+    rug: tokens.zombie_no_relation,
+    artist: artists.trippynazz,
+    stakingToken: '0xC9b0e59BC061Ce842Abb4693cad10Be1b09E9196',
+    pcsVersion: 'v2',
+    liquidityDetails: '',
+    isNew: true,
+    isFeatured: true,
+    rarity: "Common",
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
+  },
+  {
+    pid: {
+      56: 32,
+      97: 1,
+    },
+    name: 'LifeLine Token Common',
+    subtitle: 'Randall-Farm',
+    path: 'https://ipfs.io/ipfs/QmQ7C6m85qWCjBnMyMHeuhf8xgYwcKjzr2iihvgwi9Yk6T',
+    type: 'image',
+    withdrawalCooldown: '3 days',
+    nftRevivalTime: '7 days',
+    rug: tokens.llt,
+    artist: artists.trippynazz,
+    stakingToken: '0x67a64D76592141B20A49fB79762E98bA52e99a6B',
+    pcsVersion: 'v2',
+    liquidityDetails: '',
+    isNew: true,
+    isFeatured: true,
+    rarity: "Common",
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
+  },
+  {
+    pid: {
+      56: 33,
+      97: 1,
+    },
+    name: 'Bullish Jackpot Token Common',
+    subtitle: 'Feeling Lucky',
+    path: 'https://ipfs.io/ipfs/QmNqPjeXyruC29UdbQWF3dcWdZFZyv4E5BoTKs9aqmTCEo',
+    type: 'image',
+    withdrawalCooldown: '3 days',
+    nftRevivalTime: '7 days',
+    rug: tokens.bjt,
+    artist: artists.trippynazz,
+    stakingToken: '0x651d914f7e5dbBBC6c968A4C822b319b10054747',
+    pcsVersion: 'v2',
+    liquidityDetails: '',
+    isNew: true,
+    isFeatured: true,
+    rarity: "Common",
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -223,23 +255,8 @@ const graves: Grave[] = [
     isEnding: true,
     endDate: 1637750171,
     rarity: "Legendary",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -261,23 +278,8 @@ const graves: Grave[] = [
     isFeatured: true,
     isNew: true,
     rarity: "Rare",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -298,23 +300,8 @@ const graves: Grave[] = [
     isEnding: false,
     isFeatured: true,
     rarity: "Rare",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -335,23 +322,8 @@ const graves: Grave[] = [
     isEnding: false,
     isFeatured: true,
     rarity: "Rare",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -372,23 +344,8 @@ const graves: Grave[] = [
     isEnding: false,
     isFeatured: true,
     rarity: "Uncommon",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -410,23 +367,8 @@ const graves: Grave[] = [
     isEnding: false,
     isFeatured: false,
     rarity: "Rare",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -447,23 +389,8 @@ const graves: Grave[] = [
     isNew: false,
     isEnding: false,
     rarity: "Rare",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -472,7 +399,7 @@ const graves: Grave[] = [
     },
     name: 'Thunderswap Rare',
     subtitle: 'Electric Zombie',
-    path: 'images/rugZombie/Electric Zombie.png',
+    path: 'images/rugZombie/Electric Zombie (No Relation).png',
     type: 'image',
     withdrawalCooldown: '3 days',
     nftRevivalTime: '30 days',
@@ -485,23 +412,8 @@ const graves: Grave[] = [
     isEnding: false,
     isFeatured: true,
     rarity: "Rare",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -526,23 +438,8 @@ const graves: Grave[] = [
     endDate: 1630900799,
     latestEntryDate: "Aug. 4th, 2021",
     rarity: "Legendary",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -563,23 +460,8 @@ const graves: Grave[] = [
     isNew: false,
     isEnding: false,
     rarity: "Rare",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -600,23 +482,8 @@ const graves: Grave[] = [
     isNew: false,
     isEnding: false,
     rarity: "Rare",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -637,23 +504,8 @@ const graves: Grave[] = [
     isNew: false,
     isEnding: false,
     rarity: "Rare",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -674,23 +526,8 @@ const graves: Grave[] = [
     isNew: false,
     isEnding: false,
     rarity: "Rare",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -711,23 +548,8 @@ const graves: Grave[] = [
     isNew: false,
     isEnding: false,
     rarity: "Rare",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -748,23 +570,8 @@ const graves: Grave[] = [
     isNew: false,
     isEnding: false,
     rarity: "Rare",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -785,23 +592,8 @@ const graves: Grave[] = [
     isNew: false,
     isEnding: false,
     rarity: "Uncommon",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -822,23 +614,8 @@ const graves: Grave[] = [
     isNew: false,
     isEnding: false,
     rarity: "Uncommon",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -859,23 +636,8 @@ const graves: Grave[] = [
     isEnding: false,
     isFeatured: true,
     rarity: "Common",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -896,23 +658,8 @@ const graves: Grave[] = [
     isNew: false,
     isEnding: false,
     rarity: "Common",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -933,23 +680,8 @@ const graves: Grave[] = [
     isNew: false,
     isEnding: false,
     rarity: "Common",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -970,23 +702,8 @@ const graves: Grave[] = [
     isNew: false,
     isEnding: false,
     rarity: "Common",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
   {
     pid: {
@@ -1008,23 +725,8 @@ const graves: Grave[] = [
     isEnding: false,
     isClosed: false,
     rarity: "Common",
-    userInfo: {
-      paidUnlockFee: false,
-      tokenWithdrawalDate: 0,
-      nftRevivalDate: 0,
-      rugDeposited: BIG_ZERO,
-      amount: BIG_ZERO,
-      pendingZombie: BIG_ZERO,
-    },
-    poolInfo: {
-      lpToken: undefined,
-      unlockFee: BIG_ZERO,
-      minimumStake: BIG_ZERO,
-      totalStakingTokenStaked: BIG_ZERO,
-      withdrawCooldown: 0,
-      nftRevivalTime: 0,
-      allocPoint: 0
-    },
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
   },
 ]
 
