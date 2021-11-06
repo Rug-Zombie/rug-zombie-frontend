@@ -371,7 +371,7 @@ export const spawningPool = (id: number, zombie: any, poolUpdateObj?: { update: 
 
     multicallv2(spawningPoolAbi, calls)
       .then(res => {
-        getZombieContract().methods.allowance(get.account(), address).call()
+        getZombieContract().methods.allowance(account(), address).call()
           .then(balanceRes => {
             store.dispatch(updateSpawningPoolUserInfo(
               id,

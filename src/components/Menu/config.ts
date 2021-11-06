@@ -8,42 +8,42 @@ const config: MenuEntry[] = [
   },
   {
     label: 'Graves',
-    icon: 'PoolIcon',
+    icon: 'GravesIcon',
     href: '/graves',
   },
   {
     label: 'Tombs',
-    icon: 'FarmIcon',
+    icon: 'TombsIcon',
     href: '/tombs',
   },
   {
     label: 'Spawning Pools',
-    icon: 'PoolIcon',
+    icon: 'SpawningPoolIcon',
     href: '/spawning_pools'
   },
   {
     label: 'Mausoleum (BETA)',
-    icon: 'PredictionsIcon',
+    icon: 'MausoleumIcon',
     href: '/mausoleum',
   },
   {
     label: 'Graveyard',
-    icon: 'NftIcon',
+    icon: 'GraveyardIcon',
     href: '/graveyard'
   },
   {
     label: 'Catacombs',
-    icon: 'GroupsIcon',
+    icon: 'CatacombsIcon',
     href: '/catacombs'
   },
   {
     label: 'Profile',
-    icon: 'GroupsIcon',
+    icon: 'ProfileIcon',
     href: '/profile'
   },
   {
     label: 'Referral Program',
-    icon: 'TeamBattleIcon',
+    icon: 'ReferralIcon',
     items: [
       {
         label: 'In development',
