@@ -342,10 +342,10 @@ const tokens = {
     },
     decimals: 0,
   },
-  oldbog: {
+  bog: {
     symbol: 'BOG',
     address: {
-      56: '0xd7b729ef857aa773f47d37088a1181bb3fbf0099',
+      56: '0xb09fe1613fe03e7361319d2a43edc17422f36b09',
       97: '',
     },
     decimals: 18,
