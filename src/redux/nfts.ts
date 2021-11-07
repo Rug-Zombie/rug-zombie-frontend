@@ -1003,7 +1003,7 @@ const nfts: Nft[] = [
     symbol: 'CHOMPERSV3',
     description: 'Live every week like it\'s shark week.',
     address: {
-      56: '',
+      56: '0x29c2aE1acFE7dbADeed503AF38F9A59E7a72A86d',
       97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
     },
     totalSupply: BIG_ZERO,
