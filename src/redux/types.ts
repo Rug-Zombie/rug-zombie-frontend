@@ -171,7 +171,7 @@ export interface SharkPoolUserInfo {
   stakedAmount: BigNumber,
   paidUnlock: boolean,
   paidDeposit: boolean,
-  nftMintDate: BigNumber
+  nftMintDate: number
 }
 
 export interface SharkPool {
@@ -180,9 +180,11 @@ export interface SharkPool {
   isNew: boolean,
   address: Address,
   nft: number,
+  mintTime: string,
   stakeToken: Token,
   depositToken: Token,
   geckoId?: string,
+  project: any,
   poolInfo: SharkPoolInfo
   userInfo: SharkPoolUserInfo
 }

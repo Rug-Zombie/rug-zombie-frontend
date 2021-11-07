@@ -360,7 +360,7 @@ export const sharkPool = (id: number, poolUpdateObj?: { update: number, setUpdat
               unlockFee: new BigNumber(res[0].toString()),
               minStake: new BigNumber(res[1].toString()),
               maxStake: new BigNumber(res[2].toString()),
-              depositTaxRate: res[3],
+              depositTaxRate: res[3] / 100,
               requiresDeposit: res[4],
               minStakeTime: new BigNumber(res[5].toString()),
               totalStaked: new BigNumber(balanceRes.toString()) 
@@ -383,9 +383,9 @@ export const sharkPool = (id: number, poolUpdateObj?: { update: number, setUpdat
           id,
           {
             stakedAmount: new BigNumber(res[0].amount.toString()),
-            paidUnlock: res[0].paidUnlock,
-            paidDeposit: res[0].paidDeposit,
-            nftMintDate: new BigNumber(res[0].nftMintDate)
+            paidUnlock: res[0].paidUnlockFee,
+            paidDeposit: res[0].paidDepositFee,
+            nftMintDate: res[0].nftMintDate
           }
         ));
         if (userUpdateObj) {

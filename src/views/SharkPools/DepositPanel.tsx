@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { account, sharkPoolById } from 'redux/get';
 import { useModal } from '@rug-zombie-libs/uikit';
 import { useERC20 } from 'hooks/useContract';
@@ -14,15 +14,16 @@ interface DepositPanelProps {
 }
 
 const DepositPanel: React.FC<DepositPanelProps> = ({ id, updateResult }) => {
+    const pool = sharkPoolById(id);
+
     const [isApproved, setIsApproved] = useState(false);
 
     const wallet = account();
     const { toastSuccess } = useToast();
-    const { t } = useTranslation();
-    const pool = sharkPoolById(id);
+    const { t } = useTranslation();    
     const tokenContract = useERC20(getAddress(pool.depositToken.address));
-    
-    const updateAllowance = () => {
+
+    useEffect(() => {        
         if (pool.poolInfo.requiresDeposit) {            
             tokenContract.methods.allowance(wallet, getAddress(pool.address)).call()
                 .then(res => {
@@ -31,17 +32,16 @@ const DepositPanel: React.FC<DepositPanelProps> = ({ id, updateResult }) => {
                     } else {
                         setIsApproved(false);
                     }
-                    updateResult(id);
                 });
-        }        
-    }
+        }
+    }, [ pool, tokenContract, wallet, setIsApproved ]);
 
     const handleApprove = () => {
         if(wallet) {
             if (pool.poolInfo.requiresDeposit) {
                 tokenContract.methods.approve(getAddress(pool.address), BIG_TEN.pow(18).toString()).send({ from: wallet })
                     .then(() => {
-                        toastSuccess(t('Approved cJAWS'));
+                        toastSuccess(t(`Approved ${pool.depositToken.symbol}`));
                         setIsApproved(true);
                     });
             }
@@ -57,7 +57,8 @@ const DepositPanel: React.FC<DepositPanelProps> = ({ id, updateResult }) => {
             return (<span className="total-earned text-shadow">Connect Wallet</span>);
         }
 
-        if (!pool.poolInfo.requiresDeposit) {
+        // Using toString() here because, well, doing !pool.poolInfo.requiresDeposit doesn't work for some weird ass reason
+        if (pool.poolInfo.requiresDeposit.toString() === "false") {
             return (<span className="total-earned text-shadow">Not required!</span>);
         }
 
@@ -72,10 +73,8 @@ const DepositPanel: React.FC<DepositPanelProps> = ({ id, updateResult }) => {
         return(<button className="btn w-100" type="button">DEPOSITED</button>);
     }
 
-    updateAllowance();
-
     return(
-        <div className='frank-card'>
+        <div className='frank-card'>            
             <div className='small-text'>
                 <span className='white-color'>
                     {pool.poolInfo.requiresDeposit 

@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { BaseLayout } from '@rug-zombie-libs/uikit';
 import TableList from './TableList';
 import DepositPanel from './DepositPanel';
+import StakePanel from './StakePanel';
+import MintTimerPanel from './MintTimerPanel';
+import DetailsPanel from './DetailsPanel';
 
 const TableCards = styled(BaseLayout)`
     align-items: stretch;
@@ -37,9 +40,10 @@ const Table: React.FC<TableProps> = ({ id, updateResult }) => {
                         <div className="w-95 mx-auto mt-3">
                             <div className="flex-grow">
                                 <DepositPanel id={id} updateResult={updateResult} />
-                                
+                                <StakePanel id={id} updateResult={updateResult} />
+                                <MintTimerPanel id={id} updateResult={updateResult} />
                             </div>
-                            
+                            <DetailsPanel id={id} />
                         </div>
                       </div>) 
                     : null}

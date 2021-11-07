@@ -1011,6 +1011,7 @@ const nfts: Nft[] = [
     type: 'video',
     rarity: 'Legendary',
     userInfo: { ...DEFAULT_USER_INFO },
+    artist: artists.RugZombie
   },
 ]
 
