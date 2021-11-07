@@ -964,6 +964,38 @@ const nfts: Nft[] = [
     artist: artists.trippynazz,
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 60,
+    name: 'Bog of War',
+    symbol: 'WAR',
+    description: 'There are occasions when commands of the sovereign need not be obeyed.',
+    address: {
+      56: '0x515D20b37B6Ae6a5b919eFAef86D53810b70a09f',
+      97: '0x701855c54F7084D494DA18157bD164d3AB32a0a0',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmXsUgHfVLhTyiSk4VPbcr6iacEEDwo8KXfsK8tN4QXW55',
+    type: 'image',
+    rarity: 'Rare',
+    artist: artists.trippynazz,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
+  {
+    id: 61,
+    name: 'The Double Black Diamond',
+    symbol: 'DBD',
+    description: 'There are occasions when commands of the sovereign need not be obeyed.',
+    address: {
+      56: '0x3a56ffFE595CA8e9d8eC46D74721F60B3aF9FE74',
+      97: '0x701855c54F7084D494DA18157bD164d3AB32a0a0',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmXsUgHfVLhTyiSk4VPbcr6iacEEDwo8KXfsK8tN4QXW55',
+    type: 'image',
+    rarity: 'Rare',
+    artist: artists.TheLeap3d,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts
