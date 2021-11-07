@@ -51,7 +51,7 @@ const pools: VictimPool[] = [
   {
     id: 'BOG',
     name: 'Bogged Finance',
-    rug: tokens.oldbog,
+    rug: tokens.bog,
     ztoken: tokens.zbog,
     zsymbol: 'ZBOG',
     poolInfo: { ...defaultPoolInfo },
