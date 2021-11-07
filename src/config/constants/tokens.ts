@@ -327,6 +327,22 @@ const tokens = {
     },
     decimals: 0,
   },
+  zbog: {
+    symbol: 'ZBOG',
+    address: {
+      56: '0xeaaD9e5Ab71E5B21492a6686afdbB4A598A641ab',
+      97: '',
+    },
+    decimals: 0,
+  },
+  oldbog: {
+    symbol: 'BOG',
+    address: {
+      56: '0xd7b729ef857aa773f47d37088a1181bb3fbf0099',
+      97: '',
+    },
+    decimals: 18,
+  },
   horde: {
     symbol: 'HORDE',
     address: {

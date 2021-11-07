@@ -19,6 +19,7 @@ const VictimPoolsCard: React.FC = () => {
 
     const options = [
         { label: 'Black Diamond', value: 'BLACK' },
+        { label: 'Bogged Finance', value: 'BOG' },
     ]
 
     const [selectedPool, setSelectedPool] = useState(options[0]);
@@ -26,7 +27,6 @@ const VictimPoolsCard: React.FC = () => {
     function onDropdownSelected(option: OptionProps) {
       setSelectedPool(option);
     }
-
     return (
         <StyledVictimPoolsCard>
             <CardBody>
