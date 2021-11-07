@@ -318,7 +318,14 @@ const tokens = {
     },
     decimals: 12,
   },
-
+  kids: {
+    symbol: 'KIDS',
+    address: {
+      56: '0x7acf49997e9598843cb9051389fa755969e551bb',
+      97: '',
+    },
+    decimals: 9,
+  },
   zdiamonds: {
     symbol: 'ZDIAMONDS',
     address: {
