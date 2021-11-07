@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Flex, Heading } from '@rug-zombie-libs/uikit'
 import { useZTokenSwapper, useERC20 } from 'hooks/useContract'
-import { useWeb3React } from '@web3-react/core'
 import { multicallv2 } from 'utils/multicall'
 import { getFullDisplayBalance } from 'utils/formatBalance'
 import ztokenSwapperAbi from 'config/abi/ztokenSwapper.json'
@@ -11,13 +10,11 @@ import { BIG_ZERO } from 'utils/bigNumber'
 import { registerToken } from 'utils/wallet'
 import tokens from '../../../../config/constants/tokens'
 import { Token } from '../../../../config/constants/types'
+import { getBep20Contract } from '../../../../utils/contractHelpers'
+import useWeb3 from '../../../../hooks/useWeb3'
+import { account } from '../../../../redux/get'
 
-export interface VictimPoolData {
-  id: string,
-  name: string,
-  rug: Token,
-  ztoken: Token,
-  zsymbol: string,
+export interface VictimPoolPoolInfo {
   rugBalance: BigNumber,
   zTokenBalance: BigNumber,
   claimedZToken: boolean,
@@ -25,18 +22,39 @@ export interface VictimPoolData {
   amountPerClaim: BigNumber
 }
 
-const pools: VictimPoolData[] = [
+export interface VictimPool {
+  id: string,
+  name: string,
+  rug: Token,
+  ztoken: Token,
+  zsymbol: string,
+  poolInfo: VictimPoolPoolInfo
+}
+
+const defaultPoolInfo: VictimPoolPoolInfo = {
+  rugBalance: BIG_ZERO,
+  zTokenBalance: BIG_ZERO,
+  claimedZToken: false,
+  isEnabled: false,
+  amountPerClaim: BIG_ZERO,
+}
+
+const pools: VictimPool[] = [
   {
     id: 'BLACK',
     name: 'Black Diamond',
     rug: tokens.diamonds,
     ztoken: tokens.zdiamonds,
     zsymbol: 'ZDIAMONDS',
-    rugBalance: BIG_ZERO,
-    zTokenBalance: BIG_ZERO,
-    claimedZToken: false,
-    isEnabled: false,
-    amountPerClaim: BIG_ZERO,
+    poolInfo: { ...defaultPoolInfo },
+  },
+  {
+    id: 'BOG',
+    name: 'Bogged Finance',
+    rug: tokens.oldbog,
+    ztoken: tokens.zbog,
+    zsymbol: 'ZBOG',
+    poolInfo: { ...defaultPoolInfo },
   },
 ]
 
@@ -45,66 +63,71 @@ interface VictimPoolsInfoProps {
 }
 
 const VictimPoolsInfo: React.FC<VictimPoolsInfoProps> = ({ id }) => {
+  const web3 = useWeb3()
   const swapper = useZTokenSwapper()
   const address = getZTokenSwapperAddress()
-  const { account } = useWeb3React()
-  const [pool, setPool] = useState(pools.find(a => a.id === id))
-  const rug = useERC20(getAddress(pool.rug.address))
-  const ztoken = useERC20(getAddress(pool.ztoken.address))
+  const { name, ztoken, rug, poolInfo } = pools.find(a => a.id === id)
+  const [updatedPoolInfo, setUpdatedPoolInfo] = useState(poolInfo)
+
+  const rugContract = getBep20Contract(getAddress(rug.address), web3)
+  const ztokenContract = useERC20(getAddress(ztoken.address))
   const isMetaMaskInScope = !!window.ethereum?.isMetaMask
 
   const handleSwap = () => {
-    swapper.methods.getZToken(getAddress(pool.rug.address)).send({ from: account })
+    swapper.methods.getZToken(getAddress(rug.address)).send({ from: account() })
       .then(() => {
-        setPool({ claimedZToken: true, ...pool })
+
+        setUpdatedPoolInfo({ claimedZToken: true, ...updatedPoolInfo })
       })
   }
 
   useEffect(() => {
-    if (account) {
-      rug.methods.balanceOf(account).call()
+    if (account()) {
+      rugContract.methods.balanceOf(account()).call()
         .then((rugBalanceRes) => {
-          ztoken.methods.balanceOf(address).call()
+          ztokenContract.methods.balanceOf(address).call()
             .then((ztokenBalanceRes) => {
-              swapper.methods.checkUserSwapped(getAddress(pool.rug.address), account)
+              swapper.methods.checkUserSwapped(getAddress(rug.address), account())
                 .call().then(userSwapped => {
                 const calls = [
-                  { address, name: 'swapInfo', params: [getAddress(pool.rug.address)] },
-                  { address, name: 'checkUserSwapped', params: [getAddress(pool.rug.address), account] },
+                  { address, name: 'swapInfo', params: [getAddress(rug.address)] },
+                  { address, name: 'checkUserSwapped', params: [getAddress(rug.address), account()] },
                 ]
                 multicallv2(ztokenSwapperAbi, calls)
                   .then((res) => {
-                    setPool({
-                      ...pool,
+                    setUpdatedPoolInfo({
                       isEnabled: res[0].isEnabled,
                       amountPerClaim: new BigNumber(res[0].zTokenAmount.toString()),
                       rugBalance: new BigNumber(rugBalanceRes.toString()),
                       zTokenBalance: new BigNumber(ztokenBalanceRes.toString()),
-                      claimedZToken: userSwapped
+                      claimedZToken: userSwapped,
                     })
                   })
               })
-
             })
         })
     }
-  }, [account, address, pool, rug.methods, swapper.methods, ztoken.methods])
+  // eslint-disable-next-line
+  }, [address, rug.address, swapper.methods, ztokenContract.methods])
 
 
   return (
     <div>
-      <Heading>{pool.name}</Heading>
-
-      <Heading>Rugged Tokens: {getFullDisplayBalance(pool.rugBalance, pool.rug.decimals, 4)}</Heading>
-      <Heading>zTokens Remaining: {pool.zTokenBalance.toString()}</Heading>
-      <Heading>{pool.claimedZToken ? `You already claimed ${pool.ztoken.symbol}` : `You have not claimed ${pool.ztoken.symbol}`}</Heading>
+      <Heading>{name}</Heading>
+      <Heading>Rugged Tokens: {getFullDisplayBalance(updatedPoolInfo.rugBalance, rug.decimals, 4)}</Heading>
+      <Heading>zTokens Remaining: {updatedPoolInfo.zTokenBalance.toString()}</Heading>
+      <Heading>{updatedPoolInfo.claimedZToken ? `You already claimed ${ztoken.symbol}` : `You have not claimed ${ztoken.symbol}`}</Heading>
       <br />
       <Flex justifyContent='space-between'>
-        <button className='btn w-auto harvest' disabled={pool.rugBalance.isZero() || pool.claimedZToken || pool.zTokenBalance.isZero()} type='button' onClick={handleSwap}>Claim zTokens</button>
-        {account && isMetaMaskInScope && (
+        <button className='btn w-auto harvest'
+                disabled={updatedPoolInfo.rugBalance.isZero() || !account() || updatedPoolInfo.zTokenBalance.isZero()}
+                type='button'
+                onClick={handleSwap}>Claim zTokens
+        </button>
+        {account() && isMetaMaskInScope && (
           <button
             className='btn w-auto harvest' type='button'
-            onClick={() => registerToken(getAddress(pool.ztoken.address), (pool.zsymbol), pool.ztoken.decimals, 'https://bscscan.com/token/images/rugzombie_32.png')}
+            onClick={() => registerToken(getAddress(ztoken.address), (ztoken.symbol), ztoken.decimals, 'https://bscscan.com/token/images/rugzombie_32.png')}
           >Add To MetaMask</button>
         )}
       </Flex>

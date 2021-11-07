@@ -96,7 +96,7 @@ export const initialData = (accountAddress: string, setZombiePrice?: any) => {
 
 export const tomb = (pid: number, updatePoolObj?: { update: number, setUpdate: any }, updateUserObj?: { update: number, setUpdate: any }, everyUpdateObj?: { update: boolean, setUpdate: any }) => {
   const address = getDrFrankensteinAddress()
-  if (account()) {
+  if (account() && address) {
     let calls = [
       { address, name: 'poolInfo', params: [pid] },
       { address, name: 'userInfo', params: [pid, get.account()] },
@@ -363,15 +363,16 @@ export const spawningPool = (id: number, zombie: any, poolUpdateObj?: { update: 
         })
     })
 
-  if (account()) {
+  const wallet = account()
+  if (wallet && address) {
     calls = [
-      { address, name: 'userInfo', params: [account()] },
-      { address, name: 'pendingReward', params: [account()] },
+      { address, name: 'userInfo', params: [wallet] },
+      { address, name: 'pendingReward', params: [wallet] },
     ]
 
     multicallv2(spawningPoolAbi, calls)
       .then(res => {
-        getZombieContract().methods.allowance(account(), address).call()
+        getZombieContract().methods.allowance(wallet, address).call()
           .then(balanceRes => {
             store.dispatch(updateSpawningPoolUserInfo(
               id,
