@@ -19,4 +19,7 @@ export const routes = {
     BLACKMARKET:'/blackmarket/',
     BARRACKS:'/barracks/',
     DATALAB:'/datalab/',
+
+    // Games
+    MUD:'/mud/',
 }
