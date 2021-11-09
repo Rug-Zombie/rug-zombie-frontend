@@ -178,7 +178,7 @@ const graves: Grave[] = [
     withdrawalCooldown: '3 days',
     nftRevivalTime: '30 days',
     rug: tokens.zdiamonds,
-    artist: artists.trippynazz,
+    artist: artists.canadiancryptojunkie,
     stakingToken: '0x64DBC2eD265Ec5214A222251618fA78733D379d7',
     pcsVersion: 'v2',
     liquidityDetails: '',

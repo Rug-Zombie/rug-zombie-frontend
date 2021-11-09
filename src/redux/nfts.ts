@@ -801,7 +801,7 @@ const nfts: Nft[] = [
     path: 'https://ipfs.io/ipfs/QmNvGS6bxSueoyMHsxHtt7biEWCLZJ3o9TLHDR9hxHS7m1',
     type: 'image',
     rarity: 'Special',
-    artist: artists.none,
+    artist: artists.canadiancryptojunkie,
     userInfo: { ...DEFAULT_USER_INFO },
   },
   {
@@ -817,7 +817,7 @@ const nfts: Nft[] = [
     path: 'https://ipfs.io/ipfs/QmRwEtpb8yxcWBTBCp7UFFH72R2c72fJP4swfjyTyJv7C4',
     type: 'image',
     rarity: 'Special',
-    artist: artists.none,
+    artist: artists.canadiancryptojunkie,
     userInfo: { ...DEFAULT_USER_INFO },
   },
   {
@@ -833,7 +833,7 @@ const nfts: Nft[] = [
     path: 'https://ipfs.io/ipfs/QmRWcYPzZZt7Z1gk6VPZ9zJS7nAY8xxD6JX3ScdyrqyfR2',
     type: 'image',
     rarity: 'Special',
-    artist: artists.none,
+    artist: artists.canadiancryptojunkie,
     userInfo: { ...DEFAULT_USER_INFO },
   },
   {
@@ -849,7 +849,7 @@ const nfts: Nft[] = [
     path: 'https://ipfs.io/ipfs/QmcGGXw3FiX61ALeZdSNyx2MKiquVZhF489jMJJto7rMLu',
     type: 'image',
     rarity: 'Special',
-    artist: artists.none,
+    artist: artists.canadiancryptojunkie,
     userInfo: { ...DEFAULT_USER_INFO },
   },
   {
