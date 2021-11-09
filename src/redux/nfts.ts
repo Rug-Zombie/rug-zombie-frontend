@@ -1154,6 +1154,25 @@ const nfts: Nft[] = [
     rarity: 'Special',
     userInfo: { ...DEFAULT_USER_INFO },
   },
+
+
+  
+  {
+    id: 62,
+    name: 'Dr Burnenstein Test',
+    symbol: 'BURN',
+    description: 'This is just a test, nothing to see here',
+    address: {
+      56: '',
+      97: '0xDaED823C1AfF56B4304a65021933cc3CFAfad0d7',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmXsUgHfVLhTyiSk4VPbcr6iacEEDwo8KXfsK8tN4QXW55',
+    type: 'image',
+    rarity: 'Rare',
+    artist: artists.TheLeap3d,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts

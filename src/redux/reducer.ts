@@ -6,6 +6,7 @@ import nfts from './nfts'
 import spawningPools from './spawningPools'
 import sharkPools from './sharkPools'
 import auctions from './auctions'
+import burnGraves from './burnGraves'
 import { getId } from '../utils'
 import tombOverlays from './tombOverlays'
 
@@ -14,6 +15,7 @@ const defaultState = {
   tombs,
   tombOverlays,
   graves,
+  burnGraves,
   nfts,
   spawningPools,
   sharkPools,

@@ -255,3 +255,36 @@ export interface TombOverlay {
   userInfo: TombOverlayUserInfo,
   poolInfo: TombOverlayPoolInfo
 }
+
+export interface BurnGrave {
+  id: Id,
+  name: string,
+  mintingTime: string,
+  nftid: number,
+  isNew: boolean,
+  stakingToken: Token,
+  poolInfo: BurnGravePoolInfo,
+  userInfo: BurnGraveUserInfo
+}
+
+export interface BurnGravePoolInfo {
+  isEnabled: boolean,
+  depositType: number,
+  depositAddress: string,
+  unlockFee: BigNumber,
+  minimumStake: BigNumber,
+  mintingTime: BigNumber,
+  tokensToBurn: BigNumber,
+  burnReduction: number,
+  maxBurned: BigNumber,
+  totalStaked: BigNumber,
+  totalBurned: BigNumber
+}
+
+export interface BurnGraveUserInfo {
+  stakedAmount: BigNumber,
+  hasDeposited: boolean,
+  hasUnlocked: boolean,
+  nftMintDate: BigNumber,
+  burnedAmount: BigNumber
+}
