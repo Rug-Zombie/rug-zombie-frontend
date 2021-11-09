@@ -4,7 +4,7 @@ import {
   getBep20Contract,
   getDrFrankensteinContract, getErc721Contract,
   getPancakePair,
-  getZombieContract,
+  getZombieContract, getDrBurnensteinContract
 } from '../utils/contractHelpers'
 
 import store from './store'
@@ -27,7 +27,7 @@ import {
   updateAuctionUserInfo,
   updateNftUserInfo,
   updateDrFrankensteinTotalAllocPoint, updateBnbBalance,
-  updateTombOverlayPoolInfo, updateTombOverlayUserInfo,
+  updateTombOverlayPoolInfo, updateTombOverlayUserInfo, updateBurnGravePoolInfo, updateBurnGraveUserInfo,
 } from './actions'
 import {
   getAddress,
@@ -35,6 +35,7 @@ import {
   getMausoleumAddress,
   getSpawningPoolAddress,
   getTombOverlayAddress,
+  getDrBurnensteinAddress
 } from '../utils/addressHelpers'
 import tombs from './tombs'
 import * as get from './get'
@@ -643,3 +644,55 @@ export const multicallTombOverlayData = (updatePoolObj?: { update: boolean, setU
   }
 }
 
+export const burnGrave = (id: number, setUserInfoState?: { update: boolean, setUpdate: any }, setPoolInfoState?: { update: boolean, setUpdate: any }) => {
+  const burngrave = get.burnGraveById(id);
+  const drBurnenstein = getDrBurnensteinContract();
+  
+  drBurnenstein.methods.graveInfo(id).call()
+    .then(res => {
+      store.dispatch(updateBurnGravePoolInfo(
+        id,
+        {
+          isEnabled: res.isEnabled,
+          depositType: res.depositType,
+          depositAddress: res.deposit.toString(),
+          unlockFee: new BigNumber(res.unlockFee.toString()),
+          minimumStake: new BigNumber(res.minimumStake.toString()),
+          mintingTime: new BigNumber(res.mintingTime.toString()),
+          tokensToBurn: new BigNumber(res.burnTokens.toString()),
+          burnReduction: res.burnHours,
+          maxBurned: new BigNumber(res.maxBurned.toString()),
+          totalStaked: new BigNumber(res.totalStaked.toString()),
+          totalBurned: new BigNumber(res.totalBurned.toString())
+        }
+      ));
+      if (setPoolInfoState) {
+        setPoolInfoState.setUpdate(!setPoolInfoState.update)
+      }
+    });
+
+  if (account()) {
+    drBurnenstein.methods.userInfo(id, account()).call()
+      .then(res => {
+        store.dispatch(updateBurnGraveUserInfo(
+          id,
+          {
+            stakedAmount: new BigNumber(res.amount.toString()),
+            hasDeposited: res.deposited,
+            hasUnlocked: res.paidUnlockFee,
+            nftMintDate: new BigNumber(res.nftMintDate.toString()),
+            burnedAmount: new BigNumber(res.burnedAmount.toString())
+          }
+        ));
+        if (setUserInfoState) {
+          setUserInfoState.setUpdate(!setUserInfoState.update)
+        }
+      });
+  }
+}
+
+export const initialBurnGraveData = (setUserState?, setPoolState?) => {
+  get.burnGraves().forEach(g => {
+    burnGrave(getId(g.id), setUserState, setPoolState);
+  });
+}

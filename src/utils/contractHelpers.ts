@@ -33,7 +33,7 @@ import {
   getCatacombsAddress,
   getInstaBuyAddress,
   getTombOverlayAddress, getRugRollAddress,
-  getNftSwapperAddress, getZTokenSwapperAddress,
+  getNftSwapperAddress, getZTokenSwapperAddress, getDrBurnensteinAddress
 } from 'utils/addressHelpers'
 
 // ABI
@@ -74,6 +74,7 @@ import tombOverlayAbi from 'config/abi/tombOverlay.json'
 import rugRollAbi from 'config/abi/rugRollAbi.json'
 import nftSwapperAbi from 'config/abi/nftSwapper.json'
 import ztokenSwapperAbi from 'config/abi/ztokenSwapper.json'
+import drBurnensteinAbi from 'config/abi/drBurnenstein.json'
 
 export const getContract = (abi: any, address: string, web3?: Web3) => {
   const _web3 = web3 ?? web3NoAccount
@@ -197,4 +198,8 @@ export const getNftSwapperContract = (web3?: Web3) => {
 
 export const getZTokenSwapperContract = (web3?: Web3) => {
   return getContract(ztokenSwapperAbi, getZTokenSwapperAddress(), web3)
+}
+
+export const getDrBurnensteinContract = (web3?: Web3) => {
+  return getContract(drBurnensteinAbi, getDrBurnensteinAddress(), web3);
 }

@@ -117,3 +117,7 @@ export const getNftSwapperAddress = () => {
 export const getZTokenSwapperAddress = () => {
   return getAddress(addresses.ztokenSwapper)
 }
+
+export const getDrBurnensteinAddress = () => {
+  return getAddress(addresses.drburnenstein);
+}

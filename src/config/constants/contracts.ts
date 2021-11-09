@@ -120,4 +120,8 @@ export default {
     56: '0xe9B5206Cf835d0aEC6B05DA9f53a1989033812E2',
     97: '0xb1E96dA5a08423C5f0646C0eBfd135FB896d1477',
   },
+  drburnenstein: {
+    56: '',
+    97: '0xA7aE79B794BC6BB3620c887fF1d7c0c88094034A'
+  }
 }
