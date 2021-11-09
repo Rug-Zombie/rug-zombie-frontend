@@ -10,7 +10,6 @@ import './SpawningPools.Styles.css'
 import { initialSpawningPoolData, spawningPool } from '../../redux/fetch'
 import * as get from '../../redux/get'
 import { useZombie } from '../../hooks/useContract'
-import SpawningPoolTabButtons from './components/SpawningPoolTabButtons'
 import { spawningPools } from '../../redux/get'
 
 let accountAddress
@@ -65,7 +64,6 @@ const SpawningPools: React.FC = () => {
         })
     }
 
-  const visiblePools = stakedOnly ? filterPools(filter).filter(sp => !sp.userInfo.amount.isZero()) : filterPools(filter).filter(sp => sp.endDate > now || filter === 1)
 
   return (
     <>

@@ -34,7 +34,6 @@ import {
   getInstaBuyAddress,
   getTombOverlayAddress, getRugRollAddress,
   getNftSwapperAddress, getZTokenSwapperAddress,
-  getNftSwapperAddress,
   getSharkPoolAddress
 } from 'utils/addressHelpers'
 

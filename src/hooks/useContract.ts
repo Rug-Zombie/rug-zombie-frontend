@@ -186,20 +186,10 @@ export const useRugRollContract = () => {
 export const useNftSwapper = () => {
   const web3 = useWeb3()
   return useMemo(() => getNftSwapperContract(web3), [web3])
-  <<<<<<< HEAD
 }
 
 export const useZTokenSwapper = () => {
   const web3 = useWeb3()
   return useMemo(() => getZTokenSwapperContract(web3), [web3])
 }
-======
-=
-}
->>>>>>>
-964
-a93d(feat
-:
-Completed
-SharkPools
-)
+
