@@ -6,6 +6,64 @@ import { SpawningPool } from './types'
 
 const spawningPools: SpawningPool[] = [
   {
+    id: 11,
+    name: 'Squid Stake Legendary',
+    subtitle: 'Don\'t mess with Cthulhu',
+    path: 'https://ipfs.io/ipfs/QmQ11oNLDfg7c3k1S6sfBEhcHWHtc9ykTQJhXhNU25fp7V',
+    type: 'image',
+    address: {
+      56: '0x2499751b166D38e00590d054b82c20e9a1613913',
+      97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
+    },
+    endBlock: 15060000,
+    endDate: 1644641999,
+    project: {
+      name: 'Squid Stake',
+      description: 'Squid Stake builds on the oceanic ecosystem of AutoShark to help you stake more and earn more.',
+      additionalDetails: [
+        {
+          name: 'Project website',
+          url: tokens.squid.projectLink,
+        },
+        {
+          name: 'Whitepaper',
+          url: 'https://docs.squidstake.com/',
+        },
+        {
+          name: 'Telegram',
+          url: 'https://t.me/squidstake',
+        },
+      ],
+    },
+    withdrawalCooldown: '3 days',
+    nftRevivalTime: '45 days',
+    rewardToken: tokens.squid,
+    rewardTokenBnbLp: '0x2e0484D3684701dC032f29cce59c785A5837B34E',
+    bnbLpTokenIndex: 1,
+    artist: artists.canadiancryptojunkie,
+    stakingToken: '',
+    pcsVersion: 'v2',
+    liquidityDetails: '',
+    isNew: true,
+    color: "pink",
+    userInfo: {
+      paidUnlockFee: false,
+      tokenWithdrawalDate: 0,
+      nftRevivalDate: 0,
+      amount: BIG_ZERO,
+      pendingReward: BIG_ZERO,
+      zombieAllowance: BIG_ZERO,
+    },
+    poolInfo: {
+      unlockFee: BIG_ZERO,
+      rewardPerBlock: BIG_ZERO,
+      minimumStake: BIG_ZERO,
+      totalZombieStaked: BIG_ZERO,
+      withdrawCooldown: 0,
+      nftRevivalTime: 0,
+    },
+  },
+  {
     id: 10,
     name: 'French Connection Legendary',
     subtitle: 'Fluffy',

@@ -188,7 +188,6 @@ const tokens = {
     },
     decimals: 9,
     projectLink: 'https://www.buymainstreet.com/',
-    tokenLogo: ''
   },
   nalis: {
     symbol: "NALIS",
@@ -198,7 +197,6 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://app.koaladefi.finance/',
-    tokenLogo: ''
   },
   panther: {
     symbol: "PANTHER",
@@ -395,7 +393,6 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://www.milkyway.games/',
-    tokenLogo: ''
   },
   atmssft: {
     symbol: 'ATMSSFT',
@@ -848,6 +845,16 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://pancakeswap.finance/',
+  },
+  squid: {
+    symbol: 'SQUID',
+    address: {
+      56: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
+      97: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
+    },
+    decimals: 18,
+    projectLink: 'https://squidstake.com',
+    tokenLogo: 'https://squidstake.com/tokens/0xAE61e7dc989718E700C046a2483e93513eDCA484.png'
   },
   sushi: {
     symbol: 'SUSHI',

@@ -1028,6 +1028,22 @@ const nfts: Nft[] = [
     userInfo: { ...DEFAULT_USER_INFO },
     artist: artists.canadiancryptojunkie
   },
+  {
+    id: 64,
+    name: 'Don\'t mess with Cthulhu',
+    symbol: 'CTHULHU',
+    description: 'Waiting, dreaming.',
+    address: {
+      56: '0x3c73dcAFa0958700e92E15096db31DD2FDD16BFc',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmQ11oNLDfg7c3k1S6sfBEhcHWHtc9ykTQJhXhNU25fp7V',
+    type: 'image',
+    rarity: 'Legendary',
+    userInfo: { ...DEFAULT_USER_INFO },
+    artist: artists.canadiancryptojunkie
+  },
 ]
 
 export default nfts
