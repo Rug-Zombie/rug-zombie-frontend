@@ -650,11 +650,12 @@ export const burnGrave = (id: number, setUserInfoState?: { update: boolean, setU
   
   drBurnenstein.methods.graveInfo(id).call()
     .then(res => {
+        console.log(res.depositType.toString());
       store.dispatch(updateBurnGravePoolInfo(
         id,
         {
           isEnabled: res.isEnabled,
-          depositType: res.depositType,
+          depositType: parseInt(res.depositType.toString()),
           depositAddress: res.deposit.toString(),
           unlockFee: new BigNumber(res.unlockFee.toString()),
           minimumStake: new BigNumber(res.minimumStake.toString()),

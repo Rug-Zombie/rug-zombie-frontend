@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import PageHeader from 'components/PageHeader';
 import { Flex, Heading } from '@rug-zombie-libs/uikit';
-import { burnGraves, account } from 'redux/get';
+import { burnGraves, account, zombiePriceUsd } from 'redux/get';
 import { burnGrave, initialBurnGraveData } from 'redux/fetch';
 import BigNumber from 'bignumber.js';
 import { BIG_ZERO } from 'utils/bigNumber';
 import numeral from 'numeral';
 import { getBalanceAmount } from 'utils/formatBalance';
+import { getId } from 'utils';
+import Page from 'components/layout/Page';
+import Table from './components/Table';
 
 const filterGraves = (a) => {
     switch (a) {
@@ -22,6 +25,7 @@ const BurnGraves: React.FC = () => {
     const [stakedOnly, setStakedOnly] = useState(false);
     const [filter, setFilter] = useState(0);
     const [totalBurned, setTotalBurned] = useState(BIG_ZERO);
+    const [zmbePrice, setZmbePrice] = useState(0);
     
     const wallet = account();
 
@@ -29,15 +33,16 @@ const BurnGraves: React.FC = () => {
         console.log("HIT");
         if(!updateUserInfo) {
           initialBurnGraveData(
-            { update: updateUserInfo, setUpdate: setUpdateUserInfo },
-            { update: updatePoolInfo, setUpdate: setUpdatePoolInfo }
-        )
+                { update: updateUserInfo, setUpdate: setUpdateUserInfo },
+                { update: updatePoolInfo, setUpdate: setUpdatePoolInfo }
+            )
         
-        const burned = new BigNumber(0);
-        burnGraves().forEach(g => burned.plus(g.poolInfo.totalBurned));
-        setTotalBurned(burned);
+            const burned = new BigNumber(0);
+            burnGraves().forEach(g => burned.plus(g.poolInfo.totalBurned));
+            setTotalBurned(burned);
+            setZmbePrice(zombiePriceUsd());
         }
-      }, [ updatePoolInfo, updateUserInfo ]);
+    }, [ updatePoolInfo, updateUserInfo, setZmbePrice ]);
     
     const updateResult = (id: number) => {
         burnGrave(id);
@@ -61,6 +66,13 @@ const BurnGraves: React.FC = () => {
                     </Flex>
                 </Flex>
         </PageHeader>
+        <Page>
+            <div>
+                {burnGraves().map((a) => {
+                    return <Table id={getId(a.id)} zmbePrice={zmbePrice} updateResult={updateResult} />
+                })}
+            </div>
+        </Page>
         </>
     );
 }
