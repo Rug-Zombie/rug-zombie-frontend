@@ -11,6 +11,7 @@ import { initialSpawningPoolData, spawningPool } from '../../redux/fetch'
 import * as get from '../../redux/get'
 import { useZombie } from '../../hooks/useContract'
 import { spawningPools } from '../../redux/get'
+import SpawningPoolTabButtons from './components/SpawningPoolTabButtons'
 
 let accountAddress
 const now = Math.floor(Date.now() / 1000)
@@ -64,6 +65,7 @@ const SpawningPools: React.FC = () => {
         })
     }
 
+  const visiblePools = stakedOnly ? filterPools(filter).filter(sp => !sp.userInfo.amount.isZero()) : filterPools(filter).filter(sp => sp.endDate > now || filter === 1)
 
   return (
     <>
@@ -84,8 +86,9 @@ const SpawningPools: React.FC = () => {
         </Flex>
       </PageHeader>
       <Page>
+        <SpawningPoolTabButtons setFilter={setFilter} stakedOnly={stakedOnly} setStakedOnly={setStakedOnly} />
       <div>
-        {get.spawningPools().map((g) => {
+        {visiblePools.map((g) => {
           return <Table zombieUsdPrice={get.zombiePriceUsd()}
                         updateResult={updateResult} updateAllowance={updateAllowance} bnbInBusd={bnbInBusd}
                         isAllowance={isAllowance} key={g.id} id={g.id} account={accountAddress} />
