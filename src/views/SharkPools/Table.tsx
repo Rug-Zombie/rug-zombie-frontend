@@ -39,7 +39,7 @@ const Table: React.FC<TableProps> = ({ id, updateResult }) => {
                     ? (<div className="table-bottom">
                         <div className="w-95 mx-auto mt-3">
                             <div className="flex-grow">
-                                <DepositPanel id={id} updateResult={updateResult} />
+                                {/* <DepositPanel id={id} updateResult={updateResult} /> */}
                                 <StakePanel id={id} updateResult={updateResult} />
                                 <MintTimerPanel id={id} updateResult={updateResult} />
                             </div>

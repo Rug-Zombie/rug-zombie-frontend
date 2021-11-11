@@ -22,9 +22,9 @@ const config: MenuEntry[] = [
     href: '/spawning_pools'
   },
   {
-    label: 'Shark Pools',
+    label: 'Shark Tank',
     icon: 'SpawningPoolIcon',
-    href: '/sharkpools'
+    href: '/sharktank'
   },
   {
     label: 'Mausoleum (BETA)',

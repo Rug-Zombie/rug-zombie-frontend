@@ -55,7 +55,7 @@ const sharkpools: SharkPoolSetup[] = [
         id: 0,
         name: 'AutoShark Flash Loan Pool',
         isNew: true,
-        depositToken: tokens.cjaws,
+        depositToken: tokens.none,
         stakeToken: tokens.jaws,
         address: '0x1cfB376e57ae798F325EC6156Be7c29D25F31088',
         geckoId: 'autoshark',

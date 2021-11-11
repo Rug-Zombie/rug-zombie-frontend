@@ -11,6 +11,7 @@ import ruggedTokens from 'config/constants/ruggedTokens'
 import { getFullDisplayBalance } from 'utils/formatBalance'
 import { ethers } from 'ethers'
 import { BIG_TEN, BIG_ZERO } from '../../../../../utils/bigNumber'
+
 import { useRugRollContract, useZombie } from '../../../../../hooks/useContract'
 import { account, zombieBalance } from '../../../../../redux/get'
 import { AUTOSHARK_EXCHANGE_URL } from '../../../../../config'

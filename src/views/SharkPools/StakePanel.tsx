@@ -38,25 +38,29 @@ const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
     const poolContract = useSharkpool(id);
 
     useEffect(() => {
+      if(wallet) {
         tokenContract.methods.allowance(wallet, getAddress(pool.address)).call()
-            .then(res => {
-                if (parseInt(res.toString()) !== 0) {
-                    setIsApproved(true);
-                } else {
-                    setIsApproved(false);
-                }
-            });
+          .then(res => {
+            if (parseInt(res.toString()) !== 0) {
+              setIsApproved(true);
+            } else {
+              setIsApproved(false);
+            }
+          });
+      }
     }, [ pool, tokenContract, wallet ]);
 
     const handleUnlock = () => {
+      if(wallet) {
         poolContract.methods.unlockFeeInBnb().call()
-            .then(res => {
-                poolContract.methods.unlock().send({ from: wallet, value: res })
-                    .then(() => {
-                        toastSuccess(t('Pool unlocked'));
-                        updateResult(id);
-                    });
-            });
+          .then(res => {
+            poolContract.methods.unlock().send({ from: wallet, value: res })
+              .then(() => {
+                toastSuccess(t('Pool unlocked'));
+                updateResult(id);
+              });
+          });
+      }
     }
 
     const handleApprove = () => {
@@ -85,7 +89,8 @@ const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
         }
 
         if (!isApproved) {
-            return (<button onClick={handleApprove} className="btn btn-disabled w-100" type="button">Approve {pool.stakeToken.symbol}</button>)
+          const stakeTokenSymbol = pool.lpPool ? `${pool.token0.symbol}-${pool.token1.symbol} LP` : pool.stakeToken.symbol
+          return (<button onClick={handleApprove} className="btn btn-disabled w-100" type="button">Approve {stakeTokenSymbol}</button>)
         }
 
         return (

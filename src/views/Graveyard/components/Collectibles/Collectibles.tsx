@@ -3,6 +3,7 @@ import { CardsLayout, Heading } from '@rug-zombie-libs/uikit'
 import './Collectibles.Styles.css'
 import CollectiblesCard from './CollectiblesCard';
 import { nftUserInfo } from '../../../../redux/fetch'
+
 import { useNftOwnership } from '../../../../hooks/useContract'
 import CollectibleTabButtons from '../CollectibleTabButtons'
 import { nfts } from '../../../../redux/get'

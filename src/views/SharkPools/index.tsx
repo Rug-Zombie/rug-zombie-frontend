@@ -34,7 +34,7 @@ const SharkPools: React.FC = () => {
                 <Flex justifyContent='space-between' flexDirection={['column', null, 'row']}>
                     <Flex flexDirection='column' mr={['8px', 0]}>
                         <Heading as='h1' size='xxl' color='secondary' mb='24px'>
-                            Shark Pools
+                            Shark Tank
                         </Heading>
                         <Heading size='md' color='text'>
                             Special NFT Only Pools<br />
@@ -51,7 +51,7 @@ const SharkPools: React.FC = () => {
             <Page>
                 <div>
                     {get.sharkPools().map((a) => {
-                        return <Table id={a.id} updateResult={updateResult} />
+                        return <Table id={a.id} key={a.id} updateResult={updateResult} />
                     })}
                 </div>
             </Page>

@@ -24,6 +24,8 @@ const DetailsPanel: React.FC<DetailsPanelProps> = ({ id }) => {
           })
     })
 
+    const stakeTokenSymbol = pool.lpPool ? `${pool.token0.symbol}-${pool.token1.symbol} LP` : pool.stakeToken.symbol
+
     return(
         <div className="rug-indetails">
             <div className="direction-column imageColumn">
@@ -61,8 +63,8 @@ const DetailsPanel: React.FC<DetailsPanelProps> = ({ id }) => {
             <div className="direction-column">
                 <span className="indetails-type">Unlock Fees: {unlockFee} BNB ({(unlockFee * bnbPriceUsd()).toFixed(2)} in USD)</span>
                 <span className="indetails-title">NFT Minting Time:<span className="indetails-value">{pool.mintTime}</span></span>
-                <span className="indetails-title">Minimum Stake:<span className="indetails-value">{getFullDisplayBalance(pool.poolInfo.minStake)} {pool.stakeToken.symbol}</span></span>
-                <span className="indetails-title">Maximum Stake:<span className="indetails-value">{getFullDisplayBalance(pool.poolInfo.maxStake)} {pool.stakeToken.symbol}</span></span>
+                <span className="indetails-title">Minimum Stake:<span className="indetails-value">{getFullDisplayBalance(pool.poolInfo.minStake)} {stakeTokenSymbol}</span></span>
+                <span className="indetails-title">Maximum Stake:<span className="indetails-value">{getFullDisplayBalance(pool.poolInfo.maxStake)} {stakeTokenSymbol}</span></span>
                 <span className="indetails-title">Deposit Fee:<span className="indetails-value">{pool.poolInfo.depositTaxRate.toString()}%</span></span>
                 <span className="indetails-value">Please Note: These pools are subject to a tax on the deposited amount</span>
             </div>

@@ -184,6 +184,10 @@ export interface SharkPool {
   stakeToken: Token,
   depositToken: Token,
   geckoId?: string,
+  lpPool?: boolean,
+  token0?: Token,
+  token1?: Token,
+  bnbLpTokenIndex?: number,
   project: any,
   poolInfo: SharkPoolInfo
   userInfo: SharkPoolUserInfo

@@ -1,14 +1,11 @@
 import { useTranslation } from 'contexts/Localization'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-
-/* eslint-disable */
-
 import styled from 'styled-components'
+import { useMatchBreakpoints } from '@rug-zombie-libs/uikit'
 import CatacombsBackgroundDesktopSVG from '../../../../images/CatacombsMain-1920x1080px.svg'
 import CatacombsBackgroundMobileSVG from '../../../../images/CatacombsMain-414x720px.svg'
 import Menu from '../../../../components/Catacombs/Menu'
-import { useMatchBreakpoints } from '@rug-zombie-libs/uikit'
 
 const StyledDiv = styled.div`
   text-align: center;

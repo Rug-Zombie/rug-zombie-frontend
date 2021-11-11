@@ -996,22 +996,37 @@ const nfts: Nft[] = [
     artist: artists.TheLeap3d,
     userInfo: { ...DEFAULT_USER_INFO },
   },
-
   {
-    id: 52,
-    name: 'Fake Chompers V3',
-    symbol: 'CHOMPERSV3',
-    description: 'Live every week like it\'s shark week.',
+    id: 62,
+    name: 'The Ripster',
+    symbol: 'RIPSTER',
+    description: 'Truly Jawsome.',
     address: {
-      56: '0x29c2aE1acFE7dbADeed503AF38F9A59E7a72A86d',
+      56: '0x16f9f01AB90dC83FA41bAB2d10E63ef723Fa6A58',
       97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
     },
     totalSupply: BIG_ZERO,
-    path: 'images/rugZombie/Chompers.webm',
-    type: 'video',
-    rarity: 'Legendary',
+    path: 'https://ipfs.io/ipfs/QmaJhr4tHsreMqQ81D5ni8iAApmpTm5EDtq8MEHFZDEqnt',
+    type: 'image',
+    rarity: 'Rare',
     userInfo: { ...DEFAULT_USER_INFO },
-    artist: artists.RugZombie
+    artist: artists.jussjoshinduh
+  },
+  {
+    id: 63,
+    name: 'Chompnado Rampage',
+    symbol: 'CHOMPNADO',
+    description: 'Sharks. I never saw that coming.',
+    address: {
+      56: '0xAF1A40c4f497FEd95d799cD58A3b0dE8066c975E',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmdhptrGSeqm3ipgLEsFtRZ5oW7RZmoA1vMZHqfAtuGhfP',
+    type: 'image',
+    rarity: 'Rare',
+    userInfo: { ...DEFAULT_USER_INFO },
+    artist: artists.canadiancryptojunkie
   },
 ]
 

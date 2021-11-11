@@ -12,7 +12,7 @@ export const routes = {
     AUCTION:'/mausoleum/:id',
     GRAVEYARD:'/graveyard',
     DAYOFDEAD:'/dayofdead',
-    SHARKPOOLS:'/sharkpools',
+    SHARKTANK:'/sharktank',
 
     // Catacombs
     CATACOMBS:'/catacombs/',
