@@ -990,7 +990,7 @@ const nfts: Nft[] = [
       97: '0x701855c54F7084D494DA18157bD164d3AB32a0a0',
     },
     totalSupply: BIG_ZERO,
-    path: 'https://ipfs.io/ipfs/QmXsUgHfVLhTyiSk4VPbcr6iacEEDwo8KXfsK8tN4QXW55',
+    path: 'https://ipfs.io/ipfs/QmQ12QcVoJtuzGmf8zaqGyHnXWidnCSs6tqFRHASpbYnuf',
     type: 'image',
     rarity: 'Rare',
     artist: artists.TheLeap3d,

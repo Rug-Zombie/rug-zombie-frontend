@@ -89,8 +89,7 @@ const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
         }
 
         if (!isApproved) {
-          const stakeTokenSymbol = pool.lpPool ? `${pool.token0.symbol}-${pool.token1.symbol} LP` : pool.stakeToken.symbol
-          return (<button onClick={handleApprove} className="btn btn-disabled w-100" type="button">Approve {stakeTokenSymbol}</button>)
+          return (<button onClick={handleApprove} className="btn btn-disabled w-100" type="button">Approve {pool.stakeToken.symbol}</button>)
         }
 
         return (
