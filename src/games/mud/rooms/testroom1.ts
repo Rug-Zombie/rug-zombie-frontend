@@ -27,6 +27,7 @@ const pickupKnife = (props: CommandProps) => {
 const testroom1: RoomInfo = {
     id: RoomId.TESTROOM1,
     entryText: 'You are in test room one',
+    isDark: false,
     commands: [
         {
             command: 'look',

@@ -10,6 +10,7 @@ const north = (props: CommandProps) => {
 
 const entrance: RoomInfo = {
     id: RoomId.ENTRANCE,
+    isDark: false,
     entryText: 'You have awakened in a darkened room',
     commands: [
         {

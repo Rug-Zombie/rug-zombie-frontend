@@ -1,6 +1,7 @@
 import { defaultPlayer, RoomId, Command, EngineCallbacks, CommandProps, ItemId } from './types';
 import rooms from './rooms';
 import items from './items';
+import hotkeys from './hotkeys';
 
 export const currentPlayer = defaultPlayer;
 
@@ -31,6 +32,15 @@ const inventory = () => {
     return `You have the following items:\n${playerItems}`;
 }
 
+const search = () => {
+    const room = roomById(currentPlayer.currentRoom);
+    if (!room.isDark) {
+        return room.entryText;
+    }
+
+    return 'It is too dark to search in here';
+}
+
 const addItem = (id: ItemId, quantity: number) => {
     const item = currentPlayer.inventory.find(a => a.item.id === id);
 
@@ -57,6 +67,14 @@ const removeItem = (id: ItemId, quantity: number) => {
     }    
 }
 
+const checkInventory = (id: ItemId, quantity: number) => {
+    if (currentPlayer.inventory.length === 0) return false;
+    const item = currentPlayer.inventory.find(a => a.item.id === id);
+
+    if (!item) return false;
+    return item.quantity >= quantity;
+}
+
 const dropItem = (props: CommandProps) => {
     if (currentPlayer.inventory.length === 0) return 'That was not found in your inventory';
     const item = items.find(a => props.input.includes(a.shortname));
@@ -70,19 +88,16 @@ const dropItem = (props: CommandProps) => {
 }
 
 const generalCommands: Command[] = [
-    {
-        command: 'inventory',
-        handler: inventory
-    },
-    {
-        command: 'drop',
-        handler: dropItem
-    }
+    { command: 'inventory', handler: inventory },
+    { command: 'drop', handler: dropItem },
+    { command: 'search', handler: search }
 ]
 
 const engineCallbacks: EngineCallbacks = {
     roomChange,
-    addItem
+    addItem,
+    removeItem,
+    checkInventory
 }
 
 const commandProps: CommandProps = {
@@ -95,11 +110,16 @@ export const handleCommand = (input: string) => {
     if (!room) return `[ERROR] Room Not Found - ID: ${currentPlayer.currentRoom}`;
 
     commandProps.input = input;
+    const hotkey = hotkeys.find(a => a.input === input);
+    
+    if (hotkey) {
+        commandProps.input = hotkey.output;
+    }    
 
-    const roomCommand = room.commands.find(a => input.includes(a.command));
+    const roomCommand = room.commands.find(a => commandProps.input.includes(a.command));
     if (roomCommand) return roomCommand.handler(commandProps);
 
-    const generalCommand = generalCommands.find(a => input.includes(a.command));
+    const generalCommand = generalCommands.find(a => commandProps.input.includes(a.command));
     if (generalCommand) return generalCommand.handler(commandProps);
 
     return 'Unknown Command!';
