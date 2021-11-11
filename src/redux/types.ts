@@ -262,7 +262,9 @@ export interface BurnGrave {
   mintingTime: string,
   nftid: number,
   isNew: boolean,
+  depositToken: Token,
   stakingToken: Token,
+  geckoId: string,
   poolInfo: BurnGravePoolInfo,
   userInfo: BurnGraveUserInfo
 }
