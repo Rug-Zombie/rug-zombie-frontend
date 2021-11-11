@@ -8,7 +8,7 @@ import {
   TombPoolInfo,
   TombUserInfo,
   UserInfo,
-  TombOverlayPoolInfo, TombOverlayUserInfo
+  TombOverlayPoolInfo, TombOverlayUserInfo, SharkPoolInfo, SharkPoolUserInfo
 } from './types'
 
 export const updateAccount = (account: string) => ({
@@ -117,12 +117,28 @@ export const updateSpawningPoolInfo = (id: number, poolInfo: SpawningPoolInfo) =
   },
 })
 
+export const updateSharkPoolInfo = (id: number, poolInfo: SharkPoolInfo) => ({
+  type: actions.UPDATE_SHARKPOOL_INFO,
+  payload: {
+    id,
+    poolInfo
+  }
+})
+
 export const updateSpawningPoolUserInfo = (id: number, userInfo: SpawningUserInfo) => ({
   type: actions.UPDATE_SPAWNING_POOL_USER_INFO,
   payload: {
     id,
     userInfo,
   },
+})
+
+export const updateSharkPoolUserInfo = (id: number, userInfo: SharkPoolUserInfo) => ({
+  type: actions.UPDATE_SHARKPOOL_USER_INFO,
+  payload: {
+    id,
+    userInfo
+  }
 })
 
 export const updateAuctionInfo = (id: number, auctionInfo: AuctionInfo) => ({

@@ -6,6 +6,7 @@ import tokens from '../../../config/constants/tokens'
 import { account, zombieBalance } from '../../../redux/get'
 import { APESWAP_EXCHANGE_URL } from '../../../config'
 import { getAddress, getCatacombsAddress, getZombieAddress } from '../../../utils/addressHelpers'
+
 import { useCatacombsContract, useZombie } from '../../../hooks/useContract'
 import addresses from '../../../config/constants/contracts'
 import UnlockButton from '../../../components/UnlockButton'

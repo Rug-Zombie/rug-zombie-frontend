@@ -4,6 +4,7 @@ import tombs from './tombs'
 import graves from './graves'
 import nfts from './nfts'
 import spawningPools from './spawningPools'
+import sharkPools from './sharkPools'
 import auctions from './auctions'
 import { getId } from '../utils'
 import tombOverlays from './tombOverlays'
@@ -15,6 +16,7 @@ const defaultState = {
   graves,
   nfts,
   spawningPools,
+  sharkPools,
   bnbPriceUsd: 0,
   auctions,
   bnbBalance: BIG_ZERO,
@@ -137,6 +139,17 @@ export default function reducer(state = defaultState, action) {
         ...state,
         tombOverlays: state.tombOverlays.map(tombOverlay => getId(tombOverlay.pid) === action.payload.pid ? { ...tombOverlay, userInfo: { ...tombOverlay.userInfo, ...action.payload.userInfo } } : tombOverlay),
       }  
+    case types.UPDATE_SHARKPOOL_INFO:
+      return {
+        ...state,
+        sharkPools: state.sharkPools.map(sharkPool => sharkPool.id === action.payload.id ? { ...sharkPool, poolInfo: { ...sharkPool.poolInfo, ...action.payload.poolInfo } } : sharkPool),
+      }
+    case types.UPDATE_SHARKPOOL_USER_INFO:
+      return {
+        ...state,
+        sharkPools: state.sharkPools.map(sharkPool => sharkPool.id === action.payload.id ? { ...sharkPool, userInfo: { ...sharkPool.userInfo, ...action.payload.userInfo } } : sharkPool),
+      }
+
     default:
       return state
   }

@@ -7,6 +7,7 @@ import { account, nftById } from 'redux/get';
 import Video from 'components/Video';
 import { getFullDisplayBalance } from 'utils/formatBalance';
 import { BIG_ZERO } from 'utils/bigNumber';
+
 import { useInstaBuyContract } from 'hooks/useContract';
 import { getAddress } from 'utils/addressHelpers';
 import { BigNumber } from 'bignumber.js';

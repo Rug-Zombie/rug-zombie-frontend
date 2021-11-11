@@ -14,6 +14,7 @@ import { BigNumber } from 'bignumber.js'
 import { Lightbox } from "react-modal-image";
 import { account, nftById } from '../../../../redux/get'
 import Video from '../../../../components/Video'
+
 import { useInstaBuyContract } from '../../../../hooks/useContract'
 import { BIG_ZERO } from '../../../../utils/bigNumber'
 import { getFullDisplayBalance } from '../../../../utils/formatBalance'

@@ -29,6 +29,7 @@ import {
   getInstaBuyContract,
   getTombOverlayContract, getRugRollContract,
   getNftSwapperContract, getZTokenSwapperContract,
+  getSharkpoolContract,
 } from 'utils/contractHelpers'
 
 /**
@@ -60,7 +61,7 @@ export const useZombie = () => {
 
 export const useMausoleum = (version?: string) => {
   const web3 = useWeb3()
-  return useMemo(() =>  getMausoleumContract(version, web3), [version, web3])
+  return useMemo(() => getMausoleumContract(version, web3), [version, web3])
 }
 
 export const useBunnyFactory = () => {
@@ -100,6 +101,11 @@ export const useDrFrankenstein = () => {
 export const useSpawningPool = (id: number) => {
   const web3 = useWeb3()
   return useMemo(() => getSpawningPoolContract(id, web3), [id, web3])
+}
+
+export const useSharkpool = (id: number) => {
+  const web3 = useWeb3()
+  return useMemo(() => getSharkpoolContract(id, web3), [id, web3])
 }
 
 export const useNftConverter = () => {
@@ -168,8 +174,8 @@ export const useInstaBuyContract = (version) => {
 }
 
 export const useTombOverlay = () => {
-  const web3 = useWeb3();
-  return useMemo(() => getTombOverlayContract(web3), [web3]);
+  const web3 = useWeb3()
+  return useMemo(() => getTombOverlayContract(web3), [web3])
 }
 
 export const useRugRollContract = () => {
@@ -178,11 +184,12 @@ export const useRugRollContract = () => {
 }
 
 export const useNftSwapper = () => {
-  const web3 = useWeb3();
-  return useMemo(() => getNftSwapperContract(web3), [web3]);
+  const web3 = useWeb3()
+  return useMemo(() => getNftSwapperContract(web3), [web3])
 }
 
-  export const useZTokenSwapper = () => {
+export const useZTokenSwapper = () => {
   const web3 = useWeb3()
   return useMemo(() => getZTokenSwapperContract(web3), [web3])
 }
+

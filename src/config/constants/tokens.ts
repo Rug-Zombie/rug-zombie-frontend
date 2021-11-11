@@ -308,7 +308,26 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://autoshark.finance/',
-    tokenLogo: 'https://bscscan.com/token/images/autoshark_32b.png'
+    tokenLogo: 'images/tokens/FINS.svg'
+  },
+  finsbnb: {
+    symbol: 'FINS-BNB LP',
+    address: {
+      56: '0x14B5a6d26577970953F9E6608d6604e4676Ac5b7',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://autoshark.finance/',
+    tokenLogo: 'images/tokens/FINS.svg'
+  },
+  jawsbnb: {
+    symbol: 'JAWS-BNB LP',
+    address: {
+      56: '0x1BbA5C6Cc38EF04066042237b4298dC23405304D',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://autoshark.finance/',
   },
   diamonds: {
     symbol: 'DIAMONDS',
@@ -822,7 +841,7 @@ const tokens = {
     projectLink: 'https://venus.io/',
   },
   wbnb: {
-    symbol: 'wBNB',
+    symbol: 'BNB',
     address: {
       56: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
       97: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
@@ -964,6 +983,15 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://cosmos.network/',
+  },
+  jaws: {
+    symbol: 'JAWS',
+    address: {
+      56: '0xdd97ab35e3c0820215bc85a395e13671d84ccba2',
+      97: '0xCE2DFB3a10f534Fa18c9d15C0239938C06Ab3b24'
+    },
+    decimals: 18,
+    projectLink: 'https://autoshark.finance/'
   },
   none: {
     symbol: '',

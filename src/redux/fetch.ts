@@ -1,5 +1,7 @@
 import axios from 'axios'
 import { BigNumber } from 'bignumber.js'
+import sharkpoolAbi from 'config/abi/autosharkPool.json';
+
 import {
   getBep20Contract,
   getDrFrankensteinContract, getErc721Contract,
@@ -27,7 +29,7 @@ import {
   updateAuctionUserInfo,
   updateNftUserInfo,
   updateDrFrankensteinTotalAllocPoint, updateBnbBalance,
-  updateTombOverlayPoolInfo, updateTombOverlayUserInfo,
+  updateTombOverlayPoolInfo, updateTombOverlayUserInfo, updateSharkPoolInfo, updateSharkPoolUserInfo,
 } from './actions'
 import {
   getAddress,
@@ -35,6 +37,7 @@ import {
   getMausoleumAddress,
   getSpawningPoolAddress,
   getTombOverlayAddress,
+  getSharkPoolAddress
 } from '../utils/addressHelpers'
 import tombs from './tombs'
 import * as get from './get'
@@ -333,6 +336,65 @@ export const initialGraveData = (setUserState?, setPoolState?) => {
   })
 }
 
+export const sharkPool = (id: number, poolUpdateObj?: { update: number, setUpdate: any }, userUpdateObj?: { update: number, setUpdate: any }) => {
+  const pool = get.sharkPoolById(id);
+  const address = getSharkPoolAddress(id);
+  const token = getBep20Contract(getAddress(pool.stakeToken.address));
+  
+  let calls = [
+    { address, name: 'unlockFeeInBnb', params: [] },
+    { address, name: 'minStakeAmount', params: [] },
+    { address, name: 'maxStakeAmount', params: [] },
+    { address, name: 'depositTaxRate', params: [] },
+    { address, name: 'requiresDeposit', params: [] },
+    { address, name: 'minStakeTime', params: [] }
+  ]
+
+  multicallv2(sharkpoolAbi, calls)
+    .then(res => {
+      token.methods.balanceOf(address).call()
+        .then(balanceRes => {
+          store.dispatch(updateSharkPoolInfo(
+            id, 
+            {
+              unlockFee: new BigNumber(res[0].toString()),
+              minStake: new BigNumber(res[1].toString()),
+              maxStake: new BigNumber(res[2].toString()),
+              depositTaxRate: res[3] / 100,
+              requiresDeposit: res[4],
+              minStakeTime: new BigNumber(res[5].toString()),
+              totalStaked: new BigNumber(balanceRes.toString()) 
+            }
+          ));
+          if (poolUpdateObj) {
+            poolUpdateObj.setUpdate(poolUpdateObj.update + 1);
+          }
+        });
+    });
+
+  if (account()) {
+    calls = [
+      { address, name: 'userInfo', params: [ account() ] }
+    ]
+
+    multicallv2(sharkpoolAbi, calls)
+      .then(res => {
+        store.dispatch(updateSharkPoolUserInfo(
+          id,
+          {
+            stakedAmount: new BigNumber(res[0].amount.toString()),
+            paidUnlock: res[0].paidUnlockFee,
+            paidDeposit: res[0].paidDepositFee,
+            nftMintDate: res[0].nftMintDate
+          }
+        ));
+        if (userUpdateObj) {
+          userUpdateObj.setUpdate(userUpdateObj.update + 1)
+        }
+      });
+  }
+}
+
 export const spawningPool = (id: number, zombie: any, poolUpdateObj?: { update: number, setUpdate: any }, userUpdateObj?: { update: number, setUpdate: any }) => {
   const address = getSpawningPoolAddress(id)
   let calls = [
@@ -518,6 +580,18 @@ export const initialSpawningPoolData = (zombie: any, setPoolData?: { update: num
     )
     index++
   })
+}
+
+export const initialSharkPoolData = (setPoolData?: { update: number, setUpdate: any }, setUserData?: { update: number, setUpdate: any }) => {
+  let index = 0;
+  get.sharkPools().forEach(sp => {
+    sharkPool(
+      sp.id,
+      setPoolData ? { update: setPoolData.update + index, setUpdate: setPoolData.setUpdate } : undefined,
+      setUserData ? { update: setUserData.update + index, setUpdate: setUserData.setUpdate } : undefined
+    );
+    index++;
+  });
 }
 
 export const nftUserInfo = (contract: any, updateUserObj: { update: boolean, setUpdate: any }, updateEveryObj?: { update: boolean, setUpdate: any }) => {
