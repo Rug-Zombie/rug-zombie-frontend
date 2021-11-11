@@ -6,7 +6,7 @@ import numeral from 'numeral';
 import { getBalanceAmount } from 'utils/formatBalance';
 import { BigNumber } from 'bignumber.js'
 import { Token } from '../../config/constants/types'
-import { getBep20Contract, getPancakePair } from '../../utils/contractHelpers'
+import { getPancakePair } from '../../utils/contractHelpers'
 import { getAddress } from '../../utils/addressHelpers'
 
 const DisplayFlex = styled(BaseLayout)`

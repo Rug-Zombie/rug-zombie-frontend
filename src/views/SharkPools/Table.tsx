@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { BaseLayout } from '@rug-zombie-libs/uikit';
 import TableList from './TableList';
-import DepositPanel from './DepositPanel';
 import StakePanel from './StakePanel';
 import MintTimerPanel from './MintTimerPanel';
 import DetailsPanel from './DetailsPanel';
