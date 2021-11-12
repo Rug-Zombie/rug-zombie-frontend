@@ -1,12 +1,12 @@
-import { ItemInfo } from '../types';
-import nastyknife from './nastyknife';
-import torch from './torch';
-import rustyspoon from './rustyspoon';
+import Item from '../objects/item';
+import Torch from './torch';
+import RustySpoon from './rustyspoon';
+import CatacombsMap from './catacombsMap';
 
-const items: ItemInfo[] = [
-    torch,
-    rustyspoon,
-    nastyknife
+const items: Item[] = [
+    new Torch(),
+    new RustySpoon(),
+    new CatacombsMap()
 ]
 
 export default items;

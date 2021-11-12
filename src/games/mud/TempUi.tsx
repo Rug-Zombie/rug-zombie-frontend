@@ -6,7 +6,7 @@ import Page from 'components/layout/Page';
 import { useTranslation } from 'contexts/Localization';
 import { account } from 'redux/get';
 
-import { login, initialEntry, handleCommand, currentPlayer } from './game';
+import { init, login, initialEntry, handleCommand } from './game';
 
 const StyledInput = styled(Input)`
     background: transparent;
@@ -31,17 +31,23 @@ const TempMudUi: React.FC = () => {
     const [outputText, setOutputText] = useState('Output Text Goes Here');
     const [inputText, setInputText] = useState('');
     const [initialized, setInitialized] = useState(false);
+    const [loggedIn, setLoggedIn] = useState(false);
     
     const { t } = useTranslation();
     const wallet = account();
 
     useEffect(() => {
-        if (!initialized && wallet) {
-            login(wallet);
-            setOutputText(initialEntry());
+        if (!initialized) {
+            init();
             setInitialized(true);
         }
-    }, [ wallet, initialized, outputText ]);
+
+        if (!loggedIn && wallet) {
+            login(wallet);
+            setOutputText(initialEntry());
+            setLoggedIn(true);
+        }
+    }, [ wallet, loggedIn, initialized, outputText ]);
 
     const updateText = (event: React.ChangeEvent<HTMLInputElement>) => { setInputText(event.target.value); }
     const checkKey = (e: { key: string; }) => { if (e.key === 'Enter') submit(); }
@@ -62,9 +68,6 @@ const TempMudUi: React.FC = () => {
                 </Flex>
             </PageHeader>
             <Page>
-                <Text as="p" mb="24px">
-                    {t('Player: ')}{t(currentPlayer.wallet)}
-                </Text>
                 <Text as="p" mb="24px">
                     {t(outputText)}
                 </Text>

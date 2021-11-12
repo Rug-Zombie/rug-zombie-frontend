@@ -1,17 +1,29 @@
-import { defaultPlayer, RoomId, Command, EngineCallbacks, CommandProps, ItemId } from './types';
+import { RoomId, Command, EngineCallbacks, CommandProps, ItemId } from './types';
+import Player from './objects/player';
 import rooms from './rooms';
 import items from './items';
 import hotkeys from './hotkeys';
 
-export const currentPlayer = defaultPlayer;
+let currentPlayer: Player;
 
 const roomById = (id: RoomId) => {
     return rooms.find(a => a.id === id);
 }
 
+const itemById = (id: ItemId) => {
+    return items.find(a => a.id === id);
+}
+
+export const getPlayer = () => {
+    return currentPlayer;
+}
+
+export const init = () => {
+    currentPlayer = new Player();
+}
+
 export const login = (wallet: string) => {
-    // TODO: Load player data for now just return the default player but slot in the wallet address
-    currentPlayer.wallet = wallet;
+    currentPlayer.load(wallet);
 }
 
 export const initialEntry = () => {
@@ -28,76 +40,80 @@ const roomChange = (newid: RoomId, exitText: string) => {
 }
 
 const inventory = () => {
-    const playerItems = currentPlayer.inventory.map(a => `${a.item.name} :: ${a.quantity}\n`);
+    const playerItems = currentPlayer.inventory.storage.filter(a => a.quantity > 0).map(a => `${itemById(a.id).name} :: ${a.quantity} == `);
     return `You have the following items:\n${playerItems}`;
 }
 
 const search = () => {
     const room = roomById(currentPlayer.currentRoom);
+    
     if (!room.isDark) {
         return room.entryText;
     }
 
-    return 'It is too dark to search in here';
+    return 'It is too dark to search in here.';
 }
 
-const addItem = (id: ItemId, quantity: number) => {
-    const item = currentPlayer.inventory.find(a => a.item.id === id);
-
-    if (item) {
-        item.quantity += quantity;
-    } else {
-        const newitem = items.find(a => a.id === id);
-        const inventoryitem = { item: newitem, quantity };
-        currentPlayer.inventory.push(inventoryitem);
-    }
+const addPlayerItem = (id: ItemId, quantity: number) => {
+    currentPlayer.inventory.addItem(id, quantity);
 }
 
-const removeItem = (id: ItemId, quantity: number) => {
-    if (currentPlayer.inventory.length === 0) return;
-    const item = currentPlayer.inventory.find(a => a.item.id === id);
-
-    if (item) {
-        if (item.quantity > quantity) {
-            item.quantity -= quantity;
-        } else {            
-            const index = currentPlayer.inventory.indexOf(item);
-            delete currentPlayer.inventory[index];
-        }
-    }    
+const removePlayerItem = (id: ItemId, quantity: number) => {
+    currentPlayer.inventory.removeItem(id, quantity);
 }
 
-const checkInventory = (id: ItemId, quantity: number) => {
-    if (currentPlayer.inventory.length === 0) return false;
-    const item = currentPlayer.inventory.find(a => a.item.id === id);
-
-    if (!item) return false;
-    return item.quantity >= quantity;
+const checkPlayerInventory = (id: ItemId, quantity: number) => {
+    return currentPlayer.inventory.checkItem(id, quantity);
 }
 
-const dropItem = (props: CommandProps) => {
-    if (currentPlayer.inventory.length === 0) return 'That was not found in your inventory';
+const dropPlayerItem = (props: CommandProps) => {
+    if (currentPlayer.inventory.storage.length === 0) return 'That was not found in your inventory1111.';
     const item = items.find(a => props.input.includes(a.shortname));
 
     if (item) {
-        removeItem(item.id, 1);
-        return `You have dropped ${item.name}`;
+        if (checkPlayerInventory(item.id, 1)) {
+            currentPlayer.inventory.removeItem(item.id, 1);
+            return `You have dropped ${item.name}.`;
+        }
     }
 
-    return 'That was not found in your inventory';
+    return 'That was not found in your inventory.';
+}
+
+const examineMap = () => {
+    if (checkPlayerInventory(ItemId.CATACOMBS_MAP, 1)) {
+        return 'Its a basic map. it only has 3 locations.';
+    }
+
+    return 'You do not have any maps.';
+}
+
+const examine = (props: CommandProps) => {
+    if (props.input.includes('map')) return examineMap();
+
+    const item = items.find(a => props.input.includes(a.shortname));
+    if (item) {
+        if (checkPlayerInventory(item.id, 1)) {
+            if (item.examineText) return item.examineText;
+            return 'There is nothing special about this item.';
+        }
+    }
+
+    return 'That was not found in your inventory.';
 }
 
 const generalCommands: Command[] = [
     { command: 'inventory', handler: inventory },
-    { command: 'drop', handler: dropItem },
-    { command: 'search', handler: search }
+    { command: 'drop', handler: dropPlayerItem },
+    { command: 'search', handler: search },
+    { command: 'examine', handler: examine }
 ]
 
 const engineCallbacks: EngineCallbacks = {
     roomChange,
-    addItem,
-    removeItem,
-    checkInventory
+    addPlayerItem,
+    removePlayerItem,
+    checkPlayerInventory
 }
 
 const commandProps: CommandProps = {

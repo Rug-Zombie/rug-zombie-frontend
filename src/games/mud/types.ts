@@ -1,9 +1,20 @@
+export enum ItemId {
+    TORCH,
+    RUSTY_SPOON,
+    CATACOMBS_MAP,
+    NASTY_KNIFE
+}
+
 export enum RoomId {
+    NONE,
     CATACOMBS_01,
     CATACOMBS_02,
-    CATACOMBS_03,
-    ENTRANCE,
-    TESTROOM1
+    CATACOMBS_03
+}
+
+export interface InventoryItem {
+    id: ItemId,
+    quantity: number
 }
 
 export interface Command {
@@ -11,50 +22,11 @@ export interface Command {
     handler: any
 }
 
-export interface RoomInfo {
-    id: RoomId,
-    isDark: boolean,
-    entryText: string,
-    commands: Command[]
-}
-
-export interface PlayerInfo {
-    wallet: string,
-    currentRoom: RoomId,
-    counter: number,
-    inventory: InventoryItem[]
-}
-
-export enum ItemId {
-    TORCH,
-    RUSTY_SPOON,
-    NASTY_KNIFE
-}
-
-export interface ItemInfo {
-    id: ItemId,
-    name: string,
-    description: string,
-    shortname: string
-}
-
-export interface InventoryItem {
-    item: ItemInfo,
-    quantity: number
-}
-
-export const defaultPlayer: PlayerInfo = {
-    wallet: '',
-    currentRoom: RoomId.CATACOMBS_01,
-    inventory: [ ],
-    counter: 0
-}
-
 export interface EngineCallbacks {
     roomChange: any,
-    addItem: any,
-    removeItem: any,
-    checkInventory: any
+    addPlayerItem: any,
+    removePlayerItem: any,
+    checkPlayerInventory: any
 }
 
 export interface CommandProps {
@@ -65,4 +37,12 @@ export interface CommandProps {
 export interface Hotkey {
     input: string,
     output: string
+}
+
+export interface ItemInfo {
+    id: ItemId,
+    name: string,
+    description: string,
+    shortname: string,
+    examineText?: string
 }

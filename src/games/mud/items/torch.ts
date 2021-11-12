@@ -1,10 +1,14 @@
-import { ItemInfo, ItemId } from '../types';
+import { ItemId } from '../types';
+import Item from '../objects/item';
 
-const torch: ItemInfo = {
-    id: ItemId.TORCH,
-    name: 'Torch',
-    description: 'A basic light emitting stick',
-    shortname: 'torch'
+class Torch extends Item {
+    id = ItemId.TORCH;
+
+    name = 'Torch';
+
+    description = 'A basic light emitting stick';
+    
+    shortname = 'torch';
 }
 
-export default torch;
+export default Torch;

@@ -1,10 +1,14 @@
-import { ItemInfo, ItemId } from '../types';
+import { ItemId } from '../types';
+import Item from '../objects/item';
 
-const nastyknife: ItemInfo = {
-    id: ItemId.RUSTY_SPOON,
-    name: 'Rusty Spoon',
-    description: 'The rustiest of spoons',
-    shortname: 'rusty-spoon'
+class RustySpoon extends Item {
+    id = ItemId.RUSTY_SPOON;
+
+    name = 'Rusty Spoon';
+
+    description = 'The rustiest of spoons';
+    
+    shortname = 'rusty-spoon';
 }
 
-export default nastyknife;
+export default RustySpoon;
