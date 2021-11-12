@@ -7,6 +7,8 @@ class CatacombsMap extends Item {
     name = 'Catacombs Map';
 
     description = 'A map of the catacombs';
+
+    examineText: 'Its a basic map. It only has 3 locations.';
     
     shortname = 'catacombs-map';
 }

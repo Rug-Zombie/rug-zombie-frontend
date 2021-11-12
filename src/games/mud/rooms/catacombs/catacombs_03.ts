@@ -1,21 +1,24 @@
 import Room from '../../objects/room';
-import { RoomId, CommandProps, ItemId } from '../../types';
+import { RoomId, CommandProps, ItemId, EngineCallbacks } from '../../types';
 
 class Catacombs03 extends Room {
     constructor() {
         super(RoomId.CATACOMBS_03);
-        this.entryText = 'A long tunnel, with a ladder to the North. There is a small torch attached to the wall. Doesnt look safe to remove. Theres enough light now to look around. Try searching. Exits [N S E W]';        
-        this.inventory.addItem(ItemId.RUSTY_SPOON, 1);
-        this.inventory.addItem(ItemId.CATACOMBS_MAP, 1);
+        this.entryText = 'A long tunnel, with a ladder to the North. There is a small torch attached to the wall. Doesnt look safe to remove. Theres enough light now to look around. Try searching.';        
         this.commands = [
-            { command: 'south', handler: this.south },
-            { command: 'east', handler: this.east },
-            { command: 'west', handler: this.west },
-            { command: 'north', handler: this.north },
-            { command: 'search', handler: this.search },
             { command: 'take map', handler: this.takeMap },
             { command: 'take spoon', handler: this.takeSpoon }
         ]
+    }
+
+    resetRoom = (callbacks: EngineCallbacks) => {
+        if (!callbacks.checkPlayerInventory(ItemId.RUSTY_SPOON, 1)) {
+            this.inventory.addItem(ItemId.RUSTY_SPOON, 1);
+        }
+
+        if (!callbacks.checkPlayerInventory(ItemId.CATACOMBS_MAP, 1)) {
+            this.inventory.addItem(ItemId.CATACOMBS_MAP, 1);
+        }
     }
 
     dataLabResponse = (props: CommandProps) => {
@@ -39,7 +42,7 @@ class Catacombs03 extends Room {
     }
 
     east = (props: CommandProps) => {
-        props.engineCallbacks.requestResponse(this.dataLabResponse);
+        props.engineCallbacks.requestResponse({ handler: this.dataLabResponse });
         return 'Are you sure you want to enter the Data Lab?';
     }
 
@@ -49,7 +52,7 @@ class Catacombs03 extends Room {
 
     north = (props: CommandProps) => {
         if (props.engineCallbacks.checkPlayerInventory(ItemId.RUSTY_SPOON, 1)) {
-            props.engineCallbacks.requestResponse(this.openHatchResponse);
+            props.engineCallbacks.requestResponse({ handler: this.openHatchResponse });
             return 'You climb ladder to top. There is a hatch that goes above ground. Open it?';
         }
 

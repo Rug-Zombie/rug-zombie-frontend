@@ -14,8 +14,28 @@ class Room {
 
     resetRoom?: any;
 
+    north?: any;
+
+    south?: any;
+
+    east?: any;
+
+    west?: any;
+
+    search?: any;
+
     constructor(id: RoomId) {
         this.id = id;
+    }
+
+    exits = () => {
+        let output = 'Exits: [ ';
+        if (this.north) output += 'N ';
+        if (this.south) output += 'S ';
+        if (this.east) output += 'E ';
+        if (this.west) output += 'W ';
+        output += ']';
+        return output;
     }
 }
 

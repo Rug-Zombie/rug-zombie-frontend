@@ -12,6 +12,11 @@ export enum RoomId {
     CATACOMBS_04
 }
 
+export enum GameState {
+    NORMAL,
+    COMBAT
+}
+
 export interface InventoryItem {
     id: ItemId,
     quantity: number
@@ -19,7 +24,9 @@ export interface InventoryItem {
 
 export interface Command {
     command: string,
-    handler: any
+    handler: any,
+    helpText?: string,
+    shortcut?: string
 }
 
 export interface EngineCallbacks {
@@ -43,9 +50,4 @@ export interface Hotkey {
 
 export interface ResponseHandler {
     handler: any
-}
-
-export interface SavedValue {
-    id: string,
-    value: any
 }

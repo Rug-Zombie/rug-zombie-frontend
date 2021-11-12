@@ -3,10 +3,9 @@ import styled from "styled-components";
 import PageHeader from 'components/PageHeader';
 import { Flex, Heading, Text, Input } from '@rug-zombie-libs/uikit';
 import Page from 'components/layout/Page';
-import { useTranslation } from 'contexts/Localization';
 import { account } from 'redux/get';
 
-import { init, login, initialEntry, handleCommand } from './game';
+import { init, login, handleCommand, initialEntry } from './game';
 
 const StyledInput = styled(Input)`
     background: transparent;
@@ -33,7 +32,6 @@ const TempMudUi: React.FC = () => {
     const [initialized, setInitialized] = useState(false);
     const [loggedIn, setLoggedIn] = useState(false);
     
-    const { t } = useTranslation();
     const wallet = account();
 
     useEffect(() => {
@@ -43,7 +41,7 @@ const TempMudUi: React.FC = () => {
         }
 
         if (!loggedIn && wallet) {
-            login(wallet);
+            login(wallet)
             setOutputText(initialEntry());
             setLoggedIn(true);
         }
@@ -69,7 +67,7 @@ const TempMudUi: React.FC = () => {
             </PageHeader>
             <Page>
                 <Text as="p" mb="24px">
-                    {t(outputText)}
+                    <div dangerouslySetInnerHTML={{__html: outputText}} />
                 </Text>
                 <StyledInput type="text" style={{ border: 5 }} value={inputText} onChange={updateText} onKeyDown={checkKey} />
                 <button onClick={submit} className="btn w-100" type="button">Submit</button>
