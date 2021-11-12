@@ -6,10 +6,13 @@ class Player {
     
     currentRoom: RoomId = RoomId.CATACOMBS_01;
 
+    spawnPoint: RoomId = RoomId.CATACOMBS_01;
+
     inventory: Inventory = new Inventory();
 
     load = (wallet: string) => {
         this.wallet = wallet;
+        this.currentRoom = this.spawnPoint;
     }
 }
 

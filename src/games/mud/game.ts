@@ -1,10 +1,11 @@
-import { RoomId, Command, EngineCallbacks, CommandProps, ItemId } from './types';
+import { RoomId, Command, EngineCallbacks, CommandProps, ItemId, ResponseHandler } from './types';
 import Player from './objects/player';
 import rooms from './rooms';
 import items from './items';
 import hotkeys from './hotkeys';
 
 let currentPlayer: Player;
+let responseHandler: ResponseHandler;
 
 const roomById = (id: RoomId) => {
     return rooms.find(a => a.id === id);
@@ -24,11 +25,16 @@ export const init = () => {
 
 export const login = (wallet: string) => {
     currentPlayer.load(wallet);
+    rooms.filter(a => a.resetRoom).forEach(a => a.resetRoom());
 }
 
 export const initialEntry = () => {
     const room = roomById(currentPlayer.currentRoom);
     return room.entryText;
+}
+
+const requestResponse = (handler: any) => {
+    responseHandler = { handler };
 }
 
 const roomChange = (newid: RoomId, exitText: string) => {
@@ -46,7 +52,7 @@ const inventory = () => {
 
 const search = () => {
     const room = roomById(currentPlayer.currentRoom);
-    
+
     if (!room.isDark) {
         return room.entryText;
     }
@@ -102,6 +108,14 @@ const examine = (props: CommandProps) => {
     return 'That was not found in your inventory.';
 }
 
+const killPlayer = (deathMessage: string) => {
+    const wallet = currentPlayer.wallet;
+    init();
+    login(wallet);
+    const room = roomById(currentPlayer.currentRoom);
+    return `${deathMessage} == ${room.entryText}`;
+}
+
 const generalCommands: Command[] = [
     { command: 'inventory', handler: inventory },
     { command: 'drop', handler: dropPlayerItem },
@@ -113,7 +127,9 @@ const engineCallbacks: EngineCallbacks = {
     roomChange,
     addPlayerItem,
     removePlayerItem,
-    checkPlayerInventory
+    checkPlayerInventory,
+    requestResponse,
+    killPlayer
 }
 
 const commandProps: CommandProps = {
@@ -125,12 +141,18 @@ export const handleCommand = (input: string) => {
     const room = roomById(currentPlayer.currentRoom);
     if (!room) return `[ERROR] Room Not Found - ID: ${currentPlayer.currentRoom}`;
 
-    commandProps.input = input;
+    commandProps.input = input.trim();
     const hotkey = hotkeys.find(a => a.input === input);
     
     if (hotkey) {
         commandProps.input = hotkey.output;
-    }    
+    }
+
+    if (responseHandler) {
+        const response = responseHandler.handler(commandProps);
+        responseHandler = null;
+        return response;
+    }
 
     const roomCommand = room.commands.find(a => commandProps.input.includes(a.command));
     if (roomCommand) return roomCommand.handler(commandProps);

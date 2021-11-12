@@ -12,6 +12,8 @@ class Room {
 
     inventory: Inventory = new Inventory();
 
+    resetRoom?: any;
+
     constructor(id: RoomId) {
         this.id = id;
     }

@@ -1,15 +1,15 @@
 export enum ItemId {
     TORCH,
     RUSTY_SPOON,
-    CATACOMBS_MAP,
-    NASTY_KNIFE
+    CATACOMBS_MAP
 }
 
 export enum RoomId {
     NONE,
     CATACOMBS_01,
     CATACOMBS_02,
-    CATACOMBS_03
+    CATACOMBS_03,
+    CATACOMBS_04
 }
 
 export interface InventoryItem {
@@ -26,7 +26,9 @@ export interface EngineCallbacks {
     roomChange: any,
     addPlayerItem: any,
     removePlayerItem: any,
-    checkPlayerInventory: any
+    checkPlayerInventory: any,
+    requestResponse: any,
+    killPlayer: any
 }
 
 export interface CommandProps {
@@ -39,10 +41,11 @@ export interface Hotkey {
     output: string
 }
 
-export interface ItemInfo {
-    id: ItemId,
-    name: string,
-    description: string,
-    shortname: string,
-    examineText?: string
+export interface ResponseHandler {
+    handler: any
+}
+
+export interface SavedValue {
+    id: string,
+    value: any
 }

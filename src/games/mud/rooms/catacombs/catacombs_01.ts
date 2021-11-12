@@ -1,5 +1,5 @@
 import Room from '../../objects/room';
-import { RoomId, CommandProps, ItemId } from '../../types';
+import { RoomId, CommandProps, ItemId, SavedValue } from '../../types';
 
 class Catacombs01 extends Room {
     clawedDoor: boolean;
