@@ -490,7 +490,7 @@ const graves: Grave[] = [
     },
     name: 'Thunderswap Rare',
     subtitle: 'Electric Zombie',
-    path: 'images/rugZombie/Electric Zombie (No Relation).png',
+    path: 'images/rugZombie/Electric Zombie.png',
     type: 'image',
     withdrawalCooldown: '3 days',
     nftRevivalTime: '30 days',
