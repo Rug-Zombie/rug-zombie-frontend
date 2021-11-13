@@ -1,4 +1,5 @@
-import Item, { ItemId } from '../objects/item';
+import Item from '../objects/item';
+import { ItemId } from '../objects/item/types';
 
 class Torch extends Item {
     id = ItemId.TORCH;

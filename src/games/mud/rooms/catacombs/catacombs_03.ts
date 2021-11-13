@@ -1,16 +1,18 @@
 import CatacombsMap from 'games/mud/items/catacombsMap';
 import RustySpoon from 'games/mud/items/rustyspoon';
 import Room from '../../objects/room';
-import { RoomId, CommandProps } from '../../types';
-import { ItemId } from '../../objects/item';
+import { CommandProps } from '../../types';
+import { RoomId } from '../../objects/room/types';
+import { ItemId } from '../../objects/item/types';
 
 class Catacombs03 extends Room {
     constructor() {
         super(RoomId.CATACOMBS_03);
         this.entryText = 'A long tunnel, with a ladder to the North. There is a small torch attached to the wall. Doesnt look safe to remove. Theres enough light now to look around. Try searching.';        
         this.commands = [ ]
-        this.inventory.addItem(new CatacombsMap, 1);
-        this.inventory.addItem(new RustySpoon, 1);
+        this.roomconnections = [ RoomId.CATACOMBS_02, RoomId.CATACOMBS_04 ]
+        this.inventory.addItem(new CatacombsMap(), 1);
+        this.inventory.addItem(new RustySpoon(), 1);
     }
 
     dataLabResponse = (props: CommandProps) => {

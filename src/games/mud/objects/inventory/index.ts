@@ -1,5 +1,6 @@
-import { InventoryItem } from '../types';
-import Item, { ItemId } from './item';
+import { InventoryItem } from '../../types';
+import { ItemId } from '../item/types';
+import Item from '../item';
 
 class Inventory {
     storage: InventoryItem[] = [ ];

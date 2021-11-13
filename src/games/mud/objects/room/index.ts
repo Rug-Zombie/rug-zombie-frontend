@@ -1,19 +1,20 @@
-import { Command, RoomId } from '../types';
-import Inventory from './inventory';
-import { ItemId, ItemHandler } from './item';
+import { Command } from '../../types';
+import { RoomId } from './types';
+import Inventory from '../inventory';
+import { ItemId, ItemHandler } from '../item/types';
 
-class Room {
-    id: RoomId = RoomId.NONE;
-
-    isDark: boolean;
+abstract class Room {
+    id = RoomId.NONE;
 
     entryText: string;
 
     commands: Command[] = [ ];
 
-    inventory: Inventory = new Inventory();
+    inventory = new Inventory();
 
     itemhandlers: ItemHandler[] = [ ];
+
+    roomconnections: RoomId[] = [ ];
 
     resetRoom?: any;
 

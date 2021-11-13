@@ -1,5 +1,6 @@
-import { RoomId, Command, ReturnCodes, CommandResponse } from './types';
-import { ItemId } from './objects/item';
+import { Command, ReturnCodes, CommandResponse } from './types';
+import { ItemId } from './objects/item/types';
+import { RoomId } from './objects/room/types';
 import { rooms, items } from './config';
 
 export const roomById = (id: RoomId) => { return rooms.find(a => a.id === id); }

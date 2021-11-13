@@ -20,3 +20,6 @@ export const TOOK_ITEM = 'You have taken';
 export const UNKNOWN_ITEM = 'This item is not known!';
 export const DONT_HAVE_ITEM = 'You do not have this item!';
 export const CANT_USE_HERE = 'You cannot use that here!';
+export const NO_BODY_TO_SUMMON = 'You have no body to summon!';
+export const TOO_FAR_FROM_BODY = 'You are too far from your body to summon it!';
+export const WEAK_BODY_SUMMON = 'You summoned your body, but you are weak, so it spilled all its items and disintegrated';

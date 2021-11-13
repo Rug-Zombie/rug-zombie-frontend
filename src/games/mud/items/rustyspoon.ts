@@ -1,4 +1,5 @@
-import Item, { ItemId } from '../objects/item';
+import Item from '../objects/item';
+import { ItemId } from '../objects/item/types';
 
 class RustySpoon extends Item {
     id = ItemId.RUSTY_SPOON;

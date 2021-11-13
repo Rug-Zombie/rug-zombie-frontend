@@ -1,5 +1,6 @@
 import Room from '../../objects/room';
-import { RoomId, CommandProps } from '../../types';
+import { CommandProps } from '../../types';
+import { RoomId } from '../../objects/room/types';
 
 class Catacombs04 extends Room {
     constructor() {

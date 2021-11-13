@@ -1,6 +1,7 @@
 import Room from '../../objects/room';
-import { RoomId, CommandProps } from '../../types';
-import { ItemId } from '../../objects/item';
+import { CommandProps } from '../../types';
+import { RoomId } from '../../objects/room/types';
+import { ItemId } from '../../objects/item/types';
 
 class Catacombs01 extends Room {
     clawedDoor: boolean;
@@ -18,6 +19,7 @@ class Catacombs01 extends Room {
             { id: ItemId.TORCH, handler: this.useTorch },
             { id: ItemId.RUSTY_SPOON, handler: this.useSpoon }
         ]
+        this.roomconnections = [ RoomId.CATACOMBS_02 ]
     }
 
     resetRoom = () => {

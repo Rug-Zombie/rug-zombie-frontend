@@ -1,7 +1,9 @@
-import { RoomId, Command, EngineCallbacks, CommandProps, ResponseHandler, GameState, ReturnCodes } from './types';
+import { Command, EngineCallbacks, CommandProps, ResponseHandler, GameState, ReturnCodes } from './types';
+import { ItemId } from './objects/item/types';
+import { RoomId } from './objects/room/types';
 
-import Item, { ItemId } from './objects/item';
-import Player           from './objects/player';
+import Item             from './objects/item';
+import Player           from './entities/player';
 import Body             from './items/body';
 
 import * as utils   from './utils';
@@ -28,18 +30,18 @@ export const login = (wallet: string) => {
 }
 
 export const initialEntry = () => {
-    const room = utils.roomById(currentPlayer.currentRoom);
+    const room = utils.roomById(currentPlayer.currentroom);
     return `${room.entryText}${config.LINE_BREAK_CHAR}${room.exits()}`;
 }
 
 const roomChange = (id: RoomId, exitText: string) => {
     const room = utils.roomById(id);
-    currentPlayer.currentRoom = room.id;
+    currentPlayer.currentroom = room.id;
     return `${exitText}${config.LINE_BREAK_CHAR}${room.entryText}${config.LINE_BREAK_CHAR}${room.bodies()}${config.LINE_BREAK_CHAR}${room.exits()}`
 }
 
 const search = () => {
-    const room = utils.roomById(currentPlayer.currentRoom);
+    const room = utils.roomById(currentPlayer.currentroom);
     if (room.inventory.storage.length === 0) return strings.NO_ITEMS;
     const itemlist = room.inventory.storage.filter(a => a.item.id !== ItemId.PLAYER_BODY && a.item.id !== ItemId.ENEMY_BODY);
     let response = strings.SEARCH_HEADER;
@@ -66,7 +68,7 @@ const dropPlayerItem = (props: CommandProps) => {
     if (item) {
         if (checkPlayerInventory(item.id, 1)) {
             currentPlayer.inventory.removeId(item.id, 1);
-            const room = utils.roomById(currentPlayer.currentRoom);
+            const room = utils.roomById(currentPlayer.currentroom);
             room.inventory.addItem(item, 1);
             return `${strings.DROPPED_ITEM} ${item.name}.`;
         }
@@ -76,7 +78,7 @@ const dropPlayerItem = (props: CommandProps) => {
 }
 
 const take = (props: CommandProps) => {
-    const room = utils.roomById(currentPlayer.currentRoom);
+    const room = utils.roomById(currentPlayer.currentroom);
     const roomitems = room.inventory.storage.filter(a => a.quantity > 0);
     if (roomitems.length === 0) return strings.NO_ITEMS;
 
@@ -103,45 +105,44 @@ const examine = (props: CommandProps) => {
 }
 
 const killPlayer = (deathMessage: string) => {
-    currentPlayer.createBody();
-    currentPlayer.currentRoom = currentPlayer.spawnPoint;
-    const room = utils.roomById(currentPlayer.currentRoom);
+    currentPlayer.handleDeath();
+    const room = utils.roomById(currentPlayer.currentroom);
     return `${deathMessage}${config.LINE_BREAK_CHAR}${room.entryText}`;
 }
 
 const help = () => {
-    const room = utils.roomById(currentPlayer.currentRoom);
+    const room = utils.roomById(currentPlayer.currentroom);
     const combined = room.commands.concat(generalCommands);
     const helptext = combined.filter(a => a.helpText).map(a => `${a.command.join(' ')} :: ${a.helpText}${config.LINE_BREAK_CHAR}`).join('');
     return helptext;
 }
 
 const north = (props: CommandProps) => {
-    const room = utils.roomById(currentPlayer.currentRoom);
+    const room = utils.roomById(currentPlayer.currentroom);
     if (room.north) return room.north(props);
     return strings.CANT_GO;
 }
 
 const south = (props: CommandProps) => {
-    const room = utils.roomById(currentPlayer.currentRoom);
+    const room = utils.roomById(currentPlayer.currentroom);
     if (room.south) return room.south(props);
     return strings.CANT_GO;
 }
 
 const east = (props: CommandProps) => {
-    const room = utils.roomById(currentPlayer.currentRoom);
+    const room = utils.roomById(currentPlayer.currentroom);
     if (room.east) return room.east(props);
     return strings.CANT_GO;
 }
 
 const west = (props: CommandProps) => {
-    const room = utils.roomById(currentPlayer.currentRoom);
+    const room = utils.roomById(currentPlayer.currentroom);
     if (room.west) return room.west(props);
     return strings.CANT_GO;
 }
 
 const loot = () => {
-    const room = utils.roomById(currentPlayer.currentRoom);
+    const room = utils.roomById(currentPlayer.currentroom);
     
     const playerbody = room.inventory.storage.find(a => a.item.id === ItemId.PLAYER_BODY);
     if (playerbody) {
@@ -149,6 +150,7 @@ const loot = () => {
         const bodyitems = body.inventory.storage;
         bodyitems.forEach(a => currentPlayer.inventory.addItem(a.item, a.quantity));
         room.inventory.removeItem(playerbody.item, 1);
+        currentPlayer.bodyLocation = RoomId.NONE;
         return strings.LOOTED_PLAYER_BODY;
     }
 
@@ -159,10 +161,27 @@ const use = (props: CommandProps) => {
     const item = utils.itemByName(props.input);
     if (!item) return strings.UNKNOWN_ITEM;
     if (!checkPlayerInventory(item.id, 1)) return strings.DONT_HAVE_ITEM;
-    const room = utils.roomById(currentPlayer.currentRoom);
+    const room = utils.roomById(currentPlayer.currentroom);
     const handler = room.itemhandlers.find(a => a.id === item.id);
     if (!handler) return strings.CANT_USE_HERE;
     return handler.handler(props);
+}
+
+const summonBody = () => {
+    if (currentPlayer.bodyLocation === RoomId.NONE) return strings.NO_BODY_TO_SUMMON;
+    const room = utils.roomById(currentPlayer.currentroom);
+    const check = room.roomconnections.filter(a => a === currentPlayer.bodyLocation);
+    if (check.length === 0) return strings.TOO_FAR_FROM_BODY;
+    const bodyroom = utils.roomById(currentPlayer.bodyLocation);
+    const playerbody = bodyroom.inventory.storage.find(a => a.item.id === ItemId.PLAYER_BODY).item as Body;
+    const bodyitems = playerbody.inventory.storage;
+    bodyitems.forEach(a => room.inventory.addItem(a.item, a.quantity));
+    bodyroom.inventory.removeItem(playerbody, 1);
+    return strings.WEAK_BODY_SUMMON;
+}
+
+const open = () => {
+    return 'NOT IMPLEMENTED YET';
 }
 
 const generalCommands: Command[] = [
@@ -177,7 +196,17 @@ const generalCommands: Command[] = [
     { command: [ 'search'], handler: search, helpText: 'Searches the area for stuff' },
     { command: [ 'examine' ], handler: examine, helpText: 'Lets you examine an item' },    
     { command: [ 'loot' ], handler: loot, helpText: 'Loots a body', shortcut: 'l' },
-    { command: [ 'use' ], handler: use, helpText: 'Allows you to use an item' }
+    { command: [ 'use' ], handler: use, helpText: 'Allows you to use an item' },
+    { command: [ 'open' ], handler: open, helpText: 'Allows you to open a container' },
+    { command: [ 'summon', 'body' ], handler: summonBody, helpText: 'Allows you to summon your dead corpse' }
+]
+
+const attack = () => {
+    return 'NOT IMPLEMENTED YET';
+}
+
+const combatCommands: Command[] = [
+    { command: [ 'attack' ], handler: attack, helpText: 'Attack an enemy', shortcut: 'a' },
 ]
 
 const engineCallbacks: EngineCallbacks = {
@@ -191,7 +220,7 @@ const combatLoop = () => {
 }
 
 const normalLoop = () => {
-    const room = utils.roomById(currentPlayer.currentRoom);    
+    const room = utils.roomById(currentPlayer.currentroom);    
         
     if (responseHandler) {
         const response = responseHandler.handler(commandProps);
