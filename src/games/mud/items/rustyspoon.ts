@@ -1,7 +1,7 @@
-import Item from '../objects/item';
-import { ItemId } from '../objects/item/types';
+import Weapon from 'games/mud/objects/item/weapon';
+import { ItemId } from 'games/mud/objects/item/types';
 
-class RustySpoon extends Item {
+class RustySpoon extends Weapon {
     id = ItemId.RUSTY_SPOON;
 
     name = 'Rusty Spoon';
@@ -13,6 +13,8 @@ class RustySpoon extends Item {
     shortname = 'spoon';
 
     examineText = 'Its the rustiest of spoons.';
+
+    damage = 1;
 }
 
 export default RustySpoon;

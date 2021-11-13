@@ -1,3 +1,8 @@
+export enum ItemType {
+    BASIC,
+    WEAPON
+}
+
 export enum ItemId {
     NONE,
     

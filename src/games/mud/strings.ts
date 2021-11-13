@@ -1,5 +1,4 @@
-import { LINE_BREAK_CHAR } from "./config";
-
+export const LINE_BREAK_CHAR = '<br />';
 export const TOO_DARK = 'It is too dark to search in here.';
 export const ITEM_NOT_FOUND = 'That was not found in your inventory.';
 export const NO_MAPS = 'You do not have any maps.';
@@ -23,3 +22,6 @@ export const CANT_USE_HERE = 'You cannot use that here!';
 export const NO_BODY_TO_SUMMON = 'You have no body to summon!';
 export const TOO_FAR_FROM_BODY = 'You are too far from your body to summon it!';
 export const WEAK_BODY_SUMMON = 'You summoned your body, but you are weak, so it spilled all its items and disintegrated';
+export const CANT_EQUIP_THAT = 'You cannot equip that item';
+export const NOT_EQUIPPED = 'That item is not equipped';
+export const CANT_DROP_EQUIPPED = 'This item is equipped. Please unequip it first.';

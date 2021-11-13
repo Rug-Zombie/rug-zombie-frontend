@@ -1,7 +1,9 @@
-import { ItemId } from './types';
+import { ItemId, ItemType } from './types';
 
 abstract class Item {
     id = ItemId.NONE;
+
+    type = ItemType.BASIC;
 
     name = '';
 
@@ -16,6 +18,10 @@ abstract class Item {
     canPickup = true;
 
     canBeLooted = false;
+
+    canEquip = false;
+
+    isEquipped = false;
 }
 
 export default Item;

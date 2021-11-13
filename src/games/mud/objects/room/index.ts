@@ -1,4 +1,4 @@
-import { Command } from '../../types';
+import { Command } from 'games/mud/types';
 import { RoomId } from './types';
 import Inventory from '../inventory';
 import { ItemId, ItemHandler } from '../item/types';

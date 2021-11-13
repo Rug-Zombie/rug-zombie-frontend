@@ -1,3 +1,4 @@
+import { EntityCallbacks } from 'games/mud/objects/entity/types';
 import Item from './objects/item';
 
 export enum GameState {
@@ -27,7 +28,8 @@ export interface Command {
     command: string[],
     handler: any,
     helpText?: string,
-    shortcut?: string
+    shortcut?: string,
+    notTickable?: boolean
 }
 
 export interface EngineCallbacks {
@@ -41,7 +43,10 @@ export interface EngineCallbacks {
 
 export interface CommandProps {
     engineCallbacks: EngineCallbacks,
-    input: string
+    playerEntityCallbacks: EntityCallbacks,
+    input: string,
+    output: string,
+    notTickable: boolean
 }
 
 export interface Hotkey {

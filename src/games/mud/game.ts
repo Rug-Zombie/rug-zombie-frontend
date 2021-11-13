@@ -1,18 +1,19 @@
-import { Command, EngineCallbacks, CommandProps, ResponseHandler, GameState, ReturnCodes } from './types';
-import { ItemId } from './objects/item/types';
-import { RoomId } from './objects/room/types';
+import { Command, EngineCallbacks, CommandProps, ResponseHandler, GameState, ReturnCodes } from 'games/mud/types';
+import { ItemId } from 'games/mud/objects/item/types';
+import { RoomId } from 'games/mud/objects/room/types';
 
-import Item             from './objects/item';
-import Player           from './entities/player';
-import Body             from './items/body';
+import * as utils       from 'games/mud/utils';
+import * as strings     from 'games/mud/strings';
+import * as config      from 'games/mud/config';
 
-import * as utils   from './utils';
-import * as strings from './strings';
-import * as config  from './config';
+import Item             from 'games/mud/objects/item';
+import Player           from 'games/mud/entities/player';
+import Body             from 'games/mud/items/body';
+import Moan             from 'games/mud/effects/moan';
 
 let currentPlayer   : Player;
-let responseHandler : ResponseHandler;
 let currentState    : GameState;
+let responseHandler : ResponseHandler;
 
 export const getPlayer = () => { return currentPlayer; }
 export const getState = () => { return currentState; }
@@ -31,13 +32,13 @@ export const login = (wallet: string) => {
 
 export const initialEntry = () => {
     const room = utils.roomById(currentPlayer.currentroom);
-    return `${room.entryText}${config.LINE_BREAK_CHAR}${room.exits()}`;
+    return `${room.entryText}${strings.LINE_BREAK_CHAR}${room.exits()}`;
 }
 
 const roomChange = (id: RoomId, exitText: string) => {
     const room = utils.roomById(id);
     currentPlayer.currentroom = room.id;
-    return `${exitText}${config.LINE_BREAK_CHAR}${room.entryText}${config.LINE_BREAK_CHAR}${room.bodies()}${config.LINE_BREAK_CHAR}${room.exits()}`
+    return `${exitText}${strings.LINE_BREAK_CHAR}${room.entryText}${strings.LINE_BREAK_CHAR}${room.bodies()}${strings.LINE_BREAK_CHAR}${room.exits()}`
 }
 
 const search = () => {
@@ -45,12 +46,12 @@ const search = () => {
     if (room.inventory.storage.length === 0) return strings.NO_ITEMS;
     const itemlist = room.inventory.storage.filter(a => a.item.id !== ItemId.PLAYER_BODY && a.item.id !== ItemId.ENEMY_BODY);
     let response = strings.SEARCH_HEADER;
-    response += itemlist.map(a => `${config.LINE_BREAK_CHAR}- ${a.item.name} [${a.item.shortname}]`).join('');
+    response += itemlist.map(a => `${strings.LINE_BREAK_CHAR}- ${a.item.name} [${a.item.shortname}]`).join('');
     return response;
 }
 
 const inventory = () => {
-    const playerItems = currentPlayer.inventory.storage.map(a => `${a.item.name} :: ${a.quantity}${config.LINE_BREAK_CHAR}`).join('');
+    const playerItems = currentPlayer.inventory.storage.map(a => `${a.item.name} :: ${a.quantity}${strings.LINE_BREAK_CHAR}`).join('');
     return `${strings.INVENTORY_HEADER}${playerItems}`;
 }
 
@@ -67,6 +68,7 @@ const dropPlayerItem = (props: CommandProps) => {
 
     if (item) {
         if (checkPlayerInventory(item.id, 1)) {
+            if (currentPlayer.isEquipped(item.id)) return strings.CANT_DROP_EQUIPPED;
             currentPlayer.inventory.removeId(item.id, 1);
             const room = utils.roomById(currentPlayer.currentroom);
             room.inventory.addItem(item, 1);
@@ -107,13 +109,13 @@ const examine = (props: CommandProps) => {
 const killPlayer = (deathMessage: string) => {
     currentPlayer.handleDeath();
     const room = utils.roomById(currentPlayer.currentroom);
-    return `${deathMessage}${config.LINE_BREAK_CHAR}${room.entryText}`;
+    return `${deathMessage}${strings.LINE_BREAK_CHAR}${room.entryText}`;
 }
 
 const help = () => {
     const room = utils.roomById(currentPlayer.currentroom);
     const combined = room.commands.concat(generalCommands);
-    const helptext = combined.filter(a => a.helpText).map(a => `${a.command.join(' ')} :: ${a.helpText}${config.LINE_BREAK_CHAR}`).join('');
+    const helptext = combined.filter(a => a.helpText).map(a => `${a.command.join(' ')} :: ${a.helpText}${strings.LINE_BREAK_CHAR}`).join('');
     return helptext;
 }
 
@@ -184,8 +186,44 @@ const open = () => {
     return 'NOT IMPLEMENTED YET';
 }
 
+const say = () => {
+    return 'NOT IMPLEMENTED YET';
+}
+
+const shout = () => {
+    return 'NOT IMPLEMENTED YET';
+}
+
+const moan = () => {
+    return currentPlayer.applyEffect(new Moan());
+}
+
+const equip = () => {
+    const item = utils.itemByName(commandProps.input);
+    if (!item) return strings.ITEM_NOT_FOUND;
+    if (currentPlayer.inventory.storage.length === 0) return strings.ITEM_NOT_FOUND;
+    const playeritem = currentPlayer.inventory.getItem(item.id);
+    if (!playeritem) return strings.DONT_HAVE_ITEM;
+    if (!playeritem.item.canEquip) return strings.CANT_EQUIP_THAT;
+    return currentPlayer.equip(playeritem.item);
+}
+
+const unequip = () => {
+    const item = utils.itemByName(commandProps.input);
+    if (!item) return strings.ITEM_NOT_FOUND;
+    if (currentPlayer.inventory.storage.length === 0) return strings.ITEM_NOT_FOUND;
+    const playeritem = currentPlayer.inventory.getItem(item.id);
+    if (!playeritem) return strings.DONT_HAVE_ITEM;
+    if (!currentPlayer.isEquipped(playeritem.item.id)) return strings.NOT_EQUIPPED;
+    return currentPlayer.unequip(playeritem.item);
+}
+
+const stats = () => {
+    return currentPlayer.statsOutput();
+}
+
 const generalCommands: Command[] = [
-    { command: [ 'help' ], handler: help },
+    { command: [ 'help' ], handler: help, notTickable: true },
     { command: [ 'north'], handler: north, helpText: 'Moves to the north', shortcut: 'n' },
     { command: [ 'south' ], handler: south, helpText: 'Moves to the south', shortcut: 's' },
     { command: [ 'east' ], handler: east, helpText: 'Moves to the east', shortcut: 'e' },
@@ -198,6 +236,12 @@ const generalCommands: Command[] = [
     { command: [ 'loot' ], handler: loot, helpText: 'Loots a body', shortcut: 'l' },
     { command: [ 'use' ], handler: use, helpText: 'Allows you to use an item' },
     { command: [ 'open' ], handler: open, helpText: 'Allows you to open a container' },
+    { command: [ 'moan' ], handler: moan, helpText: 'Moan a bit, maybe does something?' },
+    { command: [ 'equip' ], handler: equip, helpText: 'Allows you to equip something' },
+    { command: [ 'unequip' ], handler: unequip, helpText: 'Allows you to unequip something' },
+    { command: [ 'stats' ], handler: stats, helpText: 'Shows you various statistics' },
+    { command: [ 'say' ], handler: say },
+    { command: [ 'shout' ], handler: shout },
     { command: [ 'summon', 'body' ], handler: summonBody, helpText: 'Allows you to summon your dead corpse' }
 ]
 
@@ -213,7 +257,9 @@ const engineCallbacks: EngineCallbacks = {
     roomChange, addPlayerItem, removePlayerItem, checkPlayerInventory, requestResponse, killPlayer
 }
 
-const commandProps: CommandProps = { engineCallbacks, input: '' }
+const commandProps: CommandProps = { 
+    engineCallbacks, playerEntityCallbacks: null, input: '', output: '', notTickable: false 
+}
 
 const combatLoop = () => {
     return 'NOT IMPLEMENTED';
@@ -232,17 +278,32 @@ const normalLoop = () => {
     const response = utils.findCommandMatch(commandProps.input, combined);
 
     switch (response.returncode) {
-        case ReturnCodes.OK: return response.matched.handler(commandProps);
-        case ReturnCodes.AMBIGUOUS_MATCH: return strings.AMBIGUOUS_COMMAND;
-        default: return strings.UNKNOWN_COMMAND;
+        case ReturnCodes.OK: 
+            commandProps.notTickable = response.matched.notTickable;
+            return response.matched.handler(commandProps);
+        case ReturnCodes.AMBIGUOUS_MATCH: 
+            commandProps.notTickable = true;
+            return strings.AMBIGUOUS_COMMAND;
+        default: 
+            commandProps.notTickable = true;
+            return strings.UNKNOWN_COMMAND;
     }
 }
 
 export const handleCommand = (input: string) => {
     commandProps.input = input.trim().toLowerCase();
+    commandProps.notTickable = false;
+    commandProps.playerEntityCallbacks = currentPlayer.callbacks;
 
     switch (currentState) {
-        case GameState.COMBAT: return combatLoop();
-        default: return normalLoop();
+        case GameState.COMBAT: 
+            commandProps.output = combatLoop();
+            break;
+        default: 
+            commandProps.output = normalLoop();
+            break;
     }
+
+    if (!commandProps.notTickable) commandProps.output = `${commandProps.output}${strings.LINE_BREAK_CHAR}${currentPlayer.processTick()}`;
+    return commandProps.output;
 }

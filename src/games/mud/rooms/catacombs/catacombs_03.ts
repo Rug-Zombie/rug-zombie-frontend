@@ -45,7 +45,7 @@ class Catacombs03 extends Room {
     }
 
     north = (props: CommandProps) => {
-        if (props.engineCallbacks.checkPlayerInventory(ItemId.RUSTY_SPOON, 1)) {
+        if (!this.inventory.checkItem(ItemId.RUSTY_SPOON, 1)) {
             props.engineCallbacks.requestResponse({ handler: this.openHatchResponse });
             return 'You climb ladder to top. There is a hatch that goes above ground. Open it?';
         }

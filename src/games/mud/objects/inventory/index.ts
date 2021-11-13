@@ -5,6 +5,11 @@ import Item from '../item';
 class Inventory {
     storage: InventoryItem[] = [ ];
 
+    getItem = (id: ItemId) => {
+        if (!this.storage) return null;
+        return this.storage.find(a => a.item.id === id);
+    }
+
     addItem = (item: Item, quantity: number) => {
         const check = this.storage.find(a => a.item.id === item.id);
 

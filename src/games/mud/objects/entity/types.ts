@@ -1,4 +1,4 @@
-import { ItemId } from '../item/types';
+import Weapon from 'games/mud/objects/item/weapon';
 
 export enum EntityId {
     PLAYER
@@ -12,5 +12,13 @@ export interface EntityStats {
 }
 
 export interface EntityEquipment {
-    weapon: ItemId
+    weapon: Weapon
+}
+
+export enum ModifyStatsType {
+    STRENGTH
+}
+
+export interface EntityCallbacks {
+    modifyStats: any
 }

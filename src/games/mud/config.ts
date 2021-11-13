@@ -10,8 +10,6 @@ import Torch        from './items/torch';
 import RustySpoon   from './items/rustyspoon';
 import CatacombsMap from './items/catacombsMap';
 
-export const LINE_BREAK_CHAR = '<br />';
-
 export const rooms: Room[] = [ 
     new Catacombs01(),
     new Catacombs02(),
