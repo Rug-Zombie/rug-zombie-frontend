@@ -5,9 +5,7 @@ class Catacombs02 extends Room {
     constructor() {
         super(RoomId.CATACOMBS_02);
         this.entryText = 'The ground is squishy, the air petrid, and pitch black. You hear the moans of other Zombies and creatures. What are they doing down here? Maybe it would help to have a torch or a flashlight?';
-        this.commands = [
-            
-        ]
+        this.commands = [ ]
     }
 
     south = (props: CommandProps) => {

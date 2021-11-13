@@ -1,8 +1,4 @@
-export enum ItemId {
-    TORCH,
-    RUSTY_SPOON,
-    CATACOMBS_MAP
-}
+import Item from './objects/item';
 
 export enum RoomId {
     NONE,
@@ -17,13 +13,26 @@ export enum GameState {
     COMBAT
 }
 
+export enum ReturnCodes {
+    OK,
+    ERROR,
+
+    NO_MATCH,
+    AMBIGUOUS_MATCH
+}
+
+export interface CommandResponse {
+    returncode: ReturnCodes,
+    matched: Command
+}
+
 export interface InventoryItem {
-    id: ItemId,
+    item: Item,
     quantity: number
 }
 
 export interface Command {
-    command: string,
+    command: string[],
     handler: any,
     helpText?: string,
     shortcut?: string

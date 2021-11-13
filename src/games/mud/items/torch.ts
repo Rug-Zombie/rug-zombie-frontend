@@ -1,10 +1,11 @@
-import { ItemId } from '../types';
-import Item from '../objects/item';
+import Item, { ItemId } from '../objects/item';
 
 class Torch extends Item {
     id = ItemId.TORCH;
 
     name = 'Torch';
+
+    altName = 'torch';
 
     description = 'A basic light emitting stick';
     

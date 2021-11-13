@@ -5,9 +5,7 @@ class Catacombs04 extends Room {
     constructor() {
         super(RoomId.CATACOMBS_04);
         this.entryText = 'You enter the barracks. There are 4 small torches lighting up the room and a table in the corner.';
-        this.commands = [
-            
-        ]
+        this.commands = [ ]
     }
 
     east = (props: CommandProps) => {

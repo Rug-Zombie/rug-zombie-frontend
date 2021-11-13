@@ -1,5 +1,6 @@
 import Room from '../../objects/room';
-import { RoomId, CommandProps, ItemId } from '../../types';
+import { RoomId, CommandProps } from '../../types';
+import { ItemId } from '../../objects/item';
 
 class Catacombs01 extends Room {
     clawedDoor: boolean;
@@ -10,10 +11,12 @@ class Catacombs01 extends Room {
         super(RoomId.CATACOMBS_01);
         this.entryText = 'You are in a dark, dank room. It smells like rotting flesh. It is pitch black. There is a door to the North.';
         this.commands = [
-            { command: 'claw door', handler: this.clawDoor },            
-            { command: 'use torch', handler: this.useTorch },
-            { command: 'examine wall', handler: this.examineWall },
-            { command: 'use spoon', handler: this.useSpoon }
+            { command: [ 'claw', 'door' ], handler: this.clawDoor, helpText: 'Clawing at the door may do something fun' },
+            { command: [ 'examine', 'wall' ], handler: this.examineWall, helpText: 'Whatever could be there' }
+        ]
+        this.itemhandlers = [
+            { id: ItemId.TORCH, handler: this.useTorch },
+            { id: ItemId.RUSTY_SPOON, handler: this.useSpoon }
         ]
     }
 

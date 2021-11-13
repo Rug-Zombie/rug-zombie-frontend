@@ -1,4 +1,1 @@
-[ ] Implement shortest pattern matcher for input
-[ ] Refactor the pickup/drop/search system so items can be dropped into rooms/containers
-[ ] Add destroy function for items
-[ ] Update the use item functionality to be more flexible
+* Add shortest matcher to item search

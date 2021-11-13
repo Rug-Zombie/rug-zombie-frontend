@@ -67,6 +67,7 @@ const TempMudUi: React.FC = () => {
             </PageHeader>
             <Page>
                 <Text as="p" mb="24px">
+                    {/* eslint-disable-next-line */}
                     <div dangerouslySetInnerHTML={{__html: outputText}} />
                 </Text>
                 <StyledInput type="text" style={{ border: 5 }} value={inputText} onChange={updateText} onKeyDown={checkKey} />
