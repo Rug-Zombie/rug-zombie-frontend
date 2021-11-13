@@ -23,7 +23,7 @@ const config: MenuEntry[] = [
   },
   {
     label: 'Shark Tank',
-    icon: 'SpawningPoolIcon',
+    icon: 'SharkTankIcon',
     href: '/sharktank'
   },
   {
