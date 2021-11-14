@@ -1044,6 +1044,22 @@ const nfts: Nft[] = [
     userInfo: { ...DEFAULT_USER_INFO },
     artist: artists.canadiancryptojunkie
   },
+  {
+    id: 65,
+    name: 'Infinte Zombie',
+    symbol: 'IFZ',
+    description: 'Don\'t worry, I\'m the strongest.',
+    address: {
+      56: '0xD9a1E771bf857f49db78E96B01Dd4E0BD4A68f29',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/Qme5fwhsG5sAHWg1yZUPYHqVj3wvZWetzpu5FWV4cmYHV3',
+    type: 'image',
+    rarity: 'Legendary',
+    userInfo: { ...DEFAULT_USER_INFO },
+    artist: artists.canadiancryptojunkie
+  },
 ]
 
 export default nfts
