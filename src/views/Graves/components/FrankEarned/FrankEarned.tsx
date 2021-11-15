@@ -14,7 +14,7 @@ interface FrankEarnedProps {
 }
 
 const FrankEarned: React.FC<FrankEarnedProps> = ({ pid }) => {
-  const { userInfo: { pendingZombie } } = grave(pid)
+  const { userInfo: { pendingZombie, amount } } = grave(pid)
   const drFrankenstein = useDrFrankenstein();
   const { account } = useWeb3React();
 
@@ -45,7 +45,7 @@ const FrankEarned: React.FC<FrankEarnedProps> = ({ pid }) => {
         <div className="frank-earned">
           <span className="text-shadow">{getFullDisplayBalance(new BigNumber(pendingZombie), tokens.zmbe.decimals, 4)}</span>
         </div>
-        <button disabled={pendingZombie.eq(BIG_ZERO)} onClick={handleHarvest} className={`btn w-auto harvest ${pendingZombie.eq(BIG_ZERO) ? 'btn-disabled':''}`} type="button">Harvest</button>
+        <button disabled={amount.isZero()} onClick={handleHarvest} className={`btn w-auto harvest ${amount.isZero() ? 'btn-disabled':''}`} type="button">Harvest</button>
       </div>
     </div>
   )
