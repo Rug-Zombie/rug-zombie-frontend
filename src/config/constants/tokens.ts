@@ -36,6 +36,15 @@ const tokens = {
     projectLink: 'https://euler.tools/',
     tokenLogo: 'https://bscscan.com/token/images/eulertools_32.png'
   },
+  if1: {
+    symbol: 'IF1',
+    address: {
+      56: '0xfCaC1a3eDE7b55Cc51e3eBff2885a67FBfE01a1A',
+      97: '',
+    },
+    decimals: 9,
+    projectLink: 'https://infiniteone.io/',
+  },
   rugbiden: {
     symbol: 'RUGBIDEN',
     address: {

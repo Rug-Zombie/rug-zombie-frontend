@@ -6,6 +6,64 @@ import { SpawningPool } from './types'
 
 const spawningPools: SpawningPool[] = [
   {
+    id: 12,
+    name: 'InfiniteOne Legendary',
+    subtitle: 'Infinite Zombie',
+    path: 'https://ipfs.io/ipfs/Qme5fwhsG5sAHWg1yZUPYHqVj3wvZWetzpu5FWV4cmYHV3',
+    type: 'image',
+    address: {
+      56: '0x0b9e22204EeE16B97cD9CE9dE82417D74102C6fa',
+      97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
+    },
+    endBlock: 15300000,
+    endDate: 1645073999,
+    project: {
+      name: 'InfiniteOne',
+      description: 'InfiniteOne Token is the only token you truly need in your wallet. It rewards you in multiple ways just for holding it. It supplies you with Infinite rewards through the ups and downs of the market.',
+      additionalDetails: [
+        {
+          name: 'Project website',
+          url: tokens.if1.projectLink,
+        },
+        {
+          name: 'Whitepaper',
+          url: 'https://infiniteone.io/whitepaper/#comp-0',
+        },
+        {
+          name: 'Telegram',
+          url: 'https://t.me/TheRealInfiniteOne',
+        },
+      ],
+    },
+    withdrawalCooldown: '3 days',
+    nftRevivalTime: '45 days',
+    rewardToken: tokens.if1,
+    rewardTokenBnbLp: '0x4b5676c8775f035405c817e11c2ecb3ce5e5ef90',
+    bnbLpTokenIndex: 0,
+    artist: artists.canadiancryptojunkie,
+    stakingToken: '',
+    pcsVersion: 'v2',
+    liquidityDetails: '',
+    isNew: true,
+    color: "grey",
+    userInfo: {
+      paidUnlockFee: false,
+      tokenWithdrawalDate: 0,
+      nftRevivalDate: 0,
+      amount: BIG_ZERO,
+      pendingReward: BIG_ZERO,
+      zombieAllowance: BIG_ZERO,
+    },
+    poolInfo: {
+      unlockFee: BIG_ZERO,
+      rewardPerBlock: BIG_ZERO,
+      minimumStake: BIG_ZERO,
+      totalZombieStaked: BIG_ZERO,
+      withdrawCooldown: 0,
+      nftRevivalTime: 0,
+    },
+  },
+  {
     id: 11,
     name: 'Squid Stake Legendary',
     subtitle: 'Don\'t mess with Cthulhu',
