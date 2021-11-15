@@ -679,15 +679,15 @@ const nfts: Nft[] = [
     id: 42,
     name: 'Fluffy',
     symbol: 'FLUFFY',
-    description: 'Did you hear the bells ringing?',
+    description: 'C\'est simple comme bonjour',
     address: {
-      56: '0xf5971902a4625236C1f268C6d077aFAD340359D9',
+      56: '0x988EE236F4c3E0244e7785F2a41FE8533AE1A7f3',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
 
     },
     totalSupply: BIG_ZERO,
-    path: 'https://storage.googleapis.com/rug-zombie/French%20Connection%20NFT.jpeg',
-    type: 'image',
+    path: 'https://ipfs.io/ipfs/QmdRJp1tPFNdg9WP1V1A3KTGYaF74zs6vT5yodhsn9FGcn',
+    type: 'video',
     rarity: 'Legendary',
     userInfo: { ...DEFAULT_USER_INFO },
   },
@@ -984,7 +984,7 @@ const nfts: Nft[] = [
     id: 61,
     name: 'The Double Black Diamond',
     symbol: 'DBD',
-    description: 'There are occasions when commands of the sovereign need not be obeyed.',
+    description: 'When you\'re on a merry-go-round, you miss a lot of the scenery',
     address: {
       56: '0x3a56ffFE595CA8e9d8eC46D74721F60B3aF9FE74',
       97: '0x701855c54F7084D494DA18157bD164d3AB32a0a0',
@@ -993,7 +993,7 @@ const nfts: Nft[] = [
     path: 'https://ipfs.io/ipfs/QmQ12QcVoJtuzGmf8zaqGyHnXWidnCSs6tqFRHASpbYnuf',
     type: 'image',
     rarity: 'Rare',
-    artist: artists.TheLeap3d,
+    artist: artists.canadiancryptojunkie,
     userInfo: { ...DEFAULT_USER_INFO },
   },
   {

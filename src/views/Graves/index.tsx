@@ -17,15 +17,15 @@ let accountAddress
 const filterGraves = (i) => {
   switch(i) {
     case 0: // All
-      return graves().filter(g => g.poolInfo.allocPoint > 0)
+      return graves()
     case 1: // Legendary
-      return graves().filter(g => g.rarity === "Legendary" && g.poolInfo.allocPoint > 0)
+      return graves().filter(g => g.rarity === "Legendary")
     case 2: // Rare
-      return graves().filter(g => g.rarity === "Rare" && g.poolInfo.allocPoint > 0)
+      return graves().filter(g => g.rarity === "Rare")
     case 3: // Uncommon
-      return graves().filter(g => g.rarity === "Uncommon" && g.poolInfo.allocPoint > 0)
+      return graves().filter(g => g.rarity === "Uncommon")
     case 4: // Common
-      return graves().filter(g => g.rarity === "Common" && g.poolInfo.allocPoint > 0)
+      return graves().filter(g => g.rarity === "Common")
     case 5: // NFT Only
       return graves().filter(g => g.poolInfo.allocPoint === 0)
     case 6: // Retired
@@ -72,7 +72,16 @@ const Graves: React.FC = () => {
         })
     }
 
-    const visibleGraves = stakedOnly ? filterGraves(filter).filter(g => !g.userInfo.amount.isZero()) : filterGraves(filter).filter(g => !g.isRetired || filter === 6)
+    const postFilter = () => {
+    if(filter !== 6 && filter !== 5) {
+      return filterGraves(filter).filter(g => !g.isRetired && g.poolInfo.allocPoint > 0)
+    } if(filter === 5) {
+      return filterGraves(filter).filter(g => !g.isRetired)
+    }
+    return filterGraves(filter)
+  }
+
+    const visibleGraves = stakedOnly ? filterGraves(filter).filter(g => !g.userInfo.amount.isZero()) : postFilter()
   return (
     <>
       <PageHeader background='#101820'>

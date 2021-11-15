@@ -67,8 +67,8 @@ const spawningPools: SpawningPool[] = [
     id: 10,
     name: 'French Connection Legendary',
     subtitle: 'Fluffy',
-    path: 'https://storage.googleapis.com/rug-zombie/French%20Connection%20NFT.jpeg',
-    type: 'image',
+    path: 'https://ipfs.io/ipfs/QmdRJp1tPFNdg9WP1V1A3KTGYaF74zs6vT5yodhsn9FGcn',
+    type: 'video',
     address: {
       56: '0xFC57f86f80D3f6155dE76F15e245F0A9ad33fFA5',
       97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
