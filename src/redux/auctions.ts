@@ -79,6 +79,30 @@ const auctions: Auction[] = [
       bid: BIG_ZERO,
     },
     auctionInfo: { ...DEFAULT_AUCTION_INFO }
+  },
+  {
+    id: 3,
+    aid: 1,
+    prize: "Patient Zero Gamma",
+    prizeSymbol: "PATIENT-ZERO",
+    path: 'https://ipfs.io/ipfs/QmRhksLK5YJjhSD1GssYL6czH1xdumKxUa4eQaN6AwDcyR',
+    prizeDescription: 'The blockspring.',
+    isFinished: false,
+    artist: { ...artists.jussjoshinduh },
+    startingBid: 0.05,
+    bt: 'BNB',
+    version: 'v3',
+    end: 1637816399,
+    additionalDetails: [
+      {
+        name: 'Learn what the RugZombie Team accomplished during the Trust Us Campaign',
+        url: "https://rugzombie.gitbook.io/docs/security-and-team-information/basic-team-security-information/trust-us-campaign",
+      },
+    ],
+    userInfo: {
+      bid: BIG_ZERO,
+    },
+    auctionInfo: { ...DEFAULT_AUCTION_INFO }
   }
 ]
 

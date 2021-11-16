@@ -14,6 +14,7 @@ import Title from './components/Title'
 import EnterGravesCard from './components/EnterGravesCard'
 import VictimPoolsCard from './components/VictimPool/VictimPoolsCard'
 import useEagerConnect from '../../hooks/useEagerConnect'
+import NFTBanner from './components/NFTBanner'
 
 const Cards = styled(BaseLayout)`
   align-items: stretch;
@@ -51,7 +52,7 @@ const Home: React.FC<HomeProps> = ({ modalObj }) => {
 
   return (
     <>
-     {/* <NFTBanner/> */}
+      <NFTBanner/>
     <Title/>
     <Page>
       <div>
