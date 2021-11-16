@@ -93,6 +93,7 @@ const auctions: Auction[] = [
     bt: 'BNB',
     version: 'v3',
     end: 1637816399,
+    additionalDetails: [],
     userInfo: {
       bid: BIG_ZERO,
     },
