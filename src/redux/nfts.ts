@@ -1061,7 +1061,7 @@ const nfts: Nft[] = [
     artist: artists.canadiancryptojunkie
   },
   {
-    id: 65,
+    id: 66,
     name: 'Patient Zero Gamma',
     symbol: 'PATIENT-ZERO',
     description: 'The blockspring.',
