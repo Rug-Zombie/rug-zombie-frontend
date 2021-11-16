@@ -93,12 +93,6 @@ const auctions: Auction[] = [
     bt: 'BNB',
     version: 'v3',
     end: 1637816399,
-    additionalDetails: [
-      {
-        name: 'Learn what the RugZombie Team accomplished during the Trust Us Campaign',
-        url: "https://rugzombie.gitbook.io/docs/security-and-team-information/basic-team-security-information/trust-us-campaign",
-      },
-    ],
     userInfo: {
       bid: BIG_ZERO,
     },
