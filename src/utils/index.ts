@@ -29,7 +29,8 @@ export function getBscScanLink(
 export function getId(id: Id): number {
   const mainNetChainId = 56
   const chainId = process.env.REACT_APP_CHAIN_ID
-  return id[chainId] ? id[chainId] : id[mainNetChainId]
+
+  return id[chainId] || id[chainId] === 0 ? id[chainId] : id[mainNetChainId]
 }
 
 export function instaBuyById (id: number) {

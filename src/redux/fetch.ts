@@ -330,6 +330,10 @@ export const grave = (pid: number, setUserInfoState?: { update: boolean, setUpda
 
 export const initialGraveData = (setUserState?, setPoolState?) => {
   get.graves().forEach(g => {
+    if(getId(g.pid) !== 0 || getId(g.pid) !== 1) {
+      // console.log(g)
+
+    }
     grave(getId(g.pid), setUserState, setPoolState)
   })
 }
@@ -645,7 +649,6 @@ export const multicallTombOverlayData = (updatePoolObj?: { update: boolean, setU
 }
 
 export const burnGrave = (id: number, setUserInfoState?: { update: boolean, setUpdate: any }, setPoolInfoState?: { update: boolean, setUpdate: any }) => {
-  const burngrave = get.burnGraveById(id);
   const drBurnenstein = getDrBurnensteinContract();
   
   drBurnenstein.methods.graveInfo(id).call()

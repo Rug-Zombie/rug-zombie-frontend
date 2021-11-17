@@ -34,6 +34,7 @@ const Table: React.FC<TableProps> = ({ id, zmbePrice, updateResult }) => {
         console.log(grave.poolInfo.depositType.toString());
         switch (grave.poolInfo.depositType) {
             case 1: return (<DepositToken id={id} updateResult={updateResult} />)
+            // case 0: return
             default: return (<div/>);
         }
     }
