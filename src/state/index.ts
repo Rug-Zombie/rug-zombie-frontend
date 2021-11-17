@@ -8,6 +8,11 @@ import profileReducer from './profile'
 import teamsReducer from './teams'
 import achievementsReducer from './achievements'
 import blockReducer from './block'
+import user from './user/reducer'
+import swap from './swap/reducer'
+import lists from './lists/reducer'
+import multicall from './multicall/reducer'
+import transactions from './transactions/reducer'
 
 const store = configureStore({
   devTools: process.env.NODE_ENV !== 'production',
@@ -20,6 +25,13 @@ const store = configureStore({
     predictions: predictionsReducer,
     profile: profileReducer,
     teams: teamsReducer,
+
+    // Exchange
+    user,
+    swap,
+    lists,
+    multicall,
+    transactions,
   },
 })
 
@@ -27,6 +39,7 @@ const store = configureStore({
  * @see https://redux-toolkit.js.org/usage/usage-with-typescript#getting-the-dispatch-type
  */
 export type AppDispatch = typeof store.dispatch
+export type AppState = ReturnType<typeof store.getState>
 export const useAppDispatch = () => useDispatch<AppDispatch>()
 
 export default store
