@@ -19,4 +19,11 @@ export const routes = {
     BLACKMARKET:'/blackmarket/',
     BARRACKS:'/barracks/',
     DATALAB:'/datalab/',
+
+    // Zombie Swap
+    ZOMBIESWAP:'/swap',
+    POOLFINDER:'/find',
+    POOL:'/pool',
+    ADDLIQUIDITY:'/add',
+    REMOVELIQUIDITY:'/remove/:currencyIdA/:currencyIdB',
 }
