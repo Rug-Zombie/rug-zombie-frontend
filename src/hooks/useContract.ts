@@ -29,7 +29,18 @@ import {
   getInstaBuyContract,
   getTombOverlayContract, getRugRollContract,
   getNftSwapperContract, getZTokenSwapperContract,
+  getEthersContract,
 } from 'utils/contractHelpers'
+import { getMulticallAddress } from 'utils/addressHelpers'
+import useActiveWeb3React from './useActiveWeb3React'
+import { Contract } from '@ethersproject/contracts'
+import ERC20_ABI from 'config/abi/erc20.json'
+import { ChainId, WETH } from '@autoshark-finance/sdk'
+import ENS_ABI from 'config/abi/ens-registrar.json'
+import ENS_PUBLIC_RESOLVER_ABI from '../config/abi/ens-public-resolver.json'
+import { ERC20_BYTES32_ABI } from '../config/abi/erc20'
+import WETH_ABI from '../config/abi/weth.json'
+import multiCallAbi from '../config/abi/Multicall.json'
 
 /**
  * Helper hooks to get specific contracts (by ABI)
@@ -185,4 +196,55 @@ export const useNftSwapper = () => {
   export const useZTokenSwapper = () => {
   const web3 = useWeb3()
   return useMemo(() => getZTokenSwapperContract(web3), [web3])
+}
+
+// returns null on errors
+function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
+  const { library, account } = useActiveWeb3React()
+
+  return useMemo(() => {
+    if (!address || !ABI || !library) return null
+    try {
+      return getEthersContract(address, ABI, library)
+    } catch (error) {
+      console.error('Failed to get contract', error)
+      return null
+    }
+  }, [address, ABI, library])
+}
+
+export function useTokenContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {
+  return useContract(tokenAddress, ERC20_ABI, withSignerIfPossible)
+}
+
+export function useWETHContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId ? WETH[chainId].address : undefined, WETH_ABI, withSignerIfPossible)
+}
+
+export function useENSRegistrarContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  let address: string | undefined
+  if (chainId) {
+    // eslint-disable-next-line default-case
+    switch (chainId) {
+      case ChainId.MAINNET:
+      case ChainId.TESTNET:
+        address = '0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e'
+        break
+    }
+  }
+  return useContract(address, ENS_ABI, withSignerIfPossible)
+}
+
+export function useENSResolverContract(address: string | undefined, withSignerIfPossible?: boolean): Contract | null {
+  return useContract(address, ENS_PUBLIC_RESOLVER_ABI, withSignerIfPossible)
+}
+
+export function useBytes32TokenContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {
+  return useContract(tokenAddress, ERC20_BYTES32_ABI, withSignerIfPossible)
+}
+
+export function useMulticallContract(): Contract | null {
+  return useContract(getMulticallAddress(), multiCallAbi, false)
 }
