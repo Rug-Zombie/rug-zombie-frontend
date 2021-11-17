@@ -1159,12 +1159,12 @@ const nfts: Nft[] = [
   
   {
     id: 62,
-    name: 'Dr Burnenstein Test',
+    name: 'Burn grave 1',
     symbol: 'BURN',
     description: 'This is just a test, nothing to see here',
     address: {
       56: '',
-      97: '0xDaED823C1AfF56B4304a65021933cc3CFAfad0d7',
+      97: '0xF00a3805fB55dba6331eb3e42318682Fe9C21289',
     },
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/QmXsUgHfVLhTyiSk4VPbcr6iacEEDwo8KXfsK8tN4QXW55',

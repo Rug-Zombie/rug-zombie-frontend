@@ -69,7 +69,7 @@ const BurnGraves: React.FC = () => {
         <Page>
             <div>
                 {burnGraves().map((a) => {
-                    return <Table id={getId(a.id)} zmbePrice={zmbePrice} updateResult={updateResult} />
+                    return <Table id={getId(a.id)} key={getId(a.id)} zmbePrice={zmbePrice} updateResult={updateResult} />
                 })}
             </div>
         </Page>
