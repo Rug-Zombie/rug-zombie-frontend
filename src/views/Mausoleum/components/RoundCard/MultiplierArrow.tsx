@@ -33,7 +33,7 @@ const Content = styled.div`
   width: 100%;
 `
 
-const EnteredTagWrapper = styled.div`
+const EnteredTagWrapper = styled.div<{ style: any }>`
   position: absolute;
   z-index: 10;
 `
