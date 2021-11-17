@@ -3,6 +3,8 @@ import { AbiItem } from 'web3-utils'
 import web3NoAccount from 'utils/web3'
 import { poolsConfig } from 'config/constants'
 import { PoolCategory } from 'config/constants/types'
+import { simpleRpcProvider } from 'utils/providers'
+import { ethers } from 'ethers'
 
 // Addresses
 import {
@@ -197,4 +199,9 @@ export const getNftSwapperContract = (web3?: Web3) => {
 
 export const getZTokenSwapperContract = (web3?: Web3) => {
   return getContract(ztokenSwapperAbi, getZTokenSwapperAddress(), web3)
+}
+
+export const getEthersContract = (abi: any, address: string, signer?: ethers.Signer | ethers.providers.Provider) => {
+  const signerOrProvider = signer ?? simpleRpcProvider
+  return new ethers.Contract(address, abi, signerOrProvider)
 }
