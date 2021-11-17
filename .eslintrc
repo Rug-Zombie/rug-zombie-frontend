@@ -20,11 +20,20 @@
     // Start temporary rules
     // These rules are here just to keep the lint error to 0 during the migration to the new rule set
     // They need to be removed and fixed as soon as possible
+    "no-param-reassign": "off",
+    "no-nested-ternary": "off",
+    "react/no-unused-prop-types": "off",
+    "react/require-default-props": "off",
+    "react/jsx-no-bind": "off",
+    "@typescript-eslint/no-shadow": "off",
     "@typescript-eslint/ban-ts-comment": [1, { "ts-ignore": false, "ts-nocheck": false }],
     "@typescript-eslint/no-use-before-define": 0,
     "@typescript-eslint/explicit-module-boundary-types": 0,
     "@typescript-eslint/no-explicit-any": 0,
     "radix": 0,
+    "import/order": "off",
+    "import/no-cycle": "off",
+    "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": 0,
     "jsx-a11y/media-has-caption": 0
     // End temporary rules
