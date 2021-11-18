@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { BaseLayout } from '@rug-zombie-libs/uikit';
-import { burnGraveById } from 'redux/get';
+import { account, bnbPriceUsd, burnGraveById, zombiePriceUsd } from 'redux/get'
 import GraveTop from '../GraveTop';
 import DepositToken from '../DepositToken';
+import GraveBottom from '../GraveBottom'
 
 const TableCards = styled(BaseLayout)`
     align-items: stretch;
@@ -31,10 +32,10 @@ const Table: React.FC<TableProps> = ({ id, zmbePrice, updateResult }) => {
     }
 
     const depositPanel = () => {
-        console.log(grave.poolInfo.depositType.toString());
         switch (grave.poolInfo.depositType) {
-            case 1: return (<DepositToken id={id} updateResult={updateResult} />)
             // case 0: return
+
+            case 1: return (<DepositToken id={id} updateResult={updateResult} />)
             default: return (<div/>);
         }
     }
@@ -49,7 +50,9 @@ const Table: React.FC<TableProps> = ({ id, zmbePrice, updateResult }) => {
                     ? (<div className="table-bottom">
                         <div className="w-95 mx-auto mt-3">
                             <div className="flex-grow">
-                                {depositPanel()}
+                                {/* {depositPanel()} */}
+                                {/* <GraveBottom bnbInBusd={bnbPriceUsd()} pid={id} zombieUsdPrice={zombiePriceUsd()} account={account()} /> */}
+
                             </div>
                             
                         </div>
