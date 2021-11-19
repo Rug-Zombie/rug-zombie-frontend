@@ -308,6 +308,22 @@ const nfts: Nft[] = [
     userInfo: { ...DEFAULT_USER_INFO }
   },
   {
+    id: 66,
+    name: 'Patient Zero Gamma',
+    symbol: 'PATIENT-ZERO',
+    description: 'The blockspring.',
+    address: {
+      56: '0x76a74D015c5497F8Ee2b583518266082E3af1cfF',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmRhksLK5YJjhSD1GssYL6czH1xdumKxUa4eQaN6AwDcyR',
+    type: 'image',
+    rarity: 'Biblical',
+    userInfo: { ...DEFAULT_USER_INFO },
+    artist: artists.jussjoshinduh
+  },
+  {
     id: 19,
     name: 'Zombie Horde',
     symbol: 'HORDE',
@@ -1060,22 +1076,7 @@ const nfts: Nft[] = [
     userInfo: { ...DEFAULT_USER_INFO },
     artist: artists.canadiancryptojunkie
   },
-  {
-    id: 66,
-    name: 'Patient Zero Gamma',
-    symbol: 'PATIENT-ZERO',
-    description: 'The blockspring.',
-    address: {
-      56: '0x76a74D015c5497F8Ee2b583518266082E3af1cfF',
-      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
-    },
-    totalSupply: BIG_ZERO,
-    path: 'https://ipfs.io/ipfs/QmRhksLK5YJjhSD1GssYL6czH1xdumKxUa4eQaN6AwDcyR',
-    type: 'image',
-    rarity: 'Biblical',
-    userInfo: { ...DEFAULT_USER_INFO },
-    artist: artists.jussjoshinduh
-  },
+
 ]
 
 export default nfts
