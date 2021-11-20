@@ -649,7 +649,6 @@ export const burnGrave = (id: number, setUserInfoState?: { update: boolean, setU
   
   drBurnenstein.methods.graveInfo(id).call()
     .then(res => {
-        console.log(res.depositType.toString());
       store.dispatch(updateBurnGravePoolInfo(
         id,
         {

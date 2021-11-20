@@ -50,7 +50,7 @@ const Table: React.FC<TableProps> = ({ id, zmbePrice, updateResult }) => {
                     ? (<div className="table-bottom">
                         <div className="w-95 mx-auto mt-3">
                             <div className="flex-grow">
-                                {/* {depositPanel()} */}
+                                {depositPanel()}
                                 {/* <GraveBottom bnbInBusd={bnbPriceUsd()} pid={id} zombieUsdPrice={zombiePriceUsd()} account={account()} /> */}
 
                             </div>
