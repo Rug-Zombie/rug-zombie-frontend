@@ -9,7 +9,7 @@ import {
 import { useTranslation } from 'contexts/Localization'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
-import Container from '../../../components/layout/Container'
+import Container from '../../../components/Layout/Container'
 import { auctionById } from '../../../redux/get'
 
 const NowLive = styled(Text)`

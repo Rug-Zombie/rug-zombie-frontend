@@ -7,7 +7,7 @@ import Menu from '../../../../components/Catacombs/Menu'
 import CatacombsBackgroundDesktopSVG from '../../../../images/CatacombsMain-1920x1080px.svg'
 import CatacombsBackgroundMobileSVG from '../../../../images/CatacombsMain-414x720px.svg'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import Page from '../../../../components/layout/Page'
+import Page from '../../../../components/Layout/Page'
 import InstabuyCard from './InstabuyCard'
 import useSwiper from '../../../Mausoleum/hooks/useSwiper'
 

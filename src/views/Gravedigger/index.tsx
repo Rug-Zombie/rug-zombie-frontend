@@ -4,7 +4,7 @@ import styled from "styled-components"
 import { Button, Flex, Text } from '@rug-zombie-libs/uikit'
 import { useTranslation } from "contexts/Localization"
 import { createWidget } from '@typeform/embed'
-import Page from '../../components/layout/Page'
+import Page from '../../components/Layout/Page'
 import '@typeform/embed/build/css/widget.css'
 import GraveListings from "./components/GraveListings"
 import CommunityRequestedTokens from "./components/CommunityRequestedTokens"

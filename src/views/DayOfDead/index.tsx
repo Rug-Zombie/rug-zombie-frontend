@@ -2,7 +2,7 @@ import React from 'react'
 import { Flex, Heading } from '@rug-zombie-libs/uikit'
 import PageHeader from 'components/PageHeader'
 import artists from 'config/constants/artists'
-import Page from 'components/layout/Page'
+import Page from 'components/Layout/Page'
 import NftCard from './NftCard'
 
 const DayOfDead: React.FC = () => {

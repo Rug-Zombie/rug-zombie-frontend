@@ -12,11 +12,11 @@ import {
 } from '../state/lists/hooks'
 
 import { NEVER_RELOAD, useSingleCallResult } from 'state/multicall/hooks'
-import useUserAddedTokens from 'state/user/hooks/useAddUserTokens'
 import { isAddress } from 'utils'
 
 import { useBytes32TokenContract, useTokenContract } from './useContract'
 import { filterTokens } from 'components/SearchModal/filtering'
+import useUserAddedTokens from '../state/user/hooks/useUserAddedTokens'
 
 // reduce token map into standard address <-> Token mapping, optionally include user added tokens
 function useTokensFromMap(tokenMap: TokenAddressMap, includeUserAdded: boolean): { [address: string]: Token } {

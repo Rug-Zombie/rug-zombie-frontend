@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import {useMatchBreakpoints} from "@rug-zombie-libs/uikit";
 import {Flex} from "@catacombs-libs/uikit";
 import Menu from '../../../../components/Catacombs/Menu'
-import Page from '../../../../components/layout/Page'
+import Page from '../../../../components/Layout/Page'
 import RugRollCard from "./components/RugRollCard";
 import CatacombsBackgroundDesktopSVG from '../../../../images/CatacombsMain-1920x1080px.svg'
 import CatacombsBackgroundMobileSVG from '../../../../images/CatacombsMain-414x720px.svg'

@@ -1,6 +1,6 @@
 import React from 'react'
 import Menu from '../../../../components/Catacombs/Menu'
-import Page from '../../../../components/layout/Page'
+import Page from '../../../../components/Layout/Page'
 
 
 const BlackMarket: React.FC = () => {

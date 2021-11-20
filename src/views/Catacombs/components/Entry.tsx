@@ -6,7 +6,7 @@ import { useModal } from '@rug-zombie-libs/uikit'
 import { isMobile } from 'react-device-detect';
 import Typewriter from 'typewriter-effect'
 import styled from 'styled-components'
-import Page from '../../../components/layout/Page'
+import Page from '../../../components/Layout/Page'
 import CatacombsEntryBackgroundDesktopSVG from '../../../images/CatacombsEntry-1920x1080px.svg'
 import CatacombsEntryBackgroundMobileSVG from '../../../images/CatacombsEntry-414x720px.svg'
 import BurnZombieConfirmationModal from './BurnZombieConfirmationModal'

@@ -1,5 +1,6 @@
-import { ChainId, JSBI, Percent, Token } from '@autoshark-finance/sdk'
+import { ChainId, JSBI, Percent } from '@autoshark-finance/sdk'
 import tokens from './tokens'
+import { Token } from './types'
 
 export { default as farmsConfig } from './farms'
 export { default as poolsConfig } from './pools'
@@ -46,6 +47,14 @@ export const BASES_TO_CHECK_TRADES_AGAINST: any = {
     tokens.usdc,
   ],
   [ChainId.TESTNET]: [tokens.wbnb, tokens.cake, tokens.busd],
+}
+
+export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
+  [ChainId.MAINNET]: [
+    [tokens.zmbe, tokens.wbnb],
+    [tokens.busd, tokens.usdt],
+    [tokens.dai, tokens.usdt],
+  ],
 }
 
 /**

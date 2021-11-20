@@ -1,6 +1,6 @@
-import { Token } from '@autoshark-finance/sdk'
 import { SerializedToken } from 'config/constants/types'
 import { parseUnits } from 'ethers/lib/utils'
+import { Token } from '@autoshark-finance/sdk'
 
 export function serializeToken(token: Token): SerializedToken {
   return {
@@ -9,6 +9,7 @@ export function serializeToken(token: Token): SerializedToken {
     decimals: token.decimals,
     symbol: token.symbol,
     name: token.name,
+    projectLink: token.projectLink,
   }
 }
 

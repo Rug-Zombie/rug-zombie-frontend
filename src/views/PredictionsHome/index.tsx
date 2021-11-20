@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Heading, Flex, Image } from '@rug-zombie-libs/uikit'
-import Page from 'components/layout/Page'
+import Page from 'components/Layout/Page'
 import PageHeader from 'components/PageHeader'
 import { Route, useRouteMatch } from 'react-router-dom'
 import PoolTabButtons from './components/PoolTabButtons'
-import FlexLayout from '../../components/layout/Flex'
+import FlexLayout from '../../components/Layout/Flex'
 import AuctionCard from './components/GraveCard'
 import { auctions } from '../../redux/get'
 

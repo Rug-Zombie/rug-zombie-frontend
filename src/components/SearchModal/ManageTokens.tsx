@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import Row, { RowBetween, RowFixed } from 'components/Row'
 import { useToken } from 'hooks/Tokens'
 import { useRemoveUserAddedToken } from 'state/user/hooks'
-import useUserAddedTokens from 'state/user/hooks/useAddUserTokens'
 import { CurrencyLogo } from 'components/Logo'
 import { getBscScanLink, isAddress } from 'utils'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
@@ -13,6 +12,7 @@ import { useTranslation } from 'contexts/Localization'
 import Column, { AutoColumn } from '../Column'
 import ImportRow from './ImportRow'
 import { CurrencyModalView } from './types'
+import useUserAddedTokens from 'state/user/hooks/useUserAddedTokens'
 
 const Wrapper = styled.div`
   width: 100%;
