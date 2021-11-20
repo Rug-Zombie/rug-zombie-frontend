@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { account, burnGraveById } from 'redux/get';
+import { useModal } from '@rug-zombie-libs/uikit';
 import { useERC20 } from 'hooks/useContract';
 import { useTranslation } from 'contexts/Localization';
 import useToast from 'hooks/useToast';
 import { getAddress, getDrBurnensteinAddress } from 'utils/addressHelpers';
 import { BIG_TEN } from 'utils/bigNumber';
+import DepositTokenModal from './DepositTokenModal'
 
 export interface DepositTokenProps {
     id: number,
@@ -42,13 +44,21 @@ const DepositToken: React.FC<DepositTokenProps> = ({ id, updateResult }) => {
         }
     }
 
-    // const [handleDeposit] = useModal(
-    //     <DepositModal id={id} updateResult={updateResult} />
-    // );
+    const [handleDeposit] = useModal(
+        <DepositTokenModal id={id} updateResult={updateResult} />
+    );
 
     const renderButton = () => {
         if (!wallet) {
             return (<span className="total-earned text-shadow">Connect Wallet</span>);
+        }
+
+        if (!isApproved && !grave.userInfo.hasDeposited) {
+            return (<button onClick={handleApprove} className="btn btn-disabled w-100" type="button">APPROVE</button>);
+        }
+
+        if (!grave.userInfo.hasDeposited) {
+            return (<button onClick={handleDeposit} className="btn btn-disabled w-100" type="button">DEPOSIT</button>);
         }
 
         return(<button className="btn w-100" type="button">DEPOSITED</button>);
