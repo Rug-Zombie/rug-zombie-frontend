@@ -1,4 +1,36 @@
 
+.barrack-active-1 {
+    box-shadow: white 0px 0px 20px!important;
+}
+
+.barrack-card {
+    position: relative;
+    display: block;
+    padding: 0.75rem 0.2rem;
+    background-color: black!important;
+    border: 1px solid white!important;
+    margin-bottom: 1.3em;
+    border-radius: 1em;
+}
+
+.barrack-arrow-color {
+    align-self: center;
+    fill: white;
+    flex-shrink: 0;
+}
+
+.barrack-td-width-35 {
+    width: 35%;
+}
+
+.barrack-td-width-10 {
+    width: 10%;
+}
+
+.barrack-td-width-20 {
+    width: 20%;
+}
+
 .parent-div {
     text-align: center;
     position: relative;

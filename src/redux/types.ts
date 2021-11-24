@@ -255,3 +255,30 @@ export interface TombOverlay {
   userInfo: TombOverlayUserInfo,
   poolInfo: TombOverlayPoolInfo
 }
+
+export interface BarrackInfo {
+  bnb: boolean,
+  depositFeePercentage: number,
+  maxStake: BigNumber,
+  totalStaked: BigNumber,
+  lockTime: BigNumber,
+  timeLocked: BigNumber,
+  locked: boolean,
+  nftMintDate: BigNumber
+}
+
+export interface BarrackUserInfo {
+  depositedAmount: BigNumber,
+}
+
+export interface Barrack {
+  id: number,
+  name: string,
+  description: string,
+  nft: number,
+  isNew: boolean,
+  token: Token,
+  barrackInfo: BarrackInfo,
+  barrackUserInfo: BarrackUserInfo,
+  project: any,
+}
