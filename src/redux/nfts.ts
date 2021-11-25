@@ -1076,7 +1076,22 @@ const nfts: Nft[] = [
     userInfo: { ...DEFAULT_USER_INFO },
     artist: artists.canadiancryptojunkie
   },
-
+  {
+    id: 67,
+    name: 'Marbles',
+    symbol: 'MARBLES',
+    description: 'Trust people? Never again.',
+    address: {
+      56: '0xf007c2896e969b32733b00cce93210e3886d5c94',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmXNJtKYSRKNeoGDRgzfSjom69SJkGUVVz7gYUmnb5frHS',
+    type: 'image',
+    rarity: 'Rare',
+    userInfo: { ...DEFAULT_USER_INFO },
+    artist: artists.trippynazz
+  },
 ]
 
 export default nfts

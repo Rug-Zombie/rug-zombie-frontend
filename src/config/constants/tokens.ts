@@ -136,6 +136,16 @@ const tokens = {
     decimals: 8,
     projectLink: 'https://dragonfarm.finance/',
   },
+  squidgame: {
+    symbol: 'SQUID',
+    address: {
+      56: '0x87230146e138d3f296a9a77e497a2a83012e9bc5',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: '',
+    tokenLogo: 'https://assets.coingecko.com/coins/images/20506/small/Squid_Game_Logo-0001.png?1637150038'
+  },
   yape: {
     symbol: 'yAPE',
     address: {
@@ -855,7 +865,7 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://pancakeswap.finance/',
   },
-  squid: {
+  squidstake: {
     symbol: 'SQUID',
     address: {
       56: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
