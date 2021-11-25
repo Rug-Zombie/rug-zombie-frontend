@@ -81,7 +81,7 @@ const spawningPools: SpawningPool[] = [
       additionalDetails: [
         {
           name: 'Project website',
-          url: tokens.squid.projectLink,
+          url: tokens.squidstake.projectLink,
         },
         {
           name: 'Whitepaper',
@@ -95,7 +95,7 @@ const spawningPools: SpawningPool[] = [
     },
     withdrawalCooldown: '3 days',
     nftRevivalTime: '45 days',
-    rewardToken: tokens.squid,
+    rewardToken: tokens.squidstake,
     rewardTokenBnbLp: '0x2e0484D3684701dC032f29cce59c785A5837B34E',
     bnbLpTokenIndex: 1,
     artist: artists.canadiancryptojunkie,

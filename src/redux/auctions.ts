@@ -87,7 +87,7 @@ const auctions: Auction[] = [
     prizeSymbol: "PATIENT-ZERO",
     path: 'https://ipfs.io/ipfs/QmRhksLK5YJjhSD1GssYL6czH1xdumKxUa4eQaN6AwDcyR',
     prizeDescription: 'The blockspring.',
-    isFinished: false,
+    isFinished: true,
     artist: { ...artists.jussjoshinduh },
     startingBid: 0.05,
     bt: 'BNB',

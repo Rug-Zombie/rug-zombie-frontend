@@ -52,7 +52,7 @@ const Home: React.FC<HomeProps> = ({ modalObj }) => {
 
   return (
     <>
-      <NFTBanner/>
+      {/* <NFTBanner/> */}
     <Title/>
     <Page>
       <div>
