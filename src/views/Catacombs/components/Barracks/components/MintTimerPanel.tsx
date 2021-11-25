@@ -38,15 +38,15 @@ const MintTimerPanel: React.FC<MintTimerPanelProps> = ({ id, updateResult }) => 
 
     const renderPanel = () => {
         if (!wallet) {
-            return (<span className="total-earned text-shadow">Connect Wallet</span>);
+            return (<span className="total-earned white-color">Connect Wallet</span>);
         }
 
         if (!pool.userInfo.paidUnlock) {
-            return(<span className="total-earned text-shadow">Locked</span>)
+            return(<span className="total-earned white-color">Locked</span>)
         }
 
         if (pool.userInfo.stakedAmount.eq(BIG_ZERO)){
-            return (<span className="total-earned text-shadow">Unlocked</span>)
+            return (<span className="total-earned white-color">Unlocked</span>)
         }
 
         if (currentDate >= pool.userInfo.nftMintDate) {
@@ -64,7 +64,7 @@ const MintTimerPanel: React.FC<MintTimerPanelProps> = ({ id, updateResult }) => 
     }
 
     return(
-        <div className="frank-card">
+        <div className="barracks-frank-card">
             {renderPanel()}
         </div>
     )

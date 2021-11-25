@@ -278,6 +278,7 @@ export interface Barrack {
   nft: number,
   isNew: boolean,
   token: Token,
+  nftMintingTime: string,
   barrackInfo: BarrackInfo,
   barrackUserInfo: BarrackUserInfo,
   project: any,

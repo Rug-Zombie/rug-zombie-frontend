@@ -10,6 +10,7 @@ const barracks: Barrack[] = [
         description: 'description here',
         token: tokens.bnb,
         isNew: true,
+        nftMintingTime: '3 days',
         barrackInfo: {
             bnb: true,
             depositFeePercentage: 0,
@@ -44,6 +45,7 @@ const barracks: Barrack[] = [
         nft: 62,
         description: 'description here',
         token: tokens.zmbe,
+        nftMintingTime: '3 days',
         isNew: true,
         barrackInfo: {
             bnb: false,

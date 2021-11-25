@@ -1,4 +1,46 @@
 
+.barracks-indetails-type {
+    text-align: initial!important;
+    font-size: 16px;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+.barracks-indetails-title {
+    text-align: initial!important;
+    font-size: 16px;
+    color: rgb(92, 109, 120);
+    line-height: 1.4em;
+}
+.barracks-indetails-value {
+    text-align: initial!important;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+    margin-left: 6px;
+}
+
+
+.barracks-frank-card {
+    padding: 16px;
+    border: 2px solid white!important;
+    border-radius: 16px;
+    flex-grow: 1;
+    flex-basis: 0px;
+    margin-bottom: 16px;
+    margin-left: 12px;
+    margin-right: 12px;
+    max-height: 150px;
+}
+
+.barracks-con-info {
+    border: 2px solid white!important;
+    border-radius: 1em;
+    padding-left: 4px;
+    padding-right: 4px;
+    font-size: 14px;
+    color: white;
+}
+
 .barrack-active-1 {
     box-shadow: white 0px 0px 20px!important;
 }

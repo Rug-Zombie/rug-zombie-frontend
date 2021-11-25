@@ -79,10 +79,10 @@ const TableList: React.FC<TableListProps> = ({id, openHandler}) => {
                                 <div>
                                     <div className="titel">{barrack.name}</div>
                                     <div className="small-lable">
-                                        <div className="con-info">{barrack.token.symbol}</div>
+                                        <div className="barracks-con-info">{barrack.token.symbol}</div>
                                         {
                                             barrack.isNew ?
-                                                <div className='con-info' style={{marginLeft: "4px"}}>NEW!</div> : null
+                                                <div className='barracks-con-info' style={{marginLeft: "4px"}}>NEW!</div> : null
                                         }
                                     </div>
                                 </div>

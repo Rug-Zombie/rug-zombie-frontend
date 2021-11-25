@@ -5,9 +5,9 @@ import Menu from '../../../../components/Catacombs/Menu'
 import Page from '../../../../components/layout/Page'
 import * as get from "../../../../redux/get";
 import Table from "./components/Table";
-import {barracks} from "../../../../redux/fetch";
 import CatacombsBackgroundDesktopSVG from "../../../../images/CatacombsMain-1920x1080px.svg";
 import CatacombsBackgroundMobileSVG from "../../../../images/CatacombsMain-414x720px.svg";
+import {barracks} from "../../../../redux/fetch";
 
 const StyledDiv = styled.div`
   text-align: center;

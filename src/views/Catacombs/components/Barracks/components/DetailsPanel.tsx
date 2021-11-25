@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { LinkExternal } from '@catacombs-libs/uikit';
 import {nftById, barrackById} from 'redux/get';
 import { getFullDisplayBalance } from 'utils/formatBalance';
+import numeral from 'numeral';
+import BigNumber from "bignumber.js";
 import {formatDuration} from "../../../../../utils/timerHelpers";
 import getTimePeriods from "../../../../../utils/getTimePeriods";
+import {useBarracksContract} from "../../../../../hooks/useContract";
 
 interface DetailsPanelProps {
     id: number
@@ -12,7 +15,24 @@ interface DetailsPanelProps {
 const DetailsPanel: React.FC<DetailsPanelProps> = ({ id }) => {
 
     const barrack = barrackById(id);
-    console.log(barrack.barrackInfo, ' <======================')
+    const barracksContract = useBarracksContract();
+    const [maxStake, setMaxStake] = useState(0);
+    const [depositFee, setDepositFee] = useState(0);
+    const [unlockThreshold, setUnlockThreshold] = useState(0);
+    // time required to mint nft , barracks reaches threshold amount and is locked during this time.
+    const [lockTime, setLockTime] = useState(0);
+    const [locked, setLocked] = useState(false);
+
+    useEffect(() => {
+        barracksContract.methods.barrackInfo(id).call()
+            .then((res) => {
+                setMaxStake(parseFloat(getFullDisplayBalance(new BigNumber(res.maximum), 18, 2)));
+                setDepositFee(numeral(res.feePercentage).format('( 0.00 a)'));
+                setUnlockThreshold(parseFloat(getFullDisplayBalance(new BigNumber(res.lockAmount), 18, 2)));
+                setLocked(res.locked);
+            })
+    })
+
     const nft = nftById(barrack.nft);
 
     return(
@@ -27,24 +47,25 @@ const DetailsPanel: React.FC<DetailsPanelProps> = ({ id }) => {
                 </div>
             </div>
             <div className="direction-column">
-                <span className="indetails-type">{nft.description}</span>
-                <span className="indetails-title">
+                <span className="indetails-type" style={{ textAlign: 'initial'}}>{nft.description}</span>
+                <span className="barracks-indetails-title">
                     <LinkExternal bold={false} small href={nft.artist.twitter ? nft.artist.twitter : nft.artist.instagram}>
                         View NFT Artist
                     </LinkExternal>
                 </span>
                 <br/>
-                <span className="indetails-title">{barrack.name}</span>
+                <span className="barracks-indetails-title">{barrack.name}</span>
                 <br/>
-                <span className="indetails-value">{barrack.description}</span>
+                <span className="barracks-indetails-value">{barrack.description}</span>
 
                 <br/>
             </div>
             <div className="direction-column">
-
-                <span className="indetails-title">Maximum Stake:<span className="indetails-value">{getFullDisplayBalance(barrack.barrackInfo.maxStake)} {barrack.token.symbol}</span></span>
-                <span className="indetails-title">Deposit Fee:<span className="indetails-value">{barrack.barrackInfo.depositFeePercentage}%</span></span>
-                <span className="indetails-value">Please Note: These pools are subject to a tax on the deposited amount.</span>
+                <span className="barracks-indetails-title">Unlock Threshold:<span className="indetails-value">{unlockThreshold} {barrack.token.symbol}</span></span>
+                <span className="barracks-indetails-title">Maximum Stake:<span className="indetails-value">{maxStake} {barrack.token.symbol}</span></span>
+                <span className="barracks-indetails-title">Deposit Fee:<span className="indetails-value">{depositFee}%</span></span>
+                <span className="barracks-indetails-title">NFT Minting Time:<span className="indetails-value">{barrack.nftMintingTime}%</span></span>
+                <span className="barracks-indetails-value">Please Note: These pools are subject to a tax on the deposited amount.</span>
             </div>
         </div>
     );
