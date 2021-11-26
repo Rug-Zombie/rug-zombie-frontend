@@ -1,6 +1,7 @@
 import React from 'react'
 import './Landing.Styles.css'
 import Header from './Header';
+import TeamList from './Team/TeamList'
 import TimeLine from './TimeLine';
 import Tokenomics from './Tokenomics';
 import Footer from './Footer';
@@ -63,6 +64,7 @@ const Landing: React.FC<LandingProps> = (props: LandingProps) =>{
         </a>
       </div>
     </div>
+    <TeamList />
     <TimeLine />
     <Tokenomics />
     <Footer />
