@@ -45,6 +45,16 @@ const tokens = {
     decimals: 9,
     projectLink: 'https://infiniteone.io/',
   },
+  byg: {
+    symbol: 'BYG',
+    address: {
+      56: '0x4f7b627b88651e3dddca0240bca68a3062632c8c',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://www.blackeyegalaxy.space/',
+    tokenLogo: 'https://assets.coingecko.com/coins/images/16814/small/logo_200_white.png?1625150910'
+  },
   rugbiden: {
     symbol: 'RUGBIDEN',
     address: {

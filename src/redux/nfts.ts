@@ -1092,6 +1092,22 @@ const nfts: Nft[] = [
     userInfo: { ...DEFAULT_USER_INFO },
     artist: artists.trippynazz
   },
+  {
+    id: 68,
+    name: 'Great Zom',
+    symbol: 'ZOM',
+    description: 'He lurks above.',
+    address: {
+      56: '0xf007c2896e969b32733b00cce93210e3886d5c94',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmXKBTHHpaSrhgtC67RT4JqkjDHaTJAsnYWfszcUUZfehM',
+    type: 'image',
+    rarity: 'Legendary',
+    userInfo: { ...DEFAULT_USER_INFO },
+    artist: artists.trippynazz
+  },
 ]
 
 export default nfts

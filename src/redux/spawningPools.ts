@@ -6,6 +6,63 @@ import { SpawningPool } from './types'
 
 const spawningPools: SpawningPool[] = [
   {
+    id: 13,
+    name: 'Black Eye Galaxy Legendary',
+    subtitle: 'Great Zom',
+    path: 'https://ipfs.io/ipfs/QmXKBTHHpaSrhgtC67RT4JqkjDHaTJAsnYWfszcUUZfehM',
+    type: 'image',
+    address: {
+      56: '0x2855dBBb6De5dc93893717c326a0fbDE94a9431a',
+      97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
+    },
+    endBlock: 15400000,
+    endDate: 1646197199,
+    project: {
+      name: 'Black Eye Galaxy',
+      description: 'Black Eye Galaxy is a Metaverse designed to create a space exploration experience for its members. Offering tradable assets from planets to spaceships and buildings, BYG is a Play-To-Earn game meaning that just by doing tasks in-game the player will be rewarded BYG tokens.',
+      additionalDetails: [
+        {
+          name: 'Project website',
+          url: tokens.byg.projectLink,
+        },
+        {
+          name: 'Whitepaper',
+          url: 'https://www.blackeyegalaxy.space/wp-content/uploads/2021/11/Byg_WP1.4.pdf',
+        },
+        {
+          name: 'Telegram',
+          url: 'https://t.me/blackeyegalaxypublic',
+        },
+      ],
+    },
+    withdrawalCooldown: '3 days',
+    nftRevivalTime: '45 days',
+    rewardToken: tokens.byg,
+    rewardTokenId: 'black-eye-galaxy',
+    artist: artists.ayaz_psd,
+    stakingToken: '',
+    pcsVersion: 'v2',
+    liquidityDetails: '',
+    isNew: true,
+    color: "silver",
+    userInfo: {
+      paidUnlockFee: false,
+      tokenWithdrawalDate: 0,
+      nftRevivalDate: 0,
+      amount: BIG_ZERO,
+      pendingReward: BIG_ZERO,
+      zombieAllowance: BIG_ZERO,
+    },
+    poolInfo: {
+      unlockFee: BIG_ZERO,
+      rewardPerBlock: BIG_ZERO,
+      minimumStake: BIG_ZERO,
+      totalZombieStaked: BIG_ZERO,
+      withdrawCooldown: 0,
+      nftRevivalTime: 0,
+    },
+  },
+  {
     id: 12,
     name: 'InfiniteOne Legendary',
     subtitle: 'Infinite Zombie',
@@ -44,7 +101,7 @@ const spawningPools: SpawningPool[] = [
     stakingToken: '',
     pcsVersion: 'v2',
     liquidityDetails: '',
-    isNew: true,
+    isNew: false,
     color: "grey",
     userInfo: {
       paidUnlockFee: false,
@@ -102,7 +159,7 @@ const spawningPools: SpawningPool[] = [
     stakingToken: '',
     pcsVersion: 'v2',
     liquidityDetails: '',
-    isNew: true,
+    isNew: false,
     color: "pink",
     userInfo: {
       paidUnlockFee: false,
@@ -160,7 +217,7 @@ const spawningPools: SpawningPool[] = [
     stakingToken: '',
     pcsVersion: 'v2',
     liquidityDetails: '',
-    isNew: true,
+    isNew: false,
     color: "brown",
     userInfo: {
       paidUnlockFee: false,
