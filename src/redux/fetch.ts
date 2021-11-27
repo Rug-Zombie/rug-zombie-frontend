@@ -423,7 +423,7 @@ export const barracks = (id: number, barrackUpdateObj?: { update: number, setUpd
 
     multicallv2(barracksAbi, call)
         .then(res => {
-            console.log(res[0], id,  '================== in fetch.ts');
+            console.log(res[0].bnb, id,  '================== in fetch.ts');
             store.dispatch(
                 updateBarrackInfo(
                     id,
@@ -435,7 +435,7 @@ export const barracks = (id: number, barrackUpdateObj?: { update: number, setUpd
                         totalStaked: new BigNumber(res[0].totalDeposited),
                         lockTime: new BigNumber(res[0].lockTime),
                         timeLocked: new BigNumber(res[0].timeLocked),
-                        locked: res[0].locked,
+                        locked: res[0].locked
                     }
                 )
             );
