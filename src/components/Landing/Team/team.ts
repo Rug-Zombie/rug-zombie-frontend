@@ -51,7 +51,7 @@ export const team: TeamMemberInfo[] = [
     telegramHandle: '@Jussjoshinduh',
     profilePic: '/images/team/jussjoshinduh.jpg',
     title: 'NFT Specialist',
-    email: 'juss email',
+    email: 'Joshbrownell2@gmail.com',
     isFounder: true
   }
 ]
