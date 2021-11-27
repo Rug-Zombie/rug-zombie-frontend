@@ -35,18 +35,18 @@ const Table: React.FC<TableProps> = ({ id, updateResult}) => {
         <TableCards>
             <div className="barrack-card barrack-active-1">
                 <div className="table-top">
-                    <TableList id={id} openHandler={openInDetails} />
+                    <TableList id={id} key={id} openHandler={openInDetails} />
                 </div>
                 {isOpen
                     ? (<div className="table-bottom" style={{borderTop: '1px solid white'}}>
                         <div className="w-95 mx-auto mt-3">
                             <div className="flex-grow">
                                 {
-                                    barrack.barrackInfo.bnb ? <StakePanelBNB id={id} updateResult={updateResult} /> : <StakePanelTokens id={id} updateResult={updateResult} />
+                                    barrack.barrackInfo.bnb ? <StakePanelBNB id={id} key={id} updateResult={updateResult} /> : <StakePanelTokens id={id} key={id} updateResult={updateResult} />
                                 }
-                                <MintTimerPanel id={id} updateResult={updateResult} />
+                                <MintTimerPanel id={id} key={id} updateResult={updateResult} />
                             </div>
-                            <DetailsPanel id={id} />
+                            <DetailsPanel id={id} key={id} />
                         </div>
                     </div>)
                     : null}

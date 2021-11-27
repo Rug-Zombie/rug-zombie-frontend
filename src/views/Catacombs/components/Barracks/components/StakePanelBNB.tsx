@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { ethers } from 'ethers';
 import { useModal, BaseLayout } from '@rug-zombie-libs/uikit';
-import { useTranslation } from 'contexts/Localization';
-import useToast from 'hooks/useToast';
-import {account, barrackById, sharkPoolById} from 'redux/get';
-import {useBarracksContract, useERC20, useSharkpool} from 'hooks/useContract';
-import {getAddress, getBarracksAddress} from 'utils/addressHelpers';
+import {account, barrackById} from 'redux/get';
+import {useBarracksContract} from 'hooks/useContract';
 import { getFullDisplayBalance } from 'utils/formatBalance';
 import BigNumber from 'bignumber.js';
 import IncreaseStakeModal from './IncreaseStakeModal';
 import DecreaseStakeModal from './DecreaseStakeModal';
+import DepositModalBNB from "./DepositModal";
 
 const DisplayFlex = styled(BaseLayout)`
     display: flex;
@@ -30,8 +27,8 @@ interface StakePanelProps {
 const StakePanelBNB: React.FC<StakePanelProps> = ({ id, updateResult }) => {
     const [deposited, setDeposited] = useState(0);
     const wallet = account();
-    const { toastSuccess } = useToast();
-    const { t } = useTranslation();
+    // const { toastSuccess } = useToast();
+    // const { t } = useTranslation();
     const barrack = barrackById(id);
     const barracksContract = useBarracksContract();
 
@@ -45,18 +42,9 @@ const StakePanelBNB: React.FC<StakePanelProps> = ({ id, updateResult }) => {
         }
     })
 
-    const handleDeposit = () => {
-    //   if(wallet) {
-    //     poolContract.methods.unlockFeeInBnb().call()
-    //       .then(res => {
-    //         poolContract.methods.unlock().send({ from: wallet, value: res })
-    //           .then(() => {
-    //             toastSuccess(t('Pool unlocked'));
-    //             updateResult(id);
-    //           });
-    //       });
-    //   }
-    }
+    const [handleDeposit] = useModal(
+        <DepositModalBNB id={id} updateResult={updateResult} />
+    )
 
     const [handleIncreaseStake] = useModal(
         <IncreaseStakeModal id={id} updateResult={updateResult} />
@@ -84,7 +72,6 @@ const StakePanelBNB: React.FC<StakePanelProps> = ({ id, updateResult }) => {
         }
 
         return (<button onClick={handleDeposit} className="btn btn-disabled w-100" type="button">Deposit {barrack.token.symbol}</button>)
-
     }
 
     return(

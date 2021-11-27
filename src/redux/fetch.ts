@@ -4,6 +4,7 @@ import sharkpoolAbi from 'config/abi/autosharkPool.json';
 import barracksAbi from 'config/abi/barracks.json';
 
 import {
+    getBarracksContract,
     getBep20Contract,
     getDrFrankensteinContract, getErc721Contract,
     getPancakePair,
@@ -415,27 +416,21 @@ export const sharkPool = (id: number, poolUpdateObj?: { update: number, setUpdat
 }
 
 export const barracks = (id: number, barrackUpdateObj?: { update: number, setUpdate: any }, barrackUserUpdateObj?: { update: number, setUpdate: any }) => {
-    const barracksContractAddress = getBarracksAddress();
 
-    const call = [
-        {address: barracksContractAddress, name: 'barrackInfo', params: [id]},
-    ]
-
-    multicallv2(barracksAbi, call)
+    getBarracksContract().methods.barrackInfo(id).call()
         .then(res => {
-            console.log(res[0].bnb, id,  '================== in fetch.ts');
             store.dispatch(
                 updateBarrackInfo(
                     id,
                     {
-                        bnb: res[0].bnb,
-                        depositFeePercentage: res[0].feePercentage,
-                        maxStake: new BigNumber(res[0].maximum),
-                        lockThreshold: new BigNumber(res[0].lockAmount),
-                        totalStaked: new BigNumber(res[0].totalDeposited),
-                        lockTime: new BigNumber(res[0].lockTime),
-                        timeLocked: new BigNumber(res[0].timeLocked),
-                        locked: res[0].locked
+                        bnb: res.bnb,
+                        depositFeePercentage: res.feePercentage,
+                        locked: res.locked,
+                        maxStake: new BigNumber(res.maximum),
+                        lockThreshold: new BigNumber(res.lockAmount),
+                        totalStaked: new BigNumber(res.totalDeposited),
+                        lockTime: new BigNumber(res.lockTime),
+                        timeLocked: new BigNumber(res.timeLocked),
                     }
                 )
             );
@@ -445,17 +440,13 @@ export const barracks = (id: number, barrackUpdateObj?: { update: number, setUpd
         });
 
     if (account()) {
-        const calls = [
-            {address: barracksContractAddress, name: 'checkDeposited', params: [id]},
-        ]
-
-        multicallv2(barracksAbi, calls)
+        getBarracksContract().methods.checkDeposited(id).call()
             .then(res => {
                 store.dispatch(
                     updateBarrackUserInfo(
                         id,
                         {
-                            depositedAmount: new BigNumber(res[0].toString())
+                            depositedAmount: res[0],
                         }
                     )
                 );

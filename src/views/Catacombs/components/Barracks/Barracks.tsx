@@ -66,7 +66,7 @@ const Barracks: React.FC = () => {
                         <Page >
                             <div>
                                 {get.barracks().map((b) => {
-                                    return <Table id={b.id} updateResult={updateResult} />
+                                    return <Table id={b.id} key={b.id} updateResult={updateResult} />
                                 })}
                             </div>
                         </Page>
