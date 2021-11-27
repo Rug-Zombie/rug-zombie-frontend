@@ -163,6 +163,12 @@ const graves: Grave[] = [
     isNew: true,
     isFeatured: true,
     rarity: "Rare",
+    additionalDetails: [
+      {
+        name: 'SPONSORED BY L1GHT L1ST',
+        url: 'https://l1ghtl1st.io/',
+      },
+    ],
     userInfo: { ...userInfo },
     poolInfo: { ...poolInfo },
   },
