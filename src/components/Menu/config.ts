@@ -7,6 +7,10 @@ const config: MenuEntry[] = [
     href: '/home',
   },
   {
+    label: 'Exchange',
+    icon: 'ExchangeIcon',
+    href: 'https://swap.rugzombie.io/',
+  },  {
     label: 'Graves',
     icon: 'GravesIcon',
     href: '/graves',
