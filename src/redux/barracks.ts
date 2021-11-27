@@ -14,11 +14,11 @@ const barracks: Barrack[] = [
         barrackInfo: {
             bnb: true,
             depositFeePercentage: 0,
+            lockThreshold: BIG_ZERO,
             maxStake: BIG_ZERO,
             totalStaked: BIG_ZERO,
             lockTime: BIG_ZERO,
             timeLocked: BIG_ZERO,
-            nftMintDate: BIG_ZERO,
             locked: false
         },
         barrackUserInfo: {
@@ -51,10 +51,10 @@ const barracks: Barrack[] = [
             bnb: false,
             depositFeePercentage: 0,
             maxStake: BIG_ZERO,
+            lockThreshold: BIG_ZERO,
             totalStaked: BIG_ZERO,
             lockTime: BIG_ZERO,
             timeLocked: BIG_ZERO,
-            nftMintDate: BIG_ZERO,
             locked: false
         },
         barrackUserInfo: {

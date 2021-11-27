@@ -423,18 +423,19 @@ export const barracks = (id: number, barrackUpdateObj?: { update: number, setUpd
 
     multicallv2(barracksAbi, call)
         .then(res => {
+            console.log(res[0], id,  '================== in fetch.ts');
             store.dispatch(
                 updateBarrackInfo(
                     id,
                     {
                         bnb: res[0].bnb,
                         depositFeePercentage: res[0].feePercentage,
-                        maxStake: new BigNumber(res[0].maximum.toString()),
-                        totalStaked: new BigNumber(res[0].totalDeposited.toString()),
-                        lockTime: new BigNumber(res[0].lockTime.toString()),
-                        timeLocked: new BigNumber(res[0].timeLocked.toString()),
+                        maxStake: new BigNumber(res[0].maximum),
+                        lockThreshold: new BigNumber(res[0].lockAmount),
+                        totalStaked: new BigNumber(res[0].totalDeposited),
+                        lockTime: new BigNumber(res[0].lockTime),
+                        timeLocked: new BigNumber(res[0].timeLocked),
                         locked: res[0].locked,
-                        nftMintDate: new BigNumber(res[0].nftMintDate),
                     }
                 )
             );
@@ -659,6 +660,18 @@ export const initialSharkPoolData = (setPoolData?: { update: number, setUpdate: 
             sp.id,
             setPoolData ? {update: setPoolData.update + index, setUpdate: setPoolData.setUpdate} : undefined,
             setUserData ? {update: setUserData.update + index, setUpdate: setUserData.setUpdate} : undefined
+        );
+        index++;
+    });
+}
+
+export const initializeBarrackData = (setBarrackData?: { update: number, setUpdate: any }, setBarrackUserData?: { update: number, setUpdate: any }) => {
+    let index = 0;
+    get.barracks().forEach(barrack => {
+        barracks(
+            barrack.id,
+            setBarrackData ? {update: setBarrackData.update + index, setUpdate: setBarrackData.setUpdate} : undefined,
+            setBarrackUserData ? {update: setBarrackUserData.update + index, setUpdate: setBarrackUserData.setUpdate} : undefined
         );
         index++;
     });

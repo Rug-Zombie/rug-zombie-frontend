@@ -261,10 +261,10 @@ export interface BarrackInfo {
   depositFeePercentage: number,
   maxStake: BigNumber,
   totalStaked: BigNumber,
+  lockThreshold: BigNumber,
   lockTime: BigNumber,
   timeLocked: BigNumber,
   locked: boolean,
-  nftMintDate: BigNumber
 }
 
 export interface BarrackUserInfo {

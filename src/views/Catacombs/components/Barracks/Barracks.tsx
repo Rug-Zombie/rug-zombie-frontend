@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {Flex, useMatchBreakpoints} from "@catacombs-libs/uikit";
 import styled from "styled-components";
 import Menu from '../../../../components/Catacombs/Menu'
@@ -7,7 +7,8 @@ import * as get from "../../../../redux/get";
 import Table from "./components/Table";
 import CatacombsBackgroundDesktopSVG from "../../../../images/CatacombsMain-1920x1080px.svg";
 import CatacombsBackgroundMobileSVG from "../../../../images/CatacombsMain-414x720px.svg";
-import {barracks} from "../../../../redux/fetch";
+import {barracks, initializeBarrackData, initialSharkPoolData} from "../../../../redux/fetch";
+import {account} from "../../../../redux/get";
 
 const StyledDiv = styled.div`
   text-align: center;
@@ -33,6 +34,22 @@ const Barracks: React.FC = () => {
 
     const { isLg, isXl } = useMatchBreakpoints()
     const isDesktop = isLg || isXl
+
+    const [updateBarrackInfo, setUpdateBarrackInfo] = useState(0);
+    const [updateBarrackUserInfo, setUpdateBarrackUserInfo] = useState(0);
+
+    const wallet = account();
+
+    useEffect(() => {
+        if(wallet) {
+            if(updateBarrackUserInfo === 0) {
+                initializeBarrackData({update: updateBarrackUserInfo, setUpdate: setUpdateBarrackUserInfo});
+            }
+        } else if(updateBarrackInfo === 0) {
+            initializeBarrackData({update: updateBarrackInfo, setUpdate: setUpdateBarrackInfo});
+        }
+
+    }, [ wallet, updateBarrackInfo, updateBarrackUserInfo ]);
 
     const updateResult = (id: number) => {
         barracks(id);
