@@ -26,7 +26,8 @@ const Landing: React.FC<LandingProps> = (props: LandingProps) =>{
     <div className="section hero-section">
       <div className="container w-container">
         <img  src='/images/rugZombie/loader.gif' width="350" alt="" className="image" />
-          <h1 className="heading">Bringing your rugged tokens<span className="text-span"> back from the dead</span></h1>
+          <h3 style={{padding: '1px', margin: '0%'}} className="heading">Resurrect Your Dead Tokens</h3>
+          <h3 style={{padding: '1px', margin: '0%', color: 'yellowgreen'}} className="heading-2">The Future of GameFi and E-Commerce</h3>
       </div>
       <div className="_40_percent_block">
         <div tabIndex={0} role="button" onClick={handleClick} onKeyDown ={handleClick} className="button-2 w-button">
