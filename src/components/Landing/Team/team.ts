@@ -44,7 +44,7 @@ export const team: TeamMemberInfo[] = [
     telegramHandle: '@saad_sarwar',
     profilePic: '/images/team/saad.png',
     title: 'Backend Developer',
-    email: 'saad email'
+    email: 'saad_sarwar22@hotmail.com'
   },
   {
     name: 'Jussjoshinduh',
