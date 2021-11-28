@@ -9,7 +9,7 @@ export interface TeamMemberProps {
 const TeamMember: React.FC<TeamMemberProps> = ({ member }) => {
   return(
     <div className="teamcard">
-      <img src={member.profilePic} alt={member.name} style={{width: 100, height: 100, borderRadius: 100/2}} />
+      <img src={member.profilePic} alt={member.name} style={{width: 100, height: 100, borderRadius: 100/2, marginLeft: '38%'}} />
       <div className='container'>
         <h2>{member.name}</h2>
         <h4>{member.title}{member.isFounder === true ? ' (Founder)' : null}</h4>

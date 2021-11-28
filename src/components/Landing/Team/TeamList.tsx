@@ -9,7 +9,7 @@ const TeamList: React.FC = () => {
       <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
       <div id="Team" className="section-3">
         <h2 className="heading-2">Our Team</h2><br />
-        <div className="row">
+        <div className="row" style={{ paddingRight: '10%', paddingLeft: '10%' }}>
           <div className="teamcolumn">
             <TeamMember member={team[0]} />;
           </div>
@@ -19,8 +19,6 @@ const TeamList: React.FC = () => {
           <div className="teamcolumn">
             <TeamMember member={team[2]} />;
           </div>
-        </div>
-        <div className="row">
           <div className="teamcolumn">
             <TeamMember member={team[3]} />;
           </div>
