@@ -5,10 +5,29 @@
     width: 33.3%
 }
 
+.img-team {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    margin-left: 38%;
+}
+
 @media screen and (max-width: 650px) {
     .column {
         width: 100%;
         display: block;
+    }
+
+    .teamcolumn {
+        width: 100%
+    }
+
+    .section-3{
+        padding: 50% 10%;
+    }
+
+    .img-team{
+        margin-left: 30%;
     }
 }
 
