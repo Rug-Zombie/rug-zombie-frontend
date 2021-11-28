@@ -10,7 +10,7 @@ export interface TeamMemberInfo {
 export const team: TeamMemberInfo[] = [
   {
     name: 'Emperor Zombietine',
-    telegramHandle: '@emperor_zombietine',
+    telegramHandle: 'emperor_zombietine',
     profilePic: '/images/team/ez.jpg',
     title: 'Creative Lead and Business Developer',
     email: 'ez@rugzombie.io',
@@ -18,7 +18,7 @@ export const team: TeamMemberInfo[] = [
   },
   {
     name: 'Silverback',
-    telegramHandle: '@Silverback_KingApe',
+    telegramHandle: 'Silverback_KingApe',
     profilePic: '/images/team/silverback.jpg',
     title: 'Legal Advisor',
     email: 'silverback@rugzombie.io',
@@ -26,7 +26,7 @@ export const team: TeamMemberInfo[] = [
   },
   {
     name: 'Nams',
-    telegramHandle: '@nn_mss',
+    telegramHandle: 'nn_mss',
     profilePic: '/images/team/nams.jpg',
     title: 'Chief Blockchain Developer',
     email: 'nams@rugzombie.io',
@@ -34,21 +34,21 @@ export const team: TeamMemberInfo[] = [
   },
   {
     name: 'Wingnut',
-    telegramHandle: '@CryptoWingnut',
+    telegramHandle: 'CryptoWingnut',
     profilePic: '/images/team/wingnut.png',
     title: 'Lead Backend Developer',
     email: 'wingnut@rugzombie.io'
   },
   {
     name: 'Saad',
-    telegramHandle: '@saad_sarwar',
+    telegramHandle: 'saad_sarwar',
     profilePic: '/images/team/saad.png',
     title: 'Backend Developer',
     email: 'saad_sarwar22@hotmail.com'
   },
   {
     name: 'Jussjoshinduh',
-    telegramHandle: '@Jussjoshinduh',
+    telegramHandle: 'Jussjoshinduh',
     profilePic: '/images/team/jussjoshinduh.jpg',
     title: 'NFT Specialist',
     email: 'Joshbrownell2@gmail.com',

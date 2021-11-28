@@ -65,7 +65,6 @@ const Landing: React.FC<LandingProps> = (props: LandingProps) =>{
       </div>
     </div>
     <TeamList />
-    <TimeLine />
     <Tokenomics />
     <Footer />
     </>
