@@ -2,14 +2,15 @@
     float: left;
     margin-bottom: 16px;
     padding: 0 8px;
-    width: 33.3%
+    width: 33.3%;
+    text-align: center;
 }
 
 .img-team {
     width: 100px;
     height: 100px;
     border-radius: 50px;
-    margin-left: 38%;
+    /*margin-left: 38%;*/
 }
 
 @media screen and (max-width: 650px) {
@@ -27,7 +28,7 @@
     }
 
     .img-team{
-        margin-left: 30%;
+        /*margin-left: 30%;*/
     }
 }
 
