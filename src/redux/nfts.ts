@@ -1098,7 +1098,7 @@ const nfts: Nft[] = [
     symbol: 'ZOM',
     description: 'He lurks above.',
     address: {
-      56: '0xf007c2896e969b32733b00cce93210e3886d5c94',
+      56: '0x084766d130f0c4007febb1283bbe977653c2e290',
       97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
     },
     totalSupply: BIG_ZERO,
