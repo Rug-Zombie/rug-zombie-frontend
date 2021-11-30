@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { BaseLayout } from '@rug-zombie-libs/uikit'
+import { BaseLayout, Flex } from '@rug-zombie-libs/uikit'
 import Page from 'components/layout/Page'
 import AnnouncementCard from 'views/Home/components/AnnouncementCard'
 import ZmbeStats from 'views/Home/components/ZmbeStats'
@@ -59,15 +59,18 @@ const Home: React.FC<HomeProps> = ({ modalObj }) => {
         <Cards>
           <GraveStakingCard />
           <AnnouncementCard />
-          <HomeInstabuyCard id={2} refresh={() => {
-                // eslint-disable-next-line
-                console.log('refresh')
-              }} modalObj={modalObj} />
+          {/* <HomeInstabuyCard id={2} refresh={() => { */}
+          {/*       // eslint-disable-next-line */}
+          {/*       console.log('refresh') */}
+          {/*     }} modalObj={modalObj} /> */}
           <VictimPoolsCard />
+          <Flex flexDirection="column" >
+            <EnterGravesCard/>
+            <TotalValueLockedCard/>
+          </Flex>
         </Cards>
         <Cards>
-          <EnterGravesCard/>
-          <TotalValueLockedCard/>
+
           <ZmbeStats />
           <WhatsNewCard/>
         </Cards>

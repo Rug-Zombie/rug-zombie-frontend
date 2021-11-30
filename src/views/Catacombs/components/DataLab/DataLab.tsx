@@ -79,23 +79,23 @@ const DataLab: React.FC<DataLabProps> = ({ modalObj }) => {
                   keyboard
                   resizeObserver
                 >
-                  <SwiperSlide>
-                    <div style={{ paddingTop: '15px', paddingBottom: '15px' }}>
-                      <InstabuyCard id={2} refresh={() => {
-                        // eslint-disable-next-line
-                        console.log('refresh')
-                      }} modalObj={modalObj} />
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div style={{ paddingTop: '15px', paddingBottom: '15px' }}>
+                  {/* <SwiperSlide> */}
+                  {/*  <div style={{ paddingTop: '15px', paddingBottom: '15px' }}> */}
+                  {/*    <InstabuyCard id={2} refresh={() => { */}
+                  {/*      // eslint-disable-next-line */}
+                  {/*      console.log('refresh') */}
+                  {/*    }} modalObj={modalObj} /> */}
+                  {/*  </div> */}
+                  {/* </SwiperSlide> */}
+                  {/* <SwiperSlide> */}
+                  {/*  <div style={{ paddingTop: '15px', paddingBottom: '15px' }}> */}
 
-                      <InstabuyCard id={1} refresh={() => {
-                        // eslint-disable-next-line
-                        console.log('refresh')
-                      }} modalObj={modalObj} />
-                    </div>
-                  </SwiperSlide>
+                  {/*    <InstabuyCard id={1} refresh={() => { */}
+                  {/*      // eslint-disable-next-line */}
+                  {/*      console.log('refresh') */}
+                  {/*    }} modalObj={modalObj} /> */}
+                  {/*  </div> */}
+                  {/* </SwiperSlide> */}
                 </Swiper>
               </StyledSwiper>
             </Page>
