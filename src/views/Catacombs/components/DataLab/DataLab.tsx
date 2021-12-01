@@ -68,7 +68,7 @@ const DataLab: React.FC<DataLabProps> = ({ modalObj }) => {
             <Page>
               <StyledSwiper>
                 <Swiper
-                  initialSlide={0}
+                  initialSlide={1}
                   onSwiper={setSwiper}
                   spaceBetween={64}
                   slidesPerView='auto'
