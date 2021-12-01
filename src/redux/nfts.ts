@@ -1106,7 +1106,53 @@ const nfts: Nft[] = [
     type: 'image',
     rarity: 'Legendary',
     userInfo: { ...DEFAULT_USER_INFO },
-    artist: artists.trippynazz
+    artist: artists.ayaz_psd
+  },
+  {
+    id: 69,
+    name: 'The DataLab',
+    symbol: 'DATALAB',
+    description: 'Behind illusions, we uncover truth.',
+    address: {
+      56: '0x6812B0733dB5612fae57a1D945cFEbf73F880b15',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmYjYvkES4PbSuBhUg5bwnrb4vAHJDDm3u3UMQ9H47Nfq2',
+    type: 'image',
+    rarity: 'Mythic',
+    userInfo: { ...DEFAULT_USER_INFO },
+    artist: artists.ayaz_psd
+  },
+  {
+    id: 70,
+    name: 'The Infamous Matos',
+    symbol: 'INFAMOUS',
+    description: 'bitconnEEEEEEEEEEECT!',
+    address: {
+      56: '0x9690D5a817906172c8b1e2C3e7F9D641cbF095Fd',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmZabZnzYQBVRoehCNtEUBSRUGferfRcuAjX8iz37c4VtL',
+    type: 'image',
+    rarity: 'Special',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
+  {
+    id: 71,
+    name: 'The Technical One',
+    symbol: 'TECHNICAL',
+    description: 'technically, you lost your money.',
+    address: {
+      56: '0xA51388a9B2e26641F699198B4Ff5eFcfE33a5a9B',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmZW6MpQEfQqPXfHxJmfXYqxCoWHrM5PG27NbJWXnKgpnC',
+    type: 'image',
+    rarity: 'Special',
+    userInfo: { ...DEFAULT_USER_INFO },
   },
 ]
 

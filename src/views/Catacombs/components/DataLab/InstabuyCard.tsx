@@ -11,7 +11,7 @@ import {
   Button,
 } from '@catacombs-libs/uikit'
 import { BigNumber } from 'bignumber.js'
-import { Lightbox } from "react-modal-image";
+import { Lightbox } from 'react-modal-image'
 import { account, nftById } from '../../../../redux/get'
 import Video from '../../../../components/Video'
 
@@ -46,13 +46,13 @@ const StyleCardHeader = styled.div`
 interface InstabuyCardProps {
   id: number;
   refresh: () => void;
-  modalObj: {modal: boolean, setModal: any};
+  modalObj: { modal: boolean, setModal: any };
 }
 
 const initialNftInfo = {
   price: BIG_ZERO,
   maxMints: BIG_ZERO,
-  maxMintsPerUser: BIG_ZERO
+  maxMintsPerUser: BIG_ZERO,
 }
 
 const InstabuyCard: React.FC<InstabuyCardProps> = ({ id, modalObj }) => {
@@ -79,16 +79,15 @@ const InstabuyCard: React.FC<InstabuyCardProps> = ({ id, modalObj }) => {
   }
 
   const openModal = () => {
-      modalObj.setModal(
-        <Lightbox
-          large={path}
-          alt={name}
-          onClose={closeModal}
-          hideDownload
-        />
-      )
+    modalObj.setModal(
+      <Lightbox
+        large={path}
+        alt={name}
+        onClose={closeModal}
+        hideDownload
+      />,
+    )
   }
-
 
 
   const handleInstabuy = () => {
@@ -121,7 +120,9 @@ const InstabuyCard: React.FC<InstabuyCardProps> = ({ id, modalObj }) => {
                 Instabuy
               </StyledButton>
               </div>
-              <StyleCursorPointer onClick={() => {setIsOpen(!isOpen)}}>
+              <StyleCursorPointer onClick={() => {
+                setIsOpen(!isOpen)
+              }}>
                 Details
                 {
                   isOpen ? <ChevronUpIcon color='text' ml='10px' />
@@ -136,8 +137,9 @@ const InstabuyCard: React.FC<InstabuyCardProps> = ({ id, modalObj }) => {
               <span className='indetails-type'>{name}</span>
               <span className='indetails-title'>{description}</span>
               {!nftInfo.maxMints.isZero() ?
-                <span className='indetails-title'>{nftInfo.maxMintsPerUser.toString()} per wallet ({nftInfo.maxMints.minus(totalSupply).toString()} remaining).</span>:
-              null}
+                <span
+                  className='indetails-title'>{nftInfo.maxMintsPerUser.isZero() ? '' : `${nftInfo.maxMintsPerUser.toString()} per wallet`} ({nftInfo.maxMints.minus(totalSupply).toString()} remaining).</span> :
+                null}
 
             </div>
           }
