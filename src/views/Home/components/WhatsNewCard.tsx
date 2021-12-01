@@ -26,16 +26,16 @@ const TotalValueLockedCard: React.FC = () => {
         </Heading>
         <>
           <Row>
-            <Text fontSize='14px'>1. NFTombs are out! Stake LP to earn a variety of NFTs. Using Chainlink VRF you can stake more LP for higher odds at receiving a Rare or Legendary NFT</Text>
+            <Text fontSize='14px'>1. Burnsgiving is upon us, checkout the RugZombie Medium to see what we have planned for the month.</Text>
           </Row>
           <Row>
-            <Text fontSize='14px'>2. We are listed on CoinMarketCap and CoinGecko! Make sure you add RugZombie to your watchlist to get us trending.</Text>
+            <Text fontSize='14px'>2. There are 3 new InstaBuy NFTs available in the Catacombs, burning ZMBE with each purchase.</Text>
           </Row>
           <Row>
-            <Text fontSize='14px'>3. Go earn ChompersV2 in the Autoshark Legendary Spawning Pool.</Text>
+            <Text fontSize='14px'>3. NFTombs are out! Stake LP to earn a variety of NFTs. Using Chainlink VRF you can stake more LP for higher odds at receiving a Rare or Legendary NFT.</Text>
           </Row>
           <Row>
-            <Text fontSize='14px'>4. Upgraded RugZombie Common grave is out! Please migrate your funds from the legacy grave. You can still remain in the old grave until you earn your NFT.</Text>
+            <Text fontSize='14px'>4. We are listed on CoinMarketCap and CoinGecko! Make sure you add RugZombie to your watchlist to get us trending.</Text>
           </Row>
           <Row>
             <Text fontSize='14px'>5. You can now view your NFTs in the Graveyard.</Text>
