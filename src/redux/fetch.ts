@@ -426,7 +426,7 @@ export const barracks = (id: number, barrackUpdateObj?: { update: number, setUpd
                         bnb: res.bnb,
                         depositFeePercentage: res.feePercentage,
                         locked: res.locked,
-                        maxStake: new BigNumber(res.maximum),
+                        minStake: new BigNumber(res.minimum),
                         lockThreshold: new BigNumber(res.lockAmount),
                         totalStaked: new BigNumber(res.totalDeposited),
                         lockTime: new BigNumber(res.lockTime),
@@ -440,13 +440,13 @@ export const barracks = (id: number, barrackUpdateObj?: { update: number, setUpd
         });
 
     if (account()) {
-        getBarracksContract().methods.checkDeposited(id).call()
+        getBarracksContract().methods.checkDeposited(id).call({from: account()})
             .then(res => {
                 store.dispatch(
                     updateBarrackUserInfo(
                         id,
                         {
-                            depositedAmount: res[0],
+                            depositedAmount: res,
                         }
                     )
                 );

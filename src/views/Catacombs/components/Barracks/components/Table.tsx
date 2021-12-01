@@ -44,7 +44,7 @@ const Table: React.FC<TableProps> = ({ id, updateResult}) => {
                                 {
                                     barrack.barrackInfo.bnb ? <StakePanelBNB id={id} key={id} updateResult={updateResult} /> : <StakePanelTokens id={id} key={id} updateResult={updateResult} />
                                 }
-                                <MintTimerPanel id={id} key={id} updateResult={updateResult} />
+                                <MintTimerPanel id={id} updateResult={updateResult} />
                             </div>
                             <DetailsPanel id={id} key={id} />
                         </div>

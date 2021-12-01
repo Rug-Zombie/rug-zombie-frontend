@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { ethers } from 'ethers';
 import { useModal, BaseLayout } from '@rug-zombie-libs/uikit';
 import { useTranslation } from 'contexts/Localization';
 import useToast from 'hooks/useToast';

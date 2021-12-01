@@ -259,7 +259,7 @@ export interface TombOverlay {
 export interface BarrackInfo {
   bnb: boolean,
   depositFeePercentage: number,
-  maxStake: BigNumber,
+  minStake: BigNumber,
   totalStaked: BigNumber,
   lockThreshold: BigNumber,
   lockTime: BigNumber,

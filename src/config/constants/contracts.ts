@@ -122,6 +122,6 @@ export default {
   },
   barracks: {
     56: '0x7B9BC052D70950eBf3A91538599ed17902baeED3',
-    97: '0xD7d03805F49fD067D124c8318E7fdbc00aaAEaBe',
+    97: '0xF131e43b1B3eb60d72a19e6270661d78256B5E28',
   },
 }

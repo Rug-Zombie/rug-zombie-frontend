@@ -1,6 +1,51 @@
 
 .color-white {
     color: white!important;
+    border-bottom: 2px solid white;
+}
+
+.text-white {
+    font-weight: unset;
+    color: white;
+    /*text-shadow: rgb(204 246 108) 0px 0px 12px;*/
+}
+
+.space-center {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.barracks-deposit-input {
+    background: white;
+    font-weight: bolder;
+    margin: 2%;
+    text-align: right;
+    border-radius: 8px;
+    height: 40px;
+    font-size: larger;
+}
+
+.barracks-deposit-button {
+    cursor: pointer;
+    margin-top: 10px;
+    color: white;
+    background-color: black;
+    border-radius: 16px;
+    border: 2px solid white;
+    height: 45px;
+    display: inline-flex;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 2.5;
+    justify-content: center;
+}
+
+.barracks-deposit-button:disabled {
+    cursor: none;
 }
 
 .barracks-indetails-type {

@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import { useModal, BaseLayout } from '@rug-zombie-libs/uikit';
+import {useModal, BaseLayout} from '@rug-zombie-libs/uikit';
 import {account, barrackById} from 'redux/get';
-import {useBarracksContract} from 'hooks/useContract';
-import { getFullDisplayBalance } from 'utils/formatBalance';
-import BigNumber from 'bignumber.js';
+import {getBalanceAmount, getFullDisplayBalance} from 'utils/formatBalance';
 import IncreaseStakeModal from './IncreaseStakeModal';
 import DecreaseStakeModal from './DecreaseStakeModal';
-import DepositModalBNB from "./DepositModal";
+import DepositModalBNB from "./DepositModalBNB";
+import web3 from "../../../../../utils/web3";
 
 const DisplayFlex = styled(BaseLayout)`
     display: flex;
@@ -24,34 +23,27 @@ interface StakePanelProps {
     updateResult: any
 }
 
-const StakePanelBNB: React.FC<StakePanelProps> = ({ id, updateResult }) => {
-    const [deposited, setDeposited] = useState(0);
+const StakePanelBNB: React.FC<StakePanelProps> = ({id, updateResult}) => {
     const wallet = account();
-    // const { toastSuccess } = useToast();
-    // const { t } = useTranslation();
     const barrack = barrackById(id);
-    const barracksContract = useBarracksContract();
+    const [increaseStake, setIncreaseStake] = useState(false);
 
     useEffect(() => {
-        if (wallet) {
-            barracksContract.methods.checkDeposited(wallet).call()
-                .then(res => {
-                    console.log(res, ' <= has deposited');
-                    setDeposited(res);
-                })
+        if (Number(barrack.barrackUserInfo.depositedAmount) > 0) {
+            setIncreaseStake(true);
         }
-    })
+    },  [barrack.barrackUserInfo.depositedAmount] )
 
     const [handleDeposit] = useModal(
-        <DepositModalBNB id={id} updateResult={updateResult} />
+        <DepositModalBNB id={id} increaseStake={increaseStake} updateResult={updateResult}/>
     )
 
     const [handleIncreaseStake] = useModal(
-        <IncreaseStakeModal id={id} updateResult={updateResult} />
+        <DepositModalBNB id={id} increaseStake={increaseStake} updateResult={updateResult}/>
     )
 
     const [handleDecreaseStake] = useModal(
-        <DecreaseStakeModal id={id} updateResult={updateResult} />
+        <DecreaseStakeModal id={id} updateResult={updateResult}/>
     )
 
     const RenderButtons = () => {
@@ -59,27 +51,35 @@ const StakePanelBNB: React.FC<StakePanelProps> = ({ id, updateResult }) => {
             return (<span className="total-earned text-shadow">Connect Wallet</span>);
         }
 
-        if (deposited > 0) {
+        if (Number(barrack.barrackUserInfo.depositedAmount) > 0) {
             return (
                 <div>
                     <DisplayFlex>
-                        <span style={{ paddingRight: '50px' }} className="total-earned text-shadow">{getFullDisplayBalance(new BigNumber(deposited), barrack.token.decimals, 4)}</span>
-                        <button onClick={handleDecreaseStake} style={{ marginRight: '10px' }} className="btn w-100" type="button">-</button>
-                        <button onClick={handleIncreaseStake} className="btn w-100" type="button">+</button>
+                        <button onClick={handleDecreaseStake}
+                                style={{marginRight: '10px', color: 'white', border: '2px solid white'}}
+                                className="btn w-100" type="button">-
+                        </button>
+                        <button onClick={handleIncreaseStake} className="btn w-100"
+                                style={{color: 'white', border: '2px solid white'}} type="button">+
+                        </button>
                     </DisplayFlex>
                 </div>
             );
         }
 
-        return (<button onClick={handleDeposit} className="btn btn-disabled w-100" type="button">Deposit {barrack.token.symbol}</button>)
+        return (<button onClick={handleDeposit} className="btn btn-disabled w-100" type="button">Stake {barrack.token.symbol}</button>)
     }
 
-    return(
+    return (
         <div className="barracks-frank-card">
             <div className="small-text">
-                <span className="white-color">Deposit</span>
+                {
+                    Number(barrack.barrackUserInfo.depositedAmount) > 0 ?
+                        <span className="white-color" style={{fontSize: "large"}}>You Staked : {getBalanceAmount(barrack.barrackUserInfo.depositedAmount).toString()} {barrack.token.symbol}</span>
+                    : <span/>
+                }
             </div>
-            <div className="space-between">
+            <div className="space-center">
                 {RenderButtons()}
             </div>
         </div>

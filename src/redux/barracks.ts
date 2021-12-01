@@ -15,7 +15,7 @@ const barracks: Barrack[] = [
             bnb: true,
             depositFeePercentage: 0,
             lockThreshold: BIG_ZERO,
-            maxStake: BIG_ZERO,
+            minStake: BIG_ZERO,
             totalStaked: BIG_ZERO,
             lockTime: BIG_ZERO,
             timeLocked: BIG_ZERO,
@@ -43,14 +43,50 @@ const barracks: Barrack[] = [
         id: 2,
         name: 'barrack two',
         nft: 62,
-        description: 'description here',
+        description: 'some more description here',
+        token: tokens.bnb,
+        nftMintingTime: '3 days',
+        isNew: true,
+        barrackInfo: {
+            bnb: true,
+            depositFeePercentage: 0,
+            minStake: BIG_ZERO,
+            lockThreshold: BIG_ZERO,
+            totalStaked: BIG_ZERO,
+            lockTime: BIG_ZERO,
+            timeLocked: BIG_ZERO,
+            locked: false
+        },
+        barrackUserInfo: {
+            depositedAmount: BIG_ZERO
+        },
+        project: {
+            name: 'AutoShark',
+            description: 'AutoShark flash loan attack NFT pool',
+            additionalDetails: [
+                {
+                    name: 'Project website',
+                    url: 'https://autoshark.finance',
+                },
+                {
+                    name: 'Compensation Plan',
+                    url: 'https://medium.com/autosharkfin/restoring-the-ecosystem-a870c0a36a8a',
+                }
+            ]
+        },
+    },
+    {
+        id: 3,
+        name: 'barrack three',
+        nft: 62,
+        description: 'some description here too',
         token: tokens.zmbe,
         nftMintingTime: '3 days',
         isNew: true,
         barrackInfo: {
-            bnb: false,
+            bnb: true,
             depositFeePercentage: 0,
-            maxStake: BIG_ZERO,
+            minStake: BIG_ZERO,
             lockThreshold: BIG_ZERO,
             totalStaked: BIG_ZERO,
             lockTime: BIG_ZERO,
