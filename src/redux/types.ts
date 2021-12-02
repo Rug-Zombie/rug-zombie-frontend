@@ -226,6 +226,7 @@ export interface BurnGrave {
   mintingTime: string,
   nftid: number,
   isNew: boolean,
+  isClosed: boolean,
   depositToken: Token,
   stakingToken: Token,
   geckoId: string,
