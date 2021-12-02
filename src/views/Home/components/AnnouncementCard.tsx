@@ -1,7 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Heading, Card, CardBody, Text, LinkExternal } from '@rug-zombie-libs/uikit'
+import { Heading, Card, CardBody, Text, LinkExternal, Flex } from '@rug-zombie-libs/uikit'
 import { useTranslation } from 'contexts/Localization'
+import { Lightbox } from "react-modal-image";
+
 // import { Tweet } from 'react-twitter-widgets'
 
 // const TwitterContainer = () => {
@@ -33,8 +35,28 @@ const StyledAnnouncementCard = styled(Card)`
   box-shadow: rgb(204 246 108) 0px 0px 20px;
 `
 
-const AnnouncementCard: React.FC = () => {
+interface AnnouncementCardProps {
+  modalObj: {modal: boolean, setModal: any};
+}
+
+const AnnouncementCard: React.FC<AnnouncementCardProps> = ({modalObj}) => {
   const { t } = useTranslation()
+  const imagePath = "https://ipfs.io/ipfs/QmZabZnzYQBVRoehCNtEUBSRUGferfRcuAjX8iz37c4VtL"
+
+  const closeModal = () => {
+    modalObj.setModal(null)
+  }
+
+  const openModal = () => {
+    modalObj.setModal(
+      <Lightbox
+        large={imagePath}
+        alt="The Infamous Matos"
+        onClose={closeModal}
+        hideDownload
+      />
+    )
+  }
 
   return (
     <StyledAnnouncementCard>
@@ -43,15 +65,17 @@ const AnnouncementCard: React.FC = () => {
           {t('Announcements')}
         </Heading>
         <Text>
-          {t('Spawning Pools are live! Earn partner project tokens and a limited time NFT.')}
+          {t('Bitconnect series is live in the Catacombs!')}
         </Text>
-        <br/>
-        <image width="100%" >
-          <img src="https://storage.googleapis.com/rug-zombie/chompersv2%20preview.png" alt="Chompers V2 preview"/>
-        </image>
+        <br />
+        <Flex alignItems="center" flexDirection="column" width="100%" onClick={openModal}>
 
-        <LinkExternal paddingTop="10px" href="https://twitter.com/rugzombie">
-          Follow our twitter for latest announcements
+        <img width='40%' src={imagePath}
+                 alt='The Infamous Matos Nft' />
+        </Flex>
+
+        <LinkExternal paddingTop='10px' href='https://rugzombie.medium.com/'>
+          Follow our medium for our latest Burnsgiving events
         </LinkExternal>
       </CardBody>
     </StyledAnnouncementCard>
