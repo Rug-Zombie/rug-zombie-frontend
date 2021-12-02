@@ -4,6 +4,7 @@ import { BaseLayout } from '@rug-zombie-libs/uikit';
 import { account, bnbPriceUsd, burnGraveById, zombiePriceUsd } from 'redux/get'
 import GraveTop from '../GraveTop';
 import DepositToken from '../DepositToken';
+import StakePanel from '../StakePanel'
 import GraveBottom from '../GraveBottom'
 
 const TableCards = styled(BaseLayout)`
@@ -51,10 +52,8 @@ const Table: React.FC<TableProps> = ({ id, zmbePrice, updateResult }) => {
                         <div className="w-95 mx-auto mt-3">
                             <div className="flex-grow">
                                 {depositPanel()}
-                                {/* <GraveBottom bnbInBusd={bnbPriceUsd()} pid={id} zombieUsdPrice={zombiePriceUsd()} account={account()} /> */}
-
+                                <StakePanel id={id} updateResult={updateResult} />
                             </div>
-                            
                         </div>
                       </div>) 
                     : null}

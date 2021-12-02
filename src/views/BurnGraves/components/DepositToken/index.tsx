@@ -32,7 +32,7 @@ const DepositToken: React.FC<DepositTokenProps> = ({ id, updateResult }) => {
                     setIsApproved(false);
                 }
             });
-    }, [ grave, tokenContract, wallet, setIsApproved ]);
+    }, [ tokenContract, wallet, setIsApproved ]);
 
     const handleApprove = () => {
         if(wallet) {

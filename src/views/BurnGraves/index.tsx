@@ -30,7 +30,6 @@ const BurnGraves: React.FC = () => {
     const wallet = account();
 
     useEffect(() => {
-        console.log("HIT");
         if(!updateUserInfo) {
           initialBurnGraveData(
                 { update: updateUserInfo, setUpdate: setUpdateUserInfo },
