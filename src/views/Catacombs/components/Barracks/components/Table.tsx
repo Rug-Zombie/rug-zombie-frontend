@@ -4,9 +4,7 @@ import { BaseLayout } from '@catacombs-libs/uikit';
 import TableList from './TableList';
 import MintTimerPanel from './MintTimerPanel';
 import DetailsPanel from './DetailsPanel';
-import StakePanelBNB from "./StakePanelBNB";
-import StakePanelTokens from "./StakePanelTokens";
-import {barrackById} from "../../../../../redux/get";
+import StakePanel from "./StakePanel";
 
 const TableCards = styled(BaseLayout)`
     align-items: stretch;
@@ -25,7 +23,6 @@ interface TableProps {
 
 const Table: React.FC<TableProps> = ({ id, updateResult}) => {
     const [isOpen, setIsOpen] = useState(false);
-    const barrack = barrackById(id);
 
     const openInDetails = (data: boolean) => {
         setIsOpen(data);
@@ -41,9 +38,7 @@ const Table: React.FC<TableProps> = ({ id, updateResult}) => {
                     ? (<div className="table-bottom" style={{borderTop: '1px solid white'}}>
                         <div className="w-95 mx-auto mt-3">
                             <div className="flex-grow">
-                                {
-                                    barrack.barrackInfo.bnb ? <StakePanelBNB id={id} key={id} updateResult={updateResult} /> : <StakePanelTokens id={id} key={id} updateResult={updateResult} />
-                                }
+                                <StakePanel id={id} key={id} updateResult={updateResult} />
                                 <MintTimerPanel id={id} updateResult={updateResult} />
                             </div>
                             <DetailsPanel id={id} key={id} />

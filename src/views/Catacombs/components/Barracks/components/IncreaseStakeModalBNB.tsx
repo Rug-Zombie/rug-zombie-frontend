@@ -1,43 +1,29 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {Flex, Image, Modal, Text} from '@catacombs-libs/uikit';
 import {BigNumber} from 'bignumber.js';
 import {useBarracksContract} from 'hooks/useContract';
 import {account, barrackById} from 'redux/get';
 import useToast from 'hooks/useToast';
 import {useTranslation} from 'contexts/Localization';
-import {getBalanceAmount, getDecimalAmount, getFullDisplayBalance} from "../../../../../utils/formatBalance";
+import {getBalanceAmount, getDecimalAmount} from "../../../../../utils/formatBalance";
 
 
 interface DepositModalProps {
     id: number,
-    increaseStake: boolean,
     updateResult: any,
     onDismiss?: () => void,
 }
 
-const DepositModalBNB: React.FC<DepositModalProps> = ({id, increaseStake, updateResult, onDismiss}) => {
+const IncreaseStakeModalBNB: React.FC<DepositModalProps> = ({id, updateResult, onDismiss}) => {
     const [depositAmount, setDepositAmount] = useState(new BigNumber(0));
     const [buttonDisabled, setbuttonDisabled] = useState(true);
-    const [buttonText, setButtonText] = useState('Amount should be more than minimum');
+    const [buttonText, setButtonText] = useState('Amount should be more than 0.004');
     const barrack = barrackById(id);
     const barracksContract = useBarracksContract();
     const wallet = account();
     const {toastSuccess} = useToast();
     const {t} = useTranslation();
-    const [minStake, setMinStake] = useState(getFullDisplayBalance(barrack.barrackInfo.minStake, 18, 2))
-    const [mainText, setMainText] = useState('')
-
-    useEffect(() => {
-        if (increaseStake) {
-            setMinStake('0.005')
-            setMainText('Feeling hungry, increase your stake here.');
-            setButtonText('Amount should be more than 0.004')
-        } else {
-            setMainText(`To enter this barrack, you must stake a minimum
-                of ${minStake} ${barrack.token.symbol} as part of
-                the unlock process.`)
-        }
-    }, [increaseStake, minStake, barrack.token.symbol])
+    const minStake = '0.005';
 
     const handleDeposit = () => {
         setbuttonDisabled(true)
@@ -58,19 +44,11 @@ const DepositModalBNB: React.FC<DepositModalProps> = ({id, increaseStake, update
     const handleDepositInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = event.target.value || '0'
         if (Number(inputValue) < Number(minStake)) {
-            if (increaseStake) {
-                setButtonText('Amount should be more than 0.004');
-            } else {
-                setButtonText('Amount should be more than minimum.');
-            }
+            setButtonText(`Amount should be more than 0.004 ${barrack.token.symbol}`);
             setbuttonDisabled(true)
         } else {
             setbuttonDisabled(false)
-            if (increaseStake) {
-                setButtonText(`Increase Stake`);
-            } else {
-                setButtonText(`Stake ${barrack.token.symbol}`);
-            }
+            setButtonText(`Increase Stake`);
             setDepositAmount(getDecimalAmount(new BigNumber(inputValue)));
         }
     }
@@ -85,7 +63,7 @@ const DepositModalBNB: React.FC<DepositModalProps> = ({id, increaseStake, update
                 </Flex>
             </Flex>
             <Text mt="8px" ml="auto" bold color="tertiary" fontSize="14px" mb="8px">
-                {mainText}
+                Feeling hungry, increase your stake here.
             </Text>
             <input className="barracks-deposit-input" type="number" placeholder="Enter amount here."
                    onChange={handleDepositInputChange}/>
@@ -96,4 +74,4 @@ const DepositModalBNB: React.FC<DepositModalProps> = ({id, increaseStake, update
     );
 }
 
-export default DepositModalBNB;
+export default IncreaseStakeModalBNB;

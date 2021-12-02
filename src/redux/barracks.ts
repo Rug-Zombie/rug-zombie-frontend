@@ -84,7 +84,7 @@ const barracks: Barrack[] = [
         nftMintingTime: '3 days',
         isNew: true,
         barrackInfo: {
-            bnb: true,
+            bnb: false,
             depositFeePercentage: 0,
             minStake: BIG_ZERO,
             lockThreshold: BIG_ZERO,

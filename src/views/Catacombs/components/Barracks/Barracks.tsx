@@ -7,7 +7,7 @@ import * as get from "../../../../redux/get";
 import Table from "./components/Table";
 import CatacombsBackgroundDesktopSVG from "../../../../images/CatacombsMain-1920x1080px.svg";
 import CatacombsBackgroundMobileSVG from "../../../../images/CatacombsMain-414x720px.svg";
-import {barracks, initializeBarrackData, initialSharkPoolData} from "../../../../redux/fetch";
+import {barracks, initializeBarrackData} from "../../../../redux/fetch";
 import {account} from "../../../../redux/get";
 
 const StyledDiv = styled.div`
@@ -45,10 +45,8 @@ const Barracks: React.FC = () => {
             if(updateBarrackUserInfo === 0) {
                 initializeBarrackData({update: updateBarrackUserInfo, setUpdate: setUpdateBarrackUserInfo});
             }
-        } else if(updateBarrackInfo === 0) {
-            initializeBarrackData({update: updateBarrackInfo, setUpdate: setUpdateBarrackInfo});
         }
-
+        initializeBarrackData({update: updateBarrackInfo, setUpdate: setUpdateBarrackInfo});
     }, [ wallet, updateBarrackInfo, updateBarrackUserInfo ]);
 
     const updateResult = (id: number) => {
