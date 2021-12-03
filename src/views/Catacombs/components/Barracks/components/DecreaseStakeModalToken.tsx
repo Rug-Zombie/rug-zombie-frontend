@@ -1,16 +1,14 @@
 import React, {useState} from 'react';
 import {Flex, Image, Modal, Text} from '@catacombs-libs/uikit';
 import {BigNumber} from 'bignumber.js';
-import {useBarracksContract, useERC20} from 'hooks/useContract';
+import {useBarracksContract} from 'hooks/useContract';
 import {account, barrackById} from 'redux/get';
 import useToast from 'hooks/useToast';
 import {useTranslation} from 'contexts/Localization';
 import {
-    formatNumber,
     getBalanceAmount,
     getDecimalAmount,
 } from "../../../../../utils/formatBalance";
-import {getAddress} from "../../../../../utils/addressHelpers";
 
 interface DepositModalProps {
     id: number,
@@ -27,9 +25,7 @@ const DepositModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDis
     const wallet = account();
     const {toastSuccess} = useToast();
     const {t} = useTranslation();
-    const tokenContract = useERC20(getAddress(barrack.token.address));
     const maxWithdrawable = Number(getBalanceAmount(barrack.barrackUserInfo.depositedAmount)) - Number(getBalanceAmount(barrack.barrackInfo.minStake));
-    console.log(formatNumber(maxWithdrawable), '=================')
 
     const handleDecreaseStake = () => {
         barracksContract.methods.refundEarlier(id, depositAmount).send({
@@ -55,7 +51,7 @@ const DepositModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDis
     }
 
     return (
-        <Modal onDismiss={onDismiss} title={`Deposit ${barrack.token.symbol}`} className="color-white">
+        <Modal onDismiss={onDismiss} title={`Unstake ${barrack.token.symbol}`} className="color-white">
             <Flex alignItems="center" justifyContent="space-between" mb="8px">
                 <Flex alignItems="center" minWidth="70px">
                     <Image src={`/images/tokens/${barrack.token.symbol}.png`} width={24} height={24}

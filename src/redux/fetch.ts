@@ -1,7 +1,6 @@
 import axios from 'axios'
 import {BigNumber} from 'bignumber.js'
 import sharkpoolAbi from 'config/abi/autosharkPool.json';
-import barracksAbi from 'config/abi/barracks.json';
 
 import {
     getBarracksContract,
@@ -45,7 +44,7 @@ import {
     getMausoleumAddress,
     getSpawningPoolAddress,
     getTombOverlayAddress,
-    getSharkPoolAddress, getBarracksAddress
+    getSharkPoolAddress,
 } from '../utils/addressHelpers'
 import tombs from './tombs'
 import * as get from './get'

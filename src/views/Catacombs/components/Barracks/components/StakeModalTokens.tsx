@@ -30,13 +30,13 @@ const StakeModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDismi
     const tokenContract = useERC20(getAddress(barrack.token.address));
 
     useEffect(() => {
-        tokenContract.methods.allowance(wallet, getAddress(barrack.token.address)).call()
+        tokenContract.methods.allowance(account(), getAddress(barrack.token.address)).call()
             .then(res => {
                 if (parseInt(res.toString()) !== 0) {
                     setIsApproved(true);
                     setApproveButtonDisabled(true);
                     setbuttonDisabled(false);
-                    setButtonText(`Stake ${barrack.token.symbol}`);
+                    setButtonText(`Amount should be more than minimum.`);
                 } else {
                     setIsApproved(false);
                     setApproveButtonDisabled(false);
@@ -48,7 +48,7 @@ const StakeModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDismi
 
     const handleDeposit = () => {
         if (isApproved) {
-            barracksContract.methods.depositToken(barrack.token.address, id, depositAmount).send({
+            barracksContract.methods.depositToken(getAddress(barrack.token.address), id, depositAmount).send({
                 from: wallet
             })
                 .then(() => {
@@ -67,6 +67,7 @@ const StakeModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDismi
                     toastSuccess(t(`Approved ${barrack.token.symbol}`));
                     setIsApproved(true);
                     setApproveButtonDisabled(true);
+                    setButtonText('Amount should be more than minimum.');
                 }
             );
     }
@@ -84,7 +85,7 @@ const StakeModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDismi
     }
 
     return (
-        <Modal onDismiss={onDismiss} title={`Deposit ${barrack.token.symbol}`} className="color-white">
+        <Modal onDismiss={onDismiss} title={`Stake ${barrack.token.symbol}`} className="color-white">
             <Flex alignItems="center" justifyContent="space-between" mb="8px">
                 <Flex alignItems="center" minWidth="70px">
                     <Image src={`/images/tokens/${barrack.token.symbol}.png`} width={24} height={24}
@@ -101,7 +102,7 @@ const StakeModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDismi
                     disabled={approveButtonDisabled}>
                 APPROVE {barrack.token.symbol}
             </button>
-            <input className="barracks-deposit-input" type="number" placeholder="Enter amount here."
+            <input className="barracks-deposit-input" type="number" placeholder="Enter amount here." disabled={buttonDisabled}
                    onChange={handleDepositInputChange}/>
             <button type="button" className="barracks-deposit-button" onClick={handleDeposit} disabled={buttonDisabled}>
                 {buttonText}

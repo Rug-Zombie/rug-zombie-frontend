@@ -38,6 +38,7 @@ const DepositModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDis
                     setbuttonDisabled(false);
                     setButtonText(`Stake ${barrack.token.symbol}`);
                 } else {
+
                     setIsApproved(false);
                     setApproveButtonDisabled(false);
                     setbuttonDisabled(true);
@@ -48,7 +49,7 @@ const DepositModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDis
 
     const handleDeposit = () => {
         if (isApproved) {
-            barracksContract.methods.depositToken(barrack.token.address, id, depositAmount).send({
+            barracksContract.methods.depositToken(getAddress(barrack.token.address), id, depositAmount).send({
                 from: wallet
             })
                 .then(() => {
@@ -73,13 +74,15 @@ const DepositModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDis
 
     const handleDepositInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const inputValue = event.target.value || '0'
-        if (Number(inputValue) < Number(minStake)) {
-            setButtonText(`Amount should be more than 0.004 ${barrack.token.symbol}`);
-            setbuttonDisabled(true)
-        } else {
-            setbuttonDisabled(false)
-            setButtonText(`Increase Stake`);
-            setDepositAmount(getDecimalAmount(new BigNumber(inputValue)));
+        if (isApproved) {
+            if (Number(inputValue) < Number(minStake)) {
+                setButtonText(`Amount should be more than 0.004 ${barrack.token.symbol}`);
+                setbuttonDisabled(true)
+            } else {
+                setbuttonDisabled(false)
+                setButtonText(`Increase Stake`);
+                setDepositAmount(getDecimalAmount(new BigNumber(inputValue)));
+            }
         }
     }
 

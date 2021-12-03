@@ -1,12 +1,8 @@
 import React from 'react';
 import { LinkExternal } from '@catacombs-libs/uikit';
 import {nftById, barrackById} from 'redux/get';
-import { getFullDisplayBalance } from 'utils/formatBalance';
+import {getBalanceAmount, getFullDisplayBalance} from 'utils/formatBalance';
 import numeral from 'numeral';
-import BigNumber from "bignumber.js";
-// import {formatDuration} from "../../../../../utils/timerHelpers";
-// import getTimePeriods from "../../../../../utils/getTimePeriods";
-// import {useBarracksContract} from "../../../../../hooks/useContract";
 
 interface DetailsPanelProps {
     id: number
@@ -15,24 +11,7 @@ interface DetailsPanelProps {
 const DetailsPanel: React.FC<DetailsPanelProps> = ({ id }) => {
 
     const barrack = barrackById(id);
-    // const barracksContract = useBarracksContract();
-    // const [maxStake, setMaxStake] = useState(0);
-    // const [depositFee, setDepositFee] = useState(0);
-    // const [unlockThreshold, setUnlockThreshold] = useState(0);
-    // // time required to mint nft , barracks reaches threshold amount and is locked during this time.
-    // const [lockTime, setLockTime] = useState(0);
-    // const [locked, setLocked] = useState(false);
-
-    // useEffect(() => {
-    //     barracksContract.methods.barrackInfo(id).call()
-    //         .then((res) => {
-    //             setMaxStake(parseFloat(getFullDisplayBalance(new BigNumber(res.maximum), 18, 2)));
-    //             setDepositFee(numeral(res.feePercentage).format('( 0.00 a)'));
-    //             setUnlockThreshold(parseFloat(getFullDisplayBalance(new BigNumber(res.lockAmount), 18, 2)));
-    //             setLocked(res.locked);
-    //         })
-    // })
-
+    const remainingStake = Number(getBalanceAmount(barrack.barrackInfo.lockThreshold)) - Number(getBalanceAmount(barrack.barrackInfo.totalStaked));
     const nft = nftById(barrack.nft);
 
     return(
@@ -63,6 +42,7 @@ const DetailsPanel: React.FC<DetailsPanelProps> = ({ id }) => {
             <div className="direction-column">
                 <span className="barracks-indetails-title">Lock Threshold:<span className="indetails-value">{parseFloat(getFullDisplayBalance(barrack.barrackInfo.lockThreshold, 18, 2))} {barrack.token.symbol}</span></span>
                 <span className="barracks-indetails-title">Minimum Stake:<span className="indetails-value">{parseFloat(getFullDisplayBalance(barrack.barrackInfo.minStake, 18, 2))} {barrack.token.symbol}</span></span>
+                <span className="barracks-indetails-title">Remaining Stake:<span className="indetails-value">{remainingStake} {barrack.token.symbol}</span></span>
                 <span className="barracks-indetails-title">Deposit Fee:<span className="indetails-value">{numeral(barrack.barrackInfo.depositFeePercentage).format('( 0.00 a)')}%</span></span>
                 <span className="barracks-indetails-title">NFT Minting Time After Barrack Is Locked:<span className="indetails-value">{barrack.nftMintingTime}</span></span>
                 <span className="barracks-indetails-value">Please Note: Barracks are subject to a tax on the each deposited amount.</span>

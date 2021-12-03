@@ -1,12 +1,11 @@
 import React, {useState} from 'react';
-import {Flex, Image, Modal, Text} from '@rug-zombie-libs/uikit';
+import {Flex, Image, Modal, Text} from '@catacombs-libs/uikit';
 import {account, barrackById} from 'redux/get';
-import {formatNumber, getBalanceAmount, getDecimalAmount} from 'utils/formatBalance';
+import {getBalanceAmount, getDecimalAmount} from 'utils/formatBalance';
 import BigNumber from 'bignumber.js';
 import {useBarracksContract} from 'hooks/useContract';
 import {useTranslation} from 'contexts/Localization';
 import useToast from 'hooks/useToast';
-
 
 interface DecreaseStakeModalProps {
     id: number,
@@ -15,16 +14,18 @@ interface DecreaseStakeModalProps {
 }
 
 const DecreaseStakeModalBNB: React.FC<DecreaseStakeModalProps> = ({id, updateResult, onDismiss}) => {
-    const [buttonDisabled, setbuttonDisabled] = useState(true);
+
     const barrack = barrackById(id);
-    const [depositAmount, setDepositAmount] = useState(barrack.barrackUserInfo.depositedAmount);
     const barracksContract = useBarracksContract();
     const wallet = account();
-    const {toastSuccess} = useToast();
-    const {t} = useTranslation();
+
+    const [buttonDisabled, setbuttonDisabled] = useState(true);
+    const [depositAmount, setDepositAmount] = useState(barrack.barrackUserInfo.depositedAmount);
     const [buttonText, setButtonText] = useState(`Unstake ${barrack.token.symbol}`);
     const maxWithdrawable = Number(getBalanceAmount(barrack.barrackUserInfo.depositedAmount)) - Number(getBalanceAmount(barrack.barrackInfo.minStake));
-    console.log(formatNumber(maxWithdrawable), '=================')
+
+    const {toastSuccess} = useToast();
+    const {t} = useTranslation();
 
     const handleDecreaseStake = () => {
         setbuttonDisabled(true)
@@ -54,7 +55,7 @@ const DecreaseStakeModalBNB: React.FC<DecreaseStakeModalProps> = ({id, updateRes
     }
 
     return (
-        <Modal onDismiss={onDismiss} title={`Stake ${barrack.token.symbol}`}>
+        <Modal onDismiss={onDismiss} title={`Unstake ${barrack.token.symbol}`}>
             <Flex alignItems="center" justifyContent="space-between" mb="8px">
                 <Flex alignItems="center" minWidth="70px">
                     <Image src={`/images/tokens/${barrack.token.symbol}.png`} width={24} height={24}
@@ -67,10 +68,8 @@ const DecreaseStakeModalBNB: React.FC<DecreaseStakeModalProps> = ({id, updateRes
                 Staked Amount : {getBalanceAmount(barrack.barrackUserInfo.depositedAmount)}<br/>
                 Max can be unstaked : {maxWithdrawable} {barrack.token.symbol}
             </Text>
-            <input className="barracks-deposit-input" type="number" placeholder="Enter amount here."
-                   onChange={handleDepositInputChange}/>
-            <button type="button" className="barracks-deposit-button" onClick={handleDecreaseStake}
-                    disabled={buttonDisabled}>
+            <input className="barracks-deposit-input" type="number" placeholder="Enter amount here." onChange={handleDepositInputChange}/>
+            <button type="button" className="barracks-deposit-button" onClick={handleDecreaseStake} disabled={buttonDisabled}>
                 {buttonText}
             </button>
         </Modal>

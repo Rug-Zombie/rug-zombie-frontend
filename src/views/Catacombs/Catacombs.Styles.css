@@ -45,7 +45,7 @@
 }
 
 .barracks-deposit-button:disabled {
-    cursor: none;
+    cursor: no-drop;
 }
 
 .barracks-indetails-type {
