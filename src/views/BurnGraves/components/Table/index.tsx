@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { BaseLayout } from '@rug-zombie-libs/uikit';
-import { account, bnbPriceUsd, burnGraveById, zombiePriceUsd } from 'redux/get'
+import { burnGraveById } from 'redux/get'
 import GraveTop from '../GraveTop';
 import DepositToken from '../DepositToken';
 import StakePanel from '../StakePanel'
-import GraveBottom from '../GraveBottom'
+import DetailsPanel from '../DetailsPanel'
+import BurnPanel from '../BurnPanel'
 
 const TableCards = styled(BaseLayout)`
     align-items: stretch;
@@ -53,7 +54,9 @@ const Table: React.FC<TableProps> = ({ id, zmbePrice, updateResult }) => {
                             <div className="flex-grow">
                                 {depositPanel()}
                                 <StakePanel id={id} updateResult={updateResult} />
+                                <BurnPanel id={id} updateResult={updateResult} />
                             </div>
+                            <DetailsPanel id={id} />
                         </div>
                       </div>) 
                     : null}

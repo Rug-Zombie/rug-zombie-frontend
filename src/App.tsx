@@ -30,7 +30,6 @@ import BlackMarket from './views/Catacombs/components/BlackMarket'
 import Barracks from './views/Catacombs/components/Barracks'
 import RugRoll from './views/Catacombs/components/RugRoll'
 import SwiperProvider from './views/Mausoleum/context/SwiperProvider'
-import DayOfDead from './views/DayOfDead'
 
 import SharkPools from './views/SharkPools'
 

@@ -260,10 +260,12 @@ export interface BurnGrave {
   id: Id,
   name: string,
   mintingTime: string,
+  burnReduction: string,
   nftid: number,
   isNew: boolean,
   isClosed: boolean,
   depositToken: Token,
+  depositNftId: number,
   stakingToken: Token,
   geckoId: string,
   poolInfo: BurnGravePoolInfo,
@@ -288,6 +290,6 @@ export interface BurnGraveUserInfo {
   stakedAmount: BigNumber,
   hasDeposited: boolean,
   hasUnlocked: boolean,
-  nftMintDate: BigNumber,
+  nftMintDate: number,
   burnedAmount: BigNumber
 }

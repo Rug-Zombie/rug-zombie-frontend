@@ -4,7 +4,7 @@ import { useModal } from '@rug-zombie-libs/uikit';
 import { useERC20 } from 'hooks/useContract';
 import { useTranslation } from 'contexts/Localization';
 import useToast from 'hooks/useToast';
-import { getAddress, getDrBurnensteinAddress } from 'utils/addressHelpers';
+import { getDrBurnensteinAddress } from 'utils/addressHelpers';
 import { BIG_TEN } from 'utils/bigNumber';
 import DepositTokenModal from './DepositTokenModal'
 

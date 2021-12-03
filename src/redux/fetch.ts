@@ -2,6 +2,7 @@ import axios from 'axios'
 import { BigNumber } from 'bignumber.js'
 import sharkpoolAbi from 'config/abi/autosharkPool.json';
 
+import { parseInt } from 'lodash'
 import {
   getBep20Contract,
   getDrFrankensteinContract, getErc721Contract,
@@ -38,8 +39,7 @@ import {
   getMausoleumAddress,
   getSpawningPoolAddress,
   getTombOverlayAddress,
-  getSharkPoolAddress,
-  getDrBurnensteinAddress
+  getSharkPoolAddress
 } from '../utils/addressHelpers'
 import tombs from './tombs'
 import * as get from './get'
@@ -754,7 +754,7 @@ export const burnGrave = (id: number, setUserInfoState?: { update: boolean, setU
             stakedAmount: new BigNumber(res.amount.toString()),
             hasDeposited: res.deposited,
             hasUnlocked: res.paidUnlockFee,
-            nftMintDate: new BigNumber(res.nftMintDate.toString()),
+            nftMintDate: parseInt(res.nftMintDate),
             burnedAmount: new BigNumber(res.burnedAmount.toString())
           }
         ));

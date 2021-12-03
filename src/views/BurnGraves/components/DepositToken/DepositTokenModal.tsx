@@ -37,7 +37,6 @@ const DepositTokenModal: React.FC<DepositTokenModalProps> = ({ id, updateResult,
   });
 
   const handleDeposit = () => {
-    console.log(wallet);
     if (wallet) {
       drBurnensteinContract.methods.deposit(id, BIG_TEN.pow(18).toString(), 0).send({ from: wallet })
         .then(() => {

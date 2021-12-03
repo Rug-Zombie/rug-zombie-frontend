@@ -10,11 +10,13 @@ const burnGraves: BurnGrave[] = [
         },
         name: 'No Deposit Burn Grave',
         mintingTime: '5 Hours',
+        burnReduction: '1 Hour',
         nftid: 62,
         isNew: true,
         isClosed: false,
         geckoId: 'rugzombie',
         depositToken: tokens.zmbe,
+        depositNftId: 0,
         stakingToken: tokens.zmbe,
         poolInfo: {
             isEnabled: true,
@@ -33,7 +35,7 @@ const burnGraves: BurnGrave[] = [
             stakedAmount: BIG_ZERO,
             hasDeposited: false,
             hasUnlocked: false,
-            nftMintDate: BIG_ZERO,
+            nftMintDate: 0,
             burnedAmount: BIG_ZERO
         }
     },
@@ -44,11 +46,13 @@ const burnGraves: BurnGrave[] = [
         },
         name: 'Token Deposit Burn Grave',
         mintingTime: '3 Days',
+        burnReduction: '1 Day',
         nftid: 62,
         isNew: true,
         isClosed: false,
         geckoId: 'rugzombie',
         depositToken: tokens.zmbe,
+        depositNftId: 0,
         stakingToken: tokens.zmbe,
         poolInfo: {
             isEnabled: true,
@@ -67,7 +71,7 @@ const burnGraves: BurnGrave[] = [
             stakedAmount: BIG_ZERO,
             hasDeposited: false,
             hasUnlocked: false,
-            nftMintDate: BIG_ZERO,
+            nftMintDate: 0,
             burnedAmount: BIG_ZERO
         }
     },
@@ -78,11 +82,13 @@ const burnGraves: BurnGrave[] = [
         },
         name: 'NFT Deposit Burn Grave',
         mintingTime: '3 Days',
+        burnReduction: '1 Day',
         nftid: 62,
         isNew: true,
         isClosed: false,
         geckoId: 'rugzombie',
         depositToken: tokens.zmbe,
+        depositNftId: 6,
         stakingToken: tokens.zmbe,
         poolInfo: {
             isEnabled: true,
@@ -101,7 +107,7 @@ const burnGraves: BurnGrave[] = [
             stakedAmount: BIG_ZERO,
             hasDeposited: false,
             hasUnlocked: false,
-            nftMintDate: BIG_ZERO,
+            nftMintDate: 0,
             burnedAmount: BIG_ZERO
         }
     }

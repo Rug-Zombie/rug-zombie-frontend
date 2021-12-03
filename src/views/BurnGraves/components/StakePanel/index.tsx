@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
 import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
-import { BaseLayout } from '@rug-zombie-libs/uikit'
+import { BaseLayout, useModal } from '@rug-zombie-libs/uikit'
 import { account, burnGraveById } from '../../../../redux/get'
 import { useERC20 } from '../../../../hooks/useContract'
 import { getAddress, getDrBurnensteinAddress } from '../../../../utils/addressHelpers'
@@ -10,6 +10,8 @@ import useToast from '../../../../hooks/useToast'
 import { useTranslation } from '../../../../contexts/Localization'
 import { getFullDisplayBalance } from '../../../../utils/formatBalance'
 import { getDrBurnensteinContract } from '../../../../utils/contractHelpers'
+import IncreaseStakeModal from '../../../SharkPools/IncreaseStakeModal'
+import DecreaseStakeModal from '../DecreaseStakeModal'
 
 const DisplayFlex = styled(BaseLayout)`
   display: flex;
@@ -60,7 +62,7 @@ const StakePanel:React.FC<StakePanelProps> = ({ id, updateResult }) => {
   }
 
   const handleUnlock = () => {
-    drBurnenstein.methods.unlockFeeInBnb(id).call()
+    drBurnenstein.methods.priceInBnb(grave.poolInfo.unlockFee).call()
       .then(res => {
         drBurnenstein.methods.unlock(id).send({ from: wallet, value: res})
           .then(() => {
@@ -69,6 +71,14 @@ const StakePanel:React.FC<StakePanelProps> = ({ id, updateResult }) => {
           })
       })
   }
+
+  const [handleIncreaseStake] = useModal(
+    <IncreaseStakeModal id={id} updateResult={updateResult} />
+  )
+
+  const [handleDecreaseStake] = useModal(
+    <DecreaseStakeModal id={id} updateResult={updateResult} />
+  )
 
   const renderButtons = () => {
     if (!wallet) {
@@ -91,8 +101,8 @@ const StakePanel:React.FC<StakePanelProps> = ({ id, updateResult }) => {
       <div>
         <DisplayFlex>
           <span style={{ paddingRight: '50px' }} className="total-earned text-shadow">{getFullDisplayBalance(new BigNumber(grave.userInfo.stakedAmount), grave.stakingToken.decimals, 4)}</span>
-          <button style={{ marginRight: '10px' }} className="btn w-100" type="button">-</button>
-          <button disabled={grave.isClosed} className={`btn w-100 ${grave.isClosed ? "btn-disabled" : ""}`} type="button">+</button>
+          <button onClick={handleDecreaseStake} style={{ marginRight: '10px' }} className="btn w-100" type="button">-</button>
+          <button onClick={handleIncreaseStake} disabled={grave.isClosed} className={`btn w-100 ${grave.isClosed ? "btn-disabled" : ""}`} type="button">+</button>
         </DisplayFlex>
       </div>
     )
