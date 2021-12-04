@@ -54,12 +54,8 @@ const StakePanel: React.FC<StakePanelProps> = ({id, updateResult}) => {
                 return (
                     <div>
                         <DisplayFlex>
-                            <button style={{marginRight: '10px', color: 'white', border: '2px solid white'}}
-                                    className="btn w-100" type="button" disabled>-
-                            </button>
-                            <button className="btn w-100" style={{color: 'white', border: '2px solid white'}}
-                                    type="button" disabled>+
-                            </button>
+                            <button style={{marginRight: '10px'}} className="btn w-100 white-color" type="button" disabled>-</button>
+                            <button className="btn w-100 white-color"  type="button" disabled>+</button>
                         </DisplayFlex>
                     </div>
                 )

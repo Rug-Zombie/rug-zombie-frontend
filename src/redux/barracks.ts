@@ -22,7 +22,8 @@ const barracks: Barrack[] = [
             locked: false
         },
         barrackUserInfo: {
-            depositedAmount: BIG_ZERO
+            depositedAmount: BIG_ZERO,
+            claimed: false
         },
         project: {
             name: 'AutoShark',
@@ -58,7 +59,8 @@ const barracks: Barrack[] = [
             locked: false
         },
         barrackUserInfo: {
-            depositedAmount: BIG_ZERO
+            depositedAmount: BIG_ZERO,
+            claimed: false
         },
         project: {
             name: 'AutoShark',

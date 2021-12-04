@@ -2,7 +2,6 @@ import React from 'react';
 import { Button } from '@rug-zombie-libs/uikit';
 import {account, barrackById} from 'redux/get';
 import { formatDuration } from 'utils/timerHelpers';
-import { BIG_ZERO } from 'utils/bigNumber';
 import {useBarracksContract} from 'hooks/useContract';
 import { useTranslation } from 'contexts/Localization';
 import useToast from 'hooks/useToast';
@@ -18,10 +17,16 @@ const MintTimerPanel: React.FC<MintTimerPanelProps> = ({ id, updateResult }) => 
     const barracksContract = useBarracksContract();
     const { toastSuccess } = useToast();
     const { t } = useTranslation();
-
+    // today
     const currentDate = Math.floor(Date.now() / 1000);
-    const nftMintDateFixed = Number(barrack.barrackInfo.timeLocked) + Number(barrack.barrackInfo.lockTime);
-    const initialNftTime = nftMintDateFixed - currentDate;
+    // time when barrack was locked
+    const barrackLockTime = Number(barrack.barrackInfo.timeLocked);
+    // time required after which user can claim nft, barrack will remain locked during this time
+    const timeTillBarrackLocked = Number(barrack.barrackInfo.lockTime);
+    // time when nft can be claimed.
+    const nftCanBeMintedAfter = barrackLockTime + timeTillBarrackLocked;
+    // remaining time if barrack is locked but the time required to mint an nft has not passed yet
+    const nftTimeRemaining = nftCanBeMintedAfter - currentDate;
 
     const onMintNft = () => {
         barracksContract.methods.claimNftAndRefundLockedAmount(id).send({ from: wallet })
@@ -38,11 +43,11 @@ const MintTimerPanel: React.FC<MintTimerPanelProps> = ({ id, updateResult }) => 
         // check if barrack is locked
         if (barrack.barrackInfo.locked) {
             // if barrack locked then user deposit anything?
-            if (barrack.barrackUserInfo.depositedAmount.eq(BIG_ZERO)) {
+            if (Number(barrack.barrackUserInfo.depositedAmount) === 0) {
                 return(<span className="total-earned white-color">You didn&apos;t stake anything.</span>)
             }
             // if user deposited then has the time to mint nft came
-            if (nftMintDateFixed > currentDate) {
+            if (currentDate > nftCanBeMintedAfter) {
                 return (<Button className='btn w-100' onClick={onMintNft}>Mint NFT</Button>)
             }
             // else show time left to mint the nft
@@ -51,7 +56,7 @@ const MintTimerPanel: React.FC<MintTimerPanelProps> = ({ id, updateResult }) => 
                     <div className="small-text">
                         <span className="white-color">NFT Timer</span>
                     </div>
-                    <span className="total-earned text-shadow" style={{fontSize: "20px"}}>{formatDuration(initialNftTime)}</span>
+                    <span className="total-earned text-shadow" style={{fontSize: "20px"}}>{formatDuration(nftTimeRemaining)}</span>
                 </div>
             )
         }

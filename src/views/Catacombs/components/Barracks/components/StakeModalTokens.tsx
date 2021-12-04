@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {Flex, Image, Modal, Text} from '@catacombs-libs/uikit';
 import {BigNumber} from 'bignumber.js';
-import {useBarracksContract, useERC20} from 'hooks/useContract';
+import {useBarracksContract} from 'hooks/useContract';
 import {account, barrackById} from 'redux/get';
 import useToast from 'hooks/useToast';
 import {useTranslation} from 'contexts/Localization';
 import {ethers} from "ethers";
 import {getDecimalAmount, getFullDisplayBalance} from "../../../../../utils/formatBalance";
 import {getAddress, getBarracksAddress} from "../../../../../utils/addressHelpers";
+import {getBep20Contract} from "../../../../../utils/contractHelpers";
 
 interface DepositModalProps {
     id: number,
@@ -27,10 +28,10 @@ const StakeModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDismi
     const {toastSuccess} = useToast();
     const {t} = useTranslation();
     const minStake = getFullDisplayBalance(barrack.barrackInfo.minStake, 18, 2);
-    const tokenContract = useERC20(getAddress(barrack.token.address));
+    const tokenContract = getBep20Contract(getAddress(barrack.token.address));
 
     useEffect(() => {
-        tokenContract.methods.allowance(account(), getAddress(barrack.token.address)).call()
+        tokenContract.methods.allowance(account(), getBarracksAddress()).call()
             .then(res => {
                 if (parseInt(res.toString()) !== 0) {
                     setIsApproved(true);
@@ -44,7 +45,7 @@ const StakeModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDismi
                     setButtonText(`Approve ${barrack.token.symbol} first`);
                 }
             });
-    }, [barrack, tokenContract, wallet, setIsApproved]);
+    } );
 
     const handleDeposit = () => {
         if (isApproved) {

@@ -439,13 +439,14 @@ export const barracks = (id: number, barrackUpdateObj?: { update: number, setUpd
         });
 
     if (account()) {
-        getBarracksContract().methods.checkDeposited(id).call({from: account()})
+        getBarracksContract().methods.getUserInfo(id).call({from: account()})
             .then(res => {
                 store.dispatch(
                     updateBarrackUserInfo(
                         id,
                         {
-                            depositedAmount: res,
+                            depositedAmount: res.depositedAmount,
+                            claimed: res.claimed
                         }
                     )
                 );

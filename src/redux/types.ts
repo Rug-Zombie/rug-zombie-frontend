@@ -269,6 +269,7 @@ export interface BarrackInfo {
 
 export interface BarrackUserInfo {
   depositedAmount: BigNumber,
+  claimed: boolean
 }
 
 export interface Barrack {
