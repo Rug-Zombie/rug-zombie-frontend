@@ -2,7 +2,6 @@ import React from 'react'
 import './Landing.Styles.css'
 import Header from './Header';
 import TeamList from './Team/TeamList'
-import TimeLine from './TimeLine';
 import Tokenomics from './Tokenomics';
 import Footer from './Footer';
 import { routes } from "../../routes"
