@@ -54,7 +54,7 @@
     max-width: none;
     min-height: 900px;
     margin-top: -274px;
-    padding: 149px 6% 127px;
+    padding: 160px 6% 127px;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -webkit-flex-direction: column;
@@ -89,7 +89,7 @@
 }
 
 .container {
-    margin-top: 50px;
+    margin-top: 40px;
     padding-bottom: 47px;
     -webkit-align-self: center;
     -ms-flex-item-align: center;

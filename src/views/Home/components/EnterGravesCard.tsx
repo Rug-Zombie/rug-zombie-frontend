@@ -12,6 +12,7 @@ const CardMidContent = styled(Heading).attrs({ scale: 'xl' })`
 `
 const EarnAPRCard: React.FC = () => {
   return (
+    <div style={{paddingBottom: "15px"}}>
       <StyledTotalValueLockedCard>
         <NavLink exact activeClassName='active' to='/graves' id='farm-apr-cta'>
           <CardBody>
@@ -30,6 +31,7 @@ const EarnAPRCard: React.FC = () => {
           </CardBody>
         </NavLink>
       </StyledTotalValueLockedCard>
+    </div>
   )
 }
 

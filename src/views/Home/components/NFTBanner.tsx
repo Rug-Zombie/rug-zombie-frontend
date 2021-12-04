@@ -78,29 +78,29 @@ const NFTBanner: React.FC = () => {
           {/* <NowLive>{t('Mausoleum End:')} {formatDuration(remainingTime, true)}</NowLive> */}
           <NowLive>{t('Mausoleum is Live!')}</NowLive>
           { isDesktop ? <Flex>
-            <Over fontSize='40px' bold mr='8px' style={{ whiteSpace: 'nowrap' }}>
-              {t('The first')}
+            <Over fontSize='35px' bold mr='8px' style={{ whiteSpace: 'nowrap' }}>
+              {t('The final')}
             </Over>
-            <Over fontSize='40px' color='primary' bold mr='8px' style={{ whiteSpace: 'nowrap' }}>
-              BIBLICAL
+            <Over fontSize='35px' color='primary' bold mr='8px' style={{ whiteSpace: 'nowrap' }}>
+              PATIENT-ZERO
             </Over>
-            <Over fontSize='40px' bold mr='8px'>
+            <Over fontSize='35px' bold mr='8px'>
               NFT is being auctioned in the Mausoleum.
             </Over>
           </Flex> :
             <>
               <Over fontSize='40px' bold mr='8px'>
-                {t('The first')}
+                {t('The final')}
               </Over>
               <Over fontSize='40px' color='primary' bold mr='8px'>
-                BIBLICAL
+                PATIENT-ZERO
               </Over>
               <Over fontSize='40px' bold mr='8px'>
                 NFT is being auctioned in the Mausoleum.
               </Over>
             </>
           }
-          <NavLink exact activeClassName='active' to='/mausoleum/2' id='lottery-pot-banner' style={{paddingTop: "8px"}}>
+          <NavLink exact activeClassName='active' to='/mausoleum/3' id='lottery-pot-banner' style={{paddingTop: "8px"}}>
             <Button>
               <Text color='white' bold fontSize='16px' mr='4px'>
                 {t('Enter the Mausoleum')}

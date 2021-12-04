@@ -68,7 +68,7 @@ const DataLab: React.FC<DataLabProps> = ({ modalObj }) => {
             <Page>
               <StyledSwiper>
                 <Swiper
-                  initialSlide={0}
+                  initialSlide={1}
                   onSwiper={setSwiper}
                   spaceBetween={64}
                   slidesPerView='auto'
@@ -81,7 +81,7 @@ const DataLab: React.FC<DataLabProps> = ({ modalObj }) => {
                 >
                   <SwiperSlide>
                     <div style={{ paddingTop: '15px', paddingBottom: '15px' }}>
-                      <InstabuyCard id={2} refresh={() => {
+                      <InstabuyCard id={3} refresh={() => {
                         // eslint-disable-next-line
                         console.log('refresh')
                       }} modalObj={modalObj} />
@@ -90,7 +90,16 @@ const DataLab: React.FC<DataLabProps> = ({ modalObj }) => {
                   <SwiperSlide>
                     <div style={{ paddingTop: '15px', paddingBottom: '15px' }}>
 
-                      <InstabuyCard id={1} refresh={() => {
+                      <InstabuyCard id={4} refresh={() => {
+                        // eslint-disable-next-line
+                        console.log('refresh')
+                      }} modalObj={modalObj} />
+                    </div>
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <div style={{ paddingTop: '15px', paddingBottom: '15px' }}>
+
+                      <InstabuyCard id={5} refresh={() => {
                         // eslint-disable-next-line
                         console.log('refresh')
                       }} modalObj={modalObj} />

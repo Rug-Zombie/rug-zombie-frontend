@@ -1194,7 +1194,7 @@
 
 "@catacombs-libs/uikit@https://github.com/Rug-Zombie/catacombs-uikit.git":
   version "0.29.3"
-  resolved "https://github.com/Rug-Zombie/catacombs-uikit.git#5bb8b97e7e531756e22e730ae5066c6af78021a6"
+  resolved "https://github.com/Rug-Zombie/catacombs-uikit.git#f1eed8e54d9e863d13f43487628f1e57ddec7ac4"
   dependencies:
     "@popperjs/core" "^2.9.2"
     "@types/lodash" "^4.14.168"
@@ -2116,7 +2116,7 @@
 
 "@rug-zombie-libs/uikit@https://github.com/Rug-Zombie/rug-zombie-uikit.git":
   version "0.29.3"
-  resolved "https://github.com/Rug-Zombie/rug-zombie-uikit.git#5db3ef113d56ed7dc5cc17b56f7abdb70726836c"
+  resolved "https://github.com/Rug-Zombie/rug-zombie-uikit.git#fe56889bc990761688fcbfc8ba14152666ea687a"
   dependencies:
     "@popperjs/core" "^2.9.2"
     "@types/lodash" "^4.14.168"

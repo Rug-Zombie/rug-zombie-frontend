@@ -308,6 +308,22 @@ const nfts: Nft[] = [
     userInfo: { ...DEFAULT_USER_INFO }
   },
   {
+    id: 66,
+    name: 'Patient Zero Gamma',
+    symbol: 'PATIENT-ZERO',
+    description: 'The blockspring.',
+    address: {
+      56: '0x76a74D015c5497F8Ee2b583518266082E3af1cfF',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmRhksLK5YJjhSD1GssYL6czH1xdumKxUa4eQaN6AwDcyR',
+    type: 'image',
+    rarity: 'Biblical',
+    userInfo: { ...DEFAULT_USER_INFO },
+    artist: artists.jussjoshinduh
+  },
+  {
     id: 19,
     name: 'Zombie Horde',
     symbol: 'HORDE',
@@ -679,15 +695,15 @@ const nfts: Nft[] = [
     id: 42,
     name: 'Fluffy',
     symbol: 'FLUFFY',
-    description: 'Did you hear the bells ringing?',
+    description: 'C\'est simple comme bonjour',
     address: {
-      56: '0xf5971902a4625236C1f268C6d077aFAD340359D9',
+      56: '0x988EE236F4c3E0244e7785F2a41FE8533AE1A7f3',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
 
     },
     totalSupply: BIG_ZERO,
-    path: 'https://storage.googleapis.com/rug-zombie/French%20Connection%20NFT.jpeg',
-    type: 'image',
+    path: 'https://ipfs.io/ipfs/QmdRJp1tPFNdg9WP1V1A3KTGYaF74zs6vT5yodhsn9FGcn',
+    type: 'video',
     rarity: 'Legendary',
     userInfo: { ...DEFAULT_USER_INFO },
   },
@@ -984,7 +1000,7 @@ const nfts: Nft[] = [
     id: 61,
     name: 'The Double Black Diamond',
     symbol: 'DBD',
-    description: 'There are occasions when commands of the sovereign need not be obeyed.',
+    description: 'When you\'re on a merry-go-round, you miss a lot of the scenery',
     address: {
       56: '0x3a56ffFE595CA8e9d8eC46D74721F60B3aF9FE74',
       97: '0x701855c54F7084D494DA18157bD164d3AB32a0a0',
@@ -993,7 +1009,7 @@ const nfts: Nft[] = [
     path: 'https://ipfs.io/ipfs/QmQ12QcVoJtuzGmf8zaqGyHnXWidnCSs6tqFRHASpbYnuf',
     type: 'image',
     rarity: 'Rare',
-    artist: artists.TheLeap3d,
+    artist: artists.canadiancryptojunkie,
     userInfo: { ...DEFAULT_USER_INFO },
   },
   {
@@ -1043,6 +1059,100 @@ const nfts: Nft[] = [
     rarity: 'Legendary',
     userInfo: { ...DEFAULT_USER_INFO },
     artist: artists.canadiancryptojunkie
+  },
+  {
+    id: 65,
+    name: 'Infinte Zombie',
+    symbol: 'IFZ',
+    description: 'Don\'t worry, I\'m the strongest.',
+    address: {
+      56: '0xD9a1E771bf857f49db78E96B01Dd4E0BD4A68f29',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/Qme5fwhsG5sAHWg1yZUPYHqVj3wvZWetzpu5FWV4cmYHV3',
+    type: 'image',
+    rarity: 'Legendary',
+    userInfo: { ...DEFAULT_USER_INFO },
+    artist: artists.canadiancryptojunkie
+  },
+  {
+    id: 67,
+    name: 'Marbles',
+    symbol: 'MARBLES',
+    description: 'Trust people? Never again.',
+    address: {
+      56: '0xf007c2896e969b32733b00cce93210e3886d5c94',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmXNJtKYSRKNeoGDRgzfSjom69SJkGUVVz7gYUmnb5frHS',
+    type: 'image',
+    rarity: 'Rare',
+    userInfo: { ...DEFAULT_USER_INFO },
+    artist: artists.trippynazz
+  },
+  {
+    id: 68,
+    name: 'Great Zom',
+    symbol: 'ZOM',
+    description: 'He lurks above.',
+    address: {
+      56: '0x084766d130f0c4007febb1283bbe977653c2e290',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmXKBTHHpaSrhgtC67RT4JqkjDHaTJAsnYWfszcUUZfehM',
+    type: 'image',
+    rarity: 'Legendary',
+    userInfo: { ...DEFAULT_USER_INFO },
+    artist: artists.ayaz_psd
+  },
+  {
+    id: 69,
+    name: 'The DataLab',
+    symbol: 'DATALAB',
+    description: 'Behind illusions, we uncover truth.',
+    address: {
+      56: '0x6812B0733dB5612fae57a1D945cFEbf73F880b15',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmYjYvkES4PbSuBhUg5bwnrb4vAHJDDm3u3UMQ9H47Nfq2',
+    type: 'image',
+    rarity: 'Mythic',
+    userInfo: { ...DEFAULT_USER_INFO },
+    artist: artists.ayaz_psd
+  },
+  {
+    id: 70,
+    name: 'The Infamous Matos',
+    symbol: 'INFAMOUS',
+    description: 'bitconnEEEEEEEEEEECT!',
+    address: {
+      56: '0x9690D5a817906172c8b1e2C3e7F9D641cbF095Fd',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmZabZnzYQBVRoehCNtEUBSRUGferfRcuAjX8iz37c4VtL',
+    type: 'image',
+    rarity: 'Special',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
+  {
+    id: 71,
+    name: 'The Technical One',
+    symbol: 'TECHNICAL',
+    description: 'technically, you lost your money.',
+    address: {
+      56: '0xA51388a9B2e26641F699198B4Ff5eFcfE33a5a9B',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmZW6MpQEfQqPXfHxJmfXYqxCoWHrM5PG27NbJWXnKgpnC',
+    type: 'image',
+    rarity: 'Special',
+    userInfo: { ...DEFAULT_USER_INFO },
   },
 ]
 

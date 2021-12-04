@@ -11,6 +11,30 @@ const DEFAULT_AUCTION_INFO = {
 
 const auctions: Auction[] = [
   {
+    id: 2,
+    aid: 0,
+    prize: "Trust Us",
+    prizeSymbol: "TRUST",
+    path: 'https://storage.googleapis.com/rug-zombie/Trust%20Us.jpeg',
+    prizeDescription: 'Or don\'t, we will just zombie on.',
+    isFinished: true,
+    artist: { ...artists.jussjoshinduh },
+    startingBid: 0.05,
+    bt: 'BNB',
+    version: 'v3',
+    end: 1633319999,
+    additionalDetails: [
+      {
+        name: 'Learn what the RugZombie Team accomplished during the Trust Us Campaign',
+        url: "https://rugzombie.gitbook.io/docs/security-and-team-information/basic-team-security-information/trust-us-campaign",
+      },
+    ],
+    userInfo: {
+      bid: BIG_ZERO,
+    },
+    auctionInfo: { ...DEFAULT_AUCTION_INFO }
+  },
+  {
     id: 0,
     aid: 0,
     prize: "Patient Zero Alpha",
@@ -57,29 +81,24 @@ const auctions: Auction[] = [
     auctionInfo: { ...DEFAULT_AUCTION_INFO }
   },
   {
-    id: 2,
-    aid: 0,
-    prize: "Trust Us",
-    prizeSymbol: "TRUST",
-    path: 'https://storage.googleapis.com/rug-zombie/Trust%20Us.jpeg',
-    prizeDescription: 'Or don\'t, we will just zombie on.',
+    id: 3,
+    aid: 1,
+    prize: "Patient Zero Gamma",
+    prizeSymbol: "PATIENT-ZERO",
+    path: 'https://ipfs.io/ipfs/QmRhksLK5YJjhSD1GssYL6czH1xdumKxUa4eQaN6AwDcyR',
+    prizeDescription: 'The blockspring.',
     isFinished: true,
     artist: { ...artists.jussjoshinduh },
     startingBid: 0.05,
     bt: 'BNB',
     version: 'v3',
-    end: 1633319999,
-    additionalDetails: [
-      {
-        name: 'Learn what the RugZombie Team accomplished during the Trust Us Campaign',
-        url: "https://rugzombie.gitbook.io/docs/security-and-team-information/basic-team-security-information/trust-us-campaign",
-      },
-    ],
+    end: 1637816399,
+    additionalDetails: [],
     userInfo: {
       bid: BIG_ZERO,
     },
     auctionInfo: { ...DEFAULT_AUCTION_INFO }
-  }
+  },
 ]
 
 export default auctions

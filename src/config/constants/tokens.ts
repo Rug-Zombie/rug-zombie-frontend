@@ -39,6 +39,25 @@ const tokens = {
     projectLink: 'https://euler.tools/',
     tokenLogo: 'https://bscscan.com/token/images/eulertools_32.png'
   },
+  if1: {
+    symbol: 'IF1',
+    address: {
+      56: '0xfCaC1a3eDE7b55Cc51e3eBff2885a67FBfE01a1A',
+      97: '',
+    },
+    decimals: 9,
+    projectLink: 'https://infiniteone.io/',
+  },
+  byg: {
+    symbol: 'BYG',
+    address: {
+      56: '0x4f7b627b88651e3dddca0240bca68a3062632c8c',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://www.blackeyegalaxy.space/',
+    tokenLogo: 'https://assets.coingecko.com/coins/images/16814/small/logo_200_white.png?1625150910'
+  },
   rugbiden: {
     symbol: 'RUGBIDEN',
     address: {
@@ -129,6 +148,16 @@ const tokens = {
     },
     decimals: 8,
     projectLink: 'https://dragonfarm.finance/',
+  },
+  squidgame: {
+    symbol: 'SQUID',
+    address: {
+      56: '0x87230146e138d3f296a9a77e497a2a83012e9bc5',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: '',
+    tokenLogo: 'https://assets.coingecko.com/coins/images/20506/small/Squid_Game_Logo-0001.png?1637150038'
   },
   yape: {
     symbol: 'yAPE',
@@ -849,7 +878,7 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://pancakeswap.finance/',
   },
-  squid: {
+  squidstake: {
     symbol: 'SQUID',
     address: {
       56: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
