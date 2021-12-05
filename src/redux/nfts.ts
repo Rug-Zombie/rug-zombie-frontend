@@ -1163,26 +1163,7 @@ const nfts: Nft[] = [
     symbol: 'BURN',
     description: 'This is just a test, nothing to see here',
     address: {
-      56: '',
-      97: '0xF00a3805fB55dba6331eb3e42318682Fe9C21289',
-    },
-    totalSupply: BIG_ZERO,
-    path: 'https://ipfs.io/ipfs/QmXsUgHfVLhTyiSk4VPbcr6iacEEDwo8KXfsK8tN4QXW55',
-    type: 'image',
-    rarity: 'Rare',
-    artist: artists.TheLeap3d,
-    userInfo: { ...DEFAULT_USER_INFO },
-  },
-
-
-  
-  {
-    id: 62,
-    name: 'Burn grave 1',
-    symbol: 'BURN',
-    description: 'This is just a test, nothing to see here',
-    address: {
-      56: '',
+      56: '0x396f62444eC6eff0b5A278C848A2453958023e0d',
       97: '0xF00a3805fB55dba6331eb3e42318682Fe9C21289',
     },
     totalSupply: BIG_ZERO,

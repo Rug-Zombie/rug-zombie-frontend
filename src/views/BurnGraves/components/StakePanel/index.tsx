@@ -4,7 +4,7 @@ import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
 import { BaseLayout, useModal } from '@rug-zombie-libs/uikit'
 import { account, burnGraveById } from '../../../../redux/get'
-import { useERC20 } from '../../../../hooks/useContract'
+import { useDrBurnenstein, useERC20 } from '../../../../hooks/useContract'
 import { getAddress, getDrBurnensteinAddress } from '../../../../utils/addressHelpers'
 import useToast from '../../../../hooks/useToast'
 import { useTranslation } from '../../../../contexts/Localization'
@@ -12,6 +12,7 @@ import { getFullDisplayBalance } from '../../../../utils/formatBalance'
 import { getDrBurnensteinContract } from '../../../../utils/contractHelpers'
 import IncreaseStakeModal from '../../../SharkPools/IncreaseStakeModal'
 import DecreaseStakeModal from '../DecreaseStakeModal'
+import * as get from '../../../../redux/get'
 
 const DisplayFlex = styled(BaseLayout)`
   display: flex;
@@ -38,7 +39,7 @@ const StakePanel:React.FC<StakePanelProps> = ({ id, updateResult }) => {
   const wallet = account()
 
   const tokenContract = useERC20(getAddress(grave.stakingToken.address))
-  const drBurnenstein = getDrBurnensteinContract()
+  const drBurnenstein = useDrBurnenstein()
 
   useEffect(() => {
     tokenContract.methods.allowance(wallet, getDrBurnensteinAddress()).call()
@@ -64,8 +65,9 @@ const StakePanel:React.FC<StakePanelProps> = ({ id, updateResult }) => {
   const handleUnlock = () => {
     drBurnenstein.methods.priceInBnb(grave.poolInfo.unlockFee).call()
       .then(res => {
-        drBurnenstein.methods.unlock(id).send({ from: wallet, value: res})
-          .then(() => {
+        drBurnenstein.methods.unlock(id)
+          .send({ from: get.account(), value: res }).then(() => {
+
             toastSuccess(t('Grave unlocked'))
             updateResult()
           })

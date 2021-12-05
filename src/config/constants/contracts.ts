@@ -121,7 +121,7 @@ export default {
     97: '0xb1E96dA5a08423C5f0646C0eBfd135FB896d1477',
   },
   drburnenstein: {
-    56: '',
+    56: '0xc696433139522231dEBDE3F5B0f679DF3F33BFA7',
     97: '0xA7aE79B794BC6BB3620c887fF1d7c0c88094034A'
   }
 }
