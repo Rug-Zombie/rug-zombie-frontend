@@ -146,6 +146,28 @@ const graves: Grave[] = [
   },
   {
     pid: {
+      56: 40,
+      97: 1,
+    },
+    name: 'Iron Finance Rare',
+    subtitle: 'Collectorate #1',
+    path: 'https://storage.googleapis.com/rug-zombie/Collectorate%20%231%20-%20compressed.jpeg',
+    type: 'image',
+    withdrawalCooldown: '3 days',
+    nftRevivalTime: '30 days',
+    rug: tokens.iron,
+    artist: artists.xvni,
+    stakingToken: '0x7Db92fFC7EfA16010b86deEb05B25612d8A8343a',
+    pcsVersion: 'none',
+    liquidityDetails: '',
+    isNew: true,
+    isFeatured: true,
+    rarity: "Legendary",
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
+  },
+  {
+    pid: {
       56: 39,
       97: 1,
     },
