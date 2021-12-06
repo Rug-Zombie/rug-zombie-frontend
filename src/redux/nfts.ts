@@ -1154,6 +1154,21 @@ const nfts: Nft[] = [
     rarity: 'Special',
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 72,
+    name: 'Collectorate #1',
+    symbol: 'COLLECTORATE #1',
+    description: 'Don\'t call him cubes.',
+    address: {
+      56: '0xe8399d697989d147efed8e5eead42716ee1b95b8',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://storage.googleapis.com/rug-zombie/Collectorate%20%231%20-%20compressed.jpeg',
+    type: 'image',
+    rarity: 'Legendary',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts

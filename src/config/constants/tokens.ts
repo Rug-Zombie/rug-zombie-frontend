@@ -156,6 +156,16 @@ const tokens = {
     projectLink: '',
     tokenLogo: 'https://assets.coingecko.com/coins/images/20506/small/Squid_Game_Logo-0001.png?1637150038'
   },
+  iron: {
+    symbol: 'IRON',
+    address: {
+      56: '0x7b65B489fE53fCE1F6548Db886C08aD73111DDd8',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: '',
+    tokenLogo: 'https://assets.coingecko.com/coins/images/14588/small/logo_-_2021-03-31T123525.615.png?1617165339'
+  },
   yape: {
     symbol: 'yAPE',
     address: {
