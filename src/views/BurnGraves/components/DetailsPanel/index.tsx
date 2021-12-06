@@ -18,7 +18,7 @@ const DetailsPanel:React.FC<DetailsPanelProps> = ({ id }) => {
   const drburn = useDrBurnenstein()
 
   useEffect(() => {
-    drburn.methods.priceInBnb(grave.poolInfo.unlockFee).call()
+    drburn.methods.priceInBnb(id).call()
       .then((res) => {
         setUnlockFee(parseFloat(getFullDisplayBalance(new BigNumber(res), 18, 4)))
       })

@@ -157,6 +157,13 @@ export default function reducer(state = defaultState, action) {
         ...state,
         burnGraves: state.burnGraves.map(burnGrave => getId(burnGrave.id) === action.payload.id ? { ...burnGrave, poolInfo: { ...burnGrave.poolInfo, ...action.payload.poolInfo } } : burnGrave),
       }
+
+    case types.UPDATE_BURNGRAVE_USER_INFO:
+      return {
+        ...state,
+        burnGraves: state.burnGraves.map(burnGrave => getId(burnGrave.id) === action.payload.id ? { ...burnGrave, userInfo: { ...burnGrave.userInfo, ...action.payload.userInfo } } : burnGrave),
+      }
+
     default:
       return state
   }

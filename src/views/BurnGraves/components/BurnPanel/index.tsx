@@ -1,5 +1,6 @@
 import React from 'react'
-import { Button, useModal } from '@rug-zombie-libs/uikit'
+import { BaseLayout, Button, useModal } from '@rug-zombie-libs/uikit'
+import styled from 'styled-components'
 import { formatDuration } from '../../../../utils/timerHelpers'
 import { account, burnGraveById } from '../../../../redux/get'
 import { getBalanceAmount } from '../../../../utils/formatBalance'
@@ -8,6 +9,16 @@ import { useDrBurnenstein } from '../../../../hooks/useContract'
 import useToast from '../../../../hooks/useToast'
 import { useTranslation } from '../../../../contexts/Localization'
 import BurnZombieModal from '../BurnZombieModal'
+
+const DisplayFlex = styled(BaseLayout)`
+  display: flex;
+  flex-direction: row;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  grid-gap: 0px;
+}`
 
 export interface BurnPanelProps {
   id: number,
@@ -55,30 +66,39 @@ const BurnPanel:React.FC<BurnPanelProps> = ({ id, updateResult }) => {
       return(<span className="total-earned text-shadow">MUST UNLOCK</span>)
     }
 
+    if (grave.userInfo.stakedAmount.lt(grave.poolInfo.minimumStake)) {
+      return(<span className="total-earned text-shadow">MUST STAKE MINIMUM</span>)
+    }
+
     if (grave.userInfo.burnedAmount >= grave.poolInfo.maxBurned) {
       return(
-        <>
+        <DisplayFlex>
           <span className="indetails-title">Burned :<span className="indetails-value">{Math.round(getBalanceAmount(grave.userInfo.burnedAmount).times(100).toNumber()) / 100}</span></span>
           <span className="total-earned text-shadow">MAX BURNED</span>
-        </>
+        </DisplayFlex>
       )
     }
 
     return (
-      <>
-        <span className="indetails-title">Burned :<span className="indetails-value">{Math.round(getBalanceAmount(grave.userInfo.burnedAmount).times(100).toNumber()) / 100}</span></span>
-        <button onClick={handleBurn} className="btn btn-disabled w-100" type="button">BURN ZMBE</button>
-      </>
+      <DisplayFlex>
+        <div>
+          <div className="small-text">
+            <span className="white-color">BURNED: </span>
+            <span className="total-earned text-shadow" style={{fontSize: "20px"}}>{Math.round(getBalanceAmount(grave.userInfo.burnedAmount).times(100).toNumber()) / 100}</span>
+          </div>
+        </div>
+        <button onClick={handleBurn} style={{ width: 300 }} className="btn btn-disabled w-100" type="button">BURN ZMBE</button>
+      </DisplayFlex>
     )
   }
 
   const renderTimer = () => {
-    if (grave.userInfo.stakedAmount === BIG_ZERO) {
+    if (grave.userInfo.stakedAmount.eq(BIG_ZERO)) {
       return null;
     }
 
-    if (currentDate >= grave.userInfo.nftMintDate) {
-      return (<Button className='btn w-100' onClick={onMintNft}>Mint NFT</Button>)
+    if (currentDate >= grave.userInfo.nftMintDate && grave.userInfo.stakedAmount.gte(grave.poolInfo.minimumStake)) {
+      return (<Button className='btn w-100' onClick={onMintNft}>MINT NFT</Button>)
     }
 
     return (
@@ -92,12 +112,11 @@ const BurnPanel:React.FC<BurnPanelProps> = ({ id, updateResult }) => {
   }
 
   return(
-    <div>
-      <div className="small-text">
-        <span className="white-color">BURN ZOMBIE</span>
+    <div className="frank-card">
+      <div>
+        {renderBurn()}
+        {renderTimer()}
       </div>
-      {renderBurn()}
-      {renderTimer()}
     </div>
   )
 }

@@ -24,7 +24,6 @@ const BurnGraves: React.FC = () => {
     const [updatePoolInfo, setUpdatePoolInfo] = useState(false);
     const [stakedOnly, setStakedOnly] = useState(false);
     const [filter, setFilter] = useState(0);
-    const [totalBurned, setTotalBurned] = useState(BIG_ZERO);
     const [zmbePrice, setZmbePrice] = useState(0);
     
     const wallet = account();
@@ -35,19 +34,12 @@ const BurnGraves: React.FC = () => {
                 { update: updateUserInfo, setUpdate: setUpdateUserInfo },
                 { update: updatePoolInfo, setUpdate: setUpdatePoolInfo }
             )
-        
-            const burned = new BigNumber(0);
-            burnGraves().forEach(g => burned.plus(g.poolInfo.totalBurned));
-            setTotalBurned(burned);
             setZmbePrice(zombiePriceUsd());
         }
     }, [ updatePoolInfo, updateUserInfo, setZmbePrice ]);
     
     const updateResult = (id: number) => {
         burnGrave(id);
-        const burned = new BigNumber(0);
-        burnGraves().forEach(g => burned.plus(g.poolInfo.totalBurned));
-        setTotalBurned(burned);
     }
 
     return (
@@ -59,8 +51,7 @@ const BurnGraves: React.FC = () => {
                             Burn Graves
                         </Heading>
                         <Heading size='md' color='text'>
-                            These graves help burn ZMBE in exchange for faster NFT mintings!<br />
-                            Total Zombie Burned Across All Burn Graves: {numeral(getBalanceAmount(totalBurned)).format('(0.000a)')}
+                            These graves help burn ZMBE in exchange for faster NFT mintings!
                         </Heading>
                     </Flex>
                 </Flex>

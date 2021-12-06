@@ -94,7 +94,7 @@ const BurnZombieModal:React.FC<BurnZombieModalProps> = ({ id, updateResult, onDi
   } else if (bigBurnAmount.plus(grave.userInfo.burnedAmount).gt(grave.poolInfo.maxBurned)) {
     isDisabled = true
     burnDetails = `Invalid Stake: Maximum ${getBalanceAmount(grave.poolInfo.maxBurned).toString()} ${grave.stakingToken.symbol} burned per cycle`
-  } else if (bigBurnAmount.mod(grave.poolInfo.tokensToBurn) !== BIG_ZERO) {
+  } else if (bigBurnAmount.mod(grave.poolInfo.tokensToBurn).toString() !== "0") {
     isDisabled = true
     burnDetails = `Invalid Stake: Must burn in multiples of ${getBalanceAmount(grave.poolInfo.tokensToBurn).toString()} ${grave.stakingToken.symbol}`
   }

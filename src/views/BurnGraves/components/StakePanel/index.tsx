@@ -10,7 +10,7 @@ import useToast from '../../../../hooks/useToast'
 import { useTranslation } from '../../../../contexts/Localization'
 import { getFullDisplayBalance } from '../../../../utils/formatBalance'
 import { getDrBurnensteinContract } from '../../../../utils/contractHelpers'
-import IncreaseStakeModal from '../../../SharkPools/IncreaseStakeModal'
+import IncreaseStakeModal from '../IncreaseStakeModal'
 import DecreaseStakeModal from '../DecreaseStakeModal'
 import * as get from '../../../../redux/get'
 
@@ -63,10 +63,10 @@ const StakePanel:React.FC<StakePanelProps> = ({ id, updateResult }) => {
   }
 
   const handleUnlock = () => {
-    drBurnenstein.methods.priceInBnb(grave.poolInfo.unlockFee).call()
+    drBurnenstein.methods.priceInBnb(id).call()
       .then(res => {
         drBurnenstein.methods.unlock(id)
-          .send({ from: get.account(), value: res }).then(() => {
+          .send({ from: wallet, value: res }).then(() => {
 
             toastSuccess(t('Grave unlocked'))
             updateResult()

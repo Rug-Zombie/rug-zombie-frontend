@@ -5,7 +5,7 @@ import BigNumber from 'bignumber.js';
 import { APESWAP_EXCHANGE_URL } from 'config';
 import { getDrBurnensteinContract } from 'utils/contractHelpers';
 import { getAddress } from '../../../../utils/addressHelpers';
-import { useERC20 } from '../../../../hooks/useContract';
+import { useDrBurnenstein, useERC20 } from '../../../../hooks/useContract'
 import useToast from '../../../../hooks/useToast';
 import { useTranslation } from '../../../../contexts/Localization';
 import { BIG_TEN } from '../../../../utils/bigNumber';
@@ -25,7 +25,7 @@ const DepositTokenModal: React.FC<DepositTokenModalProps> = ({ id, updateResult,
   const grave = burnGraveById(id);
   const token = useERC20(getAddress(grave.depositToken.address));
   const wallet = account();
-  const drBurnensteinContract = getDrBurnensteinContract();
+  const drBurnensteinContract = useDrBurnenstein();
 
   useEffect(() => {
     if(wallet) {

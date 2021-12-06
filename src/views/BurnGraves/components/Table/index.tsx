@@ -7,6 +7,7 @@ import DepositToken from '../DepositToken';
 import StakePanel from '../StakePanel'
 import DetailsPanel from '../DetailsPanel'
 import BurnPanel from '../BurnPanel'
+import DepositNftPanel from '../DepositNftPanel'
 
 const TableCards = styled(BaseLayout)`
     align-items: stretch;
@@ -38,6 +39,7 @@ const Table: React.FC<TableProps> = ({ id, zmbePrice, updateResult }) => {
             // case 0: return
 
             case 1: return (<DepositToken id={id} updateResult={updateResult} />)
+            case 2: return (<DepositNftPanel id={id} updateResult={updateResult} />)
             default: return (<div/>);
         }
     }
