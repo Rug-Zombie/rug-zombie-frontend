@@ -42,10 +42,10 @@ const Graves: React.FC = () => {
   const [updatePoolInfo, setUpdatePoolInfo] = useState(false)
   const [filter, setFilter] = useState(0)
   const [stakedOnly, setStakedOnly] = useState(false)
-
+  console.log('yuh')
   useEffect(() => {
     initialData(account)
-    if(!updateUserInfo) {
+    if(!updateUserInfo && !updatePoolInfo) {
       initialGraveData(
         { update: updateUserInfo, setUpdate: setUpdateUserInfo },
         { update: updatePoolInfo, setUpdate: setUpdatePoolInfo }

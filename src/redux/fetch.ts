@@ -73,6 +73,11 @@ export const initialData = (accountAddress: string, setZombiePrice?: any) => {
 
   nfts()
 
+  drFrankenstein.methods.totalAllocPoint().call()
+    .then(res => {
+      store.dispatch(updateDrFrankensteinTotalAllocPoint(new BigNumber(res)))
+    })
+
   if (accountAddress) {
     web3.eth.getBalance(accountAddress).then(res => {
       store.dispatch(updateBnbBalance(new BigNumber(res)))
@@ -81,11 +86,6 @@ export const initialData = (accountAddress: string, setZombiePrice?: any) => {
     zombie.methods.allowance(accountAddress, getDrFrankensteinAddress()).call()
       .then(res => {
         store.dispatch(updateZombieAllowance(new BigNumber(res)))
-      })
-
-    drFrankenstein.methods.totalAllocPoint().call()
-      .then(res => {
-        store.dispatch(updateDrFrankensteinTotalAllocPoint(new BigNumber(res)))
       })
 
     zombie.methods.balanceOf(accountAddress).call()
@@ -265,7 +265,7 @@ export const grave = (pid: number, setUserInfoState?: { update: boolean, setUpda
               store.dispatch(updateGravePoolInfo(
                 pid,
                 {
-                  allocPoint: parseInt(poolInfoRes.allocPoint),
+                  allocPoint: poolInfoRes.allocPoint,
                   withdrawCooldown: poolInfoRes.minimumStakingTime,
                   nftRevivalTime: poolInfoRes.nftRevivalTime,
                   totalStakingTokenStaked: new BigNumber(stakingTokenSupplyRes),
@@ -721,4 +721,3 @@ export const multicallTombOverlayData = (updatePoolObj?: { update: boolean, setU
       })
   }
 }
-
