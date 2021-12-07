@@ -6,6 +6,63 @@ import { SpawningPool } from './types'
 
 const spawningPools: SpawningPool[] = [
   {
+    id: 15,
+    name: 'L1GHT L1ST Legendary',
+    subtitle: 'The Mother',
+    path: 'https://storage.googleapis.com/rug-zombie/The%20Mother%20compressed.jpeg',
+    type: 'image',
+    address: {
+      56: '0xBBFF27B0CDEEa37EaC4A01430C9b03C512784954',
+      97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
+    },
+    endBlock: 15600000,
+    endDate: 1647147599,
+    project: {
+      name: 'L1GHT L1ST',
+      description: 'L1ght L1st was founded with the intention of bridging ambitious investors to the most innovative and remarkable projects on the blockchain. Shifting the focus from hype to utility and long term market validation. Their goal is to offer investors the exclusive opportunity to invest in innovative startups, while offering remarkable start ups the early exposure necessary for success allowing them to pay in their own token and set their own terms for launch.',
+      additionalDetails: [
+        {
+          name: 'Project website',
+          url: tokens.l1ghtv2.projectLink,
+        },
+        {
+          name: 'Whitepaper',
+          url: 'https://l1ghtl1st.io/documentation',
+        },
+        {
+          name: 'Telegram',
+          url: 'https://t.me/L1ghtL1st',
+        },
+      ],
+    },
+    withdrawalCooldown: '3 days',
+    nftRevivalTime: '45 days',
+    rewardToken: tokens.l1ghtv2,
+    rewardTokenBnbLp: '0x8458ec4a50e0bcf825dcd27b5f84fc0f39bf3b09',
+    bnbLpTokenIndex: 1,
+    artist: artists.ayaz_psd,
+    stakingToken: '',
+    pcsVersion: 'v2',
+    liquidityDetails: '',
+    isNew: true,
+    userInfo: {
+      paidUnlockFee: false,
+      tokenWithdrawalDate: 0,
+      nftRevivalDate: 0,
+      amount: BIG_ZERO,
+      pendingReward: BIG_ZERO,
+      zombieAllowance: BIG_ZERO,
+    },
+    poolInfo: {
+      unlockFee: BIG_ZERO,
+      rewardPerBlock: BIG_ZERO,
+      minimumStake: BIG_ZERO,
+      totalZombieStaked: BIG_ZERO,
+      withdrawCooldown: 0,
+      nftRevivalTime: 0,
+    },
+  },
+  {
     id: 14,
     name: 'Street Punks Legendary',
     subtitle: 'Street Zombies',

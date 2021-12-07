@@ -65,6 +65,16 @@ const tokens = {
     projectLink: 'https://streetpunks.org/',
     tokenLogo: 'https://i0.wp.com/streetpunks.org/wp-content/uploads/2021/11/cropped-2021-11-16_20h34_53-1.png?w=826&ssl=1'
   },
+  l1ghtv2: {
+    symbol: 'L1ght',
+    address: {
+      56: '0x6052327e918ccc2f24fe0a2b6fa2649e30339d04',
+      97: '',
+    },
+    decimals: 9,
+    projectLink: 'https://l1ghtl1st.io/',
+    tokenLogo: 'https://d1muf25xaso8hp.cloudfront.net/https%3A%2F%2Fs3.amazonaws.com%2Fappforest_uf%2Ff1634140724647x381024309361064100%2FNewToken.png?w=384&h=384&auto=compress&fit=crop&dpr=2'
+  },
   rugbiden: {
     symbol: 'RUGBIDEN',
     address: {

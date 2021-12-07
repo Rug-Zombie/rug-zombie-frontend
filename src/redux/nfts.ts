@@ -1062,7 +1062,7 @@ const nfts: Nft[] = [
   },
   {
     id: 65,
-    name: 'Infinte Zombie',
+    name: 'Infinite Zombie',
     symbol: 'IFZ',
     description: 'Don\'t worry, I\'m the strongest.',
     address: {
@@ -1184,6 +1184,22 @@ const nfts: Nft[] = [
     rarity: 'Legendary',
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 74,
+    name: 'The Mother',
+    symbol: 'MOTHER',
+    description: 'Endure the darkness, for it will show you the stars.',
+    address: {
+      56: '0x749859A107d5f464cb1fEB1d1a558C148bb8D707',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://storage.googleapis.com/rug-zombie/The%20Mother%20compressed.jpeg',
+    type: 'image',
+    rarity: 'Legendary',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
+
 
 export default nfts
