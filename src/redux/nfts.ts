@@ -1169,6 +1169,21 @@ const nfts: Nft[] = [
     rarity: 'Legendary',
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 73,
+    name: 'Street Zombies',
+    symbol: 'STREETZ',
+    description: 'Life\'s a one way street, and you\'re not coming back.',
+    address: {
+      56: '0x51424Aaa5043e127abdF2F6cA8Aad25BDea48F1C',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmdSGtvB9tScPDuNNEh8xWAChdKZfv5MhV4cUkWSgBxjNy',
+    type: 'image',
+    rarity: 'Legendary',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts

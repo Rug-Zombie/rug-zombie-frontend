@@ -6,6 +6,64 @@ import { SpawningPool } from './types'
 
 const spawningPools: SpawningPool[] = [
   {
+    id: 14,
+    name: 'Street Punks Legendary',
+    subtitle: 'Street Zombies',
+    path: 'https://ipfs.io/ipfs/QmdSGtvB9tScPDuNNEh8xWAChdKZfv5MhV4cUkWSgBxjNy',
+    type: 'image',
+    address: {
+      56: '0x306d8c5B2Fa6999D2Af31a966FB4Eb76E0FEc955',
+      97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
+    },
+    endBlock: 15900000,
+    endDate: 1646888399,
+    project: {
+      name: 'Street Punks',
+      description: 'StreetPunks is a spinoff inspired by the CryptoPunks project created by a small group of CryptoPunk fans. They strive to contribute to the CryptoPunks hype by creatively adding streetwear and (popular) theme orientated costumes. StreetPunks offers the average CyberPunk lover to invest early into the next stage of the CryptoPunks hype.',
+      additionalDetails: [
+        {
+          name: 'Project website',
+          url: tokens.punks.projectLink,
+        },
+        {
+          name: 'Whitepaper',
+          url: 'https://streetpunks.org/wp-content/uploads/2021/11/Streetpunks-Whitepaper-2021-1.pdf',
+        },
+        {
+          name: 'Telegram',
+          url: 'https://t.me/StreetPunksOfficial',
+        },
+      ],
+    },
+    withdrawalCooldown: '3 days',
+    nftRevivalTime: '45 days',
+    rewardToken: tokens.punks,
+    rewardTokenBnbLp: '0x3118f49b01a2c9386937f05c1bc73e3186df8b4f',
+    bnbLpTokenIndex: 0,
+    artist: artists.trippynazz,
+    stakingToken: '',
+    pcsVersion: 'v2',
+    liquidityDetails: '',
+    isNew: true,
+    color: "silver",
+    userInfo: {
+      paidUnlockFee: false,
+      tokenWithdrawalDate: 0,
+      nftRevivalDate: 0,
+      amount: BIG_ZERO,
+      pendingReward: BIG_ZERO,
+      zombieAllowance: BIG_ZERO,
+    },
+    poolInfo: {
+      unlockFee: BIG_ZERO,
+      rewardPerBlock: BIG_ZERO,
+      minimumStake: BIG_ZERO,
+      totalZombieStaked: BIG_ZERO,
+      withdrawCooldown: 0,
+      nftRevivalTime: 0,
+    },
+  },
+  {
     id: 13,
     name: 'Black Eye Galaxy Legendary',
     subtitle: 'Great Zom',

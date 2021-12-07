@@ -55,6 +55,16 @@ const tokens = {
     projectLink: 'https://www.blackeyegalaxy.space/',
     tokenLogo: 'https://assets.coingecko.com/coins/images/16814/small/logo_200_white.png?1625150910'
   },
+  punks: {
+    symbol: 'PUNKS',
+    address: {
+      56: '0x306d8c5B2Fa6999D2Af31a966FB4Eb76E0FEc955',
+      97: '',
+    },
+    decimals: 9,
+    projectLink: 'https://streetpunks.org/',
+    tokenLogo: 'https://i0.wp.com/streetpunks.org/wp-content/uploads/2021/11/cropped-2021-11-16_20h34_53-1.png?w=826&ssl=1'
+  },
   rugbiden: {
     symbol: 'RUGBIDEN',
     address: {
