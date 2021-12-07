@@ -265,7 +265,7 @@ export const grave = (pid: number, setUserInfoState?: { update: boolean, setUpda
               store.dispatch(updateGravePoolInfo(
                 pid,
                 {
-                  allocPoint: poolInfoRes.allocPoint,
+                  allocPoint: parseInt(poolInfoRes.allocPoint),
                   withdrawCooldown: poolInfoRes.minimumStakingTime,
                   nftRevivalTime: poolInfoRes.nftRevivalTime,
                   totalStakingTokenStaked: new BigNumber(stakingTokenSupplyRes),
