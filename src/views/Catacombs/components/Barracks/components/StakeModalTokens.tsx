@@ -9,6 +9,7 @@ import {ethers} from "ethers";
 import {getDecimalAmount, getFullDisplayBalance} from "../../../../../utils/formatBalance";
 import {getAddress, getBarracksAddress} from "../../../../../utils/addressHelpers";
 import {getBep20Contract} from "../../../../../utils/contractHelpers";
+import useTokenBalance from "../../../../../hooks/useTokenBalance";
 
 interface DepositModalProps {
     id: number,
@@ -29,9 +30,10 @@ const StakeModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDismi
     const {t} = useTranslation();
     const minStake = getFullDisplayBalance(barrack.barrackInfo.minStake, 18, 2);
     const tokenContract = getBep20Contract(getAddress(barrack.token.address));
+    const tokenBalance = useTokenBalance(getAddress(barrack.token.address));
 
     useEffect(() => {
-        tokenContract.methods.allowance(account(), getBarracksAddress()).call()
+        tokenContract.methods.allowance(wallet, getBarracksAddress()).call()
             .then(res => {
                 if (parseInt(res.toString()) !== 0) {
                     setIsApproved(true);
@@ -45,7 +47,7 @@ const StakeModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDismi
                     setButtonText(`Approve ${barrack.token.symbol} first`);
                 }
             });
-    } );
+    });
 
     const handleDeposit = () => {
         if (isApproved) {
@@ -63,6 +65,7 @@ const StakeModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDismi
     };
 
     const handleApprove = () => {
+        console.log(getBarracksAddress(), '< ================== barracks address here');
         tokenContract.methods.approve(getBarracksAddress(), ethers.constants.MaxUint256).send({from: wallet})
             .then(() => {
                     toastSuccess(t(`Approved ${barrack.token.symbol}`));
@@ -99,15 +102,22 @@ const StakeModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDismi
                 of {minStake} {barrack.token.symbol} as part of
                 the unlock process.
             </Text>
-            <button type="button" className="barracks-deposit-button" onClick={handleApprove}
-                    disabled={approveButtonDisabled}>
-                APPROVE {barrack.token.symbol}
-            </button>
-            <input className="barracks-deposit-input" type="number" placeholder="Enter amount here." disabled={buttonDisabled}
-                   onChange={handleDepositInputChange}/>
-            <button type="button" className="barracks-deposit-button" onClick={handleDeposit} disabled={buttonDisabled}>
-                {buttonText}
-            </button>
+            {
+                Number(tokenBalance) > 0 ?
+                    <div>
+                        <button type="button" className="barracks-deposit-button" onClick={handleApprove}
+                                disabled={approveButtonDisabled}>
+                            APPROVE {barrack.token.symbol}
+                        </button>
+                        <input className="barracks-deposit-input" type="number" placeholder="Enter amount here."
+                               disabled={buttonDisabled}
+                               onChange={handleDepositInputChange}/>
+                        <button type="button" className="barracks-deposit-button" onClick={handleDeposit}
+                                disabled={buttonDisabled}>
+                            {buttonText}
+                        </button>
+                    </div> : <a href="https://swap.rugzombie.io/" type="button" className="barracks-deposit-button">Get {barrack.token.symbol}</a>
+            }
         </Modal>
     );
 }

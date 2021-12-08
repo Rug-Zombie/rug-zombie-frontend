@@ -35,7 +35,7 @@ const StakePanel: React.FC<StakePanelProps> = ({id, updateResult}) => {
     )
 
     const [handleIncreaseStake] = useModal(
-        barrack.barrackInfo.bnb ? <IncreaseStakeModalBNB id={id} key={32} updateResult={updateResult}/> :
+        barrack.barrackInfo.bnb ? <IncreaseStakeModalBNB id={id} updateResult={updateResult}/> :
             <IncreaseStakeModalToken id={id} updateResult={updateResult}/>
     )
 

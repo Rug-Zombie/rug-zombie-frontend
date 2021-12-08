@@ -21,10 +21,11 @@
 .barracks-deposit-input {
     background: white;
     font-weight: bolder;
-    margin: 2%;
+    margin: 3%;
     text-align: right;
     border-radius: 8px;
     height: 40px;
+    width: 95%;
     font-size: larger;
 }
 
@@ -36,6 +37,7 @@
     border-radius: 16px;
     border: 2px solid white;
     height: 45px;
+    width: 100%;
     display: inline-flex;
     font-family: inherit;
     font-size: 16px;
