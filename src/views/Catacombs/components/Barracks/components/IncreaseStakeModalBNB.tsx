@@ -38,7 +38,7 @@ const IncreaseStakeModalBNB: React.FC<DepositModalProps> = ({id, updateResult, o
                 onDismiss();
             });
         setbuttonDisabled(false)
-        setButtonText(`Stake ${barrack.token.symbol}`);
+        setButtonText(`Increase Stake`);
     };
 
     const handleDepositInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

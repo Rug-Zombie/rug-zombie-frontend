@@ -6,7 +6,7 @@ const barracks: Barrack[] = [
     {
         id: 1,
         name: 'barrack one',
-        nft: 62,
+        nft: 61,
         description: 'description here',
         token: tokens.bnb,
         isNew: true,

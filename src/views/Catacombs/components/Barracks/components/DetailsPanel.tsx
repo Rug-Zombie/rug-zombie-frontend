@@ -42,7 +42,7 @@ const DetailsPanel: React.FC<DetailsPanelProps> = ({ id }) => {
             <div className="direction-column">
                 <span className="barracks-indetails-title">Lock Threshold:<span className="indetails-value">{parseFloat(getFullDisplayBalance(barrack.barrackInfo.lockThreshold, 18, 2))} {barrack.token.symbol}</span></span>
                 <span className="barracks-indetails-title">Minimum Stake:<span className="indetails-value">{parseFloat(getFullDisplayBalance(barrack.barrackInfo.minStake, 18, 2))} {barrack.token.symbol}</span></span>
-                <span className="barracks-indetails-title">Remaining Stake:<span className="indetails-value">{remainingStake} {barrack.token.symbol}</span></span>
+                <span className="barracks-indetails-title">Remaining Stake:<span className="indetails-value">{remainingStake.toFixed(2)} {barrack.token.symbol}</span></span>
                 <span className="barracks-indetails-title">Deposit Fee:<span className="indetails-value">{numeral(barrack.barrackInfo.depositFeePercentage).format('( 0.00 a)')}%</span></span>
                 <span className="barracks-indetails-title">NFT Minting Time After Barrack Is Locked:<span className="indetails-value">{barrack.nftMintingTime}</span></span>
                 <span className="barracks-indetails-value">Please Note: Barracks are subject to a tax on the each deposited amount.</span>

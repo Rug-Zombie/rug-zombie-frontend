@@ -10,13 +10,13 @@ import CatacombsBackgroundMobileSVG from "../../../../images/CatacombsMain-414x7
 import {barracks, initializeBarrackData} from "../../../../redux/fetch";
 import {account} from "../../../../redux/get";
 
-const StyledDiv = styled.div`
-  text-align: center;
-  position: relative;
-  color: white;
-  height: 100%;
-  width: 100%;
-`
+// const StyledDiv = styled.div`
+//   text-align: center;
+//   position: relative;
+//   color: white;
+//   height: 100vh;
+//   background-repeat: repeat-y;
+// `
 
 const Container = styled.div`
   text-align: center;
@@ -24,15 +24,14 @@ const Container = styled.div`
   top: 15%;
   width: 100%;
   @media (max-width: 479px) {
-    height: 40%;
-    top: 2%;
+    top: 3%;
     left: 5%;
   }
 `
 
 const Barracks: React.FC = () => {
 
-    const { isLg, isXl } = useMatchBreakpoints()
+    const {isLg, isXl} = useMatchBreakpoints()
     const isDesktop = isLg || isXl
 
     const [updateBarrackInfo, setUpdateBarrackInfo] = useState(0);
@@ -41,13 +40,13 @@ const Barracks: React.FC = () => {
     const wallet = account();
 
     useEffect(() => {
-        if(wallet) {
-            if(updateBarrackUserInfo === 0) {
+        if (wallet) {
+            if (updateBarrackUserInfo === 0) {
                 initializeBarrackData({update: updateBarrackUserInfo, setUpdate: setUpdateBarrackUserInfo});
             }
         }
         initializeBarrackData({update: updateBarrackInfo, setUpdate: setUpdateBarrackInfo});
-    }, [ wallet, updateBarrackInfo, updateBarrackUserInfo ]);
+    }, [wallet, updateBarrackInfo, updateBarrackUserInfo]);
 
     const updateResult = (id: number) => {
         barracks(id);
@@ -55,22 +54,17 @@ const Barracks: React.FC = () => {
 
     return (
         <Menu>
-            <StyledDiv>
-                {isDesktop ? <img src={CatacombsBackgroundDesktopSVG} alt='catacombs-rug-zombie' /> :
-                    <img src={CatacombsBackgroundMobileSVG} alt='catacombs-rug-zombie' />
-                }
-                <Flex justifyContent='center'>
-                    <Container>
-                        <Page >
-                            <div>
-                                {get.barracks().map((b) => {
-                                    return <Table id={b.id} key={b.id} updateResult={updateResult} />
-                                })}
-                            </div>
-                        </Page>
-                    </Container>
-                </Flex>
-            </StyledDiv>
+            <Flex justifyContent='center' id="this-one">
+                <Container style={{backgroundImage: `url(${isDesktop ? CatacombsBackgroundDesktopSVG : CatacombsBackgroundMobileSVG})`}}>
+                    <Page>
+                        <div>
+                            {get.barracks().map((b) => {
+                                return <Table id={b.id} key={b.id} updateResult={updateResult}/>
+                            })}
+                        </div>
+                    </Page>
+                </Container>
+            </Flex>
         </Menu>
     )
 }

@@ -51,7 +51,7 @@ const TableList: React.FC<TableListProps> = ({id, openHandler}) => {
         coingeckoPrice(barrack.token.geckoId).then(res => {
             setStakeTokenPrice(res.data[barrack.token.geckoId].usd);
         });
-    }, [ barrack.token.geckoId, setStakeTokenPrice ]);
+    }, [barrack.token.geckoId, setStakeTokenPrice]);
 
     const {isLg, isXl} = useMatchBreakpoints();
     const isDesktop = isLg || isXl;
@@ -82,7 +82,8 @@ const TableList: React.FC<TableListProps> = ({id, openHandler}) => {
                                         <div className="barracks-con-info">{barrack.token.symbol}</div>
                                         {
                                             barrack.isNew ?
-                                                <div className='barracks-con-info' style={{marginLeft: "4px"}}>NEW!</div> : null
+                                                <div className='barracks-con-info'
+                                                     style={{marginLeft: "4px"}}>NEW!</div> : null
                                         }
                                     </div>
                                 </div>
@@ -91,26 +92,30 @@ const TableList: React.FC<TableListProps> = ({id, openHandler}) => {
                     </div>
                 </td>
                 <td className="td-width-17 desktop-view"/>
-                <td className="barrack-td-width-35">
-                    <DisplayFlex>
-                        <div className="total-earned">Total Amount Committed :</div>
-                    </DisplayFlex>
-                </td>
+                {
+                    isDesktop ? <td className="barrack-td-width-35">
+                        <DisplayFlex>
+                            <div className="total-earned">Total Amount Committed :</div>
+                        </DisplayFlex>
+                    </td> : <td className="barrack-td-width-35" />
+                }
                 {
                     isDesktop
-                        ?   <td className='barrack-td-width-10'>
-                                <DisplayFlex>
-                                    <span className='total-earned'>{getFullDisplayBalance(barrack.barrackInfo.totalStaked).toString()}</span>
-                                    <div className='earned'>{barrack.token.symbol}</div>
-                                </DisplayFlex>
-                            </td>
+                        ? <td className='barrack-td-width-10'>
+                            <DisplayFlex>
+                                <span
+                                    className='total-earned'>{getFullDisplayBalance(barrack.barrackInfo.totalStaked).toString()}</span>
+                                <div className='earned'>{barrack.token.symbol}</div>
+                            </DisplayFlex>
+                        </td>
                         : null
                 }
                 {
                     isDesktop
                         ? <td className='barrack-td-width-10'>
                             <DisplayFlex>
-                                <span className='total-earned'>{numeral(getBalanceAmount(barrack.barrackInfo.totalStaked).times(stakeTokenPrice)).format('($ 0.00 a)')}</span>
+                                <span
+                                    className='total-earned'>{numeral(getBalanceAmount(barrack.barrackInfo.totalStaked).times(stakeTokenPrice)).format('($ 0.00 a)')}</span>
                                 <div className='earned'>TVL</div>
                             </DisplayFlex>
                         </td>

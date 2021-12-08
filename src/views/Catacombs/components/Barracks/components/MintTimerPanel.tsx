@@ -56,7 +56,7 @@ const MintTimerPanel: React.FC<MintTimerPanelProps> = ({ id, updateResult }) => 
                     <div className="small-text">
                         <span className="white-color">NFT Timer</span>
                     </div>
-                    <span className="total-earned text-shadow" style={{fontSize: "20px"}}>{formatDuration(nftTimeRemaining)}</span>
+                    <span className="total-earned white-color" style={{fontSize: "20px"}}>{formatDuration(nftTimeRemaining)}</span>
                 </div>
             )
         }
