@@ -6,15 +6,10 @@ import {account, barrackById} from 'redux/get';
 import useToast from 'hooks/useToast';
 import {useTranslation} from 'contexts/Localization';
 import {getBalanceAmount, getDecimalAmount, getFullDisplayBalance} from "../../../../../utils/formatBalance";
+import {BarrackModalProps} from "../modalProps";
 
 
-interface DepositModalProps {
-    id: number,
-    updateResult: any,
-    onDismiss?: () => void,
-}
-
-const StakeModalBNB: React.FC<DepositModalProps> = ({id, updateResult, onDismiss}) => {
+const StakeModalBNB: React.FC<BarrackModalProps> = ({id, updateResult, onDismiss}) => {
     const [depositAmount, setDepositAmount] = useState(new BigNumber(0));
     const [buttonDisabled, setbuttonDisabled] = useState(true);
     const [buttonText, setButtonText] = useState('Amount should be more than minimum');

@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import {useModal, BaseLayout} from '@rug-zombie-libs/uikit';
 import {account, barrackById} from 'redux/get';
 import {getBalanceAmount} from 'utils/formatBalance';
-import DecreaseStakeModalBNB from "./DecreaseStakeModalBNB";
+import StakeModalBNB from "./StakeModalBNB";
+import StakeModalToken from "./StakeModalToken";
 import IncreaseStakeModalBNB from "./IncreaseStakeModalBNB";
 import IncreaseStakeModalToken from "./IncreaseStakeModalToken";
-import StakeModalToken from "./StakeModalTokens";
-import StakeModalBNB from "./StakeModalBNB";
+import DecreaseStakeModalBNB from "./DecreaseStakeModalBNB";
 import DecreaseStakeModalToken from "./DecreaseStakeModalToken";
 
 const DisplayFlex = styled(BaseLayout)`
@@ -79,8 +79,9 @@ const StakePanel: React.FC<StakePanelProps> = ({id, updateResult}) => {
                 <button className="btn btn-disabled w-100" type="button" disabled>Stake {barrack.token.symbol}</button>
             )
         }
-        return (<button onClick={handleDeposit} className="btn btn-disabled w-100"
-                        type="button">Stake {barrack.token.symbol}</button>)
+        return (
+            <button onClick={handleDeposit} className="btn btn-disabled w-100" type="button">Stake {barrack.token.symbol}</button>
+        )
     }
 
     return (

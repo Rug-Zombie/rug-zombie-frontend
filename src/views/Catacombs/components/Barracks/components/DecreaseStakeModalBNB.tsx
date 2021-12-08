@@ -6,14 +6,9 @@ import BigNumber from 'bignumber.js';
 import {useBarracksContract} from 'hooks/useContract';
 import {useTranslation} from 'contexts/Localization';
 import useToast from 'hooks/useToast';
+import {BarrackModalProps} from '../modalProps';
 
-interface DecreaseStakeModalProps {
-    id: number,
-    updateResult: any,
-    onDismiss?: () => void
-}
-
-const DecreaseStakeModalBNB: React.FC<DecreaseStakeModalProps> = ({id, updateResult, onDismiss}) => {
+const DecreaseStakeModalBNB: React.FC<BarrackModalProps> = ({id, updateResult, onDismiss}) => {
 
     const barrack = barrackById(id);
     const barracksContract = useBarracksContract();

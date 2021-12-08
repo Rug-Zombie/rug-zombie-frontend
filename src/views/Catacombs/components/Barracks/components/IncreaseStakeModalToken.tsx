@@ -8,14 +8,10 @@ import {useTranslation} from 'contexts/Localization';
 import {ethers} from "ethers";
 import {getDecimalAmount} from "../../../../../utils/formatBalance";
 import {getAddress, getBarracksAddress} from "../../../../../utils/addressHelpers";
+import {BarrackModalProps} from "../modalProps";
 
-interface DepositModalProps {
-    id: number,
-    updateResult: any,
-    onDismiss?: () => void,
-}
 
-const DepositModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDismiss}) => {
+const IncreaseStakeModalToken: React.FC<BarrackModalProps> = ({id, updateResult, onDismiss}) => {
     const barrack = barrackById(id);
     const [isApproved, setIsApproved] = useState(false);
     const [approveButtonDisabled, setApproveButtonDisabled] = useState(false);
@@ -111,4 +107,4 @@ const DepositModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDis
     );
 }
 
-export default DepositModalToken;
+export default IncreaseStakeModalToken;

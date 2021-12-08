@@ -9,14 +9,9 @@ import {
     getBalanceAmount,
     getDecimalAmount,
 } from "../../../../../utils/formatBalance";
+import {BarrackModalProps} from "../modalProps";
 
-interface DepositModalProps {
-    id: number,
-    updateResult: any,
-    onDismiss?: () => void,
-}
-
-const DepositModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDismiss}) => {
+const DecreaseStakeModalToken: React.FC<BarrackModalProps> = ({id, updateResult, onDismiss}) => {
     const barrack = barrackById(id);
     const [depositAmount, setDepositAmount] = useState(new BigNumber(0));
     const [buttonDisabled, setbuttonDisabled] = useState(true);
@@ -62,7 +57,7 @@ const DepositModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDis
             <Text mt="8px" ml="auto" bold color="tertiary" fontSize="14px" mb="8px" style={{color: 'white'}}>
                 Decrease your stake here.<br/>
                 Staked Amount : {getBalanceAmount(barrack.barrackUserInfo.depositedAmount)}<br/>
-                Max can be unstaked : {maxWithdrawable} {barrack.token.symbol}
+                Max can be unstaked : {maxWithdrawable.toFixed(2)} {barrack.token.symbol}
             </Text>
             <input className="barracks-deposit-input" type="number" placeholder="Enter amount here."
                    onChange={handleDepositInputChange}/>
@@ -74,4 +69,4 @@ const DepositModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDis
     );
 }
 
-export default DepositModalToken;
+export default DecreaseStakeModalToken;

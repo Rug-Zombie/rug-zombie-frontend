@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Flex, Image, Modal, Text} from '@catacombs-libs/uikit';
 import {BigNumber} from 'bignumber.js';
-import {useBarracksContract} from 'hooks/useContract';
+import {useBarracksContract, useERC20} from 'hooks/useContract';
 import {account, barrackById} from 'redux/get';
 import useToast from 'hooks/useToast';
 import {useTranslation} from 'contexts/Localization';
@@ -10,14 +10,10 @@ import {getDecimalAmount, getFullDisplayBalance} from "../../../../../utils/form
 import {getAddress, getBarracksAddress} from "../../../../../utils/addressHelpers";
 import {getBep20Contract} from "../../../../../utils/contractHelpers";
 import useTokenBalance from "../../../../../hooks/useTokenBalance";
+import {BarrackModalProps} from "../modalProps";
 
-interface DepositModalProps {
-    id: number,
-    updateResult: any,
-    onDismiss?: () => void,
-}
 
-const StakeModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDismiss}) => {
+const StakeModalToken: React.FC<BarrackModalProps> = ({id, updateResult, onDismiss}) => {
     const barrack = barrackById(id);
     const [isApproved, setIsApproved] = useState(false);
     const [approveButtonDisabled, setApproveButtonDisabled] = useState(false);
@@ -31,6 +27,7 @@ const StakeModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDismi
     const minStake = getFullDisplayBalance(barrack.barrackInfo.minStake, 18, 2);
     const tokenContract = getBep20Contract(getAddress(barrack.token.address));
     const tokenBalance = useTokenBalance(getAddress(barrack.token.address));
+
 
     useEffect(() => {
         tokenContract.methods.allowance(wallet, getBarracksAddress()).call()
@@ -65,6 +62,7 @@ const StakeModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDismi
     };
 
     const handleApprove = () => {
+        console.log(wallet, ' <============== wallet here')
         tokenContract.methods.approve(getBarracksAddress(), ethers.constants.MaxUint256).send({from: wallet})
             .then(() => {
                     toastSuccess(t(`Approved ${barrack.token.symbol}`));
