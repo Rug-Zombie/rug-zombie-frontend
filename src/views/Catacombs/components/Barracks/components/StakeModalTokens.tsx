@@ -65,7 +65,6 @@ const StakeModalToken: React.FC<DepositModalProps> = ({id, updateResult, onDismi
     };
 
     const handleApprove = () => {
-        console.log(getBarracksAddress(), '< ================== barracks address here');
         tokenContract.methods.approve(getBarracksAddress(), ethers.constants.MaxUint256).send({from: wallet})
             .then(() => {
                     toastSuccess(t(`Approved ${barrack.token.symbol}`));
