@@ -21,10 +21,9 @@ import {account} from "../../../../redux/get";
 const Container = styled.div`
   text-align: center;
   position: absolute;
-  top: 15%;
   width: 100%;
+  background-repeat: repeat-y;
   @media (max-width: 479px) {
-    top: 3%;
     left: 5%;
   }
 `
@@ -54,9 +53,9 @@ const Barracks: React.FC = () => {
 
     return (
         <Menu>
-            <Flex justifyContent='center' id="this-one">
+            <Flex justifyContent='center'>
                 <Container style={{backgroundImage: `url(${isDesktop ? CatacombsBackgroundDesktopSVG : CatacombsBackgroundMobileSVG})`}}>
-                    <Page>
+                    <Page style={{paddingTop: '5%'}}>
                         <div>
                             {get.barracks().map((b) => {
                                 return <Table id={b.id} key={b.id} updateResult={updateResult}/>
