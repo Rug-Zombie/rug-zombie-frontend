@@ -1,9 +1,9 @@
 import React from 'react'
-import { BaseLayout, Button, useModal } from '@rug-zombie-libs/uikit'
+import { BaseLayout, Button, Flex, useModal } from '@rug-zombie-libs/uikit'
 import styled from 'styled-components'
 import { formatDuration } from '../../../../utils/timerHelpers'
 import { account, burnGraveById } from '../../../../redux/get'
-import { getBalanceAmount } from '../../../../utils/formatBalance'
+import { getBalanceAmount, getFullDisplayBalance } from '../../../../utils/formatBalance'
 import { BIG_ZERO } from '../../../../utils/bigNumber'
 import { useDrBurnenstein } from '../../../../hooks/useContract'
 import useToast from '../../../../hooks/useToast'
@@ -53,7 +53,7 @@ const BurnPanel:React.FC<BurnPanelProps> = ({ id, updateResult }) => {
     <BurnZombieModal id={id} updateResult={updateResult} />
   )
 
-  const renderBurn = () => {
+  const renderBurnButton = () => {
     if (!wallet) {
       return (<span className="total-earned text-shadow">CONNECT WALLET</span>)
     }
@@ -79,17 +79,7 @@ const BurnPanel:React.FC<BurnPanelProps> = ({ id, updateResult }) => {
       )
     }
 
-    return (
-      <DisplayFlex>
-        <div>
-          <div className="small-text">
-            <span className="white-color">BURNED: </span>
-            <span className="total-earned text-shadow" style={{fontSize: "20px"}}>{Math.round(getBalanceAmount(grave.userInfo.burnedAmount).times(100).toNumber()) / 100}</span>
-          </div>
-        </div>
-        <button onClick={handleBurn} style={{ width: 300 }} className="btn btn-disabled w-100" type="button">BURN ZMBE</button>
-      </DisplayFlex>
-    )
+    return <button onClick={handleBurn} className="btn btn-disabled" type="button">BURN ZMBE</button>
   }
 
   const renderTimer = () => {
@@ -111,13 +101,32 @@ const BurnPanel:React.FC<BurnPanelProps> = ({ id, updateResult }) => {
     )
   }
 
-  return(
-    <div className="frank-card">
-      <div>
-        {renderBurn()}
-        {renderTimer()}
+  const renderBurned = () => {
+    if (grave.userInfo.stakedAmount.eq(BIG_ZERO)) {
+      return null;
+    }
+
+
+    return (
+      <div style={{paddingLeft: "20px"}}>
+        <div className="small-text">
+          <span className="white-color">BURNED:</span>
+        </div>
+        <span className="total-earned text-shadow" style={{fontSize: "20px"}}>{getFullDisplayBalance(grave.userInfo.burnedAmount)} ZMBE</span>
       </div>
+    )
+  }
+
+  return(
+    <>
+    <div className="frank-card">
+        {renderBurnButton()}
     </div>
+    <Flex className="frank-card" >
+      {renderTimer()}
+      {renderBurned()}
+    </Flex>
+    </>
   )
 }
 
