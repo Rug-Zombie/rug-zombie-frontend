@@ -7,7 +7,6 @@ import { useWeb3React } from '@web3-react/core';
 import { useTranslation } from 'contexts/Localization'
 import useToast from 'hooks/useToast'
 import { grave } from '../../../../redux/get'
-import { BIG_ZERO } from '../../../../utils/bigNumber'
 
 interface FrankEarnedProps {
   pid: number

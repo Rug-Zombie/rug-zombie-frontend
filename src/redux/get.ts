@@ -1,7 +1,7 @@
 import { BigNumber } from 'bignumber.js'
 import axios from 'axios'
 import store from './store'
-import { Grave, Tomb, SpawningPool, UserInfo, Auction, TombOverlay, SharkPool } from './types'
+import {Grave, Tomb, SpawningPool, UserInfo, Auction, TombOverlay, SharkPool, Barrack} from './types'
 import { BIG_ZERO } from '../utils/bigNumber'
 import { getBalanceAmount } from '../utils/formatBalance'
 import { getId } from '../utils'
@@ -83,12 +83,20 @@ export const sharkPools = (): SharkPool[] => {
   return store.getState().sharkPools;
 }
 
+export const barracks = (): Barrack[] => {
+  return store.getState().barracks;
+}
+
 export const spawningPoolById = (id: number): SpawningPool => {
   return store.getState().spawningPools.find(p => p.id === id)
 }
 
 export const sharkPoolById = (id: number): SharkPool => {
   return store.getState().sharkPools.find(a => a.id === id);
+}
+
+export const barrackById = (id: number): Barrack => {
+  return store.getState().barracks.find(b => b.id === id);
 }
 
 export const grave = (pid: number): Grave => {

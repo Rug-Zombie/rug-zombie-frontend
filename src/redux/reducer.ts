@@ -8,6 +8,7 @@ import sharkPools from './sharkPools'
 import auctions from './auctions'
 import { getId } from '../utils'
 import tombOverlays from './tombOverlays'
+import barracks from './barracks'
 
 const defaultState = {
   account: '',
@@ -15,6 +16,7 @@ const defaultState = {
   tombOverlays,
   graves,
   nfts,
+  barracks,
   spawningPools,
   sharkPools,
   bnbPriceUsd: 0,
@@ -148,6 +150,16 @@ export default function reducer(state = defaultState, action) {
       return {
         ...state,
         sharkPools: state.sharkPools.map(sharkPool => sharkPool.id === action.payload.id ? { ...sharkPool, userInfo: { ...sharkPool.userInfo, ...action.payload.userInfo } } : sharkPool),
+      }
+    case types.UPDATE_BARRACK_INFO:
+      return {
+        ...state,
+        barracks: state.barracks.map(barrack => barrack.id === action.payload.id ? { ...barrack, barrackInfo: { ...barrack.barrackInfo, ...action.payload.barrackInfo } } : barrack),
+      }
+    case types.UPDATE_BARRACK_USER_INFO:
+      return {
+        ...state,
+        barracks: state.barracks.map(barrack => barrack.id === action.payload.id ? { ...barrack, barrackUserInfo: { ...barrack.barrackUserInfo, ...action.payload.barrackUserInfo } } : barrack),
       }
 
     default:
