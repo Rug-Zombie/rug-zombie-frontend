@@ -37,9 +37,9 @@ const BurnGraves: React.FC = () => {
             setZmbePrice(zombiePriceUsd());
         }
     }, [ updatePoolInfo, updateUserInfo, setZmbePrice ]);
-    
+
     const updateResult = (id: number) => {
-        burnGrave(id);
+        burnGrave(id, { update: updateUserInfo, setUpdate: setUpdateUserInfo });
     }
 
     return (

@@ -42,15 +42,18 @@ const StakePanel:React.FC<StakePanelProps> = ({ id, updateResult }) => {
   const drBurnenstein = useDrBurnenstein()
 
   useEffect(() => {
-    tokenContract.methods.allowance(wallet, getDrBurnensteinAddress()).call()
-      .then(res => {
-        if (parseInt(res.toString()) !== 0) {
-          setIsApproved(true)
-        } else {
-          setIsApproved(false)
-        }
-      })
+    if(wallet) {
+      tokenContract.methods.allowance(wallet, getDrBurnensteinAddress()).call()
+        .then(res => {
+          if (parseInt(res.toString()) !== 0) {
+            setIsApproved(true)
+          } else {
+            setIsApproved(false)
+          }
+        })
+    }
   }, [ tokenContract, wallet, setIsApproved ])
+
 
   const handleApprove = () => {
     if(wallet) {
