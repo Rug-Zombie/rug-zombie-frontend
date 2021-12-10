@@ -83,7 +83,7 @@ const IncreaseStakeModalToken: React.FC<BarrackModalProps> = ({id, updateResult,
     }
 
     return (
-        <Modal onDismiss={onDismiss} title={`Deposit ${barrack.token.symbol}`} className="color-white">
+        <Modal onDismiss={onDismiss} title={`Stake more ${barrack.token.symbol}`} className="color-white">
             <Flex alignItems="center" justifyContent="space-between" mb="8px">
                 <Flex alignItems="center" minWidth="70px">
                     <Image src={`/images/tokens/${barrack.token.symbol}.png`} width={24} height={24}

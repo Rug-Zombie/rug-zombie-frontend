@@ -77,6 +77,43 @@ const barracks: Barrack[] = [
             ]
         },
     },
+    {
+        id: 3,
+        name: 'barrack three',
+        nft: 61,
+        description: 'description here',
+        token: tokens.bnb,
+        isNew: true,
+        nftMintingTime: '1 day',
+        barrackInfo: {
+            bnb: true,
+            depositFeePercentage: 0,
+            lockThreshold: BIG_ZERO,
+            minStake: BIG_ZERO,
+            totalStaked: BIG_ZERO,
+            lockTime: BIG_ZERO,
+            timeLocked: BIG_ZERO,
+            locked: false
+        },
+        barrackUserInfo: {
+            depositedAmount: BIG_ZERO,
+            claimed: false
+        },
+        project: {
+            name: 'AutoShark',
+            description: 'AutoShark flash loan attack NFT pool',
+            additionalDetails: [
+                {
+                    name: 'Project website',
+                    url: 'https://autoshark.finance',
+                },
+                {
+                    name: 'Compensation Plan',
+                    url: 'https://medium.com/autosharkfin/restoring-the-ecosystem-a870c0a36a8a',
+                }
+            ]
+        },
+    }
 ]
 
 export default barracks
