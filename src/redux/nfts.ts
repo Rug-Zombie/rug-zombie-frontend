@@ -1062,7 +1062,7 @@ const nfts: Nft[] = [
   },
   {
     id: 65,
-    name: 'Infinte Zombie',
+    name: 'Infinite Zombie',
     symbol: 'IFZ',
     description: 'Don\'t worry, I\'m the strongest.',
     address: {
@@ -1154,6 +1154,52 @@ const nfts: Nft[] = [
     rarity: 'Special',
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 72,
+    name: 'Collectorate #1',
+    symbol: 'COLLECTORATE #1',
+    description: 'Don\'t call him cubes.',
+    address: {
+      56: '0xe8399d697989d147efed8e5eead42716ee1b95b8',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://storage.googleapis.com/rug-zombie/Collectorate%20%231%20-%20compressed.jpeg',
+    type: 'image',
+    rarity: 'Legendary',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
+  {
+    id: 73,
+    name: 'Street Zombies',
+    symbol: 'STREETZ',
+    description: 'Life\'s a one way street, and you\'re not coming back.',
+    address: {
+      56: '0x51424Aaa5043e127abdF2F6cA8Aad25BDea48F1C',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmdSGtvB9tScPDuNNEh8xWAChdKZfv5MhV4cUkWSgBxjNy',
+    type: 'image',
+    rarity: 'Legendary',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
+  {
+    id: 74,
+    name: 'The Mother',
+    symbol: 'MOTHER',
+    description: 'Endure the darkness, for it will show you the stars.',
+    address: {
+      56: '0x749859A107d5f464cb1fEB1d1a558C148bb8D707',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://storage.googleapis.com/rug-zombie/The%20Mother%20compressed.jpeg',
+    type: 'image',
+    rarity: 'Legendary',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
+
 
 export default nfts

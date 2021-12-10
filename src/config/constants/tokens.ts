@@ -58,6 +58,26 @@ const tokens = {
     projectLink: 'https://www.blackeyegalaxy.space/',
     tokenLogo: 'https://assets.coingecko.com/coins/images/16814/small/logo_200_white.png?1625150910'
   },
+  punks: {
+    symbol: 'PUNKS',
+    address: {
+      56: '0x306d8c5B2Fa6999D2Af31a966FB4Eb76E0FEc955',
+      97: '',
+    },
+    decimals: 9,
+    projectLink: 'https://streetpunks.org/',
+    tokenLogo: 'https://i0.wp.com/streetpunks.org/wp-content/uploads/2021/11/cropped-2021-11-16_20h34_53-1.png?w=826&ssl=1'
+  },
+  l1ghtv2: {
+    symbol: 'L1ght',
+    address: {
+      56: '0x6052327e918ccc2f24fe0a2b6fa2649e30339d04',
+      97: '',
+    },
+    decimals: 9,
+    projectLink: 'https://l1ghtl1st.io/',
+    tokenLogo: 'https://d1muf25xaso8hp.cloudfront.net/https%3A%2F%2Fs3.amazonaws.com%2Fappforest_uf%2Ff1634140724647x381024309361064100%2FNewToken.png?w=384&h=384&auto=compress&fit=crop&dpr=2'
+  },
   rugbiden: {
     symbol: 'RUGBIDEN',
     address: {
@@ -158,6 +178,16 @@ const tokens = {
     decimals: 18,
     projectLink: '',
     tokenLogo: 'https://assets.coingecko.com/coins/images/20506/small/Squid_Game_Logo-0001.png?1637150038'
+  },
+  iron: {
+    symbol: 'IRON',
+    address: {
+      56: '0x7b65B489fE53fCE1F6548Db886C08aD73111DDd8',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: '',
+    tokenLogo: 'https://assets.coingecko.com/coins/images/14588/small/logo_-_2021-03-31T123525.615.png?1617165339'
   },
   yape: {
     symbol: 'yAPE',

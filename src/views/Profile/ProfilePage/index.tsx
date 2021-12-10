@@ -32,25 +32,30 @@ const StyledCollectibleCard = styled(CollectiblesCard)`
 const ProfilePage: React.FC = () => {
   const contract = useNftOwnership()
   const [updateNftUserInfo, setUpdateNftUserInfo] = useState(false)
-  const [updateEvery, setUpdateEvery] = useState(false)
+  const [update, setUpdate] = useState(false)
   const [stakedInGraves, setStakedInGraves] = useState(BIG_ZERO)
   const [stakedInSpawningPools, setStakedInSpawningPools] = useState(BIG_ZERO)
   const zombieBalanceChecker = useZombieBalanceChecker()
 
   const ownedNfts = nfts().filter(nft => nft.userInfo.ownedIds.length > 0)
   const accountLength = account() ? account().length : 0
-  const displayAccount = account() ? `${account().slice(0,6)}...${account().slice(accountLength - 4, accountLength)}` : ""
+  const displayAccount = account() ? `${account().slice(0, 6)}...${account().slice(accountLength - 4, accountLength)}` : ''
   const refresh = () => {
-    if(account()) {
-      nftUserInfo(contract, { update: updateEvery, setUpdate: setUpdateEvery })
+    if (account()) {
+      nftUserInfo(contract).then(() => {
+        setUpdate(!update)
+      })
     }
   }
 
   useEffect(() => {
     if (!updateNftUserInfo && account()) {
-      nftUserInfo(contract, { update: updateNftUserInfo, setUpdate: setUpdateNftUserInfo })
+      nftUserInfo(contract).then(() => {
+        setUpdate(!update)
+      })
     }
-  }, [contract, updateNftUserInfo])
+    // eslint-disable-next-line
+  }, [contract])
 
   useEffect(() => {
     if (account()) {
