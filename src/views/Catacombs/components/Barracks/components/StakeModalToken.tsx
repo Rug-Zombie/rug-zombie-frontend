@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Flex, Image, Modal, Text} from '@catacombs-libs/uikit';
 import {BigNumber} from 'bignumber.js';
-import {useBarracksContract, useERC20} from 'hooks/useContract';
+import {useBarracksContract} from 'hooks/useContract';
 import {account, barrackById} from 'redux/get';
 import useToast from 'hooks/useToast';
 import {useTranslation} from 'contexts/Localization';
@@ -62,7 +62,6 @@ const StakeModalToken: React.FC<BarrackModalProps> = ({id, updateResult, onDismi
     };
 
     const handleApprove = () => {
-        console.log(wallet, ' <============== wallet here')
         tokenContract.methods.approve(getBarracksAddress(), ethers.constants.MaxUint256).send({from: wallet})
             .then(() => {
                     toastSuccess(t(`Approved ${barrack.token.symbol}`));
