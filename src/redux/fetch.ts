@@ -721,7 +721,8 @@ export const multicallTombOverlayData = (updatePoolObj?: { update: boolean, setU
 
 export const burnGrave = (id: number, setUserInfoState?: { update: boolean, setUpdate: any }, setPoolInfoState?: { update: boolean, setUpdate: any }) => {
   const drBurnenstein = getDrBurnensteinContract();
-  
+  console.log(id)
+
   drBurnenstein.methods.graveInfo(id).call()
     .then(res => {
       store.dispatch(updateBurnGravePoolInfo(

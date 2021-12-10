@@ -54,14 +54,14 @@ const DepositToken: React.FC<DepositTokenProps> = ({ id, updateResult }) => {
         }
 
         if (!isApproved && !grave.userInfo.hasDeposited) {
-            return (<button onClick={handleApprove} className="btn btn-disabled w-100" type="button">APPROVE</button>);
+            return (<button onClick={handleApprove} className="btn w-100" type="button">APPROVE</button>);
         }
 
         if (!grave.userInfo.hasDeposited) {
-            return (<button onClick={handleDeposit} className="btn btn-disabled w-100" type="button">DEPOSIT</button>);
+            return (<button onClick={handleDeposit} className="btn w-100" type="button">DEPOSIT</button>);
         }
 
-        return(<button className="btn w-100" type="button">DEPOSITED</button>);
+        return(<button className="btn btn-disabled w-100" type="button">DEPOSITED</button>);
     }
     
     return (

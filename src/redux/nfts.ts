@@ -1163,7 +1163,7 @@ const nfts: Nft[] = [
     symbol: 'BURN',
     description: 'This is just a test, nothing to see here',
     address: {
-      56: '0x396f62444eC6eff0b5A278C848A2453958023e0d',
+      56: '0x0D00b12e1031E80a32C63fa047717aFd3fadA261',
       97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
     },
     totalSupply: BIG_ZERO,

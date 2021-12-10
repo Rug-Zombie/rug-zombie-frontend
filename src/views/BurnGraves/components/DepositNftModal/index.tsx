@@ -7,6 +7,7 @@ import useToast from '../../../../hooks/useToast'
 import { useTranslation } from '../../../../contexts/Localization'
 import { getAddress, getDrBurnensteinAddress, getNftSwapperAddress } from '../../../../utils/addressHelpers'
 import { BIG_ZERO } from '../../../../utils/bigNumber'
+import useTheme from '../../../../hooks/useTheme'
 
 export interface DepositNftModalProps {
   id: number,
@@ -19,6 +20,8 @@ const DepositNftModal:React.FC<DepositNftModalProps> = ({ id, updateResult, onDi
   const [ids, setIds] = useState([])
   const [selected, setSelected] = useState(null)
   const [approved, setApproved] = useState(false)
+
+  const { theme } = useTheme()
 
   const drburn = useDrBurnenstein()
   const grave = burnGraveById(id)
@@ -79,16 +82,18 @@ const DepositNftModal:React.FC<DepositNftModalProps> = ({ id, updateResult, onDi
   const depositButton = selected && approved;
 
   return (
-    <Modal onDismiss={onDismiss} title={`Deposit ${nft.symbol}`}>
+    <Modal onDismiss={onDismiss} title={`Deposit ${nft.symbol}`} headerBackground={theme.colors.backgroundAlt}>
       <Flex alignItems='center' justifyContent='space-between' mb='8px'>
         <Text bold>Select ID of NFT:</Text>
         <Flex alignItems='center' minWidth='70px'>
           <Text ml='4px' bold>{nft.symbol}</Text>
         </Flex>
       </Flex>
-      <Flex justifyContent='center'>
+      <Flex justifyContent='center' style={{maxHeight: "200px", maxWidth: "400px"}} >
         {nft.type === 'image' ? (
-          <img src={nft.path} alt='NFT' style={{ maxWidth: '10%' }} className='sc-cxNHIi bjMxQn' />
+          <img
+            src={nft.path} alt='test'
+            style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain' }} />
         ) : (
           <video autoPlay loop className='sc-cxNHIi bjMxQn'>
             <source src={nft.path} type='video/webm' />

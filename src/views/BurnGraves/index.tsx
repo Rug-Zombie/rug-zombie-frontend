@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PageHeader from 'components/PageHeader';
 import { Flex, Heading } from '@rug-zombie-libs/uikit';
-import { burnGraves, account, zombiePriceUsd } from 'redux/get';
+import { burnGraves, account, zombiePriceUsd, zmbeBnbLpPriceUsd } from 'redux/get'
 import { burnGrave, initialBurnGraveData } from 'redux/fetch';
 import BigNumber from 'bignumber.js';
 import { BIG_ZERO } from 'utils/bigNumber';
@@ -22,11 +22,13 @@ const filterGraves = (a) => {
 const BurnGraves: React.FC = () => {
     const [updateUserInfo, setUpdateUserInfo] = useState(false);
     const [updatePoolInfo, setUpdatePoolInfo] = useState(false);
-    const [stakedOnly, setStakedOnly] = useState(false);
-    const [filter, setFilter] = useState(0);
-    const [zmbePrice, setZmbePrice] = useState(0);
+    const liveZmbePrice = zombiePriceUsd()
+    const [zmbePrice, setZmbePrice] = useState(liveZmbePrice);
+
+    useEffect(() => {
+        setZmbePrice(liveZmbePrice)
+    }, [liveZmbePrice])
     
-    const wallet = account();
 
     useEffect(() => {
         if(!updateUserInfo) {
@@ -34,9 +36,8 @@ const BurnGraves: React.FC = () => {
                 { update: updateUserInfo, setUpdate: setUpdateUserInfo },
                 { update: updatePoolInfo, setUpdate: setUpdatePoolInfo }
             )
-            setZmbePrice(zombiePriceUsd());
         }
-    }, [ updatePoolInfo, updateUserInfo, setZmbePrice ]);
+    }, [ updatePoolInfo, updateUserInfo ]);
 
     const updateResult = (id: number) => {
         burnGrave(id, { update: updateUserInfo, setUpdate: setUpdateUserInfo });

@@ -10,22 +10,12 @@ import useToast from '../../../../hooks/useToast'
 import { useTranslation } from '../../../../contexts/Localization'
 import BurnZombieModal from '../BurnZombieModal'
 
-const DisplayFlex = styled(BaseLayout)`
-  display: flex;
-  flex-direction: row;
-  -webkit-box-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  justify-content: center;
-  grid-gap: 0px;
-}`
-
 export interface BurnPanelProps {
   id: number,
   updateResult: any
 }
 
-const BurnPanel:React.FC<BurnPanelProps> = ({ id, updateResult }) => {
+const BurnPanel: React.FC<BurnPanelProps> = ({ id, updateResult }) => {
   const wallet = account()
   const grave = burnGraveById(id)
   const drburn = useDrBurnenstein()
@@ -35,7 +25,7 @@ const BurnPanel:React.FC<BurnPanelProps> = ({ id, updateResult }) => {
   const currentDate = Math.floor(Date.now() / 1000)
   let nftMintDateFixed = grave.userInfo.nftMintDate
 
-  if(grave.userInfo.nftMintDate < 0) {
+  if (grave.userInfo.nftMintDate < 0) {
     nftMintDateFixed = currentDate
   }
 
@@ -50,41 +40,73 @@ const BurnPanel:React.FC<BurnPanelProps> = ({ id, updateResult }) => {
   }
 
   const [handleBurn] = useModal(
-    <BurnZombieModal id={id} updateResult={updateResult} />
+    <BurnZombieModal id={id} updateResult={updateResult} />,
   )
 
   const renderBurnButton = () => {
     if (!wallet) {
-      return (<span className="total-earned text-shadow">CONNECT WALLET</span>)
+      return <div className='frank-card'>
+        <div className='small-text'>
+          <span className='white-color'>NEXT STEP:</span>
+        </div>
+        <span className='total-earned text-shadow'>CONNECT WALLET</span>
+      </div>
     }
 
-    if (!grave.userInfo.hasDeposited && grave.poolInfo.depositType !== 0) {
-      return(<span className="total-earned text-shadow">MUST DEPOSIT</span>)
+    if (!grave.userInfo.hasDeposited) {
+      if(grave.poolInfo.depositType === 1) {
+        return <div className='frank-card'>
+          <div className='small-text'>
+            <span className='white-color'>NEXT STEP:</span>
+          </div>
+          <span className='total-earned text-shadow' style={{ fontSize: '20px' }}>DEPOSIT TOKEN</span>
+        </div>
+      }
+      if(grave.poolInfo.depositType === 2) {
+        return <div className='frank-card'>
+          <div className='small-text'>
+            <span className='white-color'>NEXT STEP:</span>
+          </div>
+          <span className='total-earned text-shadow' style={{ fontSize: '20px' }}>DEPOSIT NFT</span>
+        </div>
+      }
     }
 
     if (!grave.userInfo.hasUnlocked) {
-      return(<span className="total-earned text-shadow">MUST UNLOCK</span>)
+      return <div className='frank-card'>
+        <div className='small-text'>
+          <span className='white-color'>NEXT STEP:</span>
+        </div>
+        <span className='total-earned text-shadow'>UNLOCK GRAVE</span>
+      </div>
     }
 
     if (grave.userInfo.stakedAmount.lt(grave.poolInfo.minimumStake)) {
-      return(<span className="total-earned text-shadow">MUST STAKE MINIMUM</span>)
+      return <div className='frank-card'>
+        <div className='small-text'>
+          <span className='white-color'>NEXT STEP:</span>
+        </div>
+        <span className='total-earned text-shadow' style={{ fontSize: '20px' }}>STAKE ZMBE</span>
+      </div>
     }
 
     if (grave.userInfo.burnedAmount >= grave.poolInfo.maxBurned) {
-      return(
-        <DisplayFlex>
-          <span className="indetails-title">Burned :<span className="indetails-value">{Math.round(getBalanceAmount(grave.userInfo.burnedAmount).times(100).toNumber()) / 100}</span></span>
-          <span className="total-earned text-shadow">MAX BURNED</span>
-        </DisplayFlex>
-      )
+      return <div className='frank-card'>
+        <div className='small-text'>
+          <span className='white-color'>NEXT STEP:</span>
+        </div>
+        <button className='btn btn-disabled' disabled type='button'>MAX BURNED</button>
+      </div>
     }
 
-    return <button onClick={handleBurn} className="btn btn-disabled" type="button">BURN ZMBE</button>
+    return <div className='frank-card' >
+      <button onClick={handleBurn} className='btn' type='button'>BURN ZMBE</button>
+    </div>
   }
 
   const renderTimer = () => {
     if (grave.userInfo.stakedAmount.eq(BIG_ZERO)) {
-      return null;
+      return null
     }
 
     if (currentDate >= grave.userInfo.nftMintDate && grave.userInfo.stakedAmount.gte(grave.poolInfo.minimumStake)) {
@@ -93,41 +115,39 @@ const BurnPanel:React.FC<BurnPanelProps> = ({ id, updateResult }) => {
 
     return (
       <div>
-        <div className="small-text">
-          <span className="white-color">NFT Timer</span>
+        <div className='small-text'>
+          <span className='white-color'>NFT Timer</span>
         </div>
-        <span className="total-earned text-shadow" style={{fontSize: "20px"}}>{formatDuration(initialNftTime)}</span>
+        <span className='total-earned text-shadow' style={{ fontSize: '20px' }}>{formatDuration(initialNftTime)}</span>
       </div>
     )
   }
 
   const renderBurned = () => {
-    if (grave.userInfo.stakedAmount.eq(BIG_ZERO)) {
-      return null;
+    if (currentDate >= grave.userInfo.nftMintDate && grave.userInfo.stakedAmount.gte(grave.poolInfo.minimumStake)) {
+      return null
     }
 
-
     return (
-      <div style={{paddingLeft: "20px"}}>
-        <div className="small-text">
-          <span className="white-color">BURNED:</span>
+      <div style={{ paddingLeft: '20px' }}>
+        <div className='small-text'>
+          <span className='white-color'>BURNED:</span>
         </div>
-        <span className="total-earned text-shadow" style={{fontSize: "20px"}}>{getFullDisplayBalance(grave.userInfo.burnedAmount)} ZMBE</span>
+        <span className='total-earned text-shadow'
+              style={{ fontSize: '20px' }}>{getFullDisplayBalance(grave.userInfo.burnedAmount)} ZMBE</span>
       </div>
     )
   }
-
-  return(
+  /* eslint-disable */
+  return (
     <>
-    <div className="frank-card">
-        {renderBurnButton()}
-    </div>
-    <Flex className="frank-card" >
-      {renderTimer()}
-      {renderBurned()}
-    </Flex>
+      {renderBurnButton()}
+        < Flex className='frank-card'>
+          {renderTimer()}
+          {renderBurned()}
+        </Flex>
     </>
   )
 }
 
-export default BurnPanel;
+export default BurnPanel

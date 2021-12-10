@@ -23,10 +23,10 @@ const DepositNftPanel:React.FC<DepositNftPanelProps> = ({ id, updateResult }) =>
     }
 
     if (!grave.userInfo.hasDeposited) {
-      return (<button onClick={handleDeposit} className="btn btn-disabled w-100" type="button">DEPOSIT</button>);
+      return (<button onClick={handleDeposit} className="btn w-100" type="button">DEPOSIT</button>);
     }
 
-    return(<button className="btn w-100" type="button">DEPOSITED</button>);
+    return(<button className="btn btn-disabled w-100" type="button">DEPOSITED</button>);
   }
   
   return (

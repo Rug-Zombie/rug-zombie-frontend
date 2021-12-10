@@ -29,7 +29,7 @@ export interface StakePanelProps {
   updateResult: any
 }
 
-const StakePanel:React.FC<StakePanelProps> = ({ id, updateResult }) => {
+const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
   const [isApproved, setIsApproved] = useState(false)
 
   const { toastSuccess } = useToast()
@@ -42,7 +42,7 @@ const StakePanel:React.FC<StakePanelProps> = ({ id, updateResult }) => {
   const drBurnenstein = useDrBurnenstein()
 
   useEffect(() => {
-    if(wallet) {
+    if (wallet) {
       tokenContract.methods.allowance(wallet, getDrBurnensteinAddress()).call()
         .then(res => {
           if (parseInt(res.toString()) !== 0) {
@@ -52,15 +52,15 @@ const StakePanel:React.FC<StakePanelProps> = ({ id, updateResult }) => {
           }
         })
     }
-  }, [ tokenContract, wallet, setIsApproved ])
+  }, [tokenContract, wallet, setIsApproved])
 
 
   const handleApprove = () => {
-    if(wallet) {
+    if (wallet) {
       tokenContract.methods.approve(getDrBurnensteinAddress(), ethers.constants.MaxUint256).send({ from: wallet })
         .then(() => {
           toastSuccess(t(`Approved ${grave.stakingToken.symbol}`))
-          setIsApproved(true);
+          setIsApproved(true)
         })
     }
   }
@@ -71,9 +71,9 @@ const StakePanel:React.FC<StakePanelProps> = ({ id, updateResult }) => {
         drBurnenstein.methods.unlock(id)
           .send({ from: wallet, value: res }).then(() => {
 
-            toastSuccess(t('Grave unlocked'))
-            updateResult()
-          })
+          toastSuccess(t('Grave unlocked'))
+          updateResult(id)
+        })
       })
   }
 
@@ -87,40 +87,51 @@ const StakePanel:React.FC<StakePanelProps> = ({ id, updateResult }) => {
 
   const renderButtons = () => {
     if (!wallet) {
-      return (<span className="total-earned text-shadow">CONNECT WALLET</span>)
+      return null
     }
 
     if (grave.poolInfo.depositType !== 0 && !grave.userInfo.hasDeposited) {
-      return(<span className="total-earned text-shadow">MUST DEPOSIT</span>)
+      return null
     }
 
     if (!grave.userInfo.hasUnlocked) {
-      return(<button onClick={handleUnlock} className="btn w-100" type="button">UNLOCK</button>)
+      return <div className='frank-card'>
+        <div className='small-text'>
+          <span className='white-color'>STAKING</span>
+        </div>
+        <button onClick={handleUnlock} className='btn w-100' type='button'>UNLOCK</button>
+      </div>
     }
 
     if (!isApproved) {
-      return(<button onClick={handleApprove} className="btn w-100" type="button">APPROVE</button>)
+      return <div className="frank-card">
+        <div className="small-text">
+          <span className="white-color">STAKING</span>
+        </div>
+        <button onClick={handleApprove} className='btn w-100' type='button'>APPROVE</button>
+      </div>
     }
 
     return (
-      <div>
+      <div className="frank-card">
+        <div className="small-text">
+          <span className="white-color">STAKING</span>
+        </div>
         <DisplayFlex>
-          <span style={{ paddingRight: '50px' }} className="total-earned text-shadow">{getFullDisplayBalance(new BigNumber(grave.userInfo.stakedAmount), grave.stakingToken.decimals, 4)}</span>
-          <button onClick={handleDecreaseStake} style={{ marginRight: '10px' }} className="btn w-100" type="button">-</button>
-          <button onClick={handleIncreaseStake} disabled={grave.isClosed} className={`btn w-100 ${grave.isClosed ? "btn-disabled" : ""}`} type="button">+</button>
+          <span style={{ paddingRight: '50px' }}
+                className='total-earned text-shadow'>{getFullDisplayBalance(new BigNumber(grave.userInfo.stakedAmount), grave.stakingToken.decimals, 4)}</span>
+          <button onClick={handleDecreaseStake} style={{ marginRight: '10px' }} className='btn w-100' type='button'>-
+          </button>
+          <button onClick={handleIncreaseStake} disabled={grave.isClosed}
+                  className={`btn w-100 ${grave.isClosed ? 'btn-disabled' : ''}`} type='button'>+
+          </button>
         </DisplayFlex>
       </div>
     )
   }
 
-  return (
-    <div className="frank-card">
-      <div className="small-text">
-        <span className="white-color">STAKING</span>
-      </div>
-      {renderButtons()}
-    </div>
-  )
+return renderButtons()
+
 }
 
-export default StakePanel;
+export default StakePanel

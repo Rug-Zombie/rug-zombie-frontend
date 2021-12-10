@@ -101,10 +101,7 @@ const BurnZombieModal:React.FC<BurnZombieModalProps> = ({ id, updateResult, onDi
   
   return (
     <Modal onDismiss={onDismiss} title='BURN ZOMBIE' headerBackground={theme.colors.gradients.cardHeader}>
-      <Flex alignItems='center' justifyContent='space-between' mb='8px'>
-        <Text bold>Burn Zombie</Text>
-        <Text bold>This grave allows you to burn zombie to earn NFTs faster</Text>
-      </Flex>
+        <Text bold pb="20px">This grave allows you to burn zombie to earn NFTs faster</Text>
       <BalanceInput
         value={Math.round(getBalanceAmount(burnAmount).times(100).toNumber()) / 100}
         onChange={handleBurnInputAmount}
