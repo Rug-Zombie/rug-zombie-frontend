@@ -121,3 +121,7 @@ export const getZTokenSwapperAddress = () => {
 export const getSharkPoolAddress = (id: number) => {
   return getAddress(sharkPoolById(id).address)
 }
+
+export const getDrBurnensteinAddress = () => {
+  return getAddress(addresses.drburnenstein);
+}
