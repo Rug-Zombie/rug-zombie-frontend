@@ -268,6 +268,7 @@ export interface BurnGrave {
   depositNftId: number,
   stakingToken: Token,
   geckoId: string,
+  endDate: number,
   poolInfo: BurnGravePoolInfo,
   userInfo: BurnGraveUserInfo
 }

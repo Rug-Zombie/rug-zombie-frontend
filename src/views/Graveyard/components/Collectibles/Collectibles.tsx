@@ -7,19 +7,21 @@ import { nftUserInfo } from '../../../../redux/fetch'
 import { useNftOwnership } from '../../../../hooks/useContract'
 import CollectibleTabButtons from '../CollectibleTabButtons'
 import { nfts } from '../../../../redux/get'
+import { getAddress } from '../../../../utils/addressHelpers'
 
 const RARITIES = ['Biblical', 'Mythic', 'Legendary', 'Rare', 'Uncommon', 'Common', 'Special']
 
 const Collectibles: React.FC = () => {
   const contract = useNftOwnership()
-  const [updateUserInfo, setUpdateUserInfo] = useState(false)
-  const [updateEvery, setUpdateEvery] = useState(false)
+  const [update, setUpdate] = useState(false)
   const [filter, setFilter] = useState(0)
+
   useEffect(() => {
-    if(!updateUserInfo) {
-      nftUserInfo(contract, { update: updateUserInfo, setUpdate: setUpdateUserInfo });
-    }
-  }, [contract, updateUserInfo])
+      nftUserInfo(contract).then(() => {
+        setUpdate(!update)
+      })
+    // eslint-disable-next-line
+  }, [contract])
 
   let currentNfts = []
   switch (filter) {
@@ -35,7 +37,9 @@ const Collectibles: React.FC = () => {
   }
 
   const refresh = () => {
-    nftUserInfo(contract, { update: updateEvery, setUpdate: setUpdateEvery });
+      nftUserInfo(contract).then(() => {
+        setUpdate(!update)
+      })
   }
 
   return (
@@ -43,7 +47,7 @@ const Collectibles: React.FC = () => {
       <CollectibleTabButtons setFilter={setFilter}/>
       {RARITIES.map((rarity) => {
         const nftsByRarity = currentNfts.map((nft) => {
-          return nft.rarity === rarity ? <CollectiblesCard id={nft.id} key={nft.id} refresh={refresh}/> : null
+          return nft.rarity === rarity ? <CollectiblesCard id={nft.id} key={`${getAddress(nft.address)}-${nft.id}`} refresh={refresh}/> : null
         })
 
         return <>

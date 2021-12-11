@@ -4,6 +4,7 @@ import { LinkExternal } from '@rug-zombie-libs/uikit'
 import { bnbPriceUsd, burnGraveById, nftById } from '../../../../redux/get'
 import { useDrBurnenstein } from '../../../../hooks/useContract'
 import { getFullDisplayBalance } from '../../../../utils/formatBalance'
+import { formatDuration } from '../../../../utils/timerHelpers'
 
 export interface DetailsPanelProps {
   id: number
@@ -11,7 +12,7 @@ export interface DetailsPanelProps {
 
 const DetailsPanel:React.FC<DetailsPanelProps> = ({ id }) => {
   const [unlockFee, setUnlockFee] = useState(0)
-
+  const now = Math.floor(Date.now() / 1000)
   const grave = burnGraveById(id)
   const nft = nftById(grave.nftid)
 
@@ -49,6 +50,7 @@ const DetailsPanel:React.FC<DetailsPanelProps> = ({ id }) => {
         <span className="indetails-title">Minimum Stake:<span className="indetails-value">{getFullDisplayBalance(grave.poolInfo.minimumStake)} {grave.stakingToken.symbol}</span></span>
         <span className="indetails-title">Burn Amount:<span className="indetails-value">{getFullDisplayBalance(grave.poolInfo.tokensToBurn)} ZMBE</span></span>
         <span className="indetails-title">Timer Reduction By Burn:<span className="indetails-value">{grave.burnReduction}</span></span>
+        <span className="indetails-title">NFT Rewards End:<span className="indetails-value">{formatDuration(grave.endDate - now)}</span></span>
       </div>
     </div>
   )

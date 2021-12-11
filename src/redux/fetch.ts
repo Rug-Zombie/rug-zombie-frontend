@@ -75,6 +75,11 @@ export const initialData = (accountAddress: string, setZombiePrice?: any) => {
 
   nfts()
 
+  drFrankenstein.methods.totalAllocPoint().call()
+    .then(res => {
+      store.dispatch(updateDrFrankensteinTotalAllocPoint(new BigNumber(res)))
+    })
+
   if (accountAddress) {
     web3.eth.getBalance(accountAddress).then(res => {
       store.dispatch(updateBnbBalance(new BigNumber(res)))
@@ -83,11 +88,6 @@ export const initialData = (accountAddress: string, setZombiePrice?: any) => {
     zombie.methods.allowance(accountAddress, getDrFrankensteinAddress()).call()
       .then(res => {
         store.dispatch(updateZombieAllowance(new BigNumber(res)))
-      })
-
-    drFrankenstein.methods.totalAllocPoint().call()
-      .then(res => {
-        store.dispatch(updateDrFrankensteinTotalAllocPoint(new BigNumber(res)))
       })
 
     zombie.methods.balanceOf(accountAddress).call()
@@ -596,26 +596,31 @@ export const initialSharkPoolData = (setPoolData?: { update: number, setUpdate: 
   });
 }
 
-export const nftUserInfo = (contract: any, updateUserObj: { update: boolean, setUpdate: any }, updateEveryObj?: { update: boolean, setUpdate: any }) => {
+export const nftUserInfo = async (contract: any) => {
   if (account()) {
-    const nftAddresses = get.nfts().map(nft => getAddress(nft.address))
-    contract.methods.massCheckOwnership(account(), (nftAddresses)).call()
-      .then(res => {
-        get.nfts().forEach((nft, index) => {
-          store.dispatch(updateNftUserInfo(
-            nft.id,
-            {
-              ownedIds: res[index],
-            },
-          ))
-        })
-        if (updateUserObj && !updateUserObj.update) {
-          updateUserObj.setUpdate(!updateUserObj.update)
+    const perChunk = 50
+
+    // Split nft address array into 50 sized chunks
+    const splitNftAddresses = get.nfts().reduce((all,one,i) => {
+      const ch = Math.floor(i/perChunk);
+      // eslint-disable-next-line no-param-reassign
+      all[ch] = [].concat((all[ch]||[]),one);
+      return all
+    }, [])
+
+    // eslint-disable-next-line no-restricted-syntax
+    for (const chunk of splitNftAddresses) {
+      // eslint-disable-next-line no-await-in-loop
+      const res = await contract.methods.massCheckOwnership(account(), (chunk.map(nft => getAddress(nft.address)))).call()
+          chunk.forEach((nft, index) => {
+            store.dispatch(updateNftUserInfo(
+              nft.id,
+              {
+                ownedIds: res[index],
+              },
+            ))
+          })
         }
-        if (updateEveryObj) {
-          updateEveryObj.setUpdate(!updateEveryObj.update)
-        }
-      })
   }
 }
 

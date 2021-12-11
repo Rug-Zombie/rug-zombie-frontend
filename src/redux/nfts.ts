@@ -1062,7 +1062,7 @@ const nfts: Nft[] = [
   },
   {
     id: 65,
-    name: 'Infinte Zombie',
+    name: 'Infinite Zombie',
     symbol: 'IFZ',
     description: 'Don\'t worry, I\'m the strongest.',
     address: {
@@ -1153,28 +1153,54 @@ const nfts: Nft[] = [
     type: 'image',
     rarity: 'Special',
     userInfo: { ...DEFAULT_USER_INFO },
-  },
-
-
-  
+  },  
   {
     id: 72,
-    name: 'Carllito ',
-    symbol: 'CARLLITO',
-    description: 'Let it Burn.',
+    name: 'Collectorate #1',
+    symbol: 'COLLECTORATE #1',
+    description: 'Don\'t call him cubes.',
     address: {
-      56: '0x0D00b12e1031E80a32C63fa047717aFd3fadA261',
-      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+      56: '0xe8399d697989d147efed8e5eead42716ee1b95b8',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
     },
     totalSupply: BIG_ZERO,
-    path: 'https://ipfs.io/ipfs/QmYQ1HBkRmxjwSvm6f8fK97jNX8VqynYGecBfJu84qa9eg',
+    path: 'https://storage.googleapis.com/rug-zombie/Collectorate%20%231%20-%20compressed.jpeg',
     type: 'image',
-    rarity: 'Rare',
-    artist: artists.trippynazz,
+    rarity: 'Legendary',
     userInfo: { ...DEFAULT_USER_INFO },
   },
   {
     id: 73,
+    name: 'Street Zombies',
+    symbol: 'STREETZ',
+    description: 'Life\'s a one way street, and you\'re not coming back.',
+    address: {
+      56: '0x51424Aaa5043e127abdF2F6cA8Aad25BDea48F1C',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmdSGtvB9tScPDuNNEh8xWAChdKZfv5MhV4cUkWSgBxjNy',
+    type: 'image',
+    rarity: 'Legendary',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
+  {
+    id: 74,
+    name: 'The Mother',
+    symbol: 'MOTHER',
+    description: 'Endure the darkness, for it will show you the stars.',
+    address: {
+      56: '0x749859A107d5f464cb1fEB1d1a558C148bb8D707',
+      97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://storage.googleapis.com/rug-zombie/The%20Mother%20compressed.jpeg',
+    type: 'image',
+    rarity: 'Legendary',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
+      {
+    id: 75,
     name: 'TreTre ',
     symbol: 'TRETRE',
     description: 'Let it Burn.',
@@ -1189,6 +1215,23 @@ const nfts: Nft[] = [
     artist: artists.TheLeap3d,
     userInfo: { ...DEFAULT_USER_INFO },
   },
+    {
+    id: 76,
+    name: 'Carllito ',
+    symbol: 'CARLLITO',
+    description: 'Let it Burn.',
+    address: {
+      56: '0x0D00b12e1031E80a32C63fa047717aFd3fadA261',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmYQ1HBkRmxjwSvm6f8fK97jNX8VqynYGecBfJu84qa9eg',
+    type: 'image',
+    rarity: 'Rare',
+    artist: artists.trippynazz,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
+
 
 export default nfts
