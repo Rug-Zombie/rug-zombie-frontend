@@ -9,10 +9,8 @@ import { getAddress, getDrBurnensteinAddress } from '../../../../utils/addressHe
 import useToast from '../../../../hooks/useToast'
 import { useTranslation } from '../../../../contexts/Localization'
 import { getFullDisplayBalance } from '../../../../utils/formatBalance'
-import { getDrBurnensteinContract } from '../../../../utils/contractHelpers'
 import IncreaseStakeModal from '../IncreaseStakeModal'
 import DecreaseStakeModal from '../DecreaseStakeModal'
-import * as get from '../../../../redux/get'
 
 const DisplayFlex = styled(BaseLayout)`
   display: flex;

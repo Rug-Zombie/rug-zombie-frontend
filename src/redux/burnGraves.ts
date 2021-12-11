@@ -5,13 +5,13 @@ import { BurnGrave } from './types';
 const burnGraves: BurnGrave[] = [
     {
         id: {
-            56: 0,
+            56: 3,
             97: 0,
         },
-        name: 'No Deposit Burn Grave',
-        mintingTime: '5 Hours',
+        name: 'Bitconnect Trevon',
+        mintingTime: '30 days',
         burnReduction: '1 Hour',
-        nftid: 72,
+        nftid: 73,
         isNew: true,
         isClosed: false,
         geckoId: 'rugzombie',
@@ -41,11 +41,11 @@ const burnGraves: BurnGrave[] = [
     },
     {
         id: {
-            56: 1,
-            97: 1,
+            56: 4,
+            97: 0,
         },
-        name: 'Token Deposit Burn Grave',
-        mintingTime: '5 Hours',
+        name: 'Bitconnect Matos',
+        mintingTime: '30 days',
         burnReduction: '1 Hour',
         nftid: 72,
         isNew: true,
@@ -75,42 +75,6 @@ const burnGraves: BurnGrave[] = [
             burnedAmount: BIG_ZERO
         }
     },
-    {
-        id: {
-            56: 2,
-            97: 2,
-        },
-        name: 'NFT Deposit Burn Grave',
-        mintingTime: '5 Hours',
-        burnReduction: '1 Hour',
-        nftid: 72,
-        isNew: true,
-        isClosed: false,
-        geckoId: 'rugzombie',
-        depositToken: tokens.zmbe,
-        depositNftId: 72,
-        stakingToken: tokens.zmbe,
-        poolInfo: {
-            isEnabled: true,
-            depositType: 0,
-            depositAddress: '',
-            unlockFee: BIG_ZERO,
-            minimumStake: BIG_ZERO,
-            mintingTime: BIG_ZERO,
-            tokensToBurn: BIG_ZERO,
-            burnReduction: 0,
-            maxBurned: BIG_ZERO,
-            totalStaked: BIG_ZERO,
-            totalBurned: BIG_ZERO
-        },
-        userInfo: {
-            stakedAmount: BIG_ZERO,
-            hasDeposited: false,
-            hasUnlocked: false,
-            nftMintDate: 0,
-            burnedAmount: BIG_ZERO
-        }
-    }
 ]
 
 export default burnGraves;

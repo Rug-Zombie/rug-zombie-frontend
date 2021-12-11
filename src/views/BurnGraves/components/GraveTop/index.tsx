@@ -70,8 +70,8 @@ const GraveTop: React.FC<GraveTopProps> = ({ id, zmbePrice, openHandler }) => {
                         <div className="info-td-one">
                             <div className="into-two-td">
                                 <div className="info-1">
-                                    <img src="images/tokens/clear.png" alt="clearicon" className="icon" />
                                     <img src="images/rugZombie/BasicZombie.png" alt="rugicon" className="icon" />
+                                    <img src="images/tokens/clear.png" alt="clearicon" className="icon" />
                                 </div>
                                 <div className="titel">{grave.name}</div>
                                     <div className="small-lable">
