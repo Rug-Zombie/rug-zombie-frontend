@@ -120,4 +120,8 @@ export default {
     56: '0xe9B5206Cf835d0aEC6B05DA9f53a1989033812E2',
     97: '0xb1E96dA5a08423C5f0646C0eBfd135FB896d1477',
   },
+  rugMarket: {
+    56: '',
+    97: '0xDedEcFebDA22c23539DD79fF01eCC1FCB4FC8925',
+  }
 }

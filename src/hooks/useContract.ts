@@ -29,7 +29,7 @@ import {
   getInstaBuyContract,
   getTombOverlayContract, getRugRollContract,
   getNftSwapperContract, getZTokenSwapperContract,
-  getSharkpoolContract,
+  getSharkpoolContract, getRugMarketContract,
 } from 'utils/contractHelpers'
 
 /**
@@ -191,5 +191,10 @@ export const useNftSwapper = () => {
 export const useZTokenSwapper = () => {
   const web3 = useWeb3()
   return useMemo(() => getZTokenSwapperContract(web3), [web3])
+}
+
+export const useRugMarket = () => {
+  const web3 = useWeb3()
+  return useMemo(() => getRugMarketContract(web3), [web3])
 }
 
