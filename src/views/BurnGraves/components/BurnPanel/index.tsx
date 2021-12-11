@@ -90,7 +90,7 @@ const BurnPanel: React.FC<BurnPanelProps> = ({ id, updateResult }) => {
       </div>
     }
 
-    if (grave.userInfo.burnedAmount >= grave.poolInfo.maxBurned) {
+    if (grave.userInfo.burnedAmount.gte(grave.poolInfo.maxBurned)) {
       return <div className='frank-card'>
         <div className='small-text'>
           <span className='white-color'>NEXT STEP:</span>
