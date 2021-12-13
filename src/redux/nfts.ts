@@ -1212,7 +1212,7 @@ const nfts: Nft[] = [
     path: 'https://ipfs.io/ipfs/QmZhgBBHipRXxMi8NqPxkSNEJWhTeF7XJ5FXxp3tYmcLAx',
     type: 'image',
     rarity: 'Rare',
-    artist: artists.TheLeap3d,
+    artist: artists.trippynazz,
     userInfo: { ...DEFAULT_USER_INFO },
   },
     {
@@ -1228,7 +1228,7 @@ const nfts: Nft[] = [
     path: 'https://ipfs.io/ipfs/QmYQ1HBkRmxjwSvm6f8fK97jNX8VqynYGecBfJu84qa9eg',
     type: 'image',
     rarity: 'Rare',
-    artist: artists.trippynazz,
+    artist: artists.ZomBaes,
     userInfo: { ...DEFAULT_USER_INFO },
   },
 ]
