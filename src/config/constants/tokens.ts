@@ -7,6 +7,7 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://www.binance.com/',
+    geckoId: 'binancecoin',
   },
   cake: {
     symbol: 'CAKE',
@@ -16,6 +17,7 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://rugzombie.io/',
+    geckoId: 'pancakeswap-token',
   },
   zmbe: {
     symbol: 'ZMBE',
@@ -25,6 +27,7 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://rugzombie.io/',
+    geckoId: 'rugzombie',
   },
   euler: {
     symbol: 'EULER',

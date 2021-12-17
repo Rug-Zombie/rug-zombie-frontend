@@ -8,7 +8,8 @@ import {
   TombPoolInfo,
   TombUserInfo,
   UserInfo,
-  TombOverlayPoolInfo, TombOverlayUserInfo, SharkPoolInfo, SharkPoolUserInfo
+  TombOverlayPoolInfo, TombOverlayUserInfo, SharkPoolInfo, SharkPoolUserInfo,
+  BarrackUserInfo, BarrackInfo,
 } from './types'
 
 export const updateAccount = (account: string) => ({
@@ -125,6 +126,14 @@ export const updateSharkPoolInfo = (id: number, poolInfo: SharkPoolInfo) => ({
   }
 })
 
+export const updateBarrackInfo = (id: number, barrackInfo: BarrackInfo ) => ({
+  type: actions.UPDATE_BARRACK_INFO,
+  payload: {
+    id,
+    barrackInfo
+  }
+})
+
 export const updateSpawningPoolUserInfo = (id: number, userInfo: SpawningUserInfo) => ({
   type: actions.UPDATE_SPAWNING_POOL_USER_INFO,
   payload: {
@@ -139,6 +148,14 @@ export const updateSharkPoolUserInfo = (id: number, userInfo: SharkPoolUserInfo)
     id,
     userInfo
   }
+})
+
+export const updateBarrackUserInfo = (id: number, barrackUserInfo: BarrackUserInfo) => ({
+    type: actions.UPDATE_BARRACK_USER_INFO,
+    payload: {
+        id,
+        barrackUserInfo
+    }
 })
 
 export const updateAuctionInfo = (id: number, auctionInfo: AuctionInfo) => ({

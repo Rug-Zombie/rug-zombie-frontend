@@ -16,6 +16,7 @@ export interface Token {
   decimals?: number
   projectLink?: string
   tokenLogo?: string
+  geckoId?: string
 }
 
 export enum PoolIds {

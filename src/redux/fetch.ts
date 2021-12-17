@@ -1,43 +1,50 @@
 import axios from 'axios'
-import { BigNumber } from 'bignumber.js'
+import {BigNumber} from 'bignumber.js'
 import sharkpoolAbi from 'config/abi/autosharkPool.json';
 
 import {
-  getBep20Contract,
-  getDrFrankensteinContract, getErc721Contract,
-  getPancakePair,
-  getZombieContract,
+    getBarracksContract,
+    getBep20Contract,
+    getDrFrankensteinContract, getErc721Contract,
+    getPancakePair,
+    getZombieContract,
 } from '../utils/contractHelpers'
 
 import store from './store'
 import {
-  updateZombieAllowance,
-  updateAccount,
-  updateZombieTotalSupply,
-  updateZombieBalance,
-  updateZombiePriceBnb,
-  updateBnbPriceUsd,
-  updateDrFrankensteinZombieBalance,
-  updateGravePoolInfo,
-  updateGraveUserInfo,
-  updateNftTotalSupply,
-  updateSpawningPoolInfo,
-  updateSpawningPoolUserInfo,
-  updateTombPoolInfo,
-  updateTombUserInfo,
-  updateAuctionInfo,
-  updateAuctionUserInfo,
-  updateNftUserInfo,
-  updateDrFrankensteinTotalAllocPoint, updateBnbBalance,
-  updateTombOverlayPoolInfo, updateTombOverlayUserInfo, updateSharkPoolInfo, updateSharkPoolUserInfo,
+    updateZombieAllowance,
+    updateAccount,
+    updateZombieTotalSupply,
+    updateZombieBalance,
+    updateZombiePriceBnb,
+    updateBnbPriceUsd,
+    updateDrFrankensteinZombieBalance,
+    updateGravePoolInfo,
+    updateGraveUserInfo,
+    updateNftTotalSupply,
+    updateSpawningPoolInfo,
+    updateSpawningPoolUserInfo,
+    updateTombPoolInfo,
+    updateTombUserInfo,
+    updateAuctionInfo,
+    updateAuctionUserInfo,
+    updateNftUserInfo,
+    updateDrFrankensteinTotalAllocPoint,
+    updateBnbBalance,
+    updateTombOverlayPoolInfo,
+    updateTombOverlayUserInfo,
+    updateSharkPoolInfo,
+    updateSharkPoolUserInfo,
+    updateBarrackInfo,
+    updateBarrackUserInfo,
 } from './actions'
 import {
-  getAddress,
-  getDrFrankensteinAddress,
-  getMausoleumAddress,
-  getSpawningPoolAddress,
-  getTombOverlayAddress,
-  getSharkPoolAddress
+    getAddress,
+    getDrFrankensteinAddress,
+    getMausoleumAddress,
+    getSpawningPoolAddress,
+    getTombOverlayAddress,
+    getSharkPoolAddress,
 } from '../utils/addressHelpers'
 import tombs from './tombs'
 import * as get from './get'
@@ -47,31 +54,31 @@ import pancakePairAbi from '../config/abi/pancakePairAbi.json'
 import mausoleumAbi from '../config/abi/mausoleum.json'
 import mausoleumV3Abi from '../config/abi/mausoleumV3.json'
 import tombOverlayAbi from '../config/abi/tombOverlay.json'
-import { BIG_ZERO } from '../utils/bigNumber'
-import { account, auctionById, zmbeBnbTomb } from './get'
+import {BIG_ZERO} from '../utils/bigNumber'
+import {account, auctionById, zmbeBnbTomb} from './get'
 import web3 from '../utils/web3'
-import { multicallv2 } from '../utils/multicall'
-import { getId } from '../utils'
+import {multicallv2} from '../utils/multicall'
+import {getId} from '../utils'
 
 export const initialData = (accountAddress: string, setZombiePrice?: any) => {
-  store.dispatch(updateAccount(accountAddress))
-  const zombie = getZombieContract()
-  const drFrankenstein = getDrFrankensteinContract()
-  zombie.methods.totalSupply().call()
-    .then(res => {
-      store.dispatch(updateZombieTotalSupply(new BigNumber(res)))
-    })
+    store.dispatch(updateAccount(accountAddress))
+    const zombie = getZombieContract()
+    const drFrankenstein = getDrFrankensteinContract()
+    zombie.methods.totalSupply().call()
+        .then(res => {
+            store.dispatch(updateZombieTotalSupply(new BigNumber(res)))
+        })
 
-  zombie.methods.balanceOf(getDrFrankensteinAddress()).call()
-    .then(res => {
-      store.dispatch(updateDrFrankensteinZombieBalance(new BigNumber(res)))
-    })
+    zombie.methods.balanceOf(getDrFrankensteinAddress()).call()
+        .then(res => {
+            store.dispatch(updateDrFrankensteinZombieBalance(new BigNumber(res)))
+        })
 
-  bnbPriceUsd(setZombiePrice)
+    bnbPriceUsd(setZombiePrice)
 
-  tomb(getId(tombs[0].pid))
+    tomb(getId(tombs[0].pid))
 
-  nfts()
+    nfts()
 
   drFrankenstein.methods.totalAllocPoint().call()
     .then(res => {
@@ -395,6 +402,49 @@ export const sharkPool = (id: number, poolUpdateObj?: { update: number, setUpdat
   }
 }
 
+export const barracks = (id: number, barrackUpdateObj?: { update: number, setUpdate: any }, barrackUserUpdateObj?: { update: number, setUpdate: any }) => {
+
+    getBarracksContract().methods.barrackInfo(id).call()
+        .then(res => {
+            store.dispatch(
+                updateBarrackInfo(
+                    id,
+                    {
+                        bnb: res.bnb,
+                        depositFeePercentage: res.feePercentage,
+                        locked: res.locked,
+                        minStake: new BigNumber(res.minimum),
+                        lockThreshold: new BigNumber(res.lockAmount),
+                        totalStaked: new BigNumber(res.totalDeposited),
+                        lockTime: new BigNumber(res.lockTime),
+                        timeLocked: new BigNumber(res.timeLocked),
+                    }
+                )
+            );
+            if (barrackUpdateObj) {
+                barrackUpdateObj.setUpdate(barrackUpdateObj.update + 1);
+            }
+        });
+
+    if (account()) {
+        getBarracksContract().methods.getUserInfo(id).call({from: account()})
+            .then(res => {
+                store.dispatch(
+                    updateBarrackUserInfo(
+                        id,
+                        {
+                            depositedAmount: res.depositedAmount,
+                            claimed: res.claimed
+                        }
+                    )
+                );
+                if (barrackUserUpdateObj) {
+                    barrackUserUpdateObj.setUpdate(barrackUserUpdateObj.update + 1)
+                }
+            });
+    }
+}
+
 export const spawningPool = (id: number, zombie: any, poolUpdateObj?: { update: number, setUpdate: any }, userUpdateObj?: { update: number, setUpdate: any }) => {
   const address = getSpawningPoolAddress(id)
   let calls = [
@@ -594,6 +644,18 @@ export const initialSharkPoolData = (setPoolData?: { update: number, setUpdate: 
   });
 }
 
+export const initializeBarrackData = (setBarrackData?: { update: number, setUpdate: any }, setBarrackUserData?: { update: number, setUpdate: any }) => {
+    let index = 0;
+    get.barracks().forEach(barrack => {
+        barracks(
+            barrack.id,
+            setBarrackData ? {update: setBarrackData.update + index, setUpdate: setBarrackData.setUpdate} : undefined,
+            setBarrackUserData ? {update: setBarrackUserData.update + index, setUpdate: setBarrackUserData.setUpdate} : undefined
+        );
+        index++;
+    });
+}
+
 export const nftUserInfo = async (contract: any) => {
   if (account()) {
     const perChunk = 50
@@ -721,3 +783,4 @@ export const multicallTombOverlayData = (updatePoolObj?: { update: boolean, setU
       })
   }
 }
+
