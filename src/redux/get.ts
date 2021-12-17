@@ -163,3 +163,7 @@ export const tombOverlayByPoolId = (poolId: number): TombOverlay => {
 export const rugMarketListings = (): RugMarketListing[] => {
   return store.getState().rugMarketListings;
 }
+
+export const rugMarketListingById = (id: number): RugMarketListing => {
+  return store.getState().rugMarketListings.find(listing => listing.id === id);
+}

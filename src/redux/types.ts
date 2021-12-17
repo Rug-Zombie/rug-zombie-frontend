@@ -289,8 +289,8 @@ export interface RugMarketListing {
   id: number,
   owner: string,
   token: Token,
-  quantity: BigNumber,
-  price: BigNumber,
+  quantity: string,
+  price: string,
   taxedToken: boolean,
   state: number
 }

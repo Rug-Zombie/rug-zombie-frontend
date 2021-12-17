@@ -166,7 +166,7 @@ export default function reducer(state = defaultState, action) {
     case types.UPDATE_RUG_MARKET_LISTING:
       return {
         ...state,
-        rugMarketListings: state.rugMarketListings.push(...action.payload.listing),
+        rugMarketListings: [...state.rugMarketListings, action.payload.listing],
       }
 
     default:

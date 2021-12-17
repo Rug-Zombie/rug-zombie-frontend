@@ -1,10 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {BaseLayout, useMatchBreakpoints} from '@catacombs-libs/uikit';
-import {coingeckoPrice, barrackById} from 'redux/get'
+import {ethers} from "ethers";
+import {BaseLayout} from '@catacombs-libs/uikit';
+import {rugMarketListingById, account} from 'redux/get'
+import {useTranslation} from 'contexts/Localization';
 import numeral from 'numeral';
-import {getBalanceAmount, getFullDisplayBalance} from 'utils/formatBalance';
+import useToast from 'hooks/useToast';
+import {BigNumber} from "bignumber.js";
 import {Token} from "../../../../../config/constants/types";
+import {useRugMarket, useZombie} from "../../../../../hooks/useContract";
+import {getRugMarketAddress} from "../../../../../utils/addressHelpers";
+import {getFullDisplayBalance} from "../../../../../utils/formatBalance";
 
 const DisplayFlex = styled(BaseLayout)`
     display: flex;
@@ -16,25 +22,6 @@ const DisplayFlex = styled(BaseLayout)`
     grid-gap: 0px;
 }`
 
-const ArrowIcon = styled(BaseLayout)`
-    display: flex;
-    flex-direction: row;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    border-radius: 16px;
-    cursor: pointer;
-    transition: all 0.2s ease 0s;
-    font-size: 16px;
-    font-weight: 500;
-    text-align: center;
-    position: relative;
-    width: 50px;
-    height: 50px;
-    background-color: rgb(29, 47, 59);
-    margin-right: 0.3em;
-`
 
 interface TableListProps {
     id: number,
@@ -42,11 +29,54 @@ interface TableListProps {
 
 const TableList: React.FC<TableListProps> = ({id}) => {
 
-    const {isLg, isXl} = useMatchBreakpoints();
-    const isDesktop = isLg || isXl;
+    const {toastSuccess} = useToast();
+    const {t} = useTranslation();
+    const wallet = account();
+    const rugMarketContract = useRugMarket();
+    const listing = rugMarketListingById(id);
+    const [isApproved, setIsApproved] = useState(false);
+    const isOwner = listing.owner === wallet;
+    const zmbeContract = useZombie();
+    console.log(listing.owner, '  < === listing owner')
+    console.log(wallet, '  < === wallet')
 
     const tokenImage = (token: Token) => {
         return `images/tokens/${token.symbol}.png`
+    }
+
+    useEffect(() => {
+        zmbeContract.methods.allowance(wallet, getRugMarketAddress()).call()
+            .then(res => {
+                if (parseInt(res.toString()) !== 0) {
+                    setIsApproved(true);
+                } else {
+                    setIsApproved(false);
+                }
+            });
+    });
+
+    const handleApprove = () => {
+        console.log(' handle approve')
+        zmbeContract.methods.approve(getRugMarketAddress(), ethers.constants.MaxUint256).send({from: wallet})
+            .then(() => {
+                    toastSuccess(t(`Approved ZMBE`));
+                    setIsApproved(true);
+                }
+            );
+    }
+
+    const handleBuy = () => {
+        rugMarketContract.methods.buy(id).send({'from': wallet})
+            .then(res => {
+                toastSuccess(t(`Swap successfull`));
+            })
+    }
+
+    const handleCancel = () => {
+        rugMarketContract.methods.cancel(id).send({'from': wallet})
+            .then(res => {
+                toastSuccess(t(`Listing Cancelled`));
+            });
     }
 
     return (
@@ -58,44 +88,45 @@ const TableList: React.FC<TableListProps> = ({id}) => {
                         <div className="into-two-td">
                             <div className="info-1">
                                 <div className="info-icon">
-                                    <img src="nothing" alt="clearicon" className="icon"/>
+                                    <img src={tokenImage(listing.token)} alt="clearicon" className="icon"/>
                                 </div>
                                 <div>
-                                    <div className="titel">buy rugged tokens for zmbe</div>
+                                    <div className="titel">
+                                        Swap {getFullDisplayBalance(new BigNumber(listing.quantity))} {listing.token.symbol} for {getFullDisplayBalance(new BigNumber(listing.price))} ZMBE
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </td>
                 <td className="td-width-17 desktop-view"/>
-                {
-                    isDesktop ? <td className="barrack-td-width-35">
-                        <DisplayFlex>
-                            <div className="total-earned">Total Amount Committed :</div>
-                        </DisplayFlex>
-                    </td> : <td className="barrack-td-width-35" />
-                }
-                {
-                    isDesktop
-                        ? <td className='barrack-td-width-10'>
-                            <DisplayFlex>
-                                <span className='total-earned'>total earned</span>
-                                <div className='earned'>token symbol here</div>
-                            </DisplayFlex>
-                        </td>
-                        : null
-                }
-                {
-                    isDesktop
-                        ? <td className='barrack-td-width-10'>
-                            <DisplayFlex>
-                                <span
-                                    className='total-earned'>total staked</span>
-                                <div className='earned'>TVL</div>
-                            </DisplayFlex>
-                        </td>
-                        : null
-                }
+                <td className='barrack-td-width-10'>
+                    <DisplayFlex>
+                        {
+                            isOwner ? <button onClick={handleCancel}
+                                              style={{marginRight: '10px', color: 'white', border: '2px solid white'}}
+                                              className="btn w-100" type="button">Cancel listing
+                            </button> : null
+                        }
+                    </DisplayFlex>
+                </td>
+                <td className='barrack-td-width-10'>
+                    <DisplayFlex>
+                        {
+                            !isApproved ? <button onClick={handleApprove}
+                                                  style={{
+                                                      marginRight: '15%',
+                                                      color: 'white',
+                                                      border: '2px solid white'
+                                                  }}
+                                                  className="btn w-100" type="button">Approve ZMBE
+                            </button> : <button onClick={handleBuy}
+                                                style={{marginRight: '15%', color: 'white', border: '2px solid white'}}
+                                                className="btn w-100" type="button">Swap
+                            </button>
+                        }
+                    </DisplayFlex>
+                </td>
             </tr>
             </tbody>
         </table>
