@@ -6,7 +6,7 @@ import {
     getBarracksContract,
     getBep20Contract,
     getDrFrankensteinContract, getErc721Contract,
-    getPancakePair,
+    getPancakePair, getRugMarketContract,
     getZombieContract,
 } from '../utils/contractHelpers'
 
@@ -36,7 +36,7 @@ import {
     updateSharkPoolInfo,
     updateSharkPoolUserInfo,
     updateBarrackInfo,
-    updateBarrackUserInfo,
+    updateBarrackUserInfo, updateRugMarketListing,
 } from './actions'
 import {
     getAddress,
@@ -59,6 +59,8 @@ import {account, auctionById, zmbeBnbTomb} from './get'
 import web3 from '../utils/web3'
 import {multicallv2} from '../utils/multicall'
 import {getId} from '../utils'
+import {UPDATE_RUG_MARKET_LISTING} from "./actionTypes";
+import {tokenByAddress} from "../utils/tokenHelper";
 
 export const initialData = (accountAddress: string, setZombiePrice?: any) => {
     store.dispatch(updateAccount(accountAddress))
@@ -784,3 +786,26 @@ export const multicallTombOverlayData = (updatePoolObj?: { update: boolean, setU
   }
 }
 
+export const updateRugMarketListings = () => {
+    const rugMarketContract = getRugMarketContract();
+
+    rugMarketContract.methods.totalListings().call()
+        .then(totalListings => {
+            for (let index = 0; index < Number(totalListings); index++) {
+                rugMarketContract.methods.listings(index).call()
+                    .then(listing => {
+                        store.dispatch(updateRugMarketListing(
+                            {
+                                id: index,
+                                owner: listing.owner,
+                                token: tokenByAddress(listing.token),
+                                quantity: listing.quantity,
+                                price: listing.price,
+                                taxedToken: listing.taxedToken,
+                                state: listing.state
+                            }
+                        ) )
+                    })
+            }
+        })
+}

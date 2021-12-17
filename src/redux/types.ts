@@ -284,3 +284,13 @@ export interface Barrack {
   barrackUserInfo: BarrackUserInfo,
   project: any,
 }
+
+export interface RugMarketListing {
+  id: number,
+  owner: string,
+  token: Token,
+  quantity: BigNumber,
+  price: BigNumber,
+  taxedToken: boolean,
+  state: number
+}

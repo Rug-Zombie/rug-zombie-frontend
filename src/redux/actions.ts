@@ -9,7 +9,7 @@ import {
   TombUserInfo,
   UserInfo,
   TombOverlayPoolInfo, TombOverlayUserInfo, SharkPoolInfo, SharkPoolUserInfo,
-  BarrackUserInfo, BarrackInfo,
+  BarrackUserInfo, BarrackInfo, RugMarketListing,
 } from './types'
 
 export const updateAccount = (account: string) => ({
@@ -202,5 +202,12 @@ export const updateTombOverlayUserInfo = (pid: number, userInfo: TombOverlayUser
   payload: {
     pid,
     userInfo
+  }
+})
+
+export const updateRugMarketListing = (listing: RugMarketListing) => ({
+  type: actions.UPDATE_RUG_MARKET_LISTING,
+  payload: {
+    listing
   }
 })

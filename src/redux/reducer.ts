@@ -9,6 +9,7 @@ import auctions from './auctions'
 import { getId } from '../utils'
 import tombOverlays from './tombOverlays'
 import barracks from './barracks'
+import rugMarketListings from "./rugMarketListings";
 
 const defaultState = {
   account: '',
@@ -22,6 +23,7 @@ const defaultState = {
   bnbPriceUsd: 0,
   auctions,
   bnbBalance: BIG_ZERO,
+  rugMarketListings,
   zombie: {
     allowance: BIG_ZERO,
     totalSupply: BIG_ZERO,
@@ -160,6 +162,11 @@ export default function reducer(state = defaultState, action) {
       return {
         ...state,
         barracks: state.barracks.map(barrack => barrack.id === action.payload.id ? { ...barrack, barrackUserInfo: { ...barrack.barrackUserInfo, ...action.payload.barrackUserInfo } } : barrack),
+      }
+    case types.UPDATE_RUG_MARKET_LISTING:
+      return {
+        ...state,
+        rugMarketListings: state.rugMarketListings.push(...action.payload.listing),
       }
 
     default:

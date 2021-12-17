@@ -1071,6 +1071,24 @@ const tokens = {
     decimals: 0,
     projectLink: '',
   },
+  rug_100: {
+    symbol: 'RUG-100',
+    address: {
+      56: '',
+      97: '0xcf468a63992059B77EFee1c7d4954b3A31649C38',
+    },
+    decimals: 18,
+    projectLink: '',
+  },
+  rug_101: {
+    symbol: 'RUG-101',
+    address: {
+      56: '',
+      97: '0x37eceb4E1bB26B00Da26AcF1A5F758F253822FB4',
+    },
+    decimals: 18,
+    projectLink: '',
+  },
 }
 
 export default tokens
