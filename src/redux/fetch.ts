@@ -59,7 +59,6 @@ import {account, auctionById, zmbeBnbTomb} from './get'
 import web3 from '../utils/web3'
 import {multicallv2} from '../utils/multicall'
 import {getId} from '../utils'
-import {UPDATE_RUG_MARKET_LISTING} from "./actionTypes";
 import {tokenByAddress} from "../utils/tokenHelper";
 
 export const initialData = (accountAddress: string, setZombiePrice?: any) => {

@@ -4,7 +4,6 @@ import {ethers} from "ethers";
 import {BaseLayout} from '@catacombs-libs/uikit';
 import {rugMarketListingById, account} from 'redux/get'
 import {useTranslation} from 'contexts/Localization';
-import numeral from 'numeral';
 import useToast from 'hooks/useToast';
 import {BigNumber} from "bignumber.js";
 import {Token} from "../../../../../config/constants/types";
@@ -37,26 +36,25 @@ const TableList: React.FC<TableListProps> = ({id}) => {
     const [isApproved, setIsApproved] = useState(false);
     const isOwner = listing.owner === wallet;
     const zmbeContract = useZombie();
-    console.log(listing.owner, '  < === listing owner')
-    console.log(wallet, '  < === wallet')
 
     const tokenImage = (token: Token) => {
         return `images/tokens/${token.symbol}.png`
     }
 
     useEffect(() => {
-        zmbeContract.methods.allowance(wallet, getRugMarketAddress()).call()
-            .then(res => {
-                if (parseInt(res.toString()) !== 0) {
-                    setIsApproved(true);
-                } else {
-                    setIsApproved(false);
-                }
-            });
+        if (wallet) {
+            zmbeContract.methods.allowance(wallet, getRugMarketAddress()).call()
+                .then(res => {
+                    if (parseInt(res.toString()) !== 0) {
+                        setIsApproved(true);
+                    } else {
+                        setIsApproved(false);
+                    }
+                });
+        }
     });
 
     const handleApprove = () => {
-        console.log(' handle approve')
         zmbeContract.methods.approve(getRugMarketAddress(), ethers.constants.MaxUint256).send({from: wallet})
             .then(() => {
                     toastSuccess(t(`Approved ZMBE`));
@@ -104,26 +102,23 @@ const TableList: React.FC<TableListProps> = ({id}) => {
                     <DisplayFlex>
                         {
                             isOwner ? <button onClick={handleCancel}
-                                              style={{marginRight: '10px', color: 'white', border: '2px solid white'}}
+                                              style={{marginRight: '15%', color: 'white', border: '2px solid white'}}
                                               className="btn w-100" type="button">Cancel listing
-                            </button> : null
-                        }
-                    </DisplayFlex>
-                </td>
-                <td className='barrack-td-width-10'>
-                    <DisplayFlex>
-                        {
-                            !isApproved ? <button onClick={handleApprove}
-                                                  style={{
-                                                      marginRight: '15%',
-                                                      color: 'white',
-                                                      border: '2px solid white'
-                                                  }}
-                                                  className="btn w-100" type="button">Approve ZMBE
-                            </button> : <button onClick={handleBuy}
-                                                style={{marginRight: '15%', color: 'white', border: '2px solid white'}}
-                                                className="btn w-100" type="button">Swap
-                            </button>
+                            </button> : [
+                                (
+                                    !isApproved ? <button onClick={handleApprove}
+                                                          style={{
+                                                              marginRight: '15%',
+                                                              color: 'white',
+                                                              border: '2px solid white'
+                                                          }}
+                                                          className="btn w-100" type="button">Approve ZMBE
+                                    </button> : null),
+                                isApproved ? <button onClick={handleBuy}
+                                        style={{marginRight: '15%', color: 'white', border: '2px solid white'}}
+                                        className="btn w-100" type="button">Swap
+                                </button> : null
+                            ]
                         }
                     </DisplayFlex>
                 </td>

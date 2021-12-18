@@ -292,5 +292,5 @@ export interface RugMarketListing {
   quantity: string,
   price: string,
   taxedToken: boolean,
-  state: number
+  state: string
 }

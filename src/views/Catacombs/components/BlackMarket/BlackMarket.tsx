@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import styled from "styled-components";
 import {Flex, useMatchBreakpoints} from "@catacombs-libs/uikit";
 import Menu from '../../../../components/Catacombs/Menu'
@@ -8,6 +8,8 @@ import CatacombsBackgroundDesktopSVG from "../../../../images/CatacombsMain-1920
 import CatacombsBackgroundMobileSVG from "../../../../images/CatacombsMain-414x720px.svg";
 import Table from "./components/Table";
 import {updateRugMarketListings} from "../../../../redux/fetch";
+import TabButtons from "./components/TabButtons";
+import {account} from "../../../../redux/get";
 
 const Container = styled.div`
   text-align: center;
@@ -19,13 +21,30 @@ const Container = styled.div`
   }
 `
 
+const filterListings = (filter, wallet) => {
+    switch (filter) {
+        case 0:
+            return get.rugMarketListings().filter(listing => listing.state === "0"); // open
+        case 1:
+            return get.rugMarketListings().filter(listing => listing.owner === wallet); // my listings
+        case 2:
+            return get.rugMarketListings().filter(listing => listing.state === "1"); // expired/sold
+        default:
+            return get.rugMarketListings().filter(listing => listing.state === "0"); // open
+    }
+}
+
 const BlackMarket: React.FC = () => {
+    const wallet = account();
     const {isLg, isXl} = useMatchBreakpoints()
     const isDesktop = isLg || isXl
+    const [filter, setFilter] = useState(0)
 
     useEffect(() => {
         updateRugMarketListings();
     })
+
+    const visibleListings = filterListings(filter, wallet)
 
     return (
         <Menu>
@@ -33,9 +52,10 @@ const BlackMarket: React.FC = () => {
                 <Container
                     style={{backgroundImage: `url(${isDesktop ? CatacombsBackgroundDesktopSVG : CatacombsBackgroundMobileSVG})`}}>
                     <Page style={{paddingTop: '5%'}}>
+                        <TabButtons setFilter={setFilter}/>
                         <div>
                             {
-                                get.rugMarketListings().map(listing => {
+                                visibleListings.map((listing) => {
                                         return <Table id={listing.id} key={listing.id}/>
                                     }
                                 )
