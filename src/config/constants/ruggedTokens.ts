@@ -1,3 +1,3 @@
-const ruggedTokens = ['bonfire', 'viking', 'tndr', 'rugbiden', 'u92', 'ypanda', 'yape', 'fairmoon', 'zmpr', 'zdiamonds']
+const ruggedTokens = ['bonfire', 'tndr', 'rugbiden', 'u92', 'zmpr', 'zdiamonds']
 
 export default ruggedTokens
