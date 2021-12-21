@@ -22,14 +22,22 @@ const Container = styled.div`
 `
 
 const filterListings = (filter, wallet) => {
+    console.log(filter, ' =====')
     switch (filter) {
         case 0:
-            return get.rugMarketListings().filter(listing => listing.state === "0"); // open
+            console.log('in case 0')
+            return get.rugMarketListings().filter(listing => listing.state === "0" && listing.owner !== wallet); // open and not owned
+            break
         case 1:
+            console.log('in case 1')
             return get.rugMarketListings().filter(listing => listing.owner === wallet); // my listings
+            break
         case 2:
+            console.log('in case 2')
             return get.rugMarketListings().filter(listing => listing.state === "1"); // expired/sold
+            break
         default:
+            console.log('in default case')
             return get.rugMarketListings().filter(listing => listing.state === "0"); // open
     }
 }
@@ -45,18 +53,17 @@ const BlackMarket: React.FC = () => {
     })
 
     const visibleListings = filterListings(filter, wallet)
-
+    console.log(visibleListings, ' <====')
     return (
         <Menu>
             <Flex justifyContent='center'>
-                <Container
-                    style={{backgroundImage: `url(${isDesktop ? CatacombsBackgroundDesktopSVG : CatacombsBackgroundMobileSVG})`}}>
+                <Container style={{backgroundImage: `url(${isDesktop ? CatacombsBackgroundDesktopSVG : CatacombsBackgroundMobileSVG})`}}>
                     <Page style={{paddingTop: '5%'}}>
                         <TabButtons setFilter={setFilter}/>
                         <div>
                             {
                                 visibleListings.map((listing) => {
-                                        return <Table id={listing.id} key={listing.id}/>
+                                        return <Table id={listing.id}/>
                                     }
                                 )
                             }

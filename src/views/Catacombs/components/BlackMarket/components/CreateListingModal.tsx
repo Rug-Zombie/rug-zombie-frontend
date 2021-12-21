@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 import {Modal, Text} from '@catacombs-libs/uikit';
+import {ethers} from "ethers";
+import {BigNumber} from "bignumber.js";
 import ruggedTokens from "../../../../../config/constants/ruggedTokens";
 import tokens from "../../../../../config/constants/tokens";
 import {BIG_ZERO} from "../../../../../utils/bigNumber";
 import {useRugMarket} from "../../../../../hooks/useContract";
 import {account} from "../../../../../redux/get";
 import {getDecimalAmount} from "../../../../../utils/formatBalance";
-import {BigNumber} from "bignumber.js";
 import {getBep20Contract} from "../../../../../utils/contractHelpers";
 import {getAddress, getRugMarketAddress} from "../../../../../utils/addressHelpers";
-import {ethers} from "ethers";
 import useWeb3 from "../../../../../hooks/useWeb3";
 import useToast from "../../../../../hooks/useToast";
 

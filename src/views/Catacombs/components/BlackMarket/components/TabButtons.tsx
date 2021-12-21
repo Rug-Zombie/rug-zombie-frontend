@@ -29,7 +29,7 @@ const StyledButton = styled(Button)`
   flex-grow: 1;
 `
 
-const FILTERS = ['All', 'My listings', 'Sold']
+const FILTERS = ['Open', 'My listings', 'Sold']
 
 const TabButtons = ({setFilter}) => {
     const {t} = useTranslation()
