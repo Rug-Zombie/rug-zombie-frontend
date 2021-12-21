@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {ethers} from "ethers";
 import {BaseLayout} from '@catacombs-libs/uikit';
-import {rugMarketListingById, account} from 'redux/get'
+import {rugMarketListingById, account, markRugMarketListingSold, cancelRugMarketListing} from 'redux/get'
 import {useTranslation} from 'contexts/Localization';
 import useToast from 'hooks/useToast';
 import {BigNumber} from "bignumber.js";
@@ -35,6 +35,8 @@ const TableList: React.FC<TableListProps> = ({id}) => {
     const listing = rugMarketListingById(id);
     const [isApproved, setIsApproved] = useState(false);
     const isOwner = listing.owner === wallet;
+    const isSold = listing.state === '1';
+    const cancelled = listing.state === '2';
     const zmbeContract = useZombie();
 
     const tokenImage = (token: Token) => {
@@ -59,6 +61,7 @@ const TableList: React.FC<TableListProps> = ({id}) => {
             .then(() => {
                     toastSuccess(t(`Approved ZMBE`));
                     setIsApproved(true);
+                    renderButtons()
                 }
             );
     }
@@ -66,7 +69,8 @@ const TableList: React.FC<TableListProps> = ({id}) => {
     const handleBuy = () => {
         rugMarketContract.methods.buy(id).send({'from': wallet})
             .then(res => {
-                toastSuccess(t(`Swap successfull`));
+                toastSuccess(t(`Swap successful`));
+                markRugMarketListingSold(id);
             })
     }
 
@@ -74,7 +78,39 @@ const TableList: React.FC<TableListProps> = ({id}) => {
         rugMarketContract.methods.cancel(id).send({'from': wallet})
             .then(res => {
                 toastSuccess(t(`Listing Cancelled`));
+                cancelRugMarketListing(id)
             });
+    }
+
+    const renderButtons = () => {
+
+        if (cancelled) {
+            return (
+                <button className="rug-market-listing-buttons" type="button" disabled>Cancelled</button>
+            )
+        }
+
+        if (isSold) {
+            return (
+                <button className="rug-market-listing-buttons" type="button" disabled>Sold</button>
+            )
+        }
+
+        if (isOwner) {
+            return (
+                <button onClick={handleCancel} className="rug-market-listing-buttons" type="button">Cancel listing</button>
+            )
+        }
+
+        if (isApproved) {
+            return (
+                <button onClick={handleBuy} className="rug-market-listing-buttons" type="button">Swap</button>
+            )
+        }
+
+        return (
+            <button onClick={handleApprove} className="rug-market-listing-buttons" type="button">Approve ZMBE</button>
+        )
     }
 
     return (
@@ -100,26 +136,7 @@ const TableList: React.FC<TableListProps> = ({id}) => {
                 <td className="td-width-17 desktop-view"/>
                 <td className='barrack-td-width-10'>
                     <DisplayFlex>
-                        {
-                            isOwner ? <button onClick={handleCancel}
-                                              style={{marginRight: '15%', color: 'white', border: '2px solid white'}}
-                                              className="btn w-100" type="button">Cancel listing
-                            </button> : [
-                                (
-                                    !isApproved ? <button onClick={handleApprove}
-                                                          style={{
-                                                              marginRight: '15%',
-                                                              color: 'white',
-                                                              border: '2px solid white'
-                                                          }}
-                                                          className="btn w-100" type="button">Approve ZMBE
-                                    </button> : null),
-                                isApproved ? <button onClick={handleBuy}
-                                        style={{marginRight: '15%', color: 'white', border: '2px solid white'}}
-                                        className="btn w-100" type="button">Swap
-                                </button> : null
-                            ]
-                        }
+                        {renderButtons()}
                     </DisplayFlex>
                 </td>
             </tr>

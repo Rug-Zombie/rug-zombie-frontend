@@ -211,3 +211,17 @@ export const updateRugMarketListing = (listing: RugMarketListing) => ({
     listing
   }
 })
+
+export const cancelRugMarketListing = (listingId: number) => ({
+  type: actions.CANCEL_RUG_MARKET_LISTING,
+  payload:  {
+    listingId
+  }
+})
+
+export const markRugMarketListingSold = (listingId: number) => ({
+  type: actions.MARK_RUG_MARKET_LISTING_SOLD,
+  payload:  {
+    listingId
+  }
+})

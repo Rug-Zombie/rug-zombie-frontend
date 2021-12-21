@@ -21,26 +21,32 @@ const Container = styled.div`
   }
 `
 
-const filterListings = (filter, wallet) => {
-    console.log(filter, ' =====')
-    switch (filter) {
-        case 0:
-            console.log('in case 0')
-            return get.rugMarketListings().filter(listing => listing.state === "0" && listing.owner !== wallet); // open and not owned
-            break
-        case 1:
-            console.log('in case 1')
-            return get.rugMarketListings().filter(listing => listing.owner === wallet); // my listings
-            break
-        case 2:
-            console.log('in case 2')
-            return get.rugMarketListings().filter(listing => listing.state === "1"); // expired/sold
-            break
-        default:
-            console.log('in default case')
-            return get.rugMarketListings().filter(listing => listing.state === "0"); // open
-    }
-}
+// const filterListings = (filter, wallet) => {
+//     console.log(get.rugMarketListings(), ' =====')
+//     switch (filter) {
+//         case 0:
+//             console.log('in case 0')
+//             return get.rugMarketListings().filter(listing => listing.state === "0" && listing.owner !== wallet); // open and not owned
+//             break
+//         case 1:
+//             // get.rugMarketListings().filter(listing => {
+//             //     console.log('in case 1')
+//             //     console.log(listing.owner)
+//             //     console.log(wallet)
+//             //     console.log(listing.owner === wallet)
+//             //     return listing.owner === wallet
+//             // })
+//             return get.rugMarketListings().filter(listing => listing.owner === wallet); // my listings
+//             break
+//         case 2:
+//             console.log('in case 2')
+//             return get.rugMarketListings().filter(listing => listing.state === "1"); // expired/sold
+//             break
+//         default:
+//             console.log('in default case')
+//             return get.rugMarketListings().filter(listing => listing.state === "0"); // open
+//     }
+// }
 
 const BlackMarket: React.FC = () => {
     const wallet = account();
@@ -52,8 +58,8 @@ const BlackMarket: React.FC = () => {
         updateRugMarketListings();
     })
 
-    const visibleListings = filterListings(filter, wallet)
-    console.log(visibleListings, ' <====')
+    const visibleListings = get.rugMarketListings(filter, wallet)
+
     return (
         <Menu>
             <Flex justifyContent='center'>

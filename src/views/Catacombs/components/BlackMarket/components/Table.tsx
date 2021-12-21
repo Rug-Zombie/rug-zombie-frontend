@@ -19,7 +19,6 @@ interface TableProps {
 
 const Table: React.FC<TableProps> = ({ id}) => {
 
-
     return(
         <TableCards>
             <div className="barrack-card barrack-active-1">

@@ -10,6 +10,7 @@ import { getId } from '../utils'
 import tombOverlays from './tombOverlays'
 import barracks from './barracks'
 import rugMarketListings from "./rugMarketListings";
+import {RugMarketListing} from "./types";
 
 const defaultState = {
   account: '',
@@ -166,10 +167,45 @@ export default function reducer(state = defaultState, action) {
     case types.UPDATE_RUG_MARKET_LISTING:
       return {
         ...state,
-        rugMarketListings: [...state.rugMarketListings, action.payload.listing],
+        rugMarketListings: pushListingIfNotExists(action.payload.listing),
+      }
+    case types.MARK_RUG_MARKET_LISTING_SOLD:
+      return {
+        ...state,
+        rugMarketListings: markRugMarketListingSold(action.payload.listingId),
+      }
+    case types.CANCEL_RUG_MARKET_LISTING:
+      return {
+        ...state,
+        rugMarketListings: cancelRugMarketListing(action.payload.listingId),
       }
 
     default:
       return state
   }
+}
+
+function cancelRugMarketListing(listingId): RugMarketListing[] {
+  const index = rugMarketListings.findIndex(listing => listing.id === listingId);
+  const listings = rugMarketListings;
+  // @ts-ignore
+  listings[index].state = '2';
+  return listings
+}
+
+function markRugMarketListingSold(listingId): RugMarketListing[] {
+  const index = rugMarketListings.findIndex(listing => listing.id === listingId);
+  const listings = rugMarketListings;
+  // @ts-ignore
+  listings[index].state = '1';
+  return listings
+}
+
+function pushListingIfNotExists(newListing): RugMarketListing[] {
+  const index = rugMarketListings.findIndex(listing => listing.id === newListing.id);
+  const listings = rugMarketListings;
+  if (index === -1) {
+    listings.push(newListing)
+  }
+  return listings
 }

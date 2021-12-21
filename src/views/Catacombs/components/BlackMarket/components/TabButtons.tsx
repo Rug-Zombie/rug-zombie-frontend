@@ -59,7 +59,7 @@ const TabButtons = ({setFilter}) => {
                     <ButtonMenu onItemClick={toggleButtonMenu} activeIndex={index} scale='sm'>
                         <ButtonMenuItem>
                             <Text color="tertiary" bold>
-                                {t('All')}
+                                {t('Open')}
                             </Text>
                         </ButtonMenuItem>
                         <NotificationDot>

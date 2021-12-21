@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Modal, Text} from '@catacombs-libs/uikit';
 import {ethers} from "ethers";
 import {BigNumber} from "bignumber.js";
@@ -29,15 +29,45 @@ const CreateListingModal: React.FC<ModalProps> = ({onDismiss}) => {
     const [ruggedToken, setRuggedToken] = useState(ruggedTokens[0])
     const [rugApproved, setRugApproved] = useState(false)
     const [rugBalance, setRugBalance] = useState(BIG_ZERO)
+    const [approveRuggedTokenText, setApproveRuggedTokenText] = useState('Approve Rugged Token')
     const [rugApprovalPending, setRugApprovalPending] = useState(false)
     const selectedRug = tokens[ruggedToken]
+
+    useEffect(() => {
+        checkRugApproved()
+    }, )
+
+    useEffect(() => {
+        checkRugBalance();
+    }, )
+
+    const checkRugApproved = () => {
+        if (wallet) {
+            getBep20Contract(getAddress(selectedRug.address)).methods.allowance(wallet, getRugMarketAddress())
+                .call().then(res => {
+                if (new BigNumber(res.toString()).gt(0)) {
+                    setRugApproved(true)
+                }
+            })
+        }
+    }
+
+    const checkRugBalance = () => {
+        if (wallet) {
+            getBep20Contract(getAddress(selectedRug.address)).methods.balanceOf(wallet)
+                .call().then(res => {
+                setRugBalance(new BigNumber(res.toString()))
+            })
+        }
+    }
 
     const selectRuggedToken = (event) => {
         setRuggedToken(event.target.value)
         setRugApproved(false)
         setRugBalance(BIG_ZERO)
     }
-    function ApproveRuggedToken() {
+
+    const approveRuggedToken = () => {
         setRugApprovalPending(true)
         getBep20Contract(getAddress(tokens[ruggedToken].address), web3).methods.approve(getRugMarketAddress(), ethers.constants.MaxUint256)
             .send({ from: account() }).then(() => {
@@ -59,11 +89,17 @@ const CreateListingModal: React.FC<ModalProps> = ({onDismiss}) => {
     }
 
     const handleCreate = () => {
-        console.log('handle create')
-        rugMarketContract.methods.add(ruggedToken, quantity, price).send({'from': wallet})
+        rugMarketContract.methods.add(getAddress(tokens[ruggedToken].address), quantity, price).send({'from': wallet})
+            .then(res=> {
+                toastSuccess('Listing Created Successfully')
+                onDismiss()
+            })
     }
     return (
         <Modal onDismiss={onDismiss} title='Sell your rugged tokens here'>
+            <Text mt="8px" ml="auto" bold color="tertiary" fontSize="14px" mb="8px">
+                Select your rugged token
+            </Text>
             <select onChange={selectRuggedToken} className='SelectRuggedToken'>
                 {
                     ruggedTokens.map(rugSymbol => {
@@ -80,8 +116,8 @@ const CreateListingModal: React.FC<ModalProps> = ({onDismiss}) => {
                 Enter the amount of the selected tokens
             </Text>
             <input className="barracks-deposit-input" type="number" placeholder="Enter quantity here." onChange={onPriceChange}/>
-            <button type="button" className="barracks-deposit-button" onClick={handleCreate} disabled={createButtonDisabled}>
-                Approve Rugged Token
+            <button type="button" className="barracks-deposit-button" onClick={approveRuggedToken} disabled={rugApproved}>
+                {approveRuggedTokenText}
             </button>
             <Text mt="8px" ml="auto" bold color="tertiary" fontSize="14px" mb="8px">
                 Enter the price (in ZMBE) for rugged tokens

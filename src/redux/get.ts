@@ -6,6 +6,8 @@ import { BIG_ZERO } from '../utils/bigNumber'
 import { getBalanceAmount } from '../utils/formatBalance'
 import { getId } from '../utils'
 import { Id } from '../config/constants/types'
+import * as actions from './actions'
+import {MARK_RUG_MARKET_LISTING_SOLD} from "./actionTypes";
 
 export const account = (): string => {
   return store.getState().account
@@ -160,10 +162,30 @@ export const tombOverlayByPoolId = (poolId: number): TombOverlay => {
   return store.getState().tombOverlays.find(t => getId(t.pid) === poolId)
 }
 
-export const rugMarketListings = (): RugMarketListing[] => {
-  return store.getState().rugMarketListings;
+export const rugMarketListings = (filter, wallet): RugMarketListing[] => {
+  switch (filter) {
+    case 0:
+      return store.getState().rugMarketListings.filter(listing => listing.state === "0" && listing.owner !== wallet);
+      break
+    case 1:
+      return store.getState().rugMarketListings.filter(listing => listing.owner === wallet);
+      break
+    case 2:
+      return store.getState().rugMarketListings.filter(listing => listing.state === "1");
+      break
+    default:
+      return store.getState().rugMarketListings
+  }
 }
 
 export const rugMarketListingById = (id: number): RugMarketListing => {
   return store.getState().rugMarketListings.find(listing => listing.id === id);
+}
+
+export const markRugMarketListingSold = (id: number) => {
+  store.dispatch(actions.markRugMarketListingSold(id))
+}
+
+export const cancelRugMarketListing = (id: number) => {
+  store.dispatch(actions.cancelRugMarketListing(id))
 }
