@@ -164,6 +164,11 @@ export default function reducer(state = defaultState, action) {
         ...state,
         barracks: state.barracks.map(barrack => barrack.id === action.payload.id ? { ...barrack, barrackUserInfo: { ...barrack.barrackUserInfo, ...action.payload.barrackUserInfo } } : barrack),
       }
+    case types.ADD_RUG_MARKET_LISTING:
+      return {
+        ...state,
+        rugMarketListings: pushListingIfNotExists(action.payload.listing),
+      }
     case types.UPDATE_RUG_MARKET_LISTING:
       return {
         ...state,

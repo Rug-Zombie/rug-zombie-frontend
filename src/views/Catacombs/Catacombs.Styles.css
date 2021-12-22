@@ -77,6 +77,10 @@
 }
 
 .barracks-deposit-button:disabled {
+    opacity: 0.5;
+}
+
+.barracks-deposit-button:disabled {
     cursor: no-drop;
 }
 

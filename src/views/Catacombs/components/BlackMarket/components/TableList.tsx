@@ -68,7 +68,7 @@ const TableList: React.FC<TableListProps> = ({id}) => {
 
     const handleBuy = () => {
         rugMarketContract.methods.buy(id).send({'from': wallet})
-            .then(res => {
+            .then(() => {
                 toastSuccess(t(`Swap successful`));
                 markRugMarketListingSold(id);
             })
@@ -76,7 +76,7 @@ const TableList: React.FC<TableListProps> = ({id}) => {
 
     const handleCancel = () => {
         rugMarketContract.methods.cancel(id).send({'from': wallet})
-            .then(res => {
+            .then(() => {
                 toastSuccess(t(`Listing Cancelled`));
                 cancelRugMarketListing(id)
             });

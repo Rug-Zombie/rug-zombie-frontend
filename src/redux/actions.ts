@@ -205,6 +205,13 @@ export const updateTombOverlayUserInfo = (pid: number, userInfo: TombOverlayUser
   }
 })
 
+export const addRugMarketListing = (listing: RugMarketListing) => ({
+  type: actions.ADD_RUG_MARKET_LISTING,
+  payload: {
+    listing
+  }
+})
+
 export const updateRugMarketListing = (listing: RugMarketListing) => ({
   type: actions.UPDATE_RUG_MARKET_LISTING,
   payload: {

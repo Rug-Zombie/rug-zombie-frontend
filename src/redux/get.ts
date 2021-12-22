@@ -7,7 +7,6 @@ import { getBalanceAmount } from '../utils/formatBalance'
 import { getId } from '../utils'
 import { Id } from '../config/constants/types'
 import * as actions from './actions'
-import {MARK_RUG_MARKET_LISTING_SOLD} from "./actionTypes";
 
 export const account = (): string => {
   return store.getState().account

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Modal, Text} from '@catacombs-libs/uikit';
 import {ethers} from "ethers";
 import {BigNumber} from "bignumber.js";
-import ruggedTokens from "../../../../../config/constants/ruggedTokens";
+import allowedRuggedTokens from "../../../../../config/constants/rugMarketTokenList";
 import tokens from "../../../../../config/constants/tokens";
 import {BIG_ZERO} from "../../../../../utils/bigNumber";
 import {useRugMarket} from "../../../../../hooks/useContract";
@@ -20,26 +20,22 @@ interface ModalProps {
 const CreateListingModal: React.FC<ModalProps> = ({onDismiss}) => {
 
     const web3 = useWeb3()
-    const { toastSuccess } = useToast()
+    const {toastSuccess} = useToast()
     const wallet = account()
     const rugMarketContract = useRugMarket()
     const [quantity, setQuantity] = useState(BIG_ZERO)
     const [price, setPrice] = useState(BIG_ZERO)
     const [createButtonDisabled, setCreateButtonDisabled] = useState(true)
-    const [ruggedToken, setRuggedToken] = useState(ruggedTokens[0])
+    const [ruggedToken, setRuggedToken] = useState(allowedRuggedTokens[0])
     const [rugApproved, setRugApproved] = useState(false)
     const [rugBalance, setRugBalance] = useState(BIG_ZERO)
     const [approveRuggedTokenText, setApproveRuggedTokenText] = useState('Approve Rugged Token')
-    const [rugApprovalPending, setRugApprovalPending] = useState(false)
+    const [createListingButtontext, setCreateListingButtontext] = useState('Approve Rugged Token First')
     const selectedRug = tokens[ruggedToken]
 
     useEffect(() => {
         checkRugApproved()
-    }, )
-
-    useEffect(() => {
-        checkRugBalance();
-    }, )
+    },)
 
     const checkRugApproved = () => {
         if (wallet) {
@@ -47,62 +43,83 @@ const CreateListingModal: React.FC<ModalProps> = ({onDismiss}) => {
                 .call().then(res => {
                 if (new BigNumber(res.toString()).gt(0)) {
                     setRugApproved(true)
+                    setCreateListingButtontext('Create Listing')
+                    setCreateButtonDisabled(false)
+                } else {
+                    setRugApproved(false)
+                    setCreateListingButtontext('Approve Rugged Token First')
+                    setCreateButtonDisabled(true)
                 }
-            })
-        }
-    }
-
-    const checkRugBalance = () => {
-        if (wallet) {
-            getBep20Contract(getAddress(selectedRug.address)).methods.balanceOf(wallet)
-                .call().then(res => {
-                setRugBalance(new BigNumber(res.toString()))
             })
         }
     }
 
     const selectRuggedToken = (event) => {
         setRuggedToken(event.target.value)
-        setRugApproved(false)
-        setRugBalance(BIG_ZERO)
+        checkRugApproved()
     }
 
     const approveRuggedToken = () => {
-        setRugApprovalPending(true)
+        setApproveRuggedTokenText('Approving rugged token...')
         getBep20Contract(getAddress(tokens[ruggedToken].address), web3).methods.approve(getRugMarketAddress(), ethers.constants.MaxUint256)
-            .send({ from: account() }).then(() => {
-            setRugApprovalPending(false)
+            .send({from: account()}).then(() => {
             setRugApproved(true)
+            setApproveRuggedTokenText('Approved')
             toastSuccess(`${selectedRug.symbol} Approved`)
+            setCreateListingButtontext('Create Listing')
+            setCreateButtonDisabled(false)
         })
             .catch(() => {
-                setRugApprovalPending(false)
+                toastSuccess('Something went wrong! Please try again.')
+                setApproveRuggedTokenText('Approve Rugged Token')
+                setRugApproved(false)
             })
     }
 
     const onPriceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPrice(getDecimalAmount(new BigNumber(event.target.value || '0')))
+        setPrice(getDecimalAmount(new BigNumber(event.target.value || '0'), 18))
     }
 
     const onQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setQuantity(getDecimalAmount(new BigNumber(event.target.value || '0')))
+        setQuantity(getDecimalAmount(new BigNumber(event.target.value || '0'), 18))
     }
 
     const handleCreate = () => {
-        rugMarketContract.methods.add(getAddress(tokens[ruggedToken].address), quantity, price).send({'from': wallet})
-            .then(res=> {
-                toastSuccess('Listing Created Successfully')
-                onDismiss()
-            })
+        if (quantity.lt(1)) {
+            toastSuccess('Quantity should be atleast one.')
+            return
+        }
+        if (price.lt(1)) {
+            toastSuccess('You sure want to sell your rugged tokens for free?')
+            return
+        }
+        if (wallet) {
+            getBep20Contract(getAddress(selectedRug.address)).methods.balanceOf(wallet).call()
+                .then(res => {
+                    setRugBalance(new BigNumber(res.toString()))
+                    if (rugBalance.gte(quantity)) {
+                        rugMarketContract.methods.add(getAddress(tokens[ruggedToken].address), quantity, price).send({'from': wallet})
+                            .then(() => {
+                                toastSuccess('Listing Created Successfully')
+                                onDismiss()
+                            })
+                    } else {
+                        toastSuccess('Not enough balance')
+                    }
+                })
+        } else {
+            toastSuccess('Wallet not connected')
+        }
     }
+
     return (
         <Modal onDismiss={onDismiss} title='Sell your rugged tokens here'>
-            <Text mt="8px" ml="auto" bold color="tertiary" fontSize="14px" mb="8px">
+            <Text bold color="tertiary" fontSize="14px" mb="10px">
                 Select your rugged token
             </Text>
             <select onChange={selectRuggedToken} className='SelectRuggedToken'>
                 {
-                    ruggedTokens.map(rugSymbol => {
+                    allowedRuggedTokens.map(rugSymbol => {
                         const rug = tokens[rugSymbol]
                         return (
                             <option value={rugSymbol}>
@@ -112,19 +129,23 @@ const CreateListingModal: React.FC<ModalProps> = ({onDismiss}) => {
                     })
                 }
             </select>
-            <Text mt="8px" ml="auto" bold color="tertiary" fontSize="14px" mb="8px">
+            <Text bold color="tertiary" fontSize="14px" mt="10px">
                 Enter the amount of the selected tokens
             </Text>
-            <input className="barracks-deposit-input" type="number" placeholder="Enter quantity here." onChange={onPriceChange}/>
-            <button type="button" className="barracks-deposit-button" onClick={approveRuggedToken} disabled={rugApproved}>
+            <input className="barracks-deposit-input" style={{'margin': '5px'}} type="number"
+                   placeholder="Enter quantity here." onChange={onQuantityChange}/>
+            <button type="button" className="barracks-deposit-button" onClick={approveRuggedToken}
+                    disabled={rugApproved}>
                 {approveRuggedTokenText}
             </button>
-            <Text mt="8px" ml="auto" bold color="tertiary" fontSize="14px" mb="8px">
+            <Text bold color="tertiary" fontSize="14px" mt="10px">
                 Enter the price (in ZMBE) for rugged tokens
             </Text>
-            <input className="barracks-deposit-input" type="number" placeholder="Enter price here." onChange={onQuantityChange}/>
-            <button type="button" className="barracks-deposit-button" onClick={handleCreate} disabled={createButtonDisabled}>
-                Create Listing
+            <input className="barracks-deposit-input" style={{'margin': '5px'}} type="number"
+                   placeholder="Enter price here." onChange={onPriceChange}/>
+            <button type="button" className="barracks-deposit-button" onClick={handleCreate}
+                    disabled={createButtonDisabled}>
+                {createListingButtontext}
             </button>
         </Modal>
     );

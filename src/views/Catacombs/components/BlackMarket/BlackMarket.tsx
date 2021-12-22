@@ -7,9 +7,10 @@ import * as get from "../../../../redux/get";
 import CatacombsBackgroundDesktopSVG from "../../../../images/CatacombsMain-1920x1080px.svg";
 import CatacombsBackgroundMobileSVG from "../../../../images/CatacombsMain-414x720px.svg";
 import Table from "./components/Table";
-import {updateRugMarketListings} from "../../../../redux/fetch";
+import {updateRugMarketListings, addRugMarketListings} from "../../../../redux/fetch";
 import TabButtons from "./components/TabButtons";
-import {account} from "../../../../redux/get";
+import {account, cancelRugMarketListing, markRugMarketListingSold} from "../../../../redux/get";
+import {useRugMarket} from "../../../../hooks/useContract";
 
 const Container = styled.div`
   text-align: center;
@@ -21,49 +22,57 @@ const Container = styled.div`
   }
 `
 
-// const filterListings = (filter, wallet) => {
-//     console.log(get.rugMarketListings(), ' =====')
-//     switch (filter) {
-//         case 0:
-//             console.log('in case 0')
-//             return get.rugMarketListings().filter(listing => listing.state === "0" && listing.owner !== wallet); // open and not owned
-//             break
-//         case 1:
-//             // get.rugMarketListings().filter(listing => {
-//             //     console.log('in case 1')
-//             //     console.log(listing.owner)
-//             //     console.log(wallet)
-//             //     console.log(listing.owner === wallet)
-//             //     return listing.owner === wallet
-//             // })
-//             return get.rugMarketListings().filter(listing => listing.owner === wallet); // my listings
-//             break
-//         case 2:
-//             console.log('in case 2')
-//             return get.rugMarketListings().filter(listing => listing.state === "1"); // expired/sold
-//             break
-//         default:
-//             console.log('in default case')
-//             return get.rugMarketListings().filter(listing => listing.state === "0"); // open
-//     }
-// }
-
 const BlackMarket: React.FC = () => {
     const wallet = account();
     const {isLg, isXl} = useMatchBreakpoints()
     const isDesktop = isLg || isXl
     const [filter, setFilter] = useState(0)
+    const rugMarketContract = useRugMarket();
+    const visibleListings = get.rugMarketListings(filter, wallet)
+
+    useEffect(() => {
+        addListingListener()
+        cancelListingListener()
+        soldListingListener()
+    })
+
+    const addListingListener = () => {
+        rugMarketContract.events.ListingAdded({},
+            (error, event) => {
+                if (event?.returnValues) {
+                    addRugMarketListings(Number(event.returnValues.id))
+
+                }
+            })
+    }
+
+    const cancelListingListener = () => {
+        rugMarketContract.events.ListingCancelled({},
+            (error, event) => {
+                if (event?.returnValues) {
+                    cancelRugMarketListing(Number(event.returnValues.id))
+                }
+            })
+    }
+
+    const soldListingListener = () => {
+        rugMarketContract.events.ListingSold({},
+            (error, event) => {
+                if (event?.returnValues) {
+                    markRugMarketListingSold(Number(event.returnValues.id))
+                }
+            })
+    }
 
     useEffect(() => {
         updateRugMarketListings();
     })
 
-    const visibleListings = get.rugMarketListings(filter, wallet)
-
     return (
         <Menu>
             <Flex justifyContent='center'>
-                <Container style={{backgroundImage: `url(${isDesktop ? CatacombsBackgroundDesktopSVG : CatacombsBackgroundMobileSVG})`}}>
+                <Container
+                    style={{backgroundImage: `url(${isDesktop ? CatacombsBackgroundDesktopSVG : CatacombsBackgroundMobileSVG})`}}>
                     <Page style={{paddingTop: '5%'}}>
                         <TabButtons setFilter={setFilter}/>
                         <div>
