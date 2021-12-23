@@ -6,6 +6,7 @@ import nfts from './nfts'
 import spawningPools from './spawningPools'
 import sharkPools from './sharkPools'
 import auctions from './auctions'
+import burnGraves from './burnGraves'
 import { getId } from '../utils'
 import tombOverlays from './tombOverlays'
 import barracks from './barracks'
@@ -17,6 +18,7 @@ const defaultState = {
   tombs,
   tombOverlays,
   graves,
+  burnGraves,
   nfts,
   barracks,
   spawningPools,
@@ -183,6 +185,18 @@ export default function reducer(state = defaultState, action) {
       return {
         ...state,
         rugMarketListings: cancelRugMarketListing(action.payload.listingId),
+      }
+
+    case types.UPDATE_BURNGRAVE_POOL_INFO:
+      return {
+        ...state,
+        burnGraves: state.burnGraves.map(burnGrave => getId(burnGrave.id) === action.payload.id ? { ...burnGrave, poolInfo: { ...burnGrave.poolInfo, ...action.payload.poolInfo } } : burnGrave),
+      }
+
+    case types.UPDATE_BURNGRAVE_USER_INFO:
+      return {
+        ...state,
+        burnGraves: state.burnGraves.map(burnGrave => getId(burnGrave.id) === action.payload.id ? { ...burnGrave, userInfo: { ...burnGrave.userInfo, ...action.payload.userInfo } } : burnGrave),
       }
 
     default:

@@ -133,3 +133,7 @@ export const getBarracksTokenAddress = (id: number) => {
 export const getRugMarketAddress = () => {
   return getAddress(addresses.rugMarket)
 }
+
+export const getDrBurnensteinAddress = () => {
+  return getAddress(addresses.drburnenstein);
+}

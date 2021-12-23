@@ -13,6 +13,7 @@ import Gravedigger from 'views/Gravedigger/'
 import { useWeb3React } from '@web3-react/core'
 import SpawnWithUs from 'views/SpawnWithUs'
 import Catacombs from 'views/Catacombs'
+import BurnGraves from 'views/BurnGraves'
 import SuspenseWithChunkError from './components/SuspenseWithChunkError'
 import history from './routerHistory'
 import GlobalStyle from './style/Global'
@@ -29,7 +30,6 @@ import BlackMarket from './views/Catacombs/components/BlackMarket'
 import Barracks from './views/Catacombs/components/Barracks'
 import RugRoll from './views/Catacombs/components/RugRoll'
 import SwiperProvider from './views/Mausoleum/context/SwiperProvider'
-import DayOfDead from './views/DayOfDead'
 
 import SharkPools from './views/SharkPools'
 
@@ -98,8 +98,8 @@ const App: React.FC = () => {
             <Route exact path={routes.AUCTION}><Mausoleum /></Route>
             <Route exact path={routes.GRAVEYARD}><Graveyard /></Route>
             <Route exact path={routes.PROFILE}><Profile /></Route>
-            <Route exact path={routes.DAYOFDEAD}><DayOfDead /></Route>
             <Route exact path={routes.SHARKTANK}><SharkPools /></Route>
+            <Route exact path={routes.BURNGRAVES}><BurnGraves /></Route>
           </Menu>
         </Switch>
       </SuspenseWithChunkError>

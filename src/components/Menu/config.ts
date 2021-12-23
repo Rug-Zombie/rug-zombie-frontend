@@ -26,6 +26,11 @@ const config: MenuEntry[] = [
     href: '/spawning_pools'
   },
   {
+    label: 'Burn Graves',
+    icon: 'BurnGraves',
+    href: '/burngraves'
+  },
+  {
     label: 'Shark Tank',
     icon: 'SharkTankIcon',
     href: '/sharktank'

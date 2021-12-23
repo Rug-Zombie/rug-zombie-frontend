@@ -93,7 +93,7 @@ const ConvertNftModal: React.FC<StakeModalProps> = ({ pid, updateResult, onDismi
     <NftWarningModal onClick={handleConvertNft} approved={approved}/>,
   )
 
-  return <Modal onDismiss={onDismiss} title={`Convert ${symbol}`} headerBackground={theme.colors.gradients.cardHeader}>
+  return <Modal onDismiss={onDismiss} title={`Convert ${symbol}`} headerBackground={theme.colors.backgroundAlt}>
     <Flex alignItems='center' justifyContent='space-between' mb='8px'>
       <Text bold>Select ID of NFT:</Text>
       <Flex alignItems='center' minWidth='70px'>

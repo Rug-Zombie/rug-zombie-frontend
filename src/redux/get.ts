@@ -1,7 +1,7 @@
 import { BigNumber } from 'bignumber.js'
 import axios from 'axios'
 import store from './store'
-import {Grave, Tomb, SpawningPool, UserInfo, Auction, TombOverlay, SharkPool, Barrack, RugMarketListing} from './types'
+import { Grave, Tomb, SpawningPool, UserInfo, Auction, TombOverlay, SharkPool, BurnGrave, Barrack, RugMarketListing} from './types'
 import { BIG_ZERO } from '../utils/bigNumber'
 import { getBalanceAmount } from '../utils/formatBalance'
 import { getId } from '../utils'
@@ -159,6 +159,14 @@ export const tombOverlays = (): TombOverlay[] => {
 
 export const tombOverlayByPoolId = (poolId: number): TombOverlay => {
   return store.getState().tombOverlays.find(t => getId(t.pid) === poolId)
+}
+
+export const burnGraves = (): BurnGrave[] => {
+  return store.getState().burnGraves
+}
+
+export const burnGraveById = (id: number): BurnGrave => {
+  return store.getState().burnGraves.find(a => getId(a.id) === id);
 }
 
 export const rugMarketListings = (filter, wallet): RugMarketListing[] => {
