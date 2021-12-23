@@ -8,7 +8,7 @@ import {BIG_ZERO} from "../../../../../utils/bigNumber";
 import {useRugMarket} from "../../../../../hooks/useContract";
 import {account} from "../../../../../redux/get";
 import {getDecimalAmount} from "../../../../../utils/formatBalance";
-import {getBep20Contract} from "../../../../../utils/contractHelpers";
+import {getBep20Contract,} from "../../../../../utils/contractHelpers";
 import {getAddress, getRugMarketAddress} from "../../../../../utils/addressHelpers";
 import useWeb3 from "../../../../../hooks/useWeb3";
 import useToast from "../../../../../hooks/useToast";

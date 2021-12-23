@@ -8,7 +8,7 @@ import {useTranslation} from 'contexts/Localization';
 import {ethers} from "ethers";
 import {getDecimalAmount, getFullDisplayBalance} from "../../../../../utils/formatBalance";
 import {getAddress, getBarracksAddress} from "../../../../../utils/addressHelpers";
-import {getBep20Contract} from "../../../../../utils/contractHelpers";
+import {getBep20Contract,} from "../../../../../utils/contractHelpers";
 import useTokenBalance from "../../../../../hooks/useTokenBalance";
 import {BarrackModalProps} from "../modalProps";
 

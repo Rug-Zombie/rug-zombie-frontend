@@ -3,7 +3,7 @@ import { Button, Flex, Image, Modal, Text } from '@rug-zombie-libs/uikit';
 import { account, burnGraveById } from 'redux/get';
 import BigNumber from 'bignumber.js';
 import { APESWAP_EXCHANGE_URL } from 'config';
-import { getDrBurnensteinContract } from 'utils/contractHelpers';
+import { getDrBurnensteinContract, } from 'utils/contractHelpers';
 import { getAddress } from '../../../../utils/addressHelpers';
 import { useDrBurnenstein, useERC20 } from '../../../../hooks/useContract'
 import useToast from '../../../../hooks/useToast';

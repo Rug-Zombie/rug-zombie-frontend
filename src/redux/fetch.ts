@@ -51,7 +51,7 @@ import {
   getMausoleumAddress,
   getSpawningPoolAddress,
   getTombOverlayAddress,
-  getSharkPoolAddress
+  getSharkPoolAddress,
 } from '../utils/addressHelpers'
 import tombs from './tombs'
 import * as get from './get'
@@ -66,6 +66,8 @@ import { account, auctionById, zmbeBnbTomb } from './get'
 import web3 from '../utils/web3'
 import { multicallv2 } from '../utils/multicall'
 import { getId } from '../utils'
+import {tokenByAddress} from "../utils/tokenHelper";
+import {RugMarketListing} from "./types";
 
 export const initialData = (accountAddress: string, setZombiePrice?: any) => {
   store.dispatch(updateAccount(accountAddress))

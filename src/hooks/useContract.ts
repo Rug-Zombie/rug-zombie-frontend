@@ -34,7 +34,7 @@ import {
   getBarracksContract,
   getRugMarketContract,
   getSharkpoolContract,
-  getDrBurnensteinContract
+  getDrBurnensteinContract,
 } from 'utils/contractHelpers'
 
 /**

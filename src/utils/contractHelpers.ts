@@ -32,9 +32,12 @@ import {
   getMulticallAddress,
   getCatacombsAddress,
   getInstaBuyAddress,
-  getTombOverlayAddress, getRugRollAddress,
+  getTombOverlayAddress,
+  getRugRollAddress,
   getSharkPoolAddress,
-  getNftSwapperAddress, getZTokenSwapperAddress, getDrBurnensteinAddress
+  getNftSwapperAddress,
+  getZTokenSwapperAddress,
+  getDrBurnensteinAddress,
   getBarracksAddress,
   getRugMarketAddress,
 } from 'utils/addressHelpers'
