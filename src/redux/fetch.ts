@@ -60,6 +60,7 @@ import web3 from '../utils/web3'
 import {multicallv2} from '../utils/multicall'
 import {getId} from '../utils'
 import {tokenByAddress} from "../utils/tokenHelper";
+import {RugMarketListing} from "./types";
 
 export const initialData = (accountAddress: string, setZombiePrice?: any) => {
     store.dispatch(updateAccount(accountAddress))
@@ -824,20 +825,6 @@ export const updateRugMarketListings = () => {
         })
 }
 
-export const addRugMarketListings = (id: number) => {
-    const rugMarketContract = getRugMarketContract();
-    rugMarketContract.methods.listings(id).call()
-        .then(listing => {
-            store.dispatch(addRugMarketListing(
-                {
-                    id,
-                    owner: listing.owner,
-                    token: tokenByAddress(listing.token),
-                    quantity: listing.quantity,
-                    price: listing.price,
-                    taxedToken: listing.taxedToken,
-                    state: listing.state
-                }
-            ))
-        })
+export const addRugMarketListings = (listing: RugMarketListing) => {
+    store.dispatch(addRugMarketListing(listing))
 }

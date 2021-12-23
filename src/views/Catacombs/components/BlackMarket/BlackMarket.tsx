@@ -11,6 +11,7 @@ import {updateRugMarketListings, addRugMarketListings} from "../../../../redux/f
 import TabButtons from "./components/TabButtons";
 import {account, cancelRugMarketListing, markRugMarketListingSold} from "../../../../redux/get";
 import {useRugMarket} from "../../../../hooks/useContract";
+import {tokenByAddress} from "../../../../utils/tokenHelper";
 
 const Container = styled.div`
   text-align: center;
@@ -29,40 +30,47 @@ const BlackMarket: React.FC = () => {
     const [filter, setFilter] = useState(0)
     const rugMarketContract = useRugMarket();
     const visibleListings = get.rugMarketListings(filter, wallet)
+    const [update, setUpdate] = useState(false)
 
     useEffect(() => {
-        addListingListener()
-        cancelListingListener()
-        soldListingListener()
-    })
-
-    const addListingListener = () => {
         rugMarketContract.events.ListingAdded({},
             (error, event) => {
                 if (event?.returnValues) {
-                    addRugMarketListings(Number(event.returnValues.id))
-
+                    addRugMarketListings(
+                        {
+                            id: event.returnValues.id,
+                            price: event.returnValues.price,
+                            quantity: event.returnValues.quantity,
+                            token: tokenByAddress(event.returnValues.token),
+                            taxedToken: true,
+                            owner: event.returnValues.owner,
+                            state: '0',
+                        }
+                    )
+                    setUpdate(!update)
                 }
             })
-    }
+    })
 
-    const cancelListingListener = () => {
+    useEffect(() => {
         rugMarketContract.events.ListingCancelled({},
             (error, event) => {
                 if (event?.returnValues) {
                     cancelRugMarketListing(Number(event.returnValues.id))
+                    setUpdate(!update)
                 }
             })
-    }
+    })
 
-    const soldListingListener = () => {
+    useEffect(() => {
         rugMarketContract.events.ListingSold({},
             (error, event) => {
                 if (event?.returnValues) {
                     markRugMarketListingSold(Number(event.returnValues.id))
+                    setUpdate(!update)
                 }
             })
-    }
+    })
 
     useEffect(() => {
         updateRugMarketListings();
