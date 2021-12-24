@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import numeral from 'numeral'
-import { formatDuration } from 'utils/timerHelpers'
+import { formatDuration } from '../../../../../../../utils/timerHelpers'
 
 export enum GraveItemType {
   Number,
@@ -16,11 +16,11 @@ interface GraveItemProps {
   type: GraveItemType;
 }
 
-const ItemText = styled.p`
+const ItemText = styled.text`
   text-align: left;
   font: normal normal normal 12px/24px Poppins;
+  letter-spacing: 0px;
   color: #6B7682;
-  padding: 0 15px 0 0;
 `
 
 const GraveItem: React.FC<GraveItemProps> = ({ label, value, type}) => {

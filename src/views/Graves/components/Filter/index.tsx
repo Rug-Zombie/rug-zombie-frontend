@@ -124,7 +124,7 @@ const Filter = () => {
       setShowGravesMenu(false);
     }
   };
-  
+
   const handleItemClick = (e, condition) => {
     e.preventDefault();
     if (condition === "graves") {
@@ -163,7 +163,7 @@ const Filter = () => {
         {showGravesMenu ? (
           <DropdownContent>
             {gravesList.map(grave => {
-              return ( 
+              return (
                 <DropdownItem
                   key={grave}
                   onClick={(e) => handleItemClick(e, "graves")}
@@ -199,7 +199,7 @@ const Filter = () => {
       </DropdownMenu>
     </Dropdowns>
     <SearchBar>
-     <Input placeholder='Search by name, symbol or address' />  
+      <Input placeholder='Search by name, symbol or address' />
     </SearchBar>
   </FilterContainer>
 }

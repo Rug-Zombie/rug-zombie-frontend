@@ -62,7 +62,7 @@ export const DropdownItem = styled.div`
     color: #30C00D;
   }
   padding: 0 15px 0 15px;
-`; 
+`;
 
 export const Text = styled.a`
   text-align: center;

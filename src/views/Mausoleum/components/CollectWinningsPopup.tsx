@@ -143,7 +143,7 @@ const CollectWinningsPopup = () => {
       timer.current = setInterval(async () => {
         const bets = await getBetHistory({ user: account.toLowerCase(), claimed: false })
 
-        // Filter out bets that were not winners
+        // Filter.tsx out bets that were not winners
         const winnerBets = bets.filter((bet) => {
           return bet.position === bet.round.position
         })

@@ -2,22 +2,29 @@
 import React from 'react'
 
 import { useMatchBreakpoints } from '@rug-zombie-libs/uikit'
+import styled from 'styled-components'
 
 interface VideoProps {
   path: string;
-  maxWidth?: string;
 }
 
-const Video: React.FC<VideoProps> = ({ path, maxWidth }) => {
+const StyledVideo = styled.video`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px 20px 0px 0px;
+`
+
+const PreviewVideo: React.FC<VideoProps> = ({ path }) => {
   const { isLg, isXl } = useMatchBreakpoints()
   const isDesktop = isLg || isXl
 
   const maxMobileHeight = 280
   const maxMobileWidth = 260
   return isDesktop ? (
-    <video style={{ maxWidth: maxWidth || '90%', maxHeight: '100%' }} autoPlay controls={false} loop muted>
+    <StyledVideo autoPlay controls={false} loop muted>
       <source src={path} type='video/webm' />
-    </video>
+    </StyledVideo>
   ) : (
     // eslint-disable-next-line
     <div dangerouslySetInnerHTML={{
@@ -30,4 +37,4 @@ const Video: React.FC<VideoProps> = ({ path, maxWidth }) => {
   )
 }
 
-export default Video
+export default PreviewVideo

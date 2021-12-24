@@ -107,6 +107,15 @@ const App: React.FC = () => {
               </AppContainer>
             </>
           </Route>
+
+          <Route exact path={routes.GRAVEYARD}>
+            <>
+              <TopMenu />
+              <AppContainer>
+                <Graveyard />
+              </AppContainer>
+            </>
+          </Route>
           <Menu>
 
             <Route exact path={routes.TOMBS}><Tombs /></Route>

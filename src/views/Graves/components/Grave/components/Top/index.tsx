@@ -151,8 +151,8 @@ const Top: React.FC<TopProps> = ({ pid, open, setOpen }) => {
           <GraveItem label='Withdrawal Timer' value={2000000} type={GraveItemType.Duration} />
           {
             open
-            ? <img src={uppointer} alt='Close Grave' style={{ width: '35px', height: '35px' }} />
-            : <img src={downpointer} alt='Open Grave' style={{ width: '35px', height: '35px' }} />
+              ? <img src={uppointer} alt='Close Grave' style={{ width: '35px', height: '35px' }} />
+              : <img src={downpointer} alt='Open Grave' style={{ width: '35px', height: '35px' }} />
           }
         </Percentages>
       </GraveSubRow>
