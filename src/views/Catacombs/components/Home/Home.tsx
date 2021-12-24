@@ -91,6 +91,7 @@ const Home: React.FC = () => {
   const { t } = useTranslation()
   const { isLg, isXl } = useMatchBreakpoints()
   const isDesktop = isLg || isXl
+
   return (
     <Menu>
       <StyledDiv>

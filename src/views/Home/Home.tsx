@@ -6,6 +6,7 @@ import AnnouncementCard from 'views/Home/components/AnnouncementCard'
 import ZmbeStats from 'views/Home/components/ZmbeStats'
 import TotalValueLockedCard from 'views/Home/components/TotalValueLockedCard'
 import { useWeb3React } from '@web3-react/core'
+import { ethers } from 'ethers'
 import HomeInstabuyCard from './components/HomeInstabuyCard'
 import GraveStakingCard from './components/GraveStakingCard'
 import * as fetch from '../../redux/fetch'
@@ -49,6 +50,11 @@ const Home: React.FC<HomeProps> = ({ modalObj }) => {
   useEffect(() => {
     fetch.initialData(account)
   }, [account])
+
+  const {ethereum} = window
+  const provider = new ethers.providers.Web3Provider(ethereum)
+  console.log(provider.getSigner())
+  console.log("provider")
 
   return (
     <>

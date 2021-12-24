@@ -186,6 +186,26 @@ const tokens = {
     projectLink: '',
     tokenLogo: 'https://assets.coingecko.com/coins/images/14588/small/logo_-_2021-03-31T123525.615.png?1617165339'
   },
+  mneb: {
+    symbol: 'MNEB',
+    address: {
+      56: '0xd22202d23fe7de9e3dbe11a2a88f42f4cb9507cf',
+      97: '',
+    },
+    decimals: 8,
+    projectLink: '',
+    tokenLogo: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1673.png'
+  },
+  zmneb: {
+    symbol: 'zMNEB',
+    address: {
+      56: '0x043EfaF7aC4Efb1E373D0368FC2DB33f063DF82d',
+      97: '',
+    },
+    decimals: 0,
+    projectLink: '',
+    tokenLogo: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1673.png'
+  },
   yape: {
     symbol: 'yAPE',
     address: {
