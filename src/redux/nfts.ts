@@ -1205,7 +1205,7 @@ const nfts: Nft[] = [
     symbol: 'TRETRE',
     description: 'Let it Burn.',
     address: {
-      56: '0x0D00b12e1031E80a32C63fa047717aFd3fadA261',
+      56: '0x2B23D9Cc48D9AAeEB51bA06A2aE10945E9AE5a48',
       97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
     },
     totalSupply: BIG_ZERO,
@@ -1221,7 +1221,7 @@ const nfts: Nft[] = [
     symbol: 'CARLLITO',
     description: 'Let it Burn.',
     address: {
-      56: '0x0D00b12e1031E80a32C63fa047717aFd3fadA261',
+      56: '0xc850E5e15B3cE6Ff55Ff5B47dE789B6826aEEA5F',
       97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
     },
     totalSupply: BIG_ZERO,
