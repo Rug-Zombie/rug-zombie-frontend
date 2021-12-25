@@ -5,6 +5,8 @@ import BigNumber from 'bignumber.js'
 import useEagerConnect from 'hooks/useEagerConnect'
 import ToastListener from 'components/ToastListener'
 import { routes } from 'routes'
+import TopMenu from 'components/TopMenu'
+import AppContainer from 'components/AppContainer'
 import Menu from 'components/Menu'
 import Loader from 'components/Loader'
 import Home from 'views/Home/Home'
@@ -89,9 +91,24 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.BLACKMARKET}><BlackMarket /></Route>
           <Route exact path={routes.BARRACKS}><Barracks /></Route>
+          <Route exact path={routes.HOME}>
+            <>
+              <TopMenu />
+              <AppContainer>
+                <Home />
+              </AppContainer>
+            </>
+          </Route>
+          <Route exact path={routes.GRAVES}>
+            <>
+              <TopMenu />
+              <AppContainer>
+                <Graves />
+              </AppContainer>
+            </>
+          </Route>
           <Menu>
-            <Route exact path={routes.HOME}><Home modalObj={{ modal, setModal }} /></Route>
-            <Route exact path={routes.GRAVES}><Graves /></Route>
+
             <Route exact path={routes.TOMBS}><Tombs /></Route>
             <Route exact path={routes.SPAWNING_POOLS}><SpawningPools /></Route>
             <Route exact path={routes.MAUSOLEUM}><PredictionsHome /></Route>

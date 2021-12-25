@@ -1085,6 +1085,7 @@ const tokens = {
       56: '',
       97: '',
     },
+    tokenLogo: 'images/tokens/clear.png',
     decimals: 0,
     projectLink: '',
   },
