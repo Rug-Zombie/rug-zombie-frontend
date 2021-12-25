@@ -1247,6 +1247,22 @@ const nfts: Nft[] = [
     artist: artists.ZomBaes,
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 78,
+    name: 'Garth',
+    symbol: 'GARTH',
+    description: 'Call me a cake because I’ll go straight to your ass cowboy.',
+    address: {
+      56: '0x71Af678b83E69C1754FCf50A37BF9b8989e980E4',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/Qmbn35zChcRM5UWQFHwk4zF4bY9Ku4bq4YiW7qaamKkWsw',
+    type: 'image',
+    rarity: 'Legendary',
+    artist: artists.jussjoshinduh,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 
