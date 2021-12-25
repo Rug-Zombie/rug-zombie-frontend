@@ -1,8 +1,8 @@
 import React from 'react'
 import { CardBody, Heading, LinkExternal, useModal } from '@rug-zombie-libs/uikit'
-import nfts from 'redux/nfts'
-import { Artist } from 'redux/types'
+import nfts from 'config/constants/nfts'
 import ConvertNftModal from './ConvertNftModal'
+import { Artist } from '../../config/constants/types'
 
 interface NftCardProps {
     name: string;
@@ -46,7 +46,7 @@ const NftCard: React.FC<NftCardProps> = ({ name, rznftid, dodnftid, artist }: Nf
                             <span className="indetails-type">
                                 You can convert your {rznft.name} into this special edition Day of the Dead NFT!
                             </span>
-                            <button onClick={onConvertNftModal} className="btn btn-disabled w-100" type="button">Convert {rznft.symbol}</button>                               
+                            <button onClick={onConvertNftModal} className="btn btn-disabled w-100" type="button">Convert {rznft.symbol}</button>
                         </div>
                     </div>
                 </CardBody>                

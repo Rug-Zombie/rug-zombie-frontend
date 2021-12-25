@@ -53,7 +53,7 @@ const RuggedTokenApprovalAction: React.FC<ApprovalActionProps> = ({ grave, isLoa
           onClick={handleApprove}
           width="100%"
         >
-          {`Approve ${grave.ruggedToken.symbol}`}
+          {`Approve `}
         </Button>
       )}
     </>

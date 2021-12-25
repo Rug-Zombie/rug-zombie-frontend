@@ -1,79 +1,59 @@
-import React, { useEffect } from 'react'
-import styled from 'styled-components'
-import { BaseLayout, Flex } from '@rug-zombie-libs/uikit'
-import Page from 'components/layout/Page'
-import AnnouncementCard from 'views/Home/components/AnnouncementCard'
-import ZmbeStats from 'views/Home/components/ZmbeStats'
-import TotalValueLockedCard from 'views/Home/components/TotalValueLockedCard'
-import { useWeb3React } from '@web3-react/core'
-import GraveStakingCard from './components/GraveStakingCard'
-import * as fetch from '../../redux/fetch'
-import WhatsNewCard from './components/WhatsNewCard'
-import Title from './components/Title'
-import EnterGravesCard from './components/EnterGravesCard'
-import VictimPoolsCard from './components/VictimPool/VictimPoolsCard'
-import useEagerConnect from '../../hooks/useEagerConnect'
+import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router'
+import { initialSpawningPoolData, initialTombData } from 'redux/fetch'
+import { bnbPriceUsd, drFrankensteinZombieBalance, spawningPools, tombs, zombiePriceUsd } from 'redux/get'
+import { BIG_ZERO } from 'utils/bigNumber'
+import { getBalanceAmount } from 'utils/formatBalance'
+import { useMultiCall, useZombie } from 'hooks/useContract'
+import Footer from 'components/Footer'
+import Hero from './components/Hero'
+import NftSection from './components/NftSection'
+import TutorialSection from './components/TutorialSection'
 
-const Cards = styled(BaseLayout)`
-  align-items: stretch;
-  justify-content: stretch;
-  margin-bottom: 32px;
-
-  & > div {
-    grid-column: span 6;
-    width: 100%;
-  }
-
-  ${({ theme }) => theme.mediaQueries.sm} {
-    & > div {
-      grid-column: span 8;
-    }
-  }
-
-  ${({ theme }) => theme.mediaQueries.lg} {
-    & > div {
-      grid-column: span 6;
-    }
-  }
-`
-
-interface HomeProps {
-  modalObj: {modal: boolean, setModal: any};
-}
-
-const Home: React.FC<HomeProps> = ({ modalObj }) => {
-  useEagerConnect()
-  const { account } = useWeb3React()
+const Home: React.FC = () => {
+  const history = useHistory()
+  const multi = useMultiCall()
+  const zombie = useZombie()
+  const [updatePoolInfo, setUpdatePoolInfo] = useState(0)
   useEffect(() => {
-    fetch.initialData(account)
-  }, [account])
+    initialTombData()
+  }, [])
+  useEffect(() => {
+    if (updatePoolInfo === 0) {
+      initialSpawningPoolData(zombie, { update: updatePoolInfo, setUpdate: setUpdatePoolInfo })
+    }
+  }, [multi, updatePoolInfo, zombie])
+
+
+  const totalSpawningPoolStaked = spawningPools().reduce((accumulator, sp) => {
+    return sp.poolInfo.totalZombieStaked.plus(accumulator)
+  }, BIG_ZERO)
+
+  const zombiePrice = zombiePriceUsd()
+  let tombsTvl = BIG_ZERO
+  tombs().forEach(t => {
+    const { poolInfo: { reserves, lpTotalSupply, totalStaked } } = t
+    const reservesUsd = [getBalanceAmount(reserves[0]).times(zombiePrice), getBalanceAmount(reserves[1]).times(bnbPriceUsd())]
+    const bnbLpTokenPrice = reservesUsd[0].plus(reservesUsd[1]).div(lpTotalSupply)
+    tombsTvl = tombsTvl.plus(totalStaked.times(bnbLpTokenPrice))
+  })
+
+  const zombieBalance = getBalanceAmount(drFrankensteinZombieBalance()).times(zombiePrice)
+  const spawningPoolTvl = getBalanceAmount(totalSpawningPoolStaked).times(zombiePrice)
+  const [tvl, setTvl] = useState(tombsTvl.plus(zombieBalance).plus(spawningPoolTvl))
+  const newTvl = tombsTvl.plus(zombieBalance).plus(spawningPoolTvl)
+  useEffect(() => {
+    if (!tvl.eq(newTvl) || tvl.isNaN()) {
+      setTvl(newTvl)
+    }
+  }, [newTvl, tvl])
 
   return (
     <>
-      {/* <NFTBanner/> */}
-    <Title/>
-    <Page>
-      <div>
-        <Cards>
-          <GraveStakingCard />
-          <AnnouncementCard modalObj={modalObj} />
-          {/* <HomeInstabuyCard id={2} refresh={() => { */}
-          {/*       // eslint-disable-next-line */}
-          {/*       console.log('refresh') */}
-          {/*     }} modalObj={modalObj} /> */}
-          <VictimPoolsCard />
-          <Flex flexDirection="column" >
-            <EnterGravesCard/>
-            <TotalValueLockedCard/>
-          </Flex>
-        </Cards>
-        <Cards>
-
-          <ZmbeStats />
-          <WhatsNewCard/>
-        </Cards>
-      </div>
-    </Page>
+      <Hero tvl={tvl} history={history} />
+      <NftSection history={history} />
+      <TutorialSection />
+      <Footer />
     </>
   )
 }

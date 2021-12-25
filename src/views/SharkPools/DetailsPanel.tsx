@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { LinkExternal } from '@rug-zombie-libs/uikit';
-import { sharkPoolById, nftById, bnbPriceUsd } from 'redux/get';
+import { sharkPoolById, bnbPriceUsd } from 'redux/get';
 import { useSharkpool } from 'hooks/useContract';
 import { getFullDisplayBalance } from 'utils/formatBalance';
 import BigNumber from 'bignumber.js';
+import { useGetNftById } from '../../state/hooks'
 
 interface DetailsPanelProps {
     id: number
@@ -13,7 +14,7 @@ const DetailsPanel: React.FC<DetailsPanelProps> = ({ id }) => {
     const [unlockFee, setUnlockFee] = useState(0);
 
     const pool = sharkPoolById(id);
-    const nft = nftById(pool.nft);
+    const nft = useGetNftById(pool.nft);
 
     const poolContract = useSharkpool(id);
 

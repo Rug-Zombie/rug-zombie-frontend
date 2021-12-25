@@ -61,6 +61,30 @@ export const useGetBufferBlocks = () => {
   return useSelector((state: State) => state.predictions.bufferBlocks)
 }
 
+export const useGetGraves = () => {
+  return useSelector((state: State) => state.graves)
+}
+
+export const useGetTombs = () => {
+  return useSelector((state: State) => state.tombs)
+}
+
+export const useGetSpawningPools = () => {
+  return useSelector((state: State) => state.spawningPools)
+}
+
+export const useGetUserActivities = () => {
+  return useSelector((state: State) => state.userActivity)
+}
+
+
+
+export {
+  useGetNfts,
+  useGetNftById,
+  useGetNftTotalSupply,
+} from './nfts/hooks'
+
 export const useGetTotalIntervalBlocks = () => {
   const intervalBlocks = useGetIntervalBlocks()
   const bufferBlocks = useGetBufferBlocks()

@@ -18,9 +18,7 @@ const FeeSummary: React.FC<FeeSummaryProps> = ({ userData, grave, feeInZombie })
   const { t } = useTranslation()
   const { targetRef, tooltip, tooltipVisible } = useTooltip(
     <>
-      <Text bold mb="4px">
-        {t(`Early withdrawal fee: %fee%%`, { fee: (grave.earlyWithdrawalFee * 100) })}
-      </Text>
+
       <Text>
         {t(
           'Only applies when unstaking before staking period is complete. Unstaking after the period is complete will not include a fee.',

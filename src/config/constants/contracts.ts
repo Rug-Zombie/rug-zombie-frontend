@@ -24,6 +24,10 @@ export default {
     97: '',
     56: '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73',
   },
+  apeswapFactory: {
+    97: '',
+    56: '0x0841BD0B734E4F5853f0dD8d7Ea041c241fb0Da6',
+  },
   nftConverter: {
     97: '',
     56: '0x29F085A56050285ba2d6D72983bd7F77a373e413',
@@ -123,5 +127,9 @@ export default {
   drburnenstein: {
     56: '0x7590FA9B94f6E030E6d0A86a4ed10B31f558CFDE',
     97: '0x8fe29fA5b27f800077dE4f712f3B394BeB876608'
+  },
+  pancakeRouter: {
+    56: '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73',
+    97: '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73'
   }
 }

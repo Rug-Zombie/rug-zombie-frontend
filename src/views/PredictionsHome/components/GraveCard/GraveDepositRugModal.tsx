@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Modal, Text, Flex, Image, Button, Slider, BalanceInput, AutoRenewIcon } from '@rug-zombie-libs/uikit'
 import { useTranslation } from 'contexts/Localization'
-import { BASE_EXCHANGE_URL } from 'config'
 import useTheme from 'hooks/useTheme'
 import BigNumber from 'bignumber.js'
 import { getFullDisplayBalance, formatNumber, getDecimalAmount } from 'utils/formatBalance'
 import Web3 from 'web3'
 import FeeSummary from './FeeSummary'
 import { GraveConfig } from '../../../../config/constants/types'
+import { BIG_ZERO } from '../../../../utils/bigNumber'
 
 interface VaultStakeModalProps {
   grave: GraveConfig
@@ -44,7 +44,7 @@ const GraveDepositRugModal: React.FC<VaultStakeModalProps> = ({
   const usdValueStaked = stakeAmount && formatNumber(new BigNumber(stakeAmount).times(stakingTokenPrice).toNumber())
   const handleStakeInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value || '0'
-    const convertedInput = new BigNumber(inputValue).multipliedBy(new BigNumber(10).pow(grave.ruggedToken.decimals))
+    const convertedInput = BIG_ZERO
     const percentage = Math.floor(convertedInput.dividedBy(stakingMax).multipliedBy(100).toNumber())
     setStakeAmount(inputValue)
     setPercent(percentage > 100 ? 100 : percentage)
@@ -52,7 +52,7 @@ const GraveDepositRugModal: React.FC<VaultStakeModalProps> = ({
 
   const handleChangePercent = (sliderPercent: number) => {
     const percentageOfStakingMax = stakingMax.dividedBy(100).multipliedBy(sliderPercent)
-    const amountToStake = getFullDisplayBalance(percentageOfStakingMax, grave.ruggedToken.decimals, grave.ruggedToken.decimals)
+    const amountToStake = '0'
     setStakeAmount(amountToStake)
     setPercent(sliderPercent)
   }
@@ -87,16 +87,15 @@ const GraveDepositRugModal: React.FC<VaultStakeModalProps> = ({
 
   return (
     <Modal
-      title={`Deposit ${grave.ruggedToken.symbol}`}
+      title={`Deposit `}
       onDismiss={onDismiss}
       headerBackground={theme.colors.gradients.cardHeader}
     >
       <Flex alignItems='center' justifyContent='space-between' mb='8px'>
         <Text bold>Deposit:</Text>
         <Flex alignItems='center' minWidth='70px'>
-          <Image src={`/images/tokens/${grave.ruggedToken.symbol}.png`} width={24} height={24} alt={grave.ruggedToken.symbol} />
           <Text ml='4px' bold>
-            {grave.ruggedToken.symbol}
+            na
           </Text>
         </Flex>
       </Flex>
@@ -105,9 +104,7 @@ const GraveDepositRugModal: React.FC<VaultStakeModalProps> = ({
         onChange={handleStakeInputChange}
         currencyValue={`~${usdValueStaked || 0} USD`}
       />
-      <Text mt='8px' ml='auto' color='textSubtle' fontSize='12px' mb='8px'>
-        Balance: {getFullDisplayBalance(stakingMax, grave.ruggedToken.decimals)}
-      </Text>
+
       <Slider
         min={0}
         max={100}
@@ -131,14 +128,6 @@ const GraveDepositRugModal: React.FC<VaultStakeModalProps> = ({
           MAX
         </StyledButton>
       </Flex>
-      {isRemovingStake && hasUnstakingFee && (
-        <FeeSummary
-          grave={grave}
-          stakingTokenSymbol={grave.ruggedToken.symbol}
-          userData={userData}
-          stakeAmount={stakeAmount}
-        />
-      )}
       <Button
         isLoading={pendingTx}
         endIcon={pendingTx ? <AutoRenewIcon spin color='currentColor' /> : null}
@@ -148,11 +137,6 @@ const GraveDepositRugModal: React.FC<VaultStakeModalProps> = ({
       >
         {pendingTx ? t('Confirming') : t('Confirm')}
       </Button>
-      {!isRemovingStake && (
-        <Button mt='8px' as='a' external href={BASE_EXCHANGE_URL} variant='secondary'>
-          {t('Get')} {grave.ruggedToken.symbol}
-        </Button>
-      )}
     </Modal>
   )
 }

@@ -2,7 +2,6 @@ import { BIG_ZERO } from '../utils/bigNumber'
 import * as types from './actionTypes'
 import tombs from './tombs'
 import graves from './graves'
-import nfts from './nfts'
 import spawningPools from './spawningPools'
 import sharkPools from './sharkPools'
 import auctions from './auctions'
@@ -16,7 +15,6 @@ const defaultState = {
   tombOverlays,
   graves,
   burnGraves,
-  nfts,
   spawningPools,
   sharkPools,
   bnbPriceUsd: 0,
@@ -106,11 +104,6 @@ export default function reducer(state = defaultState, action) {
         ...state,
         drFrankenstein: { ...state.drFrankenstein, totalAllocPoint: action.payload.totalAllocPoint },
       }
-    case types.UPDATE_NFT_TOTAL_SUPPLY:
-      return {
-        ...state,
-        nfts: state.nfts.map(nft => nft.id === action.payload.id ? { ...nft, totalSupply: action.payload.totalSupply } : nft)
-      }
     case types.UPDATE_AUCTION_INFO:
       return {
         ...state,
@@ -120,11 +113,6 @@ export default function reducer(state = defaultState, action) {
       return {
         ...state,
         auctions: state.auctions.map(auction => auction.id === action.payload.id ? { ...auction, userInfo: { ...auction.userInfo, ...action.payload.userInfo } } : auction)
-      }
-    case types.UPDATE_NFT_USER_INFO:
-      return {
-        ...state,
-        nfts: state.nfts.map(nft => nft.id === action.payload.id ? { ...nft, userInfo: { ...nft.userInfo, ...action.payload.userInfo } } : nft)
       }
     case types.UPDATE_BNB_BALANCE:
       return {

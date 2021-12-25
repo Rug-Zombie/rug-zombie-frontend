@@ -82,7 +82,7 @@ const GraveWithdrawModal: React.FC<VaultStakeModalProps> = ({
   }
 
   const doneStaking = (Date.now() / 1000) >= userData.withdrawalDate
-  const confirm = doneStaking ? 'Confirm' : `Confirm (${grave.earlyWithdrawalFee * 100}% Fee)`
+  const confirm = doneStaking ? 'Confirm' : `Confirm (}% Fee)`
   const zombieStaked = new BigNumber(userData.zombieStaked)
   const earlyWithdrawalFee = zombieStaked.times(0.05)
 

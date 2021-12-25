@@ -13,11 +13,11 @@ interface FeeSummaryProps {
 
 const FeeSummary: React.FC<FeeSummaryProps> = ({ stakingTokenSymbol, userData, grave, stakeAmount }) => {
   const { t } = useTranslation()
-  const feeInZombie = (parseFloat(stakeAmount) * (grave.earlyWithdrawalFee / 100)).toFixed(4)
+  const feeInZombie = 0
   const { targetRef, tooltip, tooltipVisible } = useTooltip(
     <>
       <Text bold mb="4px">
-        {t(`Unstaking fee: %fee%%`, { fee: grave.earlyWithdrawalFee })}
+        {t(`Unstaking fee: %fee%%`, { fee: 0 })}
       </Text>
       <Text>
         {t(

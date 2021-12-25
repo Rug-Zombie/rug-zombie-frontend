@@ -5,10 +5,12 @@ import BigNumber from 'bignumber.js'
 import useEagerConnect from 'hooks/useEagerConnect'
 import ToastListener from 'components/ToastListener'
 import { routes } from 'routes'
+import TopMenu from 'components/TopMenu'
+import AppContainer from 'components/AppContainer'
 import Menu from 'components/Menu'
 import Loader from 'components/Loader'
 import Home from 'views/Home/Home'
-import Tombs from 'views/Tombs/Tombs'
+import Tombs from 'views/Tombs'
 import Gravedigger from 'views/Gravedigger/'
 import { useWeb3React } from '@web3-react/core'
 import SpawnWithUs from 'views/SpawnWithUs'
@@ -32,6 +34,8 @@ import RugRoll from './views/Catacombs/components/RugRoll'
 import SwiperProvider from './views/Mausoleum/context/SwiperProvider'
 
 import SharkPools from './views/SharkPools'
+import { useAppDispatch } from './state'
+import { fetchNftPublicDataAsync } from './state/nfts'
 
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page
@@ -43,6 +47,8 @@ BigNumber.config({
 })
 
 const App: React.FC = () => {
+  const dispatch = useAppDispatch()
+
   // Monkey patch warn() because of web3 flood
   // To be removed when web3 1.3.5 is released
   useEffect(() => {
@@ -62,6 +68,11 @@ const App: React.FC = () => {
   useEffect(() => {
     fetch.initialData(account, setZombiePrice)
   }, [account])
+
+  // initialise nft state
+  useEffect(() => {
+    dispatch(fetchNftPublicDataAsync())
+  }, [dispatch])
 
   const handleAuthentication = () => {
     setAuthenticated(!isAuthenticated)
@@ -89,15 +100,50 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.BLACKMARKET}><BlackMarket /></Route>
           <Route exact path={routes.BARRACKS}><Barracks /></Route>
+          <Route exact path={routes.HOME}>
+            <>
+              <TopMenu />
+              <AppContainer>
+                <Home />
+              </AppContainer>
+            </>
+          </Route>
+          <Route exact path={routes.GRAVES}>
+            <>
+              <TopMenu />
+              <AppContainer>
+                <Graves />
+              </AppContainer>
+            </>
+          </Route>
+          <Route exact path={routes.TOMBS}>
+            <>
+              <TopMenu />
+              <AppContainer>
+                <Tombs />
+              </AppContainer>
+            </>
+          </Route>
+          <Route exact path={routes.SPAWNING_POOLS}>
+            <>
+              <TopMenu />
+              <AppContainer>
+                <SpawningPools />
+              </AppContainer>
+            </>
+          </Route>
+          <Route exact path={routes.PROFILE}>
+            <>
+              <TopMenu />
+              <AppContainer>
+                <Profile />
+              </AppContainer>
+            </>
+          </Route>
           <Menu>
-            <Route exact path={routes.HOME}><Home modalObj={{ modal, setModal }} /></Route>
-            <Route exact path={routes.GRAVES}><Graves /></Route>
-            <Route exact path={routes.TOMBS}><Tombs /></Route>
-            <Route exact path={routes.SPAWNING_POOLS}><SpawningPools /></Route>
             <Route exact path={routes.MAUSOLEUM}><PredictionsHome /></Route>
             <Route exact path={routes.AUCTION}><Mausoleum /></Route>
             <Route exact path={routes.GRAVEYARD}><Graveyard /></Route>
-            <Route exact path={routes.PROFILE}><Profile /></Route>
             <Route exact path={routes.SHARKTANK}><SharkPools /></Route>
             <Route exact path={routes.BURNGRAVES}><BurnGraves /></Route>
           </Menu>

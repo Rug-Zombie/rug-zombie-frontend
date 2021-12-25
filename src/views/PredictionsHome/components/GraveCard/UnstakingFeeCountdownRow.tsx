@@ -16,7 +16,7 @@ const UnstakingFeeCountdownRow: React.FC<UnstakingFeeCountdownRowProps> = ({
          userData,
        }) => {
   const { t } = useTranslation()
-  const feeAsDecimal = grave.minimumStakingTime / 100 || '-'
+  const feeAsDecimal = 0
   const { targetRef, tooltip, tooltipVisible } = useTooltip(
     <>
       <Text bold mb='4px'>
@@ -43,10 +43,7 @@ const UnstakingFeeCountdownRow: React.FC<UnstakingFeeCountdownRowProps> = ({
   return (
     <Flex alignItems='center' justifyContent='space-between'>
       {tooltipVisible && tooltip}
-      <TooltipText ref={targetRef} small>
-        {grave.earlyWithdrawalFee || '-'}%{' '}
-        {shouldShowTimer ? t('unstaking fee until') : t('unstaking fee if withdrawn within staking period')}
-      </TooltipText>
+
       {shouldShowTimer && <WithdrawalFeeTimer secondsRemaining={secondsRemaining} />}
     </Flex>
   )
