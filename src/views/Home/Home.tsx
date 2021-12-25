@@ -6,7 +6,6 @@ import AnnouncementCard from 'views/Home/components/AnnouncementCard'
 import ZmbeStats from 'views/Home/components/ZmbeStats'
 import TotalValueLockedCard from 'views/Home/components/TotalValueLockedCard'
 import { useWeb3React } from '@web3-react/core'
-import HomeInstabuyCard from './components/HomeInstabuyCard'
 import GraveStakingCard from './components/GraveStakingCard'
 import * as fetch from '../../redux/fetch'
 import WhatsNewCard from './components/WhatsNewCard'
@@ -14,7 +13,6 @@ import Title from './components/Title'
 import EnterGravesCard from './components/EnterGravesCard'
 import VictimPoolsCard from './components/VictimPool/VictimPoolsCard'
 import useEagerConnect from '../../hooks/useEagerConnect'
-import NFTBanner from './components/NFTBanner'
 
 const Cards = styled(BaseLayout)`
   align-items: stretch;

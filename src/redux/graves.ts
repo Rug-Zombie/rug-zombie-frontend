@@ -168,6 +168,28 @@ const graves: Grave[] = [
   },
   {
     pid: {
+      56: 41,
+      97: 1,
+    },
+    name: 'Minereum BSC Common',
+    subtitle: 'Mines of Mineria',
+    path: 'https://ipfs.io/ipfs/QmYZZSJahiBKWUhwJMcgQT4xJYnqFjWWT1XQSUnPdhZseU',
+    type: 'image',
+    withdrawalCooldown: '3 days',
+    nftRevivalTime: '7 days',
+    rug: tokens.zmneb,
+    artist: artists.canadiancryptojunkie,
+    stakingToken: '0x3f078348817F5CbA98C67268e1789Cb82c7e5791',
+    pcsVersion: 'v2',
+    liquidityDetails: '',
+    isNew: true,
+    isFeatured: true,
+    rarity: "Common",
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
+  },
+  {
+    pid: {
       56: 39,
       97: 1,
     },

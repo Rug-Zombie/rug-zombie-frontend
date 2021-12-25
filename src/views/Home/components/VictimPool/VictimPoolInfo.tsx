@@ -42,6 +42,14 @@ const defaultPoolInfo: VictimPoolPoolInfo = {
 
 const pools: VictimPool[] = [
   {
+    id: 'MNEB',
+    name: 'Minereum BSC',
+    rug: tokens.mneb,
+    ztoken: tokens.zmneb,
+    zsymbol: 'zMNEB',
+    poolInfo: { ...defaultPoolInfo },
+  },
+  {
     id: 'BLACK',
     name: 'Black Diamond',
     rug: tokens.diamonds,
@@ -115,7 +123,7 @@ const VictimPoolsInfo: React.FC<VictimPoolsInfoProps> = ({ id }) => {
   return (
     <div>
       <Heading>{name}</Heading>
-      <Heading>Rugged Tokens: {getFullDisplayBalance(updatedPoolInfo.rugBalance, rug.decimals, 4)}</Heading>
+      <Heading>{rug.symbol} in wallet: {getFullDisplayBalance(updatedPoolInfo.rugBalance, rug.decimals, 4)}</Heading>
       <Heading>zTokens Remaining: {updatedPoolInfo.zTokenBalance.toString()}</Heading>
       <Heading>{updatedPoolInfo.claimedZToken ? `You already claimed ${ztoken.symbol}` : `You have not claimed ${ztoken.symbol}`}</Heading>
       <br />
