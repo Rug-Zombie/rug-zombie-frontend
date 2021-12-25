@@ -1259,8 +1259,8 @@ const nfts: Nft[] = [
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/Qmbn35zChcRM5UWQFHwk4zF4bY9Ku4bq4YiW7qaamKkWsw',
     type: 'image',
-    rarity: 'Legendary',
-    artist: artists.jussjoshinduh,
+    rarity: 'Common',
+    artist: artists.canadiancryptojunkie,
     userInfo: { ...DEFAULT_USER_INFO },
   },
 ]
