@@ -89,8 +89,9 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.BLACKMARKET}><BlackMarket /></Route>
           <Route exact path={routes.BARRACKS}><Barracks /></Route>
+          <Route exact path={routes.HOME}><Home modalObj={{ modal, setModal }} /></Route>
+
           <Menu>
-            <Route exact path={routes.HOME}><Home modalObj={{ modal, setModal }} /></Route>
             <Route exact path={routes.GRAVES}><Graves /></Route>
             <Route exact path={routes.TOMBS}><Tombs /></Route>
             <Route exact path={routes.SPAWNING_POOLS}><SpawningPools /></Route>
