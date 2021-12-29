@@ -7,7 +7,10 @@ import {
   getBep20Contract,
   getDrFrankensteinContract, getErc721Contract,
   getPancakePair,
-  getZombieContract, getDrBurnensteinContract
+  getZombieContract,
+  getDrBurnensteinContract,
+  getBarracksContract,
+  getRugMarketContract,
 } from '../utils/contractHelpers'
 
 import store from './store'
@@ -29,9 +32,18 @@ import {
   updateAuctionInfo,
   updateAuctionUserInfo,
   updateNftUserInfo,
-  updateDrFrankensteinTotalAllocPoint, updateBnbBalance,
-  updateTombOverlayPoolInfo, updateTombOverlayUserInfo, updateSharkPoolInfo, updateSharkPoolUserInfo,
-  updateBurnGravePoolInfo, updateBurnGraveUserInfo,
+  updateDrFrankensteinTotalAllocPoint,
+  updateBnbBalance,
+  updateTombOverlayPoolInfo,
+  updateTombOverlayUserInfo,
+  updateSharkPoolInfo,
+  updateSharkPoolUserInfo,
+  updateBurnGravePoolInfo,
+  updateBurnGraveUserInfo,
+  updateBarrackInfo,
+  updateBarrackUserInfo,
+  updateRugMarketListing,
+  addRugMarketListing,
 } from './actions'
 import {
   getAddress,
@@ -39,7 +51,7 @@ import {
   getMausoleumAddress,
   getSpawningPoolAddress,
   getTombOverlayAddress,
-  getSharkPoolAddress
+  getSharkPoolAddress,
 } from '../utils/addressHelpers'
 import tombs from './tombs'
 import * as get from './get'
@@ -54,6 +66,8 @@ import { account, auctionById, zmbeBnbTomb } from './get'
 import web3 from '../utils/web3'
 import { multicallv2 } from '../utils/multicall'
 import { getId } from '../utils'
+import {tokenByAddress} from "../utils/tokenHelper";
+import {RugMarketListing} from "./types";
 
 export const initialData = (accountAddress: string, setZombiePrice?: any) => {
   store.dispatch(updateAccount(accountAddress))
@@ -397,6 +411,49 @@ export const sharkPool = (id: number, poolUpdateObj?: { update: number, setUpdat
   }
 }
 
+export const barracks = (id: number, barrackUpdateObj?: { update: number, setUpdate: any }, barrackUserUpdateObj?: { update: number, setUpdate: any }) => {
+
+    getBarracksContract().methods.barrackInfo(id).call()
+        .then(res => {
+            store.dispatch(
+                updateBarrackInfo(
+                    id,
+                    {
+                        bnb: res.bnb,
+                        depositFeePercentage: res.feePercentage,
+                        locked: res.locked,
+                        minStake: new BigNumber(res.minimum),
+                        lockThreshold: new BigNumber(res.lockAmount),
+                        totalStaked: new BigNumber(res.totalDeposited),
+                        lockTime: new BigNumber(res.lockTime),
+                        timeLocked: new BigNumber(res.timeLocked),
+                    }
+                )
+            );
+            if (barrackUpdateObj) {
+                barrackUpdateObj.setUpdate(barrackUpdateObj.update + 1);
+            }
+        });
+
+    if (account()) {
+        getBarracksContract().methods.getUserInfo(id).call({from: account()})
+            .then(res => {
+                store.dispatch(
+                    updateBarrackUserInfo(
+                        id,
+                        {
+                            depositedAmount: res.depositedAmount,
+                            claimed: res.claimed
+                        }
+                    )
+                );
+                if (barrackUserUpdateObj) {
+                    barrackUserUpdateObj.setUpdate(barrackUserUpdateObj.update + 1)
+                }
+            });
+    }
+}
+
 export const spawningPool = (id: number, zombie: any, poolUpdateObj?: { update: number, setUpdate: any }, userUpdateObj?: { update: number, setUpdate: any }) => {
   const address = getSpawningPoolAddress(id)
   let calls = [
@@ -585,15 +642,30 @@ export const initialSpawningPoolData = (zombie: any, setPoolData?: { update: num
 }
 
 export const initialSharkPoolData = (setPoolData?: { update: number, setUpdate: any }, setUserData?: { update: number, setUpdate: any }) => {
-  let index = 0;
-  get.sharkPools().forEach(sp => {
-    sharkPool(
-      sp.id,
-      setPoolData ? { update: setPoolData.update + index, setUpdate: setPoolData.setUpdate } : undefined,
-      setUserData ? { update: setUserData.update + index, setUpdate: setUserData.setUpdate } : undefined
-    );
-    index++;
-  });
+    let index = 0;
+    get.sharkPools().forEach(sp => {
+        sharkPool(
+            sp.id,
+            setPoolData ? {update: setPoolData.update + index, setUpdate: setPoolData.setUpdate} : undefined,
+            setUserData ? {update: setUserData.update + index, setUpdate: setUserData.setUpdate} : undefined
+        );
+        index++;
+    });
+}
+
+export const initializeBarrackData = (setBarrackData?: { update: number, setUpdate: any }, setBarrackUserData?: { update: number, setUpdate: any }) => {
+    let index = 0;
+    get.barracks().forEach(barrack => {
+        barracks(
+            barrack.id,
+            setBarrackData ? {update: setBarrackData.update + index, setUpdate: setBarrackData.setUpdate} : undefined,
+            setBarrackUserData ? {
+                update: setBarrackUserData.update + index,
+                setUpdate: setBarrackUserData.setUpdate
+            } : undefined
+        );
+        index++;
+    });
 }
 
 export const nftUserInfo = async (contract: any) => {
@@ -774,4 +846,32 @@ export const initialBurnGraveData = (setUserState?, setPoolState?) => {
   get.burnGraves().forEach(g => {
     burnGrave(getId(g.id), setUserState, setPoolState);
   });
+}
+
+export const updateRugMarketListings = () => {
+    const rugMarketContract = getRugMarketContract();
+
+    rugMarketContract.methods.totalListings().call()
+        .then(totalListings => {
+            for (let index = 0; index < Number(totalListings); index++) {
+                rugMarketContract.methods.listings(index).call()
+                    .then(listing => {
+                        store.dispatch(updateRugMarketListing(
+                            {
+                                id: index,
+                                owner: listing.owner,
+                                token: tokenByAddress(listing.token),
+                                quantity: listing.quantity,
+                                price: listing.price,
+                                taxedToken: listing.taxedToken,
+                                state: listing.state
+                            }
+                        ))
+                    })
+            }
+        })
+}
+
+export const addRugMarketListings = (listing: RugMarketListing) => {
+    store.dispatch(addRugMarketListing(listing))
 }

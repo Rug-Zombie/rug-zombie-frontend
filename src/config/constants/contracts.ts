@@ -120,8 +120,16 @@ export default {
     56: '0xe9B5206Cf835d0aEC6B05DA9f53a1989033812E2',
     97: '0xb1E96dA5a08423C5f0646C0eBfd135FB896d1477',
   },
+  barracks: {
+    56: '0xDB204D075A7B1306715DD10EF80EC7a6D5Be0d10',
+    97: '0x9cfB3c7Cc5426294fe6c6074F47891F65DDC045d',
+  },
+  rugMarket: {
+    56: '',
+    97: '0x5e0B065De8aeDfF0ef509c8cA77d0eebD6c5C16b',
+  },
   drburnenstein: {
     56: '0x7590FA9B94f6E030E6d0A86a4ed10B31f558CFDE',
     97: '0x8fe29fA5b27f800077dE4f712f3B394BeB876608'
-  }
+  },
 }

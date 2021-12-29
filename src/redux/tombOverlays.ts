@@ -53,24 +53,6 @@ const tombOverlays: TombOverlay[] = [
         userInfo: { ...DEFAULT_USER_INFO },
         poolInfo: { ...DEFAULT_POOL_INFO }
     },
-    {
-        id: 2,
-        pid: {
-            56: 2,
-            97: 1,
-        },
-        poolId: {
-            56: 11,
-            97: 4,
-        },
-        mintingTime: '14 days',
-        commonId: 44,
-        uncommonId: 45,
-        rareId: 46,
-        legendaryId: 78,
-        userInfo: { ...DEFAULT_USER_INFO },
-        poolInfo: { ...DEFAULT_POOL_INFO }
-    },
 ]
 
 export default tombOverlays
