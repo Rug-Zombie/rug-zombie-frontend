@@ -598,7 +598,7 @@ export const initialSharkPoolData = (setPoolData?: { update: number, setUpdate: 
 
 export const nftUserInfo = async (contract: any) => {
   if (account()) {
-    const perChunk = 50
+    const perChunk = 40
 
     // Split nft address array into 50 sized chunks
     const splitNftAddresses = get.nfts().reduce((all,one,i) => {
