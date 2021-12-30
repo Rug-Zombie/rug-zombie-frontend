@@ -9,6 +9,9 @@ import auctions from './auctions'
 import burnGraves from './burnGraves'
 import { getId } from '../utils'
 import tombOverlays from './tombOverlays'
+import barracks from './barracks'
+import rugMarketListings from "./rugMarketListings";
+import {RugMarketListing} from "./types";
 
 const defaultState = {
   account: '',
@@ -17,11 +20,13 @@ const defaultState = {
   graves,
   burnGraves,
   nfts,
+  barracks,
   spawningPools,
   sharkPools,
   bnbPriceUsd: 0,
   auctions,
   bnbBalance: BIG_ZERO,
+  rugMarketListings,
   zombie: {
     allowance: BIG_ZERO,
     totalSupply: BIG_ZERO,
@@ -151,6 +156,36 @@ export default function reducer(state = defaultState, action) {
         ...state,
         sharkPools: state.sharkPools.map(sharkPool => sharkPool.id === action.payload.id ? { ...sharkPool, userInfo: { ...sharkPool.userInfo, ...action.payload.userInfo } } : sharkPool),
       }
+    case types.UPDATE_BARRACK_INFO:
+      return {
+        ...state,
+        barracks: state.barracks.map(barrack => barrack.id === action.payload.id ? { ...barrack, barrackInfo: { ...barrack.barrackInfo, ...action.payload.barrackInfo } } : barrack),
+      }
+    case types.UPDATE_BARRACK_USER_INFO:
+      return {
+        ...state,
+        barracks: state.barracks.map(barrack => barrack.id === action.payload.id ? { ...barrack, barrackUserInfo: { ...barrack.barrackUserInfo, ...action.payload.barrackUserInfo } } : barrack),
+      }
+    case types.ADD_RUG_MARKET_LISTING:
+      return {
+        ...state,
+        rugMarketListings: pushListingIfNotExists(action.payload.listing),
+      }
+    case types.UPDATE_RUG_MARKET_LISTING:
+      return {
+        ...state,
+        rugMarketListings: pushListingIfNotExists(action.payload.listing),
+      }
+    case types.MARK_RUG_MARKET_LISTING_SOLD:
+      return {
+        ...state,
+        rugMarketListings: markRugMarketListingSold(action.payload.listingId),
+      }
+    case types.CANCEL_RUG_MARKET_LISTING:
+      return {
+        ...state,
+        rugMarketListings: cancelRugMarketListing(action.payload.listingId),
+      }
 
     case types.UPDATE_BURNGRAVE_POOL_INFO:
       return {
@@ -167,4 +202,29 @@ export default function reducer(state = defaultState, action) {
     default:
       return state
   }
+}
+
+function cancelRugMarketListing(listingId): RugMarketListing[] {
+  const index = rugMarketListings.findIndex(listing => listing.id === listingId);
+  const listings = rugMarketListings;
+  // @ts-ignore
+  listings[index].state = '2';
+  return listings
+}
+
+function markRugMarketListingSold(listingId): RugMarketListing[] {
+  const index = rugMarketListings.findIndex(listing => listing.id === listingId);
+  const listings = rugMarketListings;
+  // @ts-ignore
+  listings[index].state = '1';
+  return listings
+}
+
+function pushListingIfNotExists(newListing): RugMarketListing[] {
+  const index = rugMarketListings.findIndex(listing => listing.id === newListing.id);
+  const listings = rugMarketListings;
+  if (index === -1) {
+    listings.push(newListing)
+  }
+  return listings
 }
