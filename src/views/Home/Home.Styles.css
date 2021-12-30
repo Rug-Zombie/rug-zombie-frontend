@@ -80,9 +80,9 @@
 }
 
 #home-section-1 {
-    top: -100px;
+    top: 0px;
     left: 0px;
-    position: relative;
+    position: absolute;
     width: 1920px;
     height: 1002px;
     background: transparent url('images/backgrounds/home-section-1-background.svg') 0% 0% no-repeat padding-box;
