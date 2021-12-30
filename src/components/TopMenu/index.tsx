@@ -1,7 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import logo from 'images/menu/Logo.svg'
-import Flex from '../layout/Flex'
+import more from 'images/menu/More.png'
+import zombiehead from 'images/menu/ZombieHead.svg'
+import './TopMenu.Styles.css'
+import config from './config'
+import { zombiePriceUsd } from '../../redux/get'
 
 const BarDiv = styled.header`
   width: 1920px;
@@ -20,32 +24,90 @@ const Logo = styled.img`
   opacity: 1;
 `
 
-const MenuText = styled.text`
-  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-16)/25px var(--unnamed-font-family-poppins) !important;
-  letter-spacing: var(--unnamed-character-spacing-0) !important;
-  color: var(--unnamed-color-ffffff) !important;
-  text-align: left;
-  font: normal normal normal 16px/25px Poppins !important;
-  letter-spacing: 0px !important;
+const MenuText = styled.a`
+  text-align: center;
+  font: normal normal normal 16px Poppins;
+  letter-spacing: 0px;
   color: #FFFFFF;
   opacity: 1;
+  white-space: nowrap;
+  &:hover { text-shadow: 0 0 5px white; }
+`
+
+const ConnectText = styled(MenuText)`
+  color: black;
+  &:hover { text-shadow: 0 0 5px limegreen; };
+  font-weight: bold;
+`
+
+const MenuDiv = styled.div`
+  padding-right: 23px;
+  flex-grow: 0;
+  flex-shrink: 0;
+`
+
+const MenuFlex = styled.div`
+  position: absolute;
+  top: 38px;
+  left: 520px;
+  width: 803px;
+  height: 41px;
+  display: flex;
+  justify-content: right;
+`
+
+const TokenButton = styled.div`
+  position: absolute;
+  top: 25px;
+  right: 210px;
+  width: 140px;
+  height: 50px;
+  border: 2px solid #B8C00D;
+  border-radius: 30px;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+`
+
+const ConnectButton = styled.div`
+  position: absolute;
+  top: 25px;
+  right: 50px;
+  width: 140px;
+  height: 50px;
+  background: #B8C00D 0% 0% no-repeat padding-box;
+  border-radius: 30px;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
 `
 
 const TopMenu = (props) => {
   const { children } = props
   return <div>
     <BarDiv>
-        <Logo src={logo} alt='RugZombie Logo'/>
-      <Flex style={{
-        position: 'absolute',
-        top: '31.99px',
-        width: '100%',
-        height: '41px'}}>
-        <MenuText>yoo</MenuText>
-      </Flex>
+      <Logo src={logo} alt='RugZombie Logo' />
+      <MenuFlex>
+        {config.map(i => <MenuDiv>
+            <MenuText href={i.href}>{i.label}</MenuText>
+          </MenuDiv>,
+        )}
+        <img src={more} alt='More Icon' style={{width: '24px', height: '24px'}} />
+      </MenuFlex>
+      <TokenButton style={{flexDirection: 'row'}}>
+        <img src={zombiehead} alt='Zombie Icon' style={{height: '70%', paddingRight: '20px'}}/>
+        <MenuText style={{fontWeight: 'bold'}}>${zombiePriceUsd().toPrecision(1)}</MenuText>
+      </TokenButton>
+      <ConnectButton>
+        <ConnectText>Connect</ConnectText>
+      </ConnectButton>
     </BarDiv>
     {children}
   </div>
 }
 
-export default TopMenu;
+export default TopMenu
