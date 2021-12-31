@@ -39,7 +39,9 @@ const TableList: React.FC<TableListProps> = ({id}) => {
     const cancelled = listing.state === '2';
     const zmbeContract = useZombie();
 
-    const tokenImage = (token: Token) => {
+    const tokenImage = (token: Token): string => {
+        if(!token) return ''
+        if(token.tokenLogo) return token.tokenLogo
         return `images/tokens/${token.symbol}.png`
     }
 
@@ -126,7 +128,7 @@ const TableList: React.FC<TableListProps> = ({id}) => {
                                 </div>
                                 <div>
                                     <div className="titel">
-                                        Swap {getFullDisplayBalance(new BigNumber(listing.quantity))} {listing.token.symbol} for {getFullDisplayBalance(new BigNumber(listing.price))} ZMBE
+                                        Swap {getFullDisplayBalance(new BigNumber(listing.quantity), listing.token?.decimals, 2)} {listing.token?.symbol} for {getFullDisplayBalance(new BigNumber(listing.price), 18, 1)} ZMBE
                                     </div>
                                 </div>
                             </div>

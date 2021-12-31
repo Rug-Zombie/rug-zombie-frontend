@@ -33,33 +33,34 @@ const Barracks: React.FC = () => {
     const {isLg, isXl} = useMatchBreakpoints()
     const isDesktop = isLg || isXl
 
-    const [updateBarrackInfo, setUpdateBarrackInfo] = useState(0);
-    const [updateBarrackUserInfo, setUpdateBarrackUserInfo] = useState(0);
-
-    const wallet = account();
-
-    useEffect(() => {
-        if (wallet) {
-            if (updateBarrackUserInfo === 0) {
-                initializeBarrackData({update: updateBarrackUserInfo, setUpdate: setUpdateBarrackUserInfo});
-            }
-        }
-        initializeBarrackData({update: updateBarrackInfo, setUpdate: setUpdateBarrackInfo});
-    }, [wallet, updateBarrackInfo, updateBarrackUserInfo]);
-
-    const updateResult = (id: number) => {
-        barracks(id);
-    };
+    // const [updateBarrackInfo, setUpdateBarrackInfo] = useState(0);
+    // const [updateBarrackUserInfo, setUpdateBarrackUserInfo] = useState(0);
+    //
+    // const wallet = account();
+    //
+    // useEffect(() => {
+    //     if (wallet) {
+    //         if (updateBarrackUserInfo === 0) {
+    //             initializeBarrackData({update: updateBarrackUserInfo, setUpdate: setUpdateBarrackUserInfo});
+    //         }
+    //     }
+    //     initializeBarrackData({update: updateBarrackInfo, setUpdate: setUpdateBarrackInfo});
+    // }, [wallet, updateBarrackInfo, updateBarrackUserInfo]);
+    //
+    // const updateResult = (id: number) => {
+    //     barracks(id);
+    // };
 
     return (
         <Menu>
             <Flex justifyContent='center'>
                 <Container style={{backgroundImage: `url(${isDesktop ? CatacombsBackgroundDesktopSVG : CatacombsBackgroundMobileSVG})`}}>
                     <Page style={{paddingTop: '5%'}}>
-                        <div>
-                            {get.barracks().map((b) => {
-                                return <Table id={b.id} key={b.id} updateResult={updateResult}/>
-                            })}
+                        <div >
+                            {/* {get.barracks().map((b) => {* /}
+                            {/*    return <Table id={b.id} key={b.id} updateResult={updateResult}/>* /}
+                            {/* })} */}
+                            <h1 style={{color: 'white'}}>Coming Soon!</h1>
                         </div>
                     </Page>
                 </Container>
