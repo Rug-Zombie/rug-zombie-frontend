@@ -91,9 +91,9 @@ const TabButtons = ({setFilter}) => {
                     boxShadow: 'inset 0 0 10px, 0 0 10px'
                 }}
                         className="btn w-100" onClick={handleCreateListing}>
-                    <ButtonText color='white' bold fontSize='16px'>
+                    <Text color='white' bold fontSize='16px'>
                         {isDesktop ? t('Create Listing') : '+'}
-                    </ButtonText>
+                    </Text>
                 </button>
             </Flex>
         </Flex>

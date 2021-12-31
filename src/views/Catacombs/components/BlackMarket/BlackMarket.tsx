@@ -50,7 +50,8 @@ const BlackMarket: React.FC = () => {
                     setUpdate(!update)
                 }
             })
-    })
+      // eslint-disable-next-line
+    }, [rugMarketContract.events])
 
     useEffect(() => {
         rugMarketContract.events.ListingCancelled({},
@@ -60,7 +61,8 @@ const BlackMarket: React.FC = () => {
                     setUpdate(!update)
                 }
             })
-    })
+      // eslint-disable-next-line
+      }, [rugMarketContract.events])
 
     useEffect(() => {
         rugMarketContract.events.ListingSold({},
@@ -70,11 +72,12 @@ const BlackMarket: React.FC = () => {
                     setUpdate(!update)
                 }
             })
-    })
+      // eslint-disable-next-line
+    }, [rugMarketContract.events])
 
     useEffect(() => {
         updateRugMarketListings();
-    })
+    }, [])
 
     return (
         <Menu>
