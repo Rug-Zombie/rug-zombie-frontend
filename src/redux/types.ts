@@ -294,3 +294,41 @@ export interface BurnGraveUserInfo {
   nftMintDate: number,
   burnedAmount: BigNumber
 }
+export interface BarrackInfo {
+  bnb: boolean,
+  depositFeePercentage: number,
+  minStake: BigNumber,
+  totalStaked: BigNumber,
+  lockThreshold: BigNumber,
+  lockTime: BigNumber,
+  timeLocked: BigNumber,
+  locked: boolean,
+}
+
+export interface BarrackUserInfo {
+  depositedAmount: BigNumber,
+  claimed: boolean
+}
+
+export interface Barrack {
+  id: number,
+  name: string,
+  description: string,
+  nft: number,
+  isNew: boolean,
+  token: Token,
+  nftMintingTime: string,
+  barrackInfo: BarrackInfo,
+  barrackUserInfo: BarrackUserInfo,
+  project: any,
+}
+
+export interface RugMarketListing {
+  id: number,
+  owner: string,
+  token: Token,
+  quantity: string,
+  price: string,
+  taxedToken: boolean,
+  state: string
+}

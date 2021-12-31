@@ -9,7 +9,8 @@ import {
   TombUserInfo,
   UserInfo,
   TombOverlayPoolInfo, TombOverlayUserInfo, SharkPoolInfo, SharkPoolUserInfo,
-  BurnGravePoolInfo, BurnGraveUserInfo
+  BurnGravePoolInfo, BurnGraveUserInfo,
+  BarrackUserInfo, BarrackInfo, RugMarketListing,
 } from './types'
 
 export const updateAccount = (account: string) => ({
@@ -126,6 +127,14 @@ export const updateSharkPoolInfo = (id: number, poolInfo: SharkPoolInfo) => ({
   }
 })
 
+export const updateBarrackInfo = (id: number, barrackInfo: BarrackInfo ) => ({
+  type: actions.UPDATE_BARRACK_INFO,
+  payload: {
+    id,
+    barrackInfo
+  }
+})
+
 export const updateSpawningPoolUserInfo = (id: number, userInfo: SpawningUserInfo) => ({
   type: actions.UPDATE_SPAWNING_POOL_USER_INFO,
   payload: {
@@ -140,6 +149,14 @@ export const updateSharkPoolUserInfo = (id: number, userInfo: SharkPoolUserInfo)
     id,
     userInfo
   }
+})
+
+export const updateBarrackUserInfo = (id: number, barrackUserInfo: BarrackUserInfo) => ({
+    type: actions.UPDATE_BARRACK_USER_INFO,
+    payload: {
+        id,
+        barrackUserInfo
+    }
 })
 
 export const updateAuctionInfo = (id: number, auctionInfo: AuctionInfo) => ({
@@ -202,5 +219,33 @@ export const updateBurnGraveUserInfo = (id: number, userInfo: BurnGraveUserInfo)
   payload: {
     id,
     userInfo
+  }
+})
+
+export const addRugMarketListing = (listing: RugMarketListing) => ({
+  type: actions.ADD_RUG_MARKET_LISTING,
+  payload: {
+    listing
+  }
+})
+
+export const updateRugMarketListing = (listing: RugMarketListing) => ({
+  type: actions.UPDATE_RUG_MARKET_LISTING,
+  payload: {
+    listing
+  }
+})
+
+export const cancelRugMarketListing = (listingId: number) => ({
+  type: actions.CANCEL_RUG_MARKET_LISTING,
+  payload:  {
+    listingId
+  }
+})
+
+export const markRugMarketListingSold = (listingId: number) => ({
+  type: actions.MARK_RUG_MARKET_LISTING_SOLD,
+  payload:  {
+    listingId
   }
 })
