@@ -91,7 +91,6 @@ const Home: React.FC = () => {
   const { t } = useTranslation()
   const { isLg, isXl } = useMatchBreakpoints()
   const isDesktop = isLg || isXl
-
   return (
     <Menu>
       <StyledDiv>
@@ -110,11 +109,13 @@ const Home: React.FC = () => {
         <RugRollDiv>
           <NavLink exact activeClassName='active' to='/rugroll' id='lottery-pot-banner'
                    style={{ paddingTop: '8px' }}>
-          <StyledButton>{t('RUG ROLL')}</StyledButton>
+            <StyledButton>{t('RUG ROLL')}</StyledButton>
           </NavLink>
         </RugRollDiv>
         <BlackMarketDiv>
-          <StyledButton>{t('BLACK MARKET')}</StyledButton>
+          <NavLink exact activeClassName='active' to='/blackmarket' id='lottery-pot-banner'>
+            <StyledButton>{t('BLACK MARKET')}</StyledButton>
+          </NavLink>
         </BlackMarketDiv>
       </StyledDiv>
     </Menu>

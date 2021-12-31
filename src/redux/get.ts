@@ -1,11 +1,12 @@
 import { BigNumber } from 'bignumber.js'
 import axios from 'axios'
 import store from './store'
-import { Grave, Tomb, SpawningPool, UserInfo, Auction, TombOverlay, SharkPool, BurnGrave } from './types'
+import { Grave, Tomb, SpawningPool, UserInfo, Auction, TombOverlay, SharkPool, BurnGrave, Barrack, RugMarketListing} from './types'
 import { BIG_ZERO } from '../utils/bigNumber'
 import { getBalanceAmount } from '../utils/formatBalance'
 import { getId } from '../utils'
 import { Id } from '../config/constants/types'
+import * as actions from './actions'
 
 export const account = (): string => {
   return store.getState().account
@@ -83,12 +84,20 @@ export const sharkPools = (): SharkPool[] => {
   return store.getState().sharkPools;
 }
 
+export const barracks = (): Barrack[] => {
+  return store.getState().barracks;
+}
+
 export const spawningPoolById = (id: number): SpawningPool => {
   return store.getState().spawningPools.find(p => p.id === id)
 }
 
 export const sharkPoolById = (id: number): SharkPool => {
   return store.getState().sharkPools.find(a => a.id === id);
+}
+
+export const barrackById = (id: number): Barrack => {
+  return store.getState().barracks.find(b => b.id === id);
 }
 
 export const grave = (pid: number): Grave => {
@@ -158,4 +167,32 @@ export const burnGraves = (): BurnGrave[] => {
 
 export const burnGraveById = (id: number): BurnGrave => {
   return store.getState().burnGraves.find(a => getId(a.id) === id);
+}
+
+export const rugMarketListings = (filter, wallet): RugMarketListing[] => {
+  switch (filter) {
+    case 0:
+      return store.getState().rugMarketListings.filter(listing => listing.state === "0" && listing.owner !== wallet);
+      break
+    case 1:
+      return store.getState().rugMarketListings.filter(listing => listing.owner === wallet);
+      break
+    case 2:
+      return store.getState().rugMarketListings.filter(listing => listing.state === "1");
+      break
+    default:
+      return store.getState().rugMarketListings
+  }
+}
+
+export const rugMarketListingById = (id: number): RugMarketListing => {
+  return store.getState().rugMarketListings.find(listing => listing.id === id);
+}
+
+export const markRugMarketListingSold = (id: number) => {
+  store.dispatch(actions.markRugMarketListingSold(id))
+}
+
+export const cancelRugMarketListing = (id: number) => {
+  store.dispatch(actions.cancelRugMarketListing(id))
 }

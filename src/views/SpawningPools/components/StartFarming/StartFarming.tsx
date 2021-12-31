@@ -1,19 +1,19 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable no-nested-ternary */
-import { useModal, BaseLayout } from '@rug-zombie-libs/uikit';
+import { useModal, BaseLayout } from '@rug-zombie-libs/uikit'
 import styled from 'styled-components'
-import tokens from 'config/constants/tokens';
-import { ethers } from 'ethers';
+import tokens from 'config/constants/tokens'
+import { ethers } from 'ethers'
 import { useTranslation } from 'contexts/Localization'
-import useTokenBalance from 'hooks/useTokenBalance';
+import useTokenBalance from 'hooks/useTokenBalance'
 import useToast from 'hooks/useToast'
 import { getFullDisplayBalance } from 'utils/formatBalance'
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import { getAddress, getSpawningPoolAddress } from 'utils/addressHelpers'
 import { useERC20, useSpawningPool, useZombie } from '../../../../hooks/useContract'
-import StakeZombieModal from '../StakeZombieModal';
-import WithdrawZombieModal from '../WithdrawZombieModal';
+import StakeZombieModal from '../StakeZombieModal'
+import WithdrawZombieModal from '../WithdrawZombieModal'
 import * as get from '../../../../redux/get'
 import * as fetch from '../../../../redux/fetch'
 import { spawningPoolById } from '../../../../redux/get'
@@ -43,8 +43,8 @@ const StartFarming: React.FC<StartFarmingProps> = ({ id, zombieUsdPrice }) => {
   const { t } = useTranslation()
   const pool = spawningPoolById(id)
   const { userInfo } = pool
-  const [isZombieAllowance, setZombieAllowance] = useState(!userInfo.zombieAllowance.isZero());
-  const [zombieBalance, setZombieBalance] = useState(get.zombieAllowance());
+  const [isZombieAllowance, setZombieAllowance] = useState(!userInfo.zombieAllowance.isZero())
+  const [zombieBalance, setZombieBalance] = useState(get.zombieAllowance())
   const [poolInfoUpdate, setPoolInfoUpdate] = useState(0)
   const [userInfoUpdate, setUserInfoUpdate] = useState(0)
   const onUpdate = () => {
@@ -71,62 +71,64 @@ const StartFarming: React.FC<StartFarmingProps> = ({ id, zombieUsdPrice }) => {
       zombieBalance={zombieBalance}
       zombieUsdPrice={zombieUsdPrice}
       updateResult={onUpdate}
-    />
+    />,
   )
 
-  const zmbeContract = useERC20(getAddress(tokens.zmbe.address));
-  const spawningPoolContract = useSpawningPool(id);
+  const zmbeContract = useERC20(getAddress(tokens.zmbe.address))
+  const spawningPoolContract = useSpawningPool(id)
 
   const zmbeBalance = useTokenBalance(getAddress(tokens.zmbe.address))
 
   useEffect(() => {
-    setZombieBalance(zmbeBalance);
+    setZombieBalance(zmbeBalance)
   }, [zmbeBalance])
 
   const handleUnlock = () => {
     spawningPoolContract.methods.unlockFeeInBnb().call().then((res) => {
       spawningPoolContract.methods.unlock()
         .send({ from: get.account(), value: res }).then(() => {
-          toastSuccess(t('Pool unlocked'))
-          onUpdate();
-        })
-    });
+        toastSuccess(t('Pool unlocked'))
+        onUpdate()
+      })
+    })
   }
 
   const handleApprove = () => {
-    if(get.account()) {
-    // console.log(getSpawningPoolAddress(id))
+    if (get.account()) {
+      // console.log(getSpawningPoolAddress(id))
       zmbeContract.methods.approve(getSpawningPoolAddress(id), ethers.constants.MaxUint256)
         .send({ from: get.account() }).then(() => {
-          toastSuccess(t('Approved ZMBE'))
-          setZombieAllowance(true)
+        toastSuccess(t('Approved ZMBE'))
+        setZombieAllowance(true)
       })
     }
   }
 
   const renderSpawningPoolButtons = () => {
-    return <div className="space-between">
+    return <div className='space-between'>
       {get.account() ?
-        !userInfo.paidUnlockFee ?
-          isZombieAllowance ?
-          <button onClick={handleUnlock} className="btn btn-disabled w-100" type="button">Unlock Pool</button> :
-          <button onClick={handleApprove} className="btn btn-disabled w-100" type="button">Approve ZMBE</button>
-        :
-        <div>
-          <DisplayFlex>
-            <span style={{ paddingRight: '50px' }} className="total-earned text-shadow">{getFullDisplayBalance(new BigNumber(userInfo.amount), tokens.zmbe.decimals, 4)}</span>
-            <button onClick={onPresentWithdrawStake} style={{ marginRight: '10px' }} className="btn w-100" type="button">-</button>
-            <button onClick={onPresentZombieStake} className="btn w-100" type="button">+</button>
-          </DisplayFlex>
-        </div>
-        :  <span className="total-earned text-shadow">Connect Wallet</span>}
+        isZombieAllowance ?
+          !userInfo.paidUnlockFee ?
+            <button onClick={handleUnlock} className='btn btn-disabled w-100' type='button'>Unlock Pool</button> :
+            <div>
+              <DisplayFlex>
+                <span style={{ paddingRight: '50px' }}
+                      className='total-earned text-shadow'>{getFullDisplayBalance(new BigNumber(userInfo.amount), tokens.zmbe.decimals, 4)}</span>
+                <button onClick={onPresentWithdrawStake} style={{ marginRight: '10px' }} className='btn w-100'
+                        type='button'>-
+                </button>
+                <button onClick={onPresentZombieStake} className='btn w-100' type='button'>+</button>
+              </DisplayFlex>
+            </div> :
+          <button onClick={handleApprove} className='btn btn-disabled w-100' type='button'>Approve ZMBE</button>
+        : <span className='total-earned text-shadow'>Connect Wallet</span>}
     </div>
   }
 
   return (
-    <div className="frank-card">
-      <div className="small-text">
-        <span className="white-color">STAKING</span>
+    <div className='frank-card'>
+      <div className='small-text'>
+        <span className='white-color'>STAKING</span>
       </div>
       {renderSpawningPoolButtons()}
     </div>
