@@ -96,7 +96,7 @@ const CreateListingModal: React.FC<ModalProps> = ({onDismiss}) => {
         .then(res => {
           const rugBalance = new BigNumber(res.toString())
           if (rugBalance.gte(quantity)) {
-            rugMarketContract.methods.add(getAddress(tokens[ruggedToken].address), quantity, price).send({'from': wallet})
+            rugMarketContract.methods.add(getAddress(tokens[ruggedToken].address), quantity.toString(), price.toString()).send({'from': wallet})
               .then(() => {
                 toastSuccess('Listing Created Successfully')
                 onDismiss()
