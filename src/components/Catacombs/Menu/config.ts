@@ -3,27 +3,27 @@ import { MenuEntry } from '@catacombs-libs/uikit'
 const config: MenuEntry[] = [
   {
     label: 'Catacombs',
-    icon: 'HomeIcon',
+    icon: 'CatacombsIcon',
     href: '/catacombs',
   },
   {
     label: 'Data Lab',
-    icon: 'FarmIcon',
+    icon: 'DataLabIcon',
     href: `/datalab`,
   },
   {
     label: 'Rug Roll',
-    icon: 'FarmIcon',
+    icon: 'RugRollIcon',
     href: `/rugroll`,
   },
   {
     label: 'Barracks',
-    icon: 'PoolIcon',
+    icon: 'BarracksIcon',
     href: `/barracks`,
   },
   {
     label: 'Black Market',
-    icon: 'FarmIcon',
+    icon: 'BlackMarketIcon',
     href: `/blackmarket`,
   },
   {
