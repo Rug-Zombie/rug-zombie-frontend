@@ -141,6 +141,8 @@ const graves: Grave[] = [
     nft: "Basic Zombie",
     isFeatured: true,
     rarity: "Rare",
+    endDate: 1648051200,
+    isEnding: true,
     userInfo: { ...userInfo },
     poolInfo: { ...poolInfo },
   },
