@@ -6,9 +6,10 @@ import zombiehead from 'images/menu/ZombieHead.svg'
 import './TopMenu.Styles.css'
 import config from './config'
 import { zombiePriceUsd } from '../../redux/get'
+import { PrimaryButton, SecondaryButton } from '../Buttons'
 
 const BarDiv = styled.header`
-  width: 1920px;
+  width: 100%;
   height: 100px;
   background: #010202 0% 0% no-repeat padding-box;
   opacity: 1;
@@ -56,34 +57,16 @@ const MenuFlex = styled.div`
   justify-content: right;
 `
 
-const TokenButton = styled.div`
+const TokenButton = styled(SecondaryButton)`
   position: absolute;
   top: 25px;
   right: 210px;
-  width: 140px;
-  height: 50px;
-  border: 2px solid #B8C00D;
-  border-radius: 30px;
-  opacity: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
 `
 
-const ConnectButton = styled.div`
+const ConnectButton = styled(PrimaryButton)`
   position: absolute;
   top: 25px;
   right: 50px;
-  width: 140px;
-  height: 50px;
-  background: #B8C00D 0% 0% no-repeat padding-box;
-  border-radius: 30px;
-  opacity: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
 `
 
 const TopMenu = (props) => {
