@@ -8,6 +8,7 @@ import gravesLogo from 'images/home/Graves.svg'
 import gravesarrow from 'images/home/GraveArrow.svg'
 import sparrow from 'images/home/SpawningPoolArrow.svg'
 import tombsarrow from 'images/home/TombArrow.svg'
+import footer from 'images/home/Footer.svg'
 import { useHistory } from 'react-router'
 import TopMenu from '../../components/TopMenu'
 import { useMultiCall, useZombie } from '../../hooks/useContract'
@@ -18,6 +19,7 @@ import { getBalanceAmount } from '../../utils/formatBalance'
 import { PrimaryButton, PrimaryButtonText, SecondaryButton, SecondaryButtonText } from '../../components/Buttons'
 import tokens from '../../config/constants/tokens'
 import { getAddress } from '../../utils/addressHelpers'
+import { PlusIcon } from '../../components/Icons'
 
 interface HomeProps {
   modalObj: { modal: boolean, setModal: any };
@@ -190,7 +192,7 @@ const NavCardFooter = styled.div`
 const NavCardFooterItem = styled.div`
   position: absolute;
   bottom: 73px;
-  height: 20px; 
+  height: 20px;
   text-align: right;
 `
 
@@ -206,6 +208,25 @@ const S3TitleText = styled.div`
   letter-spacing: 1.8px;
   color: #FFFFFF;
   opacity: 1;
+`
+
+const TutorialDiv = styled.div`
+  height: 70px;
+  width: 100%;
+  border: 1px solid #162635;
+  opacity: 1;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+`
+
+const TutorialTitleText = styled.div`
+  text-align: left;
+  font: normal normal normal 18px/36px Poppins;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+  opacity: 1;
+  padding-left: 25px;
 `
 
 const Home: React.FC<HomeProps> = () => {
@@ -267,11 +288,13 @@ const Home: React.FC<HomeProps> = () => {
           </TvlNumber>
         </TvlDiv>
         <ButtonsDiv>
-            <PrimaryButton onClick={() => { window.location.href = `https://swap.rugzombie.io/swap?outputCurrency=${getAddress(tokens.zmbe.address)}` }}>
-              <PrimaryButtonText>
-                Buy $ZMBE
-              </PrimaryButtonText>
-            </PrimaryButton>
+          <PrimaryButton onClick={() => {
+            window.location.href = `https://swap.rugzombie.io/swap?outputCurrency=${getAddress(tokens.zmbe.address)}`
+          }}>
+            <PrimaryButtonText>
+              Buy $ZMBE
+            </PrimaryButtonText>
+          </PrimaryButton>
           <div style={{ paddingLeft: '30px', paddingRight: '30px' }}>
             <PrimaryButton onClick={() => {
               history.push('/graveyard')
@@ -317,11 +340,13 @@ const Home: React.FC<HomeProps> = () => {
                 Unlock graves using rugged tokens in your wallet to earn NFTs on top of regular ZMBE rewards
               </NavCardText>
               <NavCardFooter>
-                <NavCardFooterItem onClick={() => { history.push('/graves')}}>
-                  <text style={{paddingRight: '15px', color: '#AE32AA'}}>
+                <NavCardFooterItem onClick={() => {
+                  history.push('/graves')
+                }}>
+                  <text style={{ paddingRight: '15px', color: '#AE32AA' }}>
                     enter graves
                   </text>
-                  <img src={gravesarrow} alt="Grave Card Arrow"/>
+                  <img src={gravesarrow} alt='Grave Card Arrow' />
                 </NavCardFooterItem>
               </NavCardFooter>
             </NavCard>
@@ -340,14 +365,17 @@ const Home: React.FC<HomeProps> = () => {
                   Boost NFT rarity by providing liquidity
                 </NavCardSubText>
                 <NavCardText>
-                  Roll for NFTs of varying rarity while earning ZMBE by staking LP tokens. Increase your odds by increasing your stake in the tombs
+                  Roll for NFTs of varying rarity while earning ZMBE by staking LP tokens. Increase your odds by
+                  increasing your stake in the tombs
                 </NavCardText>
                 <NavCardFooter>
-                  <NavCardFooterItem onClick={() => { history.push('/tombs')}}>
-                    <text style={{paddingRight: '15px', color: '#4B7BDC'}}>
+                  <NavCardFooterItem onClick={() => {
+                    history.push('/tombs')
+                  }}>
+                    <text style={{ paddingRight: '15px', color: '#4B7BDC' }}>
                       enter tombs
                     </text>
-                    <img src={tombsarrow} alt="Tomb Card Arrow"/>
+                    <img src={tombsarrow} alt='Tomb Card Arrow' />
                   </NavCardFooterItem>
                 </NavCardFooter>
               </NavCard>
@@ -369,11 +397,13 @@ const Home: React.FC<HomeProps> = () => {
                 Farm NFTs by staking ZMBE, while earning rewards in tokens from RugZombie partners
               </NavCardText>
               <NavCardFooter>
-                <NavCardFooterItem onClick={() => { history.push('/spawning_pools')}}>
-                  <text style={{paddingRight: '15px', color: '#30C00D'}}>
+                <NavCardFooterItem onClick={() => {
+                  history.push('/spawning_pools')
+                }}>
+                  <text style={{ paddingRight: '15px', color: '#30C00D' }}>
                     enter spawning pools
                   </text>
-                  <img src={sparrow} alt="Spawning Pool Card Arrow"/>
+                  <img src={sparrow} alt='Spawning Pool Card Arrow' />
                 </NavCardFooterItem>
               </NavCardFooter>
             </NavCard>
@@ -382,11 +412,56 @@ const Home: React.FC<HomeProps> = () => {
         <div id='home-section-3'>
           <S3Div>
             <S3TitleText>
-              How does RugZombie work?
+              How does RugZombie work
             </S3TitleText>
+            <div style={{ paddingTop: '20px' }}>
+              <Line style={{
+                width: '30px',
+                background: '#B8C00D 0% 0% no-repeat padding-box',
+              }} />
+            </div>
+            <div style={{paddingTop: '85px'}}/>
+            <TutorialDiv >
+              <div style={{paddingLeft: '25px'}}>
+                <PlusIcon />
+              </div>
+              <TutorialTitleText>
+                Use your ZMBE, LP tokens and dead tokens to earn NFTs and ZMBE rewards.
+              </TutorialTitleText>
+            </TutorialDiv>
+            <div style={{paddingTop: '20px'}}/>
+            <TutorialDiv >
+              <div style={{paddingLeft: '25px'}}>
+                <PlusIcon />
+              </div>
+              <TutorialTitleText>
+                Play and win assets in a variety of NFT powered games
+              </TutorialTitleText>
+            </TutorialDiv>
+            <div style={{paddingTop: '20px'}}/>
+            <TutorialDiv >
+              <div style={{paddingLeft: '25px'}}>
+                <PlusIcon />
+              </div>
+              <TutorialTitleText>
+                Earn passive income holding your NFTs
+              </TutorialTitleText>
+            </TutorialDiv>
+            <div style={{paddingTop: '20px'}}/>
+            <TutorialDiv >
+              <div style={{paddingLeft: '25px'}}>
+                <PlusIcon />
+              </div>
+              <TutorialTitleText>
+                Venture into the catacombs...
+              </TutorialTitleText>
+            </TutorialDiv>
           </S3Div>
+          <div id='footer-img' />
         </div>
-
+        <div id='home-footer'>
+          yo
+        </div>
       </TopMenu>
     </>
   )
