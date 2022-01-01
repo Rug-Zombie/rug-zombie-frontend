@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import './Home.Styles.css'
 import styled from 'styled-components'
 import numeral from 'numeral'
-import spawningPoolsLogo from 'images/menu/SpawningPools.svg'
-import tombsLogo from 'images/menu/Tombs.svg'
-import gravesLogo from 'images/menu/Graves.svg'
+import spawningPoolsLogo from 'images/home/SpawningPools.svg'
+import tombsLogo from 'images/home/Tombs.svg'
+import gravesLogo from 'images/home/Graves.svg'
+import gravesarrow from 'images/home/GraveArrow.svg'
+import sparrow from 'images/home/SpawningPoolArrow.svg'
+import tombsarrow from 'images/home/TombArrow.svg'
 import { useHistory } from 'react-router'
-import { Redirect } from 'react-router-dom'
 import TopMenu from '../../components/TopMenu'
 import { useMultiCall, useZombie } from '../../hooks/useContract'
 import { initialSpawningPoolData, initialTombData } from '../../redux/fetch'
@@ -134,7 +136,7 @@ const NavCard = styled.div`
   align-items: center;
 `
 
-const NavCardText = styled.div`
+const NavCardTitleText = styled.div`
   text-align: center;
   font: normal normal 600 30px/30px Poppins;
   letter-spacing: 1.5px;
@@ -153,7 +155,60 @@ const StakeNowButtonText = styled(SecondaryButtonText)`
   }
 `
 
-const Home: React.FC<HomeProps> = ({ modalObj }) => {
+const NavCardSubText = styled.div`
+  position: relative;
+  padding-top: 40px;
+  width: 80%;
+  text-align: left;
+  font: normal normal normal 20px/36px Poppins;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+  opacity: 1;
+`
+
+const NavCardText = styled.div`
+  position: relative;
+  padding-top: 26px;
+  width: 80%;
+  text-align: left;
+  font: normal normal normal 16px/30px Poppins;
+  letter-spacing: 0px;
+  color: #6B7682;
+  opacity: 1;
+`
+
+const NavCardFooter = styled.div`
+  width: 80%;
+  font: normal normal 300 16px/36px Poppins;
+  letter-spacing: 0px;
+  opacity: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+`
+
+const NavCardFooterItem = styled.div`
+  position: absolute;
+  bottom: 73px;
+  height: 20px; 
+  text-align: right;
+`
+
+const S3Div = styled.div`
+  padding-top: 122px;
+  width: 850px;
+  height: 660px;
+`
+
+const S3TitleText = styled.div`
+  text-align: center;
+  font: normal normal 600 36px/72px Poppins;
+  letter-spacing: 1.8px;
+  color: #FFFFFF;
+  opacity: 1;
+`
+
+const Home: React.FC<HomeProps> = () => {
   const history = useHistory()
   const multi = useMultiCall()
   const zombie = useZombie()
@@ -222,7 +277,7 @@ const Home: React.FC<HomeProps> = ({ modalObj }) => {
               history.push('/graveyard')
             }}>
               <PrimaryButtonText>
-                View NFT&apos;s
+                View NFTs
               </PrimaryButtonText>
             </PrimaryButton>
           </div>
@@ -236,7 +291,7 @@ const Home: React.FC<HomeProps> = ({ modalObj }) => {
         </ButtonsDiv>
         <div id='home-section-2'>
           <Sec2TitleBox>
-            <div>Earn NFTs in multiple ways</div>
+            <div>Farm NFTs in multiple ways</div>
             <div style={{ paddingTop: '20px' }}>
               <Line style={{
                 width: '30px',
@@ -252,9 +307,23 @@ const Home: React.FC<HomeProps> = ({ modalObj }) => {
                 height: '5px',
               }} />
               <NavCardImg src={gravesLogo} alt='Graves Logo' style={{ paddingTop: '55px' }} />
-              <NavCardText>
+              <NavCardTitleText>
                 Graves
+              </NavCardTitleText>
+              <NavCardSubText>
+                Create NFTs from the dead tokens lingering in your wallet
+              </NavCardSubText>
+              <NavCardText>
+                Unlock graves using rugged tokens in your wallet to earn NFTs on top of regular ZMBE rewards
               </NavCardText>
+              <NavCardFooter>
+                <NavCardFooterItem onClick={() => { history.push('/graves')}}>
+                  <text style={{paddingRight: '15px', color: '#AE32AA'}}>
+                    enter graves
+                  </text>
+                  <img src={gravesarrow} alt="Grave Card Arrow"/>
+                </NavCardFooterItem>
+              </NavCardFooter>
             </NavCard>
             <div style={{ paddingLeft: '60px', paddingRight: '60px' }}>
               <NavCard>
@@ -264,12 +333,25 @@ const Home: React.FC<HomeProps> = ({ modalObj }) => {
                   height: '5px',
                 }} />
                 <NavCardImg src={tombsLogo} alt='Tombs Logo' style={{ paddingTop: '55px' }} />
-                <NavCardText>
+                <NavCardTitleText>
                   Tombs
+                </NavCardTitleText>
+                <NavCardSubText>
+                  Boost NFT rarity by providing liquidity
+                </NavCardSubText>
+                <NavCardText>
+                  Roll for NFTs of varying rarity while earning ZMBE by staking LP tokens. Increase your odds by increasing your stake in the tombs
                 </NavCardText>
+                <NavCardFooter>
+                  <NavCardFooterItem onClick={() => { history.push('/tombs')}}>
+                    <text style={{paddingRight: '15px', color: '#4B7BDC'}}>
+                      enter tombs
+                    </text>
+                    <img src={tombsarrow} alt="Tomb Card Arrow"/>
+                  </NavCardFooterItem>
+                </NavCardFooter>
               </NavCard>
             </div>
-
             <NavCard>
               <HalfLine style={{
                 background: '#30C00D 0% 0% no-repeat padding-box',
@@ -277,11 +359,32 @@ const Home: React.FC<HomeProps> = ({ modalObj }) => {
                 height: '5px',
               }} />
               <NavCardImg src={spawningPoolsLogo} alt='Spawning Pools Logo' style={{ paddingTop: '55px' }} />
-              <NavCardText>
+              <NavCardTitleText>
                 Spawning Pools
+              </NavCardTitleText>
+              <NavCardSubText>
+                Earn NFTs and returns in partnered project tokens
+              </NavCardSubText>
+              <NavCardText>
+                Farm NFTs by staking ZMBE, while earning rewards in tokens from RugZombie partners
               </NavCardText>
+              <NavCardFooter>
+                <NavCardFooterItem onClick={() => { history.push('/spawning_pools')}}>
+                  <text style={{paddingRight: '15px', color: '#30C00D'}}>
+                    enter spawning pools
+                  </text>
+                  <img src={sparrow} alt="Spawning Pool Card Arrow"/>
+                </NavCardFooterItem>
+              </NavCardFooter>
             </NavCard>
           </Sec2Cards>
+        </div>
+        <div id='home-section-3'>
+          <S3Div>
+            <S3TitleText>
+              How does RugZombie work?
+            </S3TitleText>
+          </S3Div>
         </div>
 
       </TopMenu>
