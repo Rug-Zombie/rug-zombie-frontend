@@ -5,7 +5,7 @@ import './Footer.Styles.css'
 import { useHistory } from 'react-router'
 import telegram from 'images/footer/Telegram.svg'
 import twitter from 'images/footer/Twitter.svg'
-import config from './config'
+import config, { Type } from './config'
 
 const FooterFlex = styled.div`
   position: relative;
@@ -61,7 +61,13 @@ const Footer: React.FC = () => {
             return <div style={{paddingLeft: '96px'}}>
               <FooterColumn>
                 {column.map(item => {
-                  return <FooterText>{item.label}</FooterText>
+                  return <FooterText onClick={() => {
+                    if(item.type === Type.ExternalLink) {
+                      window.location.href = item.href
+                    } else {
+                      history.push(item.href)
+                    }
+                  }}>{item.label}</FooterText>
                 })}
               </FooterColumn>
             </div>
