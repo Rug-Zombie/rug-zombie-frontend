@@ -8,7 +8,7 @@ import gravesLogo from 'images/home/Graves.svg'
 import gravesarrow from 'images/home/GraveArrow.svg'
 import sparrow from 'images/home/SpawningPoolArrow.svg'
 import tombsarrow from 'images/home/TombArrow.svg'
-import footer from 'images/home/Footer.svg'
+import logo from 'images/Logo.svg'
 import { useHistory } from 'react-router'
 import TopMenu from '../../components/TopMenu'
 import { useMultiCall, useZombie } from '../../hooks/useContract'
@@ -20,6 +20,7 @@ import { PrimaryButton, PrimaryButtonText, SecondaryButton, SecondaryButtonText 
 import tokens from '../../config/constants/tokens'
 import { getAddress } from '../../utils/addressHelpers'
 import { PlusIcon } from '../../components/Icons'
+import Footer from '../../components/Footer'
 
 interface HomeProps {
   modalObj: { modal: boolean, setModal: any };
@@ -227,6 +228,29 @@ const TutorialTitleText = styled.div`
   color: #FFFFFF;
   opacity: 1;
   padding-left: 25px;
+`
+
+const FooterFlex = styled.div`
+  width: 80%;
+  height: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 56px;
+`
+
+const FooterColumn = styled.div`
+  height: 100%;
+  max-width: 230px;
+  display: flex;
+  flex-direction: column;
+`
+
+const CopyrightText = styled.text`
+  text-align: center;
+  font: normal normal 300 12px/30px Poppins;
+  letter-spacing: 0px;
+  color: #6B7682;
+  padding-top: 34px;
 `
 
 const Home: React.FC<HomeProps> = () => {
@@ -457,11 +481,8 @@ const Home: React.FC<HomeProps> = () => {
               </TutorialTitleText>
             </TutorialDiv>
           </S3Div>
-          <div id='footer-img' />
         </div>
-        <div id='home-footer'>
-          yo
-        </div>
+        <Footer />
       </TopMenu>
     </>
   )

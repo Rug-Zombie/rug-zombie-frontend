@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import logo from 'images/menu/Logo.svg'
+import logo from 'images/Logo.svg'
 import more from 'images/menu/More.png'
 import zombiehead from 'images/menu/ZombieHead.svg'
 import './TopMenu.Styles.css'
@@ -21,7 +21,7 @@ const Logo = styled.img`
   top: 31.99px;
   left: 50px;
   height: 36px;
-  background: transparent url('images/menu/Logo.svg') 0% 0% no-repeat padding-box;
+  background: transparent url('images/Logo.svg') 0% 0% no-repeat padding-box;
   opacity: 1;
 `
 
