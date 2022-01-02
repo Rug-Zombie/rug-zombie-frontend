@@ -83,6 +83,6 @@
 
 .menu-logo {
     height: 36px;
-    background: transparent url('images/menu/Logo.svg') 0% 0% no-repeat padding-box;
+    background: transparent url('../../images/Logo.svg') 0% 0% no-repeat padding-box;
     opacity: 1;
 }

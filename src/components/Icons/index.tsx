@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import telegram from 'images/footer/Telegram.svg'
+import twitter from 'images/footer/Twitter.svg'
 
 const HorizontalLine = styled.div`
   width: 20px;
@@ -24,4 +26,16 @@ export const PlusIcon = () => {
 
 export const MinusIcon = () => {
   return <HorizontalLine/>
+}
+
+export const TelegramIcon = () => {
+  return <div>
+  <img style={{position: 'relative', bottom: '32px', left: '13px'}} src={telegram} alt='Telegram Icon'/>
+  </div>
+}
+
+export const TwitterIcon = () => {
+  return <div>
+    <img style={{position: 'relative', bottom: '32px', left: '13px'}} src={twitter} alt='Twitter Icon'/>
+  </div>
 }
