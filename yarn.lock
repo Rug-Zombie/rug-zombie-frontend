@@ -1194,7 +1194,7 @@
 
 "@catacombs-libs/uikit@https://github.com/Rug-Zombie/catacombs-uikit.git":
   version "0.29.3"
-  resolved "https://github.com/Rug-Zombie/catacombs-uikit.git#f1eed8e54d9e863d13f43487628f1e57ddec7ac4"
+  resolved "https://github.com/Rug-Zombie/catacombs-uikit.git#0386f3a4a75f12b1ef2d45d40391af8d86c932f9"
   dependencies:
     "@popperjs/core" "^2.9.2"
     "@types/lodash" "^4.14.168"
