@@ -99,9 +99,7 @@ const App: React.FC = () => {
               </AppContainer>
             </>
           </Route>
-
           <Menu>
-            <Route exact path={routes.GRAVES}><Graves /></Route>
             <Route exact path={routes.TOMBS}><Tombs /></Route>
             <Route exact path={routes.SPAWNING_POOLS}><SpawningPools /></Route>
             <Route exact path={routes.MAUSOLEUM}><PredictionsHome /></Route>
