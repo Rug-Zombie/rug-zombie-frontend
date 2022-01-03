@@ -1263,6 +1263,22 @@ const nfts: Nft[] = [
     artist: artists.canadiancryptojunkie,
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 79,
+    name: 'Hunny Badger Don\'t Care',
+    symbol: 'HUNNYB',
+    description: 'Look at her, just grunting, and eating snakes.',
+    address: {
+      56: '0xe508b5e76b116d40a7068973115b9f51598136bc',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmaAaAY5HnSGo4UAAwJ4N4DLR8JatkXirZzerdiF85QZ8w',
+    type: 'image',
+    rarity: 'Rare',
+    artist: artists.jussjoshinduh,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 
