@@ -1,89 +1,70 @@
-import React from 'react'
-import styled from 'styled-components'
-import logo from 'images/Logo.svg'
-import './Footer.Styles.css'
-import { useHistory } from 'react-router'
-import telegram from 'images/footer/Telegram.svg'
-import twitter from 'images/footer/Twitter.svg'
-import config, { Type } from './config'
+import React from 'react';
+import { useHistory } from 'react-router';
+import logo from 'images/Logo.svg';
+import telegram from 'images/footer/Telegram.svg';
+import twitter from 'images/footer/Twitter.svg';
+import config, { Type } from './config';
 
-const FooterFlex = styled.div`
-  position: relative;
-  top: -300px;
-  width: 80%;
-  height: 100%;
-  margin-right: auto;
-  margin-left: auto;
-  padding-top: 56px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-`
-
-const FooterColumn = styled.div`
-  height: 100%;
-  max-width: 230px;
-  display: flex;
-  flex-direction: column;
-`
-
-const CopyrightText = styled.text`
-  text-align: center;
-  font: normal normal 300 12px/30px Poppins;
-  letter-spacing: 0px;
-  color: #6B7682;
-  padding-top: 34px;
-`
-
-const FooterText = styled.div`
-  text-align: left;
-  font: normal normal 300 16px/20px Poppins;
-  letter-spacing: 0px;
-  color: #FFFFFF;
-`
+import {
+  FooterContainer,
+  FooterImage,
+  FooterContent,
+  Zmbe,
+  CopyrightText,
+  FooterLists,
+  FooterList,
+  FooterListItem,
+  FooterIcons,
+  FooterIcon,
+} from './styles';
 
 const Footer: React.FC = () => {
-  const history = useHistory()
+  const history = useHistory();
+
+  const handleListItemClick = (e, item) => {
+    e.preventDefault();
+    if(item.type === Type.ExternalLink) {
+      window.location.href = item.href;
+    } else {
+      history.push(item.href);
+    }
+  };
 
   return (
-    <>
-      <div id='home-footer'>
-        <div id='footer-img' />
-        <FooterFlex>
-          <FooterColumn>
-            <img src={logo} alt='footer logo' />
-            <CopyrightText>
-              © 2022 RugZombie. All rights reserved
-            </CopyrightText>
-          </FooterColumn>
-          <div style={{paddingLeft: '208px'}}/>
+    <FooterContainer>
+      <FooterImage />
+      <FooterContent>
+        <Zmbe>
+          <img src={logo} alt='Zmbe Logo' />
+          <CopyrightText>
+            © 2022 RugZombie. All rights reserved
+          </CopyrightText>
+        </Zmbe>
+        <FooterLists>
           {config.map(column => {
-            return <div style={{paddingLeft: '96px'}}>
-              <FooterColumn>
-                {column.map(item => {
-                  return <FooterText onClick={() => {
-                    if(item.type === Type.ExternalLink) {
-                      window.location.href = item.href
-                    } else {
-                      history.push(item.href)
-                    }
-                  }}>{item.label}</FooterText>
+            return (
+              <FooterList key={column[0].label}>
+                {column.map((item) => {
+                  return (
+                    <FooterListItem
+                      key={item.label}
+                      onClick={(e) => handleListItemClick(e, item)}
+                    >
+                      {item.label}
+                    </FooterListItem>
+                  );
                 })}
-              </FooterColumn>
-            </div>
+              </FooterList>
+            );
           })}
-          <div style={{paddingLeft: '208px'}}/>
-
-          <img src={telegram} style={{width: '50px', height: '50px'}} alt='Telegram icon'/>
-          <div style={{paddingLeft: '20px'}}/>
-
-          <img src={twitter} style={{width: '50px', height: '50px'}} alt='Twitter Icon'/>
-          <div style={{paddingLeft: '208px'}}/>
-
-        </FooterFlex>
-      </div>
-    </>
-  )
+        </FooterLists>
+        <FooterIcons>
+          <FooterIcon src={telegram} alt='Telegram Icon'/>
+          <FooterIcon src={twitter} alt='Twitter Icon'/>
+        </FooterIcons>
+      </FooterContent>
+    </FooterContainer>
+  );
 }
 
-export default Footer
+export default Footer;
