@@ -1243,7 +1243,7 @@ const nfts: Nft[] = [
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/QmYZZSJahiBKWUhwJMcgQT4xJYnqFjWWT1XQSUnPdhZseU',
     type: 'image',
-    rarity: 'Rare',
+    rarity: 'Common',
     artist: artists.ZomBaes,
     userInfo: { ...DEFAULT_USER_INFO },
   },
