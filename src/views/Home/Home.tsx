@@ -293,7 +293,7 @@ const Home: React.FC<HomeProps> = () => {
 
   return (
     <>
-      <TopMenu>
+      <TopMenu />
         <div id='home-section-1'>
           <TitleTextBox>
             Resurrect Your Dead Tokens
@@ -483,7 +483,6 @@ const Home: React.FC<HomeProps> = () => {
           </S3Div>
         </div>
         <Footer />
-      </TopMenu>
     </>
   )
 }
