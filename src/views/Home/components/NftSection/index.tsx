@@ -5,10 +5,10 @@ import gravesLogo from 'images/home/Graves.svg';
 import gravesArrow from 'images/home/GraveArrow.svg';
 import spLogo from 'images/home/SpawningPools.svg';
 import spArrow from 'images/home/SpawningPoolArrow.svg';
+import SectionContainer from '../SectionContainer';
 import SectionHeader from '../SectionHeader';
 
 import {
-  NftContainer,
   NftCards,
   NftCard,
   HalfLine,
@@ -27,7 +27,7 @@ interface NftSectionProps {
 
 const NftSection: React.FC<NftSectionProps> = ({ history }) => {
   return (
-    <NftContainer>
+    <SectionContainer backgroundColor='#010202'>
       <SectionHeader
         title='Farm NFTs in multiple ways'
       />
@@ -103,7 +103,7 @@ const NftSection: React.FC<NftSectionProps> = ({ history }) => {
           </NftCardFooter>
         </NftCard>
       </NftCards>
-    </NftContainer>
+    </SectionContainer>
   );
 };
 
