@@ -12,7 +12,7 @@ import { getAddress } from 'utils/addressHelpers'
 import HeroImage from 'images/backgrounds/home-section-1-background.svg'
 
 const HeroContainer = styled.section`
-  height: 100vh;
+  min-height: 100vh;
   max-width: 1920px;
   background-image: url(${HeroImage});
   background-size: cover;
