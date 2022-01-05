@@ -1,10 +1,5 @@
 import styled from 'styled-components';
 
-export const NftContainer = styled.section`
-  max-width: 1920px;
-  margin: 0 0 20px 0;
-`;
-
 export const NftCards = styled.div`
   display: flex;
   justify-content: space-around;
@@ -12,8 +7,8 @@ export const NftCards = styled.div`
 `;
 
 export const NftCard = styled.div`
-  width: 30vw;
-  margin-top: 25px;
+  width: 90vw;
+  margin: 25px 10px 0 10px;
   min-width: 260px;
   max-width: 390px;
   background-color: #151E21;
