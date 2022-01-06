@@ -13,6 +13,7 @@ export const routes = {
     GRAVEYARD:'/graveyard',
     SHARKTANK:'/sharktank',
     BURNGRAVES:'/burngraves/',
+    MARKETPLACE:'/marketplace/',
 
     // Catacombs
     CATACOMBS:'/catacombs/',

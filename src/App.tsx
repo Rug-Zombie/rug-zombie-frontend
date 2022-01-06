@@ -32,6 +32,7 @@ import RugRoll from './views/Catacombs/components/RugRoll'
 import SwiperProvider from './views/Mausoleum/context/SwiperProvider'
 
 import SharkPools from './views/SharkPools'
+import Marketplace from './views/Marketplace'
 
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page
@@ -92,6 +93,7 @@ const App: React.FC = () => {
           <Menu>
             <Route exact path={routes.HOME}><Home modalObj={{ modal, setModal }} /></Route>
             <Route exact path={routes.GRAVES}><Graves /></Route>
+            <Route exact path={routes.MARKETPLACE}><Marketplace /></Route>
             <Route exact path={routes.TOMBS}><Tombs /></Route>
             <Route exact path={routes.SPAWNING_POOLS}><SpawningPools /></Route>
             <Route exact path={routes.MAUSOLEUM}><PredictionsHome /></Route>

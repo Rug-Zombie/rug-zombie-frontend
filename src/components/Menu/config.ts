@@ -46,6 +46,11 @@ const config: MenuEntry[] = [
     href: '/graveyard'
   },
   {
+    label: 'Marketplace',
+    icon: 'GraveyardIcon',
+    href: '/marketplace'
+  },
+  {
     label: 'Catacombs',
     icon: 'CatacombsIcon',
     href: '/catacombs'
