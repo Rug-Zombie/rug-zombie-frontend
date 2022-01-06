@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const Container = styled.section`
   max-width: 1920px;
-  margin: 0 0 20px 0;
+  padding: 0 0 20px 0;
   background-color: ${({color}) => color}
 `;
 
