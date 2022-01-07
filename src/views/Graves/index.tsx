@@ -10,6 +10,7 @@ import Filter from './components/Filter'
 import Grave from './components/Grave'
 import { graves } from '../../redux/get'
 import { getId } from '../../utils'
+import Footer from '../../components/Footer'
 
 const GraveFlex = styled.div`
   display: flex;
@@ -33,7 +34,7 @@ const Graves: React.FC = () => {
   const myHoldings = 4349
 
   return (
-    <TopMenu>
+    <>
       <Page>
         <GraveFlex>
           <div style={{ paddingRight: '50px' }}>
@@ -41,18 +42,19 @@ const Graves: React.FC = () => {
           </div>
           <GravesColumn>
             <Filter />
-            <div style={{paddingTop: '40px'}}/>
-            {/* <Grave pid={40} /> */}
+            <div style={{ paddingTop: '40px' }} />
             {graves().map(g => {
               return <>
                 <Grave pid={getId(g.pid)} key={getId(g.pid)} />
-                <div style={{paddingBottom: '20px'}}/>
+                <div style={{ paddingBottom: '20px' }} />
               </>
             })}
           </GravesColumn>
         </GraveFlex>
       </Page>
-    </TopMenu>
+      <Footer />
+    </>
+
   )
 }
 

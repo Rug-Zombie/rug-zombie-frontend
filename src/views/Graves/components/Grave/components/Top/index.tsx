@@ -13,6 +13,7 @@ const GraveRow = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 100%;
+  width: 100%;
 `
 
 const GraveColumn = styled.div`
