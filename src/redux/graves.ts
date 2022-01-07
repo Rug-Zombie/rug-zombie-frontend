@@ -148,6 +148,27 @@ const graves: Grave[] = [
   },
   {
     pid: {
+      56: 43,
+      97: 1,
+    },
+    name: 'Ronin Gamez Rare',
+    subtitle: 'Ronin',
+    path: 'https://ipfs.io/ipfs/QmceY5i3QbqUFmxdxpd5FyZsHakHTH8LvY8ToLUste9xQJ',
+    type: 'image',
+    withdrawalCooldown: '3 days',
+    nftRevivalTime: '30 days',
+    rug: tokens.roningmz,
+    artist: artists.ayaz_psd,
+    stakingToken: '0xB459C6DD5ca76367df58E6874a35280b0531B451',
+    pcsVersion: 'v2',
+    liquidityDetails: '',
+    isFeatured: true,
+    rarity: "Legendary",
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
+  },
+  {
+    pid: {
       56: 40,
       97: 1,
     },

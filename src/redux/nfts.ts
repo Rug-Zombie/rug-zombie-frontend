@@ -1279,6 +1279,22 @@ const nfts: Nft[] = [
     artist: artists.jussjoshinduh,
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 80,
+    name: 'Ronin',
+    symbol: 'RONIN',
+    description: 'Burying the eversoul where no one would ever find it; this could be his only solace. May no one else ever bear the burden he shouldered.',
+    address: {
+      56: '0x08e6670b53d2c4822C479C55E6B79f1B75A2a7FB',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmceY5i3QbqUFmxdxpd5FyZsHakHTH8LvY8ToLUste9xQJ',
+    type: 'image',
+    rarity: 'Rare',
+    artist: artists.ayaz_psd,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 

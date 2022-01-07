@@ -27,7 +27,6 @@ import Graveyard from './views/Graveyard'
 import Profile from './views/Profile'
 import DataLab from './views/Catacombs/components/DataLab'
 import BlackMarket from './views/Catacombs/components/BlackMarket'
-import Barracks from './views/Catacombs/components/Barracks'
 import RugRoll from './views/Catacombs/components/RugRoll'
 import SwiperProvider from './views/Mausoleum/context/SwiperProvider'
 
@@ -89,7 +88,6 @@ const App: React.FC = () => {
             </SwiperProvider>
           </Route>
           <Route exact path={routes.BLACKMARKET}><BlackMarket /></Route>
-          <Route exact path={routes.BARRACKS}><Barracks /></Route>
           <Menu>
             <Route exact path={routes.HOME}><Home modalObj={{ modal, setModal }} /></Route>
             <Route exact path={routes.GRAVES}><Graves /></Route>
