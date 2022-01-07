@@ -39,7 +39,7 @@ const CreateListingModal: React.FC<ModalProps> = ({onDismiss}) => {
     if (wallet) {
       getBep20Contract(getAddress(selectedRug.address)).methods.allowance(wallet, getRugMarketAddress())
         .call().then(res => {
-        if (new BigNumber(res.toString()).gt(0)) {
+        if (new BigNumber(res.toString()).gt(quantity)) {
           setRugApproved(true)
           setCreateListingButtontext('Create Listing')
           setCreateButtonDisabled(false)

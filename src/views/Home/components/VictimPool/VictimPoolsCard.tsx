@@ -18,6 +18,7 @@ const VictimPoolsCard: React.FC = () => {
     const { t } = useTranslation();    
 
     const options = [
+        { label: 'Ronin Gamez', value: 'RONINGMZ' },
         { label: 'Minereum BSC', value: 'MNEB' },
         { label: 'Black Diamond', value: 'BLACK' },
         { label: 'Bogged Finance', value: 'BOG' },

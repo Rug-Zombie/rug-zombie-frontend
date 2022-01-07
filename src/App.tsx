@@ -87,6 +87,7 @@ const App: React.FC = () => {
               <DataLab modalObj={{ modal, setModal }} />
             </SwiperProvider>
           </Route>
+
           <Route exact path={routes.BLACKMARKET}><BlackMarket /></Route>
           <Menu>
             <Route exact path={routes.HOME}><Home modalObj={{ modal, setModal }} /></Route>

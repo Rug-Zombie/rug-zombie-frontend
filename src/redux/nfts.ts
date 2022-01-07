@@ -1291,7 +1291,7 @@ const nfts: Nft[] = [
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/QmceY5i3QbqUFmxdxpd5FyZsHakHTH8LvY8ToLUste9xQJ',
     type: 'image',
-    rarity: 'Rare',
+    rarity: 'Legendary',
     artist: artists.ayaz_psd,
     userInfo: { ...DEFAULT_USER_INFO },
   },

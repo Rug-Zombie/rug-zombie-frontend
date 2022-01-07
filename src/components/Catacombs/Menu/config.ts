@@ -17,14 +17,19 @@ const config: MenuEntry[] = [
     href: `/rugroll`,
   },
   {
-    label: 'Barracks',
-    icon: 'BarracksIcon',
-    href: `/barracks`,
-  },
-  {
     label: 'Black Market',
     icon: 'BlackMarketIcon',
     href: `/blackmarket`,
+  },
+  {
+    label: 'Barracks',
+    icon: 'BarracksIcon',
+    items: [
+      {
+        label: 'Coming Soon!',
+        href: '/',
+      }
+    ],
   },
   {
     label: 'RugZombie',

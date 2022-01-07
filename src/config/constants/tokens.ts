@@ -199,6 +199,16 @@ const tokens = {
     projectLink: '',
     tokenLogo: 'https://assets.coingecko.com/coins/images/19203/small/logo_200x200_%285%29.png?1634682332'
   },
+  zroningmz: {
+    symbol: 'ZRONINGMZ',
+    address: {
+      56: '0x1e25f2da754ebe4eb1cc11c255da8cafa37b9472',
+      97: '',
+    },
+    decimals: 0,
+    projectLink: '',
+    tokenLogo: 'https://assets.coingecko.com/coins/images/19203/small/logo_200x200_%285%29.png?1634682332'
+  },
   hunny: {
     symbol: 'HUNNY',
     address: {

@@ -42,6 +42,14 @@ const defaultPoolInfo: VictimPoolPoolInfo = {
 
 const pools: VictimPool[] = [
   {
+    id: 'RONINGMZ',
+    name: 'Ronin Gamez',
+    rug: tokens.roningmz,
+    ztoken: tokens.zroningmz,
+    zsymbol: 'ZRONINGMZ',
+    poolInfo: { ...defaultPoolInfo },
+  },
+  {
     id: 'MNEB',
     name: 'Minereum BSC',
     rug: tokens.mneb,
