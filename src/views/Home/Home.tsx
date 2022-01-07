@@ -5,7 +5,6 @@ import { bnbPriceUsd, drFrankensteinZombieBalance, spawningPools, tombs, zombieP
 import { BIG_ZERO } from 'utils/bigNumber'
 import { getBalanceAmount } from 'utils/formatBalance'
 import { useMultiCall, useZombie } from 'hooks/useContract'
-import TopMenu from 'components/TopMenu'
 import Footer from 'components/Footer'
 import Hero from './components/Hero'
 import NftSection from './components/NftSection'
@@ -51,7 +50,6 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <TopMenu />
       <Hero tvl={tvl} history={history} />
       <NftSection history={history} />
       <TutorialSection />
