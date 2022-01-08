@@ -1,10 +1,16 @@
 /* eslint-disable no-param-reassign */
 import React, { useEffect, useState } from 'react'
-import PageHeader from 'components/PageHeader'
-import { Flex, Heading } from '@rug-zombie-libs/uikit'
-import header from 'images/MarketplaceHeader.jpg'
-import footer from 'images/Footer.svg'
+import { LinkExternal } from '@rug-zombie-libs/uikit'
+import styled from 'styled-components'
 import { formatDuration } from '../../utils/timerHelpers'
+
+const SubText = styled.p`
+  text-align: left;
+  font: normal normal normal 14px/30px Poppins;
+  letter-spacing: 0px;
+  color: #30C00D;
+  display: flex;
+`
 
 const Marketplace: React.FC = () => {
   const jan30th = 1643605200
@@ -21,9 +27,19 @@ const Marketplace: React.FC = () => {
     width: '100%',
     paddingTop: '15%',
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center'
-  }} className="total-earned text-shadow">{formatDuration(remaining, true)} #zombieon</div>
+
+  }}>
+    <text className="total-earned text-shadow">{formatDuration(remaining, true)} #zombieon</text>
+    <div style={{paddingTop: '20px'}}/>
+    <SubText className='text-shadow'>
+      Want to whitelist your project on our secondary market place? Let us know
+      <LinkExternal external href='https://docs.google.com/forms/d/e/1FAIpQLSdkKJRBugKWdVOryendbJVfLoNX7VB8UKNjH0g6xavDafUKRA/viewform?usp=send_form' style={{paddingLeft: '10px'}}>here</LinkExternal>
+
+    </SubText>
+  </div>
 
 }
 
