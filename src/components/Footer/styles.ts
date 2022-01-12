@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import backgroundImage from 'images/home/Footer.svg';
 
 export const FooterContainer = styled.footer`
-  height: 100px;
+  height: 175px;
   max-width: 1920px;
   background-color: #010202;
 `;
