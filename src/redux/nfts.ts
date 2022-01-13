@@ -1305,7 +1305,7 @@ const nfts: Nft[] = [
       97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
     },
     totalSupply: BIG_ZERO,
-    path: 'https://ipfs.io/ipfs/QmceY5i3QbqUFmxdxpd5FyZsHakHTH8LvY8ToLUste9xQJ',
+    path: 'https://ipfs.io/ipfs/QmUTqWeW63dXGh3StdSu2wM1TiwL4ce2NxWpwyMwFHSRXc',
     type: 'image',
     rarity: 'Common',
     artist: artists.canadiancryptojunkie,
