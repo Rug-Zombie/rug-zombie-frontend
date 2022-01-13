@@ -1295,7 +1295,22 @@ const nfts: Nft[] = [
     artist: artists.ayaz_psd,
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 81,
+    name: 'A Rusty Spoon',
+    symbol: 'RUSTYSPOON',
+    description: 'there is no spoon.',
+    address: {
+      56: '0xEC284ED7Db234a86f2a959c39271060E95fA4058',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmceY5i3QbqUFmxdxpd5FyZsHakHTH8LvY8ToLUste9xQJ',
+    type: 'image',
+    rarity: 'Common',
+    artist: artists.canadiancryptojunkie,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
-
 
 export default nfts
