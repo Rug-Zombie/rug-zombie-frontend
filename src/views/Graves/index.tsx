@@ -12,17 +12,24 @@ import { graves } from '../../redux/get'
 import { getId } from '../../utils'
 import Footer from '../../components/Footer'
 
-const GraveFlex = styled.div`
+const Row = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
   width: 100%;
-`
+`;
 
 const GravesColumn = styled.div`
+  max-width: 660px;
   display: flex;
   flex-direction: column;
   width: 100%
-`
+  @media (max-width: 1015px) {
+    max-width: 100vw;
+    margin: 0 auto;
+  }
+`;
 
 let accountAddress
 
@@ -36,10 +43,8 @@ const Graves: React.FC = () => {
   return (
     <>
       <Page>
-        <GraveFlex>
-          <div style={{ paddingRight: '50px' }}>
-            <HeaderCard tvl={tvl} pageTvl={graveTvl} myHoldings={myHoldings} />
-          </div>
+        <Row>
+          <HeaderCard tvl={tvl} pageTvl={graveTvl} myHoldings={myHoldings} />
           <GravesColumn>
             <Filter />
             <div style={{ paddingTop: '40px' }} />
@@ -50,12 +55,11 @@ const Graves: React.FC = () => {
               </>
             })}
           </GravesColumn>
-        </GraveFlex>
+        </Row>
       </Page>
       <Footer />
     </>
-
-  )
+  );
 }
 
 export default Graves

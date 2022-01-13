@@ -4,52 +4,46 @@ import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
 import numeral from 'numeral'
 
-const InfoCard = styled.div`
-  width: 280px;
-  height: 500px;
-  background: #151E21 0% 0% no-repeat padding-box;
+const InfoCard = styled.header`
+  min-width: 280px;
+  max-width: 280px;
+  margin: 0 10px;
+  background-color: #151E21;
   border-radius: 20px;
-`
-
-const InfoCardFlex = styled.div`
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+  @media (max-width: 1015px) {
+    max-width: 100vw;
+    margin: 0 0 10px 0;
+  }
+`;
 
 const HalfLine = styled.div`
-  width: 220px;
-  height: 5px;
-  background: #AE32AA 0% 0% no-repeat padding-box;
   border-radius: 0px 0px 5px 5px;
-  margin-left: auto;
-  margin-right: auto;
-`
+  margin: 0 auto;
+  height: 5px;
+  width: 80%;
+  background-color: #AE32AA;
+`;
 
-const InfoCardTitle = styled.div`
+const InfoCardTitle = styled.h3`
   text-align: left;
   font: normal normal 500 1.6rem Poppins;
   letter-spacing: 0.5px;
   color: #FFFFFF;
-  padding-top: 25px;
-`
-const InfoCardTextFlex = styled.div`
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-`
+`;
 
-const InfoCardDescription = styled.text`
+const InfoCardSubHeader = styled.h4`
   width: 100%;
   text-align: left;
   font: normal normal normal 16px/30px Poppins;
   letter-spacing: 0px;
   color: #6B7682;
-`
+  padding: 0 10px;
+`;
 
-const InfoCardLink = styled.text`
+const InfoCardLink = styled.p`
   text-align: left;
   text-decoration: underline;
   font: normal normal normal 16px/30px Poppins;
@@ -57,21 +51,37 @@ const InfoCardLink = styled.text`
   color: #AE32AA;
 `
 
-const InfoCardSubtitle = styled.text`
+const InfoCardHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  width: 100%
+`;
+
+const InfoCardContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px 20px 20px;
+  width: 100%
+`;
+
+const InfoCardSubtitle = styled.p`
   text-align: left;
   font: normal normal normal 12px/30px Poppins;
   letter-spacing: 0px;
   color: #6B7682;
-  padding-top: 29px;
-`
+  padding: 0 10px;
+`;
 
-const InfoCardValue = styled.text`
+const InfoCardValue = styled.p`
   text-align: left;
   font: normal normal normal 30px/36px Poppins;
   letter-spacing: 0px;
   color: #FFFFFF;
   opacity: 1;
-`
+  padding: 0 10px 10px 10px;
+`;
 
 interface HeaderCardProps {
   tvl: number;
@@ -84,38 +94,37 @@ const HeaderCard: React.FC<HeaderCardProps> = ({ tvl, pageTvl, myHoldings }) => 
 
   return (
     <InfoCard>
-      <InfoCardFlex>
-        <HalfLine />
-        <InfoCardTextFlex>
-          <InfoCardTitle>
-            Graves
-          </InfoCardTitle>
-          <InfoCardDescription>
-            Use your dead tokens to unlock graves then stake ZMBE to earn Zombie & NFT rewards.
-          </InfoCardDescription>
-          <InfoCardSubtitle>
-            Total Value Locked
-          </InfoCardSubtitle>
-          <InfoCardValue>
-            {numeral(tvl).format('($ 0,0)')}
-          </InfoCardValue>
-          <InfoCardSubtitle>
-            {pageTvl.page} TVL
-          </InfoCardSubtitle>
-          <InfoCardValue>
-            {numeral(pageTvl.tvl).format('($ 0,0)')}
-          </InfoCardValue>
-          <InfoCardSubtitle>
-            My Holdings
-          </InfoCardSubtitle>
-          <InfoCardValue>
-            {numeral(myHoldings).format('($ 0,0)')}
-          </InfoCardValue>
-        </InfoCardTextFlex>
-      </InfoCardFlex>
+      <HalfLine />
+      <InfoCardHeader>
+        <InfoCardTitle>
+          Graves
+        </InfoCardTitle>
+        <InfoCardSubHeader>
+          Use your dead tokens to unlock graves then stake ZMBE to earn Zombie & NFT rewards.
+        </InfoCardSubHeader>
+      </InfoCardHeader>
+      <InfoCardContent>
+        <InfoCardSubtitle>
+          Total Value Locked
+        </InfoCardSubtitle>
+        <InfoCardValue>
+          {numeral(tvl).format('($ 0,0)')}
+        </InfoCardValue>
+        <InfoCardSubtitle>
+          {pageTvl.page} TVL
+        </InfoCardSubtitle>
+        <InfoCardValue>
+          {numeral(pageTvl.tvl).format('($ 0,0)')}
+        </InfoCardValue>
+        <InfoCardSubtitle>
+          My Holdings
+        </InfoCardSubtitle>
+        <InfoCardValue>
+          {numeral(myHoldings).format('($ 0,0)')}
+        </InfoCardValue>
+      </InfoCardContent>
     </InfoCard>
-
-  )
+  );
 }
 
-export default HeaderCard
+export default HeaderCard;
