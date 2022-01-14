@@ -6,6 +6,64 @@ import { SpawningPool } from './types'
 
 const spawningPools: SpawningPool[] = [
   {
+    id: 16,
+    name: 'French Connection V2 Legendary',
+    subtitle: 'Don of the Dead',
+    path: 'https://ipfs.io/ipfs/QmQD5L6kSgd2WgyydYadfc5vcd1AxjTzSDxJdmgnhSRFbJ',
+    type: 'video',
+    address: {
+      56: '0xAf0ed0352dCAbc57aa101dBd186C6abFb9C2a7F4',
+      97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
+    },
+    endBlock: 17000000,
+    endDate: 1650168000,
+    project: {
+      name: 'French Connection Finance',
+      description: 'French Connection Finance aims to create the world\'s first credit card to cryptocurrency encrypted online payment gateway, which rewards its holders with 9% fully automated BNB reflection on all the transactions made with $FCF during the same 24 hour period.',
+      additionalDetails: [
+        {
+          name: 'Project website',
+          url: tokens.fcf.projectLink,
+        },
+        {
+          name: 'Whitepaper',
+          url: 'https://frenchconnection.finance/white-paper/',
+        },
+        {
+          name: 'Telegram',
+          url: 'https://t.me/frenchconnection_bsc',
+        },
+      ],
+    },
+    withdrawalCooldown: '3 days',
+    nftRevivalTime: '45 days',
+    rewardToken: tokens.fcf,
+    rewardTokenBnbLp: '0xc58a80cf11d1cbbae4fc1c2fa9244f517676ab3d',
+    bnbLpTokenIndex: 1,
+    artist: artists.TheLeap3d,
+    stakingToken: '',
+    pcsVersion: 'v2',
+    liquidityDetails: '',
+    isNew: true,
+    color: 'brown',
+    userInfo: {
+      paidUnlockFee: false,
+      tokenWithdrawalDate: 0,
+      nftRevivalDate: 0,
+      amount: BIG_ZERO,
+      pendingReward: BIG_ZERO,
+      zombieAllowance: BIG_ZERO,
+    },
+    poolInfo: {
+      unlockFee: BIG_ZERO,
+      rewardPerBlock: BIG_ZERO,
+      minimumStake: BIG_ZERO,
+      totalZombieStaked: BIG_ZERO,
+      withdrawCooldown: 0,
+      nftRevivalTime: 0,
+    },
+  },
+  {
     id: 15,
     name: 'L1GHT L1ST Legendary',
     subtitle: 'The Mother',
@@ -44,7 +102,7 @@ const spawningPools: SpawningPool[] = [
     stakingToken: '',
     pcsVersion: 'v2',
     liquidityDetails: '',
-    isNew: true,
+    isNew: false,
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -101,8 +159,8 @@ const spawningPools: SpawningPool[] = [
     stakingToken: '',
     pcsVersion: 'v2',
     liquidityDetails: '',
-    isNew: true,
-    color: "silver",
+    isNew: false,
+    color: 'silver',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -158,8 +216,8 @@ const spawningPools: SpawningPool[] = [
     stakingToken: '',
     pcsVersion: 'v2',
     liquidityDetails: '',
-    isNew: true,
-    color: "silver",
+    isNew: false,
+    color: 'silver',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -217,7 +275,7 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v2',
     liquidityDetails: '',
     isNew: false,
-    color: "grey",
+    color: 'grey',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -275,7 +333,7 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v2',
     liquidityDetails: '',
     isNew: false,
-    color: "pink",
+    color: 'pink',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -333,7 +391,7 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v2',
     liquidityDetails: '',
     isNew: false,
-    color: "brown",
+    color: 'brown',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -391,8 +449,8 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v2',
     liquidityDetails: '',
     isNew: false,
-    tokenLogoFormat: "svg",
-    color: "#9400d3",
+    tokenLogoFormat: 'svg',
+    color: '#9400d3',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -450,7 +508,7 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v2',
     liquidityDetails: '',
     isNew: false,
-    color: "#C4A484",
+    color: '#C4A484',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -508,7 +566,7 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v2',
     liquidityDetails: '',
     isNew: false,
-    color: "violet",
+    color: 'violet',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -566,7 +624,7 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v2',
     liquidityDetails: '',
     isNew: false,
-    color: "red",
+    color: 'red',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -628,7 +686,7 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v2',
     liquidityDetails: '',
     isNew: false,
-    color: "red",
+    color: 'red',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -682,7 +740,7 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v2',
     liquidityDetails: '',
     isNew: false,
-    color: "rgb(0, 150, 255)",
+    color: 'rgb(0, 150, 255)',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -849,7 +907,7 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v2',
     liquidityDetails: '',
     isNew: false,
-    color: "rgb(0, 150, 255)",
+    color: 'rgb(0, 150, 255)',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -911,7 +969,7 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v1',
     liquidityDetails: '',
     isNew: false,
-    color: "rgb(0, 150, 255)",
+    color: 'rgb(0, 150, 255)',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,

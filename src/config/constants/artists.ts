@@ -47,6 +47,10 @@ const artists = {
     name: 'Canadian Crypto Junkie 🍁',
     twitter: 'https://twitter.com/CA_CryptoJunkie'
   },
+  febryangraves: {
+    name: 'Febryan Graves',
+    twitter: 'https://twitter.com/FebryanGraves'
+  },
   none: {
     name: '',
     twitter: '/',

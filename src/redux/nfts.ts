@@ -1311,6 +1311,22 @@ const nfts: Nft[] = [
     artist: artists.canadiancryptojunkie,
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 82,
+    name: 'Don of the Dead',
+    symbol: 'DON',
+    description: 'there is no spoon.',
+    address: {
+      56: '0x19558105A2BE2b988BCcabAdb676ea84AB85fC10',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmQD5L6kSgd2WgyydYadfc5vcd1AxjTzSDxJdmgnhSRFbJ',
+    type: 'video',
+    rarity: 'Legendary',
+    artist: artists.febryangraves,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts
