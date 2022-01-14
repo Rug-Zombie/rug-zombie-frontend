@@ -49,6 +49,7 @@ export const DropdownContent = styled.div`
   display: block;
   background-color: #010202;
   right: 0px;
+  z-index: 1;
 `;
 
 export const DropdownItem = styled.div`
