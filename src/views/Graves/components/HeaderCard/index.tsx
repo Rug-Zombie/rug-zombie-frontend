@@ -5,18 +5,12 @@ import styled from 'styled-components'
 import numeral from 'numeral'
 
 const InfoCard = styled.header`
-  min-width: 280px;
-  max-width: 280px;
-  margin: 0 10px;
+  min-width: 260px;
   background-color: #151E21;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  @media (max-width: 1015px) {
-    max-width: 100vw;
-    margin: 0 0 10px 0;
-  }
 `;
 
 const HalfLine = styled.div`

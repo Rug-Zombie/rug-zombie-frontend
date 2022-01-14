@@ -20,12 +20,22 @@ const Row = styled.div`
   width: 100%;
 `;
 
-const GravesColumn = styled.div`
-  max-width: 660px;
+const Header = styled.div`
+  max-width: 20vw;
+  margin: 0 20px 0 0;
   display: flex;
   flex-direction: column;
-  width: 100%
-  @media (max-width: 1015px) {
+  @media (max-width: 1279px) {
+    max-width: 100vw;
+    margin: 10px auto;
+  }
+`;
+
+const GravesColumn = styled.div`
+  max-width: 60vw;
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 1279px) {
     max-width: 100vw;
     margin: 0 auto;
   }
@@ -44,7 +54,9 @@ const Graves: React.FC = () => {
     <>
       <Page>
         <Row>
-          <HeaderCard tvl={tvl} pageTvl={graveTvl} myHoldings={myHoldings} />
+          <Header>
+            <HeaderCard tvl={tvl} pageTvl={graveTvl} myHoldings={myHoldings} />
+          </Header>
           <GravesColumn>
             <Filter />
             <div style={{ paddingTop: '40px' }} />
