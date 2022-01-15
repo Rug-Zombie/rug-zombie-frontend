@@ -9,6 +9,8 @@ import { getContract, getPancakePair } from '../utils/contractHelpers'
 import pancakeFactoryAbi from '../config/abi/pancakeFactoryAbi.json'
 import tokens from '../config/constants/tokens'
 import contracts from '../config/constants/contracts'
+import { getBalanceAmount } from '../utils/formatBalance'
+import { coingeckoPrice } from '../redux/get'
 
 export const getBnbPriceinBusd = () => {
   return axios.get('https://api.binance.com/api/v3/avgPrice?symbol=BNBBUSD')
@@ -20,6 +22,13 @@ export const fetchZmbeBnbAddress = (): Promise<string> => {
 
 export const fetchLpReserves = (address): Promise<any> => {
   return getPancakePair(address).methods.getReserves().call()
+}
+
+export const goldbarPrice = async (): Promise<any> => {
+  const res = await fetchLpReserves(getAddress(tokens.nuggetGoldbarApeLp.address))
+  const goldbarTokenPriceNugget = getBalanceAmount(new BigNumber(res._reserve1), 18).div(getBalanceAmount(new BigNumber(res._reserve0), tokens.goldbar.decimals))
+  const nuggetPriceUsd = (await coingeckoPrice('blockmine')).data.blockmine.usd
+  return goldbarTokenPriceNugget.times(nuggetPriceUsd)
 }
 
 // Block

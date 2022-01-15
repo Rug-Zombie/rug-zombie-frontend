@@ -535,6 +535,15 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://frenchconnection.finance/',
   },
+  goldbar: {
+    symbol: 'GOLDBAR',
+    address: {
+      56: '0x24f6ECAF0B9E99D42413F518812d2c4f3EeFEB12',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://assets.coingecko.com/coins/images/19008/small/gold_nugget.png?1636451377',
+  },
   txl: {
     symbol: 'TXL',
     address: {
@@ -543,6 +552,15 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://tixl.org/',
+  },
+  nuggetGoldbarApeLp: {
+    symbol: 'APE-LP',
+    address: {
+      56: '0x46Da2455D212bf8BC78D5fE557074dc7602969C0',
+      97: ''
+    },
+    decimals: 18,
+    projectLink: '',
   },
   cos: {
     symbol: 'COS',

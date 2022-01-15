@@ -132,4 +132,8 @@ export default {
     56: '0x7590FA9B94f6E030E6d0A86a4ed10B31f558CFDE',
     97: '0x8fe29fA5b27f800077dE4f712f3B394BeB876608'
   },
+  nuggetGoldbarRefiner: {
+    56: '0x816fa0ad9b96d840dd1cd6c25e50e86c0232f236',
+    97: '0x816fa0ad9b96d840dd1cd6c25e50e86c0232f236',
+  }
 }

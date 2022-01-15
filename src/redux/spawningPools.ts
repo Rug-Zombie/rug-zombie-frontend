@@ -6,6 +6,68 @@ import { SpawningPool } from './types'
 
 const spawningPools: SpawningPool[] = [
   {
+    id: 17,
+    name: 'Blockmine Legendary',
+    subtitle: 'Ol Jeb',
+    path: 'https://ipfs.io/ipfs/QmUqZ6p2afdtjVQJQ6tHZVxW17NT9pPsUSGUePrk1vJzrN',
+    type: 'video',
+    address: {
+      56: '0xc7D99410737B1601464f27cDDab9c2875A4da042',
+      97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
+    },
+    endBlock: 17080500,
+    endDate: 1650340799,
+    project: {
+      name: 'Blockmine',
+      description: 'Blockmine is a project that\'s goal is to solve existing issues with liquidity mining while incorporating metaverse and blockchain features. Watch the video to learn more!',
+      additionalDetails: [
+        {
+          name: 'Video',
+          url: 'https://www.youtube.com/watch?v=e8eZLYjv90I',
+        },
+        {
+          name: 'Project website',
+          url: tokens.goldbar.projectLink,
+        },
+        {
+          name: 'Whitepaper',
+          url: 'https://docs.block-mine.io/whitepaper/whitepaper',
+        },
+        {
+          name: 'Telegram',
+          url: 'https://t.me/blockmine_io',
+        },
+      ],
+    },
+    withdrawalCooldown: '3 days',
+    nftRevivalTime: '45 days',
+    rewardToken: tokens.goldbar,
+    rewardTokenBnbLp: '0xc58a80cf11d1cbbae4fc1c2fa9244f517676ab3d',
+    bnbLpTokenIndex: 1,
+    artist: artists.febryangraves,
+    stakingToken: '',
+    pcsVersion: 'v2',
+    liquidityDetails: '',
+    isNew: true,
+    color: 'orange',
+    userInfo: {
+      paidUnlockFee: false,
+      tokenWithdrawalDate: 0,
+      nftRevivalDate: 0,
+      amount: BIG_ZERO,
+      pendingReward: BIG_ZERO,
+      zombieAllowance: BIG_ZERO,
+    },
+    poolInfo: {
+      unlockFee: BIG_ZERO,
+      rewardPerBlock: BIG_ZERO,
+      minimumStake: BIG_ZERO,
+      totalZombieStaked: BIG_ZERO,
+      withdrawCooldown: 0,
+      nftRevivalTime: 0,
+    },
+  },
+  {
     id: 16,
     name: 'French Connection V2 Legendary',
     subtitle: 'Don of the Dead',
@@ -40,7 +102,7 @@ const spawningPools: SpawningPool[] = [
     rewardToken: tokens.fcf,
     rewardTokenBnbLp: '0xc58a80cf11d1cbbae4fc1c2fa9244f517676ab3d',
     bnbLpTokenIndex: 1,
-    artist: artists.TheLeap3d,
+    artist: artists.febryangraves,
     stakingToken: '',
     pcsVersion: 'v2',
     liquidityDetails: '',

@@ -7,7 +7,7 @@ import tokens from 'config/constants/tokens';
 import numeral from 'numeral';
 import { getPoolApr } from '../../../../utils/apr'
 import { bnbPriceUsd, coingeckoPrice, spawningPoolById } from '../../../../redux/get'
-import { fetchLpReserves } from '../../../../state/hooks'
+import { fetchLpReserves, goldbarPrice } from '../../../../state/hooks'
 
 
 const DisplayFlex = styled(BaseLayout)`
@@ -57,6 +57,11 @@ const TableList: React.FC<TableListProps> = (props: TableListProps) => {
     if(rewardTokenId) {
       coingeckoPrice(rewardTokenId).then(res => {
         setRewardTokenPrice(res.data[rewardTokenId].usd)
+      })
+    } else if(id === 17) {
+      goldbarPrice().then(price => {
+        console.log(price.toString())
+        setRewardTokenPrice(price)
       })
     } else {
       fetchLpReserves(rewardTokenBnbLp).then(res => {
