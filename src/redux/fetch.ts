@@ -580,17 +580,26 @@ export const auction = (
   } else {
     mausoleum.methods.bidsLength(aid).call()
       .then(bidsLengthRes => {
-        const calls = [{ address: getMausoleumAddress(version), name: 'unlockFeeInBnb', params: [aid] }]
+        const calls = [
+          { address: getMausoleumAddress(version), name: 'auctionInfo', params: [aid] },
+        ]
+        if (!v3) {
+          calls.push({ address: getMausoleumAddress(version), name: 'unlockFeeInBnb', params: [aid] })
+        }
         for (let x = parseInt(bidsLengthRes) - 5; x <= parseInt(bidsLengthRes); x++) {
+          if (x - 1 >= 0) {
+            calls.push({ address: getMausoleumAddress(version), name: 'bidInfo', params: [aid, x - 1] })
+          }
+        }        for (let x = parseInt(bidsLengthRes) - 5; x <= parseInt(bidsLengthRes); x++) {
           if (x - 1 >= 0) {
             calls.push({ address: getMausoleumAddress(version), name: 'bidInfo', params: [aid, x - 1] })
           }
         }
 
-        multicallv2(mausoleumAbi, calls)
+        multicallv2(version === 'v3' ? mausoleumV3Abi : mausoleumAbi, calls)
           .then(res => {
-            const auctionInfoRes = v3 ? res[1] : res[2]
-
+            const auctionInfoRes = v3 ? res[0] : res[1]
+            console.log(auctionInfoRes)
             const start = parseInt(bidsLengthRes) - 6
             let index = start < -1 ? 0 : parseInt(bidsLengthRes) - 6
             const bids = res.slice((v3 ? 2 : 3), res.length).map(bid => {
@@ -618,6 +627,9 @@ export const auction = (
             if (everyUpdateObj) {
               everyUpdateObj.setUpdate(!everyUpdateObj.update)
             }
+          })
+          .catch(res => {
+            console.log(res)
           })
       })
   }

@@ -39,6 +39,7 @@ const Mausoleum = () => {
   if (!updateAuctionInfo && !updateUserInfo) {
     debouncedFetch()
   }
+  console.log(updateAuctionInfo)
 
   return (
     <>

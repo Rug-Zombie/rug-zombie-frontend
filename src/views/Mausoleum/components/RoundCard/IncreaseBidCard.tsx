@@ -10,6 +10,7 @@ import {
 import { useTranslation } from 'contexts/Localization'
 import { BetPosition } from 'state/types'
 import { ethers } from 'ethers'
+import UnlockButton from 'components/UnlockButton'
 import CardFlip from '../CardFlip'
 import { RoundResultBox } from '../RoundResult'
 import Card from './Card'
@@ -175,94 +176,99 @@ const IncreaseBidCard: React.FC<OpenRoundCardProps> = ({ lastBid, refresh, setRe
           id={bidId}
         />
         <CardBody p='16px'>
-          <RoundResultBox>
-            {/* eslint-disable-next-line no-nested-ternary */}
-            {paidUnlockFee || v3 ? allowance.gt(BIG_ZERO) || v3 ?
-            <>
-              <CurrentBid totalAmount={amount} id={id} mb='8px' />
-              <Button
-                variant='success'
-                width='100%'
-                onClick={increaseBid}
-                mb='4px'
-              >
-                {t('Increase BID')}
-              </Button>
-              <Button
-                variant='danger'
-                width='100%'
-                onClick={decreaseBid}
-                mb='4px'
-              >
-                {t('Decrease BID')}
-              </Button>
-              <Flex alignItems='center' justifyContent='center'>
+          {
+              <RoundResultBox>
                 {/* eslint-disable-next-line no-nested-ternary */}
-                { !isDisabled ?
-                  <Button
-                    variant='secondary'
-                    onClick={submitBid}
-                    style={{
-                      width: '50%',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    {t('SUBMIT')}
-                  </Button> :
-                    lastBid.bidder === account() ?
-                      <Button
-                        variant='secondary'
-                        disabled
-                        onClick={withdrawBid}
-                        style={{
-                          width: '75%',
-                          justifyContent: 'center',
-                        }}
-                      >
-                        {t("YOU'RE BID LEADER")}
-                      </Button> :
-                      <Button
-                        variant='secondary'
-                        onClick={withdrawBid}
-                        style={{
-                          width: '50%',
-                          justifyContent: 'center',
-                        }}
-                      >
-                        {t('WITHDRAW BID')}
-                      </Button>
-                }
-              </Flex>
-              <Flex alignItems='center' justifyContent='center' className='indetails-title' paddingTop='10px'>
-                <LinkExternal onClick={() => handleSetPosition(BetPosition.BULL)}
-                              fontSize='14px'>{t('Enter custom bid')}</LinkExternal>
-              </Flex>
-            </> :
-              <Flex alignItems='center' justifyContent='center'>
-                <Button
-                  variant='secondary'
-                  onClick={handleApprove}
-                  style={{
-                    width: '50%',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {t('Approve BT')}
-                </Button>
-              </Flex> :
-              <Flex alignItems='center' justifyContent='center'>
-                <Button
-                  variant='secondary'
-                  onClick={handleUnlock}
-                  style={{
-                    width: '50%',
-                    justifyContent: 'center',
-                  }}
-                >
-                  {t('Unlock to start')}
-                </Button>
-              </Flex>}
-          </RoundResultBox>
+                {account() ? paidUnlockFee || v3 ? allowance.gt(BIG_ZERO) || v3 ?
+                  <>
+                    <CurrentBid totalAmount={amount} id={id} mb='8px' />
+                    <Button
+                      variant='success'
+                      width='100%'
+                      onClick={increaseBid}
+                      mb='4px'
+                    >
+                      {t('Increase BID')}
+                    </Button>
+                    <Button
+                      variant='danger'
+                      width='100%'
+                      onClick={decreaseBid}
+                      mb='4px'
+                    >
+                      {t('Decrease BID')}
+                    </Button>
+                    <Flex alignItems='center' justifyContent='center'>
+                      {/* eslint-disable-next-line no-nested-ternary */}
+                      { !isDisabled ?
+                        <Button
+                          variant='secondary'
+                          onClick={submitBid}
+                          style={{
+                            width: '50%',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          {t('SUBMIT')}
+                        </Button> :
+                        lastBid.bidder === account() ?
+                          <Button
+                            variant='secondary'
+                            disabled
+                            onClick={withdrawBid}
+                            style={{
+                              width: '75%',
+                              justifyContent: 'center',
+                            }}
+                          >
+                            {t("YOU'RE BID LEADER")}
+                          </Button> :
+                          <Button
+                            variant='secondary'
+                            onClick={withdrawBid}
+                            style={{
+                              width: '50%',
+                              justifyContent: 'center',
+                            }}
+                          >
+                            {t('WITHDRAW BID')}
+                          </Button>
+                      }
+                    </Flex>
+                    <Flex alignItems='center' justifyContent='center' className='indetails-title' paddingTop='10px'>
+                      <LinkExternal onClick={() => handleSetPosition(BetPosition.BULL)}
+                                    fontSize='14px'>{t('Enter custom bid')}</LinkExternal>
+                    </Flex>
+                  </> :
+                  <Flex alignItems='center' justifyContent='center'>
+                    <Button
+                      variant='secondary'
+                      onClick={handleApprove}
+                      style={{
+                        width: '50%',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      {t('Approve BT')}
+                    </Button>
+                  </Flex> :
+                  <Flex alignItems='center' justifyContent='center'>
+                    <Button
+                      variant='secondary'
+                      onClick={handleUnlock}
+                      style={{
+                        width: '50%',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      {t('Unlock to start')}
+                    </Button>
+                  </Flex> :
+                  <Flex alignItems='center' justifyContent='center'>
+                    <UnlockButton/>
+                  </Flex>}
+              </RoundResultBox>
+          }
         </CardBody>
       </Card>
       <SetPositionCard
