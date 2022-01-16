@@ -3,6 +3,7 @@ import { BaseLayout, Box, LinkExternal } from '@rug-zombie-libs/uikit'
 import styled from 'styled-components'
 import { getBalanceAmount } from '../../../utils/formatBalance'
 import { auctionById, bnbPriceUsd } from '../../../redux/get'
+import Video from '../../../components/Video'
 
 const TableCards = styled(BaseLayout)`
   align-items: stretch;
@@ -19,9 +20,8 @@ interface PrizeTabProps {
 }
 
 const PrizeTab:  React.FC<PrizeTabProps> = ({ id }) => {
-  const { path, prize , prizeDescription, version, additionalDetails, artist: { twitter }, auctionInfo: { unlockFeeInBnb }} = auctionById(id)
+  const { path, prize , prizeDescription, version, additionalDetails, type, artist: { twitter }, auctionInfo: { unlockFeeInBnb }} = auctionById(id)
 
-  const type = 'image'
   return (
     <Box overflow='hidden'>
       <TableCards>
@@ -34,9 +34,7 @@ const PrizeTab:  React.FC<PrizeTabProps> = ({ id }) => {
                     {type === 'image' ? (
                       <img src={path} alt='PRIZE' className='sc-cxNHIi bjMxQn' />
                     ) : (
-                      <video width='100%' autoPlay loop>
-                        <source src='' type='video/webm' />
-                      </video>
+                      <Video path={path} />
                     )}
                   </div>
                 </div>

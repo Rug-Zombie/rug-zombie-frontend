@@ -1327,6 +1327,22 @@ const nfts: Nft[] = [
     artist: artists.febryangraves,
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 83,
+    name: 'Fez',
+    symbol: 'FEZ',
+    description: 'What have you done with Mr. Noodle',
+    address: {
+      56: '0x19558105A2BE2b988BCcabAdb676ea84AB85fC10',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmbbBroUEahSifTACYoPhA9fhQ1ZY42unhLzGrbD1egKgK',
+    type: 'video',
+    rarity: 'Biblical',
+    artist: artists.none,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts

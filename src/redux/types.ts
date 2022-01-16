@@ -210,6 +210,7 @@ export interface Auction {
   token0?: string,
   token1?: string,
   end: number,
+  type: string,
   additionalDetails?: any,
   userInfo: AuctionUserInfo,
   auctionInfo: AuctionInfo,

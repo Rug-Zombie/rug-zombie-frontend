@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { auctionById, bnbPriceUsd } from '../../redux/get'
 import { getBalanceAmount } from '../../utils/formatBalance'
+import Video from '../../components/Video'
 
 interface PrizeModalProps {
   id: number
@@ -37,6 +38,7 @@ const StyledSwiper = styled.div`
 const PrizeModal: React.FC<PrizeModalProps> = ({ id, setSwiper, onDismiss }) => {
   const {
     prize,
+    type,
     prizeDescription,
     path,
     version,
@@ -71,7 +73,10 @@ const PrizeModal: React.FC<PrizeModalProps> = ({ id, setSwiper, onDismiss }) => 
                 <div className='rug-indetails'>
                   <div className='direction-column'>
                     <div className='sc-iwajpm dcRUtg'>
-                      <img src={path} alt='PRIZE' />
+                      { type === 'image' ?
+                        <img src={path} alt='PRIZE' /> :
+                        <Video path={path} />
+                      }
                     </div>
                   </div>
                   <div className='direction-column'>
