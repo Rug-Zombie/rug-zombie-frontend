@@ -1333,7 +1333,7 @@ const nfts: Nft[] = [
     symbol: 'FEZ',
     description: 'What have you done with Mr. Noodle',
     address: {
-      56: '0x19558105A2BE2b988BCcabAdb676ea84AB85fC10',
+      56: '0x3DB5809DCCD497B7184C0a920410476e210EC81d',
       97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
     },
     totalSupply: BIG_ZERO,
