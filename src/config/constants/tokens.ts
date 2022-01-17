@@ -542,7 +542,7 @@ const tokens = {
       97: '',
     },
     decimals: 18,
-    projectLink: '',
+    projectLink: 'https://block-mine.io/',
   },
   txl: {
     symbol: 'TXL',
