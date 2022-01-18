@@ -61,7 +61,7 @@ const tokens = {
   punks: {
     symbol: 'PUNKS',
     address: {
-      56: '0x306d8c5B2Fa6999D2Af31a966FB4Eb76E0FEc955',
+      56: '0xf428fc1126b7c1b1bd266f1e415ac05255fa7748',
       97: '',
     },
     decimals: 9,
@@ -334,7 +334,7 @@ const tokens = {
       56: '0x9d8aac497a4b8fe697dd63101d793f0c6a6eebb6',
       97: '',
     },
-    decimals: 18,
+    decimals: 9,
     projectLink: 'https://defi100.org/',
   },
   msc: {
@@ -989,7 +989,7 @@ const tokens = {
   squidstake: {
     symbol: 'SQUID',
     address: {
-      56: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
+      56: '0xae61e7dc989718e700c046a2483e93513edca484',
       97: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
     },
     decimals: 18,
