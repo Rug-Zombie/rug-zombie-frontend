@@ -2,74 +2,88 @@ import React from 'react'
 import styled from 'styled-components'
 import downpointer from 'images/DownPointer.png'
 
-const FilterFlex = styled.div`
+const FilterContainer = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
   width: 100%;
-  height: 60px;
-`
+  padding: 0 0 20px 0;
+  @media (max-width: 640px) {
+    flex-direction: column-reverse;
+    height: auto;
+    align-items: space-between;
+  }
+`;
+
+const Dropdowns = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex: 1;
+`;
 
 const Dropdown = styled.div`
   height: 60px;
   border: 2px solid #151E21;
   border-radius: 10px;
-  flex-grow: 1;
-`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 10px 0 0;
+  min-width: 152px;
+`;
 
-const SearchBar = styled.input`
+const SearchBar = styled.div`
+  display: flex;
+  flex: 1;
+  min-height: 60px;
+  @media (max-width: 640px) {
+    padding: 0 0 10px 0;
+    min-height: 70px;
+    flex: 0;
+  }
+`;
+
+const Input = styled.input`
   border: 2px solid #151E21;
   border-radius: 10px;
   background: none;
-  flex-grow: 2;
-  padding-left: 20px;
-`
+  caret-color: #fff;
+  color: #fff;
+  padding: 0 20px;
+  width: 100%;
+`;
 
 const DropdownText = styled.text`
   font: normal normal normal 14px/30px Poppins;
-  letter-spacing: 0px;
   color: #FFFFFF;
-  padding-left: 20px;
-  opacity: 1;
-`
+  padding: 0 10px 0 20px;
+`;
 
-const DropdownFlex = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  justify-content: space-between;
-`
-
+const DownPointer = <div style={{ paddingRight: '20px' }}>
+  <img src={downpointer} alt='Dropdown menu' width='20px' />
+</div>
 
 const Filter = () => {
-
-  const DownPointer = <div style={{ paddingRight: '20px' }}>
-    <img src={downpointer} alt='Dropdown menu' width='20px' />
-  </div>
-
-  return <FilterFlex>
-    <Dropdown>
-      <DropdownFlex>
+  return <FilterContainer>
+    <Dropdowns>
+      <Dropdown>
         <DropdownText>
           Live graves
         </DropdownText>
         {DownPointer}
-      </DropdownFlex>
-    </Dropdown>
-    <div style={{ paddingRight: '30px' }} />
-    <Dropdown>
-      <DropdownFlex>
+      </Dropdown>
+      <Dropdown>
         <DropdownText>
           Legendary
         </DropdownText>
         {DownPointer}
-      </DropdownFlex>
-    </Dropdown>
-    <div style={{ paddingRight: '30px' }} />
-    <SearchBar placeholder='Search by name, symbol or address'/>
-  </FilterFlex>
-
+      </Dropdown>
+    </Dropdowns>
+    <SearchBar>
+     <Input placeholder='Search by name, symbol or address' />  
+    </SearchBar>
+  </FilterContainer>
 }
 
-export default Filter
+export default Filter;
