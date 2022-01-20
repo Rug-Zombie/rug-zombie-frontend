@@ -41,7 +41,7 @@ interface AnnouncementCardProps {
 
 const AnnouncementCard: React.FC<AnnouncementCardProps> = ({modalObj}) => {
   const { t } = useTranslation()
-  const imagePath = "https://ipfs.io/ipfs/QmZabZnzYQBVRoehCNtEUBSRUGferfRcuAjX8iz37c4VtL"
+  const imagePath = "https://gateway.pinata.cloud/ipfs/QmZabZnzYQBVRoehCNtEUBSRUGferfRcuAjX8iz37c4VtL?preview=1"
 
   const closeModal = () => {
     modalObj.setModal(null)
