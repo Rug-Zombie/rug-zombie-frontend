@@ -1343,6 +1343,22 @@ const nfts: Nft[] = [
     artist: artists.none,
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 84,
+    name: 'Captain Dead Mouth',
+    symbol: 'CAP-DM',
+    description: 'I am sorry to see you here, but if you had fought like a man, you needn’t be hanged like a dog.',
+    address: {
+      56: '0x3DB5809DCCD497B7184C0a920410476e210EC81d',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmZ5VSVdLqNZgJ6mhFFtP48xxr2Jc9jLQvJwi573eCnd7s',
+    type: 'image',
+    rarity: 'Rare',
+    artist: artists.jussjoshinduh,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts

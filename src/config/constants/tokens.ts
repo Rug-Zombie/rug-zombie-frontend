@@ -544,6 +544,16 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://block-mine.io/',
   },
+  pirate: {
+    symbol: 'PIRATE',
+    address: {
+      56: '0x63041a8770c4cfe8193d784f3dc7826eab5b7fd2',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: '',
+    tokenLogo: 'https://s2.coinmarketcap.com/static/img/coins/64x64/10922.png'
+  },
   txl: {
     symbol: 'TXL',
     address: {

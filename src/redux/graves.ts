@@ -148,6 +148,28 @@ const graves: Grave[] = [
   },
   {
     pid: {
+      56: 45,
+      97: 1,
+    },
+    name: 'TreasureKey Rare',
+    subtitle: 'Captain Dead Mouth',
+    path: 'https://ipfs.io/ipfs/QmZ5VSVdLqNZgJ6mhFFtP48xxr2Jc9jLQvJwi573eCnd7s',
+    type: 'image',
+    withdrawalCooldown: '3 days',
+    nftRevivalTime: '30 days',
+    rug: tokens.pirate,
+    artist: artists.jussjoshinduh,
+    stakingToken: '0x881A94a5cd54623c59b88068D029558090D7b62b',
+    pcsVersion: 'v2',
+    liquidityDetails: '',
+    isNew: true,
+    isFeatured: true,
+    rarity: "Rare",
+    userInfo: { ...userInfo },
+    poolInfo: { ...poolInfo },
+  },
+  {
+    pid: {
       56: 44,
       97: 1,
     },
