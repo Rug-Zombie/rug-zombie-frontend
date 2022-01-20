@@ -48,6 +48,8 @@ export const DropdownContent = styled.div`
   position: absolute;
   display: block;
   background-color: #010202;
+  border: 2px solid #010202;
+  border-radius: 10px;
   right: 0px;
   z-index: 1;
 `;
@@ -55,6 +57,9 @@ export const DropdownContent = styled.div`
 export const DropdownItem = styled.div`
   &:hover {
     cursor: pointer;
+    background-color: #151E21;
+    border-radius: 10px;
+    color: #30C00D;
   }
   padding: 0 15px 0 15px;
 `; 
@@ -70,7 +75,12 @@ export const Text = styled.a`
 `;
 
 export const MenuText = styled(Text)`
-  padding: 0 5px 0 5px;
+  padding: 5px;
+  color: #6B7682;
+  font: normal normal normal 14px/30px Poppins;
+  &:hover {
+    color: #30C00D;
+  }
 `;
 
 export const ConnectText = styled(Text)`
