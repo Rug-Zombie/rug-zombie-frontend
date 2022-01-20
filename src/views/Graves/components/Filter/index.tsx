@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import downpointer from 'images/DownPointer.png'
 
@@ -31,6 +31,9 @@ const Dropdown = styled.div`
   justify-content: space-between;
   margin: 0 10px 0 0;
   min-width: 152px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const SearchBar = styled.div`
@@ -54,7 +57,48 @@ const Input = styled.input`
   width: 100%;
 `;
 
-const DropdownText = styled.text`
+const DropdownMenu = styled.div`
+  display: inline-block;
+  transition: all 0.5s ease;
+  position: relative;
+`;
+
+const DropdownContent = styled.div`
+  position: absolute;
+  display: block;
+  top: 60px;
+  background-color: #010202;
+  border: 2px solid #010202;
+  right: 2px;
+  z-index: 1;
+  border-radius: 10px;
+  margin: 0 10px 0 0;
+  min-width: 152px;
+  @media (max-width: 640px) {
+    right: 17px;
+  }
+`;
+
+const DropdownItem = styled.div`
+  &:hover {
+    cursor: pointer;
+    background-color: #151E21;
+    border-radius: 10px;
+    color: #30C00D;
+  }
+  padding: 0 15px 0 15px;
+`;
+
+const MenuText = styled.p`
+  padding: 5px;
+  color: #6B7682;
+  font: normal normal normal 14px/30px Poppins;
+  &:hover {
+    color: #30C00D;
+  }
+`;
+
+const DropdownText = styled.p`
   font: normal normal normal 14px/30px Poppins;
   color: #FFFFFF;
   padding: 0 10px 0 20px;
@@ -65,20 +109,94 @@ const DownPointer = <div style={{ paddingRight: '20px' }}>
 </div>
 
 const Filter = () => {
+  const [ showGravesMenu, setShowGravesMenu ] = useState(false);
+  const [ showTypeMenu, setShowTypeMenu ] = useState(false);
+  const [ graves, setGraves ] = useState("All graves");
+  const [ types, setTypes ] = useState("All types");
+
+  const handleDropdownClick = (e, condition) => {
+    e.preventDefault();
+    if (condition === "graves") {
+      setShowGravesMenu(prev => !prev);
+      setShowTypeMenu(false);
+    } else if (condition === "types") {
+      setShowTypeMenu(prev => !prev);
+      setShowGravesMenu(false);
+    }
+  };
+  
+  const handleItemClick = (e, condition) => {
+    e.preventDefault();
+    if (condition === "graves") {
+      setGraves(e.target.textContent);
+      setShowGravesMenu(false);
+    } else if (condition === "types") {
+      setTypes(e.target.textContent);
+      setShowTypeMenu(false);
+    }
+  }
+
+  const gravesList = [
+    "All graves",
+    "Staked",
+    "NFT-only",
+    "Inactive",
+  ];
+
+  const typesList = [
+    "All types",
+    "Legendary",
+    "Rare",
+    "Uncommon",
+    "Common",
+  ];
+
   return <FilterContainer>
     <Dropdowns>
-      <Dropdown>
+      <Dropdown onClick={(e) => handleDropdownClick(e, "graves")}>
         <DropdownText>
-          Live graves
+          {graves}
         </DropdownText>
         {DownPointer}
       </Dropdown>
-      <Dropdown>
+      <DropdownMenu>
+        {showGravesMenu ? (
+          <DropdownContent>
+            {gravesList.map(grave => {
+              return ( 
+                <DropdownItem
+                  key={grave}
+                  onClick={(e) => handleItemClick(e, "graves")}
+                >
+                  <MenuText>{grave}</MenuText>
+                </DropdownItem>
+              )},
+            )}
+          </DropdownContent>
+        ) : null}
+      </DropdownMenu>
+      <Dropdown onClick={(e) => handleDropdownClick(e, "types")}>
         <DropdownText>
-          Legendary
+          {types}
         </DropdownText>
         {DownPointer}
       </Dropdown>
+      <DropdownMenu>
+        {showTypeMenu ? (
+          <DropdownContent>
+            {typesList.map(type => {
+              return (
+                <DropdownItem
+                  key={type}
+                  onClick={(e) => handleItemClick(e, "types")}
+                >
+                  <MenuText>{type}</MenuText>
+                </DropdownItem>
+              )},
+            )}
+          </DropdownContent>
+        ) : null}
+      </DropdownMenu>
     </Dropdowns>
     <SearchBar>
      <Input placeholder='Search by name, symbol or address' />  
