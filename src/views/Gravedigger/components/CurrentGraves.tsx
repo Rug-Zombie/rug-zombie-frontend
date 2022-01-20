@@ -15,7 +15,7 @@ const Container = styled(Heading).attrs({ scale: 'xl' })`
 
 const CurrentGraves: React.FC<CurrentGravesProps> = (props) => {
   const { grave } = props
-  const link = `https://app.euler.tools/token/${grave.name === 'RugZombie Common' ? '0x50ba8BF9E34f0F83F96a340387d1d3888BA4B3b5' : grave.rug.address[56]}`
+  const link = `https://app.euler.tools/bsc/address/${grave.name === 'RugZombie Common' ? '0x50ba8BF9E34f0F83F96a340387d1d3888BA4B3b5' : grave.rug.address[56]}`
   return (
     <Container>
       <Flex style={{ justifyContent: 'center' }}>
