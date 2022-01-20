@@ -9,15 +9,9 @@ export const getAddress = (address: Address): string => {
   return address[chainId] ? address[chainId] : address[mainNetChainId]
 }
 
-export const getCakeAddress = () => {
-  return getAddress(tokens.cake.address)
-}
 
 export const getZombieAddress = () => {
   return getAddress(tokens.zmbe.address)
-}
-export const getMasterChefAddress = () => {
-  return getAddress(addresses.masterChef)
 }
 export const getDrFrankensteinAddress = () => {
   return getAddress(addresses.drFrankenstein)
@@ -61,32 +55,8 @@ export const getLotteryAddress = () => {
 export const getLotteryTicketAddress = () => {
   return getAddress(addresses.lotteryNFT)
 }
-export const getPancakeProfileAddress = () => {
-  return getAddress(addresses.pancakeProfile)
-}
-export const getPancakeRabbitsAddress = () => {
-  return getAddress(addresses.pancakeRabbits)
-}
-export const getBunnyFactoryAddress = () => {
-  return getAddress(addresses.bunnyFactory)
-}
-export const getClaimRefundAddress = () => {
-  return getAddress(addresses.claimRefund)
-}
-export const getPointCenterIfoAddress = () => {
-  return getAddress(addresses.pointCenterIfo)
-}
-export const getBunnySpecialAddress = () => {
-  return getAddress(addresses.bunnySpecial)
-}
 export const getTradingCompetitionAddress = () => {
   return getAddress(addresses.tradingCompetition)
-}
-export const getEasterNftAddress = () => {
-  return getAddress(addresses.easterNft)
-}
-export const getCakeVaultAddress = () => {
-  return getAddress(addresses.cakeVault)
 }
 export const getPredictionsAddress = () => {
   return getAddress(addresses.predictions)

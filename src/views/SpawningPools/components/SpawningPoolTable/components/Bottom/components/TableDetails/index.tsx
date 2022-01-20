@@ -2,10 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import numeral from 'numeral'
 import { bnbPriceUsd, nftById, zombiePriceUsd } from '../../../../../../../../redux/get'
-import { getBalanceAmount, getBalanceNumber, getFullDisplayBalance } from '../../../../../../../../utils/formatBalance'
+import { getBalanceAmount, getFullDisplayBalance } from '../../../../../../../../utils/formatBalance'
 import { SpawningPool } from '../../../../../../../../state/types'
 import { formatDays } from '../../../../../../../../utils/timerHelpers'
-import { getPoolApr } from '../../../../../../../../utils/apr'
 
 export enum SpawningPoolItemType {
   Number,

@@ -1,14 +1,15 @@
+import { useEffect } from 'react'
 import { useAppDispatch } from '../state'
 import useRefresh from './useRefresh'
-import { useEffect } from 'react'
-import { fetchFarmUserDataAsync, fetchGravesUserDataAsync, setBlock } from '../state/actions'
+// import { fetchGravesUserDataAsync } from '../state/graves'
+import { setBlock } from '../state/block'
 import { getWeb3NoAccount } from '../utils/web3'
 
-export const useFetchPublicData = () => {
+const useFetchPublicData = () => {
   const dispatch = useAppDispatch()
   const { slowRefresh } = useRefresh()
   useEffect(() => {
-    // dispatch(fetchFarmUserDataAsync(""))
+    // dispatch(fetchGravesUserDataAsync(""))
   }, [dispatch, slowRefresh])
 
   useEffect(() => {
@@ -21,3 +22,5 @@ export const useFetchPublicData = () => {
     return () => clearInterval(interval)
   }, [dispatch])
 }
+
+export default useFetchPublicData

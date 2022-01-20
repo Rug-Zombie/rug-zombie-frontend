@@ -139,7 +139,7 @@ const IncreaseStakeModal: React.FC<IncreaseStakeModalProps> = ({ id, updateResul
             </Flex>
             {tokenBalance.toString() === '0' 
                 ? <Button mt='8px' as='a' external
-                    href={`${BASE_EXCHANGE_URL}/swap?outputCurrency=${getAddress(pool.stakeToken.address)}`} variant='secondary'>
+                          href={`${BASE_EXCHANGE_URL}/swap?outputCurrency=${getAddress(pool.stakeToken.address)}`} variant='secondary'>
                     Get {pool.stakeToken.symbol}
                   </Button> 
                 : <Button onClick={handleStake} disabled={isDisabled} mt='8px' as='a' variant='secondary'>

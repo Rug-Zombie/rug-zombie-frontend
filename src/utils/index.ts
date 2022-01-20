@@ -1,5 +1,5 @@
 import { BASE_BSC_SCAN_URLS } from '../config'
-import { Address, Id } from '../config/constants/types'
+import { Id } from '../config/constants/types'
 import instabuys from '../config/constants/instabuys'
 
 // eslint-disable-next-line import/prefer-default-export

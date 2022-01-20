@@ -1,10 +1,10 @@
 import BigNumber from 'bignumber.js'
 import drFrankenstein from 'config/abi/drFrankenstein.json'
 import multicall from 'utils/multicall'
-import { getDrFrankensteinAddress, getMasterChefAddress } from 'utils/addressHelpers'
+import { getDrFrankensteinAddress } from 'utils/addressHelpers'
 import {  GraveConfig } from 'config/constants/types'
 import { getId } from '../../utils'
-import { getBep20Contract, getDrFrankensteinContract } from '../../utils/contractHelpers'
+import { getBep20Contract } from '../../utils/contractHelpers'
 
 const fetchGraves = async (gravesToFetch: GraveConfig[]) => {
   const data = await Promise.all(
