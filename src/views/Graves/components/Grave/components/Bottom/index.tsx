@@ -1,10 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import tokens from '../../../../../../config/constants/tokens'
-import GraveItem, { GraveItemType } from './components/GraveItem'
-import downpointer from '../../../../../../images/FullDownPointer.png'
 import { graveByPid } from '../../../../../../redux/get'
-import { Token } from '../../../../../../config/constants/types'
 import ProgressBar from './components/ProgressBar'
 import TableDetails from './components/TableDetails'
 
@@ -36,7 +32,7 @@ const Buttons = styled.div`
 `;
 
 const StakingInput = styled.input`
-  width: 170px;
+  width: 125px;
   height: 60px;
   background: #0D1417 0% 0% no-repeat padding-box;
   border-radius: 10px;
@@ -45,28 +41,33 @@ const StakingInput = styled.input`
   text-align: left;
   font: normal normal normal 14px/30px Poppins;
   color: #FFFFFF;
+  margin: 0 5px;
 `;
 
 const PrimaryStakeButton = styled.button`
   height: 60px;
-  width: 170px;
+  width: 125px;
   background: #B8C00D 0% 0% no-repeat padding-box;
   border-radius: 10px;
   border: none;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 5px;
+  &:hover { cursor: pointer; };
 `;
 
 const SecondaryStakeButton = styled.button`
   height: 60px;
-  width: 170px;
+  width: 125px;
   border: 2px solid #B8C00D;
   border-radius: 10px;
   background: none;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 5px;
+  &:hover { cursor: pointer; };
 `;
 
 const PrimaryStakeButtonText = styled.text`
@@ -105,9 +106,7 @@ const Bottom: React.FC<BottomProps> = ({ pid }) => {
       </Buttons>
     </StakingContainer>
     <ProgressBar pid={pid} />
-    <div style={{ paddingTop: '28px' }} />
     <Separator />
-    <div style={{ paddingTop: '30px' }} />
     <TableDetails pid={pid} />
   </>
 }
