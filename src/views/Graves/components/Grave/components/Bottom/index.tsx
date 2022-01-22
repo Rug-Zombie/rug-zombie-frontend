@@ -11,15 +11,32 @@ import TableDetails from './components/TableDetails'
 const Separator = styled.div`
   height: 0px;
   border: 1px dashed #6B7682;
+  margin: 25px 0 0 0;
 `
 
-const StakingFlex = styled.div`
+const StakingContainer = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-between;
-`
+  justify-content: stretch;
+  flex-wrap: wrap;
+`;
+
+const Inputs = styled.div`
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-evenly;
+  margin: 25px 0 0 0;
+`;
+
+const Buttons = styled.div`
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-evenly;
+  margin: 25px 0 0 0;
+`;
+
 const StakingInput = styled.input`
-  width: 22%;
+  width: 170px;
   height: 60px;
   background: #0D1417 0% 0% no-repeat padding-box;
   border-radius: 10px;
@@ -27,46 +44,42 @@ const StakingInput = styled.input`
   border: none;
   text-align: left;
   font: normal normal normal 14px/30px Poppins;
-  letter-spacing: 0px;
   color: #FFFFFF;
-`
+`;
 
 const PrimaryStakeButton = styled.button`
-  width: 22%;
+  height: 60px;
+  width: 170px;
   background: #B8C00D 0% 0% no-repeat padding-box;
   border-radius: 10px;
   border: none;
   display: flex;
   justify-content: center;
   align-items: center;
-`
-
+`;
 
 const SecondaryStakeButton = styled.button`
-  width: 22%;
+  height: 60px;
+  width: 170px;
   border: 2px solid #B8C00D;
   border-radius: 10px;
   background: none;
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
 const PrimaryStakeButtonText = styled.text`
   text-align: center;
-  font: normal normal medium 16px/25px Poppins;
-  letter-spacing: 0px;
+  font: normal normal normal 16px/25px Poppins;
   color: #010202;
-  font-weight: bolder;
-`
+`;
 
 const SecondaryStakeButtonText = styled.text`
   text-align: center;
-  font: normal normal medium 16px/25px Poppins;
-  letter-spacing: 0px;
+  font: normal normal normal 16px/25px Poppins;
   color: #FFFFFF;
-  font-weight: bold;
-`
+`;
 
 interface BottomProps {
   pid: number;
@@ -76,19 +89,21 @@ const Bottom: React.FC<BottomProps> = ({ pid }) => {
   const { name, rug, isNew, poolInfo: { allocPoint } } = graveByPid(pid)
 
   return <>
-    <div style={{ paddingTop: '25px' }} />
     <Separator />
-    <div style={{ paddingBottom: '30px' }} />
-    <StakingFlex>
+    <StakingContainer>
+      <Inputs>
         <StakingInput placeholder='Stake amount' type='number' />
         <StakingInput placeholder='Unstake amount' type='number' />
-      <PrimaryStakeButton>
-        <PrimaryStakeButtonText>Approve</PrimaryStakeButtonText>
-      </PrimaryStakeButton>
-      <SecondaryStakeButton>
-        <SecondaryStakeButtonText>Unstake</SecondaryStakeButtonText>
-      </SecondaryStakeButton>
-    </StakingFlex>
+      </Inputs>
+      <Buttons>
+        <PrimaryStakeButton>
+          <PrimaryStakeButtonText>Approve</PrimaryStakeButtonText>
+        </PrimaryStakeButton>
+        <SecondaryStakeButton>
+          <SecondaryStakeButtonText>Unstake</SecondaryStakeButtonText>
+        </SecondaryStakeButton>
+      </Buttons>
+    </StakingContainer>
     <ProgressBar pid={pid} />
     <div style={{ paddingTop: '28px' }} />
     <Separator />
