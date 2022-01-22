@@ -34,6 +34,7 @@ const GravesColumn = styled.div`
   max-width: 60vw;
   display: flex;
   flex-direction: column;
+  z-index: 1;
   @media (max-width: 1279px) {
     max-width: 100vw;
     margin: 0 auto;
