@@ -102,7 +102,9 @@ const App: React.FC = () => {
           <Route exact path={routes.GRAVES}>
             <>
               <TopMenu />
+              <AppContainer>
                 <Graves />
+              </AppContainer>
             </>
           </Route>
           <Menu>
