@@ -4,7 +4,6 @@ import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
 import Page from '../../components/layout/Page'
 import './Graves.Styles.css'
-import TopMenu from '../../components/TopMenu'
 import HeaderCard from './components/HeaderCard'
 import Filter from './components/Filter'
 import Grave from './components/Grave'
@@ -59,12 +58,8 @@ const Graves: React.FC = () => {
           </Header>
           <GravesColumn>
             <Filter />
-            <div style={{ paddingTop: '40px' }} />
             {graves().map(g => {
-              return <>
-                <Grave pid={getId(g.pid)} key={getId(g.pid)} />
-                <div style={{ paddingBottom: '20px' }} />
-              </>
+              return <Grave pid={getId(g.pid)} key={getId(g.pid)} />
             })}
           </GravesColumn>
         </Row>
