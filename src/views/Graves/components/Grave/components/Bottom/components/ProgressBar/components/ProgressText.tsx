@@ -5,19 +5,16 @@ interface ProgressTextProps {
   active: boolean;
 }
 
-const ActiveText = styled.div`
-  text-align: left;
+const ActiveText = styled.p`
+  text-align: center;
   font: normal normal 300 14px/21px Poppins;
-  letter-spacing: 0px;
   color: #FFFFFF;
 `
 
-const InactiveText = styled.div`
-  text-align: left;
+const InactiveText = styled.p`
+  text-align: center;
   font: normal normal 300 14px/21px Poppins;
-  letter-spacing: 0px;
   color: #6B7682;
-  opacity: 1;
 `
 
 const ProgressLine: React.FC<ProgressTextProps> = ({ active, children }) => {
