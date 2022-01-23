@@ -4,10 +4,6 @@ import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
 import Page from '../../components/layout/Page'
 import './Graves.Styles.css'
-<<<<<<< HEAD
-=======
-import TopMenu from '../../components/TopMenu'
->>>>>>> 3c46208 (feat: Graveyard work)
 import HeaderCard from './components/HeaderCard'
 import Filter from './components/Filter'
 import Grave from './components/Grave'
@@ -45,18 +41,6 @@ const GravesColumn = styled.div`
   }
 `;
 
-const GraveFlex = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-`
-
-const GravesColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%
-`
-
 let accountAddress
 
 const Graves: React.FC = () => {
@@ -67,7 +51,6 @@ const Graves: React.FC = () => {
   const myHoldings = 4349
 
   return (
-<<<<<<< HEAD
     <>
       <Page>
         <Row>
@@ -85,27 +68,6 @@ const Graves: React.FC = () => {
       <Footer />
     </>
   );
-=======
-    <Page>
-      <GraveFlex>
-        <div style={{ paddingRight: '50px' }}>
-          <HeaderCard tvl={tvl} pageTvl={graveTvl} myHoldings={myHoldings} />
-        </div>
-        <GravesColumn>
-          <Filter />
-          <div style={{ paddingTop: '40px' }} />
-          {/* <Grave pid={40} /> */}
-          {graves().map(g => {
-            return <>
-              <Grave pid={getId(g.pid)} key={getId(g.pid)} />
-              <div style={{ paddingBottom: '20px' }} />
-            </>
-          })}
-        </GravesColumn>
-      </GraveFlex>
-    </Page>
-  )
->>>>>>> 3c46208 (feat: Graveyard work)
 }
 
 export default Graves
