@@ -13,13 +13,13 @@ const SubText = styled.p`
 `
 
 const Marketplace: React.FC = () => {
-  const jan30th = 1643605200
+  const jan31th = 1643691599
   const [remaining, setRemaining] = useState(0)
 
     useEffect(() => {
       setInterval(() => {
         const now = Math.floor(Date.now() / 1000)
-        setRemaining(jan30th - now)
+        setRemaining(jan31th - now)
       },1000)
       /* eslint-disable react-hooks/exhaustive-deps */
     }, [])
