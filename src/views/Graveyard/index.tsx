@@ -7,6 +7,7 @@ import './Graveyard.Styles.css'
 import Footer from 'components/Footer'
 import { nftUserInfo } from 'redux/fetch'
 import { useNftOwnership } from 'hooks/useContract'
+import { FooterImage } from 'components/Footer/styles'
 import Nfts from './components/Nfts'
 import Collections from './components/Collections'
 
@@ -30,11 +31,15 @@ const SubTextBox = styled.p`
   margin: 25px 0;
   @media (max-width: 999px) {
     width: 70%;
-    margin: 25px 0 100px 0;
   }
   @media (max-width: 499px) {
     width: 90%
   }
+`;
+
+const SectionEnd = styled(FooterImage)`
+  top: -200px;
+  width: 100%;
 `;
 
 const Graveyard: React.FC = () => {
@@ -57,7 +62,7 @@ const Graveyard: React.FC = () => {
         <SubTextBox>
           View our NFT collection powering the RugZombie gaming ecosystem… Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
         </SubTextBox>
-        <div className="section-end"/>
+        <SectionEnd />
       </TitleSection>
       <Collections />
       <Nfts top='-100px' />
