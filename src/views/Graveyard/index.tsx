@@ -2,75 +2,58 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import header from 'images/GraveyardHeader.jpg'
-import TopMenu from '../../components/TopMenu'
+import SectionHeader from 'views/Home/components/SectionHeader'
 import './Graveyard.Styles.css'
-import Page from '../../components/layout/Page'
-import Filter from './components/Filter'
-import CollectionCard from './components/CollectionCard'
-import Collections from './components/Collections'
-import Footer from '../../components/Footer'
+import Footer from 'components/Footer'
+import { nftUserInfo } from 'redux/fetch'
+import { useNftOwnership } from 'hooks/useContract'
 import Nfts from './components/Nfts'
-import { nftUserInfo } from '../../redux/fetch'
-import { useNftOwnership } from '../../hooks/useContract'
+import Collections from './components/Collections'
 
 const Banner = styled.img`
-  min-width: 1280px;
-`
-
-const Title = styled.text`
-  text-align: center;
-  font: normal normal 600 36px/72px Poppins;
-  letter-spacing: 1.8px;
-  color: #FFFFFF;
-  opacity: 1;
-`
+  max-width: 1920px;
+`;
 
 const TitleSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
+  padding: 100px 0 0 0;
+`;
 
-const SubTextBox = styled.div`
+const SubTextBox = styled.p`
   width: 45%;
   text-align: center;
   font: normal normal 300 20px/30px Poppins;
-  letter-spacing: 0px;
   color: #6B7682;
-  opacity: 1;
-`
-
-const Line = styled.div`
-  border-radius: 3px;
-  opacity: 1;
-  margin-right: auto;
-  margin-left: auto;
-  height: 5px;
-`
-
+  margin: 25px 0;
+  @media (max-width: 999px) {
+    width: 70%;
+    margin: 25px 0 100px 0;
+  }
+  @media (max-width: 499px) {
+    width: 90%
+  }
+`;
 
 const Graveyard: React.FC = () => {
   const contract = useNftOwnership()
   const [update, setUpdate] = useState(false)
+
   useEffect(() => {
     nftUserInfo(contract).then(() => {
-      setUpdate(!update)
-    })
-    // eslint-disable-next-line
-  }, [contract])
-  return <>
-      <Banner src={header} alt="Banner" />
-      <div style={{paddingTop: '100px'}}/>
+      setUpdate(prev => !prev);
+    });
+  }, [contract]);
 
+  return (
+    <>
+      <Banner src={header} alt="Banner" />
       <TitleSection>
-        <Title>Explore the Graveyard</Title>
-        <div style={{paddingTop: '20px'}}/>
-        <Line style={{
-          width: '30px',
-          background: '#B8C00D 0% 0% no-repeat padding-box',
-        }} />
-        <div style={{paddingTop: '30px'}}/>
+        <SectionHeader 
+          title="Explore the Graveyard"
+        />
         <SubTextBox>
           View our NFT collection powering the RugZombie gaming ecosystem… Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
         </SubTextBox>
@@ -80,6 +63,7 @@ const Graveyard: React.FC = () => {
       <Nfts top='-100px' />
       <Footer />
     </>
+  );
 }
 
 export default Graveyard
