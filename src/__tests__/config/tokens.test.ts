@@ -23,7 +23,7 @@ const tokensToTest = omitBy(tokens, (token) => (
   symbolsExcludedFromAllTests.has(token.symbol)));
 
 const toComparableSymbol = (s: string) => (
-  s.replaceAll(/[\s-_()$]/g, '')
+  s.replace(/[\s-_()$]/g, '')
   .toLowerCase()
   .replace('rzgnt', ''));
 
