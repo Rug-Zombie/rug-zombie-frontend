@@ -35,7 +35,7 @@ const GraveStakingCard: React.FC = () => {
         </Heading>
 
 
-        <YouTube videoId="WFHuSIvC6cg" opts={opts} onReady={_onReady} />
+        <YouTube videoId="k-BgBhG3WH4" opts={opts} onReady={_onReady} />
       </CardBody>
     </StyledFarmStakingCard>
   )
