@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import SectionHeader from 'views/Home/components/SectionHeader'
 import Page from '../../../../components/layout/Page'
 import Filter from '../Filter'
 import CollectionCard from '../CollectionCard'
@@ -7,7 +8,7 @@ import config from './config'
 import Nfts from '../Nfts'
 import { account } from '../../../../redux/get'
 
-const CollectionSection = styled.div`
+const CollectionSection = styled.section`
   background-color: #010202;
   position: relative;
   top: -210px;
@@ -28,60 +29,68 @@ const CollectionGrid = styled.div`
   grid-row-gap: 30px;
 `
 
-const Title = styled.text`
-  text-align: center;
-  font: normal normal 600 36px/72px Poppins;
-  letter-spacing: 1.8px;
+const Tabs = styled.ul`
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  &:hover { cursor: pointer; }
+`;
+
+const Tab = styled.li`
   color: #FFFFFF;
-  opacity: 1;
-`
-
-const Line = styled.div`
-  border-radius: 3px;
-  opacity: 1;
-  margin-right: auto;
-  margin-left: auto;
-  height: 5px;
-`
-
-const RarityText = styled.div`
-  text-align: left;
-  font: normal normal normal 14px/30px Poppins;
-  letter-spacing: 0px;
-  color: #30C00D;
-  padding-right: 30px;
-  padding-left: 30px;
-`
+  text-align: center;
+  font: normal normal normal 16px Poppins;
+  padding: 10px;
+  border-bottom: 4px solid #010202;
+  &:hover { color: #30C00D; }
+  &.active {
+    color: #30C00D;
+    border-bottom: 4px solid #30C00D;
+    border-radius: 4px;
+  }
+`;
 
 const Collections: React.FC = () => {
   const filters = ['Browse', 'In Wallet']
   const [selected, setSelected] = useState(0)
-  const [collection, setCollection] = useState('None')
-  const showCollections = selected === 0 && collection === 'None'
+  const [collection, setCollection] = useState('All')
+  const [ isActive, setIsActive ] = useState('All');
 
-  return <CollectionSection>
-    <Page>
-      <CollectionFlex>
-        <Title>The RugZombie Collection</Title>
-        <div style={{ paddingTop: '20px' }} />
-        <Line style={{
-          width: '30px',
-          background: '#B8C00D 0% 0% no-repeat padding-box',
-        }} />
-        <div style={{ paddingTop: '45px' }} />
-        <Filter filters={filters} selected={selected} setSelected={setSelected} />
-        <div style={{ paddingTop: '50px' }} />
-        { collection !== 'None' ? <div style={{alignSelf: 'flex-start'}}>
-          <RarityText style={{color: 'white'}} onClick={() => {setCollection('None')}}>{'< Back'}</RarityText>
-          <RarityText>Showing: {collection}</RarityText></div> : null}
-        <CollectionGrid>
-          {showCollections ? config.map(({ title, description, nftId }) => {
-            return <CollectionCard onClick={() => {setCollection(title)}} key={title} title={title} description={description} id={nftId} />
-          }) : <Nfts filter={collection} inWallet={selected === 1} /> }
-        </CollectionGrid>
-      </CollectionFlex>
-    </Page>
-  </CollectionSection>
+  const handleTabClick = (e, title) => {
+    e.preventDefault();
+    setCollection(title);
+    setIsActive(title);
+  }
+
+  const tabList = config.map(({ title }) => {
+    return (
+      <Tab
+        className={isActive === title ? "active" : ""} 
+        onClick={e => handleTabClick(e, title)}
+      >
+        {title}
+      </Tab>
+    );
+  });
+
+  return (
+    <CollectionSection>
+      <Page>
+        <CollectionFlex>
+          <SectionHeader 
+            title="The RugZombie Collection"
+          />
+          <Filter filters={filters} selected={selected} setSelected={setSelected} />
+          <Tabs>
+            {tabList}
+          </Tabs>
+          <CollectionGrid>
+            <Nfts filter={collection} inWallet={selected === 1} />
+          </CollectionGrid>
+        </CollectionFlex>
+      </Page>
+    </CollectionSection>
+  );
 }
 
 export default Collections
