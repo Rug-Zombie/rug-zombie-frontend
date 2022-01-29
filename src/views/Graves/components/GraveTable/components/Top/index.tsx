@@ -5,17 +5,22 @@ import uppointer from 'images/FullUpPointer.png'
 import downpointer from 'images/FullDownPointer.png'
 import { graveByPid, zombiePriceUsd } from 'redux/get'
 import { Token } from 'config/constants/types'
+import BigNumber from 'bignumber.js'
 import GraveItem, { GraveItemType } from './GraveItem'
 import { Grave } from '../../../../../../state/types'
-import { getBalanceNumber, getFullDisplayBalance } from '../../../../../../utils/formatBalance'
+import { getBalanceNumber, getDecimalAmount, getFullDisplayBalance } from '../../../../../../utils/formatBalance'
+import { getGraveTombApr } from '../../../../../../utils/apr'
 
 const GraveColumn = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
-  &:hover { cursor: pointer; }
-`;
+
+  &:hover {
+    cursor: pointer;
+  }
+`
 
 const GraveHeaderRow = styled.div`
   display: flex;
@@ -23,14 +28,14 @@ const GraveHeaderRow = styled.div`
   justify-content: left;
   align-items: center;
   padding-bottom: 20px;
-`;
+`
 
 const TokenFlex = styled.div`
   display: flex;
   flex-direction: row;
   min-width: 70px;
   justify-content: space-between;
-`;
+`
 
 const GraveTitle = styled.div`
   text-align: left;
@@ -41,7 +46,7 @@ const GraveTitle = styled.div`
   min-width: 40.5%;
   @media (max-width: 527px) {
     width: 100%;;
-  }`;
+  }`
 
 const TabFlex = styled.div`
   display: flex;
@@ -51,7 +56,7 @@ const TabFlex = styled.div`
     align-items: flex-end;
     justify-content: center;
   }
-`;
+`
 
 const GreenTab = styled.div`
   width: 49px;
@@ -65,7 +70,7 @@ const GreenTab = styled.div`
   @media (max-width: 527px) {
     margin: 0;
   }
-`;
+`
 
 const GreyTab = styled.div`
   width: 60px;
@@ -78,17 +83,17 @@ const GreyTab = styled.div`
   @media (max-width: 527px) {
     margin: 5px 0;
   }
-`;
+`
 
 const GreenTabText = styled.p`
   font: normal normal normal 12px/30px Poppins;
   color: #FFFFFF;
-`;
+`
 
 const GreyTabText = styled.p`
   font: normal normal normal 12px/30px Poppins;
   color: #6B7682;
-`;
+`
 
 const GraveSubRow = styled.div`
   display: flex;
@@ -101,17 +106,17 @@ const GraveSubRow = styled.div`
     justify-content: space-between;
     align-items: stretch;
   }
-`;
+`
 
 const Amounts = styled.div`
   display: flex;
   flex-grow: 1;
-`;
+`
 
 const Percentages = styled.div`
   display: flex;
   flex-grow: 1;
-`;
+`
 
 interface TopProps {
   grave: Grave;
@@ -120,12 +125,45 @@ interface TopProps {
 }
 
 const Top: React.FC<TopProps> = ({ grave, open, setOpen }) => {
-  const { name, rug, isNew, poolInfo: { allocPoint, tokenAmount } } = grave
-  const toggleOpen = () => setOpen(!open);
+  const {
+    name,
+    rug,
+    isNew,
+    poolInfo: { allocPoint, tokenAmount, weight },
+    userInfo: { pendingZombie, nftMintDate, tokenWithdrawalDate, amount },
+  } = grave
+  const toggleOpen = () => setOpen(!open)
   const tokenImage = (token: Token) => {
     return token.tokenLogo ? token.tokenLogo : `images/tokens/${token.symbol}.png`
   }
-  const tvl = getBalanceNumber(tokenAmount.times(zombiePriceUsd()))
+  const bigTvl = tokenAmount.times(zombiePriceUsd())
+  const tvl = getBalanceNumber(bigTvl)
+  const bigZombiePrice = getDecimalAmount(new BigNumber(zombiePriceUsd()))
+  const yearly = getGraveTombApr(weight, bigZombiePrice, bigTvl)
+  const daily = yearly / 365
+  const now = Math.floor(Date.now() / 1000)
+
+  const nftTime = () => {
+    if(amount.isZero()) {
+      return <GraveItem label='NFT Timer' value='N/A' type={GraveItemType.Text} />
+    }
+    const remainingNftTime = nftMintDate.toNumber() - now
+    if(remainingNftTime <= 0) {
+      return <GraveItem label='NFT Timer' value='NFT Ready' type={GraveItemType.Text} />
+    }
+    return <GraveItem label='NFT Timer' value={remainingNftTime} type={GraveItemType.Duration} />
+  }
+
+  const cooldownTime = () => {
+    if(amount.isZero()) {
+      return <GraveItem label='Withdrawal Timer' value='N/A' type={GraveItemType.Text} />
+    }
+    const remainingCooldownTime = tokenWithdrawalDate.toNumber() - now
+    if(remainingCooldownTime <= 0) {
+      return <GraveItem label='Withdrawal Timer' value='None' type={GraveItemType.Text} />
+    }
+    return <GraveItem label='Withdrawal Timer' value={remainingCooldownTime} type={GraveItemType.Duration} />
+  }
 
   return (
     <GraveColumn onClick={toggleOpen}>
@@ -137,32 +175,31 @@ const Top: React.FC<TopProps> = ({ grave, open, setOpen }) => {
         <GraveTitle>
           {name}
         </GraveTitle>
-          <TabFlex>
-            <GreenTab><GreenTabText>{allocPoint.div(100).toString()}X</GreenTabText></GreenTab>
-            <GreyTab><GreyTabText>ZMBE</GreyTabText></GreyTab>
-            {isNew ? <GreenTab><GreenTabText>NEW</GreenTabText></GreenTab> : null}
-          </TabFlex>
-
+        <TabFlex>
+          <GreenTab><GreenTabText>{allocPoint.div(100).toString()}X</GreenTabText></GreenTab>
+          <GreyTab><GreyTabText>ZMBE</GreyTabText></GreyTab>
+          {isNew ? <GreenTab><GreenTabText>NEW</GreenTabText></GreenTab> : null}
+        </TabFlex>
       </GraveHeaderRow>
       <GraveSubRow>
         <Amounts>
-          <GraveItem label='Earned' value={0} type={GraveItemType.Number} />
-          <GraveItem label='Yearly' value={0} type={GraveItemType.Percentage} />
-          <GraveItem label='Daily' value={0} type={GraveItemType.Percentage} />
+          <GraveItem label='Earned' unit='ZMBE' value={getBalanceNumber(pendingZombie)} type={GraveItemType.Number} />
+          <GraveItem label='Yearly' value={yearly} type={GraveItemType.Percentage} />
+          <GraveItem label='Daily' value={daily} type={GraveItemType.Percentage} />
           <GraveItem label='TVL' value={tvl} type={GraveItemType.Money} />
         </Amounts>
         <Percentages>
-          <GraveItem label='NFT Timer' value={1000} type={GraveItemType.Duration} />
-          <GraveItem label='Withdrawal Timer' value={2000000} type={GraveItemType.Duration} />
+          {nftTime()}
+          {cooldownTime()}
           {
             open
-            ? <img src={uppointer} alt='Close Grave' style={{ width: '35px', height: '35px' }} />
-            : <img src={downpointer} alt='Open Grave' style={{ width: '35px', height: '35px' }} />
+              ? <img src={uppointer} alt='Close Grave' style={{ width: '35px', height: '35px' }} />
+              : <img src={downpointer} alt='Open Grave' style={{ width: '35px', height: '35px' }} />
           }
         </Percentages>
       </GraveSubRow>
     </GraveColumn>
-  );
+  )
 }
 
 export default Top

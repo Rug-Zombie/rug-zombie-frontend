@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { graveByPid } from '../../../../../../redux/get'
 import ProgressBar from './components/ProgressBar'
 import TableDetails from './components/TableDetails'
+import { Grave } from '../../../../../../state/types'
 
 const Separator = styled.div`
   height: 0px;
@@ -83,11 +84,11 @@ const SecondaryStakeButtonText = styled.text`
 `;
 
 interface BottomProps {
-  pid: number;
+  grave: Grave;
 }
 
-const Bottom: React.FC<BottomProps> = ({ pid }) => {
-  const { name, rug, isNew, poolInfo: { allocPoint } } = graveByPid(pid)
+const Bottom: React.FC<BottomProps> = ({ grave }) => {
+  const { name, rug, isNew, poolInfo: { allocPoint } } = grave
 
   return <>
     <Separator />
@@ -105,9 +106,9 @@ const Bottom: React.FC<BottomProps> = ({ pid }) => {
         </SecondaryStakeButton>
       </Buttons>
     </StakingContainer>
-    <ProgressBar pid={pid} />
+    <ProgressBar grave={grave} />
     <Separator />
-    <TableDetails pid={pid} />
+    <TableDetails grave={grave} />
   </>
 }
 

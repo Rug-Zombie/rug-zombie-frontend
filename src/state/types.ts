@@ -13,8 +13,8 @@ export type TranslatableText =
 export interface GraveUserInfo {
   paidUnlockFee: boolean
   rugDeposited: BigNumber
-  tokenWithdrawalDate: number
-  nftMintDate: number
+  tokenWithdrawalDate: BigNumber
+  nftMintDate: BigNumber
   amount: BigNumber
   pendingZombie: BigNumber
 }
@@ -26,8 +26,8 @@ export interface GravePoolInfo {
   unlockFee: BigNumber;
   minimumStake: BigNumber;
   tokenAmount: BigNumber;
-  withdrawCooldown: number;
-  nftRevivalTime: number;
+  withdrawCooldown: BigNumber;
+  nftMintTime: BigNumber;
 }
 
 export interface Grave extends GraveConfig {

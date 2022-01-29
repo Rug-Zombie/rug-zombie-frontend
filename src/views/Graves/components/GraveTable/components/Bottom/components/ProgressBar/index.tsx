@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import ProgressCircle from './components/ProgressCircle'
 import ProgressLine from './components/ProgressLine'
 import ProgressText from './components/ProgressText'
+import { Grave } from '../../../../../../../../state/types'
 
 const ProgressFlex = styled.div`
   width: 100%;
@@ -28,10 +29,10 @@ const TextFlex = styled.div`
 `
 
 interface StakingProgressBarProps {
-  pid: number;
+  grave: Grave;
 }
 
-const ProgressBar: React.FC<StakingProgressBarProps> = ({ pid }) => {
+const ProgressBar: React.FC<StakingProgressBarProps> = ({ grave }) => {
   const steps = ['Approve rug', 'Deposit rug', 'Unlock grave', 'Approve ZMBE', 'Stake ZMBE']
   return <ProgressFlex>
     <IconFlex>

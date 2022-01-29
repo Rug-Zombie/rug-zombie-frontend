@@ -28,3 +28,11 @@ export const displayInteger = (int: number): string => {
   }
     return `${int}`
 }
+
+// eslint-disable-next-line import/prefer-default-export
+export const formatDays = (duration: number,): string => {
+  const days = Math.floor(duration / SECONDS_PER_DAY)
+  const unit = days === 1 ? 'day' : 'days'
+
+  return `${days} ${unit}`
+}

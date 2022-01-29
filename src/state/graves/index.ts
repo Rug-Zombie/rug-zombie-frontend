@@ -21,14 +21,14 @@ const noAccountGraveConfig: Grave[] = gravesConfig.map((grave) => ({
     unlockFee: BIG_ZERO,
     minimumStake: BIG_ZERO,
     tokenAmount: BIG_ZERO,
-    withdrawCooldown: 0,
-    nftRevivalTime: 0,
+    withdrawCooldown: BIG_ZERO,
+    nftMintTime: BIG_ZERO,
   },
   userInfo: {
     paidUnlockFee: false,
     rugDeposited: BIG_ZERO,
-    tokenWithdrawalDate: 0,
-    nftMintDate: 0,
+    tokenWithdrawalDate: BIG_ZERO,
+    nftMintDate: BIG_ZERO,
     amount: BIG_ZERO,
     pendingZombie: BIG_ZERO
   },
@@ -51,8 +51,8 @@ export const gravesSlice = createSlice({
       const { arrayOfUserDataObjects } = action.payload
       arrayOfUserDataObjects.forEach((userInfoEl) => {
         const { pid } = userInfoEl
-        const index = state.data.findIndex((grave) => getId(grave.pid) === getId(pid))
-        state.data[index] = { ...state.data[index], userInfo: userInfoEl }
+        const index = state.data.findIndex((grave) => getId(grave.pid) === pid)
+        state.data[index] = { ...state.data[index], userInfo: { ...state.data[index].userInfo, ...userInfoEl } }
       })
       state.userDataLoaded = true
     },
@@ -79,7 +79,7 @@ export const fetchGravesUserDataAsync = (account: string) => async (dispatch) =>
       tokenWithdrawalDate: new BigNumber(userInfo.tokenWithdrawalDate._hex),
       nftMintDate: new BigNumber(userInfo.nftRevivalDate._hex),
       amount: new BigNumber(userInfo.amount._hex),
-      pendingZombie: new BigNumber(userGraveEarnings[index]._hex),
+      pendingZombie: new BigNumber(userGraveEarnings[index]),
     }
   })
 

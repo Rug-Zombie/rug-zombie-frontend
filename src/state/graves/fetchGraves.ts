@@ -41,7 +41,7 @@ const fetchGraves = async (gravesToFetch: GraveConfig[]) => {
           unlockFee: new BigNumber(unlockFee._hex),
           minimumStake: new BigNumber(info.minimumStake._hex),
           withdrawCooldown: new BigNumber(info.minimumStakingTime._hex),
-          nftRevivalTime: new BigNumber(info.nftRevivalTime._hex),
+          nftMintTime: new BigNumber(info.nftRevivalTime._hex),
           lpToken: info.lpToken,
           tokenAmount,
           allocPoint,

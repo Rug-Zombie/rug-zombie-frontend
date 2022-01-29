@@ -8,11 +8,13 @@ export enum GraveItemType {
   Money,
   Percentage,
   Duration,
+  Text
 }
 
 interface GraveItemProps {
   label: string;
-  value: number;
+  unit?: string;
+  value: number | string;
   type: GraveItemType;
 }
 
@@ -23,9 +25,9 @@ const ItemText = styled.p`
   padding: 0 15px 0 0;
 `
 
-const GraveItem: React.FC<GraveItemProps> = ({ label, value, type}) => {
+const GraveItem: React.FC<GraveItemProps> = ({ label, value, type, unit }) => {
   let formattedValue
-  switch(type) {
+  switch (type) {
     case GraveItemType.Number:
       formattedValue = numeral(value).format('(0.00 a)')
       break
@@ -36,7 +38,11 @@ const GraveItem: React.FC<GraveItemProps> = ({ label, value, type}) => {
       formattedValue = numeral(value).format('% (0.00 a)')
       break
     case GraveItemType.Duration:
-      formattedValue = formatDuration(value)
+      if (typeof value === 'number')
+        formattedValue = formatDuration(value)
+      break
+    case GraveItemType.Text:
+      formattedValue = value
       break
     default:
       formattedValue = 'NAN'
@@ -48,10 +54,10 @@ const GraveItem: React.FC<GraveItemProps> = ({ label, value, type}) => {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'flex-start',
-    marginRight: 'auto'
+    marginRight: 'auto',
   }}>
     <ItemText>{label}</ItemText>
-    <ItemText>{formattedValue}</ItemText>
+    <ItemText>{formattedValue}{unit ? ` ${unit}` : null}</ItemText>
   </div>
 }
 

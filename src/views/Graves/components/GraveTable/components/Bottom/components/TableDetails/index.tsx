@@ -1,8 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import numeral from 'numeral'
-import { bnbPriceUsd, graveByPid, zombiePriceUsd } from '../../../../../../../../redux/get'
-import { getBalanceAmount, getDecimalAmount } from '../../../../../../../../utils/formatBalance'
+import { bnbPriceUsd, nftById, zombiePriceUsd } from '../../../../../../../../redux/get'
+import { getBalanceAmount, getFullDisplayBalance } from '../../../../../../../../utils/formatBalance'
+import { Grave } from '../../../../../../../../state/types'
+import { formatDays } from '../../../../../../../../utils/timerHelpers'
 
 export enum GraveItemType {
   Number,
@@ -12,7 +14,7 @@ export enum GraveItemType {
 }
 
 interface TableDetailsProps {
-  pid: number;
+  grave: Grave;
 }
 
 const Container = styled.div`
@@ -32,6 +34,17 @@ const NftImageContainer = styled.div`
 `;
 
 const NftImage = styled.img`
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 150px;
+  max-width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+`;
+
+const NftVideo = styled.video`
   position: absolute;
   top: 0;
   left: 0;
@@ -75,18 +88,14 @@ const Text = styled.span`
   color: #FFFFFF;
 `;
 
-const TableDetails: React.FC<TableDetailsProps> = ({ pid }) => {
+const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
   const {
-    path,
-    subtitle,
-    withdrawalCooldown,
-    nftRevivalTime,
-    poolInfo: { allocPoint, totalStakingTokenStaked, minimumStake },
-  } = graveByPid(pid);
-  const tvl = getBalanceAmount(totalStakingTokenStaked.times(zombiePriceUsd()))
-  const unlockFeeInBnb = 0.01
-  const unlockFeeUsd = unlockFeeInBnb * bnbPriceUsd()
-
+    nftId,
+    poolInfo: { allocPoint, withdrawCooldown, nftMintTime, tokenAmount, minimumStake, unlockFee },
+  } = grave
+  const { name, path, type } = nftById(nftId)
+  const tvl = getBalanceAmount(tokenAmount.times(zombiePriceUsd()))
+  const unlockFeeUsd = unlockFee.times(bnbPriceUsd())
   const imageOnErrorHandler = (
     event: React.SyntheticEvent<HTMLImageElement, Event>
   ) => {
@@ -97,28 +106,33 @@ const TableDetails: React.FC<TableDetailsProps> = ({ pid }) => {
 
   return <Container>
     <NftImageContainer>
-      <NftImage src={path} onError={imageOnErrorHandler} />
+      {type === 'video' ? <NftVideo autoPlay loop muted>
+          <source src={path} type='video/webm' />
+        </NftVideo> :
+        <NftImage src={path} onError={imageOnErrorHandler} />
+
+      }
     </NftImageContainer>
     <Details>
       <GraveInfo>
-        <HeaderText>{subtitle}</HeaderText>
+        <HeaderText>{name}</HeaderText>
         <SubHeaderText>
-          Weight: <Text>{allocPoint / 100}X</Text>
+          Weight: <Text>{allocPoint.div(100).toString()}X</Text>
         </SubHeaderText>
         <SubHeaderText>
           Grave TVL: <Text>{numeral(tvl.toString()).format('$ (0.00 a)')}</Text>
         </SubHeaderText>
       </GraveInfo>
       <GraveInfo>
-        <HeaderText>Unlock Fees: {unlockFeeInBnb} BNB (~ {unlockFeeUsd.toFixed(2)})</HeaderText>
+        <HeaderText>Unlock Fees: {getFullDisplayBalance(unlockFee)} BNB (~ {unlockFeeUsd.toFixed(2)})</HeaderText>
         <SubHeaderText>
           Early Withdraw Fee: <Text>5%</Text>
         </SubHeaderText>
         <SubHeaderText>
-          Withdrawal Cooldown: <Text>{withdrawalCooldown}</Text>
+          Withdrawal Cooldown: <Text>{formatDays(withdrawCooldown.toNumber())}</Text>
         </SubHeaderText>
         <SubHeaderText>
-          NFT Minting Time: <Text>{nftRevivalTime}</Text>
+          NFT Minting Time: <Text>{formatDays(nftMintTime.toNumber())}</Text>
         </SubHeaderText>
         <SubHeaderText>
           Minimum Stake: <Text>{getBalanceAmount(minimumStake).toString()} ZMBE</Text>

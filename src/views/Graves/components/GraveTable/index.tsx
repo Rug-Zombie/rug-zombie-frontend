@@ -28,7 +28,7 @@ const GraveTable: React.FC<GraveProps> = ({ grave }) => {
   return (
     <GraveCard open={open}>
       <Top grave={grave} open={open} setOpen={setOpen} />
-      {open ? <Bottom pid={getId(grave.pid)}/> : null}
+      {open ? <Bottom grave={grave}/> : null}
     </GraveCard>
   )
 }
