@@ -21,10 +21,11 @@ export interface GraveUserInfo {
 
 export interface GravePoolInfo {
   lpToken: string;
-  allocPoint: number;
+  allocPoint: BigNumber;
+  weight: BigNumber;
   unlockFee: BigNumber;
   minimumStake: BigNumber;
-  totalStakingTokenStaked: BigNumber;
+  tokenAmount: BigNumber;
   withdrawCooldown: number;
   nftRevivalTime: number;
 }
@@ -84,6 +85,11 @@ export interface GravesState {
 export interface FarmsState {
   data: Farm[]
   loadArchivedFarmsData: boolean
+  userDataLoaded: boolean
+}
+
+export interface GraveState {
+  data: Grave[]
   userDataLoaded: boolean
 }
 
@@ -287,6 +293,7 @@ export interface State {
   farms: FarmsState
   prices: PriceState
   pools: PoolsState
+  graves: GraveState
   predictions: PredictionsState
   profile: ProfileState
   teams: TeamsState

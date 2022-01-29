@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
 import Page from '../../components/layout/Page'
@@ -10,6 +10,8 @@ import Grave from './components/Grave'
 import { graves } from '../../redux/get'
 import { getId } from '../../utils'
 import Footer from '../../components/Footer'
+import { fetchFarmUserDataAsync, fetchGravesPublicDataAsync } from '../../state/actions'
+import { useAppDispatch } from '../../state'
 
 const GravePage = styled(Page)`
   min-width: 80vw;
@@ -57,6 +59,11 @@ const Graves: React.FC = () => {
   const tvl = 1580000
   const graveTvl = { page: 'Graves', tvl: 768000 }
   const myHoldings = 4349
+
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    dispatch(fetchFarmUserDataAsync(accountAddress))
+  })
 
   return (
     <>

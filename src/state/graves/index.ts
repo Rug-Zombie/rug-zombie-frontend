@@ -4,13 +4,14 @@ import gravesConfig from 'config/constants/graves'
 import { BigNumber } from 'bignumber.js'
 import fetchGraves from './fetchGraves'
 import {
-  fetchFarmUserEarnings,
+  fetchGraveUserEarnings,
   fetchFarmUserAllowances,
-  fetchFarmUserTokenBalances,
-  fetchFarmUserStakedBalances,
-} from './fetchFarmUser'
+  fetchGraveUserInfo,
+  fetchGraveUserStakedBalances,
+} from './fetchGraveUser'
 import { Farm, GravesState, Grave } from '../types'
 import { BIG_ZERO } from '../../utils/bigNumber'
+import { getId } from '../../utils'
 
 const noAccountGraveConfig: Grave[] = gravesConfig.map((grave) => ({
   ...grave,
@@ -54,29 +55,27 @@ export const gravesSlice = createSlice({
 export const { setGravePoolInfo, setGraveUserInfo } = gravesSlice.actions
 
 // Thunks
-export const fetchFarmsPublicDataAsync = () => async (dispatch, getState) => {
+export const fetchGravesPublicDataAsync = () => async (dispatch) => {
   const graves = await fetchGraves(gravesConfig)
   dispatch(setGravePoolInfo(graves))
 }
-export const fetchFarmUserDataAsync = (account: string) => async (dispatch, getState) => {
-  const fetchArchived = getState().farms.loadArchivedFarmsData
-  const farmsToFetch = fetchArchived ? farmsConfig : nonArchivedFarms
-  const userFarmAllowances = await fetchFarmUserAllowances(account, farmsToFetch)
-  const userFarmTokenBalances = await fetchFarmUserTokenBalances(account, farmsToFetch)
-  const userStakedBalances = await fetchFarmUserStakedBalances(account, farmsToFetch)
-  const userFarmEarnings = await fetchFarmUserEarnings(account, farmsToFetch)
+export const fetchGravesUserDataAsync = (account: string) => async (dispatch) => {
+  const userInfos = await fetchGraveUserInfo(account, gravesConfig)
+  const userFarmEarnings = await fetchGraveUserEarnings(account, gravesConfig)
 
-  const arrayOfUserDataObjects = userFarmAllowances.map((farmAllowance, index) => {
+  const arrayOfUserDataObjects = userInfos.map((userInfo, index) => {
     return {
-      pid: farmsToFetch[index].pid,
-      allowance: userFarmAllowances[index],
-      tokenBalance: userFarmTokenBalances[index],
-      stakedBalance: userStakedBalances[index],
-      earnings: userFarmEarnings[index],
+      pid: getId(gravesConfig[index].pid),
+      paidUnlockFee: userInfo.paidUnlockFee,
+      rugDeposited: new BigNumber(userInfo.rugDeposited._hex),
+      tokenWithdrawalDate: new BigNumber(userInfo.tokenWithdrawalDate._hex),
+      nftMintDate: new BigNumber(userInfo.nftRevivalDate._hex),
+      amount: new BigNumber(userInfo.amount._hex),
+      pendingZombie: new BigNumber(userFarmEarnings[index]._hex),
     }
   })
 
-  dispatch(setFarmUserData({ arrayOfUserDataObjects }))
+  dispatch(setGraveUserInfo({ arrayOfUserDataObjects }))
 }
 
 export default gravesSlice.reducer

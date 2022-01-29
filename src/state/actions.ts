@@ -1,4 +1,5 @@
 export { fetchFarmsPublicDataAsync, fetchFarmUserDataAsync } from './farms'
+export { fetchGravesPublicDataAsync, fetchGravesUserDataAsync } from './graves'
 export {
   fetchPoolsPublicDataAsync,
   fetchPoolsUserDataAsync,

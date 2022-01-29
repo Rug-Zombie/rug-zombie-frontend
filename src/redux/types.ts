@@ -209,6 +209,7 @@ export interface Auction {
   artist: Artist,
   token0?: string,
   token1?: string,
+  type?: string,
   end: number,
   additionalDetails?: any,
   userInfo: AuctionUserInfo,

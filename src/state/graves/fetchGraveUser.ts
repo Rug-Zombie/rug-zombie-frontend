@@ -2,8 +2,9 @@ import BigNumber from 'bignumber.js'
 import erc20ABI from 'config/abi/erc20.json'
 import masterchefABI from 'config/abi/masterchef.json'
 import multicall from 'utils/multicall'
-import { getAddress, getMasterChefAddress } from 'utils/addressHelpers'
-import { FarmConfig } from 'config/constants/types'
+import { getAddress, getDrFrankensteinAddress, getMasterChefAddress } from 'utils/addressHelpers'
+import { FarmConfig, GraveConfig } from 'config/constants/types'
+import { getId } from '../../utils'
 
 export const fetchFarmUserAllowances = async (account: string, farmsToFetch: FarmConfig[]) => {
   const masterChefAddress = getMasterChefAddress()
@@ -20,13 +21,14 @@ export const fetchFarmUserAllowances = async (account: string, farmsToFetch: Far
   return parsedLpAllowances
 }
 
-export const fetchFarmUserTokenBalances = async (account: string, farmsToFetch: FarmConfig[]) => {
-  const calls = farmsToFetch.map((farm) => {
-    const lpContractAddress = getAddress(farm.lpAddresses)
+export const fetchGraveUserInfo = async (account: string, gravesToFetch: GraveConfig[]) => {
+  const drFrankensteinAddress = getDrFrankensteinAddress()
+
+  const calls = gravesToFetch.map((grave) => {
     return {
-      address: lpContractAddress,
-      name: 'balanceOf',
-      params: [account],
+      address: drFrankensteinAddress,
+      name: 'poolInfo',
+      params: [getId(grave.pid)],
     }
   })
 
@@ -37,7 +39,7 @@ export const fetchFarmUserTokenBalances = async (account: string, farmsToFetch: 
   return parsedTokenBalances
 }
 
-export const fetchFarmUserStakedBalances = async (account: string, farmsToFetch: FarmConfig[]) => {
+export const fetchGraveUserStakedBalances = async (account: string, farmsToFetch: FarmConfig[]) => {
   const masterChefAddress = getMasterChefAddress()
 
   const calls = farmsToFetch.map((farm) => {
@@ -55,14 +57,14 @@ export const fetchFarmUserStakedBalances = async (account: string, farmsToFetch:
   return parsedStakedBalances
 }
 
-export const fetchFarmUserEarnings = async (account: string, farmsToFetch: FarmConfig[]) => {
-  const masterChefAddress = getMasterChefAddress()
+export const fetchGraveUserEarnings = async (account: string, gravesToFetch: GraveConfig[]) => {
+  const drFrankensteinAddress = getDrFrankensteinAddress()
 
-  const calls = farmsToFetch.map((farm) => {
+  const calls = gravesToFetch.map((grave) => {
     return {
-      address: masterChefAddress,
-      name: 'pendingCake',
-      params: [farm.pid, account],
+      address: drFrankensteinAddress,
+      name: 'pendingZombie',
+      params: [grave.pid, account],
     }
   })
 

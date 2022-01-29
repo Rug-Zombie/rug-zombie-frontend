@@ -96,7 +96,7 @@ export const initialData = (accountAddress: string, setZombiePrice?: any) => {
       })
   }
 
-  initialGraveData()
+  // initialGraveData()
 }
 
 export const tomb = (pid: number, updatePoolObj?: { update: number, setUpdate: any }, updateUserObj?: { update: number, setUpdate: any }, everyUpdateObj?: { update: boolean, setUpdate: any }) => {
