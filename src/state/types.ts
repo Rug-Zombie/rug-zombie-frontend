@@ -14,7 +14,7 @@ export interface GraveUserInfo {
   paidUnlockFee: boolean
   rugDeposited: BigNumber
   tokenWithdrawalDate: number
-  nftRevivalDate: number
+  nftMintDate: number
   amount: BigNumber
   pendingZombie: BigNumber
 }
@@ -30,8 +30,8 @@ export interface GravePoolInfo {
 }
 
 export interface Grave extends GraveConfig {
-  userData?: GraveUserInfo;
-  poolData?: GravePoolInfo;
+  userInfo?: GraveUserInfo;
+  poolInfo?: GravePoolInfo;
 }
 
 export interface Farm extends FarmConfig {
@@ -78,7 +78,6 @@ export interface Profile {
 
 export interface GravesState {
   data: Grave[]
-  loadArchivedFarmsData: boolean
   userDataLoaded: boolean
 }
 

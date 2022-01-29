@@ -1,21 +1,18 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit'
-import farmsConfig from 'config/constants/farms'
-import isArchivedPid from 'utils/farmHelpers'
+import gravesConfig from 'config/constants/graves'
 import { BigNumber } from 'bignumber.js'
-import fetchFarms from './fetchFarms'
+import fetchGraves from './fetchGraves'
 import {
   fetchFarmUserEarnings,
   fetchFarmUserAllowances,
   fetchFarmUserTokenBalances,
   fetchFarmUserStakedBalances,
 } from './fetchFarmUser'
-import { FarmsState, Farm, GravesState, Grave } from '../types'
+import { Farm, GravesState, Grave } from '../types'
 import { BIG_ZERO } from '../../utils/bigNumber'
 
-const nonArchivedFarms = farmsConfig.filter(({ pid }) => !isArchivedPid(pid))
-
-const noAccountFarmConfig: Grave = farmsConfig.map((grave) => ({
+const noAccountGraveConfig: Grave[] = gravesConfig.map((grave) => ({
   ...grave,
   userInfo: {
     paidUnlockFee: false,
@@ -27,44 +24,39 @@ const noAccountFarmConfig: Grave = farmsConfig.map((grave) => ({
   },
 }))
 
-const initialState: GravesState = { data: noAccountFarmConfig, loadArchivedFarmsData: false, userDataLoaded: false }
+const initialState: GravesState = { data: noAccountGraveConfig, userDataLoaded: false }
 
-export const farmsSlice = createSlice({
-  name: 'Farms',
+export const gravesSlice = createSlice({
+  name: 'Graves',
   initialState,
   reducers: {
-    setFarmsPublicData: (state, action) => {
-      const liveFarmsData: Farm[] = action.payload
-      state.data = state.data.map((farm) => {
-        const liveFarmData = liveFarmsData.find((f) => f.pid === farm.pid)
-        return { ...farm, ...liveFarmData }
+    setGravePoolInfo: (state, action) => {
+      const liveGravesData: Grave[] = action.payload
+      state.data = state.data.map((grave) => {
+        const liveGraveData = liveGravesData.find((g) => g.pid === grave.pid)
+
+        return { ...grave, poolInfo: { ...grave.poolInfo, ...liveGraveData.poolInfo }  }
       })
     },
-    setFarmUserData: (state, action) => {
+    setGraveUserInfo: (state, action) => {
       const { arrayOfUserDataObjects } = action.payload
-      arrayOfUserDataObjects.forEach((userDataEl) => {
-        const { pid } = userDataEl
-        const index = state.data.findIndex((farm) => farm.pid === pid)
-        state.data[index] = { ...state.data[index], userData: userDataEl }
+      arrayOfUserDataObjects.forEach((userInfoEl) => {
+        const { pid } = userInfoEl
+        const index = state.data.findIndex((grave) => grave.pid === pid)
+        state.data[index] = { ...state.data[index], userInfo: userInfoEl }
       })
       state.userDataLoaded = true
-    },
-    setLoadArchivedFarmsData: (state, action) => {
-      const loadArchivedFarmsData = action.payload
-      state.loadArchivedFarmsData = loadArchivedFarmsData
     },
   },
 })
 
 // Actions
-export const { setFarmsPublicData, setFarmUserData, setLoadArchivedFarmsData } = farmsSlice.actions
+export const { setGravePoolInfo, setGraveUserInfo } = gravesSlice.actions
 
 // Thunks
 export const fetchFarmsPublicDataAsync = () => async (dispatch, getState) => {
-  const fetchArchived = getState().farms.loadArchivedFarmsData
-  const farmsToFetch = fetchArchived ? farmsConfig : nonArchivedFarms
-  const farms = await fetchFarms(farmsToFetch)
-  dispatch(setFarmsPublicData(farms))
+  const graves = await fetchGraves(gravesConfig)
+  dispatch(setGravePoolInfo(graves))
 }
 export const fetchFarmUserDataAsync = (account: string) => async (dispatch, getState) => {
   const fetchArchived = getState().farms.loadArchivedFarmsData
@@ -87,4 +79,4 @@ export const fetchFarmUserDataAsync = (account: string) => async (dispatch, getS
   dispatch(setFarmUserData({ arrayOfUserDataObjects }))
 }
 
-export default farmsSlice.reducer
+export default gravesSlice.reducer

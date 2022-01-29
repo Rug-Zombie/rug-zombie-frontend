@@ -1,6 +1,5 @@
 // eslint-disable-next-line import/prefer-default-export
 import { Dex, GraveConfig } from './types'
-import artists from './artists'
 import tokens from './tokens'
 
 const graves: GraveConfig[] = [
@@ -368,7 +367,6 @@ const graves: GraveConfig[] = [
       97: 1,
     },
     name: 'Kitty Cake Common',
-    subtitle: 'Meowser',
     nftId: 31,
     rug: tokens.kcake,
     rugDex: Dex.PCS_V2,
@@ -401,7 +399,6 @@ const graves: GraveConfig[] = [
     name: 'Dragon Farm Finance Common',
     nftId: 2,
     rug: tokens.dragon,
-    artist: artists.none,
     rugDex: Dex.PCS_V1,
   },
   {
