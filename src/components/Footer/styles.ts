@@ -21,12 +21,12 @@ export const FooterContent = styled.div`
   position: relative;
   top: -310px;
   padding: 0 0 20px 0;
-  margin: 0 auto;
-  width: 90vw;
+  width: 100%;
   max-width: 1920px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  background-color: #010202;
 `;
 
 export const Zmbe = styled.div`
