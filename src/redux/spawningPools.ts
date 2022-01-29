@@ -48,7 +48,7 @@ const spawningPools: SpawningPool[] = [
     stakingToken: '',
     pcsVersion: 'v2',
     liquidityDetails: '',
-    isNew: false,
+    isNew: true,
     color: 'orange',
     userInfo: {
       paidUnlockFee: false,
@@ -110,7 +110,7 @@ const spawningPools: SpawningPool[] = [
     stakingToken: '',
     pcsVersion: 'v2',
     liquidityDetails: '',
-    isNew: true,
+    isNew: false,
     color: 'orange',
     userInfo: {
       paidUnlockFee: false,
