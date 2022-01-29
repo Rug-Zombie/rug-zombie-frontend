@@ -75,8 +75,7 @@ export enum Dex {
   PCS_V1,
   PCS_V2,
   AUTOSHARK,
-  APESWAP,
-  NONE
+  APESWAP
 }
 
 export interface GraveConfig {
@@ -84,7 +83,7 @@ export interface GraveConfig {
   name: string,
   nftId: number,
   nft?: number,
-  depositNft?: number,
+  depositNftId?: number,
   isNew?: boolean,
   isClosed?: boolean,
   endDate?: number,
@@ -93,9 +92,8 @@ export interface GraveConfig {
   graveNftToken?: string,   // remove move to own type
   additionalDetails?: any[],
   rug: Token,
-  rugDex: Dex,
+  rugDex?: Dex,
   liquidityDetails?: string,
-  rarity: string,
   isRetired?: boolean
 }
 
