@@ -1,5 +1,4 @@
 import BigNumber from 'bignumber.js'
-import erc20 from 'config/abi/erc20.json'
 import drFrankenstein from 'config/abi/drFrankenstein.json'
 import multicall from 'utils/multicall'
 import { getDrFrankensteinAddress, getMasterChefAddress } from 'utils/addressHelpers'
@@ -31,12 +30,11 @@ const fetchGraves = async (gravesToFetch: GraveConfig[]) => {
         info,
         unlockFee,
         totalAllocPoint
-      ] = await multicall(erc20, calls)
+      ] = await multicall(drFrankenstein, calls)
 
       const allocPoint = new BigNumber(info.allocPoint._hex)
       const weight = allocPoint.div(new BigNumber(totalAllocPoint))
-      const tokenAmount = new BigNumber((await getBep20Contract(info.lpToken).methods.balanceOf(getDrFrankensteinAddress()))._hex)
-
+      const tokenAmount = new BigNumber((await getBep20Contract(info.lpToken).methods.balanceOf(getDrFrankensteinAddress()).call()))
       return {
         ...graveConfig,
         poolInfo: {

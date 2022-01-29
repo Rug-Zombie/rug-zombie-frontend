@@ -32,7 +32,7 @@ export interface GravePoolInfo {
 
 export interface Grave extends GraveConfig {
   userInfo?: GraveUserInfo;
-  poolInfo?: GravePoolInfo;
+  poolInfo: GravePoolInfo;
 }
 
 export interface Farm extends FarmConfig {

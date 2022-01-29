@@ -69,7 +69,7 @@ const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
         drBurnenstein.methods.unlock(id)
           .send({ from: wallet, value: res }).then(() => {
 
-          toastSuccess(t('Grave unlocked'))
+          toastSuccess(t('GraveTable unlocked'))
           updateResult(id)
         })
       })

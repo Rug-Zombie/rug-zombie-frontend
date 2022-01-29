@@ -1,5 +1,6 @@
 import BigNumber from 'bignumber.js'
 import erc20ABI from 'config/abi/erc20.json'
+import drFrankenstein from 'config/abi/drFrankenstein.json'
 import masterchefABI from 'config/abi/masterchef.json'
 import multicall from 'utils/multicall'
 import { getAddress, getDrFrankensteinAddress, getMasterChefAddress } from 'utils/addressHelpers'
@@ -27,16 +28,12 @@ export const fetchGraveUserInfo = async (account: string, gravesToFetch: GraveCo
   const calls = gravesToFetch.map((grave) => {
     return {
       address: drFrankensteinAddress,
-      name: 'poolInfo',
-      params: [getId(grave.pid)],
+      name: 'userInfo',
+      params: [getId(grave.pid), account],
     }
   })
 
-  const rawTokenBalances = await multicall(erc20ABI, calls)
-  const parsedTokenBalances = rawTokenBalances.map((tokenBalance) => {
-    return new BigNumber(tokenBalance).toJSON()
-  })
-  return parsedTokenBalances
+  return multicall(drFrankenstein, calls)
 }
 
 export const fetchGraveUserStakedBalances = async (account: string, farmsToFetch: FarmConfig[]) => {
@@ -64,11 +61,11 @@ export const fetchGraveUserEarnings = async (account: string, gravesToFetch: Gra
     return {
       address: drFrankensteinAddress,
       name: 'pendingZombie',
-      params: [grave.pid, account],
+      params: [getId(grave.pid), account],
     }
   })
 
-  const rawEarnings = await multicall(masterchefABI, calls)
+  const rawEarnings = await multicall(drFrankenstein, calls)
   const parsedEarnings = rawEarnings.map((earnings) => {
     return new BigNumber(earnings).toJSON()
   })

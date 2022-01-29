@@ -5,16 +5,25 @@ import { BigNumber } from 'bignumber.js'
 import fetchGraves from './fetchGraves'
 import {
   fetchGraveUserEarnings,
-  fetchFarmUserAllowances,
   fetchGraveUserInfo,
-  fetchGraveUserStakedBalances,
 } from './fetchGraveUser'
-import { Farm, GravesState, Grave } from '../types'
+import { GravesState, Grave } from '../types'
 import { BIG_ZERO } from '../../utils/bigNumber'
 import { getId } from '../../utils'
+import { ZERO_ADDRESS } from '../../config'
 
 const noAccountGraveConfig: Grave[] = gravesConfig.map((grave) => ({
   ...grave,
+  poolInfo: {
+    lpToken: ZERO_ADDRESS,
+    allocPoint: BIG_ZERO,
+    weight: BIG_ZERO,
+    unlockFee: BIG_ZERO,
+    minimumStake: BIG_ZERO,
+    tokenAmount: BIG_ZERO,
+    withdrawCooldown: 0,
+    nftRevivalTime: 0,
+  },
   userInfo: {
     paidUnlockFee: false,
     rugDeposited: BIG_ZERO,
@@ -34,8 +43,7 @@ export const gravesSlice = createSlice({
     setGravePoolInfo: (state, action) => {
       const liveGravesData: Grave[] = action.payload
       state.data = state.data.map((grave) => {
-        const liveGraveData = liveGravesData.find((g) => g.pid === grave.pid)
-
+        const liveGraveData = liveGravesData.find((g) => getId(g.pid) === getId(grave.pid))
         return { ...grave, poolInfo: { ...grave.poolInfo, ...liveGraveData.poolInfo }  }
       })
     },
@@ -43,7 +51,7 @@ export const gravesSlice = createSlice({
       const { arrayOfUserDataObjects } = action.payload
       arrayOfUserDataObjects.forEach((userInfoEl) => {
         const { pid } = userInfoEl
-        const index = state.data.findIndex((grave) => grave.pid === pid)
+        const index = state.data.findIndex((grave) => getId(grave.pid) === getId(pid))
         state.data[index] = { ...state.data[index], userInfo: userInfoEl }
       })
       state.userDataLoaded = true
@@ -61,7 +69,7 @@ export const fetchGravesPublicDataAsync = () => async (dispatch) => {
 }
 export const fetchGravesUserDataAsync = (account: string) => async (dispatch) => {
   const userInfos = await fetchGraveUserInfo(account, gravesConfig)
-  const userFarmEarnings = await fetchGraveUserEarnings(account, gravesConfig)
+  const userGraveEarnings = await fetchGraveUserEarnings(account, gravesConfig)
 
   const arrayOfUserDataObjects = userInfos.map((userInfo, index) => {
     return {
@@ -71,7 +79,7 @@ export const fetchGravesUserDataAsync = (account: string) => async (dispatch) =>
       tokenWithdrawalDate: new BigNumber(userInfo.tokenWithdrawalDate._hex),
       nftMintDate: new BigNumber(userInfo.nftRevivalDate._hex),
       amount: new BigNumber(userInfo.amount._hex),
-      pendingZombie: new BigNumber(userFarmEarnings[index]._hex),
+      pendingZombie: new BigNumber(userGraveEarnings[index]._hex),
     }
   })
 

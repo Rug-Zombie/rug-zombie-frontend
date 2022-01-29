@@ -65,8 +65,6 @@ export const useGetGraves = () => {
   return useSelector((state: State) => state.graves)
 }
 
-
-
 export const useGetTotalIntervalBlocks = () => {
   const intervalBlocks = useGetIntervalBlocks()
   const bufferBlocks = useGetBufferBlocks()

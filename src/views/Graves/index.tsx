@@ -6,12 +6,13 @@ import Page from '../../components/layout/Page'
 import './Graves.Styles.css'
 import HeaderCard from './components/HeaderCard'
 import Filter from './components/Filter'
-import Grave from './components/Grave'
+import GraveTable from './components/GraveTable'
 import { graves } from '../../redux/get'
 import { getId } from '../../utils'
 import Footer from '../../components/Footer'
-import { fetchFarmUserDataAsync, fetchGravesPublicDataAsync } from '../../state/actions'
 import { useAppDispatch } from '../../state'
+import { fetchGravesPublicDataAsync, fetchGravesUserDataAsync } from '../../state/graves'
+import { useGetGraves } from '../../state/hooks'
 
 const GravePage = styled(Page)`
   min-width: 80vw;
@@ -61,10 +62,15 @@ const Graves: React.FC = () => {
   const myHoldings = 4349
 
   const dispatch = useAppDispatch()
-  useEffect(() => {
-    dispatch(fetchFarmUserDataAsync(accountAddress))
-  })
 
+  useEffect(() => {
+      dispatch(fetchGravesPublicDataAsync())
+      if (account) {
+        dispatch(fetchGravesUserDataAsync(account))
+      }
+  }, [dispatch, account])
+
+  const gs = useGetGraves().data
   return (
     <>
       <GravePage>
@@ -74,8 +80,8 @@ const Graves: React.FC = () => {
           </Header>
           <GravesColumn>
             <Filter />
-            {graves().map(g => {
-              return <Grave pid={getId(g.pid)} key={getId(g.pid)} />
+            {gs.map(g => {
+              return <GraveTable grave={g} key={getId(g.pid)} />
             })}
           </GravesColumn>
         </Row>

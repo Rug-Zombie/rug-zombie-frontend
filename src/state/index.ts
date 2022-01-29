@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
-import gravesReducer from './graves'
+import gravesReducer from "./graves"
 
 
 const store = configureStore({

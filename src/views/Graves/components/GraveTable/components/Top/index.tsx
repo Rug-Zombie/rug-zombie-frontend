@@ -3,9 +3,11 @@ import styled from 'styled-components'
 import tokens from 'config/constants/tokens'
 import uppointer from 'images/FullUpPointer.png'
 import downpointer from 'images/FullDownPointer.png'
-import { graveByPid } from 'redux/get'
+import { graveByPid, zombiePriceUsd } from 'redux/get'
 import { Token } from 'config/constants/types'
 import GraveItem, { GraveItemType } from './GraveItem'
+import { Grave } from '../../../../../../state/types'
+import { getBalanceNumber, getFullDisplayBalance } from '../../../../../../utils/formatBalance'
 
 const GraveColumn = styled.div`
   height: 100%;
@@ -112,19 +114,18 @@ const Percentages = styled.div`
 `;
 
 interface TopProps {
-  pid: number;
+  grave: Grave;
   open: boolean;
   setOpen: any;
 }
 
-const Top: React.FC<TopProps> = ({ pid, open, setOpen }) => {
-  const { name, rug, isNew, poolInfo: { allocPoint } } = graveByPid(pid)
-
+const Top: React.FC<TopProps> = ({ grave, open, setOpen }) => {
+  const { name, rug, isNew, poolInfo: { allocPoint, tokenAmount } } = grave
+  const toggleOpen = () => setOpen(!open);
   const tokenImage = (token: Token) => {
     return token.tokenLogo ? token.tokenLogo : `images/tokens/${token.symbol}.png`
   }
-
-  const toggleOpen = () => setOpen(!open);
+  const tvl = getBalanceNumber(tokenAmount.times(zombiePriceUsd()))
 
   return (
     <GraveColumn onClick={toggleOpen}>
@@ -137,7 +138,7 @@ const Top: React.FC<TopProps> = ({ pid, open, setOpen }) => {
           {name}
         </GraveTitle>
           <TabFlex>
-            <GreenTab><GreenTabText>{allocPoint / 100}X</GreenTabText></GreenTab>
+            <GreenTab><GreenTabText>{allocPoint.div(100).toString()}X</GreenTabText></GreenTab>
             <GreyTab><GreyTabText>ZMBE</GreyTabText></GreyTab>
             {isNew ? <GreenTab><GreenTabText>NEW</GreenTabText></GreenTab> : null}
           </TabFlex>
@@ -148,7 +149,7 @@ const Top: React.FC<TopProps> = ({ pid, open, setOpen }) => {
           <GraveItem label='Earned' value={0} type={GraveItemType.Number} />
           <GraveItem label='Yearly' value={0} type={GraveItemType.Percentage} />
           <GraveItem label='Daily' value={0} type={GraveItemType.Percentage} />
-          <GraveItem label='TVL' value={0} type={GraveItemType.Money} />
+          <GraveItem label='TVL' value={tvl} type={GraveItemType.Money} />
         </Amounts>
         <Percentages>
           <GraveItem label='NFT Timer' value={1000} type={GraveItemType.Duration} />

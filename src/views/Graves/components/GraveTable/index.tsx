@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import Top from './components/Top'
 import Bottom from './components/Bottom'
+import { Grave } from '../../../../state/types'
+import { getId } from '../../../../utils'
 
 const GraveCard = styled.div<{ open: boolean }>`
   width: 100%;
@@ -18,18 +20,17 @@ const GraveCard = styled.div<{ open: boolean }>`
 `;
 
 interface GraveProps {
-  pid: number
+  grave: Grave
 }
 
-const Grave: React.FC<GraveProps> = ({ pid }) => {
+const GraveTable: React.FC<GraveProps> = ({ grave }) => {
   const [open, setOpen] = useState(false)
-
   return (
     <GraveCard open={open}>
-      <Top pid={pid} open={open} setOpen={setOpen} />
-      {open ? <Bottom pid={pid}/> : null}
+      <Top grave={grave} open={open} setOpen={setOpen} />
+      {open ? <Bottom pid={getId(grave.pid)}/> : null}
     </GraveCard>
   )
 }
 
-export default Grave
+export default GraveTable
