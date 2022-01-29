@@ -82,7 +82,7 @@ export enum Dex {
 export interface GraveConfig {
   pid: Id,
   name: string,
-  nftId: string,
+  nftId: number,
   nft?: number,
   depositNft?: number,
   isNew?: boolean,
@@ -94,8 +94,7 @@ export interface GraveConfig {
   additionalDetails?: any[],
   rug: Token,
   rugDex: Dex,
-  stakingToken: string,
-  liquidityDetails: string,
+  liquidityDetails?: string,
   rarity: string,
   isRetired?: boolean
 }

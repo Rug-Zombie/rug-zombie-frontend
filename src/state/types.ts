@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js'
-import { CampaignType, FarmConfig, Nft, PoolConfig, Team } from 'config/constants/types'
+import { CampaignType, FarmConfig, GraveConfig, Nft, PoolConfig, Team } from 'config/constants/types'
 
 export type TranslatableText =
   | string
@@ -9,6 +9,30 @@ export type TranslatableText =
         [key: string]: string | number
       }
     }
+
+export interface GraveUserInfo {
+  paidUnlockFee: boolean
+  rugDeposited: BigNumber
+  tokenWithdrawalDate: number
+  nftRevivalDate: number
+  amount: BigNumber
+  pendingZombie: BigNumber
+}
+
+export interface GravePoolInfo {
+  lpToken: string;
+  allocPoint: number;
+  unlockFee: BigNumber;
+  minimumStake: BigNumber;
+  totalStakingTokenStaked: BigNumber;
+  withdrawCooldown: number;
+  nftRevivalTime: number;
+}
+
+export interface Grave extends GraveConfig {
+  userData?: GraveUserInfo;
+  poolData?: GravePoolInfo;
+}
 
 export interface Farm extends FarmConfig {
   tokenAmount?: BigNumber
@@ -51,6 +75,12 @@ export interface Profile {
 }
 
 // Slices states
+
+export interface GravesState {
+  data: Grave[]
+  loadArchivedFarmsData: boolean
+  userDataLoaded: boolean
+}
 
 export interface FarmsState {
   data: Farm[]

@@ -1,5 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
+import gravesReducer from './graves'
+
 
 const store = configureStore({
   devTools: process.env.NODE_ENV !== 'production',

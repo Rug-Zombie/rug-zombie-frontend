@@ -2,6 +2,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import farmsConfig from 'config/constants/farms'
 import isArchivedPid from 'utils/farmHelpers'
+import { BigNumber } from 'bignumber.js'
 import fetchFarms from './fetchFarms'
 import {
   fetchFarmUserEarnings,
@@ -9,21 +10,24 @@ import {
   fetchFarmUserTokenBalances,
   fetchFarmUserStakedBalances,
 } from './fetchFarmUser'
-import { FarmsState, Farm } from '../types'
+import { FarmsState, Farm, GravesState, Grave } from '../types'
+import { BIG_ZERO } from '../../utils/bigNumber'
 
 const nonArchivedFarms = farmsConfig.filter(({ pid }) => !isArchivedPid(pid))
 
-const noAccountFarmConfig = farmsConfig.map((farm) => ({
-  ...farm,
-  userData: {
-    allowance: '0',
-    tokenBalance: '0',
-    stakedBalance: '0',
-    earnings: '0',
+const noAccountFarmConfig: Grave = farmsConfig.map((grave) => ({
+  ...grave,
+  userInfo: {
+    paidUnlockFee: false,
+    rugDeposited: BIG_ZERO,
+    tokenWithdrawalDate: 0,
+    nftMintDate: 0,
+    amount: BIG_ZERO,
+    pendingZombie: BIG_ZERO
   },
 }))
 
-const initialState: FarmsState = { data: noAccountFarmConfig, loadArchivedFarmsData: false, userDataLoaded: false }
+const initialState: GravesState = { data: noAccountFarmConfig, loadArchivedFarmsData: false, userDataLoaded: false }
 
 export const farmsSlice = createSlice({
   name: 'Farms',
