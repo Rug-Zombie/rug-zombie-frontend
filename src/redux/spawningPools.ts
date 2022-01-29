@@ -6,6 +6,64 @@ import { SpawningPool } from './types'
 
 const spawningPools: SpawningPool[] = [
   {
+    id: 19,
+    name: 'Farmaggedon Legendary',
+    subtitle: 'Farmer Zoe',
+    path: 'https://ipfs.io/ipfs/QmW2HpTsZsRYM759q2o9j3qPbZH6oefCbt2iEYAkZnuYnG',
+    type: 'image',
+    address: {
+      56: '0xFaAa54ec46a9BA92694DdA390a54A713b9Ce1332',
+      97: '0xFaAa54ec46a9BA92694DdA390a54A713b9Ce1332',
+    },
+    endBlock: 17450000,
+    endDate: 1651463999,
+    project: {
+      name: 'Farmaggedon',
+      description: 'Farmageddon is used to power a platform that brings the lucrative yet complicated process of yield farming to the masses. After choosing the Farm you want to stake into. All you need to do is enter the quantity of FG tokens you want staked. Leave the rest to us. As your rewards start growing you will then be able to compound your rewards back into the farm with one simple click.',
+      additionalDetails: [
+        {
+          name: 'Project website',
+          url: tokens.frt.projectLink,
+        },
+        {
+          name: 'Whitepaper',
+          url: 'https://farmageddon.gitbook.io/farmageddon/farmageddon-whitepaper',
+        },
+        {
+          name: 'Telegram',
+          url: 'https://t.me/FARMAGEDDON_TOKEN',
+        },
+      ],
+    },
+    withdrawalCooldown: '3 days',
+    nftRevivalTime: '45 days',
+    rewardToken: tokens.frt,
+    rewardTokenId: tokens.frt.geckoId,
+    bnbLpTokenIndex: 1,
+    artist: artists.canadiancryptojunkie,
+    stakingToken: '',
+    pcsVersion: 'v2',
+    liquidityDetails: '',
+    isNew: true,
+    color: 'orange',
+    userInfo: {
+      paidUnlockFee: false,
+      tokenWithdrawalDate: 0,
+      nftRevivalDate: 0,
+      amount: BIG_ZERO,
+      pendingReward: BIG_ZERO,
+      zombieAllowance: BIG_ZERO,
+    },
+    poolInfo: {
+      unlockFee: BIG_ZERO,
+      rewardPerBlock: BIG_ZERO,
+      minimumStake: BIG_ZERO,
+      totalZombieStaked: BIG_ZERO,
+      withdrawCooldown: 0,
+      nftRevivalTime: 0,
+    },
+  },
+  {
     id: 18,
     name: 'Sparten Token Legendary',
     subtitle: 'Artwork coming soon!',

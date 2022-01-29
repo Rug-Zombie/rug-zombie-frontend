@@ -40,6 +40,17 @@ const tokens = {
     geckoId: 'spartan-token',
     tokenLogo: 'https://assets.coingecko.com/coins/images/22787/small/Spartan_Logo.png?1642580873'
   },
+  frt: {
+    symbol: 'FRT',
+    address: {
+      56: '0xd51237a6f3219d186f0c8d8dd957b1bcb3ce5d48',
+      97: '0xd51237a6f3219d186f0c8d8dd957b1bcb3ce5d48',
+    },
+    decimals: 18,
+    projectLink: 'https://farmageddon.farm/',
+    geckoId: 'fertilizer',
+    tokenLogo: 'https://assets.coingecko.com/coins/images/20173/small/Untitled-design-7-removebg-preview-2.png?1637155311'
+  },
   euler: {
     symbol: 'EULER',
     address: {
