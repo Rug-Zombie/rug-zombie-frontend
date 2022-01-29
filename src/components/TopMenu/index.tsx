@@ -21,7 +21,7 @@ import {
   ConnectButton,
 } from './styles';
 
-const TopMenu = () => {
+const TopMenu: React.FC = () => {
   const [ showMenu, setShowMenu ] = useState(false);
 
   const handleClick = (e) => {
@@ -34,7 +34,7 @@ const TopMenu = () => {
       <NavbarContent>
       <Logo src={logo} alt='RugZombie Logo' />
       <Links>
-        {config.map(i => <MenuText href={i.href}>{i.label}</MenuText>)}
+        {config.map(i => <MenuText key={i.label} href={i.href}>{i.label}</MenuText>)}
       </Links>
       <DropdownMenu>
         <button type="button" onClick={handleClick} style={{
@@ -47,7 +47,7 @@ const TopMenu = () => {
         {showMenu ? (
             <DropdownContent>
               {config.map(i => <DropdownItem>
-                  <MenuText href={i.href}>{i.label}</MenuText>
+                  <MenuText key={i.label} href={i.href}>{i.label}</MenuText>
                 </DropdownItem>,
               )}
             </DropdownContent>
