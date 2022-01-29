@@ -29,6 +29,17 @@ const tokens = {
     projectLink: 'https://rugzombie.io/',
     geckoId: 'rugzombie',
   },
+  spa: {
+    symbol: 'SPA',
+    address: {
+      56: '0xbcfe392E778dbB59DcAd624F10f7fa8C4a910B1e',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
+    },
+    decimals: 18,
+    projectLink: 'https://spartans.army/',
+    geckoId: 'spartan-token',
+    tokenLogo: 'https://assets.coingecko.com/coins/images/22787/small/Spartan_Logo.png?1642580873'
+  },
   euler: {
     symbol: 'EULER',
     address: {

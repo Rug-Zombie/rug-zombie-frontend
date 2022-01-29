@@ -6,6 +6,68 @@ import { SpawningPool } from './types'
 
 const spawningPools: SpawningPool[] = [
   {
+    id: 18,
+    name: 'Sparten Token Legendary',
+    subtitle: 'Artwork coming soon!',
+    path: 'https://ipfs.io/ipfs/QmcGGXw3FiX61ALeZdSNyx2MKiquVZhF489jMJJto7rMLu',
+    type: 'image',
+    address: {
+      56: '0xe43cf2bd5076C480410AC0065BBc8b3029C609c3',
+      97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
+    },
+    endBlock: 17450000,
+    endDate: 1651463999,
+    project: {
+      name: 'Spartan Army',
+      description: 'The Spartans project vision is to educate, reward, and simplify the complicated world of Defi to crypto investors. Spartan holders benefit by being a part of the powerful Decentralized Exchange (DEX) of the KnightSwap ecosystem, being the first token that emits $KNIGHT tokens to Spartan holders.',
+      additionalDetails: [
+        {
+          name: 'Youtube',
+          url: 'https://www.youtube.com/channel/UC_rRWe4zY_5zP0j3L_lqDZg',
+        },
+        {
+          name: 'Project website',
+          url: tokens.spa.projectLink,
+        },
+        {
+          name: 'Whitepaper',
+          url: 'https://info-121.gitbook.io/welcome-to-the-spartan-army/',
+        },
+        {
+          name: 'Telegram',
+          url: 'https://t.me/+AzNvB9nnf2A0ZjU5',
+        },
+      ],
+    },
+    withdrawalCooldown: '3 days',
+    nftRevivalTime: '45 days',
+    rewardToken: tokens.spa,
+    rewardTokenId: tokens.spa.geckoId,
+    bnbLpTokenIndex: 1,
+    artist: artists.canadiancryptojunkie,
+    stakingToken: '',
+    pcsVersion: 'v2',
+    liquidityDetails: '',
+    isNew: false,
+    color: 'orange',
+    userInfo: {
+      paidUnlockFee: false,
+      tokenWithdrawalDate: 0,
+      nftRevivalDate: 0,
+      amount: BIG_ZERO,
+      pendingReward: BIG_ZERO,
+      zombieAllowance: BIG_ZERO,
+    },
+    poolInfo: {
+      unlockFee: BIG_ZERO,
+      rewardPerBlock: BIG_ZERO,
+      minimumStake: BIG_ZERO,
+      totalZombieStaked: BIG_ZERO,
+      withdrawCooldown: 0,
+      nftRevivalTime: 0,
+    },
+  },
+  {
     id: 17,
     name: 'Blockmine Legendary',
     subtitle: 'Ol Jeb',
