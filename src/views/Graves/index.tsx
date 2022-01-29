@@ -11,19 +11,25 @@ import { graves } from '../../redux/get'
 import { getId } from '../../utils'
 import Footer from '../../components/Footer'
 
+const GravePage = styled(Page)`
+  min-width: 80vw;
+`
+
 const Row = styled.div`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  justify-content: center;
   flex-wrap: wrap;
-  width: 100%;
 `;
 
 const Header = styled.div`
-  max-width: 20vw;
+  max-width: 15vw;
+  min-width: 266px;
   margin: 0 20px 0 0;
   display: flex;
   flex-direction: column;
+  
   @media (max-width: 1279px) {
     max-width: 100vw;
     margin: 10px auto;
@@ -32,11 +38,13 @@ const Header = styled.div`
 
 const GravesColumn = styled.div`
   max-width: 60vw;
+  min-width: 50vw;
   display: flex;
   flex-direction: column;
   z-index: 1;
   @media (max-width: 1279px) {
     max-width: 100vw;
+    min-width: 0;
     margin: 0 auto;
   }
 `;
@@ -52,7 +60,7 @@ const Graves: React.FC = () => {
 
   return (
     <>
-      <Page>
+      <GravePage>
         <Row>
           <Header>
             <HeaderCard tvl={tvl} pageTvl={graveTvl} myHoldings={myHoldings} />
@@ -64,7 +72,7 @@ const Graves: React.FC = () => {
             })}
           </GravesColumn>
         </Row>
-      </Page>
+      </GravePage>
       <Footer />
     </>
   );

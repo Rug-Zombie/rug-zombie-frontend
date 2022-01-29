@@ -18,7 +18,7 @@ const GraveColumn = styled.div`
 const GraveHeaderRow = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: left;
   align-items: center;
   padding-bottom: 20px;
 `;
@@ -36,7 +36,10 @@ const GraveTitle = styled.div`
   letter-spacing: 0px;
   color: #FFFFFF;
   padding-left: 20px;
-`;
+  min-width: 40.5%;
+  @media (max-width: 527px) {
+    width: 100%;;
+  }`;
 
 const TabFlex = styled.div`
   display: flex;
@@ -133,11 +136,12 @@ const Top: React.FC<TopProps> = ({ pid, open, setOpen }) => {
         <GraveTitle>
           {name}
         </GraveTitle>
-        <TabFlex>
-          <GreenTab><GreenTabText>{allocPoint / 100}X</GreenTabText></GreenTab>
-          <GreyTab><GreyTabText>ZMBE</GreyTabText></GreyTab>
-          {isNew ? <GreenTab><GreenTabText>NEW</GreenTabText></GreenTab> : null}
-        </TabFlex>
+          <TabFlex>
+            <GreenTab><GreenTabText>{allocPoint / 100}X</GreenTabText></GreenTab>
+            <GreyTab><GreyTabText>ZMBE</GreyTabText></GreyTab>
+            {isNew ? <GreenTab><GreenTabText>NEW</GreenTabText></GreenTab> : null}
+          </TabFlex>
+
       </GraveHeaderRow>
       <GraveSubRow>
         <Amounts>

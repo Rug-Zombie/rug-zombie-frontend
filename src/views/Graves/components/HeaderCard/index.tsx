@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import numeral from 'numeral'
 
 const InfoCard = styled.header`
-  min-width: 260px;
   background-color: #151E21;
   border-radius: 20px;
   display: flex;

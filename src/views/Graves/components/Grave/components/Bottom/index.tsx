@@ -32,7 +32,7 @@ const Buttons = styled.div`
 `;
 
 const StakingInput = styled.input`
-  width: 125px;
+  width: 160px;
   height: 60px;
   background: #0D1417 0% 0% no-repeat padding-box;
   border-radius: 10px;
@@ -46,7 +46,7 @@ const StakingInput = styled.input`
 
 const PrimaryStakeButton = styled.button`
   height: 60px;
-  width: 125px;
+  width: 160px;
   background: #B8C00D 0% 0% no-repeat padding-box;
   border-radius: 10px;
   border: none;
@@ -59,7 +59,7 @@ const PrimaryStakeButton = styled.button`
 
 const SecondaryStakeButton = styled.button`
   height: 60px;
-  width: 125px;
+  width: 160px;
   border: 2px solid #B8C00D;
   border-radius: 10px;
   background: none;
