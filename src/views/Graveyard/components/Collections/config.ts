@@ -6,6 +6,11 @@ interface Collection {
 
 const config: Collection[] = [
   {
+    title: 'All',
+    description: 'None',
+    nftId: 0,
+  },
+  {
     title: 'Biblical',
     description: 'Powerful one of a kind relic’s from the pre apocalyptic times.',
     nftId: 5,

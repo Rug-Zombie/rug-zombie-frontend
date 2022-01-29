@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import SectionHeader from 'views/Home/components/SectionHeader'
-import Page from '../../../../components/layout/Page'
 import Filter from '../Filter'
-import CollectionCard from '../CollectionCard'
 import config from './config'
 import Nfts from '../Nfts'
 import { account } from '../../../../redux/get'
@@ -12,28 +10,20 @@ const CollectionSection = styled.section`
   background-color: #010202;
   position: relative;
   top: -210px;
-`
-
-const CollectionFlex = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
-`
-
-const CollectionGrid = styled.div`
-  display: grid;
-  display: grid;
-  grid-template-columns: auto auto auto;
-  grid-column-gap: 30px;
-  grid-row-gap: 30px;
 `
 
 const Tabs = styled.ul`
   display: flex;
-  justify-content: space-between;
   list-style-type: none;
   &:hover { cursor: pointer; }
+  overflow-x: auto;
+  margin: 5px;
+  @media (min-width: 638px) {
+    justify-content: center;
+  }
 `;
 
 const Tab = styled.li`
@@ -60,11 +50,16 @@ const Collections: React.FC = () => {
     e.preventDefault();
     setCollection(title);
     setIsActive(title);
-  }
+  };
+
+  const handleSelection = (index) => {
+    setSelected(index);
+  };
 
   const tabList = config.map(({ title }) => {
     return (
       <Tab
+        key={title}
         className={isActive === title ? "active" : ""} 
         onClick={e => handleTabClick(e, title)}
       >
@@ -75,20 +70,16 @@ const Collections: React.FC = () => {
 
   return (
     <CollectionSection>
-      <Page>
-        <CollectionFlex>
-          <SectionHeader 
-            title="The RugZombie Collection"
-          />
-          <Filter filters={filters} selected={selected} setSelected={setSelected} />
-          <Tabs>
-            {tabList}
-          </Tabs>
-          <CollectionGrid>
-            <Nfts filter={collection} inWallet={selected === 1} />
-          </CollectionGrid>
-        </CollectionFlex>
-      </Page>
+      <SectionHeader title="The RugZombie Collection" />
+      <Filter
+        filters={filters}
+        selected={selected}
+        handleSelection={handleSelection}
+      />
+      <Tabs>
+        {tabList}
+      </Tabs>
+      <Nfts filter={collection} inWallet={selected === 1} />
     </CollectionSection>
   );
 }
