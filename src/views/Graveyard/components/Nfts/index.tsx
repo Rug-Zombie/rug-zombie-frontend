@@ -1,45 +1,38 @@
 /* eslint-disable no-param-reassign */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { account, nfts } from '../../../../redux/get'
+import { account, nfts } from 'redux/get'
 import NftCard from './components/NftCard'
-import Page from '../../../../components/layout/Page'
 
-const NftGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 25%);
-  grid-column-gap: 30px;
-  grid-row-gap: 30px;
-`
+const NftsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: 480px;
+`;
 
 interface NftsProps {
   filter?: string;
   inWallet?: boolean;
-  top?: string
 }
 
-const Nfts: React.FC<NftsProps> = ({ filter, top, inWallet }) => {
-  let items = []
-  switch (filter) {
-    case 'Special': case'Common': case 'Uncommon': case 'Rare': case 'Legendary': case 'Mythic': case 'Biblical':
-      items = nfts().filter(nft => nft.rarity === filter)
-      break
-    default:
-      items = nfts()
-      break
-  }
+const Nfts: React.FC<NftsProps> = ({ filter, inWallet }) => {
+  const [ items, setItems ] = useState([]);
 
-  if(inWallet) {
-    items = items.filter(nft => nft.userInfo.ownedIds.length > 0)
-  }
+  useEffect(() => {
+    if (filter === 'All') setItems(nfts());
+    else setItems(nfts().filter(nft => nft.rarity === filter));
 
-  return <Page style={{ position: 'relative', top: top || '0px'}}>
-    <NftGrid>
-      {items.map(nft => {
-        return <NftCard id={nft.id} />
-      })}
-    </NftGrid>
-  </Page>
+    if (inWallet) setItems(prev => prev.filter(nft => nft.userInfo.ownedIds.length > 0));
+  }, [ filter, inWallet ]);
+
+  const NftCardList = items.map(nft => <NftCard key={nft.id} id={nft.id} />);
+
+  return (
+    <NftsContainer>
+      {NftCardList}
+    </NftsContainer>
+  );
 }
 
 export default Nfts

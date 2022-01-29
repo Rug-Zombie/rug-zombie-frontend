@@ -3,12 +3,10 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import header from 'images/GraveyardHeader.jpg'
 import SectionHeader from 'views/Home/components/SectionHeader'
-import './Graveyard.Styles.css'
 import Footer from 'components/Footer'
 import { nftUserInfo } from 'redux/fetch'
 import { useNftOwnership } from 'hooks/useContract'
 import { FooterImage } from 'components/Footer/styles'
-import Nfts from './components/Nfts'
 import Collections from './components/Collections'
 
 const Banner = styled.img`
@@ -65,7 +63,6 @@ const Graveyard: React.FC = () => {
         <SectionEnd />
       </TitleSection>
       <Collections />
-      <Nfts top='-100px' />
       <Footer />
     </>
   );
