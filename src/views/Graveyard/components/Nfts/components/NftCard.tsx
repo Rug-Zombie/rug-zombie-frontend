@@ -1,37 +1,39 @@
 import React from 'react'
 import styled from 'styled-components'
-import { nftById } from '../../../../../redux/get'
-import Video from '../../../../../components/Video'
-import PreviewVideo from '../../../../../components/Video/PreviewVideo'
+import { nftById } from 'redux/get'
+import Video from 'components/Video'
+import PreviewVideo from 'components/Video/PreviewVideo'
 
 const Card = styled.div`
-  min-height: 410px;
-  background: #151E21 0% 0% no-repeat padding-box;
+  height: 450px;
+  background: #151E21;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
-  padding-bottom: 37px;
-  width: 100%;
-`
+  width: 300px;
+  margin: 15px;
+`;
 const PreviewDiv = styled.div`
   height: 240px;
-  width: 100%;
+  min-width: 300px;
+  max-width: 300px;
 `
 
 const PreviewImage = styled.img`
-  height: 100%;
-  width: 100%;
+  height: 240px;
+  min-width: 300px;
+  max-width: 300px;
   border-radius: 20px 20px 0px 0px;
   object-fit: cover;
-`
+`;
 
 const PreviewVid = styled(PreviewVideo)`
-  height: 100%;
-  width: 100%;
+  height: 240px;
+  min-width: 300px;
+  max-width: 300px;
   border-radius: 20px 20px 0px 0px; 
   object-fit: cover;
-`
-
+`;
 
 const Title = styled.div`
   text-align: left;
@@ -40,7 +42,7 @@ const Title = styled.div`
   color: #FFFFFF;
   padding-right: 30px;
   padding-left: 30px;
-`
+`;
 
 const RarityText = styled.div`
   text-align: left;
@@ -49,14 +51,14 @@ const RarityText = styled.div`
   color: #30C00D;
   padding-right: 30px;
   padding-left: 30px;
-`
+`;
 
 
-const SubText = styled.text`
+const SubText = styled.span`
   text-align: left;
   font: normal normal normal 16px/30px Poppins;
   letter-spacing: 0px;
-`
+`;
 
 interface CollectionCardProps {
   id: number;
@@ -66,9 +68,9 @@ const NftCard: React.FC<CollectionCardProps> = ({ id }) => {
   const { name, path, totalSupply, rarity, type  } = nftById(id)
   return <Card>
     <PreviewDiv>
-      {
-        type === 'image' ? <PreviewImage src={path} alt={`${name} NFT`} /> :
-          <PreviewVid path={path} />
+      {type === 'image'
+        ? <PreviewImage src={path} alt={`${name} NFT`} />
+        : <PreviewVid path={path} />
       }
     </PreviewDiv>
     <div style={{paddingTop: '20px'}}/>
