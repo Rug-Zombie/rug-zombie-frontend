@@ -1,7 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
-
-import { useMatchBreakpoints } from '@rug-zombie-libs/uikit'
 import styled from 'styled-components'
 
 interface VideoProps {
@@ -16,24 +14,10 @@ const StyledVideo = styled.video`
 `
 
 const PreviewVideo: React.FC<VideoProps> = ({ path }) => {
-  const { isLg, isXl } = useMatchBreakpoints()
-  const isDesktop = isLg || isXl
-
-  const maxMobileHeight = 280
-  const maxMobileWidth = 260
-  return isDesktop ? (
+  return (
     <StyledVideo autoPlay controls={false} loop muted>
       <source src={path} type='video/webm' />
     </StyledVideo>
-  ) : (
-    // eslint-disable-next-line
-    <div dangerouslySetInnerHTML={{
-      __html: `
-                <video  autoPlay loop muted style='max-height: ${maxMobileHeight}px; max-width: ${maxMobileWidth}px'>
-                  <source src='${path}' type='video/webm' />
-                </video>
-                `,
-    }} />
   )
 }
 
