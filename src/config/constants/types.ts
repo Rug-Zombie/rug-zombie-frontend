@@ -70,6 +70,36 @@ export interface FarmConfig {
   }
 }
 
+export enum Dex {
+  ZOMBIE_SWAP,
+  PCS_V1,
+  PCS_V2,
+  AUTOSHARK,
+  APESWAP,
+  NONE
+}
+
+export interface GraveConfig {
+  pid: Id,
+  name: string,
+  nftId: string,
+  nft?: number,
+  depositNft?: number,
+  isNew?: boolean,
+  isClosed?: boolean,
+  endDate?: number,
+  startingDate?: number,
+  nftConverterPid?: number, // remove move to own type
+  graveNftToken?: string,   // remove move to own type
+  additionalDetails?: any[],
+  rug: Token,
+  rugDex: Dex,
+  stakingToken: string,
+  liquidityDetails: string,
+  rarity: string,
+  isRetired?: boolean
+}
+
 export interface PoolConfig {
   sousId: number
   earningToken: Token
@@ -78,26 +108,6 @@ export interface PoolConfig {
   contractAddress: Address
   poolCategory: PoolCategory
   tokenPerBlock: string
-  sortOrder?: number
-  harvest?: boolean
-  isFinished?: boolean
-}
-
-export interface GraveConfig {
-  gid: number
-  nftName: string
-  ruggedToken: Token
-  unlockingToken: Token
-  nftSrc: string,
-  rugSrc: string,
-  contractAddress: Address
-  unlockingFee: number
-  minimumStakingTime: number
-  displayMinimumStakingTime: string
-  minimumStakingAmount: number
-  earlyWithdrawalFee: number
-  artistUrl: string
-  startBlock?: number
   sortOrder?: number
   harvest?: boolean
   isFinished?: boolean

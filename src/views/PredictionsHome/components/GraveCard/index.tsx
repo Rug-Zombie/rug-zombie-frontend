@@ -9,13 +9,14 @@ import MinimumStakingTime from './MinimumStakingTime'
 import GraveCardActions from './GraveCardActions'
 import CardFooter from './CardFooter'
 import { account, auctionById } from '../../../../redux/get'
+import Video from '../../../../components/Video'
 
 const StyledCardBody = styled(CardBody)<{ isLoading: boolean }>`
   min-height: ${({ isLoading }) => (isLoading ? '0' : '254px')};
 `
 
 const AuctionCard: React.FC<{ id: number }> = ({ id }) => {
-  const { prize, path } = auctionById(id)
+  const { prize, path, type } = auctionById(id)
   const isLoading = false
   return (
     <StyledCard isStaking={false} style={{
@@ -30,11 +31,15 @@ const AuctionCard: React.FC<{ id: number }> = ({ id }) => {
         <Flex justifyContent='center'> {prize} </Flex>
         <br/>
         <Flex justifyContent="center">
-          <img
-            src={path}
-            alt='auction prize'
-            style={{width: "50%"}}
-          />
+          {
+            type === 'image' ?
+              <img
+                src={path}
+                alt='auction prize'
+                style={{width: "50%"}}
+              /> :
+              <Video path={path} />
+          }
         </Flex>
         <Flex mt='24px' flexDirection='column'>
           {account() ? (
