@@ -6,6 +6,7 @@ export const TutorialItems = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 60px;
 `;
 
 export const TutorialItem = styled.div`

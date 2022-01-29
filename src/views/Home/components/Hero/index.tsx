@@ -37,7 +37,7 @@ const Hero: React.FC<HeroProps> = ({ tvl, history }) => {
           Total value locked: 
         </TvlText>
         <TvlNumber>
-          {` $ ${numeral(tvl).format('(0.00 a)')}`}
+          &nbsp;{`$${numeral(tvl).format('(0.00 a)')}`}
         </TvlNumber>
         <ButtonsDiv>
           <PrimaryLinkButton onClick={() => {

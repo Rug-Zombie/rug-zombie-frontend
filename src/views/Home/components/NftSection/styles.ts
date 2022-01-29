@@ -2,13 +2,13 @@ import styled from 'styled-components';
 
 export const NftCards = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   flex-wrap: wrap;
 `;
 
 export const NftCard = styled.div`
   width: 90vw;
-  margin: 25px 10px 0 10px;
+  margin: 25px 17px 0 17px;
   min-width: 260px;
   max-width: 390px;
   background-color: #151E21;
