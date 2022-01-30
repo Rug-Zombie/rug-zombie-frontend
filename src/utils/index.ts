@@ -36,3 +36,7 @@ export function getId(id: Id): number {
 export function instaBuyById (id: number) {
   return instabuys.find(i => i.id === id)
 }
+
+export function formatAddress (address: string): string {
+  return `${address.slice(0, 4)}...${address.slice(address.length - 4, address.length)}`
+}

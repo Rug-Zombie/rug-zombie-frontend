@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import downpointer from 'images/DownPointer.png'
+import { GraveFilter, graveFilters, RarityFilter, rarityFilters } from '../../filterConfig'
 
 const FilterContainer = styled.div`
   display: flex;
@@ -108,11 +109,17 @@ const DownPointer = <div style={{ paddingRight: '20px' }}>
   <img src={downpointer} alt='Dropdown menu' width='20px' />
 </div>
 
-const Filter = () => {
+interface FilterProps {
+  gravesList: string[];
+  raritiesList: string[];
+  graveFilter: { value: GraveFilter, set: any};
+  rarityFilter: { value: RarityFilter, set: any};
+  setSearch: any;
+}
+
+const Filter: React.FC<FilterProps> = ({ gravesList, raritiesList, graveFilter, rarityFilter, setSearch}) => {
   const [ showGravesMenu, setShowGravesMenu ] = useState(false);
   const [ showTypeMenu, setShowTypeMenu ] = useState(false);
-  const [ graves, setGraves ] = useState("All graves");
-  const [ types, setTypes ] = useState("All types");
 
   const handleDropdownClick = (e, condition) => {
     e.preventDefault();
@@ -123,39 +130,28 @@ const Filter = () => {
       setShowTypeMenu(prev => !prev);
       setShowGravesMenu(false);
     }
-  };
-  
+  }
+
   const handleItemClick = (e, condition) => {
     e.preventDefault();
     if (condition === "graves") {
-      setGraves(e.target.textContent);
+      graveFilter.set(graveFilters.findIndex(f => f.label === e.target.textContent));
       setShowGravesMenu(false);
     } else if (condition === "types") {
-      setTypes(e.target.textContent);
+      rarityFilter.set(rarityFilters.findIndex(f => f.label === e.target.textContent));
       setShowTypeMenu(false);
     }
   }
 
-  const gravesList = [
-    "All graves",
-    "Staked",
-    "NFT-only",
-    "Inactive",
-  ];
-
-  const typesList = [
-    "All types",
-    "Legendary",
-    "Rare",
-    "Uncommon",
-    "Common",
-  ];
+  const handleSearch = (e) => {
+    setSearch.set(e.target.textContent)
+  }
 
   return <FilterContainer>
     <Dropdowns>
       <Dropdown onClick={(e) => handleDropdownClick(e, "graves")}>
         <DropdownText>
-          {graves}
+          {graveFilters[graveFilter.value].label}
         </DropdownText>
         {DownPointer}
       </Dropdown>
@@ -163,7 +159,7 @@ const Filter = () => {
         {showGravesMenu ? (
           <DropdownContent>
             {gravesList.map(grave => {
-              return ( 
+              return (
                 <DropdownItem
                   key={grave}
                   onClick={(e) => handleItemClick(e, "graves")}
@@ -177,14 +173,14 @@ const Filter = () => {
       </DropdownMenu>
       <Dropdown onClick={(e) => handleDropdownClick(e, "types")}>
         <DropdownText>
-          {types}
+          {rarityFilters[rarityFilter.value].label}
         </DropdownText>
         {DownPointer}
       </Dropdown>
       <DropdownMenu>
         {showTypeMenu ? (
           <DropdownContent>
-            {typesList.map(type => {
+            {raritiesList.map(type => {
               return (
                 <DropdownItem
                   key={type}
@@ -199,7 +195,7 @@ const Filter = () => {
       </DropdownMenu>
     </Dropdowns>
     <SearchBar>
-     <Input placeholder='Search by name, symbol or address' />  
+     <Input onInput={handleSearch} placeholder='Search by name, symbol or address' />
     </SearchBar>
   </FilterContainer>
 }

@@ -58,9 +58,7 @@ const NftVideo = styled.video`
 const Details = styled.div`
   display: flex;
   justify-content: space-between;
-  flex-grow: 1;
   padding: 25px 10px 0 10px;
-  max-width: 431.39px;
 `;
 
 const GraveInfo = styled.div`
@@ -74,6 +72,7 @@ const HeaderText = styled.p`
   text-align: left;
   font: normal normal normal 16px/30px Poppins;
   color: #FFFFFF;
+  
 `;
 
 const SubHeaderText = styled.p`
@@ -86,6 +85,7 @@ const Text = styled.span`
   text-align: left;
   font: normal normal normal 14px/21px Poppins;
   color: #FFFFFF;
+  white-space: nowrap;
 `;
 
 const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
@@ -124,7 +124,7 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
         </SubHeaderText>
       </GraveInfo>
       <GraveInfo>
-        <HeaderText>Unlock Fees: {getFullDisplayBalance(unlockFee)} BNB (~ {getFullDisplayBalance(unlockFeeUsd, 18, 2)})</HeaderText>
+        <HeaderText>Unlock Fees: {getFullDisplayBalance(unlockFee)} BNB (~ ${getFullDisplayBalance(unlockFeeUsd, 18, 2)})</HeaderText>
         <SubHeaderText>
           Early Withdraw Fee: <Text>5%</Text>
         </SubHeaderText>

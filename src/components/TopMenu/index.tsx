@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import logo from 'images/Logo.svg'
 import more from 'images/menu/More.png'
 import zombiehead from 'images/menu/ZombieHead.svg'
+import { useWeb3React } from '@web3-react/core'
 import { zombiePriceUsd } from '../../redux/get'
 import config from './config'
 
@@ -20,8 +21,10 @@ import {
   ConnectText,
   ConnectButton,
 } from './styles';
+import { formatAddress } from '../../utils'
 
 const TopMenu = () => {
+  const { account } = useWeb3React()
   const [ showMenu, setShowMenu ] = useState(false);
 
   const handleClick = (e) => {
@@ -59,7 +62,7 @@ const TopMenu = () => {
           <Text style={{fontWeight: 'bold'}}>${zombiePriceUsd().toPrecision(1)}</Text>
         </TokenButton>
         <ConnectButton>
-          <ConnectText>Connect</ConnectText>
+          <ConnectText>{account ? formatAddress(account) : 'Connect'}</ConnectText>
         </ConnectButton>
       </Buttons>
       </NavbarContent>

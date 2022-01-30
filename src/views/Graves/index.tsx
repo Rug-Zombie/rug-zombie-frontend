@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
 import Page from '../../components/layout/Page'
@@ -7,12 +7,12 @@ import './Graves.Styles.css'
 import HeaderCard from './components/HeaderCard'
 import Filter from './components/Filter'
 import GraveTable from './components/GraveTable'
-import { graves } from '../../redux/get'
 import { getId } from '../../utils'
 import Footer from '../../components/Footer'
 import { useAppDispatch } from '../../state'
 import { fetchGravesPublicDataAsync, fetchGravesUserDataAsync } from '../../state/graves'
 import { useGetGraves } from '../../state/hooks'
+import { GraveFilter, graveFilters, RarityFilter, rarityFilters } from './filterConfig'
 
 const GravePage = styled(Page)`
   min-width: 80vw;
@@ -24,7 +24,7 @@ const Row = styled.div`
   align-items: flex-start;
   justify-content: center;
   flex-wrap: wrap;
-`;
+`
 
 const Header = styled.div`
   max-width: 15vw;
@@ -32,12 +32,12 @@ const Header = styled.div`
   margin: 0 20px 0 0;
   display: flex;
   flex-direction: column;
-  
+
   @media (max-width: 1279px) {
     max-width: 100vw;
     margin: 10px auto;
   }
-`;
+`
 
 const GravesColumn = styled.div`
   max-width: 70vw;
@@ -51,27 +51,32 @@ const GravesColumn = styled.div`
 
     margin: 0 auto;
   }
-`;
-
-let accountAddress
+`
 
 const Graves: React.FC = () => {
   const { account } = useWeb3React()
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    dispatch(fetchGravesPublicDataAsync())
+    if (account) {
+      dispatch(fetchGravesUserDataAsync(account))
+    }
+  }, [dispatch, account])
+
+  const [graveFilter, setGraveFilter] = useState(GraveFilter.All)
+  const [rarityFilter, setRarityFilter] = useState(RarityFilter.All)
+  const [searchFilter, setSearchFilter] = useState('')
+
+  let graves = useGetGraves().data
+  graves = graveFilters[graveFilter].filter(graves)
+  graves = rarityFilters[rarityFilter].filter(graves)
 
   const tvl = 1580000
   const graveTvl = { page: 'Graves', tvl: 768000 }
   const myHoldings = 4349
 
-  const dispatch = useAppDispatch()
 
-  useEffect(() => {
-      dispatch(fetchGravesPublicDataAsync())
-      if (account) {
-        dispatch(fetchGravesUserDataAsync(account))
-      }
-  }, [dispatch, account])
 
-  const gs = useGetGraves().data
   return (
     <>
       <GravePage>
@@ -80,8 +85,10 @@ const Graves: React.FC = () => {
             <HeaderCard tvl={tvl} pageTvl={graveTvl} myHoldings={myHoldings} />
           </Header>
           <GravesColumn>
-            <Filter />
-            {gs.map(g => {
+            <Filter gravesList={graveFilters.map(f => f.label)} raritiesList={rarityFilters.map(f => f.label)}
+                    graveFilter={{ value: graveFilter, set: setGraveFilter }}
+                    rarityFilter={{ value: rarityFilter, set: setRarityFilter }} setSearch={setSearchFilter} />
+            {graves.map(g => {
               return <GraveTable grave={g} key={getId(g.pid)} />
             })}
           </GravesColumn>
@@ -89,7 +96,7 @@ const Graves: React.FC = () => {
       </GravePage>
       <Footer />
     </>
-  );
+  )
 }
 
 export default Graves
