@@ -3,29 +3,30 @@ import { useWeb3React } from '@web3-react/core'
 import { Contract } from 'web3-eth-contract'
 import { ethers } from 'ethers'
 import { useAppDispatch } from 'state'
-import { updateUserAllowance, fetchFarmUserDataAsync } from 'state/actions'
+import { updateUserAllowance, fetchFarmUserDataAsync, fetchGravesUserDataAsync } from 'state/actions'
 import { approve } from 'utils/callHelpers'
-import { useMasterchef, useCake, useSousChef, useLottery } from './useContract'
+import { useCake, useSousChef, useLottery } from './useContract'
 
-// Approve a Farm
-export const useApprove = (lpContract: Contract) => {
+// Approve an address
+export const useApprove = (tokenContract: Contract, spenderAddress: string) => {
   const dispatch = useAppDispatch()
   const { account } = useWeb3React()
-  const masterChefContract = useMasterchef()
 
   const handleApprove = useCallback(async () => {
     try {
-      const tx = await approve(lpContract, masterChefContract, account)
+      const tx = await approve(tokenContract, spenderAddress, account)
       // @ts-ignore
-      dispatch(fetchFarmUserDataAsync(account))
+      dispatch(fetchGravesUserDataAsync(account))
       return tx
     } catch (e) {
       return false
     }
-  }, [account, dispatch, lpContract, masterChefContract])
+  }, [tokenContract, spenderAddress, account, dispatch])
 
   return { onApprove: handleApprove }
 }
+
+
 
 // Approve a Pool
 export const useSousApprove = (lpContract: Contract, sousId) => {

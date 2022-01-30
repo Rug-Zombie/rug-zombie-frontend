@@ -5,7 +5,7 @@ import { BigNumber } from 'bignumber.js'
 import fetchGraves from './fetchGraves'
 import {
   fetchGraveUserEarnings,
-  fetchGraveUserInfo,
+  fetchGraveUserInfo, fetchGraveUserTokenInfo,
 } from './fetchGraveUser'
 import { GravesState, Grave } from '../types'
 import { BIG_ZERO } from '../../utils/bigNumber'
@@ -27,10 +27,13 @@ const noAccountGraveConfig: Grave[] = gravesConfig.map((grave) => ({
   userInfo: {
     paidUnlockFee: false,
     rugDeposited: BIG_ZERO,
+    rugAllowance: BIG_ZERO,
+    rugBalance: BIG_ZERO,
+    zombieAllowance: BIG_ZERO,
     tokenWithdrawalDate: BIG_ZERO,
     nftMintDate: BIG_ZERO,
     amount: BIG_ZERO,
-    pendingZombie: BIG_ZERO
+    pendingZombie: BIG_ZERO,
   },
 }))
 
@@ -70,6 +73,7 @@ export const fetchGravesPublicDataAsync = () => async (dispatch) => {
 export const fetchGravesUserDataAsync = (account: string) => async (dispatch) => {
   const userInfos = await fetchGraveUserInfo(account, gravesConfig)
   const userGraveEarnings = await fetchGraveUserEarnings(account, gravesConfig)
+  const userGraveRugInfo = await fetchGraveUserTokenInfo(account, gravesConfig)
 
   const arrayOfUserDataObjects = userInfos.map((userInfo, index) => {
     return {
@@ -80,6 +84,10 @@ export const fetchGravesUserDataAsync = (account: string) => async (dispatch) =>
       nftMintDate: new BigNumber(userInfo.nftRevivalDate._hex),
       amount: new BigNumber(userInfo.amount._hex),
       pendingZombie: new BigNumber(userGraveEarnings[index]),
+      rugAllowance: new BigNumber(userGraveRugInfo[index].allowance),
+      rugBalance: new BigNumber(userGraveRugInfo[index].balance),
+      zombieAllowance: new BigNumber(userGraveRugInfo[index].zombieAllowance),
+
     }
   })
 

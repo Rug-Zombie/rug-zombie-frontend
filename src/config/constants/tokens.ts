@@ -1082,7 +1082,7 @@ const tokens = {
   none: {
     symbol: '',
     address: {
-      56: '',
+      56: '0x50ba8BF9E34f0F83F96a340387d1d3888BA4B3b5',
       97: '',
     },
     tokenLogo: 'images/tokens/clear.png',

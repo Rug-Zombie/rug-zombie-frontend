@@ -124,7 +124,7 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
         </SubHeaderText>
       </GraveInfo>
       <GraveInfo>
-        <HeaderText>Unlock Fees: {getFullDisplayBalance(unlockFee)} BNB (~ {unlockFeeUsd.toFixed(2)})</HeaderText>
+        <HeaderText>Unlock Fees: {getFullDisplayBalance(unlockFee)} BNB (~ {getFullDisplayBalance(unlockFeeUsd, 18, 2)})</HeaderText>
         <SubHeaderText>
           Early Withdraw Fee: <Text>5%</Text>
         </SubHeaderText>

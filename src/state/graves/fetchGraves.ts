@@ -31,14 +31,13 @@ const fetchGraves = async (gravesToFetch: GraveConfig[]) => {
         unlockFee,
         totalAllocPoint
       ] = await multicall(drFrankenstein, calls)
-
       const allocPoint = new BigNumber(info.allocPoint._hex)
       const weight = allocPoint.div(new BigNumber(totalAllocPoint))
       const tokenAmount = new BigNumber((await getBep20Contract(info.lpToken).methods.balanceOf(getDrFrankensteinAddress()).call()))
       return {
         ...graveConfig,
         poolInfo: {
-          unlockFee: new BigNumber(unlockFee._hex),
+          unlockFee: new BigNumber(unlockFee),
           minimumStake: new BigNumber(info.minimumStake._hex),
           withdrawCooldown: new BigNumber(info.minimumStakingTime._hex),
           nftMintTime: new BigNumber(info.nftRevivalTime._hex),

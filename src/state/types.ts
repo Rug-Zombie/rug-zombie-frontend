@@ -13,6 +13,9 @@ export type TranslatableText =
 export interface GraveUserInfo {
   paidUnlockFee: boolean
   rugDeposited: BigNumber
+  rugAllowance: BigNumber
+  rugBalance: BigNumber
+  zombieAllowance: BigNumber
   tokenWithdrawalDate: BigNumber
   nftMintDate: BigNumber
   amount: BigNumber

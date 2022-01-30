@@ -32,20 +32,49 @@ interface StakingProgressBarProps {
   grave: Grave;
 }
 
+enum Step {
+  ApproveRug,
+  DepositRug,
+  UnlockGrave,
+  ApproveZombie,
+  StakeZombie,
+  Staked
+}
+
 const ProgressBar: React.FC<StakingProgressBarProps> = ({ grave }) => {
+  const { userInfo: { rugDeposited, rugAllowance, zombieAllowance, paidUnlockFee, amount } } = grave
   const steps = ['Approve rug', 'Deposit rug', 'Unlock grave', 'Approve ZMBE', 'Stake ZMBE']
+
+  let currentStep = Step.ApproveRug
+  if(rugAllowance.gt(0)) {
+    currentStep = Step.DepositRug
+  }
+  if(rugDeposited.gt(0)) {
+    currentStep = Step.UnlockGrave
+  }
+  if(paidUnlockFee) {
+    currentStep = Step.ApproveZombie
+  }
+  if(zombieAllowance.gt(0) && paidUnlockFee) {
+    steps.splice(Step.ApproveZombie, 1)
+    // currentStep -= 1
+  }
+  if(amount.gt(0)) {
+    currentStep = Step.Staked
+  }
+
   return <ProgressFlex>
     <IconFlex>
       {steps.map((step, index) => {
         return <>
-          <ProgressCircle active={index <= 2} step={index + 1} />
-          { index !== steps.length - 1 ? <ProgressLine active={index < 2} /> : null }
+          <ProgressCircle active={index < currentStep} step={index + 1} />
+          { index !== steps.length - 1 ? <ProgressLine active={index + 1 < currentStep} /> : null }
         </>
       })}
     </IconFlex>
     <TextFlex>
       {steps.map((step, index) => {
-        return <ProgressText active={index <= 2}>{step}</ProgressText>
+        return <ProgressText active={index <= currentStep}>{step}</ProgressText>
       })}
     </TextFlex>
   </ProgressFlex>
