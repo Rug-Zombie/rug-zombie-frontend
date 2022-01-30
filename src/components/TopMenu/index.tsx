@@ -18,10 +18,8 @@ import {
   Buttons,
   TokenButton,
   Text,
-  ConnectText,
-  ConnectButton,
 } from './styles';
-import { formatAddress } from '../../utils'
+import UnlockButton from '../UnlockButton'
 
 const TopMenu = () => {
   const { account } = useWeb3React()
@@ -61,9 +59,7 @@ const TopMenu = () => {
           <img src={zombiehead} alt='Zombie Icon' style={{height: '70%', paddingRight: '20px'}}/>
           <Text style={{fontWeight: 'bold'}}>${zombiePriceUsd().toPrecision(1)}</Text>
         </TokenButton>
-        <ConnectButton>
-          <ConnectText>{account ? formatAddress(account) : 'Connect'}</ConnectText>
-        </ConnectButton>
+        <UnlockButton/>
       </Buttons>
       </NavbarContent>
     </Navbar>

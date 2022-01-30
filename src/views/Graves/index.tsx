@@ -13,6 +13,7 @@ import { useAppDispatch } from '../../state'
 import { fetchGravesPublicDataAsync, fetchGravesUserDataAsync } from '../../state/graves'
 import { useGetGraves } from '../../state/hooks'
 import { GraveFilter, graveFilters, RarityFilter, rarityFilters } from './filterConfig'
+import { nftById } from '../../redux/get'
 
 const GravePage = styled(Page)`
   min-width: 80vw;
@@ -71,11 +72,16 @@ const Graves: React.FC = () => {
   graves = graveFilters[graveFilter].filter(graves)
   graves = rarityFilters[rarityFilter].filter(graves)
 
+  if (searchFilter) {
+    graves = graves.filter(({name, rug: {symbol}, nftId}) => {
+      const searchString = searchFilter.toLowerCase()
+      return name.toLowerCase().includes(searchString) || symbol.toLowerCase().includes(searchString) || nftById(nftId).name.toLowerCase().includes(searchString)
+    })
+  }
+
   const tvl = 1580000
   const graveTvl = { page: 'Graves', tvl: 768000 }
   const myHoldings = 4349
-
-
 
   return (
     <>

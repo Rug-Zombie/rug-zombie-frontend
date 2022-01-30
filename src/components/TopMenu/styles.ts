@@ -83,12 +83,6 @@ export const MenuText = styled(Text)`
   }
 `;
 
-export const ConnectText = styled(Text)`
-  color: black;
-  &:hover { text-shadow: 0 0 5px limegreen; };
-  font-weight: bold;
-`;
-
 export const Buttons = styled.div`
   display: flex;
   justify-content: space-between;
@@ -97,14 +91,6 @@ export const Buttons = styled.div`
 export const TokenButton = styled(SecondaryButton)`
   padding: 0 25px 0 25px;
   margin: 0 20px 0 20px;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
-export const ConnectButton = styled(PrimaryButton)`
-  padding: 0 25px 0 25px;
-  margin-right: 20px;
   &:hover {
     cursor: pointer;
   }

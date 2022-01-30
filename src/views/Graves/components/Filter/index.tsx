@@ -15,13 +15,13 @@ const FilterContainer = styled.div`
     height: auto;
     align-items: space-between;
   }
-`;
+`
 
 const Dropdowns = styled.div`
   display: flex;
   justify-content: space-around;
   flex: 1;
-`;
+`
 
 const Dropdown = styled.div`
   height: 60px;
@@ -32,10 +32,11 @@ const Dropdown = styled.div`
   justify-content: space-between;
   margin: 0 10px 0 0;
   min-width: 152px;
+
   &:hover {
     cursor: pointer;
   }
-`;
+`
 
 const SearchBar = styled.div`
   display: flex;
@@ -46,7 +47,7 @@ const SearchBar = styled.div`
     min-height: 70px;
     flex: 0;
   }
-`;
+`
 
 const Input = styled.input`
   border: 2px solid #151E21;
@@ -56,13 +57,13 @@ const Input = styled.input`
   color: #fff;
   padding: 0 20px;
   width: 100%;
-`;
+`
 
 const DropdownMenu = styled.div`
   display: inline-block;
   transition: all 0.5s ease;
   position: relative;
-`;
+`
 
 const DropdownContent = styled.div`
   position: absolute;
@@ -78,7 +79,7 @@ const DropdownContent = styled.div`
   @media (max-width: 640px) {
     right: 17px;
   }
-`;
+`
 
 const DropdownItem = styled.div`
   &:hover {
@@ -87,23 +88,25 @@ const DropdownItem = styled.div`
     border-radius: 10px;
     color: #30C00D;
   }
+
   padding: 0 15px 0 15px;
-`;
+`
 
 const MenuText = styled.p`
   padding: 5px;
   color: #6B7682;
   font: normal normal normal 14px/30px Poppins;
+
   &:hover {
     color: #30C00D;
   }
-`;
+`
 
 const DropdownText = styled.p`
   font: normal normal normal 14px/30px Poppins;
   color: #FFFFFF;
   padding: 0 10px 0 20px;
-`;
+`
 
 const DownPointer = <div style={{ paddingRight: '20px' }}>
   <img src={downpointer} alt='Dropdown menu' width='20px' />
@@ -112,44 +115,44 @@ const DownPointer = <div style={{ paddingRight: '20px' }}>
 interface FilterProps {
   gravesList: string[];
   raritiesList: string[];
-  graveFilter: { value: GraveFilter, set: any};
-  rarityFilter: { value: RarityFilter, set: any};
+  graveFilter: { value: GraveFilter, set: any };
+  rarityFilter: { value: RarityFilter, set: any };
   setSearch: any;
 }
 
-const Filter: React.FC<FilterProps> = ({ gravesList, raritiesList, graveFilter, rarityFilter, setSearch}) => {
-  const [ showGravesMenu, setShowGravesMenu ] = useState(false);
-  const [ showTypeMenu, setShowTypeMenu ] = useState(false);
+const Filter: React.FC<FilterProps> = ({ gravesList, raritiesList, graveFilter, rarityFilter, setSearch }) => {
+  const [showGravesMenu, setShowGravesMenu] = useState(false)
+  const [showTypeMenu, setShowTypeMenu] = useState(false)
 
   const handleDropdownClick = (e, condition) => {
-    e.preventDefault();
-    if (condition === "graves") {
-      setShowGravesMenu(prev => !prev);
-      setShowTypeMenu(false);
-    } else if (condition === "types") {
-      setShowTypeMenu(prev => !prev);
-      setShowGravesMenu(false);
+    e.preventDefault()
+    if (condition === 'graves') {
+      setShowGravesMenu(prev => !prev)
+      setShowTypeMenu(false)
+    } else if (condition === 'types') {
+      setShowTypeMenu(prev => !prev)
+      setShowGravesMenu(false)
     }
   }
 
   const handleItemClick = (e, condition) => {
-    e.preventDefault();
-    if (condition === "graves") {
-      graveFilter.set(graveFilters.findIndex(f => f.label === e.target.textContent));
-      setShowGravesMenu(false);
-    } else if (condition === "types") {
-      rarityFilter.set(rarityFilters.findIndex(f => f.label === e.target.textContent));
-      setShowTypeMenu(false);
+    e.preventDefault()
+    if (condition === 'graves') {
+      graveFilter.set(graveFilters.findIndex(f => f.label === e.target.textContent))
+      setShowGravesMenu(false)
+    } else if (condition === 'types') {
+      rarityFilter.set(rarityFilters.findIndex(f => f.label === e.target.textContent))
+      setShowTypeMenu(false)
     }
   }
 
   const handleSearch = (e) => {
-    setSearch.set(e.target.textContent)
+    setSearch(e.target.value)
   }
 
   return <FilterContainer>
     <Dropdowns>
-      <Dropdown onClick={(e) => handleDropdownClick(e, "graves")}>
+      <Dropdown onClick={(e) => handleDropdownClick(e, 'graves')}>
         <DropdownText>
           {graveFilters[graveFilter.value].label}
         </DropdownText>
@@ -159,19 +162,20 @@ const Filter: React.FC<FilterProps> = ({ gravesList, raritiesList, graveFilter, 
         {showGravesMenu ? (
           <DropdownContent>
             {gravesList.map(grave => {
-              return (
-                <DropdownItem
-                  key={grave}
-                  onClick={(e) => handleItemClick(e, "graves")}
-                >
-                  <MenuText>{grave}</MenuText>
-                </DropdownItem>
-              )},
+                return (
+                  <DropdownItem
+                    key={grave}
+                    onClick={(e) => handleItemClick(e, 'graves')}
+                  >
+                    <MenuText>{grave}</MenuText>
+                  </DropdownItem>
+                )
+              },
             )}
           </DropdownContent>
         ) : null}
       </DropdownMenu>
-      <Dropdown onClick={(e) => handleDropdownClick(e, "types")}>
+      <Dropdown onClick={(e) => handleDropdownClick(e, 'types')}>
         <DropdownText>
           {rarityFilters[rarityFilter.value].label}
         </DropdownText>
@@ -181,23 +185,24 @@ const Filter: React.FC<FilterProps> = ({ gravesList, raritiesList, graveFilter, 
         {showTypeMenu ? (
           <DropdownContent>
             {raritiesList.map(type => {
-              return (
-                <DropdownItem
-                  key={type}
-                  onClick={(e) => handleItemClick(e, "types")}
-                >
-                  <MenuText>{type}</MenuText>
-                </DropdownItem>
-              )},
+                return (
+                  <DropdownItem
+                    key={type}
+                    onClick={(e) => handleItemClick(e, 'types')}
+                  >
+                    <MenuText>{type}</MenuText>
+                  </DropdownItem>
+                )
+              },
             )}
           </DropdownContent>
         ) : null}
       </DropdownMenu>
     </Dropdowns>
     <SearchBar>
-     <Input onInput={handleSearch} placeholder='Search by name, symbol or address' />
+      <Input onInput={handleSearch} placeholder='Search by name, symbol or NFT' />
     </SearchBar>
   </FilterContainer>
 }
 
-export default Filter;
+export default Filter
