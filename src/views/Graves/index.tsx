@@ -40,14 +40,15 @@ const Header = styled.div`
 `;
 
 const GravesColumn = styled.div`
-  max-width: 60vw;
+  max-width: 70vw;
   min-width: 50vw;
   display: flex;
   flex-direction: column;
   z-index: 1;
   @media (max-width: 1279px) {
     max-width: 100vw;
-    min-width: 0;
+    flex-grow: 0.5;
+
     margin: 0 auto;
   }
 `;
