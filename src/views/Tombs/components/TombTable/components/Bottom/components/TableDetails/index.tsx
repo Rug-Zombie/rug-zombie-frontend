@@ -1,10 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import numeral from 'numeral'
-import { bnbPriceUsd, nftById, zombiePriceUsd } from '../../../../../../../../redux/get'
+import { bnbPriceUsd, nftById, tombOverlayById, zombiePriceUsd } from '../../../../../../../../redux/get'
 import { getBalanceAmount, getFullDisplayBalance } from '../../../../../../../../utils/formatBalance'
 import { Tomb } from '../../../../../../../../state/types'
 import { formatDays } from '../../../../../../../../utils/timerHelpers'
+import { getId } from '../../../../../../../../utils'
 
 export enum TombItemType {
   Number,
@@ -90,12 +91,12 @@ const Text = styled.span`
 
 const TableDetails: React.FC<TableDetailsProps> = ({ tomb }) => {
   const {
-    nftId,
-    poolInfo: { allocPoint, withdrawCooldown, nftMintTime, tokenAmount, minimumStake, unlockFee },
+    poolInfo: { allocPoint, withdrawCooldown, nftMintTime, tokenAmount, mintingFee },
   } = tomb
-  const { name, path, type } = nftById(nftId)
+  const { legendaryId } = tombOverlayById(getId(tomb.overlayId))
+  const { name, path, type } = nftById(legendaryId)
   const tvl = getBalanceAmount(tokenAmount.times(zombiePriceUsd()))
-  const unlockFeeUsd = unlockFee.times(bnbPriceUsd())
+  const mintingFeeUsd = mintingFee.times(bnbPriceUsd())
   const imageOnErrorHandler = (
     event: React.SyntheticEvent<HTMLImageElement, Event>
   ) => {
@@ -124,7 +125,7 @@ const TableDetails: React.FC<TableDetailsProps> = ({ tomb }) => {
         </SubHeaderText>
       </TombInfo>
       <TombInfo>
-        <HeaderText>Unlock Fees: {getFullDisplayBalance(unlockFee)} BNB (~ ${getFullDisplayBalance(unlockFeeUsd, 18, 2)})</HeaderText>
+        <HeaderText>Unlock Fees: {getFullDisplayBalance(mintingFee)} BNB (~ ${getFullDisplayBalance(mintingFeeUsd, 18, 2)})</HeaderText>
         <SubHeaderText>
           Early Withdraw Fee: <Text>5%</Text>
         </SubHeaderText>
@@ -133,9 +134,6 @@ const TableDetails: React.FC<TableDetailsProps> = ({ tomb }) => {
         </SubHeaderText>
         <SubHeaderText>
           NFT Minting Time: <Text>{formatDays(nftMintTime.toNumber())}</Text>
-        </SubHeaderText>
-        <SubHeaderText>
-          Minimum Stake: <Text>{getBalanceAmount(minimumStake).toString()} ZMBE</Text>
         </SubHeaderText>
       </TombInfo>
     </Details>

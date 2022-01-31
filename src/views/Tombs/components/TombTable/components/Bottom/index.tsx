@@ -15,7 +15,7 @@ import {
   useUnlock,
   useUnstake,
   useUnstakeEarly,
-} from '../../../../../../hooks/useTomb'
+} from '../../../../../../hooks/useGrave'
 import { getId } from '../../../../../../utils'
 import { BIG_ZERO } from '../../../../../../utils/bigNumber'
 import tokens from '../../../../../../config/constants/tokens'
@@ -136,19 +136,17 @@ interface BottomProps {
 const Bottom: React.FC<BottomProps> = ({ tomb }) => {
   const {
     pid,
-    rug,
-    userInfo: { rugDeposited, rugAllowance, rugBalance, paidUnlockFee, amount, zombieAllowance, nftMintDate, tokenWithdrawalDate },
-    poolInfo: { unlockFee },
+    lpAddress,
+    token1,
+    token2,
+    userInfo: { lpAllowance, lpBalance, nftMintDate, tokenWithdrawalDate, amount },
   } = tomb
   const [stakeAmount, setStakeAmount] = useState(BIG_ZERO)
   const [unstakeAmount, setUnstakeAmount] = useState(BIG_ZERO)
-  const rugContract = useERC20(getAddress(rug.address))
+  const lpContract = useERC20(getAddress(lpAddress))
   const drFrankenstein = useDrFrankenstein()
-  const approveRug = useApprove(rugContract, getDrFrankensteinAddress()).onApprove
-  const approveZombie = useApprove(useZombie(), getDrFrankensteinAddress()).onApprove
+  const approveLp = useApprove(lpContract, getDrFrankensteinAddress()).onApprove
   const { onStake } = useStake(drFrankenstein, getId(pid), stakeAmount)
-  const { onUnlock } = useUnlock(drFrankenstein, getId(pid), unlockFee)
-  const { onDepositRug } = useDepositRug(drFrankenstein, getId(pid), stakeAmount)
   const { onUnstake } = useUnstake(drFrankenstein, getId(pid), unstakeAmount)
   const { onUnstakeEarly } = useUnstakeEarly(drFrankenstein, getId(pid), unstakeAmount)
   const { onHarvest } = useHarvest(drFrankenstein, getId(pid))
@@ -157,57 +155,37 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
   const now = Math.floor(Date.now() / 1000)
 
   enum Step {
-    ApproveRug,
-    DepositRug,
-    UnlockTomb,
-    ApproveZombie,
-    StakeZombie,
-    Staked,
+    PairLp,
+    ApproveLp,
+    StakeLp,
+    Staked
   }
 
-  steps[Step.ApproveRug] = {
-    label: `Approve ${rug.symbol}`,
+  const lpName = `${token2.symbol}-${token1.symbol} LP`
+
+  steps[Step.PairLp] = {
+    label: `Pair ${lpName} LP`,
+    sent: `Pairing...`,
+    func: null,
+  }
+  steps[Step.ApproveLp] = {
+    label: `Approve ${lpName} LP`,
     sent: `Approving...`,
-    func: approveRug,
+    func: approveLp,
   }
-  steps[Step.DepositRug] = {
-    label: `Deposit ${rug.symbol}`,
-    sent: `Depositing...`,
-    func: onDepositRug,
-  }
-  steps[Step.UnlockTomb] = {
-    label: `Unlock`,
-    sent: `Unlocking...`,
-    func: onUnlock,
-  }
-  steps[Step.ApproveZombie] = {
-    label: `Approve ZMBE`,
-    sent: `Approving...`,
-    func: approveZombie,
-  }
-  steps[Step.StakeZombie] = {
-    label: `Stake ZMBE`,
-    sent: `Staking...`,
-    func: onStake,
-  }
-  steps[Step.Staked] = {
-    label: `Stake ZMBE`,
+  steps[Step.StakeLp] = {
+    label: `Stake LP ${lpName}`,
     sent: `Staking...`,
     func: onStake,
   }
 
-  let currentStep = Step.ApproveRug
-  if (rugAllowance.gt(0)) {
-    currentStep = Step.DepositRug
+  let currentStep = Step.PairLp
+
+  if (lpBalance.gt(0)) {
+    currentStep = Step.ApproveLp
   }
-  if (rugDeposited.gt(0)) {
-    currentStep = Step.UnlockTomb
-  }
-  if (paidUnlockFee) {
-    currentStep = Step.ApproveZombie
-  }
-  if (zombieAllowance.gt(0) && paidUnlockFee) {
-    currentStep = Step.StakeZombie
+  if (lpAllowance.gt(0)) {
+    currentStep = Step.StakeLp
   }
   if (amount.gt(0)) {
     currentStep = Step.Staked
@@ -223,19 +201,17 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
         setConfirming(false)
       })
   }, [currentStep, steps])
-  const decimals = currentStep === Step.ApproveRug || currentStep === Step.DepositRug ? rug.decimals : tokens.zmbe.decimals
 
   const changeStakeInput = (e) => {
-    setStakeAmount(getDecimalAmount(new BigNumber(e.target.value), decimals))
+    setStakeAmount(getDecimalAmount(new BigNumber(e.target.value)))
   }
 
   const changeUnstakeInput = (e) => {
-    setUnstakeAmount(getDecimalAmount(new BigNumber(e.target.value), tokens.zmbe.decimals))
+    setUnstakeAmount(getDecimalAmount(new BigNumber(e.target.value)))
   }
 
   const maxStakeAmount = () => {
-    const maxAmount = currentStep === Step.ApproveRug || currentStep === Step.DepositRug ? rugBalance : zombieBalance()
-    setStakeAmount(maxAmount)
+    setStakeAmount(lpBalance)
   }
 
   const maxUnstakeAmount = () => {
@@ -269,15 +245,12 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
   return <>
     <Separator />
   <BalanceContainer>
-    {currentStep === Step.ApproveRug || currentStep === Step.DepositRug ?
-      <BalanceText onClick={maxStakeAmount}>Wallet Balance: {numeral(getFullDisplayBalance(rugBalance, rug.decimals)).format('(0.00 a)')} {rug.symbol}</BalanceText> :
-      <BalanceText onClick={maxStakeAmount}>Wallet Balance: {numeral(getFullDisplayBalance(zombieBalance())).format('(0.00 a)')} ZMBE</BalanceText>
-    }
-      <BalanceText onClick={maxUnstakeAmount}>Your Staked: {numeral(getFullDisplayBalance(amount)).format('(0.00 a)')} ZMBE</BalanceText>
+      <BalanceText onClick={maxStakeAmount}>Wallet Balance: {numeral(getFullDisplayBalance(lpBalance)).format('(0.00 a)')} {lpName}</BalanceText>
+      <BalanceText onClick={maxUnstakeAmount}>Your Staked: {numeral(getFullDisplayBalance(amount)).format('(0.00 a)')} {lpName}</BalanceText>
   </BalanceContainer>
     <StakingContainer>
       <Inputs>
-        <StakingInput onInput={changeStakeInput} value={getBalanceNumber(stakeAmount, decimals)} placeholder='Stake amount' type='number' />
+        <StakingInput onInput={changeStakeInput} value={getBalanceNumber(stakeAmount)} placeholder='Stake amount' type='number' />
         <StakingInput onInput={changeUnstakeInput} value={getBalanceNumber(unstakeAmount)} placeholder='Unstake amount' type='number' />
       </Inputs>
       <Buttons>

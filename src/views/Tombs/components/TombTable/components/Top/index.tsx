@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import tokens from 'config/constants/tokens'
 import uppointer from 'images/FullUpPointer.png'
 import downpointer from 'images/FullDownPointer.png'
 import { tombByPid, zombiePriceUsd } from 'redux/get'
@@ -8,8 +7,8 @@ import { Token } from 'config/constants/types'
 import BigNumber from 'bignumber.js'
 import TombItem, { TombItemType } from './TombItem'
 import { Tomb } from '../../../../../../state/types'
-import { getBalanceNumber, getDecimalAmount, getFullDisplayBalance } from '../../../../../../utils/formatBalance'
-import { getTombTombApr } from '../../../../../../utils/apr'
+import { getBalanceNumber, getDecimalAmount } from '../../../../../../utils/formatBalance'
+import { getGraveTombApr } from '../../../../../../utils/apr'
 
 const TombColumn = styled.div`
   height: 100%;
@@ -127,9 +126,9 @@ interface TopProps {
 
 const Top: React.FC<TopProps> = ({ tomb, open, setOpen }) => {
   const {
-    name,
-    rug,
     isNew,
+    token1,
+    token2,
     poolInfo: { allocPoint, tokenAmount, weight },
     userInfo: { pendingZombie, nftMintDate, tokenWithdrawalDate, amount },
   } = tomb
@@ -140,7 +139,7 @@ const Top: React.FC<TopProps> = ({ tomb, open, setOpen }) => {
   const bigTvl = tokenAmount.times(zombiePriceUsd())
   const tvl = getBalanceNumber(bigTvl)
   const bigZombiePrice = getDecimalAmount(new BigNumber(zombiePriceUsd()))
-  const yearly = getTombTombApr(weight, bigZombiePrice, bigTvl)
+  const yearly = getGraveTombApr(weight, bigZombiePrice, bigTvl)
   const daily = yearly / 365
   const now = Math.floor(Date.now() / 1000)
 
@@ -166,15 +165,18 @@ const Top: React.FC<TopProps> = ({ tomb, open, setOpen }) => {
     return <TombItem label='Withdrawal Timer' value={remainingCooldownTime} type={TombItemType.Duration} />
   }
 
+  const lpName = `${token2.symbol}-${token1.symbol} LP`
+
+
   return (
     <TombColumn onClick={toggleOpen}>
       <TombHeaderRow>
         <TokenFlex>
-          <img src={tokenImage(tokens.zmbe)} style={{ width: '30px', height: '30px' }} alt='Zombie Token logo' />
-          <img src={tokenImage(rug)} style={{ width: '30px', height: '30px' }} alt='Rug token logo' />
+          <img src={tokenImage(token1)} style={{ width: '30px', height: '30px' }} alt='Token1 icon' />
+          <img src={tokenImage(token2)} style={{ width: '30px', height: '30px' }} alt='Token2 icon' />
         </TokenFlex>
         <TombTitle>
-          {name}
+          {lpName}
         </TombTitle>
         <TabFlex>
           <GreenTab><GreenTabText>{allocPoint.div(100).toString()}X</GreenTabText></GreenTab>

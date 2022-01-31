@@ -73,9 +73,9 @@ const Tombs: React.FC = () => {
   tombs = rarityFilters[rarityFilter].filter(tombs)
 
   if (searchFilter) {
-    tombs = tombs.filter(({name, rug: {symbol}, nftId}) => {
-      const searchString = searchFilter.toLowerCase()
-      return name.toLowerCase().includes(searchString) || symbol.toLowerCase().includes(searchString) || nftById(nftId).name.toLowerCase().includes(searchString)
+    tombs = tombs.filter(({ token1, token2 }) => {
+      const searchString = searchFilter.toLowerCase().replace('-','')
+      return token1.symbol.toLowerCase().includes(searchString) || token2.symbol.toLowerCase().includes(searchString)
     })
   }
 

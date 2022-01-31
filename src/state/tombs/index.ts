@@ -10,6 +10,8 @@ import {
 import { Tomb, TombsState } from '../types'
 import { BIG_ZERO } from '../../utils/bigNumber'
 import { getId } from '../../utils'
+import { fetchTombOverlayUserInfo } from './fetchTombOverlayUser'
+import fetchTombOverlays from './fetchTombOverlays'
 
 const noAccountTombConfig: Tomb[] = tombsConfig.map((tomb) => ({
   ...tomb,
@@ -19,6 +21,7 @@ const noAccountTombConfig: Tomb[] = tombsConfig.map((tomb) => ({
     tokenAmount: BIG_ZERO,
     withdrawCooldown: BIG_ZERO,
     nftMintTime: BIG_ZERO,
+    mintingFee: BIG_ZERO,
   },
   userInfo: {
     tokenWithdrawalDate: BIG_ZERO,
@@ -61,12 +64,25 @@ export const { setTombPoolInfo, setTombUserInfo } = tombsSlice.actions
 // Thunks
 export const fetchTombsPublicDataAsync = () => async (dispatch) => {
   const tombs = await fetchTombs(tombsConfig)
-  dispatch(setTombPoolInfo(tombs))
+  const tombOverlays = await fetchTombOverlays(tombsConfig)
+
+  const arrayOfTombDataObjects = tombs.map((tomb, index) => {
+    return {
+      ...tomb,
+      poolInfo: {
+        ...tomb.poolInfo,
+        ...tombOverlays[index].poolInfo
+      }
+    }
+  })
+
+  dispatch(setTombPoolInfo(arrayOfTombDataObjects))
 }
 export const fetchTombsUserDataAsync = (account: string) => async (dispatch) => {
   const userInfos = await fetchTombUserInfo(account, tombsConfig)
   const userTombEarnings = await fetchTombUserEarnings(account, tombsConfig)
   const userTombLpInfo = await fetchTombUserTokenInfo(account, tombsConfig)
+  const userTombOverlayInfo = await fetchTombOverlayUserInfo(account, tombsConfig)
 
   const arrayOfUserDataObjects = userInfos.map((userInfo, index) => {
     return {
@@ -77,6 +93,10 @@ export const fetchTombsUserDataAsync = (account: string) => async (dispatch) => 
       pendingZombie: new BigNumber(userTombEarnings[index]),
       lpBalance: new BigNumber(userTombLpInfo[index].balance),
       lpAllowance: new BigNumber(userTombLpInfo[index].allowance),
+      nextNftMintDate: new BigNumber(userTombOverlayInfo[index].nextNftMintDate),
+      isMinting: new BigNumber(userTombOverlayInfo[index].isMinting),
+      randomNumber: new BigNumber(userTombOverlayInfo[index].randomNumber),
+      nftMintTime: new BigNumber(userTombOverlayInfo[index].nftMintTime),
     }
   })
 

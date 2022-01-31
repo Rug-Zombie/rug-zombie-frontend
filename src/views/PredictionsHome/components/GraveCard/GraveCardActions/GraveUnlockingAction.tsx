@@ -23,7 +23,7 @@ const UnlockingAction: React.FC<ApprovalActionProps> = ({ isLoading = false }) =
     //   })
     //   .on('receipt', () => {
     //     toastSuccess(
-    //       `${t('GraveTable Unlocked')}`,
+    //       `${t('TombTable Unlocked')}`,
     //       `${t(`You can now stake in the %symbol %vault!`, { symbol: tokens.zmbe.symbol })}`,
     //     )
     //     setLastUpdated()
@@ -51,7 +51,7 @@ const UnlockingAction: React.FC<ApprovalActionProps> = ({ isLoading = false }) =
           onClick={handleUnlock}
           width="100%"
         >
-          {t('Unlock GraveTable ($10)')}
+          {t('Unlock TombTable ($10)')}
         </Button>
       )}
     </>

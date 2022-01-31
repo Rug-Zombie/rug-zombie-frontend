@@ -1,10 +1,11 @@
 import BigNumber from 'bignumber.js'
-import drFrankenstein from 'config/abi/drFrankenstein.json'
-import multicall from 'utils/multicall'
+import tombOverlay from 'config/abi/tombOverlay.json'
+import multicall, { multicallv2 } from 'utils/multicall'
 import { getDrFrankensteinAddress, getTombOverlayAddress } from 'utils/addressHelpers'
 import { TombConfig } from 'config/constants/types'
 import { getId } from '../../utils'
-import { getBep20Contract } from '../../utils/contractHelpers'
+import { tombOverlayById } from '../../redux/get'
+import { getTombOverlayContract } from '../../utils/contractHelpers'
 
 const fetchTombOverlays = async (tombsToFetch: TombConfig[]) => {
   const data = await Promise.all(
@@ -13,18 +14,22 @@ const fetchTombOverlays = async (tombsToFetch: TombConfig[]) => {
         {
           address: getTombOverlayAddress(),
           name: 'poolInfo',
-          params: [getId(tombConfig.overlayId)],
+          params: [getId(tombOverlayById(getId(tombConfig.overlayId)).pid)],
         },
         {
-          address: getDrFrankensteinAddress(),
+          address: getTombOverlayAddress(),
           name: 'mintingFee',
+          params: [],
         },
       ]
+
+      console.log(await getTombOverlayContract().methods.poolInfo(1).call()) // test on old branch
+      // revert to old web3 whatever
 
       const [
         info,
         fee
-      ] = await multicall(drFrankenstein, calls)
+      ] = await multicall(tombOverlay, calls)
       return {
         ...tombConfig,
         poolInfo: {

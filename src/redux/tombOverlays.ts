@@ -16,7 +16,7 @@ const DEFAULT_POOL_INFO = {
     mintingFee: BIG_ZERO
 }
 
-const tombOverlays: TombOverlay[] = [
+const tombOverlays: TombOverlay[] = [ // TODO move to tombs
     {
         id: 0,
         pid: {

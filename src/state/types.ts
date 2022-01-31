@@ -54,6 +54,7 @@ export interface TombPoolInfo {
   tokenAmount: BigNumber;
   withdrawCooldown: BigNumber;
   nftMintTime: BigNumber;
+  mintingFee: BigNumber
 }
 
 export interface Tomb extends TombConfig {
@@ -326,6 +327,7 @@ export interface State {
   prices: PriceState
   pools: PoolsState
   graves: GraveState
+  tombs: TombsState
   predictions: PredictionsState
   profile: ProfileState
   teams: TeamsState
