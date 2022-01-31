@@ -7,20 +7,16 @@ import TableDetails from './components/TableDetails'
 import { Tomb } from '../../../../../../state/types'
 import { useApprove } from '../../../../../../hooks/useApprove'
 import { getAddress, getDrFrankensteinAddress } from '../../../../../../utils/addressHelpers'
-import { useDrFrankenstein, useERC20, useZombie } from '../../../../../../hooks/useContract'
+import { useDrFrankenstein, useERC20 } from '../../../../../../hooks/useContract'
 import {
-  useDepositRug,
   useHarvest,
   useStake,
-  useUnlock,
   useUnstake,
   useUnstakeEarly,
 } from '../../../../../../hooks/useGrave'
 import { getId } from '../../../../../../utils'
 import { BIG_ZERO } from '../../../../../../utils/bigNumber'
-import tokens from '../../../../../../config/constants/tokens'
 import { getBalanceNumber, getDecimalAmount, getFullDisplayBalance } from '../../../../../../utils/formatBalance'
-import { zombieBalance } from '../../../../../../redux/get'
 
 const Separator = styled.div`
   height: 0px;

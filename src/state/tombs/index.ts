@@ -22,6 +22,7 @@ const noAccountTombConfig: Tomb[] = tombsConfig.map((tomb) => ({
     withdrawCooldown: BIG_ZERO,
     nftMintTime: BIG_ZERO,
     mintingFee: BIG_ZERO,
+    lpPriceBnb: BIG_ZERO
   },
   userInfo: {
     tokenWithdrawalDate: BIG_ZERO,
@@ -65,7 +66,6 @@ export const { setTombPoolInfo, setTombUserInfo } = tombsSlice.actions
 export const fetchTombsPublicDataAsync = () => async (dispatch) => {
   const tombs = await fetchTombs(tombsConfig)
   const tombOverlays = await fetchTombOverlays(tombsConfig)
-
   const arrayOfTombDataObjects = tombs.map((tomb, index) => {
     return {
       ...tomb,

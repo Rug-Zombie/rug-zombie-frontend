@@ -7,7 +7,7 @@
         "type": "address"
       },
       {
-        "internalType": "address",
+        "internalType": "address payable",
         "name": "_treasury",
         "type": "address"
       },
@@ -354,11 +354,6 @@
         "type": "uint256"
       },
       {
-        "internalType": "bool",
-        "name": "isEnabled",
-        "type": "bool"
-      },
-      {
         "internalType": "uint256",
         "name": "mintingTime",
         "type": "uint256"
@@ -501,24 +496,6 @@
       }
     ],
     "name": "setCommonRewardNft",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_pid",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bool",
-        "name": "_enabled",
-        "type": "bool"
-      }
-    ],
-    "name": "setIsEnabled",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

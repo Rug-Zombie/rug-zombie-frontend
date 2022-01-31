@@ -91,12 +91,14 @@ const Text = styled.span`
 
 const TableDetails: React.FC<TableDetailsProps> = ({ tomb }) => {
   const {
-    poolInfo: { allocPoint, withdrawCooldown, nftMintTime, tokenAmount, mintingFee },
+    poolInfo: { allocPoint, withdrawCooldown, nftMintTime, tokenAmount, lpPriceBnb, mintingFee },
   } = tomb
   const { legendaryId } = tombOverlayById(getId(tomb.overlayId))
   const { name, path, type } = nftById(legendaryId)
-  const tvl = getBalanceAmount(tokenAmount.times(zombiePriceUsd()))
+
+  const tvl = tokenAmount.times(lpPriceBnb).times(bnbPriceUsd())
   const mintingFeeUsd = mintingFee.times(bnbPriceUsd())
+
   const imageOnErrorHandler = (
     event: React.SyntheticEvent<HTMLImageElement, Event>
   ) => {
@@ -121,16 +123,19 @@ const TableDetails: React.FC<TableDetailsProps> = ({ tomb }) => {
           Weight: <Text>{allocPoint.div(100).toString()}X</Text>
         </SubHeaderText>
         <SubHeaderText>
-          Tomb TVL: <Text>{numeral(tvl.toString()).format('$ (0.00 a)')}</Text>
+          Tomb TVL: <Text>{numeral(getFullDisplayBalance(tvl)).format('$ (0.00 a)')}</Text>
         </SubHeaderText>
       </TombInfo>
       <TombInfo>
-        <HeaderText>Unlock Fees: {getFullDisplayBalance(mintingFee)} BNB (~ ${getFullDisplayBalance(mintingFeeUsd, 18, 2)})</HeaderText>
+        <HeaderText>Minting Fee: {getFullDisplayBalance(mintingFee)} BNB (~ ${getFullDisplayBalance(mintingFeeUsd, 18, 2)})</HeaderText>
+        {
+          withdrawCooldown.gt(0) ?
+          <SubHeaderText>
+            Early Withdraw Fee: <Text>5%</Text>
+          </SubHeaderText> : null
+        }
         <SubHeaderText>
-          Early Withdraw Fee: <Text>5%</Text>
-        </SubHeaderText>
-        <SubHeaderText>
-          Withdrawal Cooldown: <Text>{formatDays(withdrawCooldown.toNumber())}</Text>
+          Withdrawal Cooldown: <Text>{withdrawCooldown.gt(0) ? formatDays(withdrawCooldown.toNumber()) : 'None'}</Text>
         </SubHeaderText>
         <SubHeaderText>
           NFT Minting Time: <Text>{formatDays(nftMintTime.toNumber())}</Text>

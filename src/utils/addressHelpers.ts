@@ -3,8 +3,6 @@ import tokens from 'config/constants/tokens'
 import { Address } from 'config/constants/types'
 import { sharkPoolById, spawningPoolById } from '../redux/get'
 
-
-
 export const getAddress = (address: Address): string => {
   const mainNetChainId = 56
   const chainId = process.env.REACT_APP_CHAIN_ID

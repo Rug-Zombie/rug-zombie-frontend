@@ -2,13 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 import uppointer from 'images/FullUpPointer.png'
 import downpointer from 'images/FullDownPointer.png'
-import { tombByPid, zombiePriceUsd } from 'redux/get'
+import { bnbPriceUsd, tombByPid, zombiePriceUsd } from 'redux/get'
 import { Token } from 'config/constants/types'
 import BigNumber from 'bignumber.js'
 import TombItem, { TombItemType } from './TombItem'
 import { Tomb } from '../../../../../../state/types'
 import { getBalanceNumber, getDecimalAmount } from '../../../../../../utils/formatBalance'
 import { getGraveTombApr } from '../../../../../../utils/apr'
+import { DEXS } from '../../../../../../config'
 
 const TombColumn = styled.div`
   height: 100%;
@@ -72,8 +73,8 @@ const GreenTab = styled.div`
 `
 
 const GreyTab = styled.div`
-  width: 60px;
   height: 30px;
+  padding: 5px;
   border: 2px solid #6B7682;
   border-radius: 15px;
   display: flex;
@@ -129,14 +130,15 @@ const Top: React.FC<TopProps> = ({ tomb, open, setOpen }) => {
     isNew,
     token1,
     token2,
-    poolInfo: { allocPoint, tokenAmount, weight },
+    dex,
+    poolInfo: { allocPoint, tokenAmount, weight, lpPriceBnb },
     userInfo: { pendingZombie, nftMintDate, tokenWithdrawalDate, amount },
   } = tomb
   const toggleOpen = () => setOpen(!open)
   const tokenImage = (token: Token) => {
     return token.tokenLogo ? token.tokenLogo : `images/tokens/${token.symbol}.png`
   }
-  const bigTvl = tokenAmount.times(zombiePriceUsd())
+  const bigTvl = tokenAmount.times(lpPriceBnb).times(bnbPriceUsd())
   const tvl = getBalanceNumber(bigTvl)
   const bigZombiePrice = getDecimalAmount(new BigNumber(zombiePriceUsd()))
   const yearly = getGraveTombApr(weight, bigZombiePrice, bigTvl)
@@ -180,7 +182,7 @@ const Top: React.FC<TopProps> = ({ tomb, open, setOpen }) => {
         </TombTitle>
         <TabFlex>
           <GreenTab><GreenTabText>{allocPoint.div(100).toString()}X</GreenTabText></GreenTab>
-          <GreyTab><GreyTabText>ZMBE</GreyTabText></GreyTab>
+          <GreyTab><GreyTabText>{DEXS[dex]}</GreyTabText></GreyTab>
           {isNew ? <GreenTab><GreenTabText>NEW</GreenTabText></GreenTab> : null}
         </TabFlex>
       </TombHeaderRow>

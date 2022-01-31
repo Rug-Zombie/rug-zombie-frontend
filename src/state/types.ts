@@ -1,6 +1,5 @@
 import BigNumber from 'bignumber.js'
 import { CampaignType, FarmConfig, GraveConfig, Nft, PoolConfig, Team, TombConfig } from 'config/constants/types'
-import { BIG_ZERO } from '../utils/bigNumber'
 
 export type TranslatableText =
   | string
@@ -55,6 +54,7 @@ export interface TombPoolInfo {
   withdrawCooldown: BigNumber;
   nftMintTime: BigNumber;
   mintingFee: BigNumber
+  lpPriceBnb: BigNumber
 }
 
 export interface Tomb extends TombConfig {
