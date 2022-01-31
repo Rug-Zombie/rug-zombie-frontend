@@ -97,6 +97,18 @@ export interface GraveConfig {
   isRetired?: boolean
 }
 
+export interface TombConfig {
+  id: number,
+  pid: Id,
+  overlayId?: Id,
+  token1: Token,
+  token2: Token,
+  dex: Dex,
+  lpAddress: Address,
+  notNativeDex?: boolean,
+  isNew?: boolean,
+}
+
 export interface PoolConfig {
   sousId: number
   earningToken: Token

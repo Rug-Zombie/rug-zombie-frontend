@@ -3,15 +3,15 @@ import styled from 'styled-components'
 import tokens from 'config/constants/tokens'
 import uppointer from 'images/FullUpPointer.png'
 import downpointer from 'images/FullDownPointer.png'
-import { graveByPid, zombiePriceUsd } from 'redux/get'
+import { tombByPid, zombiePriceUsd } from 'redux/get'
 import { Token } from 'config/constants/types'
 import BigNumber from 'bignumber.js'
-import GraveItem, { GraveItemType } from './GraveItem'
-import { Grave } from '../../../../../../state/types'
+import TombItem, { TombItemType } from './TombItem'
+import { Tomb } from '../../../../../../state/types'
 import { getBalanceNumber, getDecimalAmount, getFullDisplayBalance } from '../../../../../../utils/formatBalance'
-import { getGraveTombApr } from '../../../../../../utils/apr'
+import { getTombTombApr } from '../../../../../../utils/apr'
 
-const GraveColumn = styled.div`
+const TombColumn = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
@@ -22,7 +22,7 @@ const GraveColumn = styled.div`
   }
 `
 
-const GraveHeaderRow = styled.div`
+const TombHeaderRow = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: left;
@@ -37,7 +37,7 @@ const TokenFlex = styled.div`
   justify-content: space-between;
 `
 
-const GraveTitle = styled.div`
+const TombTitle = styled.div`
   text-align: left;
   font: normal normal normal 20px Poppins;
   letter-spacing: 0px;
@@ -95,7 +95,7 @@ const GreyTabText = styled.p`
   color: #6B7682;
 `
 
-const GraveSubRow = styled.div`
+const TombSubRow = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -119,20 +119,20 @@ const Percentages = styled.div`
 `
 
 interface TopProps {
-  grave: Grave;
+  tomb: Tomb;
   open: boolean;
   setOpen: any;
 
 }
 
-const Top: React.FC<TopProps> = ({ grave, open, setOpen }) => {
+const Top: React.FC<TopProps> = ({ tomb, open, setOpen }) => {
   const {
     name,
     rug,
     isNew,
     poolInfo: { allocPoint, tokenAmount, weight },
     userInfo: { pendingZombie, nftMintDate, tokenWithdrawalDate, amount },
-  } = grave
+  } = tomb
   const toggleOpen = () => setOpen(!open)
   const tokenImage = (token: Token) => {
     return token.tokenLogo ? token.tokenLogo : `images/tokens/${token.symbol}.png`
@@ -140,66 +140,66 @@ const Top: React.FC<TopProps> = ({ grave, open, setOpen }) => {
   const bigTvl = tokenAmount.times(zombiePriceUsd())
   const tvl = getBalanceNumber(bigTvl)
   const bigZombiePrice = getDecimalAmount(new BigNumber(zombiePriceUsd()))
-  const yearly = getGraveTombApr(weight, bigZombiePrice, bigTvl)
+  const yearly = getTombTombApr(weight, bigZombiePrice, bigTvl)
   const daily = yearly / 365
   const now = Math.floor(Date.now() / 1000)
 
   const nftTime = () => {
     if(amount.isZero()) {
-      return <GraveItem label='NFT Timer' value='N/A' type={GraveItemType.Text} />
+      return <TombItem label='NFT Timer' value='N/A' type={TombItemType.Text} />
     }
     const remainingNftTime = nftMintDate.toNumber() - now
     if(remainingNftTime <= 0) {
-      return <GraveItem label='NFT Timer' value='NFT Ready' type={GraveItemType.Text} />
+      return <TombItem label='NFT Timer' value='NFT Ready' type={TombItemType.Text} />
     }
-    return <GraveItem label='NFT Timer' value={remainingNftTime} type={GraveItemType.Duration} />
+    return <TombItem label='NFT Timer' value={remainingNftTime} type={TombItemType.Duration} />
   }
 
   const cooldownTime = () => {
     if(amount.isZero()) {
-      return <GraveItem label='Withdrawal Timer' value='N/A' type={GraveItemType.Text} />
+      return <TombItem label='Withdrawal Timer' value='N/A' type={TombItemType.Text} />
     }
     const remainingCooldownTime = tokenWithdrawalDate.toNumber() - now
     if(remainingCooldownTime <= 0) {
-      return <GraveItem label='Withdrawal Timer' value='None' type={GraveItemType.Text} />
+      return <TombItem label='Withdrawal Timer' value='None' type={TombItemType.Text} />
     }
-    return <GraveItem label='Withdrawal Timer' value={remainingCooldownTime} type={GraveItemType.Duration} />
+    return <TombItem label='Withdrawal Timer' value={remainingCooldownTime} type={TombItemType.Duration} />
   }
 
   return (
-    <GraveColumn onClick={toggleOpen}>
-      <GraveHeaderRow>
+    <TombColumn onClick={toggleOpen}>
+      <TombHeaderRow>
         <TokenFlex>
           <img src={tokenImage(tokens.zmbe)} style={{ width: '30px', height: '30px' }} alt='Zombie Token logo' />
           <img src={tokenImage(rug)} style={{ width: '30px', height: '30px' }} alt='Rug token logo' />
         </TokenFlex>
-        <GraveTitle>
+        <TombTitle>
           {name}
-        </GraveTitle>
+        </TombTitle>
         <TabFlex>
           <GreenTab><GreenTabText>{allocPoint.div(100).toString()}X</GreenTabText></GreenTab>
           <GreyTab><GreyTabText>ZMBE</GreyTabText></GreyTab>
           {isNew ? <GreenTab><GreenTabText>NEW</GreenTabText></GreenTab> : null}
         </TabFlex>
-      </GraveHeaderRow>
-      <GraveSubRow>
+      </TombHeaderRow>
+      <TombSubRow>
         <Amounts>
-          <GraveItem label='Earned' unit='ZMBE' value={getBalanceNumber(pendingZombie)} type={GraveItemType.Number} />
-          <GraveItem label='Yearly' value={yearly} type={GraveItemType.Percentage} />
-          <GraveItem label='Daily' value={daily} type={GraveItemType.Percentage} />
-          <GraveItem label='TVL' value={tvl} type={GraveItemType.Money} />
+          <TombItem label='Earned' unit='ZMBE' value={getBalanceNumber(pendingZombie)} type={TombItemType.Number} />
+          <TombItem label='Yearly' value={yearly} type={TombItemType.Percentage} />
+          <TombItem label='Daily' value={daily} type={TombItemType.Percentage} />
+          <TombItem label='TVL' value={tvl} type={TombItemType.Money} />
         </Amounts>
         <Percentages>
           {nftTime()}
           {cooldownTime()}
           {
             open
-              ? <img src={uppointer} alt='Close Grave' style={{ width: '35px', height: '35px' }} />
-              : <img src={downpointer} alt='Open Grave' style={{ width: '35px', height: '35px' }} />
+              ? <img src={uppointer} alt='Close Tomb' style={{ width: '35px', height: '35px' }} />
+              : <img src={downpointer} alt='Open Tomb' style={{ width: '35px', height: '35px' }} />
           }
         </Percentages>
-      </GraveSubRow>
-    </GraveColumn>
+      </TombSubRow>
+    </TombColumn>
   )
 }
 

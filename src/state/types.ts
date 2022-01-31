@@ -1,5 +1,6 @@
 import BigNumber from 'bignumber.js'
-import { CampaignType, FarmConfig, GraveConfig, Nft, PoolConfig, Team } from 'config/constants/types'
+import { CampaignType, FarmConfig, GraveConfig, Nft, PoolConfig, Team, TombConfig } from 'config/constants/types'
+import { BIG_ZERO } from '../utils/bigNumber'
 
 export type TranslatableText =
   | string
@@ -36,6 +37,28 @@ export interface GravePoolInfo {
 export interface Grave extends GraveConfig {
   userInfo?: GraveUserInfo;
   poolInfo: GravePoolInfo;
+}
+
+export interface TombUserInfo {
+  tokenWithdrawalDate: BigNumber
+  nftMintDate: BigNumber
+  amount: BigNumber
+  pendingZombie: BigNumber
+  lpBalance: BigNumber
+  lpAllowance: BigNumber
+}
+
+export interface TombPoolInfo {
+  allocPoint: BigNumber;
+  weight: BigNumber;
+  tokenAmount: BigNumber;
+  withdrawCooldown: BigNumber;
+  nftMintTime: BigNumber;
+}
+
+export interface Tomb extends TombConfig {
+  userInfo?: TombUserInfo
+  poolInfo: TombPoolInfo
 }
 
 export interface Farm extends FarmConfig {
@@ -82,6 +105,12 @@ export interface Profile {
 
 export interface GravesState {
   data: Grave[]
+  userDataLoaded: boolean
+}
+
+
+export interface TombsState {
+  data: Tomb[]
   userDataLoaded: boolean
 }
 

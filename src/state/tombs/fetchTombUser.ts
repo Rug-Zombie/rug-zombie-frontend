@@ -3,27 +3,27 @@ import erc20ABI from 'config/abi/erc20.json'
 import drFrankenstein from 'config/abi/drFrankenstein.json'
 import multicall from 'utils/multicall'
 import { getAddress, getDrFrankensteinAddress, getMasterChefAddress, getZombieAddress } from 'utils/addressHelpers'
-import { FarmConfig, GraveConfig } from 'config/constants/types'
+import { GraveConfig, TombConfig } from 'config/constants/types'
 import { getId } from '../../utils'
 
-export const fetchGraveUserInfo = async (account: string, gravesToFetch: GraveConfig[]) => {
+export const fetchTombUserInfo = async (account: string, tombsToFetch: TombConfig[]) => {
   const drFrankensteinAddress = getDrFrankensteinAddress()
 
-  const calls = gravesToFetch.map((grave) => {
+  const calls = tombsToFetch.map((tomb) => {
     return {
       address: drFrankensteinAddress,
       name: 'userInfo',
-      params: [getId(grave.pid), account],
+      params: [getId(tomb.pid), account],
     }
   })
 
   return multicall(drFrankenstein, calls)
 }
 
-export const fetchGraveUserEarnings = async (account: string, gravesToFetch: GraveConfig[]) => {
+export const fetchTombUserEarnings = async (account: string, tombsToFetch: TombConfig[]) => {
   const drFrankensteinAddress = getDrFrankensteinAddress()
 
-  const calls = gravesToFetch.map((grave) => {
+  const calls = tombsToFetch.map((grave) => {
     return {
       address: drFrankensteinAddress,
       name: 'pendingZombie',
@@ -38,34 +38,28 @@ export const fetchGraveUserEarnings = async (account: string, gravesToFetch: Gra
   return parsedEarnings
 }
 
-export const fetchGraveUserTokenInfo = async (account: string, gravesToFetch: GraveConfig[]) => {
-  const calls = gravesToFetch.reduce((rugInfos, graveConfig) => {
-    return rugInfos.concat([{
-      address: getAddress(graveConfig.rug.address),
+export const fetchTombUserTokenInfo = async (account: string, tombsToFetch: TombConfig[]) => {
+  const calls = tombsToFetch.reduce((lpInfos, tombConfig) => {
+    return lpInfos.concat([{
+      address: getAddress(tombConfig.lpAddress),
       name: 'allowance',
       params: [account, getDrFrankensteinAddress()],
     },
       {
-        address: getAddress(graveConfig.rug.address),
+        address: getAddress(tombConfig.lpAddress),
         name: 'balanceOf',
         params: [account],
-      },
-      { // Separate in the future
-        address: getZombieAddress(),
-        name: 'allowance',
-        params: [account, getDrFrankensteinAddress()],
       },
     ])
   }, [])
 
   const tokenInfos = await multicall(erc20ABI, calls)
-  const pairedRugInfos = []
-  for (let i = 0; i < tokenInfos.length; i += 3) {
-    pairedRugInfos.push({
+  const pairedLpInfos = []
+  for (let i = 0; i < tokenInfos.length; i += 2) {
+    pairedLpInfos.push({
       allowance: tokenInfos[i],
       balance: tokenInfos[i+1],
-      zombieAllowance: tokenInfos[i+2]
     })
   }
-  return pairedRugInfos
+  return pairedLpInfos
 }

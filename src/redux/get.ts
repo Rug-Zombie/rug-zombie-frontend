@@ -152,6 +152,10 @@ export const tombOverlayByPoolId = (poolId: number): TombOverlay => {
   return store.getState().tombOverlays.find(t => getId(t.pid) === poolId)
 }
 
+export const tombOverlayById = (id: number): TombOverlay => {
+  return store.getState().tombOverlays.find(t => t.id === id)
+}
+
 export const burnGraves = (): BurnGrave[] => {
   return store.getState().burnGraves
 }

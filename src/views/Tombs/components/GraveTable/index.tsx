@@ -3,10 +3,10 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import Top from './components/Top'
 import Bottom from './components/Bottom'
-import { Grave } from '../../../../state/types'
+import { Tomb } from '../../../../state/types'
 import { getId } from '../../../../utils'
 
-const GraveCard = styled.div<{ open: boolean }>`
+const TombCard = styled.div<{ open: boolean }>`
   width: 100%;
   min-width: 260px;
   min-height: 130px;
@@ -33,23 +33,23 @@ const Shadow = styled.div`
   z-index: -1;
 `
 
-interface GraveProps {
-  grave: Grave
+interface TombProps {
+  tomb: Tomb
 }
 
-const GraveTable: React.FC<GraveProps> = ({ grave }) => {
+const TombTable: React.FC<TombProps> = ({ tomb }) => {
   const [open, setOpen] = useState(false)
 
   return (
     <>
-    <GraveCard open={open}>
-      <Top grave={grave} open={open} setOpen={setOpen} />
-      {open ? <Bottom grave={grave}/> : null}
-    </GraveCard>
+    <TombCard open={open}>
+      <Top tomb={tomb} open={open} setOpen={setOpen} />
+      {open ? <Bottom tomb={tomb}/> : null}
+    </TombCard>
       <Shadow/>
     </>
 
   )
 }
 
-export default GraveTable
+export default TombTable
