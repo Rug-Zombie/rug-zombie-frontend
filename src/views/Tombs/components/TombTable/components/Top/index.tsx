@@ -2,9 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import uppointer from 'images/FullUpPointer.png'
 import downpointer from 'images/FullDownPointer.png'
-import { bnbPriceUsd, tombByPid, zombiePriceUsd } from 'redux/get'
+import { bnbPriceUsd, zombiePriceUsd } from 'redux/get'
 import { Token } from 'config/constants/types'
 import BigNumber from 'bignumber.js'
+import { ethers } from 'ethers'
 import TombItem, { TombItemType } from './TombItem'
 import { Tomb } from '../../../../../../state/types'
 import { getBalanceNumber, getDecimalAmount } from '../../../../../../utils/formatBalance'
@@ -132,7 +133,7 @@ const Top: React.FC<TopProps> = ({ tomb, open, setOpen }) => {
     token2,
     dex,
     poolInfo: { allocPoint, tokenAmount, weight, lpPriceBnb },
-    userInfo: { pendingZombie, nftMintDate, tokenWithdrawalDate, amount },
+    userInfo: { pendingZombie, nftMintTime, tokenWithdrawalDate, amount, isMinting, randomNumber },
   } = tomb
   const toggleOpen = () => setOpen(!open)
   const tokenImage = (token: Token) => {
@@ -144,31 +145,38 @@ const Top: React.FC<TopProps> = ({ tomb, open, setOpen }) => {
   const yearly = getGraveTombApr(weight, bigZombiePrice, bigTvl)
   const daily = yearly / 365
   const now = Math.floor(Date.now() / 1000)
-
+  const mintingReady = randomNumber.gt(0)
   const nftTime = () => {
-    if(amount.isZero()) {
+    if (nftMintTime.eq(ethers.constants.MaxUint256._hex)) {
       return <TombItem label='NFT Timer' value='N/A' type={TombItemType.Text} />
     }
-    const remainingNftTime = nftMintDate.toNumber() - now
-    if(remainingNftTime <= 0) {
+    if (nftMintTime.isZero()) {
+      if (mintingReady) {
+        return <TombItem label='NFT Timer' value='Finish Minting' type={TombItemType.Text} />
+      }
+      return <TombItem label='NFT Timer' value='Start Minting' type={TombItemType.Text} />
+    }
+    if (isMinting && !mintingReady) {
+      return <TombItem label='NFT Timer' value='Minting in progress' type={TombItemType.Text} />
+    }
+    if (isMinting && mintingReady) {
       return <TombItem label='NFT Timer' value='NFT Ready' type={TombItemType.Text} />
     }
-    return <TombItem label='NFT Timer' value={remainingNftTime} type={TombItemType.Duration} />
+    return <TombItem label='NFT Timer' value={nftMintTime.toNumber()} type={TombItemType.Duration} />
   }
 
   const cooldownTime = () => {
-    if(amount.isZero()) {
+    if (amount.isZero()) {
       return <TombItem label='Withdrawal Timer' value='N/A' type={TombItemType.Text} />
     }
     const remainingCooldownTime = tokenWithdrawalDate.toNumber() - now
-    if(remainingCooldownTime <= 0) {
+    if (remainingCooldownTime <= 0) {
       return <TombItem label='Withdrawal Timer' value='None' type={TombItemType.Text} />
     }
     return <TombItem label='Withdrawal Timer' value={remainingCooldownTime} type={TombItemType.Duration} />
   }
 
   const lpName = `${token2.symbol}-${token1.symbol} LP`
-
 
   return (
     <TombColumn onClick={toggleOpen}>

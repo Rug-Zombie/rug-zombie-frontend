@@ -36,3 +36,7 @@ export const formatDays = (duration: number,): string => {
 
   return `${days} ${unit}`
 }
+
+export const now = () => {
+  return Math.floor(Date.now() / 1000)
+}

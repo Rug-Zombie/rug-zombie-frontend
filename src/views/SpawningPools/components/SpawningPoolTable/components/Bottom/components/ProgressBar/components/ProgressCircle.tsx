@@ -7,7 +7,7 @@ interface SvgProps {
 
 
 const ProgressCircle: React.FC<SvgProps> = ({ step, active }) => {
-  const border = active ? '#4B7BDC' : '#0D1417'
+  const border = active ? '#30C00D' : '#0D1417'
   const textColor = active ? 'white' : '#6B7682'
   return <div>
     <svg width='32' height='32' xmlns="http://www.w3.org/2000/svg">

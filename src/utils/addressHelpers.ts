@@ -125,3 +125,11 @@ export const getSharkPoolAddress = (id: number) => {
 export const getDrBurnensteinAddress = () => {
   return getAddress(addresses.drburnenstein);
 }
+
+export const getPancakeFactoryAddress = () => {
+  return getAddress(addresses.pancakeFactory);
+}
+
+export const getApeswapFactoryAddress = () => {
+  return getAddress(addresses.apeswapFactory);
+}

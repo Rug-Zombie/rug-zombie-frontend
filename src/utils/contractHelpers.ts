@@ -32,9 +32,14 @@ import {
   getMulticallAddress,
   getCatacombsAddress,
   getInstaBuyAddress,
-  getTombOverlayAddress, getRugRollAddress,
+  getTombOverlayAddress,
+  getRugRollAddress,
   getSharkPoolAddress,
-  getNftSwapperAddress, getZTokenSwapperAddress, getDrBurnensteinAddress
+  getNftSwapperAddress,
+  getZTokenSwapperAddress,
+  getDrBurnensteinAddress,
+  getPancakeFactoryAddress,
+  getApeswapFactoryAddress,
 } from 'utils/addressHelpers'
 
 // ABI
@@ -77,6 +82,7 @@ import nftSwapperAbi from 'config/abi/nftSwapper.json'
 import ztokenSwapperAbi from 'config/abi/ztokenSwapper.json'
 import sharkpoolAbi from 'config/abi/autosharkPool.json'
 import drBurnensteinAbi from 'config/abi/drBurnenstein.json'
+import pancakeFactory from 'config/abi/pancakeFactoryAbi.json'
 
 export const getContract = (abi: any, address: string, web3?: Web3) => {
   const _web3 = web3 ?? web3NoAccount
@@ -207,4 +213,12 @@ export const getZTokenSwapperContract = (web3?: Web3) => {
 
 export const getDrBurnensteinContract = (web3?: Web3) => {
   return getContract(drBurnensteinAbi, getDrBurnensteinAddress(), web3);
+}
+
+export const getPancakeFactoryContract = (web3?: Web3) => {
+  return getContract(pancakeFactory, getPancakeFactoryAddress(), web3);
+}
+
+export const getApeswapFactoryContract = (web3?: Web3) => {
+  return getContract(pancakeFactory, getApeswapFactoryAddress(), web3);
 }

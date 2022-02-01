@@ -4,29 +4,13 @@ import { BigNumber } from 'bignumber.js'
 import numeral from 'numeral'
 import ProgressBar from './components/ProgressBar'
 import TableDetails from './components/TableDetails'
-import { Tomb } from '../../../../../../state/types'
+import { SpawningPool } from '../../../../../../state/types'
 import { useApprove } from '../../../../../../hooks/useApprove'
-import { getAddress, getDrFrankensteinAddress } from '../../../../../../utils/addressHelpers'
-import { useDrFrankenstein, useERC20 } from '../../../../../../hooks/useContract'
-import {
-  useFinishMinting,
-  useHarvest,
-  useStake,
-  useStartMinting,
-  useUnstake,
-  useUnstakeEarly,
-} from '../../../../../../hooks/useTomb'
-import { getId } from '../../../../../../utils'
+import { getAddress } from '../../../../../../utils/addressHelpers'
+import { useSpawningPool, useZombie } from '../../../../../../hooks/useContract'
+import { useHarvest, useStake, useUnlock, useUnstake, useUnstakeEarly } from '../../../../../../hooks/useSpawningPool'
 import { BIG_ZERO } from '../../../../../../utils/bigNumber'
 import { getBalanceNumber, getDecimalAmount, getFullDisplayBalance } from '../../../../../../utils/formatBalance'
-import {
-  APESWAP_ADD_LIQUIDITY_URL,
-  AUTOSHARK_ADD_LIQUIDITY_URL,
-  BASE_ADD_LIQUIDITY_URL,
-  DEXS,
-} from '../../../../../../config'
-import tokens from '../../../../../../config/constants/tokens'
-import { Dex } from '../../../../../../config/constants/types'
 
 const Separator = styled.div`
   height: 0px;
@@ -137,86 +121,69 @@ const BalanceText = styled.button`
 `
 
 interface BottomProps {
-  tomb: Tomb;
+  spawningPool: SpawningPool;
 }
 
-const Bottom: React.FC<BottomProps> = ({ tomb }) => {
+const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
   const {
-    pid,
-    lpAddress,
-    token1,
-    token2,
-    dex,
-    userInfo: { lpAllowance, lpBalance, nftMintTime, tokenWithdrawalDate, randomNumber, isMinting, amount },
-    poolInfo: { mintingFee }
-  } = tomb
+    id,
+    address,
+    rewardToken,
+    userInfo: { zombieBalance, paidUnlockFee, amount, zombieAllowance, nftMintDate, tokenWithdrawalDate },
+    poolInfo: { unlockFee },
+  } = spawningPool
   const [stakeAmount, setStakeAmount] = useState(BIG_ZERO)
   const [unstakeAmount, setUnstakeAmount] = useState(BIG_ZERO)
-  const lpContract = useERC20(getAddress(lpAddress))
-  const drFrankenstein = useDrFrankenstein()
-  const approveLp = useApprove(lpContract, getDrFrankensteinAddress()).onApprove
-  const { onStake } = useStake(drFrankenstein, getId(pid), stakeAmount)
-  const { onUnstake } = useUnstake(drFrankenstein, getId(pid), unstakeAmount)
-  const { onUnstakeEarly } = useUnstakeEarly(drFrankenstein, getId(pid), unstakeAmount)
-  const { onHarvest } = useHarvest(drFrankenstein, getId(pid))
-  const { onStartMinting } = useStartMinting(drFrankenstein, getId(pid), mintingFee)
-  const { onFinishMinting } = useFinishMinting(drFrankenstein, getId(pid))
+  const spawningPoolContract = useSpawningPool(id)
+  const approveZombie = useApprove(useZombie(), getAddress(address)).onApprove
+  const { onStake } = useStake(spawningPoolContract, stakeAmount)
+  const { onUnlock } = useUnlock(spawningPoolContract, unlockFee)
+  const { onUnstake } = useUnstake(spawningPoolContract, unstakeAmount)
+  const { onUnstakeEarly } = useUnstakeEarly(spawningPoolContract, unstakeAmount)
+  const { onHarvest } = useHarvest(spawningPoolContract)
   const [confirming, setConfirming] = useState(false)
   const steps = useMemo(() => [], [])
   const now = Math.floor(Date.now() / 1000)
-  const mintingReady = randomNumber.gt(0)
   enum Step {
-    PairLp,
-    ApproveLp,
-    StakeLp,
-    Staked
+    UnlockSpawningPool,
+    ApproveZombie,
+    StakeZombie,
+    Staked,
   }
 
-  const lpName = `${token2.symbol}-${token1.symbol} LP`
-
-  let addLiquidityUrl: string
-  const quoteToken = token1 === tokens.wbnb ? token1 : token2
-  // eslint-disable-next-line no-nested-ternary
-  const quoteTokenUrl = quoteToken === tokens.wbnb ? dex === Dex.APESWAP ? 'ETH' : 'BNB' : getAddress(token1.address)
-
-  if (dex === Dex.APESWAP) {
-    addLiquidityUrl = `${APESWAP_ADD_LIQUIDITY_URL}/${quoteTokenUrl}/${getAddress(token2.address)}`
-  } else if (dex === Dex.AUTOSHARK) {
-    addLiquidityUrl = `${AUTOSHARK_ADD_LIQUIDITY_URL}/${quoteTokenUrl}/${getAddress(token2.address)}`
-  } else {
-    addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${quoteTokenUrl}/${getAddress(token2.address)}`
+  steps[Step.UnlockSpawningPool] = {
+    label: `Unlock`,
+    sent: `Unlocking...`,
+    func: onUnlock,
   }
-
-  steps[Step.PairLp] = {
-    label: `Pair on ${DEXS[dex]}`,
-    sent: `Redirecting...`,
-    func: () => { window.location.href = addLiquidityUrl },
-  }
-  steps[Step.ApproveLp] = {
-    label: `Approve ${lpName} LP`,
+  steps[Step.ApproveZombie] = {
+    label: `Approve ZMBE`,
     sent: `Approving...`,
-    func: approveLp,
+    func: approveZombie,
   }
-  steps[Step.StakeLp] = {
-    label: `Stake LP`,
+  steps[Step.StakeZombie] = {
+    label: `Stake ZMBE`,
     sent: `Staking...`,
     func: onStake,
   }
   steps[Step.Staked] = {
-    label: `Stake LP`,
+    label: `Stake ZMBE`,
     sent: `Staking...`,
     func: onStake,
   }
-  let currentStep = Step.PairLp
 
-  if (lpAllowance.gt(0)) {
-    currentStep = Step.StakeLp
+  let currentStep = Step.UnlockSpawningPool
+  if (paidUnlockFee) {
+    currentStep = Step.ApproveZombie
+  }
+  if (zombieAllowance.gt(0)) {
+    currentStep = Step.StakeZombie
   }
   if (amount.gt(0)) {
     currentStep = Step.Staked
   }
-  if (amount.isZero()) {
-    currentStep = Step.PairLp
+  if (zombieAllowance.isZero()) {
+    currentStep = Step.ApproveZombie
   }
 
   const handleTx = useCallback(async () => {
@@ -239,23 +206,30 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
   }
 
   const maxStakeAmount = () => {
-    setStakeAmount(lpBalance)
+    setStakeAmount(zombieBalance)
   }
 
   const maxUnstakeAmount = () => {
     setUnstakeAmount(amount)
   }
 
-  const unstakeButton = () => {
-    if(unstakeAmount.isZero() || unstakeAmount.isNaN()) {
-      return <SecondaryStakeButton onClick={onHarvest}>
-        <SecondaryStakeButtonText>Harvest</SecondaryStakeButtonText>
-      </SecondaryStakeButton>
-    }
-    if (tokenWithdrawalDate.gt(now)) {
-      return <SecondaryStakeButton onClick={onUnstakeEarly}>
-        <SecondaryStakeButtonText>Unstake Early</SecondaryStakeButtonText>
-      </SecondaryStakeButton>
+  const withdrawButton = () => {
+    if (amount.gt(0)) {
+      if (nftMintDate.lte(now)) {
+        return <SecondaryStakeButton onClick={onHarvest}>
+          <SecondaryStakeButtonText>Mint NFT</SecondaryStakeButtonText>
+        </SecondaryStakeButton>
+      }
+      if (unstakeAmount.isZero() || unstakeAmount.isNaN()) {
+        return <SecondaryStakeButton onClick={onHarvest}>
+          <SecondaryStakeButtonText>Harvest</SecondaryStakeButtonText>
+        </SecondaryStakeButton>
+      }
+      if (tokenWithdrawalDate.gt(now)) {
+        return <SecondaryStakeButton onClick={onUnstakeEarly}>
+          <SecondaryStakeButtonText>Unstake Early</SecondaryStakeButtonText>
+        </SecondaryStakeButton>
+      }
     }
 
     return <SecondaryStakeButton onClick={onUnstake}>
@@ -263,39 +237,18 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
     </SecondaryStakeButton>
   }
 
-
-  const withdrawButton = () => {
-    if (!nftMintTime.eq(2 ** 256 - 1)) {
-      return unstakeButton()
-    }
-    if (isMinting && !mintingReady) {
-      return <SecondaryStakeButton>
-        <SecondaryStakeButtonText>Minting in progress</SecondaryStakeButtonText>
-      </SecondaryStakeButton>
-    }
-    if (isMinting && mintingReady) {
-      return <SecondaryStakeButton onClick={onFinishMinting}>
-        <SecondaryStakeButtonText>Finish Minting</SecondaryStakeButtonText>
-      </SecondaryStakeButton>
-    }
-    return <SecondaryStakeButton onClick={onStartMinting}>
-      <SecondaryStakeButtonText>Start Minting</SecondaryStakeButtonText>
-    </SecondaryStakeButton>
-  }
-
-
   return <>
     <Separator />
     <BalanceContainer>
       <BalanceText onClick={maxStakeAmount}>Wallet
-        Balance: {numeral(getFullDisplayBalance(lpBalance)).format('(0.00 a)')} LP</BalanceText>
+        Balance: {numeral(getFullDisplayBalance(zombieBalance)).format('(0.00 a)')} ZMBE</BalanceText>
       <BalanceText onClick={maxUnstakeAmount}>Your
-        Staked: {numeral(getFullDisplayBalance(amount)).format('(0.00 a)')} LP</BalanceText>
+        Staked: {numeral(getFullDisplayBalance(amount)).format('(0.00 a)')} ZMBE</BalanceText>
     </BalanceContainer>
     <StakingContainer>
       <Inputs>
-        <StakingInput onInput={changeStakeInput} value={getBalanceNumber(stakeAmount)} placeholder='Stake amount'
-                      type='number' />
+        <StakingInput onInput={changeStakeInput} value={getBalanceNumber(stakeAmount)}
+                      placeholder='Stake amount' type='number' />
         <StakingInput onInput={changeUnstakeInput} value={getBalanceNumber(unstakeAmount)} placeholder='Unstake amount'
                       type='number' />
       </Inputs>
@@ -306,9 +259,9 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
         {withdrawButton()}
       </Buttons>
     </StakingContainer>
-    <ProgressBar tomb={tomb} />
+    <ProgressBar spawningPool={spawningPool} />
     <Separator />
-    <TableDetails tomb={tomb} />
+    <TableDetails spawningPool={spawningPool} />
   </>
 }
 

@@ -20,7 +20,7 @@ const tombOverlays: TombOverlay[] = [ // TODO move to tombs
     {
         id: 0,
         pid: {
-            56: 1,
+            56: 0,
             97: 2,
         },
         poolId: {
@@ -31,14 +31,14 @@ const tombOverlays: TombOverlay[] = [ // TODO move to tombs
         commonId: 44,
         uncommonId: 45,
         rareId: 46,
-        legendaryId: 48,
+        legendaryId: 47,
         userInfo: { ...DEFAULT_USER_INFO },
         poolInfo: { ...DEFAULT_POOL_INFO }
     },
     {
         id: 1,
         pid: {
-            56: 0,
+            56: 1,
             97: 1,
         },
         poolId: {
@@ -49,7 +49,7 @@ const tombOverlays: TombOverlay[] = [ // TODO move to tombs
         commonId: 44,
         uncommonId: 45,
         rareId: 46,
-        legendaryId: 47,
+        legendaryId: 48,
         userInfo: { ...DEFAULT_USER_INFO },
         poolInfo: { ...DEFAULT_POOL_INFO }
     },

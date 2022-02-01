@@ -8,7 +8,7 @@ interface ProgressLineProps {
 const ActiveLine = styled.div`
   width: 100%;
   height: 2px;
-  background: #4B7BDC 0% 0% no-repeat padding-box;
+  background: #30C00D 0% 0% no-repeat padding-box;
   position: relative;
   bottom: 1px;
 `

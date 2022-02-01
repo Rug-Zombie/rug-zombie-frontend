@@ -69,6 +69,10 @@ export const useGetTombs = () => {
   return useSelector((state: State) => state.tombs)
 }
 
+export const useGetSpawningPools = () => {
+  return useSelector((state: State) => state.spawningPools)
+}
+
 export const useGetTotalIntervalBlocks = () => {
   const intervalBlocks = useGetIntervalBlocks()
   const bufferBlocks = useGetBufferBlocks()

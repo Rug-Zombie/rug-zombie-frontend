@@ -58,7 +58,7 @@ const tokens = {
   punks: {
     symbol: 'PUNKS',
     address: {
-      56: '0x306d8c5B2Fa6999D2Af31a966FB4Eb76E0FEc955',
+      56: '0xf428FC1126B7C1b1bd266F1E415aC05255fa7748',
       97: '',
     },
     decimals: 9,
@@ -928,7 +928,7 @@ const tokens = {
   squidstake: {
     symbol: 'SQUID',
     address: {
-      56: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
+      56: '0xAE61e7dc989718E700C046a2483e93513eDCA484',
       97: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
     },
     decimals: 18,

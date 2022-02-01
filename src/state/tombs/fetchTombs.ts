@@ -24,14 +24,11 @@ const fetchTombs = async (tombsToFetch: TombConfig[]) => {
           {
             address: getAddress(tombConfig.lpAddress),
             name: 'totalSupply',
+            params: [],
           },
           {
             address: getAddress(tombConfig.lpAddress),
             name: 'token0',
-          },
-          {
-            address: getAddress(tombConfig.lpAddress),
-            name: 'token1',
           },
         ]
 
@@ -39,7 +36,6 @@ const fetchTombs = async (tombsToFetch: TombConfig[]) => {
           reserves,
           totalSupply,
           token0,
-          token1,
         ] = await multicall(lpPair, calls)
 
         calls = [

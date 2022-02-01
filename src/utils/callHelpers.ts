@@ -1,7 +1,5 @@
-import BigNumber from 'bignumber.js'
-import { DEFAULT_TOKEN_DECIMAL } from 'config'
 import { ethers } from 'ethers'
-import { BIG_TEN, BIG_ZERO } from './bigNumber'
+import { BIG_ZERO } from './bigNumber'
 
 export const approve = async (tokenContract, spenderAddress, account) => {
   return tokenContract.methods
@@ -72,6 +70,42 @@ export const unlock = async (drFrankensteinContract, pid, amount, account) => {
     })
 }
 
+export const spStake = async (spawningPoolContract, amount, account) => {
+  return spawningPoolContract.methods
+    .deposit(amount)
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const spUnstake = async (spawningPoolContract, amount, account) => {
+  return spawningPoolContract.methods
+    .withdraw(amount)
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const spUnstakeEarly = async (spawningPoolContract, amount, account) => {
+  return spawningPoolContract.methods
+    .leaveStakingEarly(amount)
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const spUnlock = async (spawningPoolContract, amount, account) => {
+  return spawningPoolContract.methods
+    .unlock()
+    .send({ from: account, value: amount })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
 export const depositRug = async (drFrankensteinContract, pid, amount, account) => {
   return drFrankensteinContract.methods
     .depositRug(pid, amount)
@@ -81,62 +115,18 @@ export const depositRug = async (drFrankensteinContract, pid, amount, account) =
     })
 }
 
-export const sousStake = async (sousChefContract, amount, decimals = 18, account) => {
-  return sousChefContract.methods
-    .deposit(new BigNumber(amount).times(BIG_TEN.pow(decimals)).toString())
-    .send({ from: account, gas: 200000 })
+export const startMinting = async (tombOverlayContract, pid, fee, account) => {
+  return tombOverlayContract.methods
+    .startMinting(pid)
+    .send({ from: account, value: fee })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
     })
 }
 
-export const sousStakeBnb = async (sousChefContract, amount, account) => {
-  return sousChefContract.methods
-    .deposit()
-    .send({ from: account, gas: 200000, value: new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString() })
-    .on('transactionHash', (tx) => {
-      return tx.transactionHash
-    })
-}
-
-export const sousUnstake = async (sousChefContract, amount, decimals = 18, account) => {
-  // shit code: hard fix for old CTK and BLK
-  if (sousChefContract.options.address === '0x3B9B74f48E89Ebd8b45a53444327013a2308A9BC') {
-    return sousChefContract.methods
-      .emergencyWithdraw()
-      .send({ from: account })
-      .on('transactionHash', (tx) => {
-        return tx.transactionHash
-      })
-  }
-  if (sousChefContract.options.address === '0xBb2B66a2c7C2fFFB06EA60BeaD69741b3f5BF831') {
-    return sousChefContract.methods
-      .emergencyWithdraw()
-      .send({ from: account })
-      .on('transactionHash', (tx) => {
-        return tx.transactionHash
-      })
-  }
-  if (sousChefContract.options.address === '0x453a75908fb5a36d482d5f8fe88eca836f32ead5') {
-    return sousChefContract.methods
-      .emergencyWithdraw()
-      .send({ from: account })
-      .on('transactionHash', (tx) => {
-        return tx.transactionHash
-      })
-  }
-
-  return sousChefContract.methods
-    .withdraw(new BigNumber(amount).times(BIG_TEN.pow(decimals)).toString())
-    .send({ from: account, gas: 200000 })
-    .on('transactionHash', (tx) => {
-      return tx.transactionHash
-    })
-}
-
-export const sousEmergencyUnstake = async (sousChefContract, amount, account) => {
-  return sousChefContract.methods
-    .emergencyWithdraw()
+export const finishMinting = async (tombOverlayContract, pid, account) => {
+  return tombOverlayContract.methods
+    .finishMinting(pid)
     .send({ from: account })
     .on('transactionHash', (tx) => {
       return tx.transactionHash

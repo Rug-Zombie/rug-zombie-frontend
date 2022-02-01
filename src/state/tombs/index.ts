@@ -26,11 +26,13 @@ const noAccountTombConfig: Tomb[] = tombsConfig.map((tomb) => ({
   },
   userInfo: {
     tokenWithdrawalDate: BIG_ZERO,
-    nftMintDate: BIG_ZERO,
+    nftMintTime: BIG_ZERO,
     amount: BIG_ZERO,
     pendingZombie: BIG_ZERO,
     lpBalance: BIG_ZERO,
     lpAllowance: BIG_ZERO,
+    randomNumber: BIG_ZERO,
+    isMinting: false
   },
 }))
 
@@ -88,13 +90,12 @@ export const fetchTombsUserDataAsync = (account: string) => async (dispatch) => 
     return {
       pid: getId(tombsConfig[index].pid),
       tokenWithdrawalDate: new BigNumber(userInfo.tokenWithdrawalDate._hex),
-      nftMintDate: new BigNumber(userInfo.nftRevivalDate._hex),
       amount: new BigNumber(userInfo.amount._hex),
       pendingZombie: new BigNumber(userTombEarnings[index]),
       lpBalance: new BigNumber(userTombLpInfo[index].balance),
       lpAllowance: new BigNumber(userTombLpInfo[index].allowance),
       nextNftMintDate: new BigNumber(userTombOverlayInfo[index].nextNftMintDate),
-      isMinting: new BigNumber(userTombOverlayInfo[index].isMinting),
+      isMinting: userTombOverlayInfo[index].isMinting,
       randomNumber: new BigNumber(userTombOverlayInfo[index].randomNumber),
       nftMintTime: new BigNumber(userTombOverlayInfo[index].nftMintTime),
     }

@@ -17,7 +17,7 @@ const HalfLine = styled.div`
   margin: 0 auto;
   height: 5px;
   width: 80%;
-  background-color: #4B7BDC;
+  background-color: #AE32AA;
 `
 
 const InfoCardTitle = styled.h3`
@@ -104,10 +104,10 @@ const HeaderCard: React.FC<HeaderCardProps> = ({ tvl, pageTvl, myHoldings }) => 
         <HalfLine />
         <InfoCardHeader>
           <InfoCardTitle>
-            Tombs
+            SpawningPools
           </InfoCardTitle>
           <InfoCardSubHeader>
-            Use your dead tokens to unlock tombs then stake ZMBE to earn Zombie & NFT rewards.
+            Use your dead tokens to unlock spawningPools then stake ZMBE to earn Zombie & NFT rewards.
           </InfoCardSubHeader>
         </InfoCardHeader>
         <InfoCardContent>

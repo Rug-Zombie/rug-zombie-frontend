@@ -3,16 +3,16 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import Top from './components/Top'
 import Bottom from './components/Bottom'
-import { Tomb } from '../../../../state/types'
+import { SpawningPool } from '../../../../state/types'
 import { getId } from '../../../../utils'
 
-const TombCard = styled.div<{ open: boolean }>`
+const SpawningPoolCard = styled.div<{ open: boolean }>`
   width: 100%;
   min-width: 260px;
   min-height: 130px;
   background-color: #151E21;
   border-radius: 10px;
-  border: ${props => (props.open ? '2px solid #4B7BDC' : '2px solid #151E21')};
+  border: ${props => (props.open ? '2px solid #30C00D' : '2px solid #151E21')};
   padding: 20px;
   margin: 0 0 0 0;
   display: flex;
@@ -33,23 +33,23 @@ const Shadow = styled.div`
   z-index: -1;
 `
 
-interface TombProps {
-  tomb: Tomb
+interface SpawningPoolProps {
+  spawningPool: SpawningPool
 }
 
-const TombTable: React.FC<TombProps> = ({ tomb }) => {
+const SpawningPoolTable: React.FC<SpawningPoolProps> = ({ spawningPool }) => {
   const [open, setOpen] = useState(false)
 
   return (
     <>
-    <TombCard open={open}>
-      <Top tomb={tomb} open={open} setOpen={setOpen} />
-      {open ? <Bottom tomb={tomb}/> : null}
-    </TombCard>
+    <SpawningPoolCard open={open}>
+      <Top spawningPool={spawningPool} open={open} setOpen={setOpen} />
+      {open ? <Bottom spawningPool={spawningPool}/> : null}
+    </SpawningPoolCard>
       <Shadow/>
     </>
 
   )
 }
 
-export default TombTable
+export default SpawningPoolTable

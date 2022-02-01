@@ -1,5 +1,14 @@
 import BigNumber from 'bignumber.js'
-import { CampaignType, FarmConfig, GraveConfig, Nft, PoolConfig, Team, TombConfig } from 'config/constants/types'
+import {
+  CampaignType,
+  FarmConfig,
+  GraveConfig,
+  Nft,
+  PoolConfig,
+  SpawningPoolConfig,
+  Team,
+  TombConfig,
+} from 'config/constants/types'
 
 export type TranslatableText =
   | string
@@ -40,11 +49,13 @@ export interface Grave extends GraveConfig {
 
 export interface TombUserInfo {
   tokenWithdrawalDate: BigNumber
-  nftMintDate: BigNumber
+  nftMintTime: BigNumber
   amount: BigNumber
   pendingZombie: BigNumber
   lpBalance: BigNumber
   lpAllowance: BigNumber
+  randomNumber: BigNumber
+  isMinting: boolean
 }
 
 export interface TombPoolInfo {
@@ -60,6 +71,31 @@ export interface TombPoolInfo {
 export interface Tomb extends TombConfig {
   userInfo?: TombUserInfo
   poolInfo: TombPoolInfo
+}
+
+export interface SpawningPoolInfo {
+  rewardPerBlock: BigNumber,
+  unlockFee: BigNumber,
+  minimumStake: BigNumber,
+  totalAmount: BigNumber,
+  withdrawCooldown: BigNumber,
+  nftMintTime: BigNumber,
+  rewardTokenPriceBnb: BigNumber
+}
+
+export interface SpawningPoolUserInfo {
+  paidUnlockFee: boolean,
+  tokenWithdrawalDate: BigNumber,
+  nftMintDate: BigNumber,
+  amount: BigNumber,
+  pendingReward: BigNumber,
+  zombieAllowance: BigNumber,
+  zombieBalance: BigNumber,
+}
+
+export interface SpawningPool extends SpawningPoolConfig {
+  userInfo?: SpawningPoolUserInfo;
+  poolInfo: SpawningPoolInfo;
 }
 
 export interface Farm extends FarmConfig {
@@ -114,6 +150,12 @@ export interface TombsState {
   data: Tomb[]
   userDataLoaded: boolean
 }
+
+export interface SpawningPoolState {
+  data: SpawningPool[]
+  userDataLoaded: boolean
+}
+
 
 export interface FarmsState {
   data: Farm[]
@@ -328,6 +370,7 @@ export interface State {
   pools: PoolsState
   graves: GraveState
   tombs: TombsState
+  spawningPools: SpawningPoolState
   predictions: PredictionsState
   profile: ProfileState
   teams: TeamsState

@@ -109,6 +109,20 @@ export interface TombConfig {
   isNew?: boolean,
 }
 
+export interface SpawningPoolConfig {
+  id: number,
+  name: string,
+  address: Address,
+  project: any,
+  endBlock: number,
+  endDate: number,
+  isNew?: boolean,
+  rewardToken: Token,
+  dex: Dex,
+  nftId: number,
+  color?: string,
+}
+
 export interface PoolConfig {
   sousId: number
   earningToken: Token
