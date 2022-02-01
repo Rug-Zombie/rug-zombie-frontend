@@ -18,7 +18,7 @@ export const useStake = (spawningPoolContract: Contract, amount: BigNumber) => {
 
   const handleStake = useCallback(async () => {
     try {
-      const tx = await spStake(spawningPoolContract, amount, account)
+      const tx = await spStake(spawningPoolContract, amount.toString(), account)
       // @ts-ignore
       dispatch(fetchGravesUserDataAsync(account))
       return tx
@@ -36,7 +36,7 @@ export const useUnstake = (spawningPoolContract: Contract, amount: BigNumber) =>
 
   const handleUnstake = useCallback(async () => {
     try {
-      const tx = await spUnstake(spawningPoolContract, amount, account)
+      const tx = await spUnstake(spawningPoolContract, amount.toString(), account)
       // @ts-ignore
       dispatch(fetchGravesUserDataAsync(account))
       return tx

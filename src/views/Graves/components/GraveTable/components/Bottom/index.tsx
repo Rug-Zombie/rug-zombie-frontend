@@ -124,10 +124,11 @@ const BalanceText = styled.button`
   color: #6B7682;
   background: none;
   border: none;
+
   &:hover {
     cursor: pointer;
   }
-`;
+`
 
 interface BottomProps {
   grave: Grave;
@@ -137,7 +138,16 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   const {
     pid,
     rug,
-    userInfo: { rugDeposited, rugAllowance, rugBalance, paidUnlockFee, amount, zombieAllowance, nftMintDate, tokenWithdrawalDate },
+    userInfo: {
+      rugDeposited,
+      rugAllowance,
+      rugBalance,
+      paidUnlockFee,
+      amount,
+      zombieAllowance,
+      nftMintDate,
+      tokenWithdrawalDate,
+    },
     poolInfo: { unlockFee },
   } = grave
   const [stakeAmount, setStakeAmount] = useState(BIG_ZERO)
@@ -212,6 +222,9 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   if (amount.gt(0)) {
     currentStep = Step.Staked
   }
+  if(zombieAllowance.isZero()) {
+    currentStep = Step.ApproveZombie
+  }
 
   const handleTx = useCallback(async () => {
     setConfirming(true)
@@ -268,17 +281,22 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
 
   return <>
     <Separator />
-  <BalanceContainer>
-    {currentStep === Step.ApproveRug || currentStep === Step.DepositRug ?
-      <BalanceText onClick={maxStakeAmount}>Wallet Balance: {numeral(getFullDisplayBalance(rugBalance, rug.decimals)).format('(0.00 a)')} {rug.symbol}</BalanceText> :
-      <BalanceText onClick={maxStakeAmount}>Wallet Balance: {numeral(getFullDisplayBalance(zombieBalance())).format('(0.00 a)')} ZMBE</BalanceText>
-    }
-      <BalanceText onClick={maxUnstakeAmount}>Your Staked: {numeral(getFullDisplayBalance(amount)).format('(0.00 a)')} ZMBE</BalanceText>
-  </BalanceContainer>
+    <BalanceContainer>
+      {currentStep === Step.ApproveRug || currentStep === Step.DepositRug ?
+        <BalanceText onClick={maxStakeAmount}>Wallet
+          Balance: {numeral(getFullDisplayBalance(rugBalance, rug.decimals)).format('(0.00 a)')} {rug.symbol}</BalanceText> :
+        <BalanceText onClick={maxStakeAmount}>Wallet
+          Balance: {numeral(getFullDisplayBalance(zombieBalance())).format('(0.00 a)')} ZMBE</BalanceText>
+      }
+      <BalanceText onClick={maxUnstakeAmount}>Your
+        Staked: {numeral(getFullDisplayBalance(amount)).format('(0.00 a)')} ZMBE</BalanceText>
+    </BalanceContainer>
     <StakingContainer>
       <Inputs>
-        <StakingInput onInput={changeStakeInput} value={getBalanceNumber(stakeAmount, decimals)} placeholder='Stake amount' type='number' />
-        <StakingInput onInput={changeUnstakeInput} value={getBalanceNumber(unstakeAmount)} placeholder='Unstake amount' type='number' />
+        <StakingInput onInput={changeStakeInput} value={getBalanceNumber(stakeAmount, decimals)}
+                      placeholder='Stake amount' type='number' />
+        <StakingInput onInput={changeUnstakeInput} value={getBalanceNumber(unstakeAmount)} placeholder='Unstake amount'
+                      type='number' />
       </Inputs>
       <Buttons>
         <PrimaryStakeButton onClick={handleTx}>

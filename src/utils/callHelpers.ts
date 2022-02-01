@@ -1,5 +1,4 @@
 import { ethers } from 'ethers'
-import { BIG_ZERO } from './bigNumber'
 
 export const approve = async (tokenContract, spenderAddress, account) => {
   return tokenContract.methods
@@ -10,7 +9,7 @@ export const approve = async (tokenContract, spenderAddress, account) => {
 export const stake = async (drFrankensteinContract, pid, amount, account) => {
   if (pid === 0) {
     return drFrankensteinContract.methods
-      .enterStaking(amount)
+      .enterStaking(amount.toString())
       .send({ from: account })
       .on('transactionHash', (tx) => {
         return tx.transactionHash
@@ -18,7 +17,7 @@ export const stake = async (drFrankensteinContract, pid, amount, account) => {
   }
 
   return drFrankensteinContract.methods
-    .deposit(pid, amount)
+    .deposit(pid, amount.toString())
     .send({ from: account })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
@@ -28,7 +27,7 @@ export const stake = async (drFrankensteinContract, pid, amount, account) => {
 export const unstake = async (drFrankensteinContract, pid, amount, account) => {
   if (pid === 0) {
     return drFrankensteinContract.methods
-      .leaveStaking(amount)
+      .leaveStaking(amount.toString())
       .send({ from: account })
       .on('transactionHash', (tx) => {
         return tx.transactionHash
@@ -36,7 +35,7 @@ export const unstake = async (drFrankensteinContract, pid, amount, account) => {
   }
 
   return drFrankensteinContract.methods
-    .withdraw(pid, amount)
+    .withdraw(pid, amount.toString())
     .send({ from: account })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
@@ -46,7 +45,7 @@ export const unstake = async (drFrankensteinContract, pid, amount, account) => {
 export const unstakeEarly = async (drFrankensteinContract, pid, amount, account) => {
   if (pid === 0) {
     return drFrankensteinContract.methods
-      .leaveStakingEarly(amount)
+      .leaveStakingEarly(amount.toString())
       .send({ from: account })
       .on('transactionHash', (tx) => {
         return tx.transactionHash
@@ -54,7 +53,7 @@ export const unstakeEarly = async (drFrankensteinContract, pid, amount, account)
   }
 
   return drFrankensteinContract.methods
-    .withdrawEarly(pid, amount)
+    .withdrawEarly(pid, amount.toString())
     .send({ from: account })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
@@ -64,7 +63,7 @@ export const unstakeEarly = async (drFrankensteinContract, pid, amount, account)
 export const unlock = async (drFrankensteinContract, pid, amount, account) => {
   return drFrankensteinContract.methods
     .unlock(pid)
-    .send({ from: account, value: amount })
+    .send({ from: account, value: amount.toString() })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
     })
@@ -73,7 +72,7 @@ export const unlock = async (drFrankensteinContract, pid, amount, account) => {
 export const spStake = async (spawningPoolContract, amount, account) => {
   return spawningPoolContract.methods
     .deposit(amount)
-    .send({ from: account })
+    .send({ from: account.toString() })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
     })
@@ -82,7 +81,7 @@ export const spStake = async (spawningPoolContract, amount, account) => {
 export const spUnstake = async (spawningPoolContract, amount, account) => {
   return spawningPoolContract.methods
     .withdraw(amount)
-    .send({ from: account })
+    .send({ from: account.toString() })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
     })
@@ -90,7 +89,7 @@ export const spUnstake = async (spawningPoolContract, amount, account) => {
 
 export const spUnstakeEarly = async (spawningPoolContract, amount, account) => {
   return spawningPoolContract.methods
-    .leaveStakingEarly(amount)
+    .leaveStakingEarly(amount.toString())
     .send({ from: account })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
@@ -100,7 +99,7 @@ export const spUnstakeEarly = async (spawningPoolContract, amount, account) => {
 export const spUnlock = async (spawningPoolContract, amount, account) => {
   return spawningPoolContract.methods
     .unlock()
-    .send({ from: account, value: amount })
+    .send({ from: account, value: amount.toString() })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
     })
@@ -108,7 +107,7 @@ export const spUnlock = async (spawningPoolContract, amount, account) => {
 
 export const depositRug = async (drFrankensteinContract, pid, amount, account) => {
   return drFrankensteinContract.methods
-    .depositRug(pid, amount)
+    .depositRug(pid, amount.toString())
     .send({ from: account })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
@@ -146,24 +145,6 @@ export const harvest = async (masterChefContract, pid, account) => {
   return masterChefContract.methods
     .deposit(pid, '0')
     .send({ from: account, gas: 200000 })
-    .on('transactionHash', (tx) => {
-      return tx.transactionHash
-    })
-}
-
-export const soushHarvest = async (sousChefContract, account) => {
-  return sousChefContract.methods
-    .deposit('0')
-    .send({ from: account, gas: 200000 })
-    .on('transactionHash', (tx) => {
-      return tx.transactionHash
-    })
-}
-
-export const soushHarvestBnb = async (sousChefContract, account) => {
-  return sousChefContract.methods
-    .deposit()
-    .send({ from: account, gas: 200000, value: BIG_ZERO })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
     })

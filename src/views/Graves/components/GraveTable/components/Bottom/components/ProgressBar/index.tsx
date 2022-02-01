@@ -62,6 +62,9 @@ const ProgressBar: React.FC<StakingProgressBarProps> = ({ grave }) => {
   if(amount.gt(0)) {
     currentStep = Step.Staked
   }
+  if(zombieAllowance.isZero()) {
+    currentStep = Step.ApproveZombie
+  }
 
   return <ProgressFlex>
     <IconFlex>
