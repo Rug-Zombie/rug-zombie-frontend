@@ -162,11 +162,13 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   const { onUnstake } = useUnstake(drFrankenstein, getId(pid), unstakeAmount)
   const { onUnstakeEarly } = useUnstakeEarly(drFrankenstein, getId(pid), unstakeAmount)
   const { onHarvest } = useHarvest(drFrankenstein, getId(pid))
-  const [confirming, setConfirming] = useState(false)
-  const steps = useMemo(() => [], [])
+  const [confirmingStake, setConfirmingStake] = useState(false)
+  const [confirmingUnstake, setConfirmingUnstake] = useState(false)
+  const stakingSteps = useMemo(() => [], [])
+  const unstakingSteps = useMemo(() => [], [])
   const now = Math.floor(Date.now() / 1000)
 
-  enum Step {
+  enum StakingStep {
     ApproveRug,
     DepositRug,
     UnlockGrave,
@@ -175,69 +177,123 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     Staked,
   }
 
-  steps[Step.ApproveRug] = {
+  stakingSteps[StakingStep.ApproveRug] = {
     label: `Approve ${rug.symbol}`,
     sent: `Approving...`,
     func: approveRug,
   }
-  steps[Step.DepositRug] = {
+  stakingSteps[StakingStep.DepositRug] = {
     label: `Deposit ${rug.symbol}`,
     sent: `Depositing...`,
     func: onDepositRug,
   }
-  steps[Step.UnlockGrave] = {
+  stakingSteps[StakingStep.UnlockGrave] = {
     label: `Unlock`,
     sent: `Unlocking...`,
     func: onUnlock,
   }
-  steps[Step.ApproveZombie] = {
+  stakingSteps[StakingStep.ApproveZombie] = {
     label: `Approve ZMBE`,
     sent: `Approving...`,
     func: approveZombie,
   }
-  steps[Step.StakeZombie] = {
+  stakingSteps[StakingStep.StakeZombie] = {
     label: `Stake ZMBE`,
     sent: `Staking...`,
     func: onStake,
   }
-  steps[Step.Staked] = {
+  stakingSteps[StakingStep.Staked] = {
     label: `Stake ZMBE`,
     sent: `Staking...`,
     func: onStake,
   }
 
-  let currentStep = Step.ApproveRug
+  let currentStep = StakingStep.ApproveRug
   if (rugAllowance.gt(0)) {
-    currentStep = Step.DepositRug
+    currentStep = StakingStep.DepositRug
   }
   if (rugDeposited.gt(0)) {
-    currentStep = Step.UnlockGrave
+    currentStep = StakingStep.UnlockGrave
   }
   if (paidUnlockFee) {
-    currentStep = Step.ApproveZombie
+    currentStep = StakingStep.ApproveZombie
   }
   if (zombieAllowance.gt(0) && paidUnlockFee) {
-    currentStep = Step.StakeZombie
+    currentStep = StakingStep.StakeZombie
   }
   if (amount.gt(0)) {
-    currentStep = Step.Staked
+    currentStep = StakingStep.Staked
   }
   if(zombieAllowance.isZero()) {
-    currentStep = Step.ApproveZombie
+    currentStep = StakingStep.ApproveZombie
   }
 
   const handleTx = useCallback(async () => {
-    setConfirming(true)
-    steps[currentStep].func()
+    setConfirmingStake(true)
+    stakingSteps[currentStep].func()
       .then(() => {
-        setConfirming(false)
+        setConfirmingStake(false)
       })
       .catch(() => {
-        setConfirming(false)
+        setConfirmingStake(false)
       })
-  }, [currentStep, steps])
-  const decimals = currentStep === Step.ApproveRug || currentStep === Step.DepositRug ? rug.decimals : tokens.zmbe.decimals
+  }, [currentStep, stakingSteps])
 
+  enum UnstakingStep {
+    MintNft,
+    Harvest,
+    Unstake,
+    UnstakeEarly,
+    StakeZombie,
+    Staked,
+  }
+
+  unstakingSteps[UnstakingStep.MintNft] = {
+    label: `Mint NFT`,
+    sent: `Minting...`,
+    func: onHarvest,
+  }
+  unstakingSteps[UnstakingStep.Harvest] = {
+    label: `Harvest`,
+    sent: `Harvesting...`,
+    func: onHarvest,
+  }
+  unstakingSteps[UnstakingStep.Unstake] = {
+    label: `Unstake`,
+    sent: `Unstaking...`,
+    func: onUnstake,
+  }
+  unstakingSteps[UnstakingStep.UnstakeEarly] = {
+    label: `Unstake Early`,
+    sent: `Unstaking...`,
+    func: onUnstakeEarly,
+  }
+
+  let currentUnstakingStep = UnstakingStep.Unstake
+  if (amount.gt(0)) {
+    if (nftMintDate.lte(now)) {
+      currentUnstakingStep = UnstakingStep.MintNft
+    } else if (unstakeAmount.isZero() || unstakeAmount.isNaN()) {
+      currentUnstakingStep = UnstakingStep.Harvest
+    } else if (tokenWithdrawalDate.gt(now)) {
+      currentUnstakingStep = UnstakingStep.UnstakeEarly
+    }
+  }
+
+  const handleUnstakeTx = useCallback(async () => {
+    setConfirmingUnstake(true)
+    unstakingSteps[currentUnstakingStep].func()
+      .then(() => {
+        setConfirmingUnstake(false)
+      })
+      .catch(() => {
+        setConfirmingUnstake(false)
+      })
+  }, [currentUnstakingStep, unstakingSteps])
+
+
+
+  const decimals = currentStep === StakingStep.ApproveRug || currentStep === StakingStep.DepositRug ? rug.decimals : tokens.zmbe.decimals
   const changeStakeInput = (e) => {
     setStakeAmount(getDecimalAmount(new BigNumber(e.target.value), decimals))
   }
@@ -247,7 +303,7 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   }
 
   const maxStakeAmount = () => {
-    const maxAmount = currentStep === Step.ApproveRug || currentStep === Step.DepositRug ? rugBalance : zombieBalance()
+    const maxAmount = currentStep === StakingStep.ApproveRug || currentStep === StakingStep.DepositRug ? rugBalance : zombieBalance()
     setStakeAmount(maxAmount)
   }
 
@@ -255,34 +311,10 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     setUnstakeAmount(amount)
   }
 
-  const withdrawButton = () => {
-    if (amount.gt(0)) {
-      if (nftMintDate.lte(now)) {
-        return <SecondaryStakeButton onClick={onHarvest}>
-          <SecondaryStakeButtonText>Mint NFT</SecondaryStakeButtonText>
-        </SecondaryStakeButton>
-      }
-      if (unstakeAmount.isZero() || unstakeAmount.isNaN()) {
-        return <SecondaryStakeButton onClick={onHarvest}>
-          <SecondaryStakeButtonText>Harvest</SecondaryStakeButtonText>
-        </SecondaryStakeButton>
-      }
-      if (tokenWithdrawalDate.gt(now)) {
-        return <SecondaryStakeButton onClick={onUnstakeEarly}>
-          <SecondaryStakeButtonText>Unstake Early</SecondaryStakeButtonText>
-        </SecondaryStakeButton>
-      }
-    }
-
-    return <SecondaryStakeButton onClick={onUnstake}>
-      <SecondaryStakeButtonText>Unstake</SecondaryStakeButtonText>
-    </SecondaryStakeButton>
-  }
-
   return <>
     <Separator />
     <BalanceContainer>
-      {currentStep === Step.ApproveRug || currentStep === Step.DepositRug ?
+      {currentStep === StakingStep.ApproveRug || currentStep === StakingStep.DepositRug ?
         <BalanceText onClick={maxStakeAmount}>Wallet
           Balance: {numeral(getFullDisplayBalance(rugBalance, rug.decimals)).format('(0.00 a)')} {rug.symbol}</BalanceText> :
         <BalanceText onClick={maxStakeAmount}>Wallet
@@ -300,9 +332,11 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
       </Inputs>
       <Buttons>
         <PrimaryStakeButton onClick={handleTx}>
-          <PrimaryStakeButtonText>{confirming ? steps[currentStep].sent : steps[currentStep].label}</PrimaryStakeButtonText>
+          <PrimaryStakeButtonText>{confirmingStake ? stakingSteps[currentStep].sent : stakingSteps[currentStep].label}</PrimaryStakeButtonText>
         </PrimaryStakeButton>
-        {withdrawButton()}
+        <SecondaryStakeButton onClick={handleUnstakeTx}>
+          <SecondaryStakeButtonText>{confirmingUnstake ? unstakingSteps[currentUnstakingStep].sent : unstakingSteps[currentUnstakingStep].label}</SecondaryStakeButtonText>
+        </SecondaryStakeButton>
       </Buttons>
     </StakingContainer>
     <ProgressBar grave={grave} />

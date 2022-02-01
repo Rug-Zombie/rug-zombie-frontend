@@ -2,6 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { BigNumber } from 'bignumber.js'
 import numeral from 'numeral'
+import { ethers } from 'ethers'
 import ProgressBar from './components/ProgressBar'
 import TableDetails from './components/TableDetails'
 import { Tomb } from '../../../../../../state/types'
@@ -148,7 +149,7 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
     token2,
     dex,
     userInfo: { lpAllowance, lpBalance, nftMintTime, tokenWithdrawalDate, randomNumber, isMinting, amount },
-    poolInfo: { mintingFee }
+    poolInfo: { mintingFee },
   } = tomb
   const [stakeAmount, setStakeAmount] = useState(BIG_ZERO)
   const [unstakeAmount, setUnstakeAmount] = useState(BIG_ZERO)
@@ -162,9 +163,12 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
   const { onStartMinting } = useStartMinting(drFrankenstein, getId(pid), mintingFee)
   const { onFinishMinting } = useFinishMinting(drFrankenstein, getId(pid))
   const [confirming, setConfirming] = useState(false)
+  const [confirmingUnstake, setConfirmingUnstake] = useState(false)
   const steps = useMemo(() => [], [])
+  const unstakingSteps = useMemo(() => [], [])
   const now = Math.floor(Date.now() / 1000)
   const mintingReady = randomNumber.gt(0)
+
   enum Step {
     PairLp,
     ApproveLp,
@@ -190,7 +194,9 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
   steps[Step.PairLp] = {
     label: `Pair on ${DEXS[dex]}`,
     sent: `Redirecting...`,
-    func: () => { window.location.href = addLiquidityUrl },
+    func: () => {
+      window.location.href = addLiquidityUrl
+    },
   }
   steps[Step.ApproveLp] = {
     label: `Approve ${lpName} LP`,
@@ -230,6 +236,85 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
       })
   }, [currentStep, steps])
 
+  enum UnstakingStep {
+    StartMinting,
+    MintingInProgress,
+    FinishMinting,
+    Harvest,
+    Unstake,
+    UnstakeEarly,
+  }
+
+  unstakingSteps[UnstakingStep.StartMinting] = {
+    label: `Start Minting`,
+    sent: `Confirming...`,
+    func: onStartMinting,
+  }
+  unstakingSteps[UnstakingStep.StartMinting] = {
+    label: `Minting in progress`,
+    sent: `Confirming...`,
+    func: null,
+  }
+  unstakingSteps[UnstakingStep.FinishMinting] = {
+    label: `Finish Minting`,
+    sent: `Minting...`,
+    func: onFinishMinting,
+  }
+  unstakingSteps[UnstakingStep.Unstake] = {
+    label: `Unstake`,
+    sent: `Unstaking...`,
+    func: onUnstake,
+  }
+  unstakingSteps[UnstakingStep.UnstakeEarly] = {
+    label: `Unstake Early`,
+    sent: `Unstaking...`,
+    func: onUnstakeEarly,
+  }
+    unstakingSteps[UnstakingStep.Harvest] = {
+    label: `Harvest`,
+    sent: `Harvesting...`,
+    func: onHarvest,
+  }
+
+
+  let currentUnstakingStep
+  if (unstakeAmount.isZero() || unstakeAmount.isNaN()) {
+    currentUnstakingStep = UnstakingStep.Harvest
+  } else if (tokenWithdrawalDate.gt(now)) {
+    currentUnstakingStep = UnstakingStep.UnstakeEarly
+  } else {
+    currentUnstakingStep = UnstakingStep.Unstake
+  }
+
+  if (isMinting && !mintingReady) {
+    currentUnstakingStep = UnstakingStep.MintingInProgress
+  } else if (isMinting && mintingReady) {
+    currentUnstakingStep = UnstakingStep.FinishMinting
+  } else {
+    currentUnstakingStep = UnstakingStep.StartMinting
+  }
+
+  if (!nftMintTime.eq(ethers.constants.MaxUint256._hex)) {
+    if (unstakeAmount.isZero() || unstakeAmount.isNaN()) {
+      currentUnstakingStep = UnstakingStep.Harvest
+    } else if (tokenWithdrawalDate.gt(now)) {
+      currentUnstakingStep = UnstakingStep.UnstakeEarly
+    } else {
+      currentUnstakingStep = UnstakingStep.Unstake
+    }
+  }
+
+  const handleUnstakingTx = useCallback(async () => {
+    setConfirmingUnstake(true)
+    unstakingSteps[currentUnstakingStep].func()
+      .then(() => {
+        setConfirmingUnstake(false)
+      })
+      .catch(() => {
+        setConfirmingUnstake(false)
+      })
+  }, [currentUnstakingStep, unstakingSteps])
+
   const changeStakeInput = (e) => {
     setStakeAmount(getDecimalAmount(new BigNumber(e.target.value)))
   }
@@ -245,44 +330,6 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
   const maxUnstakeAmount = () => {
     setUnstakeAmount(amount)
   }
-
-  const unstakeButton = () => {
-    if(unstakeAmount.isZero() || unstakeAmount.isNaN()) {
-      return <SecondaryStakeButton onClick={onHarvest}>
-        <SecondaryStakeButtonText>Harvest</SecondaryStakeButtonText>
-      </SecondaryStakeButton>
-    }
-    if (tokenWithdrawalDate.gt(now)) {
-      return <SecondaryStakeButton onClick={onUnstakeEarly}>
-        <SecondaryStakeButtonText>Unstake Early</SecondaryStakeButtonText>
-      </SecondaryStakeButton>
-    }
-
-    return <SecondaryStakeButton onClick={onUnstake}>
-      <SecondaryStakeButtonText>Unstake</SecondaryStakeButtonText>
-    </SecondaryStakeButton>
-  }
-
-
-  const withdrawButton = () => {
-    if (!nftMintTime.eq(2 ** 256 - 1)) {
-      return unstakeButton()
-    }
-    if (isMinting && !mintingReady) {
-      return <SecondaryStakeButton>
-        <SecondaryStakeButtonText>Minting in progress</SecondaryStakeButtonText>
-      </SecondaryStakeButton>
-    }
-    if (isMinting && mintingReady) {
-      return <SecondaryStakeButton onClick={onFinishMinting}>
-        <SecondaryStakeButtonText>Finish Minting</SecondaryStakeButtonText>
-      </SecondaryStakeButton>
-    }
-    return <SecondaryStakeButton onClick={onStartMinting}>
-      <SecondaryStakeButtonText>Start Minting</SecondaryStakeButtonText>
-    </SecondaryStakeButton>
-  }
-
 
   return <>
     <Separator />
@@ -303,7 +350,9 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
         <PrimaryStakeButton onClick={handleTx}>
           <PrimaryStakeButtonText>{confirming ? steps[currentStep].sent : steps[currentStep].label}</PrimaryStakeButtonText>
         </PrimaryStakeButton>
-        {withdrawButton()}
+        <SecondaryStakeButton onClick={handleUnstakingTx}>
+          <SecondaryStakeButtonText>{confirmingUnstake ? unstakingSteps[currentUnstakingStep].sent : unstakingSteps[currentUnstakingStep].label}</SecondaryStakeButtonText>
+        </SecondaryStakeButton>
       </Buttons>
     </StakingContainer>
     <ProgressBar tomb={tomb} />
