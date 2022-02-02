@@ -180,16 +180,15 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
   const lpName = `${token2.symbol}-${token1.symbol} LP`
 
   let addLiquidityUrl: string
-  const quoteToken = token1 === tokens.wbnb ? token1 : token2
-  // eslint-disable-next-line no-nested-ternary
-  const quoteTokenUrl = quoteToken === tokens.wbnb ? dex === Dex.APESWAP ? 'ETH' : 'BNB' : getAddress(token1.address)
+  const sortedTokens = token1 === tokens.wbnb ? [token1, token2] : [token2, token1]
+  const quoteTokenUrl = dex === Dex.APESWAP ? 'ETH' : 'BNB'
 
   if (dex === Dex.APESWAP) {
-    addLiquidityUrl = `${APESWAP_ADD_LIQUIDITY_URL}/${quoteTokenUrl}/${getAddress(token2.address)}`
+    addLiquidityUrl = `${APESWAP_ADD_LIQUIDITY_URL}/${quoteTokenUrl}/${sortedTokens[1]}`
   } else if (dex === Dex.AUTOSHARK) {
-    addLiquidityUrl = `${AUTOSHARK_ADD_LIQUIDITY_URL}/${quoteTokenUrl}/${getAddress(token2.address)}`
+    addLiquidityUrl = `${AUTOSHARK_ADD_LIQUIDITY_URL}/${quoteTokenUrl}/${sortedTokens[1]}`
   } else {
-    addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${quoteTokenUrl}/${getAddress(token2.address)}`
+    addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${quoteTokenUrl}/${sortedTokens[1]}`
   }
 
   steps[Step.PairLp] = {
@@ -292,9 +291,6 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
   } else {
     currentUnstakingStep = UnstakingStep.Unstake
   }
-
-  console.log(DEXS[dex])
-  console.log(nftMintTime.toString())
 
   const handleUnstakingTx = useCallback(async () => {
     setConfirmingUnstake(true)

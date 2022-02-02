@@ -1,5 +1,5 @@
 import { BASE_BSC_SCAN_URLS } from '../config'
-import { Id } from '../config/constants/types'
+import { Address, Id } from '../config/constants/types'
 import instabuys from '../config/constants/instabuys'
 
 // eslint-disable-next-line import/prefer-default-export
@@ -39,4 +39,8 @@ export function instaBuyById (id: number) {
 
 export function formatAddress (address: string): string {
   return `${address.slice(0, 4)}...${address.slice(address.length - 4, address.length)}`
+}
+
+export function equalAddresses(addr1: string, addr2: string): boolean {
+  return addr1.toLowerCase() === addr2.toLowerCase()
 }

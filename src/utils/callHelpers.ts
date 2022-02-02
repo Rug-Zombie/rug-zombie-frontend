@@ -132,9 +132,9 @@ export const finishMinting = async (tombOverlayContract, pid, account) => {
     })
 }
 
-export const harvest = async (masterChefContract, pid, account) => {
+export const harvest = async (drFrankensteinContract, pid, account) => {
   if (pid === 0) {
-    return masterChefContract.methods
+    return drFrankensteinContract.methods
       .leaveStaking('0')
       .send({ from: account, gas: 200000 })
       .on('transactionHash', (tx) => {
@@ -142,7 +142,7 @@ export const harvest = async (masterChefContract, pid, account) => {
       })
   }
 
-  return masterChefContract.methods
+  return drFrankensteinContract.methods
     .deposit(pid, '0')
     .send({ from: account, gas: 200000 })
     .on('transactionHash', (tx) => {

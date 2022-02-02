@@ -9,8 +9,8 @@ import {
   spUnstake,
   spUnstakeEarly,
 } from '../utils/callHelpers'
-import { fetchGravesUserDataAsync } from '../state/graves'
 import { BIG_ZERO } from '../utils/bigNumber'
+import { fetchSpawningPoolsUserDataAsync } from '../state/spawningPools'
 
 export const useStake = (spawningPoolContract: Contract, amount: BigNumber) => {
   const dispatch = useAppDispatch()
@@ -20,7 +20,7 @@ export const useStake = (spawningPoolContract: Contract, amount: BigNumber) => {
     try {
       const tx = await spStake(spawningPoolContract, amount.toString(), account)
       // @ts-ignore
-      dispatch(fetchGravesUserDataAsync(account))
+      dispatch(fetchSpawningPoolsUserDataAsync(account))
       return tx
     } catch (e) {
       return false
@@ -38,7 +38,7 @@ export const useUnstake = (spawningPoolContract: Contract, amount: BigNumber) =>
     try {
       const tx = await spUnstake(spawningPoolContract, amount.toString(), account)
       // @ts-ignore
-      dispatch(fetchGravesUserDataAsync(account))
+      dispatch(fetchSpawningPoolsUserDataAsync(account))
       return tx
     } catch (e) {
       return false
@@ -56,7 +56,7 @@ export const useUnstakeEarly = (spawningPoolContract: Contract, amount: BigNumbe
     try {
       const tx = await spUnstakeEarly(spawningPoolContract, amount, account)
       // @ts-ignore
-      dispatch(fetchGravesUserDataAsync(account))
+      dispatch(fetchSpawningPoolsUserDataAsync(account))
       return tx
     } catch (e) {
       return false
@@ -74,7 +74,7 @@ export const useHarvest = (spawningPoolContract: Contract) => {
     try {
       const tx = await spUnstake(spawningPoolContract, BIG_ZERO, account)
       // @ts-ignore
-      dispatch(fetchGravesUserDataAsync(account))
+      dispatch(fetchSpawningPoolsUserDataAsync(account))
       return tx
     } catch (e) {
       return false
@@ -92,7 +92,7 @@ export const useUnlock = (spawningPoolContract: Contract, amount: BigNumber) => 
     try {
       const tx = await spUnlock(spawningPoolContract, amount, account)
       // @ts-ignore
-      dispatch(fetchGravesUserDataAsync(account))
+      dispatch(fetchSpawningPoolsUserDataAsync(account))
       return tx
     } catch (e) {
       return false

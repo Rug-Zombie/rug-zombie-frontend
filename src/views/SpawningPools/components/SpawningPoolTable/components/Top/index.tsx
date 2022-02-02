@@ -7,7 +7,7 @@ import { bnbPriceUsd, zombiePriceUsd } from 'redux/get'
 import { Token } from 'config/constants/types'
 import SpawningPoolItem, { SpawningPoolItemType } from './SpawningPoolItem'
 import { SpawningPool } from '../../../../../../state/types'
-import { getBalanceAmount, getBalanceNumber, getDecimalAmount } from '../../../../../../utils/formatBalance'
+import { getBalanceAmount, getBalanceNumber, getFullDisplayBalance } from '../../../../../../utils/formatBalance'
 import { getPoolApr } from '../../../../../../utils/apr'
 
 const SpawningPoolColumn = styled.div`
@@ -126,6 +126,7 @@ interface TopProps {
 
 const Top: React.FC<TopProps> = ({ spawningPool, open, setOpen }) => {
   const {
+    id,
     name,
     rewardToken,
     isNew,
@@ -139,34 +140,38 @@ const Top: React.FC<TopProps> = ({ spawningPool, open, setOpen }) => {
   const bigTvl = totalAmount.times(zombiePriceUsd())
   const tvl = getBalanceNumber(bigTvl)
 
-  const rewardTokenPrice = getBalanceNumber(rewardTokenPriceBnb.times(bnbPriceUsd()))
-  console.log(rewardToken.symbol)
-  console.log(rewardTokenPrice)
+  const rewardTokenPrice = rewardTokenPriceBnb.times(bnbPriceUsd()).toNumber()
   const yearly = getPoolApr(zombiePriceUsd(), rewardTokenPrice, getBalanceNumber(totalAmount), getBalanceNumber(rewardPerBlock, rewardToken.decimals))
   const daily = yearly / 365
 
   const now = Math.floor(Date.now() / 1000)
 
+  if (id === 15) {
+    console.log(pendingReward.toString())
+
+  }
+
   const nftTime = () => {
-    if(amount.isZero()) {
+    if (amount.isZero()) {
       return <SpawningPoolItem label='NFT Timer' value='N/A' type={SpawningPoolItemType.Text} />
     }
     const remainingNftTime = nftMintDate.toNumber() - now
-    if(remainingNftTime <= 0) {
+    if (remainingNftTime <= 0) {
       return <SpawningPoolItem label='NFT Timer' value='NFT Ready' type={SpawningPoolItemType.Text} />
     }
     return <SpawningPoolItem label='NFT Timer' value={remainingNftTime} type={SpawningPoolItemType.Duration} />
   }
 
   const cooldownTime = () => {
-    if(amount.isZero()) {
+    if (amount.isZero()) {
       return <SpawningPoolItem label='Withdrawal Timer' value='N/A' type={SpawningPoolItemType.Text} />
     }
     const remainingCooldownTime = tokenWithdrawalDate.toNumber() - now
-    if(remainingCooldownTime <= 0) {
+    if (remainingCooldownTime <= 0) {
       return <SpawningPoolItem label='Withdrawal Timer' value='None' type={SpawningPoolItemType.Text} />
     }
-    return <SpawningPoolItem label='Withdrawal Timer' value={remainingCooldownTime} type={SpawningPoolItemType.Duration} />
+    return <SpawningPoolItem label='Withdrawal Timer' value={remainingCooldownTime}
+                             type={SpawningPoolItemType.Duration} />
   }
 
   return (
@@ -187,7 +192,9 @@ const Top: React.FC<TopProps> = ({ spawningPool, open, setOpen }) => {
       </SpawningPoolHeaderRow>
       <SpawningPoolSubRow>
         <Amounts>
-          <SpawningPoolItem label='Earned' unit='ZMBE' value={getBalanceNumber(pendingReward)} type={SpawningPoolItemType.Number} />
+          <SpawningPoolItem label='Earned' unit={`${rewardToken.symbol} ($${getFullDisplayBalance(pendingReward.times(rewardTokenPrice), rewardToken.decimals, 2)})`}
+                            value={getBalanceNumber(pendingReward, rewardToken.decimals)}
+                            type={SpawningPoolItemType.Number} />
           <SpawningPoolItem label='Yearly' value={yearly} type={SpawningPoolItemType.Percentage} />
           <SpawningPoolItem label='Daily' value={daily} type={SpawningPoolItemType.Percentage} />
           <SpawningPoolItem label='TVL' value={tvl} type={SpawningPoolItemType.Money} />

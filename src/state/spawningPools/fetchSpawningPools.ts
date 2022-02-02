@@ -5,6 +5,9 @@ import multicall from 'utils/multicall'
 import { getAddress } from 'utils/addressHelpers'
 import { Dex, SpawningPoolConfig } from 'config/constants/types'
 import { getApeswapFactoryContract, getPancakeFactoryContract, getZombieContract } from '../../utils/contractHelpers'
+import { equalAddresses } from '../../utils'
+import { getBalanceAmount } from '../../utils/formatBalance'
+import { DEXS } from '../../config'
 
 const fetchSpawningPools = async (spawningPoolToFetch: SpawningPoolConfig[]) => {
   const wbnb = {
@@ -79,11 +82,12 @@ const fetchSpawningPools = async (spawningPoolToFetch: SpawningPoolConfig[]) => 
 
       const totalAmount = await getZombieContract().methods.balanceOf(getAddress(spawningPoolConfig.address)).call()
 
-      const [reserves, token0] = await multicall(pancakePair, calls)
+      const [reserves, [token0]] = await multicall(pancakePair, calls)
 
-      const bnbReserve = reserves[token0 === getAddress(wbnb) ? 0 : 1]
-      const rewardTokenReserve = reserves[token0 === getAddress(wbnb) ? 1 : 0]
-      const rewardTokenPriceBnb = new BigNumber(bnbReserve._hex).div(rewardTokenReserve._hex)
+      const bnbReserve = reserves[equalAddresses(token0, getAddress(wbnb)) ? 0 : 1]
+      const rewardTokenReserve = reserves[equalAddresses(token0, getAddress(wbnb)) ? 1 : 0]
+      const rewardTokenPriceBnb = getBalanceAmount(new BigNumber(bnbReserve._hex)).div(getBalanceAmount(rewardTokenReserve._hex, spawningPoolConfig.rewardToken.decimals))
+
       return {
         ...spawningPoolConfig,
         poolInfo: {

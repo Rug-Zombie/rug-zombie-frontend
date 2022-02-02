@@ -30,7 +30,7 @@ export const fetchSpawningPoolUserEarnings = async (account: string, spawningPoo
 
   const rawEarnings = await multicall(spawningPoolAbi, calls)
   const parsedEarnings = rawEarnings.map((earnings) => {
-    return new BigNumber(earnings).toJSON()
+    return new BigNumber(earnings)
   })
   return parsedEarnings
 }
