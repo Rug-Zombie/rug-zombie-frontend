@@ -8,7 +8,7 @@ import TableDetails from './components/TableDetails'
 import { Tomb } from '../../../../../../state/types'
 import { useApprove } from '../../../../../../hooks/useApprove'
 import { getAddress, getDrFrankensteinAddress } from '../../../../../../utils/addressHelpers'
-import { useDrFrankenstein, useERC20 } from '../../../../../../hooks/useContract'
+import { useDrFrankenstein, useERC20, useTombOverlay } from '../../../../../../hooks/useContract'
 import {
   useFinishMinting,
   useHarvest,
@@ -155,13 +155,14 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
   const [unstakeAmount, setUnstakeAmount] = useState(BIG_ZERO)
   const lpContract = useERC20(getAddress(lpAddress))
   const drFrankenstein = useDrFrankenstein()
+  const tombOverlay = useTombOverlay()
   const approveLp = useApprove(lpContract, getDrFrankensteinAddress()).onApprove
   const { onStake } = useStake(drFrankenstein, getId(pid), stakeAmount)
   const { onUnstake } = useUnstake(drFrankenstein, getId(pid), unstakeAmount)
   const { onUnstakeEarly } = useUnstakeEarly(drFrankenstein, getId(pid), unstakeAmount)
   const { onHarvest } = useHarvest(drFrankenstein, getId(pid))
-  const { onStartMinting } = useStartMinting(drFrankenstein, getId(pid), mintingFee)
-  const { onFinishMinting } = useFinishMinting(drFrankenstein, getId(pid))
+  const { onStartMinting } = useStartMinting(tombOverlay, getId(pid), mintingFee)
+  const { onFinishMinting } = useFinishMinting(tombOverlay, getId(pid))
   const [confirming, setConfirming] = useState(false)
   const [confirmingUnstake, setConfirmingUnstake] = useState(false)
   const steps = useMemo(() => [], [])
@@ -250,7 +251,7 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
     sent: `Confirming...`,
     func: onStartMinting,
   }
-  unstakingSteps[UnstakingStep.StartMinting] = {
+  unstakingSteps[UnstakingStep.MintingInProgress] = {
     label: `Minting in progress`,
     sent: `Confirming...`,
     func: null,
@@ -278,7 +279,13 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
 
 
   let currentUnstakingStep
-  if (unstakeAmount.isZero() || unstakeAmount.isNaN()) {
+  if (isMinting && !mintingReady) {
+    currentUnstakingStep = UnstakingStep.MintingInProgress
+  } else if (isMinting && mintingReady) {
+    currentUnstakingStep = UnstakingStep.FinishMinting
+  } else if(amount.gt(0) && nftMintTime.isZero()) {
+    currentUnstakingStep = UnstakingStep.StartMinting
+  } else if ((unstakeAmount.isZero() || unstakeAmount.isNaN()) && amount.gt(0)) {
     currentUnstakingStep = UnstakingStep.Harvest
   } else if (tokenWithdrawalDate.gt(now)) {
     currentUnstakingStep = UnstakingStep.UnstakeEarly
@@ -286,23 +293,8 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
     currentUnstakingStep = UnstakingStep.Unstake
   }
 
-  if (isMinting && !mintingReady) {
-    currentUnstakingStep = UnstakingStep.MintingInProgress
-  } else if (isMinting && mintingReady) {
-    currentUnstakingStep = UnstakingStep.FinishMinting
-  } else {
-    currentUnstakingStep = UnstakingStep.StartMinting
-  }
-
-  if (!nftMintTime.eq(ethers.constants.MaxUint256._hex)) {
-    if (unstakeAmount.isZero() || unstakeAmount.isNaN()) {
-      currentUnstakingStep = UnstakingStep.Harvest
-    } else if (tokenWithdrawalDate.gt(now)) {
-      currentUnstakingStep = UnstakingStep.UnstakeEarly
-    } else {
-      currentUnstakingStep = UnstakingStep.Unstake
-    }
-  }
+  console.log(DEXS[dex])
+  console.log(nftMintTime.toString())
 
   const handleUnstakingTx = useCallback(async () => {
     setConfirmingUnstake(true)
