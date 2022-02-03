@@ -117,7 +117,7 @@ export const depositRug = async (drFrankensteinContract, pid, amount, account) =
 export const startMinting = async (tombOverlayContract, pid, fee, account) => {
   return tombOverlayContract.methods
     .startMinting(pid)
-    .send({ from: account, value: fee })
+    .send({ from: account, value: fee.toString() })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
     })
