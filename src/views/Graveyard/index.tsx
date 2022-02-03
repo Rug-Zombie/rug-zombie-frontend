@@ -9,8 +9,13 @@ import { useNftOwnership } from 'hooks/useContract'
 import { FooterImage } from 'components/Footer/styles'
 import Collections from './components/Collections'
 
-const Banner = styled.img`
+const Banner = styled.div`
   max-width: 1920px;
+  height: 220px;
+  background-image: url(${header});
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
 `;
 
 const TitleSection = styled.div`
@@ -52,7 +57,7 @@ const Graveyard: React.FC = () => {
 
   return (
     <>
-      <Banner src={header} alt="Banner" />
+      <Banner />
       <TitleSection>
         <SectionHeader 
           title="Explore the Graveyard"
