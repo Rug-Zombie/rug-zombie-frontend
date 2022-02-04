@@ -34,6 +34,8 @@ import RugRoll from './views/Catacombs/components/RugRoll'
 import SwiperProvider from './views/Mausoleum/context/SwiperProvider'
 
 import SharkPools from './views/SharkPools'
+import { useAppDispatch } from './state'
+import { fetchNftPublicDataAsync } from './state/nfts'
 
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page
@@ -45,6 +47,8 @@ BigNumber.config({
 })
 
 const App: React.FC = () => {
+  const dispatch = useAppDispatch()
+
   // Monkey patch warn() because of web3 flood
   // To be removed when web3 1.3.5 is released
   useEffect(() => {
@@ -64,6 +68,11 @@ const App: React.FC = () => {
   useEffect(() => {
     fetch.initialData(account, setZombiePrice)
   }, [account])
+
+  // initialise nft state
+  useEffect(() => {
+    dispatch(fetchNftPublicDataAsync())
+  }, [dispatch])
 
   const handleAuthentication = () => {
     setAuthenticated(!isAuthenticated)

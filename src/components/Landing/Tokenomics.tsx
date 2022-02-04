@@ -1,20 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import './Landing.Styles.css'
 import { useBurnedBalance, useTotalSupply } from 'hooks/useTokenBalance'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { getZombieAddress } from 'utils/addressHelpers'
 import { useGetNftTotalSupply } from '../../state/hooks'
-import { useAppDispatch } from '../../state'
-import { fetchNftPublicDataAsync } from '../../state/nfts'
 
 const Tokenomics = () => {
   const burnedBalance = getBalanceNumber(useBurnedBalance(getZombieAddress()))
-
-  const dispatch = useAppDispatch()
-  useEffect(() => {
-    dispatch(fetchNftPublicDataAsync())
-  }, [dispatch])
-
   const totalSupply = useTotalSupply()
   const zmbeSupply = totalSupply ? getBalanceNumber(totalSupply) - burnedBalance : 0
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Card, CardBody, Heading, Text } from '@rug-zombie-libs/uikit'
 import styled from 'styled-components'
 import { getBalanceNumber } from 'utils/formatBalance'
@@ -7,8 +7,6 @@ import { useTranslation } from 'contexts/Localization'
 import { getZombieAddress } from 'utils/addressHelpers'
 import CardValue from './CardValue'
 import { useGetNftTotalSupply } from '../../../state/hooks'
-import { useAppDispatch } from '../../../state'
-import { fetchNftPublicDataAsync } from '../../../state/nfts'
 
 const StyledCakeStats = styled(Card)`
   margin-left: auto;
@@ -26,11 +24,6 @@ const Row = styled.div`
 
 const ZmbeStats: React.FC = () => {
   const { t } = useTranslation()
-  const dispatch = useAppDispatch()
-
-  useEffect(() => {
-    fetchNftPublicDataAsync()
-  }, [dispatch])
 
   const totalSupply = useTotalSupply()
   const burnedBalance = getBalanceNumber(useBurnedBalance(getZombieAddress()))

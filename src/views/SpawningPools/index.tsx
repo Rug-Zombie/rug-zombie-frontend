@@ -61,6 +61,9 @@ const SpawningPools: React.FC = () => {
       dispatch(fetchSpawningPoolsUserDataAsync(account))
     }
   }, [dispatch, account])
+  useEffect(() => {
+    dispatch(fetchSpawningPoolsPublicDataAsync())
+  }, [dispatch])
 
   const [spawningPoolFilter, setSpawningPoolFilter] = useState(SpawningPoolFilter.All)
   const [searchFilter, setSearchFilter] = useState('')
