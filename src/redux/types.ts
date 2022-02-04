@@ -1,5 +1,5 @@
 import { BigNumber } from 'bignumber.js'
-import { Address, Id, Token } from '../config/constants/types'
+import { Address, Artist, Id, Token } from '../config/constants/types'
 
 export interface UserInfo {
   paidUnlockFee: boolean,
@@ -70,16 +70,6 @@ export interface AuctionInfo {
 export interface AuctionUserInfo {
   bid: BigNumber,
   paidUnlockFee?: boolean
-}
-
-export interface NftUserInfo {
-  ownedIds: number[],
-}
-
-export interface Artist {
-  name: string,
-  twitter?: string,
-  instagram?: string,
 }
 
 export interface Grave {
@@ -214,20 +204,6 @@ export interface Auction {
   additionalDetails?: any,
   userInfo: AuctionUserInfo,
   auctionInfo: AuctionInfo,
-}
-
-export interface Nft {
-  id: number,
-  name: string,
-  description: string,
-  symbol: string,
-  address: Address,
-  totalSupply: BigNumber,
-  path: string,
-  type: string,
-  rarity: string,
-  artist?: Artist,
-  userInfo: NftUserInfo,
 }
 
 export interface TombOverlayPoolInfo {

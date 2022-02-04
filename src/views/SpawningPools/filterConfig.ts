@@ -1,4 +1,3 @@
-import { nftById } from '../../redux/get'
 import { now } from '../../utils/timerHelpers'
 
 export enum SpawningPoolFilter {

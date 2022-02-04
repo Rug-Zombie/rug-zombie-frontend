@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import { Button, Flex, Modal, Text } from '@rug-zombie-libs/uikit'
 import { useDrBurnenstein, useERC721, useNftOwnership } from '../../../../hooks/useContract'
-import { account, burnGraveById, nftById } from '../../../../redux/get'
+import { account, burnGraveById } from '../../../../redux/get'
 import useToast from '../../../../hooks/useToast'
 import { useTranslation } from '../../../../contexts/Localization'
 import { getAddress, getDrBurnensteinAddress, getNftSwapperAddress } from '../../../../utils/addressHelpers'
 import { BIG_ZERO } from '../../../../utils/bigNumber'
 import useTheme from '../../../../hooks/useTheme'
+import { useGetNftById } from '../../../../state/hooks'
 
 export interface DepositNftModalProps {
   id: number,
@@ -25,7 +26,7 @@ const DepositNftModal:React.FC<DepositNftModalProps> = ({ id, updateResult, onDi
 
   const drburn = useDrBurnenstein()
   const grave = burnGraveById(id)
-  const nft = nftById(grave.depositNftId)
+  const nft = useGetNftById(grave.depositNftId)
 
   const wallet = account()
   const { toastSuccess } = useToast()

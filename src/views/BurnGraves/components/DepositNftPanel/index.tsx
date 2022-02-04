@@ -1,7 +1,8 @@
 import React from 'react'
 import { useModal } from '@rug-zombie-libs/uikit'
-import { account, burnGraveById, nftById } from '../../../../redux/get'
+import { account, burnGraveById } from '../../../../redux/get'
 import DepositNftModal from '../DepositNftModal'
+import { useGetNftById } from '../../../../state/hooks'
 
 export interface DepositNftPanelProps {
   id: number,
@@ -10,7 +11,7 @@ export interface DepositNftPanelProps {
 
 const DepositNftPanel:React.FC<DepositNftPanelProps> = ({ id, updateResult }) => {
   const grave = burnGraveById(id)
-  const nft = nftById(grave.depositNftId)
+  const nft = useGetNftById(grave.depositNftId)
   const wallet = account()
 
   const [handleDeposit] = useModal(

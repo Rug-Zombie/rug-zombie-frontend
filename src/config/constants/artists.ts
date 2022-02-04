@@ -1,4 +1,6 @@
-const artists = {
+import { Artist } from './types'
+
+const artists: { [name: string]: Artist } = {
   RugZombie: {
     name: 'Rug Zombie',
     twitter: 'https://twitter.com/rugzombie',

@@ -73,6 +73,12 @@ export const useGetSpawningPools = () => {
   return useSelector((state: State) => state.spawningPools)
 }
 
+export {
+  useGetNfts,
+  useGetNftById,
+  useGetNftTotalSupply,
+} from './nfts/hooks'
+
 export const useGetTotalIntervalBlocks = () => {
   const intervalBlocks = useGetIntervalBlocks()
   const bufferBlocks = useGetBufferBlocks()

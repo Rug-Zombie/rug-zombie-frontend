@@ -1,11 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import numeral from 'numeral'
-import { bnbPriceUsd, nftById, tombOverlayById, zombiePriceUsd } from '../../../../../../../../redux/get'
-import { getBalanceAmount, getFullDisplayBalance } from '../../../../../../../../utils/formatBalance'
+import { bnbPriceUsd, tombOverlayById } from '../../../../../../../../redux/get'
+import { getFullDisplayBalance } from '../../../../../../../../utils/formatBalance'
 import { Tomb } from '../../../../../../../../state/types'
 import { formatDays } from '../../../../../../../../utils/timerHelpers'
 import { getId } from '../../../../../../../../utils'
+import { useGetNftById } from '../../../../../../../../state/hooks'
 
 export enum TombItemType {
   Number,
@@ -94,7 +95,7 @@ const TableDetails: React.FC<TableDetailsProps> = ({ tomb }) => {
     poolInfo: { allocPoint, withdrawCooldown, nftMintTime, tokenAmount, lpPriceBnb, mintingFee },
   } = tomb
   const { legendaryId } = tombOverlayById(getId(tomb.overlayId))
-  const { name, path, type } = nftById(legendaryId)
+  const { name, path, type } = useGetNftById(legendaryId)
 
   const tvl = tokenAmount.times(lpPriceBnb).times(bnbPriceUsd())
   const mintingFeeUsd = mintingFee.times(bnbPriceUsd())

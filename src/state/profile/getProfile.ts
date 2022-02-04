@@ -45,10 +45,7 @@ const getProfile = async (address: string): Promise<GetProfileResponse> => {
 
     // If the profile is not active the tokenId returns 0, which is still a valid token id
     // so only fetch the nft data if active
-    let nft: Nft
     if (isActive) {
-      nft = undefined // await getNftByTokenId(nftAddress, tokenId)
-
       // Save the preview image in a cookie so it can be used on the exchange
       Cookies.set(
         `profile_${address}`,
@@ -68,7 +65,6 @@ const getProfile = async (address: string): Promise<GetProfileResponse> => {
       username,
       nftAddress,
       isActive,
-      nft,
       team,
     } as Profile
 

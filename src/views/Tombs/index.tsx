@@ -13,7 +13,6 @@ import { useAppDispatch } from '../../state'
 import { fetchTombsPublicDataAsync, fetchTombsUserDataAsync } from '../../state/tombs'
 import { useGetTombs } from '../../state/hooks'
 import { TombFilter, tombFilters, RarityFilter, rarityFilters } from './filterConfig'
-import { nftById } from '../../redux/get'
 
 const TombPage = styled(Page)`
   min-width: 80vw;

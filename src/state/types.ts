@@ -1,9 +1,10 @@
 import BigNumber from 'bignumber.js'
+
 import {
+  Address, Artist,
   CampaignType,
   FarmConfig,
   GraveConfig,
-  Nft,
   PoolConfig,
   SpawningPoolConfig,
   Team,
@@ -255,12 +256,27 @@ export interface BlockState {
 
 // Graveyard
 
-export interface CollectiblesState {
-  isInitialized: boolean
-  isLoading: boolean
-  data: {
-    [key: string]: number[]
-  }
+export interface NftUserInfo {
+  ownedIds: number[],
+}
+
+export interface Nft {
+  id: number,
+  name: string,
+  description: string,
+  symbol: string,
+  address: Address,
+  totalSupply: BigNumber,
+  path: string,
+  type: string,
+  rarity: string,
+  artist?: Artist,
+  userInfo: NftUserInfo,
+}
+
+export interface NftState {
+  data: Nft[]
+  userDataLoaded: boolean
 }
 
 // Mausoleum
@@ -374,5 +390,5 @@ export interface State {
   predictions: PredictionsState
   profile: ProfileState
   teams: TeamsState
-  collectibles: CollectiblesState
+  nfts: NftState
 }

@@ -5,7 +5,7 @@ import sharkpoolAbi from 'config/abi/autosharkPool.json';
 import { parseInt } from 'lodash'
 import {
   getBep20Contract,
-  getDrFrankensteinContract, getErc721Contract,
+  getDrFrankensteinContract,
   getPancakePair,
   getZombieContract, getDrBurnensteinContract
 } from '../utils/contractHelpers'
@@ -21,14 +21,12 @@ import {
   updateDrFrankensteinZombieBalance,
   updateGravePoolInfo,
   updateGraveUserInfo,
-  updateNftTotalSupply,
   updateSpawningPoolInfo,
   updateSpawningPoolUserInfo,
   updateTombPoolInfo,
   updateTombUserInfo,
   updateAuctionInfo,
   updateAuctionUserInfo,
-  updateNftUserInfo,
   updateDrFrankensteinTotalAllocPoint, updateBnbBalance,
   updateTombOverlayPoolInfo, updateTombOverlayUserInfo, updateSharkPoolInfo, updateSharkPoolUserInfo,
   updateBurnGravePoolInfo, updateBurnGraveUserInfo,
@@ -72,8 +70,6 @@ export const initialData = (accountAddress: string, setZombiePrice?: any) => {
   bnbPriceUsd(setZombiePrice)
 
   tomb(getId(tombs[0].pid))
-
-  nfts()
 
   drFrankenstein.methods.totalAllocPoint().call()
     .then(res => {
@@ -596,34 +592,6 @@ export const initialSharkPoolData = (setPoolData?: { update: number, setUpdate: 
   });
 }
 
-export const nftUserInfo = async (contract: any) => {
-  if (account()) {
-    const perChunk = 50
-
-    // Split nft address array into 50 sized chunks
-    const splitNftAddresses = get.nfts().reduce((all,one,i) => {
-      const ch = Math.floor(i/perChunk);
-      // eslint-disable-next-line no-param-reassign
-      all[ch] = [].concat((all[ch]||[]),one);
-      return all
-    }, [])
-
-    // eslint-disable-next-line no-restricted-syntax
-    for (const chunk of splitNftAddresses) {
-      // eslint-disable-next-line no-await-in-loop
-      const res = await contract.methods.massCheckOwnership(account(), (chunk.map(nft => getAddress(nft.address)))).call()
-          chunk.forEach((nft, index) => {
-            store.dispatch(updateNftUserInfo(
-              nft.id,
-              {
-                ownedIds: res[index],
-              },
-            ))
-          })
-        }
-  }
-}
-
 const zombiePriceBnb = (setZombiePrice?: any) => {
   getPancakePair(getAddress(zmbeBnbTomb().lpAddress)).methods.getReserves().call()
     .then(res => {
@@ -643,15 +611,6 @@ const bnbPriceUsd = (setZombiePrice?: any) => {
         zombiePriceBnb(setZombiePrice)
       }
     })
-}
-
-const nfts = () => {
-  get.nfts().forEach(nft => {
-    getErc721Contract(getAddress(nft.address)).methods.totalSupply().call()
-      .then(res => {
-        store.dispatch(updateNftTotalSupply(nft.id, new BigNumber(res)))
-      })
-  })
 }
 
 export const multicallTombOverlayData = (updatePoolObj?: { update: boolean, setUpdate: any }, updateUserObj?: { update: boolean, setUpdate: any }, everyUpdateObj?: { update: boolean, setUpdate: any }) => {

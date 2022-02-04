@@ -1,12 +1,12 @@
 import React from 'react'
 import './Landing.Styles.css'
-import { useTotalSupply, useBurnedBalance } from 'hooks/useTokenBalance'
+import { useBurnedBalance } from 'hooks/useTokenBalance'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { getZombieAddress } from 'utils/addressHelpers'
-import { nftTotalSupply } from '../../redux/get'
+import { useGetNftTotalSupply } from '../../state/hooks'
 
 const Tokenomics = () => {
-  const totalSupply = useTotalSupply()
+  const totalSupply = useGetNftTotalSupply()
   const burnedBalance = getBalanceNumber(useBurnedBalance(getZombieAddress()))
   const zmbeSupply = totalSupply ? getBalanceNumber(totalSupply) - burnedBalance : 0
 
@@ -19,7 +19,7 @@ const Tokenomics = () => {
             <h3 className="heading-4">Token Metrics</h3>
             <p className="paragraph-14">Current Supply:  {zmbeSupply.toLocaleString(undefined, { maximumFractionDigits: 0 })}<br/>
               Burned Supply :  {burnedBalance.toLocaleString(undefined, { maximumFractionDigits: 0 })}<br/>
-              NFTs Minted   :  {nftTotalSupply().toNumber().toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+              NFTs Minted   :  {useGetNftTotalSupply().toNumber().toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
           </div>
           <div className="card">
             <h3 className="heading-4">Details</h3>
