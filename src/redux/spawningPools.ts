@@ -66,8 +66,8 @@ const spawningPools: SpawningPool[] = [
   {
     id: 18,
     name: 'Sparten Token Legendary',
-    subtitle: 'Artwork coming soon!',
-    path: 'https://ipfs.io/ipfs/QmcGGXw3FiX61ALeZdSNyx2MKiquVZhF489jMJJto7rMLu',
+    subtitle: 'Argalus',
+    path: 'https://ipfs.io/ipfs/QmQN5zX2NS3Yrj6VpxwHgoS83jDr5xuEFE4a1zZYpDe86m',
     type: 'image',
     address: {
       56: '0xe43cf2bd5076C480410AC0065BBc8b3029C609c3',
