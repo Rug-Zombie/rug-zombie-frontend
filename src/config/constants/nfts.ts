@@ -1,6 +1,6 @@
-import { BIG_ZERO } from '../utils/bigNumber'
-import { Nft, NftUserInfo } from './types'
-import artists from '../config/constants/artists'
+import { BIG_ZERO } from '../../utils/bigNumber'
+import artists from './artists'
+import { Nft, NftUserInfo } from '../../state/types'
 
 const DEFAULT_USER_INFO: NftUserInfo = {
   ownedIds: [],

@@ -4,8 +4,8 @@ import { Modal } from '@rug-zombie-libs/uikit'
 import useTheme from 'hooks/useTheme'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import styled from 'styled-components'
-import { nftById } from '../../../../redux/get'
 import ViewCard from '../ViewCard'
+import { useGetNftById } from '../../../../state/hooks'
 
 interface ViewModalProps {
   id: number;
@@ -26,7 +26,7 @@ const StyledSwiper = styled.div`
 `
 
 const ViewModal: React.FC<ViewModalProps> = ({ id, onDismiss, setSwiper, refresh }) => {
-  const { userInfo: { ownedIds } } = nftById(id)
+  const { userInfo: { ownedIds } } = useGetNftById(id)
   const { theme } = useTheme()
   return <Modal onDismiss={onDismiss} title='In Wallet' headerBackground={theme.colors.backgroundAlt}
                 style={{ minWidth: '50%' }}>

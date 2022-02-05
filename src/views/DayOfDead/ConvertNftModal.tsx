@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Flex, Text, Button } from '@rug-zombie-libs/uikit';
-import nfts from 'redux/nfts';
+import nfts from 'config/constants/nfts';
 import { BIG_ZERO } from 'utils/bigNumber';
 import { useERC721, useNftOwnership, useNftSwapper } from 'hooks/useContract';
 import { getAddress, getNftSwapperAddress } from 'utils/addressHelpers';

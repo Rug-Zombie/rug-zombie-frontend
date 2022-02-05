@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import gravesReducer from "./graves"
 import tombsReducer from "./tombs"
 import spawningPoolsReducer from "./spawningPools"
+import nftReducer from './nfts'
 
 
 const store = configureStore({
@@ -10,7 +11,8 @@ const store = configureStore({
   reducer: {
     graves: gravesReducer,
     tombs: tombsReducer,
-    spawningPools: spawningPoolsReducer
+    spawningPools: spawningPoolsReducer,
+    nfts: nftReducer,
   },
 })
 

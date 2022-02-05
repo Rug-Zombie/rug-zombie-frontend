@@ -1,10 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import numeral from 'numeral'
-import { bnbPriceUsd, nftById, zombiePriceUsd } from '../../../../../../../../redux/get'
+import { bnbPriceUsd, zombiePriceUsd } from '../../../../../../../../redux/get'
 import { getBalanceAmount, getFullDisplayBalance } from '../../../../../../../../utils/formatBalance'
 import { Grave } from '../../../../../../../../state/types'
 import { formatDays } from '../../../../../../../../utils/timerHelpers'
+import { useGetNftById } from '../../../../../../../../state/hooks'
 
 export enum GraveItemType {
   Number,
@@ -93,7 +94,7 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
     nftId,
     poolInfo: { allocPoint, withdrawCooldown, nftMintTime, tokenAmount, minimumStake, unlockFee },
   } = grave
-  const { name, path, type } = nftById(nftId)
+  const { name, path, type } = useGetNftById(nftId)
   const tvl = getBalanceAmount(tokenAmount.times(zombiePriceUsd()))
   const unlockFeeUsd = unlockFee.times(bnbPriceUsd())
   const imageOnErrorHandler = (

@@ -132,6 +132,56 @@ export interface PoolConfig {
   isFinished?: boolean
 }
 
+export type Images = {
+  lg: string
+  md: string
+  sm: string
+  ipfs?: string
+}
+
+export interface Artist {
+  name: string,
+  twitter?: string,
+  instagram?: string,
+}
+
+export type NftImages = {
+  blur?: string
+} & Images
+
+export type NftVideo = {
+  webm: string
+  mp4: string
+}
+
+export type NftSource = {
+  [key in NftType]: {
+    address: Address
+    identifierKey: string
+  }
+}
+
+export enum NftType {
+  PANCAKE = 'pancake',
+  MIXIE = 'mixie',
+}
+
+export type Nft = {
+  description: string
+  name: string
+  images: NftImages
+  sortOrder: number
+  type: NftType
+  video?: NftVideo
+
+  // Uniquely identifies the nft.
+  // Used for matching an NFT from the config with the data from the NFT's tokenURI
+  identifier: string
+
+  // Used to be "bunnyId". Used when minting NFT
+  variationId?: number | string
+}
+
 export type PageMeta = {
   title: string
   description?: string

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { Text, Flex, LinkExternal, useMatchBreakpoints } from '@rug-zombie-libs/uikit'
 import tokens from 'config/constants/tokens'
 import React from 'react'
@@ -6,11 +7,12 @@ import BigNumber from 'bignumber.js'
 import numeral from 'numeral'
 import Video from 'components/Video'
 import { Carousel } from 'react-responsive-carousel'
-import { nftById, tombByPid, tombOverlayByPoolId } from '../../../redux/get'
+import { tombByPid, tombOverlayByPoolId } from '../../../redux/get'
 import { getAddress } from '../../../utils/addressHelpers'
 import { APESWAP_ADD_LIQUIDITY_URL, AUTOSHARK_ADD_LIQUIDITY_URL, BASE_ADD_LIQUIDITY_URL } from '../../../config'
 import { getId } from '../../../utils'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
+import { useGetNftById } from '../../../state/hooks'
 
 interface RugInDetailsProps {
   pid: number,
@@ -32,10 +34,10 @@ const RugInDetails: React.FC<RugInDetailsProps> = ({ pid, tvl, bracketBStart, br
   if (overlay) {
     const { commonId, uncommonId, rareId, legendaryId, mintingTime } = overlay
 
-    const commonNft = nftById(commonId)
-    const uncommonNft = nftById(uncommonId)
-    const rareNft = nftById(rareId)
-    const legendaryNft = nftById(legendaryId)
+    const commonNft = useGetNftById(commonId)
+    const uncommonNft = useGetNftById(uncommonId)
+    const rareNft = useGetNftById(rareId)
+    const legendaryNft = useGetNftById(legendaryId)
     const nfts = [legendaryNft, rareNft, uncommonNft, commonNft]
 
     const brackets = {

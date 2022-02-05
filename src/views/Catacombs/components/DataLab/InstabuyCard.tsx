@@ -12,7 +12,7 @@ import {
 } from '@catacombs-libs/uikit'
 import { BigNumber } from 'bignumber.js'
 import { Lightbox } from 'react-modal-image'
-import { account, nftById } from '../../../../redux/get'
+import { account } from '../../../../redux/get'
 import Video from '../../../../components/Video'
 
 import { useInstaBuyContract } from '../../../../hooks/useContract'
@@ -21,6 +21,7 @@ import { getFullDisplayBalance } from '../../../../utils/formatBalance'
 import useToast from '../../../../hooks/useToast'
 import { getAddress } from '../../../../utils/addressHelpers'
 import { instaBuyById } from '../../../../utils'
+import { useGetNftById } from '../../../../state/hooks'
 
 
 const StyleDetails = styled.div`
@@ -57,7 +58,7 @@ const initialNftInfo = {
 
 const InstabuyCard: React.FC<InstabuyCardProps> = ({ id, modalObj }) => {
   const { nftId, version } = instaBuyById(id)
-  const { name, symbol, description, address, path, type, totalSupply } = nftById(nftId)
+  const { name, symbol, description, address, path, type, totalSupply } = useGetNftById(nftId)
   const [isOpen, setIsOpen] = useState(false)
   const [nftInfo, setNftInfo] = useState(initialNftInfo)
   const instaBuy = useInstaBuyContract(version)

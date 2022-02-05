@@ -10,10 +10,10 @@ import {
   Flex,
   Button, useModal,
 } from '@rug-zombie-libs/uikit'
-import { nftById } from '../../../../redux/get'
 import ViewModal from '../ViewModal'
 import useSwiper from '../../../Mausoleum/hooks/useSwiper'
 import Video from '../../../../components/Video'
+import { Nft } from '../../../../state/types'
 
 
 const StyleDetails = styled.div`
@@ -31,12 +31,12 @@ const StyleCardHeader = styled.div`
 `
 
 interface CollectiblesCardProps {
-  id: number;
+  nft: Nft;
   refresh: () => void;
 }
 
-const CollectiblesCard: React.FC<CollectiblesCardProps> = ({ id, refresh }: CollectiblesCardProps) => {
-  const { name, description, path, type, userInfo: { ownedIds } } = nftById(id)
+const CollectiblesCard: React.FC<CollectiblesCardProps> = ({ nft, refresh }: CollectiblesCardProps) => {
+  const { name, description, path, type, userInfo: { ownedIds } } = nft
   const [isOpen, setIsOpen] = useState(false)
   const isOwned = ownedIds.length > 0
   const { setSwiper } = useSwiper()
@@ -47,7 +47,7 @@ const CollectiblesCard: React.FC<CollectiblesCardProps> = ({ id, refresh }: Coll
 
   const [onPresentViewModal,] = useModal(
       <ViewModal
-        id={id}
+        id={nft.id}
         setSwiper={setSwiper}
         refresh={refresh}
       />

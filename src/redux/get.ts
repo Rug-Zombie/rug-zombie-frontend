@@ -2,7 +2,6 @@ import { BigNumber } from 'bignumber.js'
 import axios from 'axios'
 import store from './store'
 import { Grave, Tomb, SpawningPool, UserInfo, Auction, TombOverlay, SharkPool, BurnGrave } from './types'
-import { BIG_ZERO } from '../utils/bigNumber'
 import { getBalanceAmount } from '../utils/formatBalance'
 import { getId } from '../utils'
 import { Id } from '../config/constants/types'
@@ -107,25 +106,6 @@ export const auctionById = (id: number): Auction => {
   return auctions().find(a => a.id === id)
 }
 
-export const nfts = () => {
-  return store.getState().nfts
-}
-
-export const nftByName = (name: string) => {
-  return nfts().find(n => n.name === name)
-}
-
-export const nftById = (id: number) => {
-  return nfts().find(n => n.id === id)
-}
-
-export const nftTotalSupply = (): BigNumber => {
-  let totalSupply = BIG_ZERO
-  nfts().forEach(nft => {
-    totalSupply = totalSupply.plus(nft.totalSupply)
-  })
-  return totalSupply
-}
 
 // store lpreserves
 export const zmbeBnbLpPriceBnb = () => {

@@ -6,9 +6,9 @@ import {
   CardFooter,
   Flex, useModal,
 } from '@rug-zombie-libs/uikit'
-import { nftById } from '../../../../redux/get'
 import Video from '../../../../components/Video'
 import TransferNftModal from '../TransferNftModal'
+import { useGetNftById } from '../../../../state/hooks'
 
 const StyleDetails = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ interface ViewCardProps {
 }
 
 const ViewCard: React.FC<ViewCardProps> = ({ id, nftId, refresh }: ViewCardProps) => {
-  const { path, type, userInfo: { ownedIds } } = nftById(id);
+  const { path, type, userInfo: { ownedIds } } = useGetNftById(id);
   const isOwned = ownedIds.length > 0
 
   const handleSuccess = () => {
