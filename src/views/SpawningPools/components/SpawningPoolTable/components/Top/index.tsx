@@ -7,8 +7,8 @@ import { bnbPriceUsd, zombiePriceUsd } from 'redux/get'
 import { Token } from 'config/constants/types'
 import SpawningPoolItem, { SpawningPoolItemType } from './SpawningPoolItem'
 import { SpawningPool } from '../../../../../../state/types'
-import { getBalanceAmount, getBalanceNumber, getFullDisplayBalance } from '../../../../../../utils/formatBalance'
-import { getPoolApr } from '../../../../../../utils/apr'
+import { getBalanceNumber, getFullDisplayBalance } from '../../../../../../utils/formatBalance'
+import { getSpawningPoolApr } from '../../../../../../utils/apr'
 
 const SpawningPoolColumn = styled.div`
   height: 100%;
@@ -141,7 +141,7 @@ const Top: React.FC<TopProps> = ({ spawningPool, open, setOpen }) => {
   const tvl = getBalanceNumber(bigTvl)
 
   const rewardTokenPrice = rewardTokenPriceBnb.times(bnbPriceUsd()).toNumber()
-  const yearly = getPoolApr(zombiePriceUsd(), rewardTokenPrice, getBalanceNumber(totalAmount), getBalanceNumber(rewardPerBlock, rewardToken.decimals))
+  const yearly = getSpawningPoolApr(zombiePriceUsd(), rewardTokenPrice, getBalanceNumber(totalAmount), getBalanceNumber(rewardPerBlock, rewardToken.decimals))
   const daily = yearly / 365
 
   const now = Math.floor(Date.now() / 1000)

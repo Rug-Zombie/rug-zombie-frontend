@@ -1,14 +1,12 @@
 import BigNumber from 'bignumber.js'
 
 import {
-  Address, Artist,
-  CampaignType,
-  FarmConfig,
+  Address,
+  Artist,
   GraveConfig,
-  PoolConfig,
   SpawningPoolConfig,
-  Team,
-  TombConfig, UserActivityType,
+  TombConfig,
+  UserActivityType,
 } from 'config/constants/types'
 
 export type TranslatableText =
@@ -99,50 +97,10 @@ export interface SpawningPool extends SpawningPoolConfig {
   poolInfo: SpawningPoolInfo;
 }
 
-export interface Farm extends FarmConfig {
-  tokenAmount?: BigNumber
-  quoteTokenAmount?: BigNumber
-  lpTotalInQuoteToken?: BigNumber
-  lpTotalSupply?: BigNumber
-  tokenPriceVsQuote?: BigNumber
-  poolWeight?: BigNumber
-  userData?: {
-    allowance: string
-    tokenBalance: string
-    stakedBalance: string
-    earnings: string
-  }
-}
-
-export interface Pool extends PoolConfig {
-  totalStaked?: BigNumber
-  startBlock?: number
-  endBlock?: number
-  userData?: {
-    allowance: BigNumber
-    stakingTokenBalance: BigNumber
-    stakedBalance: BigNumber
-    pendingReward: BigNumber
-  }
-}
-
 export interface UserActivity {
   type: UserActivityType
   timestamp: number
   data: Record<string, any>
-}
-
-export interface Profile {
-  userId: number
-  points: number
-  teamId: number
-  nftAddress: string
-  tokenId: number
-  isActive: boolean
-  username: string
-  nft?: Nft
-  team: Team
-  hasRegistered: boolean
 }
 
 // Slices states
@@ -151,7 +109,6 @@ export interface GravesState {
   data: Grave[]
   userDataLoaded: boolean
 }
-
 
 export interface TombsState {
   data: Tomb[]
@@ -168,59 +125,9 @@ export interface UserActivityState {
   userDataLoaded: boolean
 }
 
-export interface FarmsState {
-  data: Farm[]
-  loadArchivedFarmsData: boolean
-  userDataLoaded: boolean
-}
-
 export interface GraveState {
   data: Grave[]
   userDataLoaded: boolean
-}
-
-export interface PoolsState {
-  data: Pool[]
-}
-
-
-export interface ProfileState {
-  isInitialized: boolean
-  isLoading: boolean
-  hasRegistered: boolean
-  data: Profile
-}
-
-export type TeamResponse = {
-  0: string
-  1: string
-  2: string
-  3: string
-  4: boolean
-}
-
-export type TeamsById = {
-  [key: string]: Team
-}
-
-export interface TeamsState {
-  isInitialized: boolean
-  isLoading: boolean
-  data: TeamsById
-}
-
-export interface Achievement {
-  id: string
-  type: CampaignType
-  address: string
-  title: TranslatableText
-  description?: TranslatableText
-  badge: string
-  points: number
-}
-
-export interface AchievementState {
-  data: Achievement[]
 }
 
 // API Price State
@@ -389,16 +296,11 @@ export interface PredictionsState {
 // Global state
 
 export interface State {
-  achievements: AchievementState
   block: BlockState
-  farms: FarmsState
   prices: PriceState
-  pools: PoolsState
   graves: GraveState
   tombs: TombsState
   spawningPools: SpawningPoolState
   predictions: PredictionsState
-  profile: ProfileState
-  teams: TeamsState
   nfts: NftState
 }

@@ -2,8 +2,8 @@ import BigNumber from 'bignumber.js'
 import erc20ABI from 'config/abi/erc20.json'
 import drFrankenstein from 'config/abi/drFrankenstein.json'
 import multicall from 'utils/multicall'
-import { getAddress, getDrFrankensteinAddress, getMasterChefAddress, getZombieAddress } from 'utils/addressHelpers'
-import { FarmConfig, GraveConfig } from 'config/constants/types'
+import { getAddress, getDrFrankensteinAddress, getZombieAddress } from 'utils/addressHelpers'
+import { GraveConfig } from 'config/constants/types'
 import { getId } from '../../utils'
 
 export const fetchGraveUserInfo = async (account: string, gravesToFetch: GraveConfig[]) => {

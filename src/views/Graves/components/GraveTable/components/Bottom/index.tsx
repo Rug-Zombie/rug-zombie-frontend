@@ -5,7 +5,7 @@ import numeral from 'numeral'
 import ProgressBar from './components/ProgressBar'
 import TableDetails from './components/TableDetails'
 import { Grave } from '../../../../../../state/types'
-import { useApprove } from '../../../../../../hooks/useApprove'
+import useApprove from '../../../../../../hooks/useApprove'
 import { getAddress, getDrFrankensteinAddress } from '../../../../../../utils/addressHelpers'
 import { useDrFrankenstein, useERC20, useZombie } from '../../../../../../hooks/useContract'
 import {

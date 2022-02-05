@@ -5,7 +5,7 @@ import BigNumber from 'bignumber.js';
 import { getBalanceAmount, getFullDisplayBalance } from 'utils/formatBalance'
 import tokens from 'config/constants/tokens';
 import numeral from 'numeral';
-import { getPoolApr } from '../../../../utils/apr'
+import { getSpawningPoolApr } from '../../../../utils/apr'
 import { bnbPriceUsd, coingeckoPrice, spawningPoolById } from '../../../../redux/get'
 import { fetchLpReserves } from '../../../../state/hooks'
 
@@ -71,7 +71,7 @@ const TableList: React.FC<TableListProps> = (props: TableListProps) => {
     }
   }, [id, bnbLpTokenIndex, bnbPrice, rewardToken.decimals, rewardTokenBnbLp, rewardTokenId])
 
-  const apr = getPoolApr(zombieUsdPrice, rewardTokenPrice, getBalanceAmount(poolInfo.totalZombieStaked).toNumber(), getBalanceAmount(poolInfo.rewardPerBlock, rewardToken.decimals).toNumber())
+  const apr = getSpawningPoolApr(poolInfo.rewardPerBlock, zombieUsdPrice, rewardTokenPrice, getBalanceAmount(poolInfo.rewardPerBlock, rewardToken.decimals).toNumber())
   const dailyApr = apr / 365
   const displayApr = apr > 10 ? numeral(apr).format('(0.00 a)') : numeral(apr).format('(0.0000 a)')
   const displayDailyApr = dailyApr > 100 ? numeral(dailyApr).format('(0.00 a)') : numeral(dailyApr).format('(0.00000 a)')
