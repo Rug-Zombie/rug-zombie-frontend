@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import { LinkExternal } from '@rug-zombie-libs/uikit'
-import { bnbPriceUsd, burnGraveById, nftById } from '../../../../redux/get'
+import { bnbPriceUsd, burnGraveById } from '../../../../redux/get'
 import { useDrBurnenstein } from '../../../../hooks/useContract'
 import { getFullDisplayBalance } from '../../../../utils/formatBalance'
 import { formatDuration } from '../../../../utils/timerHelpers'
+import { useGetNftById } from '../../../../state/hooks'
 
 export interface DetailsPanelProps {
   id: number
@@ -14,7 +15,7 @@ const DetailsPanel:React.FC<DetailsPanelProps> = ({ id }) => {
   const [unlockFee, setUnlockFee] = useState(0)
   const now = Math.floor(Date.now() / 1000)
   const grave = burnGraveById(id)
-  const nft = nftById(grave.nftid)
+  const nft = useGetNftById(grave.nftid)
 
   const drburn = useDrBurnenstein()
 

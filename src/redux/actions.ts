@@ -1,8 +1,7 @@
 import { BigNumber } from 'bignumber.js'
 import * as actions from './actionTypes'
 import {
-  AuctionInfo, AuctionUserInfo, NftUserInfo,
-  PoolInfo,
+  AuctionInfo, AuctionUserInfo, PoolInfo,
   SpawningPoolInfo,
   SpawningUserInfo,
   TombPoolInfo,
@@ -102,13 +101,6 @@ export const updateGraveUserInfo = (pid: number, userInfo: UserInfo) => ({
   },
 })
 
-export const updateNftTotalSupply = (id: number, totalSupply: BigNumber) => ({
-  type: actions.UPDATE_NFT_TOTAL_SUPPLY,
-  payload: {
-    id,
-    totalSupply,
-  },
-})
 
 export const updateSpawningPoolInfo = (id: number, poolInfo: SpawningPoolInfo) => ({
   type: actions.UPDATE_SPAWNING_POOL_INFO,
@@ -158,13 +150,6 @@ export const updateAuctionUserInfo = (id: number, userInfo: AuctionUserInfo) => 
   },
 })
 
-export const updateNftUserInfo = (id: number, userInfo: NftUserInfo) => ({
-  type: actions.UPDATE_NFT_USER_INFO,
-  payload: {
-    id,
-    userInfo,
-  },
-})
 
 export const updateBnbBalance = (bnbBalance: BigNumber) => ({
   type: actions.UPDATE_BNB_BALANCE,

@@ -143,6 +143,12 @@ export type Images = {
   ipfs?: string
 }
 
+export interface Artist {
+  name: string,
+  twitter?: string,
+  instagram?: string,
+}
+
 export type NftImages = {
   blur?: string
 } & Images

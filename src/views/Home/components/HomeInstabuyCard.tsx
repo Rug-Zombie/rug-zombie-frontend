@@ -3,7 +3,7 @@ import { Lightbox } from "react-modal-image";
 import { Card, CardBody, Heading, Flex, CardFooter, Button, ChevronUpIcon, ChevronDownIcon } from '@rug-zombie-libs/uikit';
 import styled from 'styled-components';
 import { useTranslation } from 'contexts/Localization';
-import { account, nftById } from 'redux/get';
+import { account } from 'redux/get';
 import Video from 'components/Video';
 import { getFullDisplayBalance } from 'utils/formatBalance';
 import { BIG_ZERO } from 'utils/bigNumber';
@@ -13,6 +13,7 @@ import { getAddress } from 'utils/addressHelpers';
 import { BigNumber } from 'bignumber.js';
 import useToast from 'hooks/useToast';
 import { instaBuyById } from '../../../utils'
+import { useGetNftById } from '../../../state/hooks'
 
 const StyledInstabuy = styled(Card)`
   margin-left: auto;
@@ -51,7 +52,7 @@ const initialNftInfo = {
 
 const HomeInstabuyCard: React.FC<InstabuyCardProps> = ({ id, modalObj }) => {
     const {nftId, version } = instaBuyById(id)
-    const { name, symbol, description, address, path, type, totalSupply } = nftById(nftId);
+    const { name, symbol, description, address, path, type, totalSupply } = useGetNftById(nftId);
     const { t } = useTranslation();
     const instaBuy = useInstaBuyContract(version);
     const { toastSuccess } = useToast();

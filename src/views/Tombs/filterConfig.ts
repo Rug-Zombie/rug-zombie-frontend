@@ -1,4 +1,4 @@
-import { nftById } from '../../redux/get'
+import { useGetNftById } from '../../state/hooks'
 
 export enum TombFilter {
   All,
@@ -41,18 +41,18 @@ export const rarityFilters = [
   },
   {
     label: 'Legendary',
-    filter: gs => gs.filter(g => nftById(g.nftId).rarity === 'Legendary')
+    filter: gs => gs.filter(g => useGetNftById(g.nftId).rarity === 'Legendary')
   },
   {
     label: 'Rare',
-    filter: gs => gs.filter(g => nftById(g.nftId).rarity === 'Rare')
+    filter: gs => gs.filter(g => useGetNftById(g.nftId).rarity === 'Rare')
   },
   {
     label: 'Uncommon',
-    filter: gs => gs.filter(g => nftById(g.nftId).rarity === 'Uncommon')
+    filter: gs => gs.filter(g => useGetNftById(g.nftId).rarity === 'Uncommon')
   },
   {
     label: 'Common',
-    filter: gs => gs.filter(g => nftById(g.nftId).rarity === 'Common')
+    filter: gs => gs.filter(g => useGetNftById(g.nftId).rarity === 'Common')
   },
 ]

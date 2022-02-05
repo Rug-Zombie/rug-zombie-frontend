@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Heading, LinkExternal, Text, CardsLayout } from '@rug-zombie-libs/uikit'
-import { account, nfts, zombiePriceUsd } from 'redux/get'
+import { zombiePriceUsd } from 'redux/get'
 import styled from 'styled-components'
 
-import { nftUserInfo } from 'redux/fetch'
-import { useNftOwnership, useZombieBalanceChecker } from 'hooks/useContract'
+import { useZombieBalanceChecker } from 'hooks/useContract'
 import { BigNumber } from 'bignumber.js'
+import { useWeb3React } from '@web3-react/core'
 import Page from '../../../components/layout/Page'
 import StakedGraves from '../components/StakedGraves'
 import SwiperProvider from '../../Mausoleum/context/SwiperProvider'
@@ -16,6 +16,9 @@ import StakedTombs from '../components/StakedTombs'
 import { BIG_ZERO } from '../../../utils/bigNumber'
 import { getBalanceAmount, getFullDisplayBalance } from '../../../utils/formatBalance'
 import StakedSpawningPools from '../components/StakedSpawningPools'
+import { useAppDispatch } from '../../../state'
+import { fetchNftUserDataAsync } from '../../../state/nfts'
+import { useGetNfts } from '../../../state/hooks'
 
 const Row = styled.div`
   display: flex
@@ -30,50 +33,41 @@ const StyledCollectibleCard = styled(CollectiblesCard)`
   height: 20px;
 `
 const ProfilePage: React.FC = () => {
-  const contract = useNftOwnership()
-  const [updateNftUserInfo, setUpdateNftUserInfo] = useState(false)
-  const [update, setUpdate] = useState(false)
+  const { account } = useWeb3React()
+  const dispatch = useAppDispatch();
+
   const [stakedInGraves, setStakedInGraves] = useState(BIG_ZERO)
   const [stakedInSpawningPools, setStakedInSpawningPools] = useState(BIG_ZERO)
   const zombieBalanceChecker = useZombieBalanceChecker()
+  const nfts = useGetNfts().data
 
-  const ownedNfts = nfts().filter(nft => nft.userInfo.ownedIds.length > 0)
-  const accountLength = account() ? account().length : 0
-  const displayAccount = account() ? `${account().slice(0, 6)}...${account().slice(accountLength - 4, accountLength)}` : ''
-  const refresh = () => {
-    if (account()) {
-      nftUserInfo(contract).then(() => {
-        setUpdate(!update)
-      })
-    }
-  }
+  const ownedNfts = nfts.filter(nft => nft.userInfo.ownedIds.length > 0)
+  const accountLength = account ? account.length : 0
+  const displayAccount = account ? `${account.slice(0, 6)}...${account.slice(accountLength - 4, accountLength)}` : ''
+
+  const refresh = () => undefined
 
   useEffect(() => {
-    if (!updateNftUserInfo && account()) {
-      nftUserInfo(contract).then(() => {
-        setUpdate(!update)
-      })
-    }
-    // eslint-disable-next-line
-  }, [contract])
+      dispatch(fetchNftUserDataAsync(account))
+  }, [dispatch, account])
 
   useEffect(() => {
-    if (account()) {
-      zombieBalanceChecker.methods.getGraves(account()).call()
+    if (account) {
+      zombieBalanceChecker.methods.getGraves(account).call()
         .then(res => {
           setStakedInGraves(new BigNumber(res))
         })
     }
-  }, [zombieBalanceChecker.methods])
+  }, [zombieBalanceChecker.methods, account])
 
   useEffect(() => {
-    if (account()) {
-      zombieBalanceChecker.methods.getSpawningPools(account()).call()
+    if (account) {
+      zombieBalanceChecker.methods.getSpawningPools(account).call()
         .then(res => {
           setStakedInSpawningPools(new BigNumber(res))
         })
     }
-  }, [zombieBalanceChecker.methods])
+  }, [zombieBalanceChecker.methods, account])
 
   const zombiePrice = zombiePriceUsd()
   const totalStaked = stakedInGraves.plus(stakedInSpawningPools)
@@ -82,7 +76,7 @@ const ProfilePage: React.FC = () => {
       <Page>
         <Row>
           <Avatar />
-          <LinkExternal href={`https://bscscan.com/address/${account()}`}>
+          <LinkExternal href={`https://bscscan.com/address/${account}`}>
             <Text>{displayAccount}</Text>
           </LinkExternal>
         </Row>
@@ -121,7 +115,7 @@ const ProfilePage: React.FC = () => {
             <CardsLayout>
               {ownedNfts.map((nft) => {
                 return (<Col>
-                    <StyledCollectibleCard id={nft.id} key={nft.id} refresh={refresh} />
+                    <StyledCollectibleCard nft={nft} key={nft.id} refresh={refresh} />
                   </Col>
                 )
               })
