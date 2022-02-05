@@ -8,7 +8,7 @@ import {
   PoolConfig,
   SpawningPoolConfig,
   Team,
-  TombConfig,
+  TombConfig, UserActivityType,
 } from 'config/constants/types'
 
 export type TranslatableText =
@@ -126,6 +126,12 @@ export interface Pool extends PoolConfig {
   }
 }
 
+export interface UserActivity {
+  type: UserActivityType
+  timestamp: number
+  data: Record<string, any>
+}
+
 export interface Profile {
   userId: number
   points: number
@@ -157,6 +163,10 @@ export interface SpawningPoolState {
   userDataLoaded: boolean
 }
 
+export interface UserActivityState {
+  data: UserActivity[]
+  userDataLoaded: boolean
+}
 
 export interface FarmsState {
   data: Farm[]

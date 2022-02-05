@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { useWeb3React } from '@web3-react/core'
+import { fetchUserActivityAsync } from '../../../../state/userActivites'
 
 
 const Card = styled.div`
@@ -16,6 +17,9 @@ const Card = styled.div`
 const ProfilePage: React.FC = () => {
   const { account } = useWeb3React()
 
+  useEffect(() => {
+    fetchUserActivityAsync(account)
+  }, [account])
 
 
   return (
