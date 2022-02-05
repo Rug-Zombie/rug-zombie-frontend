@@ -22,6 +22,8 @@ export const { setUserActivity } = userActivitySlice.actions
 
 // Thunks
 export const fetchUserActivityAsync = (account: string) => async (dispatch) => {
+  console.log('yuh')
+
   const drFEvents = await fetchDrFEvents(account)
 
   const arrayOfUserEventObjects = drFEvents

@@ -21,6 +21,7 @@ import StakedSpawningPools from '../components/StakedSpawningPools'
 import { useAppDispatch } from '../../../state'
 import { fetchNftUserDataAsync } from '../../../state/nfts'
 import { useGetNfts } from '../../../state/hooks'
+import ActivityCard from './components/ActivityCard'
 
 const Row = styled.div`
   display: flex
@@ -93,13 +94,17 @@ const CardDiv = styled.div`
 `
 
 const Card = styled.div`
-  width: 630px;
+  width: 100%;
   height: 450px;
   background-color: #151E21;
   border-radius: 10px;
   border: 2px solid #30C00D;
   opacity: 1;
   margin: 10px;
+  display: flex;
+  flex-direction: column;
+  padding-top: 15px;
+  padding-left: 25px;
 `
 
 const ProfilePage: React.FC = () => {
@@ -157,7 +162,7 @@ const ProfilePage: React.FC = () => {
         <Separator/>
         <CardDiv>
           <Card/>
-          <Card/>
+          <ActivityCard/>
         </CardDiv>
         <Row>
           <LinkExternal href={`https://bscscan.com/address/${account}`}>

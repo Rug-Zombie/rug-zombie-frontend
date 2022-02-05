@@ -128,7 +128,7 @@ export interface Pool extends PoolConfig {
 
 export interface UserActivity {
   type: UserActivityType
-  timestamp: number
+  blockNumber: number
   data: Record<string, any>
 }
 
