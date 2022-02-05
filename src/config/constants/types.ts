@@ -1,5 +1,3 @@
-import { TranslatableText } from 'state/types'
-
 export interface Address {
   97?: string
   56: string
@@ -22,8 +20,6 @@ export enum PoolIds {
   poolBasic = 'poolBasic',
   poolUnlimited = 'poolUnlimited',
 }
-
-export type IfoStatus = 'idle' | 'coming_soon' | 'live' | 'finished'
 
 interface IfoPoolInfo {
   saleAmount: string
@@ -192,32 +188,6 @@ export type Nft = {
 
   // Used to be "bunnyId". Used when minting NFT
   variationId?: number | string
-}
-
-export type TeamImages = {
-  alt: string
-} & Images
-
-export type Team = {
-  id: number
-  name: string
-  description: string
-  isJoinable?: boolean
-  users: number
-  points: number
-  images: TeamImages
-  background: string
-  textColor: string
-}
-
-export type CampaignType = 'ifo' | 'teambattle'
-
-export type Campaign = {
-  id: string
-  type: CampaignType
-  title?: TranslatableText
-  description?: TranslatableText
-  badge?: string
 }
 
 export type PageMeta = {
