@@ -6,6 +6,7 @@ import {
   GraveConfig,
   SpawningPoolConfig,
   TombConfig,
+  UserActivityType,
 } from 'config/constants/types'
 
 export type TranslatableText =
@@ -96,6 +97,12 @@ export interface SpawningPool extends SpawningPoolConfig {
   poolInfo: SpawningPoolInfo;
 }
 
+export interface UserActivity {
+  type: UserActivityType
+  timestamp: number
+  data: Record<string, any>
+}
+
 // Slices states
 
 export interface GravesState {
@@ -110,6 +117,11 @@ export interface TombsState {
 
 export interface SpawningPoolState {
   data: SpawningPool[]
+  userDataLoaded: boolean
+}
+
+export interface UserActivityState {
+  data: UserActivity[]
   userDataLoaded: boolean
 }
 

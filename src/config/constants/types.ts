@@ -74,6 +74,14 @@ export enum Dex {
   APESWAP
 }
 
+export enum UserActivityType {
+  DrFDeposit,
+  DrFWithdraw,
+  DrFWithdrawEarly,
+  DrFHarvest,
+  DrFMintNft,
+}
+
 export interface GraveConfig {
   pid: Id,
   name: string,
