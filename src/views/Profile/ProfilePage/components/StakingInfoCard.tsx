@@ -7,20 +7,28 @@ import { useGetGraves, useGetSpawningPools, useGetTombs } from '../../../../stat
 import '../../Profile.Styles.css'
 import { BIG_ZERO } from '../../../../utils/bigNumber'
 import { fetchGravesUserDataAsync } from '../../../../state/graves'
-import { getBalanceAmount, getBalanceNumber, getFullDisplayBalance } from '../../../../utils/formatBalance'
+import { getBalanceNumber, getFullDisplayBalance } from '../../../../utils/formatBalance'
 import { bnbPriceUsd, zombiePriceUsd } from '../../../../redux/get'
 import { now } from '../../../../utils/timerHelpers'
 import { fetchSpawningPoolsPublicDataAsync, fetchSpawningPoolsUserDataAsync } from '../../../../state/spawningPools'
 import { fetchTombsPublicDataAsync, fetchTombsUserDataAsync } from '../../../../state/tombs'
+
+const Container = styled.div`
+  width: 100%;
+  padding-right: 10px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
 
 const Card = styled.div`
   width: 100%;
   height: 450px;
   background-color: #151E21;
   border-radius: 10px;
-  border: 2px solid #30C00D;
+  //border: 2px solid #30C00D;
   opacity: 1;
-  margin: 10px;
   display: flex;
   flex-direction: column;
   padding-top: 15px;
@@ -78,6 +86,19 @@ const InnerCardDiv = styled.div`
   height: 100%;
 `
 
+const Shadow = styled.div`
+  width: 100%;
+  height: 40px;
+  background: #000000 0% 0% no-repeat padding-box;
+  border-radius: 10px;
+  opacity: 0.5;
+  filter: blur(10px);
+  position: relative;
+  bottom: 20px;
+  margin-bottom: -15px;
+  z-index: -1;
+`
+
 const ProfilePage: React.FC = () => {
   const { account } = useWeb3React()
   const dispatch = useAppDispatch()
@@ -116,8 +137,11 @@ const ProfilePage: React.FC = () => {
   }, { amount: BIG_ZERO, pending: BIG_ZERO, nfts: 0 })
 
 
-
-  const spawningPoolSum = useGetSpawningPools().data.reduce((sum, { rewardToken, poolInfo: { rewardTokenPriceBnb }, userInfo: { amount, pendingReward, nftMintDate } }) => {
+  const spawningPoolSum = useGetSpawningPools().data.reduce((sum, {
+    rewardToken,
+    poolInfo: { rewardTokenPriceBnb },
+    userInfo: { amount, pendingReward, nftMintDate },
+  }) => {
     const rewardTokenPrice = rewardTokenPriceBnb.times(bnbPriceUsd()).toNumber()
     return {
       amount: sum.amount.plus(amount),
@@ -126,7 +150,10 @@ const ProfilePage: React.FC = () => {
     }
   }, { amount: BIG_ZERO, pendingValueUsd: 0, nfts: 0 })
 
-  const tombSum = useGetTombs().data.reduce((sum, { poolInfo: { lpPriceBnb }, userInfo: { amount, pendingZombie, nftMintTime } }) => {
+  const tombSum = useGetTombs().data.reduce((sum, {
+    poolInfo: { lpPriceBnb },
+    userInfo: { amount, pendingZombie, nftMintTime },
+  }) => {
     const lpPrice = lpPriceBnb.times(bnbPriceUsd()).toNumber()
     return {
       amount: sum.amount.plus(amount),
@@ -137,113 +164,115 @@ const ProfilePage: React.FC = () => {
   }, { amount: BIG_ZERO, amountValueUsd: 0, pending: BIG_ZERO, nfts: 0 })
 
   return (
-    <Card>
-      <CardTitle style={{fontWeight: 'normal'}}>
-        Staking Info
-      </CardTitle>
-      <div style={{ paddingBottom: '35px' }} />
-      <InnerCardDiv className='scroll'>
-        <CardTitle>
-          Graves
+    <Container>
+      <Card>
+        <CardTitle style={{ fontWeight: 'normal' }}>
+          Staking Info
         </CardTitle>
-        <Row>
-          <SubTitle>
-            Staked
-          </SubTitle>
-          <SubTitle>
-            Pending Rewards
-          </SubTitle>
-        </Row>
-        <Row>
-          <Value>
-            {getFullDisplayBalance(graveSum.amount, 18, 2)} ZMBE
-          </Value>
-          <Value>
-            {getFullDisplayBalance(graveSum.pending, 18, 2)} ZMBE
-          </Value>
-        </Row>
-        <Row>
-          <SubTitle>
-            ${getFullDisplayBalance(graveSum.amount.times(zombiePriceUsd()), 18, 2)}
-          </SubTitle>
-          <SubTitle>
-            {graveSum.nfts} {graveSum.nfts === 1 ? 'NFT' : 'NFTS'} Ready
-          </SubTitle>
-        </Row>
-        <ClaimButton>
-          <ButtonText>
-            Claim All
-          </ButtonText>
-        </ClaimButton>
         <div style={{ paddingBottom: '35px' }} />
-        <CardTitle>
-          Tombs
-        </CardTitle>
-        <Row>
-          <SubTitle>
-            Staked
-          </SubTitle>
-          <SubTitle>
-            Pending Rewards
-          </SubTitle>
-        </Row>
-        <Row>
-          <Value>
-            {getFullDisplayBalance(tombSum.amount, 18, 2)} LP
-          </Value>
-          <Value>
-            {getFullDisplayBalance(tombSum.pending, 18, 2)} ZMBE
-          </Value>
-        </Row>
-        <Row>
-          <SubTitle>
-            ${tombSum.amountValueUsd.toFixed(2)}
-          </SubTitle>
-          <SubTitle>
-            {tombSum.nfts} {tombSum.nfts === 1 ? 'NFT' : 'NFTS'} Ready
-          </SubTitle>
-        </Row>
-        <ClaimButton>
-          <ButtonText>
-            Claim All
-          </ButtonText>
-        </ClaimButton>
-        <div style={{ paddingBottom: '35px' }} />
-        <CardTitle>
-          Spawning Pools
-        </CardTitle>
-        <Row>
-          <SubTitle>
-            Staked
-          </SubTitle>
-          <SubTitle>
-            Pending Rewards
-          </SubTitle>
-        </Row>
-        <Row>
-          <Value>
-            {getFullDisplayBalance(spawningPoolSum.amount, 18, 2)} ZMBE
-          </Value>
-          <Value>
-            ${spawningPoolSum.pendingValueUsd.toFixed(2)}
-          </Value>
-        </Row>
-        <Row>
-          <SubTitle>
-            ${getFullDisplayBalance(spawningPoolSum.amount.times(zombiePriceUsd()), 18, 2)}
-          </SubTitle>
-          <SubTitle>
-            {spawningPoolSum.nfts} {spawningPoolSum.nfts === 1 ? 'NFT' : 'NFTS'} Ready
-          </SubTitle>
-        </Row>
-        <ClaimButton>
-          <ButtonText>
-            Claim All
-          </ButtonText>
-        </ClaimButton>
-      </InnerCardDiv>
-
-    </Card>
+        <InnerCardDiv className='scroll'>
+          <CardTitle>
+            Graves
+          </CardTitle>
+          <Row>
+            <SubTitle>
+              Staked
+            </SubTitle>
+            <SubTitle>
+              Pending Rewards
+            </SubTitle>
+          </Row>
+          <Row>
+            <Value>
+              {getFullDisplayBalance(graveSum.amount, 18, 2)} ZMBE
+            </Value>
+            <Value>
+              {getFullDisplayBalance(graveSum.pending, 18, 2)} ZMBE
+            </Value>
+          </Row>
+          <Row>
+            <SubTitle>
+              ${getFullDisplayBalance(graveSum.amount.times(zombiePriceUsd()), 18, 2)}
+            </SubTitle>
+            <SubTitle>
+              {graveSum.nfts} {graveSum.nfts === 1 ? 'NFT' : 'NFTS'} Ready
+            </SubTitle>
+          </Row>
+          <ClaimButton>
+            <ButtonText>
+              Claim All
+            </ButtonText>
+          </ClaimButton>
+          <div style={{ paddingBottom: '35px' }} />
+          <CardTitle>
+            Tombs
+          </CardTitle>
+          <Row>
+            <SubTitle>
+              Staked
+            </SubTitle>
+            <SubTitle>
+              Pending Rewards
+            </SubTitle>
+          </Row>
+          <Row>
+            <Value>
+              {getFullDisplayBalance(tombSum.amount, 18, 2)} LP
+            </Value>
+            <Value>
+              {getFullDisplayBalance(tombSum.pending, 18, 2)} ZMBE
+            </Value>
+          </Row>
+          <Row>
+            <SubTitle>
+              ${tombSum.amountValueUsd.toFixed(2)}
+            </SubTitle>
+            <SubTitle>
+              {tombSum.nfts} {tombSum.nfts === 1 ? 'NFT' : 'NFTS'} Ready
+            </SubTitle>
+          </Row>
+          <ClaimButton>
+            <ButtonText>
+              Claim All
+            </ButtonText>
+          </ClaimButton>
+          <div style={{ paddingBottom: '35px' }} />
+          <CardTitle>
+            Spawning Pools
+          </CardTitle>
+          <Row>
+            <SubTitle>
+              Staked
+            </SubTitle>
+            <SubTitle>
+              Pending Rewards
+            </SubTitle>
+          </Row>
+          <Row>
+            <Value>
+              {getFullDisplayBalance(spawningPoolSum.amount, 18, 2)} ZMBE
+            </Value>
+            <Value>
+              ${spawningPoolSum.pendingValueUsd.toFixed(2)}
+            </Value>
+          </Row>
+          <Row>
+            <SubTitle>
+              ${getFullDisplayBalance(spawningPoolSum.amount.times(zombiePriceUsd()), 18, 2)}
+            </SubTitle>
+            <SubTitle>
+              {spawningPoolSum.nfts} {spawningPoolSum.nfts === 1 ? 'NFT' : 'NFTS'} Ready
+            </SubTitle>
+          </Row>
+          <ClaimButton>
+            <ButtonText>
+              Claim All
+            </ButtonText>
+          </ClaimButton>
+        </InnerCardDiv>
+      </Card>
+      <Shadow/>
+    </Container>
   )
 }
 

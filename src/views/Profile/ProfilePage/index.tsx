@@ -90,6 +90,14 @@ const CardDiv = styled.div`
   display: flex;
 `
 
+const SectionTitle = styled.text`
+  text-align: left;
+  font: normal normal normal 36px/36px Poppins;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+  opacity: 1;
+`
+
 const ProfilePage: React.FC = () => {
   const { account } = useWeb3React()
   const dispatch = useAppDispatch();
@@ -111,7 +119,7 @@ const ProfilePage: React.FC = () => {
         <BannerImage src={DefaultBannerImage}/>
         <UserDiv>
           <UserAvatar src={BasicZombie}/>
-          <UserName>YungNams</UserName>
+          <UserName>Basic Zombie</UserName>
           <UserAddress href={`https://bscscan.com/address/${account}`}>{displayAccount}</UserAddress>
         </UserDiv>
         <TabDiv>
@@ -124,6 +132,9 @@ const ProfilePage: React.FC = () => {
           <ActivityCard/>
         </CardDiv>
 
+        <SectionTitle>
+          Your Assets
+        </SectionTitle>
         <SwiperProvider>
           <Row>
             <CardsLayout>
