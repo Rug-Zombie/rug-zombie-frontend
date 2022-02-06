@@ -11,7 +11,8 @@ import Collections from './components/Collections'
 
 const Banner = styled.div`
   max-width: 1920px;
-  height: 220px;
+  min-height: 350px;
+  max-height: 370px;
   background-image: url(${header});
   background-size: cover;
   background-position: center center;

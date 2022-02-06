@@ -13,6 +13,7 @@ const CollectionSection = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
+  z-index: 0;
 `
 
 const Tabs = styled.ul`
