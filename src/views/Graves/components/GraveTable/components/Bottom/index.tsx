@@ -159,8 +159,8 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     },
     poolInfo: { unlockFee },
   } = grave
-  const [stakeAmount, setStakeAmount] = useState(BIG_ZERO)
-  const [unstakeAmount, setUnstakeAmount] = useState(BIG_ZERO)
+  const [stakeAmount, setStakeAmount] = useState(new BigNumber(null))
+  const [unstakeAmount, setUnstakeAmount] = useState(new BigNumber(null))
   const rugContract = useERC20(getAddress(rug.address))
   const drFrankenstein = useDrFrankenstein()
   const approveRug = useApprove(rugContract, getDrFrankensteinAddress()).onApprove

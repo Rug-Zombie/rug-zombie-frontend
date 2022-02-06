@@ -167,11 +167,11 @@ export const tomb = (pid: number, updatePoolObj?: { update: number, setUpdate: a
 export const initialTombData = (updatePoolObj?: { update: number, setUpdate: any }, updateUserObj?: { update: number, setUpdate: any }) => {
   let index = 0
   get.tombs().forEach(t => {
-    tomb(
-      getId(t.pid),
-      updatePoolObj ? { update: updatePoolObj.update + index, setUpdate: updatePoolObj.setUpdate } : undefined,
-      updateUserObj ? { update: updateUserObj.update + index, setUpdate: updateUserObj.setUpdate } : undefined,
-    )
+    // tomb(
+    //   getId(t.pid),
+    //   updatePoolObj ? { update: updatePoolObj.update + index, setUpdate: updatePoolObj.setUpdate } : undefined,
+    //   updateUserObj ? { update: updateUserObj.update + index, setUpdate: updateUserObj.setUpdate } : undefined,
+    // )
     index++
   })
 }

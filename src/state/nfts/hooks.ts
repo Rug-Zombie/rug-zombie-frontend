@@ -3,6 +3,8 @@ import BigNumber from 'bignumber.js'
 
 import { Nft, State } from '../types'
 import { BIG_ZERO } from '../../utils/bigNumber'
+import { getAddress } from '../../utils/addressHelpers'
+import { equalAddresses } from '../../utils'
 
 export const useGetNfts = () => {
   return useSelector((state: State) => state.nfts)

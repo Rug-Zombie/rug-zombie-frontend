@@ -99,7 +99,7 @@ export interface SpawningPool extends SpawningPoolConfig {
 
 export interface UserActivity {
   type: UserActivityType
-  blockNumber: number
+  timestamp: number
   data: Record<string, any>
 }
 
@@ -301,6 +301,7 @@ export interface State {
   graves: GraveState
   tombs: TombsState
   spawningPools: SpawningPoolState
+  userActivity: UserActivityState
   predictions: PredictionsState
   nfts: NftState
 }

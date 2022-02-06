@@ -59,12 +59,12 @@ const Tombs: React.FC = () => {
 
   const [isAllowance, setIsAllowance] = useState(false)
   const updateResult = (pid) => {
-    tomb(
-      pid,
-      null,
-      null,
-      { update, setUpdate },
-    )
+    // tomb(
+    //   pid,
+    //   null,
+    //   null,
+    //   { update, setUpdate },
+    // )
   }
 
   const updateAllowance = (tokenContact, pid) => {

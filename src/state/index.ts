@@ -4,6 +4,7 @@ import gravesReducer from "./graves"
 import tombsReducer from "./tombs"
 import spawningPoolsReducer from "./spawningPools"
 import nftReducer from './nfts'
+import userActivityReducer from './userActivites'
 
 
 const store = configureStore({
@@ -13,6 +14,7 @@ const store = configureStore({
     tombs: tombsReducer,
     spawningPools: spawningPoolsReducer,
     nfts: nftReducer,
+    userActivity: userActivityReducer,
   },
 })
 

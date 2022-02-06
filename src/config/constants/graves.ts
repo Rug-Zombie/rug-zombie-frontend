@@ -66,6 +66,41 @@ const graves: GraveConfig[] = [
     graveNftToken: '0x22e42D9425b55FD2262bfF72a316bb052DDb2a77',
   },
   {
+    pid: {
+      56: 45,
+      97: 1,
+    },
+    name: 'TreasureKey Rare',
+    nftId: 84,
+    rug: tokens.pirate,
+    rugDex: Dex.PCS_V2,
+    isNew: true,
+  },
+  {
+    pid: {
+      56: 44,
+      97: 1,
+    },
+    name: 'zRonin Gamez Legendary',
+    nftId: 80,
+    rug: tokens.zroningmz,
+    liquidityDetails: 'None! RONINGMZ holders can claim ZRONINGMZ on the homepage Victim Pools card. ZRONINGMZ can also be found in the Blackmarket and RugRoll in the Catacombs!',
+    isNew: true,
+    endDate: 1646283600,
+  },
+  {
+    pid: {
+      56: 43,
+      97: 1,
+    },
+    name: 'Ronin Gamez Legendary',
+    nftId: 80,
+    rug: tokens.roningmz,
+    liquidityDetails: 'None! Trading on the Ronin contract has been halted, a new grave will be available for new stakers shortly.',
+    isNew: true,
+    endDate: 1646283600,
+  },
+  {
     name: 'Iron Finance Legendary',
     pid: {
       56: 40,

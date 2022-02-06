@@ -73,6 +73,12 @@ export const useGetSpawningPools = () => {
   return useSelector((state: State) => state.spawningPools)
 }
 
+export const useGetUserActivities = () => {
+  return useSelector((state: State) => state.userActivity)
+}
+
+
+
 export {
   useGetNfts,
   useGetNftById,
