@@ -158,9 +158,9 @@ const ProfilePage: React.FC = () => {
         <InnerCardDiv className='scroll'>
           <ActivitiesFlex>
             {activities.map(activity => {
-              if (activity.type === UserActivityType.DrFHarvest) {
-                return null
-              }
+              // if (activity.type === UserActivityType.DrFHarvest) {
+              //   return null
+              // }
               return <ActivityDiv>
                 <DateText>{formatDuration(now() - activity.timestamp, false, true)} ago</DateText>
                 <ActivityText>{activityText(activity)}</ActivityText>
