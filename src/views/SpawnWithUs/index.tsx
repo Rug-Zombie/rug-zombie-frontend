@@ -1,5 +1,5 @@
 import React,{useEffect} from 'react'
-import Header from "components/Landing/Header"
+import Header from "components/Home/Header"
 import { createWidget } from '@typeform/embed'
 import '@typeform/embed/build/css/widget.css'
 import styled from 'styled-components'

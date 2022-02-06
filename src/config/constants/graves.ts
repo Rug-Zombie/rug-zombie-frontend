@@ -112,6 +112,17 @@ const graves: GraveConfig[] = [
   },
   {
     pid: {
+      56: 42,
+      97: 1,
+    },
+    name: 'Pancake Hunny Rare',
+    nftId: 79,
+    rug: tokens.hunny,
+    rugDex: Dex.PCS_V2,
+    isNew: true,
+  },
+  {
+    pid: {
       56: 41,
       97: 1,
     },

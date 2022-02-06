@@ -10,7 +10,7 @@ const Container = styled.div`
 `
 
 const Card = styled.div`
-  height: 410px;
+   min-height: 410px;
   background: #151E21;
   border-radius: 20px;
   display: flex;
@@ -81,9 +81,11 @@ const SubText = styled.span`
 
 interface CollectionCardProps {
   id: number;
+  showOwned?: boolean
+  showTotalSupply?: boolean
 }
 
-const NftCard: React.FC<CollectionCardProps> = ({ id }) => {
+const NftCard: React.FC<CollectionCardProps> = ({ id, showOwned, showTotalSupply }) => {
   const { name, path, totalSupply, rarity, type, userInfo: { ownedIds } } = useGetNftById(id)
   return <Container>
     <Card>
@@ -98,10 +100,15 @@ const NftCard: React.FC<CollectionCardProps> = ({ id }) => {
       <div style={{ paddingTop: '10px' }} />
       <Title>{name}</Title>
       <div style={{ paddingTop: '22px' }} />
-      <p style={{ paddingLeft: '30px' }}>
+      {showTotalSupply ? <p style={{ paddingLeft: '30px', paddingBottom: '10px' }}>
         <SubText style={{ color: '#6B7682' }}>Total supply:&nbsp;&nbsp;</SubText>
         <SubText style={{ color: '#FFFFFF' }}>{totalSupply.toString()}</SubText>
-      </p>
+      </p> : null}
+      {showOwned ? <p style={{ paddingLeft: '30px' }}>
+        <SubText style={{ color: '#6B7682' }}>Variants owned:&nbsp;&nbsp;</SubText>
+        <SubText style={{ color: '#FFFFFF' }}>{ownedIds.length}</SubText>
+      </p> : null}
+      <div style={{paddingBottom: '10px'}}/>
     </Card>
     {ownedIds.length > 0 ? <Shadow /> : null}
   </Container>

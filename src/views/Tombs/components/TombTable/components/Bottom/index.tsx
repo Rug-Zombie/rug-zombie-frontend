@@ -150,8 +150,8 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
     userInfo: { lpAllowance, lpBalance, nftMintTime, tokenWithdrawalDate, randomNumber, isMinting, amount },
     poolInfo: { mintingFee },
   } = tomb
-  const [stakeAmount, setStakeAmount] = useState(BIG_ZERO)
-  const [unstakeAmount, setUnstakeAmount] = useState(BIG_ZERO)
+  const [stakeAmount, setStakeAmount] = useState(new BigNumber(null))
+  const [unstakeAmount, setUnstakeAmount] = useState(new BigNumber(null))
   const lpContract = useERC20(getAddress(lpAddress))
   const drFrankenstein = useDrFrankenstein()
   const tombOverlay = useTombOverlay()

@@ -1,7 +1,13 @@
+export enum MenuItem {
+  Internal,
+  External
+}
+
 const config = [
+
   {
-    label: 'Exchange',
-    href: 'https://swap.rugzombie.io/'
+    label: 'Home',
+    href: '/'
   },
   {
     label: 'Graves',
@@ -16,8 +22,9 @@ const config = [
     href: '/spawning_pools'
   },
   {
-    label: 'Mausoleum',
-    href: '/mausoleum'
+    label: 'Exchange',
+    href: 'https://swap.rugzombie.io/',
+    type: MenuItem.External
   },
   {
     label: 'Graveyard',
@@ -27,6 +34,7 @@ const config = [
     label: 'Catacombs',
     href: '/catacombs'
   },
+
 ]
 
 export default config

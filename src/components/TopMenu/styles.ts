@@ -80,6 +80,7 @@ export const MenuText = styled(Text)`
   font: normal normal normal 14px/30px Poppins;
   &:hover {
     color: #30C00D;
+    cursor: pointer;
   }
 `;
 
@@ -95,3 +96,15 @@ export const TokenButton = styled(SecondaryButton)`
     cursor: pointer;
   }
 `;
+
+
+
+export const ProfileImage = styled.img`
+  width: 50px;
+  height: 50px;
+  border: 2px solid green;
+  border-radius: 20px;
+  &:hover {
+    cursor: pointer;
+  }
+`

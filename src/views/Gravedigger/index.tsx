@@ -1,5 +1,5 @@
 import React,{ useEffect } from "react"
-import Header from "components/Landing/Header"
+import Header from "components/Home/Header"
 import styled from "styled-components"
 import { Button, Flex, Text } from '@rug-zombie-libs/uikit'
 import { useTranslation } from "contexts/Localization"

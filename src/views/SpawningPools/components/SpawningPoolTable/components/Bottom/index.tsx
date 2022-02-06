@@ -128,12 +128,11 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
   const {
     id,
     address,
-    rewardToken,
     userInfo: { zombieBalance, paidUnlockFee, amount, zombieAllowance, nftMintDate, tokenWithdrawalDate },
     poolInfo: { unlockFee },
   } = spawningPool
-  const [stakeAmount, setStakeAmount] = useState(BIG_ZERO)
-  const [unstakeAmount, setUnstakeAmount] = useState(BIG_ZERO)
+  const [stakeAmount, setStakeAmount] = useState(new BigNumber(null))
+  const [unstakeAmount, setUnstakeAmount] = useState(new BigNumber(null))
   const spawningPoolContract = useSpawningPool(id)
   const approveZombie = useApprove(useZombie(), getAddress(address)).onApprove
   const { onStake } = useStake(spawningPoolContract, stakeAmount)

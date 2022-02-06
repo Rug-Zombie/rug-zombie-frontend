@@ -19,6 +19,7 @@ import { fetchNftUserDataAsync } from '../../../state/nfts'
 import { useGetNfts } from '../../../state/hooks'
 import ActivityCard from './components/ActivityCard'
 import StakingInfoCard from './components/StakingInfoCard'
+import NftCard from '../../Graveyard/components/Nfts/components/NftCard'
 
 const Row = styled.div`
   display: flex
@@ -98,6 +99,13 @@ const SectionTitle = styled.text`
   opacity: 1;
 `
 
+const NftsContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  min-height: 480px;
+`
+
 const ProfilePage: React.FC = () => {
   const { account } = useWeb3React()
   const dispatch = useAppDispatch();
@@ -107,11 +115,10 @@ const ProfilePage: React.FC = () => {
   const accountLength = account ? account.length : 0
   const displayAccount = account ? `${account.slice(0, 6)}...${account.slice(accountLength - 4, accountLength)}` : ''
 
-  const refresh = () => undefined
-
   useEffect(() => {
       dispatch(fetchNftUserDataAsync(account))
   }, [dispatch, account])
+
 
   return (
     <>
@@ -135,20 +142,10 @@ const ProfilePage: React.FC = () => {
         <SectionTitle>
           Your Assets
         </SectionTitle>
-        <SwiperProvider>
-          <Row>
-            <CardsLayout>
-              {ownedNfts.map((nft) => {
-                return (<Col>
-                    <StyledCollectibleCard id={nft.id} key={nft.id} />
-                  </Col>
-                )
-              })
-              }
-            </CardsLayout>
-          </Row>
-        </SwiperProvider>
       </Page>
+      <NftsContainer>
+        {ownedNfts.map(nft => <NftCard showOwned key={nft.id} id={nft.id} />)}
+      </NftsContainer>
     </>
   )
 }

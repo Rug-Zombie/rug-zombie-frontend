@@ -2,13 +2,13 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import header from 'images/GraveyardHeader.jpeg'
-import SectionHeader from 'views/Home/components/SectionHeader'
 import Footer from 'components/Footer'
 import { FooterImage } from 'components/Footer/styles'
 import { useWeb3React } from '@web3-react/core'
 import Collections from './components/Collections'
 import { useAppDispatch } from '../../state'
 import { fetchNftPublicDataAsync, fetchNftUserDataAsync } from '../../state/nfts'
+import SectionHeader from '../../components/Home/components/SectionHeader'
 
 const Banner = styled.div`
   max-width: 1920px;

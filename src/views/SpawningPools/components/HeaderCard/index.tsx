@@ -17,7 +17,7 @@ const HalfLine = styled.div`
   margin: 0 auto;
   height: 5px;
   width: 80%;
-  background-color: #AE32AA;
+  background-color: #30C00D;
 `
 
 const InfoCardTitle = styled.h3`

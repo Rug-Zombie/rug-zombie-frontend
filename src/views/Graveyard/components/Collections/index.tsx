@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import SectionHeader from 'views/Home/components/SectionHeader'
 import Filter from '../Filter'
 import config from './config'
 import Nfts from '../Nfts'
-import { account } from '../../../../redux/get'
+import SectionHeader from '../../../../components/Home/components/SectionHeader'
 
 const CollectionSection = styled.section`
   background-color: #010202;

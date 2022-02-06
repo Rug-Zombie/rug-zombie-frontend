@@ -9,7 +9,6 @@ import TopMenu from 'components/TopMenu'
 import AppContainer from 'components/AppContainer'
 import Menu from 'components/Menu'
 import Loader from 'components/Loader'
-import Home from 'views/Home/Home'
 import Tombs from 'views/Tombs'
 import Gravedigger from 'views/Gravedigger/'
 import { useWeb3React } from '@web3-react/core'
@@ -38,7 +37,7 @@ import { fetchNftPublicDataAsync } from './state/nfts'
 
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page
-const Landing = lazy(() => import('./components/Landing'))
+const Landing = lazy(() => import('./components/Home'))
 
 BigNumber.config({
   EXPONENTIAL_AT: 1000,
@@ -73,21 +72,12 @@ const App: React.FC = () => {
     dispatch(fetchNftPublicDataAsync())
   }, [dispatch])
 
-  const handleAuthentication = () => {
-    setAuthenticated(!isAuthenticated)
-    history.push(routes.HOME)
-  }
-
-  const LandingProps = {
-    'handleAuthentication': handleAuthentication,
-  }
   return (
     <Router history={history}>
       <ResetCSS />
       <GlobalStyle />
       <SuspenseWithChunkError fallback={<Loader />}>
         <Switch>
-          <Route exact path={routes.LANDING}><Landing {...LandingProps} /></Route>
           <Route exact path={routes.GRAVEDIGGER}><Gravedigger /></Route>
           <Route exact path={routes.SPAWNWITHUS}><SpawnWithUs /></Route>
           <Route exact path={routes.CATACOMBS}><Catacombs /></Route>
@@ -99,11 +89,11 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.BLACKMARKET}><BlackMarket /></Route>
           <Route exact path={routes.BARRACKS}><Barracks /></Route>
-          <Route exact path={routes.HOME}>
+          <Route exact path={routes.LANDING}>
             <>
               <TopMenu />
               <AppContainer>
-                <Home />
+                <Landing />
               </AppContainer>
             </>
           </Route>
