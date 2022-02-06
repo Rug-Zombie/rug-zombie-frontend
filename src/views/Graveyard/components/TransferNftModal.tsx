@@ -8,7 +8,7 @@ import { useERC721 } from 'hooks/useContract'
 import InfoRow from './InfoRow'
 import { ToastDescriptionWithTx } from '../../../components/Toast'
 import { getAddress } from '../../../utils/addressHelpers'
-import { useGetNftById } from '../../../state/hooks'
+import { useGetNftById } from '../../../state/nfts/hooks'
 
 interface TransferNftModalProps {
   id: number

@@ -8,7 +8,7 @@ import {
 } from '@rug-zombie-libs/uikit'
 import Video from '../../../../components/Video'
 import TransferNftModal from '../TransferNftModal'
-import { useGetNftById } from '../../../../state/hooks'
+import { useGetNftById } from '../../../../state/nfts/hooks'
 
 const StyleDetails = styled.div`
   display: flex;
@@ -22,7 +22,7 @@ interface ViewCardProps {
 }
 
 const ViewCard: React.FC<ViewCardProps> = ({ id, nftId, refresh }: ViewCardProps) => {
-  const { path, type, userInfo: { ownedIds } } = useGetNftById(id);
+  const { path, type, userInfo: { ownedIds } } = useGetNftById(id)
   const isOwned = ownedIds.length > 0
 
   const handleSuccess = () => {

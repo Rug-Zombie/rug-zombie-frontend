@@ -13,7 +13,7 @@ import {
 import ViewModal from '../ViewModal'
 import useSwiper from '../../../Mausoleum/hooks/useSwiper'
 import Video from '../../../../components/Video'
-import { Nft } from '../../../../state/types'
+import { useGetNftById } from '../../../../state/hooks'
 
 
 const StyleDetails = styled.div`
@@ -31,12 +31,12 @@ const StyleCardHeader = styled.div`
 `
 
 interface CollectiblesCardProps {
-  nft: Nft;
+  id: number;
   refresh: () => void;
 }
 
-const CollectiblesCard: React.FC<CollectiblesCardProps> = ({ nft, refresh }: CollectiblesCardProps) => {
-  const { name, description, path, type, userInfo: { ownedIds } } = nft
+const CollectiblesCard: React.FC<CollectiblesCardProps> = ({ id, refresh }: CollectiblesCardProps) => {
+  const { name, description, path, type, userInfo: { ownedIds } } = useGetNftById(id)
   const [isOpen, setIsOpen] = useState(false)
   const isOwned = ownedIds.length > 0
   const { setSwiper } = useSwiper()
@@ -47,7 +47,7 @@ const CollectiblesCard: React.FC<CollectiblesCardProps> = ({ nft, refresh }: Col
 
   const [onPresentViewModal,] = useModal(
       <ViewModal
-        id={nft.id}
+        id={id}
         setSwiper={setSwiper}
         refresh={refresh}
       />

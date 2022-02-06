@@ -1,32 +1,76 @@
 /* eslint-disable no-param-reassign */
-import React from 'react'
-import PageHeader from 'components/PageHeader'
-import { Flex, Heading } from '@rug-zombie-libs/uikit'
-import Collectibles from './components/Collectibles'
-import SwiperProvider from '../Mausoleum/context/SwiperProvider'
+import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
+import header from 'images/GraveyardHeader.jpeg'
+import SectionHeader from 'views/Home/components/SectionHeader'
+import Footer from 'components/Footer'
+import { useNftOwnership } from 'hooks/useContract'
+import { FooterImage } from 'components/Footer/styles'
+import Collections from './components/Collections'
 
-const CollectiblesMain: React.FC = () => {
+const Banner = styled.div`
+  max-width: 1920px;
+  min-height: 350px;
+  max-height: 370px;
+  background-image: url(${header});
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+`;
+
+const TitleSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 0 0 0;
+`;
+
+const SubTextBox = styled.p`
+  width: 45%;
+  text-align: center;
+  font: normal normal 300 20px/30px Poppins;
+  color: #6B7682;
+  margin: 25px 0;
+  @media (max-width: 999px) {
+    width: 70%;
+  }
+  @media (max-width: 499px) {
+    width: 90%
+  }
+`;
+
+const SectionEnd = styled(FooterImage)`
+  top: -200px;
+  width: 100%;
+`;
+
+const Graveyard: React.FC = () => {
+  const contract = useNftOwnership()
+  const [update, setUpdate] = useState(false)
+
+  useEffect(() => {
+    nftUserInfo(contract).then(() => {
+      setUpdate(prev => !prev);
+    });
+  }, [contract]);
+
   return (
     <>
-      <PageHeader background='#101820'>
-        <Flex justifyContent='space-between' flexDirection={['column', null, 'row']}>
-          <Flex flexDirection='column' mr={['8px', 0]}>
-            <Heading as='h1' size='xxl' color='secondary' mb='24px'>
-              Graveyard
-            </Heading>
-            <Heading size='md' color='text'>
-              View your NFT collection
-            </Heading>
-          </Flex>
-        </Flex>
-      </PageHeader>
-      <div style={{ paddingTop: '30px' }}>
-        <SwiperProvider>
-          <Collectibles />
-        </SwiperProvider>
-      </div>
+      <Banner />
+      <TitleSection>
+        <SectionHeader 
+          title="Explore the Graveyard"
+        />
+        <SubTextBox>
+          View our NFT collection powering the RugZombie gaming ecosystem… Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+        </SubTextBox>
+        <SectionEnd />
+      </TitleSection>
+      <Collections />
+      <Footer />
     </>
-  )
+  );
 }
 
-export default CollectiblesMain
+export default Graveyard

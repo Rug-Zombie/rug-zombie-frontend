@@ -1,50 +1,53 @@
 import React, { useEffect, useState } from 'react';
 import { CardsLayout, Heading } from '@rug-zombie-libs/uikit'
 import './Collectibles.Styles.css'
-import { useWeb3React } from '@web3-react/core'
 import CollectiblesCard from './CollectiblesCard';
+import { nftUserInfo } from '../../../../redux/fetch'
 
+import { useNftOwnership } from '../../../../hooks/useContract'
 import CollectibleTabButtons from '../CollectibleTabButtons'
+import { nfts } from '../../../../redux/get'
 import { getAddress } from '../../../../utils/addressHelpers'
-import { useAppDispatch } from '../../../../state'
-import { useGetNfts } from '../../../../state/hooks'
-import { fetchNftPublicDataAsync, fetchNftUserDataAsync } from '../../../../state/nfts'
 
 const RARITIES = ['Biblical', 'Mythic', 'Legendary', 'Rare', 'Uncommon', 'Common', 'Special']
 
 const Collectibles: React.FC = () => {
-  const { account } = useWeb3React()
-  const dispatch = useAppDispatch()
+  const contract = useNftOwnership()
+  const [update, setUpdate] = useState(false)
+  const [filter, setFilter] = useState(0)
 
   useEffect(() => {
-    dispatch(fetchNftPublicDataAsync())
-    dispatch(fetchNftUserDataAsync(account))
-  }, [dispatch, account])
-
-  const [filter, setFilter] = useState(0)
-  const nfts = useGetNfts().data
+      nftUserInfo(contract).then(() => {
+        setUpdate(!update)
+      })
+    // eslint-disable-next-line
+  }, [contract])
 
   let currentNfts = []
   switch (filter) {
     case 1:
-      currentNfts = nfts.filter(nft => nft.userInfo.ownedIds.length > 0)
+      currentNfts = nfts().filter(nft => nft.userInfo.ownedIds.length > 0)
       break
     case 2:
-      currentNfts = nfts.filter(nft => nft.userInfo.ownedIds.length === 0)
+      currentNfts = nfts().filter(nft => nft.userInfo.ownedIds.length === 0)
       break
     default:
-      currentNfts = nfts
+      currentNfts = nfts()
       break
   }
 
-  const refresh = () => undefined
+  const refresh = () => {
+      nftUserInfo(contract).then(() => {
+        setUpdate(!update)
+      })
+  }
 
   return (
     <>
       <CollectibleTabButtons setFilter={setFilter}/>
       {RARITIES.map((rarity) => {
         const nftsByRarity = currentNfts.map((nft) => {
-          return nft.rarity === rarity ? <CollectiblesCard nft={nft} key={`${getAddress(nft.address)}-${nft.id}`} refresh={refresh}/> : null
+          return nft.rarity === rarity ? <CollectiblesCard id={nft.id} key={`${getAddress(nft.address)}-${nft.id}`} refresh={refresh}/> : null
         })
 
         return <>

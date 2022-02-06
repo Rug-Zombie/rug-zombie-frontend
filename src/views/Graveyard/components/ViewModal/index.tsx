@@ -5,7 +5,7 @@ import useTheme from 'hooks/useTheme'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import styled from 'styled-components'
 import ViewCard from '../ViewCard'
-import { useGetNftById } from '../../../../state/hooks'
+import { useGetNftById } from '../../../../state/nfts/hooks'
 
 interface ViewModalProps {
   id: number;
