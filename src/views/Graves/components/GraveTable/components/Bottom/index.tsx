@@ -65,7 +65,7 @@ const Buttons = styled.div`
   }
 `
 
-const InputControl = styled.p`
+const InputControl = styled.text`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -116,13 +116,13 @@ const SecondaryStakeButton = styled.button`
   }
 `
 
-const PrimaryStakeButtonText = styled.p`
+const PrimaryStakeButtonText = styled.text`
   text-align: center;
   font: normal normal normal 16px/25px Poppins;
   color: #010202;
 `
 
-const SecondaryStakeButtonText = styled.p`
+const SecondaryStakeButtonText = styled.text`
   text-align: center;
   font: normal normal normal 16px/25px Poppins;
   color: #FFFFFF;
