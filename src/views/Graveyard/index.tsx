@@ -4,9 +4,11 @@ import styled from 'styled-components'
 import header from 'images/GraveyardHeader.jpeg'
 import SectionHeader from 'views/Home/components/SectionHeader'
 import Footer from 'components/Footer'
-import { useNftOwnership } from 'hooks/useContract'
 import { FooterImage } from 'components/Footer/styles'
+import { useWeb3React } from '@web3-react/core'
 import Collections from './components/Collections'
+import { useAppDispatch } from '../../state'
+import { fetchNftPublicDataAsync, fetchNftUserDataAsync } from '../../state/nfts'
 
 const Banner = styled.div`
   max-width: 1920px;
@@ -46,15 +48,15 @@ const SectionEnd = styled(FooterImage)`
 `;
 
 const Graveyard: React.FC = () => {
-  const contract = useNftOwnership()
-  const [update, setUpdate] = useState(false)
+  const dispatch = useAppDispatch()
+  const {account} = useWeb3React()
 
   useEffect(() => {
-    nftUserInfo(contract).then(() => {
-      setUpdate(prev => !prev);
-    });
-  }, [contract]);
-
+    dispatch(fetchNftPublicDataAsync())
+    if(account) {
+      dispatch(fetchNftUserDataAsync(account))
+    }
+  }, [account, dispatch])
   return (
     <>
       <Banner />

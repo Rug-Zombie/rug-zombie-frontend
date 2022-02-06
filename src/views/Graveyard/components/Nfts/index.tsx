@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import NftCard from './components/NftCard'
+import { useGetNfts } from '../../../../state/nfts/hooks'
 
 const NftsContainer = styled.div`
   display: flex;
@@ -18,12 +19,13 @@ interface NftsProps {
 const Nfts: React.FC<NftsProps> = ({ filter, inWallet }) => {
   const [ items, setItems ] = useState([]);
 
+  const nfts = useGetNfts().data
   useEffect(() => {
-    if (filter === 'All') setItems(nfts());
-    else setItems(nfts().filter(nft => nft.rarity === filter));
+    if (filter === 'All') setItems(nfts);
+    else setItems(nfts.filter(nft => nft.rarity === filter));
 
     if (inWallet) setItems(prev => prev.filter(nft => nft.userInfo.ownedIds.length > 0));
-  }, [ filter, inWallet ]);
+  }, [filter, inWallet, nfts]);
 
   const NftCardList = items.map(nft => <NftCard key={nft.id} id={nft.id} />);
 

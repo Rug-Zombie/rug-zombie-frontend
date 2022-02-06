@@ -13,7 +13,6 @@ import { useGetNftById } from '../../../state/nfts/hooks'
 interface TransferNftModalProps {
   id: number
   tokenId: number
-  onSuccess: () => any
   onDismiss?: () => void
 }
 
@@ -38,7 +37,7 @@ const Label = styled.label`
   margin-top: 24px;
 `
 
-const TransferNftModal: React.FC<TransferNftModalProps> = ({ id, tokenId, onSuccess, onDismiss }) => {
+const TransferNftModal: React.FC<TransferNftModalProps> = ({ id, tokenId, onDismiss }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [value, setValue] = useState('')
   const [error, setError] = useState(null)
@@ -57,7 +56,6 @@ const TransferNftModal: React.FC<TransferNftModalProps> = ({ id, tokenId, onSucc
         contract.methods.transferFrom(account, value, tokenId).send({ from: account })
           .then(res => {
             onDismiss()
-            onSuccess()
             toastSuccess('NFT successfully transferred!', <ToastDescriptionWithTx txHash={res.transactionHash} />)
           })
           .catch(() => {

@@ -25,7 +25,6 @@ import Mausoleum from './views/Mausoleum'
 import PredictionsHome from './views/PredictionsHome'
 import SpawningPools from './views/SpawningPools'
 import Graveyard from './views/Graveyard'
-
 import Profile from './views/Profile'
 import DataLab from './views/Catacombs/components/DataLab'
 import BlackMarket from './views/Catacombs/components/BlackMarket'
@@ -140,10 +139,17 @@ const App: React.FC = () => {
               </AppContainer>
             </>
           </Route>
+          <Route exact path={routes.GRAVEYARD}>
+            <>
+              <TopMenu />
+              <AppContainer>
+                <Graveyard />
+              </AppContainer>
+            </>
+          </Route>
           <Menu>
             <Route exact path={routes.MAUSOLEUM}><PredictionsHome /></Route>
             <Route exact path={routes.AUCTION}><Mausoleum /></Route>
-            <Route exact path={routes.GRAVEYARD}><Graveyard /></Route>
             <Route exact path={routes.SHARKTANK}><SharkPools /></Route>
             <Route exact path={routes.BURNGRAVES}><BurnGraves /></Route>
           </Menu>

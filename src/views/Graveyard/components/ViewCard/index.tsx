@@ -18,19 +18,14 @@ const StyleDetails = styled.div`
 interface ViewCardProps {
   id: number;
   nftId: number;
-  refresh: () => void;
 }
 
-const ViewCard: React.FC<ViewCardProps> = ({ id, nftId, refresh }: ViewCardProps) => {
+const ViewCard: React.FC<ViewCardProps> = ({ id, nftId }: ViewCardProps) => {
   const { path, type, userInfo: { ownedIds } } = useGetNftById(id)
   const isOwned = ownedIds.length > 0
 
-  const handleSuccess = () => {
-    refresh()
-  }
-
   const [onPresentTransferModal] = useModal(
-    <TransferNftModal id={id} tokenId={nftId} onSuccess={handleSuccess} />,
+    <TransferNftModal id={id} tokenId={nftId} />,
   )
 
   return (

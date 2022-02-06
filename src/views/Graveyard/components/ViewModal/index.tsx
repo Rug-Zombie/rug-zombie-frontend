@@ -11,7 +11,6 @@ interface ViewModalProps {
   id: number;
   onDismiss?: any;
   setSwiper: any;
-  refresh: () => void;
 }
 
 const StyledSwiper = styled.div`
@@ -25,7 +24,7 @@ const StyledSwiper = styled.div`
   }
 `
 
-const ViewModal: React.FC<ViewModalProps> = ({ id, onDismiss, setSwiper, refresh }) => {
+const ViewModal: React.FC<ViewModalProps> = ({ id, onDismiss, setSwiper }) => {
   const { userInfo: { ownedIds } } = useGetNftById(id)
   const { theme } = useTheme()
   return <Modal onDismiss={onDismiss} title='In Wallet' headerBackground={theme.colors.backgroundAlt}
@@ -44,7 +43,7 @@ const ViewModal: React.FC<ViewModalProps> = ({ id, onDismiss, setSwiper, refresh
         resizeObserver
       >
         {ownedIds.map(ownedId => {
-          return <SwiperSlide><ViewCard id={id} nftId={ownedId} refresh={refresh} /></SwiperSlide>
+          return <SwiperSlide><ViewCard id={id} nftId={ownedId} /></SwiperSlide>
         })}
       </Swiper>
     </StyledSwiper>

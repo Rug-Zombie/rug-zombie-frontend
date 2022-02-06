@@ -140,7 +140,7 @@ const ProfilePage: React.FC = () => {
             <CardsLayout>
               {ownedNfts.map((nft) => {
                 return (<Col>
-                    <StyledCollectibleCard nft={nft} key={nft.id} refresh={refresh} />
+                    <StyledCollectibleCard id={nft.id} key={nft.id} />
                   </Col>
                 )
               })
