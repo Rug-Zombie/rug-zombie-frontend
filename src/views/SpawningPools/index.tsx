@@ -23,6 +23,9 @@ const Row = styled.div`
   align-items: flex-start;
   justify-content: center;
   flex-wrap: wrap;
+  @media (max-width: 1279px) {
+    max-width: 748px;
+  }
 `
 
 const Header = styled.div`
