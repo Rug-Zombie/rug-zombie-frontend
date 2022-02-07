@@ -24,6 +24,9 @@ const Row = styled.div`
   align-items: flex-start;
   justify-content: center;
   flex-wrap: wrap;
+  @media (max-width: 1279px) {
+    max-width: 748px;
+  }
 `
 
 const Header = styled.div`
@@ -46,9 +49,8 @@ const TombsColumn = styled.div`
   flex-direction: column;
   z-index: 1;
   @media (max-width: 1279px) {
-    max-width: 100vw;
-    flex-grow: 0.5;
-
+    max-width: 100%;
+    flex-grow: 1;
     margin: 0 auto;
   }
 `

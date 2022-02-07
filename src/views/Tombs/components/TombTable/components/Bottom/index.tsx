@@ -34,19 +34,6 @@ const Separator = styled.div`
   margin: 25px 0 0 0;
 `
 
-const BalanceContainer = styled.div`
-  width: 50%;
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: nowrap;
-  margin: 25px 0 0 0;
-  white-space: nowrap;
-  @media (max-width: 771px) {
-    width: 100%;;
-  }
-
-`
-
 const StakingContainer = styled.div`
   width: 100%;
   display: flex;
@@ -65,11 +52,22 @@ const Buttons = styled.div`
   display: flex;
   flex-grow: 1;
   justify-content: space-evenly;
-  margin: 10px 0 0 0;
+  margin: 54px 0 0 0;
+  @media (max-width: 723px) {
+    margin: 10px 0 0 0;
+  }
+`
+
+const InputControl = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 104px;
 `
 
 const StakingInput = styled.input`
-  width: 160px;
+  width: 150px;
   height: 60px;
   background: #0D1417 0% 0% no-repeat padding-box;
   border-radius: 10px;
@@ -78,19 +76,19 @@ const StakingInput = styled.input`
   text-align: left;
   font: normal normal normal 14px/30px Poppins;
   color: #FFFFFF;
-  margin: 0 5px;
+  margin: 0 2px;
 `
 
 const PrimaryStakeButton = styled.button`
   height: 60px;
-  width: 160px;
+  width: 150px;
   background: #B8C00D 0% 0% no-repeat padding-box;
   border-radius: 10px;
   border: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 5px;
+  margin: 0 2px;
 
   &:hover {
     cursor: pointer;
@@ -99,14 +97,14 @@ const PrimaryStakeButton = styled.button`
 
 const SecondaryStakeButton = styled.button`
   height: 60px;
-  width: 160px;
+  width: 150px;
   border: 2px solid #B8C00D;
   border-radius: 10px;
   background: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 5px;
+  margin: 0 2px;
 
   &:hover {
     cursor: pointer;
@@ -130,6 +128,7 @@ const BalanceText = styled.button`
   color: #6B7682;
   background: none;
   border: none;
+  width: 150px;
 
   &:hover {
     cursor: pointer;
@@ -320,18 +319,30 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
 
   return <>
     <Separator />
-    <BalanceContainer>
-      <BalanceText onClick={maxStakeAmount}>Wallet
-        Balance: {numeral(getFullDisplayBalance(lpBalance)).format('(0.00 a)')} LP</BalanceText>
-      <BalanceText onClick={maxUnstakeAmount}>Your
-        Staked: {numeral(getFullDisplayBalance(amount)).format('(0.00 a)')} LP</BalanceText>
-    </BalanceContainer>
     <StakingContainer>
       <Inputs>
-        <StakingInput onInput={changeStakeInput} value={getBalanceNumber(stakeAmount)} placeholder='Stake amount'
-                      type='number' />
-        <StakingInput onInput={changeUnstakeInput} value={getBalanceNumber(unstakeAmount)} placeholder='Unstake amount'
-                      type='number' />
+        <InputControl>
+          <BalanceText onClick={maxStakeAmount}>
+            Wallet Balance: <p>{numeral(getFullDisplayBalance(lpBalance)).format('(0.00 a)')} LP</p>
+          </BalanceText>
+          <StakingInput
+            onInput={changeStakeInput}
+            value={getBalanceNumber(stakeAmount)}
+            placeholder='Stake amount'
+            type='number'
+          />
+        </InputControl>
+        <InputControl>
+          <BalanceText onClick={maxUnstakeAmount}>
+            Your Staked: <p>{numeral(getFullDisplayBalance(amount)).format('(0.00 a)')} LP</p>
+          </BalanceText>
+          <StakingInput
+            onInput={changeUnstakeInput}
+            value={getBalanceNumber(unstakeAmount)}
+            placeholder='Unstake amount'
+            type='number'
+          />
+        </InputControl>
       </Inputs>
       <Buttons>
         <PrimaryStakeButton onClick={handleTx}>

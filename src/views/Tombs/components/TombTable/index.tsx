@@ -18,6 +18,9 @@ const TombCard = styled.div<{ open: boolean }>`
   display: flex;
   flex-direction: column;
   position: relative;
+  @media (min-width: 1280px) {
+    min-width: 668px;
+  }
 `;
 
 const Shadow = styled.div`
