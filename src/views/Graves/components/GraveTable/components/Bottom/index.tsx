@@ -368,11 +368,10 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
         <InputControl>
           {currentStep === StakingStep.ApproveRug || currentStep === StakingStep.DepositRug
             ? <BalanceText onClick={maxStakeAmount}>
-              Wallet
-              Balance: <p>{numeral(getFullDisplayBalance(rugBalance, rug.decimals)).format('(0.00 a)')} {rug.symbol}</p>
+              Wallet Balance: <p>{numeral(getFullDisplayBalance(rugBalance, rug.decimals)).format('(0.00 a)')} {rug.symbol}</p>
             </BalanceText>
             : <BalanceText onClick={maxStakeAmount}>
-              Wallet Balance: {numeral(getFullDisplayBalance(zombieBalance())).format('(0.00 a)')} ZMBE
+              Wallet Balance: <p>{numeral(getFullDisplayBalance(zombieBalance())).format('(0.00 a)')} ZMBE</p>
             </BalanceText>
           }
           <StakingInput
@@ -383,7 +382,7 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
         </InputControl>
         <InputControl>
           <BalanceText onClick={maxUnstakeAmount}>
-            Your Staked: {numeral(getFullDisplayBalance(amount)).format('(0.00 a)')} ZMBE
+            Your Staked: <p>{numeral(getFullDisplayBalance(amount)).format('(0.00 a)')} ZMBE</p>
           </BalanceText>
           <StakingInput
             onInput={changeUnstakeInput}
