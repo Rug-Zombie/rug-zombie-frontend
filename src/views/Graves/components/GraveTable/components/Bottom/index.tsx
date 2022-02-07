@@ -68,10 +68,12 @@ const Buttons = styled.div`
   }
 `
 
-const InputControl = styled.text`
+const InputControl = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  height: 104px;
 `
 
 const StakingInput = styled.input`
@@ -84,7 +86,7 @@ const StakingInput = styled.input`
   text-align: left;
   font: normal normal normal 14px/30px Poppins;
   color: #FFFFFF;
-  margin: 0 3px;
+  margin: 0 2px;
 `
 
 const PrimaryStakeButton = styled.button`
@@ -96,7 +98,7 @@ const PrimaryStakeButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 3px;
+  margin: 0 2px;
 
   &:hover {
     cursor: pointer;
@@ -112,7 +114,7 @@ const SecondaryStakeButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 3px;
+  margin: 0 2px;
 
   &:hover {
     cursor: pointer;
