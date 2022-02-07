@@ -21,6 +21,7 @@ export const NavbarContent = styled.div`
 export const Logo = styled.img`
   height: 36px;
   margin: 0 20px 0 20px;
+  &:hover { cursor: pointer; }
 `;
 
 export const Links = styled.div`

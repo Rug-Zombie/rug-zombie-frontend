@@ -36,7 +36,7 @@ const TopMenu = () => {
   return (
     <Navbar>
       <NavbarContent>
-        <Logo src={logo} alt='RugZombie Logo' />
+        <Logo src={logo} alt='RugZombie Logo' onClick={() => history.push('/')}/>
         <Links>
           {config.map(i => {
             if (i.type === MenuItem.External) {
