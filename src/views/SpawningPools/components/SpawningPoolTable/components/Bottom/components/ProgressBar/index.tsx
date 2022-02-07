@@ -33,8 +33,6 @@ interface StakingProgressBarProps {
 }
 
 enum Step {
-  ApproveRug,
-  DepositRug,
   UnlockSpawningPool,
   ApproveZombie,
   StakeZombie,
