@@ -45,9 +45,8 @@ const SpawningPoolsColumn = styled.div`
   flex-direction: column;
   z-index: 1;
   @media (max-width: 1279px) {
-    max-width: 100vw;
-    flex-grow: 0.5;
-
+    max-width: 100%;
+    flex-grow: 1;
     margin: 0 auto;
   }
 `
