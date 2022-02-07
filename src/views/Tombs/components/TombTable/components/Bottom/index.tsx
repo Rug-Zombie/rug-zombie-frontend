@@ -135,6 +135,11 @@ const BalanceText = styled.button`
   }
 `
 
+const AmountText = styled.p`
+  font: normal normal normal 14px/21px Poppins;
+  margin: 0;
+`
+
 interface BottomProps {
   tomb: Tomb;
 }
@@ -323,7 +328,7 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
       <Inputs>
         <InputControl>
           <BalanceText onClick={maxStakeAmount}>
-            Wallet Balance: <p>{numeral(getFullDisplayBalance(lpBalance)).format('(0.00 a)')} LP</p>
+            Wallet Balance: <AmountText>{numeral(getFullDisplayBalance(lpBalance)).format('(0.00 a)')} LP</AmountText>
           </BalanceText>
           <StakingInput
             onInput={changeStakeInput}
@@ -334,7 +339,7 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
         </InputControl>
         <InputControl>
           <BalanceText onClick={maxUnstakeAmount}>
-            Your Staked: <p>{numeral(getFullDisplayBalance(amount)).format('(0.00 a)')} LP</p>
+            Your Staked: <AmountText>{numeral(getFullDisplayBalance(amount)).format('(0.00 a)')} LP</AmountText>
           </BalanceText>
           <StakingInput
             onInput={changeUnstakeInput}

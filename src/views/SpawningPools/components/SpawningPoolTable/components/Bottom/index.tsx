@@ -131,6 +131,11 @@ const BalanceText = styled.button`
   }
 `
 
+const AmountText = styled.p`
+  font: normal normal normal 14px/21px Poppins;
+  margin: 0;
+`
+
 interface BottomProps {
   spawningPool: SpawningPool;
 }
@@ -253,7 +258,7 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
       <Inputs>
         <InputControl>
           <BalanceText onClick={maxStakeAmount}>
-            Wallet Balance: <p>{numeral(getFullDisplayBalance(zombieBalance)).format('(0.00 a)')} ZMBE</p>
+            Wallet Balance: <AmountText>{numeral(getFullDisplayBalance(zombieBalance)).format('(0.00 a)')} ZMBE</AmountText>
           </BalanceText>
           <StakingInput
             onInput={changeStakeInput}
@@ -264,7 +269,7 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
         </InputControl>
         <InputControl>
           <BalanceText onClick={maxUnstakeAmount}>
-            Your Staked: <p>{numeral(getFullDisplayBalance(amount)).format('(0.00 a)')} ZMBE</p>
+            Your Staked: <AmountText>{numeral(getFullDisplayBalance(amount)).format('(0.00 a)')} ZMBE</AmountText>
           </BalanceText>
           <StakingInput
             onInput={changeUnstakeInput}
