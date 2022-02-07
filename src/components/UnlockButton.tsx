@@ -24,9 +24,9 @@ export const ConnectText = styled(Text)`
 
 const UnlockButton = (props) => {
   const { t } = useTranslation()
-  const { login, logout } = useAuth()
-  const { onPresentConnectModal, onPresentAccountModal } = useWalletModal(login, logout)
   const { account } = useWeb3React()
+  const { login, logout } = useAuth()
+  const { onPresentConnectModal, onPresentAccountModal } = useWalletModal(login, logout, account)
 
   return (
     <ConnectButton onClick={account ? onPresentAccountModal : onPresentConnectModal} {...props}>
