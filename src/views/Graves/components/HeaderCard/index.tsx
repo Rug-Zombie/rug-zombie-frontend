@@ -1,8 +1,12 @@
 /* eslint-disable no-param-reassign */
 import React from 'react'
-import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
 import numeral from 'numeral'
+import { BIG_ZERO } from '../../../../utils/bigNumber'
+import { getBalanceNumber } from '../../../../utils/formatBalance'
+import { zombiePriceUsd } from '../../../../redux/get'
+import { useGetGraveByPid, useGetGraves } from '../../../../state/hooks'
+import { getId } from '../../../../utils'
 
 const InfoCard = styled.header`
   background-color: #151E21;
@@ -89,14 +93,19 @@ const Shadow = styled.div`
   z-index: -1;
 `
 
-interface HeaderCardProps {
-  tvl: number;
-  pageTvl: { page: string, tvl: number };
-  myHoldings: number;
-}
+const HeaderCard: React.FC = () => {
+  const graveSum = useGetGraves().data.reduce((sum, { pid, poolInfo: { tokenAmount }, userInfo: { amount } }) => {
+    return {
+      amount: sum.amount.plus(amount),
+      totalAmount: getId(pid) === 0 ? sum.totalAmount : sum.totalAmount.plus(tokenAmount),
+    }
+  }, { amount: BIG_ZERO, totalAmount: BIG_ZERO })
 
-const HeaderCard: React.FC<HeaderCardProps> = ({ tvl, pageTvl, myHoldings }) => {
-  const { account } = useWeb3React()
+  const legacyGraveTvl = getBalanceNumber(
+    useGetGraveByPid(0).poolInfo.tokenAmount.minus(graveSum.totalAmount),
+  ) * zombiePriceUsd()
+  const graveTvl = getBalanceNumber(graveSum.totalAmount) * (zombiePriceUsd()) + legacyGraveTvl
+  const userTvl = getBalanceNumber(graveSum.amount) * (zombiePriceUsd())
 
   return (
     <>
@@ -112,26 +121,20 @@ const HeaderCard: React.FC<HeaderCardProps> = ({ tvl, pageTvl, myHoldings }) => 
         </InfoCardHeader>
         <InfoCardContent>
           <InfoCardSubtitle>
-            Total Value Locked
+            Graves TVL
           </InfoCardSubtitle>
           <InfoCardValue>
-            {numeral(tvl).format('($ 0,0)')}
-          </InfoCardValue>
-          <InfoCardSubtitle>
-            {pageTvl.page} TVL
-          </InfoCardSubtitle>
-          <InfoCardValue>
-            {numeral(pageTvl.tvl).format('($ 0,0)')}
+            {numeral(graveTvl).format('($ 0,0)')}
           </InfoCardValue>
           <InfoCardSubtitle>
             My Holdings
           </InfoCardSubtitle>
           <InfoCardValue>
-            {numeral(myHoldings).format('($ 0,0)')}
+            {numeral(userTvl).format('($ 0,0)')}
           </InfoCardValue>
         </InfoCardContent>
       </InfoCard>
-      <Shadow/>
+      <Shadow />
     </>
   )
 }

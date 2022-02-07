@@ -78,16 +78,12 @@ const Tombs: React.FC = () => {
     })
   }
 
-  const tvl = 1580000
-  const tombTvl = { page: 'Tombs', tvl: 768000 }
-  const myHoldings = 4349
-
   return (
     <>
       <TombPage>
         <Row>
           <Header>
-            <HeaderCard tvl={tvl} pageTvl={tombTvl} myHoldings={myHoldings} />
+            <HeaderCard />
           </Header>
           <TombsColumn>
             <Filter tombsList={tombFilters.map(f => f.label)} raritiesList={rarityFilters.map(f => f.label)}

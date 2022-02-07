@@ -9,6 +9,7 @@ import { getContract, getPancakePair } from '../utils/contractHelpers'
 import pancakeFactoryAbi from '../config/abi/pancakeFactoryAbi.json'
 import tokens from '../config/constants/tokens'
 import contracts from '../config/constants/contracts'
+import { getId } from '../utils'
 
 export const getBnbPriceinBusd = () => {
   return axios.get('https://api.binance.com/api/v3/avgPrice?symbol=BNBBUSD')
@@ -63,6 +64,10 @@ export const useGetBufferBlocks = () => {
 
 export const useGetGraves = () => {
   return useSelector((state: State) => state.graves)
+}
+
+export const useGetGraveByPid = (pid: number) => {
+  return useGetGraves().data.find(g => getId(g.pid) === pid)
 }
 
 export const useGetTombs = () => {

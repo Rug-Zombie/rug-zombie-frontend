@@ -5,50 +5,65 @@ import { useMultiCall, useZombie } from '../../hooks/useContract'
 import { initialSpawningPoolData, initialTombData } from '../../redux/fetch'
 import { bnbPriceUsd, drFrankensteinZombieBalance, spawningPools, tombs, zombiePriceUsd } from '../../redux/get'
 import { BIG_ZERO } from '../../utils/bigNumber'
-import { getBalanceAmount } from '../../utils/formatBalance'
+import { getBalanceAmount, getBalanceNumber } from '../../utils/formatBalance'
 import Hero from './components/Hero'
 import NftSection from './components/NftSection'
 import TutorialSection from './components/TutorialSection'
 import Footer from '../Footer'
+import { useGetGraveByPid, useGetGraves, useGetSpawningPools, useGetTombs } from '../../state/hooks'
+import { getId } from '../../utils'
+import { useAppDispatch } from '../../state'
+import { fetchTombsPublicDataAsync } from '../../state/tombs'
+import { fetchSpawningPoolsPublicDataAsync } from '../../state/spawningPools'
+import { fetchGravesPublicDataAsync } from '../../state/graves'
 
 const Home: React.FC = () => {
   const history = useHistory()
-  const multi = useMultiCall()
-  const zombie = useZombie()
-  const [updatePoolInfo, setUpdatePoolInfo] = useState(0)
+  const dispatch = useAppDispatch()
+
   useEffect(() => {
-    initialTombData()
-  }, [])
+    dispatch(fetchGravesPublicDataAsync())
+  }, [dispatch])
+
   useEffect(() => {
-    if (updatePoolInfo === 0) {
-      initialSpawningPoolData(zombie, { update: updatePoolInfo, setUpdate: setUpdatePoolInfo })
+    dispatch(fetchSpawningPoolsPublicDataAsync())
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch(fetchTombsPublicDataAsync())
+  }, [dispatch])
+
+  const graveSum = useGetGraves().data.reduce((sum, { pid, poolInfo: { tokenAmount } }) => {
+    return {
+      totalAmount: getId(pid) === 0 ? sum.totalAmount : sum.totalAmount.plus(tokenAmount),
     }
-  }, [multi, updatePoolInfo, zombie])
+  }, { totalAmount: BIG_ZERO })
 
+  const legacyGraveTvl = getBalanceNumber(
+    useGetGraveByPid(0).poolInfo.tokenAmount.minus(graveSum.totalAmount),
+  ) * zombiePriceUsd()
+  const graveTvl = getBalanceNumber(graveSum.totalAmount) * (zombiePriceUsd()) + legacyGraveTvl
 
-  const totalSpawningPoolStaked = spawningPools().reduce((accumulator, sp) => {
-    return sp.poolInfo.totalZombieStaked.plus(accumulator)
-  }, BIG_ZERO)
-
-  const zombiePrice = zombiePriceUsd()
-  let tombsTvl = BIG_ZERO
-  tombs().forEach(t => {
-    const { poolInfo: { reserves, lpTotalSupply, totalStaked } } = t
-    const reservesUsd = [getBalanceAmount(reserves[0]).times(zombiePrice), getBalanceAmount(reserves[1]).times(bnbPriceUsd())]
-    const bnbLpTokenPrice = reservesUsd[0].plus(reservesUsd[1]).div(lpTotalSupply)
-    tombsTvl = tombsTvl.plus(totalStaked.times(bnbLpTokenPrice))
-  })
-
-  const zombieBalance = getBalanceAmount(drFrankensteinZombieBalance()).times(zombiePrice)
-  const spawningPoolTvl = getBalanceAmount(totalSpawningPoolStaked).times(zombiePrice)
-  const [tvl, setTvl] = useState(tombsTvl.plus(zombieBalance).plus(spawningPoolTvl))
-  const newTvl = tombsTvl.plus(zombieBalance).plus(spawningPoolTvl)
-  useEffect(() => {
-    if (!tvl.eq(newTvl) || tvl.isNaN()) {
-      setTvl(newTvl)
+  const spawningPoolSum = useGetSpawningPools().data.reduce((sum, {
+    poolInfo: { totalAmount },
+  }) => {
+    return {
+      totalAmount: sum.totalAmount.plus(totalAmount)
     }
-  }, [newTvl, tvl])
+  }, { totalAmount: BIG_ZERO })
 
+  const spawningPoolsTvl = getBalanceNumber(spawningPoolSum.totalAmount) * zombiePriceUsd()
+
+  const tombSum = useGetTombs().data.reduce((sum, {
+    poolInfo: { tokenAmount, lpPriceBnb },
+  }) => {
+    const lpPrice = lpPriceBnb.times(bnbPriceUsd()).toNumber()
+    return {
+      tokenAmountTvl: sum.tokenAmountTvl.plus(getBalanceNumber(tokenAmount.times(lpPrice))),
+    }
+  }, { tokenAmountTvl: BIG_ZERO })
+
+  const tvl = graveTvl + spawningPoolsTvl + tombSum.tokenAmountTvl.toNumber()
   return (
     <>
       <Hero tvl={tvl} history={history} />

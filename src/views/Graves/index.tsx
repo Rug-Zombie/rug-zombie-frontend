@@ -13,6 +13,10 @@ import { useAppDispatch } from '../../state'
 import { fetchGravesPublicDataAsync, fetchGravesUserDataAsync } from '../../state/graves'
 import { useGetGraves, useGetNftById } from '../../state/hooks'
 import { GraveFilter, graveFilters, RarityFilter, rarityFilters } from './filterConfig'
+import { now } from '../../utils/timerHelpers'
+import { BIG_ZERO } from '../../utils/bigNumber'
+import { getBalanceNumber } from '../../utils/formatBalance'
+import { zombiePriceUsd } from '../../redux/get'
 
 const GravePage = styled(Page)`
   min-width: 80vw;
@@ -70,6 +74,7 @@ const Graves: React.FC = () => {
   const [searchFilter, setSearchFilter] = useState('')
 
   let graves = useGetGraves().data
+
   graves = graveFilters[graveFilter].filter(graves)
   graves = rarityFilters[rarityFilter].filter(graves)
 
@@ -81,16 +86,12 @@ const Graves: React.FC = () => {
     })
   }
 
-  const tvl = 1580000
-  const graveTvl = { page: 'Graves', tvl: 768000 }
-  const myHoldings = 4349
-
   return (
     <>
       <GravePage>
         <Row>
           <Header>
-            <HeaderCard tvl={tvl} pageTvl={graveTvl} myHoldings={myHoldings} />
+            <HeaderCard />
           </Header>
           <GravesColumn>
             <Filter gravesList={graveFilters.map(f => f.label)} raritiesList={rarityFilters.map(f => f.label)}

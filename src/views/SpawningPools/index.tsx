@@ -79,16 +79,12 @@ const SpawningPools: React.FC = () => {
     })
   }
 
-  const tvl = 1580000
-  const spawningPoolTvl = { page: 'SpawningPools', tvl: 768000 }
-  const myHoldings = 4349
-
   return (
     <>
       <SpawningPoolPage>
         <Row>
           <Header>
-            <HeaderCard tvl={tvl} pageTvl={spawningPoolTvl} myHoldings={myHoldings} />
+            <HeaderCard />
           </Header>
           <SpawningPoolsColumn>
             <Filter spawningPoolsList={spawningPoolFilters.map(f => f.label)}

@@ -3,6 +3,11 @@ import React from 'react'
 import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
 import numeral from 'numeral'
+import { useGetSpawningPools } from '../../../../state/hooks'
+import { bnbPriceUsd, zombiePriceUsd } from '../../../../redux/get'
+import { getBalanceNumber } from '../../../../utils/formatBalance'
+import { now } from '../../../../utils/timerHelpers'
+import { BIG_ZERO } from '../../../../utils/bigNumber'
 
 const InfoCard = styled.header`
   background-color: #151E21;
@@ -89,14 +94,19 @@ const Shadow = styled.div`
   z-index: -1;
 `
 
-interface HeaderCardProps {
-  tvl: number;
-  pageTvl: { page: string, tvl: number };
-  myHoldings: number;
-}
+const HeaderCard: React.FC = () => {
+  const spawningPoolSum = useGetSpawningPools().data.reduce((sum, {
+    poolInfo: { totalAmount },
+    userInfo: { amount},
+  }) => {
+    return {
+      amount: sum.amount.plus(amount),
+      totalAmount: sum.totalAmount.plus(totalAmount)
+    }
+  }, { amount: BIG_ZERO, totalAmount: BIG_ZERO })
 
-const HeaderCard: React.FC<HeaderCardProps> = ({ tvl, pageTvl, myHoldings }) => {
-  const { account } = useWeb3React()
+  const spawningPoolsTvl = getBalanceNumber(spawningPoolSum.totalAmount) * zombiePriceUsd()
+  const userTvl = getBalanceNumber(spawningPoolSum.amount) * zombiePriceUsd()
 
   return (
     <>
@@ -112,22 +122,16 @@ const HeaderCard: React.FC<HeaderCardProps> = ({ tvl, pageTvl, myHoldings }) => 
         </InfoCardHeader>
         <InfoCardContent>
           <InfoCardSubtitle>
-            Total Value Locked
+            Spawning Pools TVL
           </InfoCardSubtitle>
           <InfoCardValue>
-            {numeral(tvl).format('($ 0,0)')}
-          </InfoCardValue>
-          <InfoCardSubtitle>
-            {pageTvl.page} TVL
-          </InfoCardSubtitle>
-          <InfoCardValue>
-            {numeral(pageTvl.tvl).format('($ 0,0)')}
+            {numeral(spawningPoolsTvl).format('($ 0,0)')}
           </InfoCardValue>
           <InfoCardSubtitle>
             My Holdings
           </InfoCardSubtitle>
           <InfoCardValue>
-            {numeral(myHoldings).format('($ 0,0)')}
+            {numeral(userTvl).format('($ 0,0)')}
           </InfoCardValue>
         </InfoCardContent>
       </InfoCard>

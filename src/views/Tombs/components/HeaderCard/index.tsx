@@ -3,6 +3,10 @@ import React from 'react'
 import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
 import numeral from 'numeral'
+import { useGetTombs } from '../../../../state/hooks'
+import { bnbPriceUsd } from '../../../../redux/get'
+import { getBalanceNumber } from '../../../../utils/formatBalance'
+import { BIG_ZERO } from '../../../../utils/bigNumber'
 
 const InfoCard = styled.header`
   background-color: #151E21;
@@ -89,14 +93,17 @@ const Shadow = styled.div`
   z-index: -1;
 `
 
-interface HeaderCardProps {
-  tvl: number;
-  pageTvl: { page: string, tvl: number };
-  myHoldings: number;
-}
-
-const HeaderCard: React.FC<HeaderCardProps> = ({ tvl, pageTvl, myHoldings }) => {
-  const { account } = useWeb3React()
+const HeaderCard: React.FC = () => {
+  const tombSum = useGetTombs().data.reduce((sum, {
+    poolInfo: { tokenAmount, lpPriceBnb },
+    userInfo: { amount},
+  }) => {
+    const lpPrice = lpPriceBnb.times(bnbPriceUsd()).toNumber()
+    return {
+      amountTvl: sum.amountTvl.plus(getBalanceNumber(amount.times(lpPrice))),
+      tokenAmountTvl: sum.tokenAmountTvl.plus(getBalanceNumber(tokenAmount.times(lpPrice))),
+    }
+  }, { amountTvl: BIG_ZERO, tokenAmountTvl: BIG_ZERO })
 
   return (
     <>
@@ -111,23 +118,18 @@ const HeaderCard: React.FC<HeaderCardProps> = ({ tvl, pageTvl, myHoldings }) => 
           </InfoCardSubHeader>
         </InfoCardHeader>
         <InfoCardContent>
+
           <InfoCardSubtitle>
-            Total Value Locked
+            Tombs TVL
           </InfoCardSubtitle>
           <InfoCardValue>
-            {numeral(tvl).format('($ 0,0)')}
-          </InfoCardValue>
-          <InfoCardSubtitle>
-            {pageTvl.page} TVL
-          </InfoCardSubtitle>
-          <InfoCardValue>
-            {numeral(pageTvl.tvl).format('($ 0,0)')}
+            {numeral(tombSum.tokenAmountTvl).format('($ 0,0)')}
           </InfoCardValue>
           <InfoCardSubtitle>
             My Holdings
           </InfoCardSubtitle>
           <InfoCardValue>
-            {numeral(myHoldings).format('($ 0,0)')}
+            {numeral(tombSum.amountTvl).format('($ 0,0)')}
           </InfoCardValue>
         </InfoCardContent>
       </InfoCard>
