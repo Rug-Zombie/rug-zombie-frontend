@@ -2,7 +2,6 @@ const SECONDS_PER_MINUTE = 60
 const SECONDS_PER_HOUR = 3600
 const SECONDS_PER_DAY = 86400
 
-// eslint-disable-next-line import/prefer-default-export
 export const formatDuration = (duration: number, withSeconds?: boolean, showMinimum?: boolean): string => {
   let remaining = duration
   const days = Math.floor(remaining / SECONDS_PER_DAY)
@@ -35,19 +34,20 @@ export const formatDuration = (duration: number, withSeconds?: boolean, showMini
 }
 
 export const displayInteger = (int: number): string => {
-  if(int < 10) {
+  if (int < 10) {
     return `0${int}`
   }
     return `${int}`
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export const formatDays = (duration: number,): string => {
   const days = Math.floor(duration / SECONDS_PER_DAY)
   const unit = days === 1 ? 'day' : 'days'
 
   return `${days} ${unit}`
 }
+
+export const secondsToDays = (durationInSeconds: number) => Math.floor(durationInSeconds / SECONDS_PER_DAY)
 
 export const now = () => {
   return Math.floor(Date.now() / 1000)
