@@ -1,0 +1,65 @@
+.item-text {
+    text-align: left;
+    font: normal normal normal 12px/24px Poppins;
+    color: #6B7682;
+    padding: 0 15px 0 0;
+}
+
+.highlighted {
+    font-weight: bold;
+    color: #FFFFFF;
+    text-shadow: #B8C00D 0 0 5px;
+}
+
+@keyframes nft-HOT {
+    0% {
+        color: #AE32AA;
+        text-shadow: #AE32AA 0 0 6px;
+    }
+    15% {
+        text-shadow: 0 0 3px;
+    }
+    33% {
+        color: #4B7BDC;
+        text-shadow: #4B7BDC 0 0 6px;
+    }
+    45% {
+        text-shadow: 0 0 3px;
+    }
+    66% {
+        color: #30C00D;
+        text-shadow: #30C00D 0 0 6px;
+    }
+    75% {
+        text-shadow: 0 0 3px;
+    }
+    100% {
+        color: #AE32AA;
+        text-shadow: #AE32AA 0 0 6px;
+    }
+}
+
+.nft-timer-mint-depends-on-user-action {
+    color: #AE32AA;
+    animation: nft-HOT 5s infinite;
+}
+
+.nft-timer-less-than-14-days {
+    color: #ffffff;
+    text-shadow: none;
+}
+
+.nft-timer-less-than-7-days {
+    color: #4B7BDC;
+    text-shadow: #4B7BDC 0 0 2px;
+}
+
+.nft-timer-less-than-3-days {
+    color: #30C00D;
+    text-shadow: #30C00D 0 0 2px;
+}
+
+.nft-timer-less-than-1-day {
+    color: #AE32AA;
+    text-shadow: #AE32AA 0 0 5px;
+}

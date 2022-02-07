@@ -5,10 +5,10 @@ import uppointer from 'images/FullUpPointer.png'
 import downpointer from 'images/FullDownPointer.png'
 import { bnbPriceUsd, zombiePriceUsd } from 'redux/get'
 import { Token } from 'config/constants/types'
-import SpawningPoolItem, { SpawningPoolItemType } from './SpawningPoolItem'
 import { SpawningPool } from '../../../../../../state/types'
 import { getBalanceNumber, getFullDisplayBalance } from '../../../../../../utils/formatBalance'
 import { getSpawningPoolApr } from '../../../../../../utils/apr'
+import CardItem, { CardItemValueType, NftTimerCardItem } from '../../../../../../components/CardItem'
 
 const SpawningPoolColumn = styled.div`
   height: 100%;
@@ -151,27 +151,15 @@ const Top: React.FC<TopProps> = ({ spawningPool, open, setOpen }) => {
 
   }
 
-  const nftTime = () => {
-    if (amount.isZero()) {
-      return <SpawningPoolItem label='NFT Timer' value='N/A' type={SpawningPoolItemType.Text} />
-    }
-    const remainingNftTime = nftMintDate.toNumber() - now
-    if (remainingNftTime <= 0) {
-      return <SpawningPoolItem label='NFT Timer' value='NFT Ready' type={SpawningPoolItemType.Text} />
-    }
-    return <SpawningPoolItem label='NFT Timer' value={remainingNftTime} type={SpawningPoolItemType.Duration} />
-  }
-
   const cooldownTime = () => {
     if (amount.isZero()) {
-      return <SpawningPoolItem label='Withdrawal Timer' value='N/A' type={SpawningPoolItemType.Text} />
+      return <CardItem label='Withdrawal Timer' value='N/A' valueType={CardItemValueType.Text} />
     }
     const remainingCooldownTime = tokenWithdrawalDate.toNumber() - now
     if (remainingCooldownTime <= 0) {
-      return <SpawningPoolItem label='Withdrawal Timer' value='None' type={SpawningPoolItemType.Text} />
+      return <CardItem label='Withdrawal Timer' value='None' valueType={CardItemValueType.Text} />
     }
-    return <SpawningPoolItem label='Withdrawal Timer' value={remainingCooldownTime}
-                             type={SpawningPoolItemType.Duration} />
+    return <CardItem label='Withdrawal Timer' value={remainingCooldownTime} valueType={CardItemValueType.Duration} />
   }
 
   return (
@@ -192,15 +180,16 @@ const Top: React.FC<TopProps> = ({ spawningPool, open, setOpen }) => {
       </SpawningPoolHeaderRow>
       <SpawningPoolSubRow>
         <Amounts>
-          <SpawningPoolItem label='Earned' unit={`${rewardToken.symbol} ($${getFullDisplayBalance(pendingReward.times(rewardTokenPrice), rewardToken.decimals, 2)})`}
-                            value={getBalanceNumber(pendingReward, rewardToken.decimals)}
-                            type={SpawningPoolItemType.Number} />
-          <SpawningPoolItem label='Yearly' value={yearly} type={SpawningPoolItemType.Percentage} />
-          <SpawningPoolItem label='Daily' value={daily} type={SpawningPoolItemType.Percentage} />
-          <SpawningPoolItem label='TVL' value={tvl} type={SpawningPoolItemType.Money} />
+          <CardItem label='Earned' highlightable
+                    unit={`${rewardToken.symbol} ($${getFullDisplayBalance(pendingReward.times(rewardTokenPrice), rewardToken.decimals, 2)})`}
+                    value={getBalanceNumber(pendingReward, rewardToken.decimals)}
+                    valueType={CardItemValueType.Number} />
+          <CardItem label='Yearly' value={yearly} valueType={CardItemValueType.Percentage} />
+          <CardItem label='Daily' value={daily} valueType={CardItemValueType.Percentage} />
+          <CardItem label='TVL' value={tvl} valueType={CardItemValueType.Money} />
         </Amounts>
         <Percentages>
-          {nftTime()}
+          <NftTimerCardItem amountStaked={amount} mintDate={nftMintDate} />
           {cooldownTime()}
           {
             open

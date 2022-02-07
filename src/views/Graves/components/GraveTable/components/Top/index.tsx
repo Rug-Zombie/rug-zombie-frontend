@@ -3,13 +3,13 @@ import styled from 'styled-components'
 import tokens from 'config/constants/tokens'
 import uppointer from 'images/FullUpPointer.png'
 import downpointer from 'images/FullDownPointer.png'
-import { graveByPid, zombiePriceUsd } from 'redux/get'
+import { zombiePriceUsd } from 'redux/get'
 import { Token } from 'config/constants/types'
 import BigNumber from 'bignumber.js'
-import GraveItem, { GraveItemType } from './GraveItem'
 import { Grave } from '../../../../../../state/types'
-import { getBalanceNumber, getDecimalAmount, getFullDisplayBalance } from '../../../../../../utils/formatBalance'
+import { getBalanceNumber, getDecimalAmount } from '../../../../../../utils/formatBalance'
 import { getGraveTombApr } from '../../../../../../utils/apr'
+import CardItem, { CardItemValueType, NftTimerCardItem } from '../../../../../../components/CardItem'
 
 const GraveColumn = styled.div`
   height: 100%;
@@ -144,26 +144,15 @@ const Top: React.FC<TopProps> = ({ grave, open, setOpen }) => {
   const daily = yearly / 365
   const now = Math.floor(Date.now() / 1000)
 
-  const nftTime = () => {
-    if(amount.isZero()) {
-      return <GraveItem label='NFT Timer' value='N/A' type={GraveItemType.Text} />
-    }
-    const remainingNftTime = nftMintDate.toNumber() - now
-    if(remainingNftTime <= 0) {
-      return <GraveItem label='NFT Timer' value='NFT Ready' type={GraveItemType.Text} />
-    }
-    return <GraveItem label='NFT Timer' value={remainingNftTime} type={GraveItemType.Duration} />
-  }
-
   const cooldownTime = () => {
     if(amount.isZero()) {
-      return <GraveItem label='Withdrawal Timer' value='N/A' type={GraveItemType.Text} />
+      return <CardItem label='Withdrawal Timer' value='N/A' valueType={CardItemValueType.Text} />
     }
     const remainingCooldownTime = tokenWithdrawalDate.toNumber() - now
     if(remainingCooldownTime <= 0) {
-      return <GraveItem label='Withdrawal Timer' value='None' type={GraveItemType.Text} />
+      return <CardItem label='Withdrawal Timer' value='None' valueType={CardItemValueType.Text} />
     }
-    return <GraveItem label='Withdrawal Timer' value={remainingCooldownTime} type={GraveItemType.Duration} />
+    return <CardItem label='Withdrawal Timer' value={remainingCooldownTime} valueType={CardItemValueType.Duration} />
   }
 
   return (
@@ -184,13 +173,14 @@ const Top: React.FC<TopProps> = ({ grave, open, setOpen }) => {
       </GraveHeaderRow>
       <GraveSubRow>
         <Amounts>
-          <GraveItem label='Earned' unit='ZMBE' value={getBalanceNumber(pendingZombie)} type={GraveItemType.Number} />
-          <GraveItem label='Yearly' value={yearly} type={GraveItemType.Percentage} />
-          <GraveItem label='Daily' value={daily} type={GraveItemType.Percentage} />
-          <GraveItem label='TVL' value={tvl} type={GraveItemType.Money} />
+          <CardItem label='Earned' unit='ZMBE' value={getBalanceNumber(pendingZombie)}
+                    highlightable valueType={CardItemValueType.Number} />
+          <CardItem label='Yearly' value={yearly} valueType={CardItemValueType.Percentage} />
+          <CardItem label='Daily' value={daily} valueType={CardItemValueType.Percentage} />
+          <CardItem label='TVL' value={tvl} valueType={CardItemValueType.Money} />
         </Amounts>
         <Percentages>
-          {nftTime()}
+          <NftTimerCardItem mintDate={nftMintDate} amountStaked={amount} />
           {cooldownTime()}
           {
             open
