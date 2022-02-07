@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import tokens from 'config/constants/tokens'
-import uppointer from 'images/FullUpPointer.png'
-import downpointer from 'images/FullDownPointer.png'
+import uppointer from 'images/graves/Hide_Dropdown.svg'
+import downpointer from 'images/graves/Dropdown_icon.svg'
 import { zombiePriceUsd } from 'redux/get'
 import { Token } from 'config/constants/types'
 import BigNumber from 'bignumber.js'
@@ -61,7 +61,7 @@ const TabFlex = styled.div`
 const GreenTab = styled.div`
   width: 49px;
   height: 30px;
-  border: 2px solid #30C00D;
+  border: 2px solid #B8C00D;
   border-radius: 15px;
   display: flex;
   align-items: center;

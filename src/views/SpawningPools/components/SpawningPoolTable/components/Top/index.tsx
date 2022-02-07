@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import tokens from 'config/constants/tokens'
-import uppointer from 'images/FullUpPointer.png'
-import downpointer from 'images/FullDownPointer.png'
+import uppointer from 'images/spawningPools/Hide_Dropdown.svg'
+import downpointer from 'images/spawningPools/Dropdown_icon.svg'
 import { bnbPriceUsd, zombiePriceUsd } from 'redux/get'
 import { Token } from 'config/constants/types'
 import { SpawningPool } from '../../../../../../state/types'
@@ -60,7 +60,7 @@ const TabFlex = styled.div`
 const GreenTab = styled.div`
   width: 49px;
   height: 30px;
-  border: 2px solid #30C00D;
+  border: 2px solid #B8C00D;
   border-radius: 15px;
   display: flex;
   align-items: center;

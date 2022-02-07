@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import logo from 'images/Logo.svg'
-import more from 'images/menu/More.png'
+import dropdownIcon from 'images/menu/Dropdown_icon.svg'
+import hideDropdownIcon from 'images/menu/Hide_Dropdown.svg'
 import zombiehead from 'images/menu/ZombieHead.svg'
 import basiczombie from 'images/BasicZombie.gif'
 import { useHistory } from 'react-router'
@@ -50,7 +51,10 @@ const TopMenu = () => {
             background: 'transparent',
             border: '1px solid transparent',
           }}>
-            <img src={more} alt='More Icon' style={{ width: '24px', height: '24px' }} />
+            {showMenu
+              ? <img src={hideDropdownIcon} alt='Hide Dropdown Icon' />
+              : <img src={dropdownIcon} alt='Dropdown Icon' />
+            }
           </button>
           {showMenu ? (
             <DropdownContent>
