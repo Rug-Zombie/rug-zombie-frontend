@@ -67,7 +67,7 @@ const tombs: TombConfig[] = [
     dex: Dex.PCS_V2,
     overlay: {
       pid: {
-        56: 11,
+        56: 2,
         97: 0,
       },
       commonId: 44,
