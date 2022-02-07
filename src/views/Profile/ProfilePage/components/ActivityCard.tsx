@@ -14,30 +14,20 @@ import { formatDuration, now } from '../../../../utils/timerHelpers'
 import { getAddress } from '../../../../utils/addressHelpers'
 import '../../Profile.Styles.css'
 
-
-const Container = styled.div`
-  width: 100%;
-  padding-right: 10px;
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`
-
 const Card = styled.div`
-  width: 100%;
+  min-width: 317px;
+  width: 40vw;
   height: 450px;
   background-color: #151E21;
   border-radius: 10px;
-  //border: 2px solid #30C00D;
-  opacity: 1;
   display: flex;
   flex-direction: column;
-  padding-top: 15px;
-  padding-left: 25px;
+  padding: 15px 25px;
+  margin: 25px;
+  box-shadow: 0 20px 20px -20px #000000;
 `
 
-const CardTitle = styled.text`
+const CardTitle = styled.p`
   text-align: left;
   font: normal normal normal 20px/36px Poppins;
   letter-spacing: 0px;
@@ -47,8 +37,6 @@ const CardTitle = styled.text`
 
 const InnerCardDiv = styled.div`
   display: flex;
-  margin-right: 30px;
-  margin-bottom: 30px;
 `
 
 const ActivitiesFlex = styled.div`
@@ -62,7 +50,7 @@ const ActivityDiv = styled.div`
   width: 100%;
 `
 
-const DateText = styled.text`
+const DateText = styled.p`
   text-align: right;
   font: normal normal 300 14px/40px Poppins;
   letter-spacing: 0px;
@@ -72,26 +60,13 @@ const DateText = styled.text`
   padding-right: 25px;
 `
 
-const ActivityText = styled.text`
+const ActivityText = styled.p`
   text-align: left;
   font: normal normal 300 14px/40px Poppins;
   letter-spacing: 0px;
   color: #FFFFFF;
   flex-shrink: 2;
   width: 65%;;
-`
-
-const Shadow = styled.div`
-  width: 100%;
-  height: 40px;
-  background: #000000 0% 0% no-repeat padding-box;
-  border-radius: 10px;
-  opacity: 0.5;
-  filter: blur(10px);
-  position: relative;
-  bottom: 20px;
-  margin-bottom: -15px;
-  z-index: -1;
 `
 
 const ProfilePage: React.FC = () => {
@@ -150,7 +125,6 @@ const ProfilePage: React.FC = () => {
   }
 
   return (
-    <Container>
       <Card>
         <CardTitle>
           Activity
@@ -169,10 +143,6 @@ const ProfilePage: React.FC = () => {
           </ActivitiesFlex>
         </InnerCardDiv>
       </Card>
-      <Shadow/>
-
-    </Container>
-
   )
 }
 

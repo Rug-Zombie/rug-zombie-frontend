@@ -1,19 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { LinkExternal, Text, CardsLayout } from '@rug-zombie-libs/uikit'
-import { zombiePriceUsd } from 'redux/get'
+import React, { useEffect } from 'react'
+import { LinkExternal } from '@rug-zombie-libs/uikit'
 import styled from 'styled-components'
-import { useZombieBalanceChecker } from 'hooks/useContract'
-import { BigNumber } from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
 import DefaultBannerImage from 'images/backgrounds/DefaultProfileBanner.png'
 import BasicZombie from 'images/BasicZombie.gif'
 import RugZombieTab from 'images/profile/RugZombieTab.png'
 import OblivionTab from 'images/profile/OblivionTab.png'
-import Page from '../../../components/layout/Page'
-import SwiperProvider from '../../Mausoleum/context/SwiperProvider'
-import CollectiblesCard from '../../Graveyard/components/Collectibles/CollectiblesCard'
 import '../Profile.Styles.css'
-import { BIG_ZERO } from '../../../utils/bigNumber'
 import { useAppDispatch } from '../../../state'
 import { fetchNftUserDataAsync } from '../../../state/nfts'
 import { useGetNfts } from '../../../state/hooks'
@@ -21,23 +14,11 @@ import ActivityCard from './components/ActivityCard'
 import StakingInfoCard from './components/StakingInfoCard'
 import NftCard from '../../Graveyard/components/Nfts/components/NftCard'
 
-const Row = styled.div`
-  display: flex
-`
-
-const Col = styled.div`
-  flex: 1;
-  padding: 10px;
-`
-const StyledCollectibleCard = styled(CollectiblesCard)`
-  width: 20px;
-  height: 20px;
-`
-
 const BannerImage = styled.img`
-  width: 100%;
+  min-width: 317px;
   height: 300px;
   border-radius: 10px;
+  padding: 10px;
 `
 
 const UserAvatar = styled.img`
@@ -46,8 +27,7 @@ const UserAvatar = styled.img`
   border-radius: 35px;
 `
 
-const UserName = styled.text`
-  width: 410px;
+const UserName = styled.p`
   height: 43px;
   text-align: center;
   font: normal normal 600 30px/42px Poppins;
@@ -89,14 +69,14 @@ const Separator = styled.div`
 
 const CardDiv = styled.div`
   display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
 `
 
-const SectionTitle = styled.text`
-  text-align: left;
+const SectionTitle = styled.p`
   font: normal normal normal 36px/36px Poppins;
-  letter-spacing: 0px;
   color: #FFFFFF;
-  opacity: 1;
+  padding: 20px;
 `
 
 const NftsContainer = styled.div`
@@ -122,27 +102,24 @@ const ProfilePage: React.FC = () => {
 
   return (
     <>
-      <Page>
-        <BannerImage src={DefaultBannerImage}/>
-        <UserDiv>
-          <UserAvatar src={BasicZombie}/>
-          <UserName>Basic Zombie</UserName>
-          <UserAddress href={`https://bscscan.com/address/${account}`}>{displayAccount}</UserAddress>
-        </UserDiv>
-        <TabDiv>
-          <Tab style={{marginRight: '10px'}} src={OblivionTab} alt='Oblivion tab'/>
-          <Tab style={{marginLeft: '10px'}} src={RugZombieTab} alt='RugZombie tab'/>
-        </TabDiv>
-        <Separator/>
-        <CardDiv>
-          <StakingInfoCard/>
-          <ActivityCard/>
-        </CardDiv>
-
-        <SectionTitle>
-          Your Assets
-        </SectionTitle>
-      </Page>
+      <BannerImage src={DefaultBannerImage}/>
+      <UserDiv>
+        <UserAvatar src={BasicZombie}/>
+        <UserName>Basic Zombie</UserName>
+        <UserAddress href={`https://bscscan.com/address/${account}`}>{displayAccount}</UserAddress>
+      </UserDiv>
+      <TabDiv>
+        <Tab style={{marginRight: '10px'}} src={OblivionTab} alt='Oblivion tab'/>
+        <Tab style={{marginLeft: '10px'}} src={RugZombieTab} alt='RugZombie tab'/>
+      </TabDiv>
+      <Separator/>
+      <CardDiv>
+        <StakingInfoCard/>
+        <ActivityCard/>
+      </CardDiv>
+      <SectionTitle>
+        Your Assets
+      </SectionTitle>
       <NftsContainer>
         {ownedNfts.map(nft => <NftCard showOwned key={nft.id} id={nft.id} />)}
       </NftsContainer>

@@ -13,26 +13,17 @@ import { now } from '../../../../utils/timerHelpers'
 import { fetchSpawningPoolsPublicDataAsync, fetchSpawningPoolsUserDataAsync } from '../../../../state/spawningPools'
 import { fetchTombsPublicDataAsync, fetchTombsUserDataAsync } from '../../../../state/tombs'
 
-const Container = styled.div`
-  width: 100%;
-  padding-right: 10px;
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-`
-
 const Card = styled.div`
-  width: 100%;
+  min-width: 317px;
+  width: 40vw;
   height: 450px;
   background-color: #151E21;
   border-radius: 10px;
-  //border: 2px solid #30C00D;
-  opacity: 1;
   display: flex;
   flex-direction: column;
-  padding-top: 15px;
-  padding-left: 25px;
+  padding: 15px 25px;
+  margin: 25px;
+  box-shadow: 0 20px 20px -20px #000000;
 `
 
 const CardTitle = styled.text`
@@ -81,22 +72,7 @@ const ButtonText = styled.text`
 const InnerCardDiv = styled.div`
   display: flex;
   flex-direction: column;
-  margin-right: 30px;
-  margin-bottom: 30px;
   height: 100%;
-`
-
-const Shadow = styled.div`
-  width: 100%;
-  height: 40px;
-  background: #000000 0% 0% no-repeat padding-box;
-  border-radius: 10px;
-  opacity: 0.5;
-  filter: blur(10px);
-  position: relative;
-  bottom: 20px;
-  margin-bottom: -15px;
-  z-index: -1;
 `
 
 const ProfilePage: React.FC = () => {
@@ -164,7 +140,6 @@ const ProfilePage: React.FC = () => {
   }, { amount: BIG_ZERO, amountValueUsd: 0, pending: BIG_ZERO, nfts: 0 })
 
   return (
-    <Container>
       <Card>
         <CardTitle style={{ fontWeight: 'normal' }}>
           Staking Info
@@ -271,8 +246,6 @@ const ProfilePage: React.FC = () => {
           </ClaimButton>
         </InnerCardDiv>
       </Card>
-      <Shadow/>
-    </Container>
   )
 }
 
