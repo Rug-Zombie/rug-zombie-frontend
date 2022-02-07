@@ -96,7 +96,7 @@ export const fetchTombsUserDataAsync = (account: string) => async (dispatch) => 
       lpAllowance: new BigNumber(userTombLpInfo[index].allowance),
       nextNftMintDate: new BigNumber(userTombOverlayInfo[index].nextNftMintDate),
       isMinting: userTombOverlayInfo[index].isMinting,
-      randomNumber: new BigNumber(userTombOverlayInfo[index].randomNumber),
+      randomNumber: new BigNumber(userTombOverlayInfo[index].randomNumber._hex),
       nftMintTime: new BigNumber(userTombOverlayInfo[index].nftMintTime),
     }
   })

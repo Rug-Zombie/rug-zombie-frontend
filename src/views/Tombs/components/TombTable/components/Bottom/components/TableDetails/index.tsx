@@ -93,8 +93,8 @@ const Text = styled.span`
 const TableDetails: React.FC<TableDetailsProps> = ({ tomb }) => {
   const {
     poolInfo: { allocPoint, withdrawCooldown, nftMintTime, tokenAmount, lpPriceBnb, mintingFee },
+    overlay: {legendaryId}
   } = tomb
-  const { legendaryId } = tombOverlayById(getId(tomb.overlayId))
   const { name, path, type } = useGetNftById(legendaryId)
 
   const tvl = tokenAmount.times(lpPriceBnb).times(bnbPriceUsd())

@@ -13,7 +13,7 @@ const fetchTombOverlays = async (tombsToFetch: TombConfig[]) => {
         {
           address: getTombOverlayAddress(),
           name: 'poolInfo',
-          params: [getId(tombOverlayById(getId(tombConfig.overlayId)).pid)],
+          params: [getId(tombConfig.overlay.pid)],
         },
         {
           address: getTombOverlayAddress(),

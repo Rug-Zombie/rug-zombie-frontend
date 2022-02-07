@@ -30,6 +30,8 @@ const InfoCardTitle = styled.h3`
   font: normal normal 500 1.6rem Poppins;
   letter-spacing: 0.5px;
   color: #FFFFFF;
+  width: 100%;
+  padding: 0 10px;
 `
 
 const InfoCardSubHeader = styled.h4`
@@ -117,7 +119,7 @@ const HeaderCard: React.FC = () => {
             SpawningPools
           </InfoCardTitle>
           <InfoCardSubHeader>
-            Use your dead tokens to unlock spawningPools then stake ZMBE to earn Zombie & NFT rewards.
+            Stake your ZMBE to earn NFTs and rewards in partnered project tokens.
           </InfoCardSubHeader>
         </InfoCardHeader>
         <InfoCardContent>

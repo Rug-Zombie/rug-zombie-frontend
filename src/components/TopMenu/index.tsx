@@ -58,9 +58,16 @@ const TopMenu = () => {
           </button>
           {showMenu ? (
             <DropdownContent>
-              {config.map(i => <DropdownItem>
-                  <MenuText href={i.href}>{i.label}</MenuText>
-                </DropdownItem>,
+              {config.map(i => {
+                if (i.type === MenuItem.External) {
+                  return <DropdownItem onClick={()=> {window.location.href = i.href}}>
+                    <MenuText>{i.label}</MenuText>
+                  </DropdownItem>
+                }
+                return <DropdownItem onClick={()=> history.push(i.href)}>
+                  <MenuText>{i.label}</MenuText>
+                </DropdownItem>
+              },
               )}
             </DropdownContent>
           ) : null}

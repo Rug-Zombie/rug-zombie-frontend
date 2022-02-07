@@ -153,6 +153,7 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
     dex,
     userInfo: { lpAllowance, lpBalance, nftMintTime, tokenWithdrawalDate, randomNumber, isMinting, amount },
     poolInfo: { mintingFee },
+    overlay
   } = tomb
   const [stakeAmount, setStakeAmount] = useState(new BigNumber(null))
   const [unstakeAmount, setUnstakeAmount] = useState(new BigNumber(null))
@@ -164,8 +165,8 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
   const { onUnstake } = useUnstake(drFrankenstein, getId(pid), unstakeAmount)
   const { onUnstakeEarly } = useUnstakeEarly(drFrankenstein, getId(pid), unstakeAmount)
   const { onHarvest } = useHarvest(drFrankenstein, getId(pid))
-  const { onStartMinting } = useStartMinting(tombOverlay, getId(pid), mintingFee)
-  const { onFinishMinting } = useFinishMinting(tombOverlay, getId(pid))
+  const { onStartMinting } = useStartMinting(tombOverlay, getId(overlay.pid), mintingFee)
+  const { onFinishMinting } = useFinishMinting(tombOverlay, getId(overlay.pid))
   const [confirming, setConfirming] = useState(false)
   const [confirmingUnstake, setConfirmingUnstake] = useState(false)
   const steps = useMemo(() => [], [])

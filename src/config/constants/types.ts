@@ -101,16 +101,24 @@ export interface GraveConfig {
   isRetired?: boolean
 }
 
+export interface TombOverlayConfig {
+  pid: Id,
+  commonId: number,
+  uncommonId: number,
+  rareId: number,
+  legendaryId: number,
+}
+
 export interface TombConfig {
   id: number,
   pid: Id,
-  overlayId?: Id,
   token1: Token,
   token2: Token,
   dex: Dex,
   lpAddress: Address,
   notNativeDex?: boolean,
   isNew?: boolean,
+  overlay: TombOverlayConfig
 }
 
 export interface SpawningPoolConfig {

@@ -25,7 +25,7 @@ const tombOverlays: TombOverlay[] = [ // TODO move to tombs
         },
         poolId: {
             56: 17,
-            97: 2,
+            97: 3,
         },
         mintingTime: '14 days',
         commonId: 44,
@@ -57,11 +57,11 @@ const tombOverlays: TombOverlay[] = [ // TODO move to tombs
         id: 2,
         pid: {
             56: 2,
-            97: 1,
+            97: 0,
         },
         poolId: {
             56: 11,
-            97: 4,
+            97: 2,
         },
         mintingTime: '14 days',
         commonId: 44,

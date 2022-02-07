@@ -72,7 +72,6 @@ const MobileTopMenu: React.FC<MenuProps> = () => {
           <Token style={{ position: 'relative', top: '35px', right: '25px' }}>
             <Image src='/images/rugZombie/BasicZombie.png' width={50} height={50} alt='ZMBE' />
           </Token>
-
           <Label>
             <Title bold textTransform='uppercase'>
               MAUSOLEUM (BETA)

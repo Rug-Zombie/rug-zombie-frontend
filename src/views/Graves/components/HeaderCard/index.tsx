@@ -29,6 +29,8 @@ const InfoCardTitle = styled.h3`
   font: normal normal 500 1.6rem Poppins;
   letter-spacing: 0.5px;
   color: #FFFFFF;
+  width: 100%;
+  padding: 0 10px;
 `
 
 const InfoCardSubHeader = styled.h4`

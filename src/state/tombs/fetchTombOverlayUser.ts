@@ -9,6 +9,7 @@ import {
 import { TombConfig } from 'config/constants/types'
 import { getId } from '../../utils'
 import { tombOverlayById } from '../../redux/get'
+import { getTombOverlayContract } from '../../utils/contractHelpers'
 
 export const fetchTombUserEarnings = async (account: string, tombsToFetch: TombConfig[]) => {
   const drFrankensteinAddress = getDrFrankensteinAddress()
@@ -30,23 +31,27 @@ export const fetchTombUserEarnings = async (account: string, tombsToFetch: TombC
 
 export const fetchTombOverlayUserInfo = async (account: string, tombOverlaysToFetch: TombConfig[]) => {
   const calls = tombOverlaysToFetch.reduce((userInfos, tombConfig) => {
-    const overlayPid = getId(tombOverlayById(getId(tombConfig.overlayId)).pid)
+    const overlayId = getId(tombConfig.overlay.pid).toString()
+    console.log(overlayId)
     return userInfos.concat([{
       address: getTombOverlayAddress(),
       name: 'userInfo',
-      params: [overlayPid, account],
+      params: [overlayId, account],
     },
       {
         address: getTombOverlayAddress(),
         name: 'nftMintTime',
-        params: [overlayPid, account],
+        params: [overlayId, account],
       },
     ])
   }, [])
 
   const userInfos = await multicall(tombOverlay, calls)
+
   const pairedUserInfos = []
   for (let i = 0; i < userInfos.length; i += 2) {
+    console.log(userInfos[i].toString())
+
     pairedUserInfos.push({
       nextNftMintDate: userInfos[i].nextNftMintDate,
       isMinting: userInfos[i].isMinting,
