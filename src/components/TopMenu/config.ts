@@ -4,11 +4,6 @@ export enum MenuItem {
 }
 
 const config = [
-
-  {
-    label: 'Home',
-    href: '/'
-  },
   {
     label: 'Graves',
     href: '/graves'

@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import downpointer from 'images/DownPointer.png'
+import downpointer from 'images/graves/Down_Arrow.svg'
+import upPointer from 'images/graves/Up_Arrow.svg'
+import searchIcon from 'images/graves/Search_Icon.svg'
 import { GraveFilter, graveFilters, RarityFilter, rarityFilters } from '../../filterConfig'
 
 const FilterContainer = styled.div`
@@ -52,10 +54,10 @@ const SearchBar = styled.div`
 const Input = styled.input`
   border: 2px solid #151E21;
   border-radius: 10px;
-  background: none;
+  background: #0D1517 url(${searchIcon}) 93% no-repeat;
   caret-color: #fff;
   color: #fff;
-  padding: 0 20px;
+  padding: 0 60px 0 20px;
   width: 100%;
 `
 
@@ -68,17 +70,14 @@ const DropdownMenu = styled.div`
 const DropdownContent = styled.div`
   position: absolute;
   display: block;
-  top: 60px;
+  top: 30px;
   background-color: #010202;
   border: 2px solid #010202;
-  right: 2px;
+  right: -12px;
   z-index: 1;
   border-radius: 10px;
   margin: 0 10px 0 0;
   min-width: 152px;
-  @media (max-width: 640px) {
-    right: 17px;
-  }
 `
 
 const DropdownItem = styled.div`
@@ -98,7 +97,7 @@ const MenuText = styled.p`
   font: normal normal normal 14px/30px Poppins;
 
   &:hover {
-    color: #30C00D;
+    color: #AE32AA;
   }
 `
 
@@ -106,10 +105,15 @@ const DropdownText = styled.p`
   font: normal normal normal 14px/30px Poppins;
   color: #FFFFFF;
   padding: 0 10px 0 20px;
+  margin: 0;
 `
 
-const DownPointer = <div style={{ paddingRight: '20px' }}>
-  <img src={downpointer} alt='Dropdown menu' width='20px' />
+const DownPointer = <div style={{ marginRight: '10px' }}>
+  <img src={downpointer} alt='Dropdown menu' width='30px' />
+</div>
+
+const UpPointer = <div style={{ marginRight: '10px' }}>
+  <img src={upPointer} alt='Hide Dropdown menu' width='30px' />
 </div>
 
 interface FilterProps {
@@ -156,8 +160,7 @@ const Filter: React.FC<FilterProps> = ({ gravesList, raritiesList, graveFilter, 
         <DropdownText>
           {graveFilters[graveFilter.value].label}
         </DropdownText>
-        {DownPointer}
-      </Dropdown>
+        {showGravesMenu ? UpPointer : DownPointer }
       <DropdownMenu>
         {showGravesMenu ? (
           <DropdownContent>
@@ -175,12 +178,12 @@ const Filter: React.FC<FilterProps> = ({ gravesList, raritiesList, graveFilter, 
           </DropdownContent>
         ) : null}
       </DropdownMenu>
+      </Dropdown>
       <Dropdown onClick={(e) => handleDropdownClick(e, 'types')}>
         <DropdownText>
           {rarityFilters[rarityFilter.value].label}
         </DropdownText>
-        {DownPointer}
-      </Dropdown>
+        {showTypeMenu ? UpPointer : DownPointer }
       <DropdownMenu>
         {showTypeMenu ? (
           <DropdownContent>
@@ -198,6 +201,7 @@ const Filter: React.FC<FilterProps> = ({ gravesList, raritiesList, graveFilter, 
           </DropdownContent>
         ) : null}
       </DropdownMenu>
+      </Dropdown>
     </Dropdowns>
     <SearchBar>
       <Input onInput={handleSearch} placeholder='Search by name, symbol or NFT' />
