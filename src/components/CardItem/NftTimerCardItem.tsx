@@ -1,6 +1,7 @@
 import React from 'react'
 import BigNumber from 'bignumber.js'
 import { ethers } from 'ethers'
+import { useWeb3React } from '@web3-react/core'
 import { secondsToDays } from '../../utils/timerHelpers'
 import CardItem, { CardItemValueType } from './CardItem'
 
@@ -14,6 +15,7 @@ enum MintingStatus {
   CanFinish = 'Finish Minting',
   Ready = 'NFT Ready',
 }
+
 const HIGHLIGHTED_MINTING_STATUSES: Set<MintingStatus> = new Set([
   MintingStatus.CanStart,
   MintingStatus.InProgress,
@@ -43,11 +45,12 @@ interface Props {
 }
 
 const getTombMintingStatus = (
-    mintDate: BigNumber,
-    mintingReady: boolean,
-    isMinting: boolean,
+  mintDate: BigNumber,
+  mintingReady: boolean,
+  isMinting: boolean,
+  account: string,
 ): MintingStatus => {
-  if (mintDate.eq(ethers.constants.MaxUint256._hex)) {
+  if (mintDate.eq(ethers.constants.MaxUint256._hex) || !account) {
     return MintingStatus.NotApplicable
   }
 
@@ -63,14 +66,15 @@ const getTombMintingStatus = (
 }
 
 const getMintingStatus = (
-    amountStaked: BigNumber,
-    mintDate: BigNumber,
-    secondsUntilMintable: number,
-    mintingReady?: boolean,
-    isMinting?: boolean,
+  amountStaked: BigNumber,
+  mintDate: BigNumber,
+  secondsUntilMintable: number,
+  account: string,
+  mintingReady?: boolean,
+  isMinting?: boolean,
 ): MintingStatus => {
   if (mintingReady !== undefined || isMinting !== undefined) {
-    return getTombMintingStatus(mintDate, mintingReady, isMinting)
+    return getTombMintingStatus(mintDate, mintingReady, isMinting, account)
   }
 
   if (amountStaked.isZero()) {
@@ -99,23 +103,24 @@ const getTier = (secondsUntilMintable: number): TimeRemainingTier => {
 }
 
 const NftTimerCardItem: React.FC<Props> = ({
-    mintDate,
-    amountStaked,
-    mintingReady,
-    isMinting,
-    secondsUntilMintable = mintDate.toNumber() - Math.floor(Date.now() / 1000),
-}) => {
-  const status = getMintingStatus(amountStaked, mintDate, secondsUntilMintable, mintingReady, isMinting)
+                                             mintDate,
+                                             amountStaked,
+                                             mintingReady,
+                                             isMinting,
+                                             secondsUntilMintable = mintDate.toNumber() - Math.floor(Date.now() / 1000),
+                                           }) => {
+  const { account } = useWeb3React()
+  const status = getMintingStatus(amountStaked, mintDate, secondsUntilMintable, account, mintingReady, isMinting)
   if (status !== MintingStatus.TimerCountingDown) {
     return <CardItem highlightable
-        isHighlighted={() => HIGHLIGHTED_MINTING_STATUSES.has(status)}
-        additionalHighlightClassNames={USER_ACTION_MINTING_STATUSES.has(status) ? [ CLASS_USER_ACTION_NEEDED ] : []}
-        label='NFT Timer'
-        value={status.valueOf()} />
+                     isHighlighted={() => HIGHLIGHTED_MINTING_STATUSES.has(status)}
+                     additionalHighlightClassNames={USER_ACTION_MINTING_STATUSES.has(status) ? [CLASS_USER_ACTION_NEEDED] : []}
+                     label='NFT Timer'
+                     value={status.valueOf()} />
   }
 
   const tier = getTier(secondsUntilMintable)
-  const tierClassNames = tier.valueOf() ? [ `nft-timer-${tier.valueOf()}` ] : []
+  const tierClassNames = tier.valueOf() ? [`nft-timer-${tier.valueOf()}`] : []
   return <CardItem highlightable
                    isHighlighted={(value) => value && value > 0 && tier !== TimeRemainingTier.AtLeast14Days}
                    label='NFT Timer'

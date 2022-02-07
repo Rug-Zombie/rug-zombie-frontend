@@ -2,6 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { BigNumber } from 'bignumber.js'
 import numeral from 'numeral'
+import { useModal } from '@rug-zombie-libs/uikit'
 import ProgressBar from './components/ProgressBar'
 import TableDetails from './components/TableDetails'
 import { Grave } from '../../../../../../state/types'
@@ -17,10 +18,12 @@ import {
   useUnstakeEarly,
 } from '../../../../../../hooks/useGrave'
 import { getId } from '../../../../../../utils'
-import { BIG_ZERO } from '../../../../../../utils/bigNumber'
 import tokens from '../../../../../../config/constants/tokens'
 import { getBalanceNumber, getDecimalAmount, getFullDisplayBalance } from '../../../../../../utils/formatBalance'
 import { zombieBalance } from '../../../../../../redux/get'
+import { useGetNfts } from '../../../../../../state/hooks'
+import ConvertNftModal from './components/ConvertNftModal'
+import BurnZombieModal from './components/BurnZombieModal'
 
 const Separator = styled.div`
   height: 0px;
@@ -69,7 +72,7 @@ const InputControl = styled.text`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
+`
 
 const StakingInput = styled.input`
   width: 150px;
@@ -134,6 +137,7 @@ const BalanceText = styled.button`
   background: none;
   border: none;
   width: 150px;
+
   &:hover {
     cursor: pointer;
   }
@@ -147,6 +151,8 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   const {
     pid,
     rug,
+    depositNftId,
+    nftConverterPid,
     userInfo: {
       rugDeposited,
       rugAllowance,
@@ -159,6 +165,7 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     },
     poolInfo: { unlockFee },
   } = grave
+
   const [stakeAmount, setStakeAmount] = useState(new BigNumber(null))
   const [unstakeAmount, setUnstakeAmount] = useState(new BigNumber(null))
   const rugContract = useERC20(getAddress(rug.address))
@@ -176,6 +183,9 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   const stakingSteps = useMemo(() => [], [])
   const unstakingSteps = useMemo(() => [], [])
   const now = Math.floor(Date.now() / 1000)
+  const isFirstGrave = getId(pid) === 22
+  const nfts = useGetNfts().data
+  const depositNft = depositNftId ? nfts.find(n => n.id === depositNftId) : null
 
   enum StakingStep {
     ApproveRug,
@@ -184,17 +194,39 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     ApproveZombie,
     StakeZombie,
     Staked,
+    ApproveDepositNft,
+    ConvertDepositNft,
   }
 
+  const [onConvertNftModal] = useModal(<ConvertNftModal nftConverterPid={nftConverterPid}
+                                                        depositNftId={depositNftId} />)
+  const [onBurnZombieModal] = useModal(<BurnZombieModal pid={getId(pid)} />)
+
+  if (depositNftId) {
+    stakingSteps[StakingStep.ConvertDepositNft] = {
+      label: `Convert ${depositNft.symbol} NFT`,
+      sent: `Selecting...`,
+      func: onConvertNftModal,
+      nonAsync: true,
+    }
+  }
   stakingSteps[StakingStep.ApproveRug] = {
     label: `Approve ${rug.symbol}`,
     sent: `Approving...`,
     func: approveRug,
   }
-  stakingSteps[StakingStep.DepositRug] = {
-    label: `Deposit ${rug.symbol}`,
-    sent: `Depositing...`,
-    func: onDepositRug,
+  if(isFirstGrave) {
+    stakingSteps[StakingStep.DepositRug] = {
+      label: 'Begin Journey',
+      func: onBurnZombieModal,
+      nonAsync: true
+    }
+  } else {
+    stakingSteps[StakingStep.DepositRug] = {
+      label: `Deposit ${rug.symbol}`,
+      sent: `Depositing...`,
+      func: onDepositRug,
+    }
   }
   stakingSteps[StakingStep.UnlockGrave] = {
     label: `Unlock`,
@@ -216,8 +248,12 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     sent: `Staking...`,
     func: onStake,
   }
-
-  let currentStep = StakingStep.ApproveRug
+  let currentStep
+  if (rugBalance.isZero() && depositNftId) {
+    currentStep = StakingStep.ConvertDepositNft
+  } else {
+    currentStep = StakingStep.ApproveRug
+  }
   if (rugAllowance.gt(0)) {
     currentStep = StakingStep.DepositRug
   }
@@ -233,19 +269,23 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   if (amount.gt(0)) {
     currentStep = StakingStep.Staked
   }
-  if(zombieAllowance.isZero()) {
+  if (zombieAllowance.isZero()) {
     currentStep = StakingStep.ApproveZombie
   }
 
   const handleTx = useCallback(async () => {
-    setConfirmingStake(true)
-    stakingSteps[currentStep].func()
-      .then(() => {
-        setConfirmingStake(false)
-      })
-      .catch(() => {
-        setConfirmingStake(false)
-      })
+    if (stakingSteps[currentStep].nonAsync) {
+      stakingSteps[currentStep].func()
+    } else {
+      setConfirmingStake(true)
+      stakingSteps[currentStep].func()
+        .then(() => {
+          setConfirmingStake(false)
+        })
+        .catch(() => {
+          setConfirmingStake(false)
+        })
+    }
   }, [currentStep, stakingSteps])
 
   enum UnstakingStep {
@@ -301,7 +341,6 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   }, [currentUnstakingStep, unstakingSteps])
 
 
-
   const decimals = currentStep === StakingStep.ApproveRug || currentStep === StakingStep.DepositRug ? rug.decimals : tokens.zmbe.decimals
   const changeStakeInput = (e) => {
     setStakeAmount(getDecimalAmount(new BigNumber(e.target.value), decimals))
@@ -326,10 +365,11 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
       <Inputs>
         <InputControl>
           {currentStep === StakingStep.ApproveRug || currentStep === StakingStep.DepositRug
-          ? <BalanceText onClick={maxStakeAmount}>
-              Wallet Balance: <p>{numeral(getFullDisplayBalance(rugBalance, rug.decimals)).format('(0.00 a)')} {rug.symbol}</p>
+            ? <BalanceText onClick={maxStakeAmount}>
+              Wallet
+              Balance: <p>{numeral(getFullDisplayBalance(rugBalance, rug.decimals)).format('(0.00 a)')} {rug.symbol}</p>
             </BalanceText>
-          : <BalanceText onClick={maxStakeAmount}>
+            : <BalanceText onClick={maxStakeAmount}>
               Wallet Balance: {numeral(getFullDisplayBalance(zombieBalance())).format('(0.00 a)')} ZMBE
             </BalanceText>
           }

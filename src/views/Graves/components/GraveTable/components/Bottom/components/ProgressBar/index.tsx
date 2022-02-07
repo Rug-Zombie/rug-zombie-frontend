@@ -4,6 +4,7 @@ import ProgressCircle from './components/ProgressCircle'
 import ProgressLine from './components/ProgressLine'
 import ProgressText from './components/ProgressText'
 import { Grave } from '../../../../../../../../state/types'
+import { getId } from '../../../../../../../../utils'
 
 const ProgressFlex = styled.div`
   width: 100%;
@@ -42,8 +43,18 @@ enum Step {
 }
 
 const ProgressBar: React.FC<StakingProgressBarProps> = ({ grave }) => {
-  const { userInfo: { rugDeposited, rugAllowance, zombieAllowance, paidUnlockFee, amount } } = grave
+  const { pid, depositNftId, userInfo: { rugDeposited, rugAllowance, zombieAllowance, paidUnlockFee, amount } } = grave
   const steps = ['Approve rug', 'Deposit rug', 'Unlock grave', 'Approve ZMBE', 'Stake ZMBE']
+  if(depositNftId) {
+    steps[Step.ApproveRug] = 'Convert Nft'
+    steps[Step.DepositRug] = 'Deposit Nft'
+  }
+
+  const isFirstGrave = getId(pid) === 22
+  if(isFirstGrave) {
+    steps[Step.ApproveRug] = 'Approve ZMBE'
+    steps[Step.DepositRug] = 'Burn ZMBE'
+  }
 
   let currentStep = Step.ApproveRug
   if(rugAllowance.gt(0)) {
@@ -55,7 +66,7 @@ const ProgressBar: React.FC<StakingProgressBarProps> = ({ grave }) => {
   if(paidUnlockFee) {
     currentStep = Step.ApproveZombie
   }
-  if(zombieAllowance.gt(0) && paidUnlockFee) {
+  if((zombieAllowance.gt(0) && paidUnlockFee) || isFirstGrave) {
     steps.splice(Step.ApproveZombie, 1)
     // currentStep -= 1
   }

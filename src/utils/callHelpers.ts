@@ -149,3 +149,12 @@ export const harvest = async (drFrankensteinContract, pid, account) => {
       return tx.transactionHash
     })
 }
+
+export const convertNft = async (nftSwapper, nftConverterPid, tokenId, account) => {
+  return nftSwapper.methods
+    .deposit(nftConverterPid, tokenId)
+    .send({ from: account, gas: 200000 })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
