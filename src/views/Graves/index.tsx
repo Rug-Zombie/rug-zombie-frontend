@@ -82,7 +82,7 @@ const Graves: React.FC = () => {
     graves = graves.filter(({name, rug: {symbol}, nftId}) => {
       const searchString = searchFilter.toLowerCase()
       // eslint-disable-next-line react-hooks/rules-of-hooks
-      return name.toLowerCase().includes(searchString) || symbol.toLowerCase().includes(searchString) || useGetNftById(nftId).name.toLowerCase().includes(searchString)
+      return name.toLowerCase().includes(searchString) || symbol.toLowerCase().includes(searchString)
     })
   }
 
