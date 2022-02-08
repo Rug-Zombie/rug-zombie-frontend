@@ -126,24 +126,24 @@ const ProfilePage: React.FC = () => {
   }
 
   return (
-      <Card>
-        <CardTitle>
-          Activity
-        </CardTitle>
-        <InnerCardDiv className='scroll'>
-          <ActivitiesFlex>
-            {activities.map(activity => {
-              // if (activity.type === UserActivityType.DrFHarvest) {
-              //   return null
-              // }
-              return <ActivityDiv>
-                <DateText>{formatDuration(now() - activity.timestamp, false, true)} ago</DateText>
-                <ActivityText>{activityText(activity)}</ActivityText>
-              </ActivityDiv>
-            })}
-          </ActivitiesFlex>
-        </InnerCardDiv>
-      </Card>
+    <Card>
+      <CardTitle>
+        Activity
+      </CardTitle>
+      <InnerCardDiv className='scroll'>
+        <ActivitiesFlex>
+          {activities.map(activity => {
+            // if (activity.type === UserActivityType.DrFHarvest) {
+            //   return null
+            // }
+            return <ActivityDiv>
+              <DateText>{formatDuration(now() - activity.timestamp, false, true)} ago</DateText>
+              <ActivityText>{activityText(activity)}</ActivityText>
+            </ActivityDiv>
+          })}
+        </ActivitiesFlex>
+      </InnerCardDiv>
+    </Card>
   )
 }
 

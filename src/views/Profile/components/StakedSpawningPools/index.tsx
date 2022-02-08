@@ -7,6 +7,7 @@ import { useMultiCall, useZombie } from 'hooks/useContract'
 import { initialSpawningPoolData } from '../../../../redux/fetch'
 import { getSpawningPoolContract } from '../../../../utils/contractHelpers'
 import useWeb3 from '../../../../hooks/useWeb3'
+import { getAddress } from '../../../../utils/addressHelpers'
 
 const TableCards = styled(BaseLayout)`
   width: 100%;
@@ -35,7 +36,7 @@ const StakedSpawningPools: React.FC<{ zombieStaked }> = ({ zombieStaked }) => {
   const isDesktop = isLg || isXl
   const handleHarvest = () => {
     stakedSpawningPools.forEach((sp) => {
-      getSpawningPoolContract(sp.id, web3).methods.withdraw(0)
+      getSpawningPoolContract(getAddress(sp.address), web3).methods.withdraw(0)
         .send({ from: account()
         })
     })

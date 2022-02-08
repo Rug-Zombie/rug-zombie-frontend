@@ -88,8 +88,8 @@ export const getMausoleumContract = (version: string, web3?: Web3) => {
 export const getMausoleumV2Contract = (web3?: Web3) => {
   return getContract(mausoleumAbi, getMausoleumV2Address(), web3)
 }
-export const getSpawningPoolContract = (id: number, web3?: Web3) => {
-  return getContract(spawningPoolAbi, getSpawningPoolAddress(id), web3)
+export const getSpawningPoolContract = (address: string, web3?: Web3) => {
+  return getContract(spawningPoolAbi, address, web3)
 }
 export const getSharkpoolContract = (id: number, web3?: Web3) => {
   return getContract(sharkpoolAbi, getSharkPoolAddress(id), web3);

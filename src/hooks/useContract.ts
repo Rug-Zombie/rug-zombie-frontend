@@ -56,9 +56,9 @@ export const useDrFrankenstein = () => {
   return useMemo(() => getDrFrankensteinContract(web3), [web3])
 }
 
-export const useSpawningPool = (id: number) => {
+export const useSpawningPool = (address: string) => {
   const web3 = useWeb3()
-  return useMemo(() => getSpawningPoolContract(id, web3), [id, web3])
+  return useMemo(() => getSpawningPoolContract(address, web3), [address, web3])
 }
 
 export const useSharkpool = (id: number) => {
