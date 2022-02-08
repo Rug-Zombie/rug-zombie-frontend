@@ -107,6 +107,7 @@ const spawningPools: SpawningPoolConfig[] = [
     dex: Dex.APESWAP,
     isNew: false,
     color: 'orange',
+    unknownPrice: true,
   },
   {
     id: 16,

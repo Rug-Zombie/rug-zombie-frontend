@@ -133,6 +133,7 @@ export interface SpawningPoolConfig {
   dex: Dex,
   nftId: number,
   color?: string,
+  unknownPrice?: boolean
 }
 
 export interface PoolConfig {

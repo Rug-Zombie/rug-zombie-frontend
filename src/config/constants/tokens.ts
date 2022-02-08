@@ -565,6 +565,7 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://block-mine.io/',
+    tokenLogo: 'https://assets.coingecko.com/coins/images/19008/small/gold_nugget.png?1636451377'
   },
   pirate: {
     symbol: 'PIRATE',

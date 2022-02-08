@@ -132,6 +132,7 @@ const Top: React.FC<TopProps> = ({ spawningPool, open, setOpen }) => {
     name,
     rewardToken,
     isNew,
+    unknownPrice,
     poolInfo: { totalAmount, rewardTokenPriceBnb, rewardPerBlock },
     userInfo: { pendingReward, nftMintDate, tokenWithdrawalDate, amount },
   } = spawningPool
@@ -183,7 +184,7 @@ const Top: React.FC<TopProps> = ({ spawningPool, open, setOpen }) => {
       <SpawningPoolSubRow>
         <Amounts>
           <CardItem label='Earned' highlightable
-                    unit={`${rewardToken.symbol} ($${getFullDisplayBalance(pendingReward.times(rewardTokenPrice), rewardToken.decimals, 2)})`}
+                    unit={`${rewardToken.symbol}${unknownPrice ? '' : ` ($${getFullDisplayBalance(pendingReward.times(rewardTokenPrice), rewardToken.decimals, 2)})`}`}
                     value={getBalanceNumber(pendingReward, rewardToken.decimals)}
                     valueType={CardItemValueType.Number} />
           <CardItem label='Yearly' value={yearly} valueType={CardItemValueType.Percentage} />
