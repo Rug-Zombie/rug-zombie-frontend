@@ -116,11 +116,10 @@ const HeaderCard: React.FC = () => {
             Tombs
           </InfoCardTitle>
           <InfoCardSubHeader>
-            Use your dead tokens to unlock tombs then stake ZMBE to earn Zombie & NFT rewards.
+            Provide liquidity to roll for various NFTs. Increase your stake in the tombs to increase your chance at rolling rare NFTs.
           </InfoCardSubHeader>
         </InfoCardHeader>
         <InfoCardContent>
-
           <InfoCardSubtitle>
             Tombs TVL
           </InfoCardSubtitle>

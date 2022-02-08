@@ -13,10 +13,6 @@ import { useAppDispatch } from '../../state'
 import { fetchGravesPublicDataAsync, fetchGravesUserDataAsync } from '../../state/graves'
 import { useGetGraves, useGetNftById } from '../../state/hooks'
 import { GraveFilter, graveFilters, RarityFilter, rarityFilters } from './filterConfig'
-import { now } from '../../utils/timerHelpers'
-import { BIG_ZERO } from '../../utils/bigNumber'
-import { getBalanceNumber } from '../../utils/formatBalance'
-import { zombiePriceUsd } from '../../redux/get'
 
 const GravePage = styled(Page)`
   min-width: 80vw;

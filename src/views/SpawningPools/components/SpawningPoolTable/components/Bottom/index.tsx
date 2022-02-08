@@ -196,13 +196,13 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
   if (paidUnlockFee) {
     currentStep = Step.ApproveZombie
   }
-  if (zombieAllowance.gt(0)) {
+  if (zombieAllowance.gt(0) && paidUnlockFee) {
     currentStep = Step.StakeZombie
   }
   if (amount.gt(0)) {
     currentStep = Step.Staked
   }
-  if (zombieAllowance.isZero()) {
+  if (zombieAllowance.isZero() && amount.gt(0)) {
     currentStep = Step.ApproveZombie
   }
 

@@ -56,6 +56,7 @@ const ProgressBar: React.FC<StakingProgressBarProps> = ({ grave }) => {
     steps[Step.DepositRug] = 'Burn ZMBE'
   }
 
+
   let currentStep = Step.ApproveRug
   if(rugAllowance.gt(0)) {
     currentStep = Step.DepositRug
@@ -71,9 +72,11 @@ const ProgressBar: React.FC<StakingProgressBarProps> = ({ grave }) => {
     // currentStep -= 1
   }
   if(amount.gt(0)) {
+    console.log('staked')
+
     currentStep = Step.Staked
   }
-  if(zombieAllowance.isZero()) {
+  if(zombieAllowance.isZero() && amount.gt(0)) {
     currentStep = Step.ApproveZombie
   }
 
