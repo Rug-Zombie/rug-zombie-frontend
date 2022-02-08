@@ -71,7 +71,7 @@ export const unlock = async (drFrankensteinContract, pid, amount, account) => {
 
 export const spStake = async (spawningPoolContract, amount, account) => {
   return spawningPoolContract.methods
-    .deposit(amount)
+    .deposit(amount.toString())
     .send({ from: account.toString() })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
@@ -80,7 +80,7 @@ export const spStake = async (spawningPoolContract, amount, account) => {
 
 export const spUnstake = async (spawningPoolContract, amount, account) => {
   return spawningPoolContract.methods
-    .withdraw(amount)
+    .withdraw(amount.toString())
     .send({ from: account.toString() })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
