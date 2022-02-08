@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import downpointer from 'images/graves/Down_Arrow.svg'
 import upPointer from 'images/graves/Up_Arrow.svg'
 import searchIcon from 'images/graves/Search_Icon.svg'
-import { GraveFilter, graveFilters, RarityFilter, rarityFilters } from '../../filterConfig'
 
 const FilterContainer = styled.div`
   display: flex;
@@ -105,7 +104,7 @@ const DropdownText = styled.p`
   font: normal normal normal 14px/30px Poppins;
   color: #FFFFFF;
   padding: 0 10px 0 20px;
-  margin: 0;
+  margin: 0 auto 0 0;
 `
 
 const DownPointer = <div style={{ marginRight: '10px' }}>
@@ -117,16 +116,35 @@ const UpPointer = <div style={{ marginRight: '10px' }}>
 </div>
 
 interface FilterProps {
-  gravesList: string[];
-  raritiesList: string[];
-  graveFilter: { value: GraveFilter, set: any };
-  rarityFilter: { value: RarityFilter, set: any };
-  setSearch: any;
+  searchValue: string;
+  handleSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleFilter: (condition: string) => void;
 }
 
-const Filter: React.FC<FilterProps> = ({ gravesList, raritiesList, graveFilter, rarityFilter, setSearch }) => {
+const GRAVES_FILTER = [
+  'All graves',
+  'Staked',
+  'NFT-only',
+  'Retired',
+]
+
+const RARITY_FILTER = [
+  'All types',
+  'Legendary',
+  'Rare',
+  'Uncommon',
+  'Common',
+]
+
+const Filter: React.FC<FilterProps> = ({
+  searchValue,
+  handleSearch,
+  handleFilter,
+}) => {
   const [showGravesMenu, setShowGravesMenu] = useState(false)
   const [showTypeMenu, setShowTypeMenu] = useState(false)
+  const [gravesLabel, setGravesLabel] = useState('All graves')
+  const [typesLabel, setTypesLabel] = useState('All types')
 
   const handleDropdownClick = (e, condition) => {
     e.preventDefault()
@@ -139,32 +157,30 @@ const Filter: React.FC<FilterProps> = ({ gravesList, raritiesList, graveFilter, 
     }
   }
 
-  const handleItemClick = (e, condition) => {
+  const handleItemClick = (e: any, condition: string) => {
     e.preventDefault()
     if (condition === 'graves') {
-      graveFilter.set(graveFilters.findIndex(f => f.label === e.target.textContent))
-      setShowGravesMenu(false)
+      handleFilter(e.target.textContent)
+      setGravesLabel(e.target.textContent)
+      setTypesLabel('All types')
     } else if (condition === 'types') {
-      rarityFilter.set(rarityFilters.findIndex(f => f.label === e.target.textContent))
-      setShowTypeMenu(false)
+      handleFilter(e.target.textContent)
+      setTypesLabel(e.target.textContent)
+      setGravesLabel('All graves')
     }
-  }
-
-  const handleSearch = (e) => {
-    setSearch(e.target.value)
   }
 
   return <FilterContainer>
     <Dropdowns>
       <Dropdown onClick={(e) => handleDropdownClick(e, 'graves')}>
         <DropdownText>
-          {graveFilters[graveFilter.value].label}
+          {gravesLabel}
         </DropdownText>
         {showGravesMenu ? UpPointer : DownPointer }
       <DropdownMenu>
         {showGravesMenu ? (
           <DropdownContent>
-            {gravesList.map(grave => {
+            {GRAVES_FILTER.map(grave => {
                 return (
                   <DropdownItem
                     key={grave}
@@ -181,13 +197,13 @@ const Filter: React.FC<FilterProps> = ({ gravesList, raritiesList, graveFilter, 
       </Dropdown>
       <Dropdown onClick={(e) => handleDropdownClick(e, 'types')}>
         <DropdownText>
-          {rarityFilters[rarityFilter.value].label}
+          {typesLabel}
         </DropdownText>
         {showTypeMenu ? UpPointer : DownPointer }
       <DropdownMenu>
         {showTypeMenu ? (
           <DropdownContent>
-            {raritiesList.map(type => {
+            {RARITY_FILTER.map(type => {
                 return (
                   <DropdownItem
                     key={type}
@@ -204,7 +220,7 @@ const Filter: React.FC<FilterProps> = ({ gravesList, raritiesList, graveFilter, 
       </Dropdown>
     </Dropdowns>
     <SearchBar>
-      <Input onInput={handleSearch} placeholder='Search by name, symbol or NFT' />
+      <Input onInput={handleSearch} value={searchValue} placeholder='Search by name, symbol or NFT' />
     </SearchBar>
   </FilterContainer>
 }
