@@ -15,13 +15,13 @@ const FrankEarned: React.FC<FrankEarnedProps> = ({ id }) => {
   const { userInfo: { pendingReward }, rewardToken, color } = spawningPoolById(id)
   const spawningPoolContract = useSpawningPool(id)
   const { account } = useWeb3React()
-  const { toastSuccess } = useToast()
+  const { toastDefault } = useToast()
   const { t } = useTranslation()
 
   const handleHarvest = () => {
     spawningPoolContract.methods.withdraw(0)
       .send({ from: account }).then(() => {
-      toastSuccess(t(`Claimed ${rewardToken.symbol}`))
+      toastDefault(t(`Claimed ${rewardToken.symbol}`))
     })
   }
 

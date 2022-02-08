@@ -50,7 +50,7 @@ const StakedGraves: React.FC<{ zombieStaked }> = ({ zombieStaked }) => {
 
 
     const drFrankenstein = useDrFrankenstein();
-    const { toastSuccess } = useToast()
+    const { toastDefault } = useToast()
     const { t } = useTranslation()
     const handleHarvest = () => {
 
@@ -58,12 +58,12 @@ const StakedGraves: React.FC<{ zombieStaked }> = ({ zombieStaked }) => {
         if (getId(stakedGrave.pid) === 0) {
           drFrankenstein.methods.leaveStaking(0)
           .send({from: account()}).then(() => {
-            toastSuccess(t('Claimed ZMBE'))
+            toastDefault(t('Claimed ZMBE'))
           });
         } else {
           drFrankenstein.methods.withdraw(getId(stakedGrave.pid), 0)
           .send({from: account()}).then(() => {
-            toastSuccess(t('Claimed ZMBE'))
+            toastDefault(t('Claimed ZMBE'))
           });
         }
       })

@@ -37,7 +37,7 @@ const StakeZombieModal: React.FC<StakeZombieModalProps> = ({
   const { userInfo: { amount }, poolInfo } = spawningPoolById(pid)
   const spawningPoolContract = useSpawningPool(pid)
   const { account } = useWeb3React()
-  const { toastSuccess } = useToast()
+  const { toastDefault } = useToast()
   const { t } = useTranslation()
 
   const { theme } = useTheme()
@@ -74,7 +74,7 @@ const StakeZombieModal: React.FC<StakeZombieModalProps> = ({
     spawningPoolContract.methods.deposit(formattedAmount)
       .send({ from: account }).then(() => {
       updateResult(pid)
-      toastSuccess(t('Staked ZMBE'))
+      toastDefault(t('Staked ZMBE'))
       onDismiss()
     })
   }

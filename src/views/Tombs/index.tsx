@@ -13,6 +13,7 @@ import { useAppDispatch } from '../../state'
 import { fetchTombsPublicDataAsync, fetchTombsUserDataAsync } from '../../state/tombs'
 import { useGetTombs } from '../../state/hooks'
 import { TombFilter, tombFilters, RarityFilter, rarityFilters } from './filterConfig'
+import useToast from '../../hooks/useToast'
 
 const TombPage = styled(Page)`
   min-width: 80vw;
@@ -68,7 +69,6 @@ const Tombs: React.FC = () => {
   const [tombFilter, setTombFilter] = useState(TombFilter.All)
   const [rarityFilter, setRarityFilter] = useState(RarityFilter.All)
   const [searchFilter, setSearchFilter] = useState('')
-
   let tombs = useGetTombs().data
   tombs = tombFilters[tombFilter].filter(tombs)
   tombs = rarityFilters[rarityFilter].filter(tombs)

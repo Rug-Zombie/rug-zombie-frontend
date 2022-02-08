@@ -24,6 +24,7 @@ import { zombieBalance } from '../../../../../../redux/get'
 import { useGetNfts } from '../../../../../../state/hooks'
 import ConvertNftModal from './components/ConvertNftModal'
 import BurnZombieModal from './components/BurnZombieModal'
+import useToast from '../../../../../../hooks/useToast'
 
 const Separator = styled.div`
   height: 0px;
@@ -158,6 +159,7 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   const {
     pid,
     rug,
+    nftId,
     depositNftId,
     nftConverterPid,
     userInfo: {
@@ -170,7 +172,7 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
       nftMintDate,
       tokenWithdrawalDate,
     },
-    poolInfo: { unlockFee },
+    poolInfo: { unlockFee, minimumStake },
   } = grave
 
   const [stakeAmount, setStakeAmount] = useState(new BigNumber(null))
@@ -193,6 +195,8 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   const isFirstGrave = getId(pid) === 22
   const nfts = useGetNfts().data
   const depositNft = depositNftId ? nfts.find(n => n.id === depositNftId) : null
+  const nft = nfts.find(n => n.id === nftId)
+  const { toastGraves } = useToast()
 
   enum StakingStep {
     ApproveRug,
@@ -204,6 +208,9 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     ApproveDepositNft,
     ConvertDepositNft,
   }
+
+  const validStakeAmount = amount.plus(stakeAmount).gte(minimumStake)
+  const validUnstakeAmount = amount.minus(unstakeAmount).gte(minimumStake) || amount.minus(unstakeAmount).isZero()
 
   const [onConvertNftModal] = useModal(<ConvertNftModal nftConverterPid={nftConverterPid}
                                                         depositNftId={depositNftId} />)
@@ -221,39 +228,46 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     label: `Approve ${rug.symbol}`,
     sent: `Approving...`,
     func: approveRug,
+    toast: { title: `Approved ${rug.symbol}` },
   }
-  if(isFirstGrave) {
+  if (isFirstGrave) {
     stakingSteps[StakingStep.DepositRug] = {
       label: 'Begin Journey',
       func: onBurnZombieModal,
-      nonAsync: true
+      nonAsync: true,
     }
   } else {
     stakingSteps[StakingStep.DepositRug] = {
       label: `Deposit ${rug.symbol}`,
       sent: `Depositing...`,
       func: onDepositRug,
+      toast: { title: `Deposited ${rug.symbol}` },
     }
   }
   stakingSteps[StakingStep.UnlockGrave] = {
     label: `Unlock`,
     sent: `Unlocking...`,
     func: onUnlock,
+    toast: { title: 'Unlocked Grave' },
   }
   stakingSteps[StakingStep.ApproveZombie] = {
     label: `Approve ZMBE`,
     sent: `Approving...`,
     func: approveZombie,
+    toast: { title: 'Approved ZMBE' },
   }
   stakingSteps[StakingStep.StakeZombie] = {
     label: `Stake ZMBE`,
     sent: `Staking...`,
     func: onStake,
+    toast: { title: 'Staked ZMBE' },
+
   }
   stakingSteps[StakingStep.Staked] = {
     label: `Stake ZMBE`,
     sent: `Staking...`,
     func: onStake,
+    toast: { title: 'Staked ZMBE' },
   }
   let currentStep
   if (rugBalance.isZero() && depositNftId) {
@@ -284,16 +298,27 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     if (stakingSteps[currentStep].nonAsync) {
       stakingSteps[currentStep].func()
     } else {
+      if (!validStakeAmount && currentStep === StakingStep.StakeZombie) {
+        toastGraves(
+          'Insufficient Stake',
+          `This grave requires a minimum of ${getFullDisplayBalance(minimumStake)} ZMBE`
+        )
+        return
+      }
+
       setConfirmingStake(true)
       stakingSteps[currentStep].func()
-        .then(() => {
+        .then(succeeded => {
+          if (succeeded) {
+            toastGraves(stakingSteps[currentStep].toast.title)
+          }
           setConfirmingStake(false)
         })
         .catch(() => {
           setConfirmingStake(false)
         })
     }
-  }, [currentStep, stakingSteps])
+  }, [StakingStep.StakeZombie, currentStep, minimumStake, stakingSteps, toastGraves, validStakeAmount])
 
   enum UnstakingStep {
     MintNft,
@@ -307,21 +332,25 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   unstakingSteps[UnstakingStep.MintNft] = {
     label: `Mint NFT`,
     sent: `Minting...`,
+    toast: { title: `Minted ${nft.symbol} NFT` },
     func: onHarvest,
   }
   unstakingSteps[UnstakingStep.Harvest] = {
     label: `Harvest`,
     sent: `Harvesting...`,
+    toast: { title: 'Harvested ZMBE' },
     func: onHarvest,
   }
   unstakingSteps[UnstakingStep.Unstake] = {
     label: `Unstake`,
     sent: `Unstaking...`,
+    toast: { title: 'Unstaked ZMBE' },
     func: onUnstake,
   }
   unstakingSteps[UnstakingStep.UnstakeEarly] = {
     label: `Unstake Early`,
     sent: `Unstaking...`,
+    toast: { title: 'Unstaked ZMBE' },
     func: onUnstakeEarly,
   }
 
@@ -339,14 +368,16 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   const handleUnstakeTx = useCallback(async () => {
     setConfirmingUnstake(true)
     unstakingSteps[currentUnstakingStep].func()
-      .then(() => {
+      .then(succeeded => {
+        if (succeeded) {
+          toastGraves(unstakingSteps[currentUnstakingStep].toast.title)
+        }
         setConfirmingUnstake(false)
       })
       .catch(() => {
         setConfirmingUnstake(false)
       })
-  }, [currentUnstakingStep, unstakingSteps])
-
+  }, [currentUnstakingStep, toastGraves, unstakingSteps])
 
   const decimals = currentStep === StakingStep.ApproveRug || currentStep === StakingStep.DepositRug ? rug.decimals : tokens.zmbe.decimals
   const changeStakeInput = (e) => {
@@ -373,10 +404,12 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
         <InputControl>
           {currentStep === StakingStep.ApproveRug || currentStep === StakingStep.DepositRug
             ? <BalanceText onClick={maxStakeAmount}>
-              Wallet Balance: <AmountText>{numeral(getFullDisplayBalance(rugBalance, rug.decimals)).format('(0.00 a)')} {rug.symbol}</AmountText>
+              Wallet
+              Balance: <AmountText>{numeral(getFullDisplayBalance(rugBalance, rug.decimals)).format('(0.00 a)')} {rug.symbol}</AmountText>
             </BalanceText>
             : <BalanceText onClick={maxStakeAmount}>
-              Wallet Balance: <AmountText>{numeral(getFullDisplayBalance(zombieBalance())).format('(0.00 a)')} ZMBE</AmountText>
+              Wallet
+              Balance: <AmountText>{numeral(getFullDisplayBalance(zombieBalance())).format('(0.00 a)')} ZMBE</AmountText>
             </BalanceText>
           }
           <StakingInput

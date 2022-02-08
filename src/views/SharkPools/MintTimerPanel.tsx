@@ -16,7 +16,7 @@ const MintTimerPanel: React.FC<MintTimerPanelProps> = ({ id, updateResult }) => 
     const wallet = account();
     const pool = sharkPoolById(id);
     const poolContract = useSharkpool(id);
-    const { toastSuccess } = useToast();
+    const { toastDefault } = useToast();
     const { t } = useTranslation();
 
     const currentDate = Math.floor(Date.now() / 1000);
@@ -32,7 +32,7 @@ const MintTimerPanel: React.FC<MintTimerPanelProps> = ({ id, updateResult }) => 
         poolContract.methods.withdraw(0).send({ from: wallet })
             .then(() => {
                 updateResult(id);
-                toastSuccess(t('Minted NFT'));
+                toastDefault(t('Minted NFT'));
             });
     }
 

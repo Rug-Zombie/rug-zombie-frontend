@@ -19,7 +19,7 @@ const DepositPanel: React.FC<DepositPanelProps> = ({ id, updateResult }) => {
     const [isApproved, setIsApproved] = useState(false);
 
     const wallet = account();
-    const { toastSuccess } = useToast();
+    const { toastDefault } = useToast();
     const { t } = useTranslation();    
     const tokenContract = useERC20(getAddress(pool.depositToken.address));
 
@@ -41,7 +41,7 @@ const DepositPanel: React.FC<DepositPanelProps> = ({ id, updateResult }) => {
             if (pool.poolInfo.requiresDeposit) {
                 tokenContract.methods.approve(getAddress(pool.address), BIG_TEN.pow(18).toString()).send({ from: wallet })
                     .then(() => {
-                        toastSuccess(t(`Approved ${pool.depositToken.symbol}`));
+                        toastDefault(t(`Approved ${pool.depositToken.symbol}`));
                         setIsApproved(true);
                     });
             }

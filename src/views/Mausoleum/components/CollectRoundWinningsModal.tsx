@@ -50,7 +50,7 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
   const [isPendingTx, setIsPendingTx] = useState(false)
   const { account } = useWeb3React()
   const { t } = useTranslation()
-  const { toastSuccess, toastError } = useToast()
+  const { toastDefault, toastError } = useToast()
   const predictionsContract = usePredictionsContract()
   const bnbBusdPrice = bnbPriceUsd()
 
@@ -68,7 +68,7 @@ const CollectRoundWinningsModal: React.FC<CollectRoundWinningsModalProps> = ({
 
         setIsPendingTx(false)
         onDismiss()
-        toastSuccess(
+        toastDefault(
           t('Winnings collected!'),
           <Box>
             <Text as="p" mb="8px">

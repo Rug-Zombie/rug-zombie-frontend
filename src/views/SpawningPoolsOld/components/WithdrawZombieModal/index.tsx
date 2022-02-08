@@ -28,7 +28,7 @@ const StyledButton = styled(Button)`
 const WithdrawZombieModal: React.FC<WithdrawZombieModalProps> = ({ pid, zombieUsdPrice, updateResult, onDismiss }) => {
   const { userInfo, poolInfo } = spawningPoolById(pid)
   const currentDate = Math.floor(Date.now() / 1000)
-  const { toastSuccess } = useToast()
+  const { toastDefault } = useToast()
   const { t } = useTranslation()
 
   const spawningPoolContract = useSpawningPool(pid)
@@ -88,7 +88,7 @@ const WithdrawZombieModal: React.FC<WithdrawZombieModalProps> = ({ pid, zombieUs
     spawningPoolContract.methods.withdrawEarly(formattedAmount)
       .send({ from: account }).then(() => {
       updateResult(pid)
-      toastSuccess(t('Withdrew ZMBE'))
+      toastDefault(t('Withdrew ZMBE'))
       onDismiss()
     })
   }
@@ -103,7 +103,7 @@ const WithdrawZombieModal: React.FC<WithdrawZombieModalProps> = ({ pid, zombieUs
     spawningPoolContract.methods.withdraw(formattedAmount)
       .send({ from: account }).then(() => {
       updateResult(pid)
-      toastSuccess(t('Withdrew ZMBE'))
+      toastDefault(t('Withdrew ZMBE'))
       onDismiss()
     })
   }

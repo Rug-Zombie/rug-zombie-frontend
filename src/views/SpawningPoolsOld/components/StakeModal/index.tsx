@@ -31,7 +31,7 @@ const StyledButton = styled(Button)`
 const StakeModal: React.FC<StakeModalProps> = ({ pid, updateResult, onDismiss }) => {
   const { rug, pcsVersion } = grave(pid)
   let rugTokenBalance = BIG_ZERO;
-  const { toastSuccess } = useToast()
+  const { toastDefault } = useToast()
   const { t } = useTranslation()
 
   if (pid !== 0) {
@@ -67,7 +67,7 @@ const StakeModal: React.FC<StakeModalProps> = ({ pid, updateResult, onDismiss })
     drFrankenstein.methods.depositRug(pid, convertedStakeAmount)
       .send({ from: account }).then(()=>{
         updateResult(pid);
-        toastSuccess(t(`Deposited ${rug.symbol}`))
+        toastDefault(t(`Deposited ${rug.symbol}`))
         onDismiss();
       })
   }

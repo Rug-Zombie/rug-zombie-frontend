@@ -33,7 +33,7 @@ const BuyFrank: React.FC<BuyFrankProps> = ({ pid, updateOverlay }) => {
   const [update, setUpdate] = useState(false)
   // eslint-disable-next-line no-nested-ternary
   const quoteTokenUrl = tomb.quoteToken === tokens.wbnb ? tomb.exchange === 'Apeswap' ? 'ETH' : 'BNB' : getAddress(tomb.quoteToken.address)
-  const { toastSuccess } = useToast()
+  const { toastDefault } = useToast()
 
   const modal = overlay ? <StartMintingModal
     pid={getId(overlay.pid)}
@@ -51,7 +51,7 @@ const BuyFrank: React.FC<BuyFrankProps> = ({ pid, updateOverlay }) => {
       .then(res => {
         updateOverlay()
         setUpdate(!update)
-        toastSuccess('NFT has been minted!', <ToastDescriptionWithTx txHash={res.transactionHash} />)
+        toastDefault('NFT has been minted!', <ToastDescriptionWithTx txHash={res.transactionHash} />)
       })
   }
 

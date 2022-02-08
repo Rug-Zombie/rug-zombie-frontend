@@ -11,6 +11,7 @@ import { useSpawningPool, useZombie } from '../../../../../../hooks/useContract'
 import { useHarvest, useStake, useUnlock, useUnstake, useUnstakeEarly } from '../../../../../../hooks/useSpawningPool'
 import { BIG_ZERO } from '../../../../../../utils/bigNumber'
 import { getBalanceNumber, getDecimalAmount, getFullDisplayBalance } from '../../../../../../utils/formatBalance'
+import useToast from '../../../../../../hooks/useToast'
 
 const Separator = styled.div`
   height: 0px;
@@ -28,7 +29,6 @@ const BalanceContainer = styled.div`
   @media (max-width: 771px) {
     width: 100%;;
   }
-
 `
 
 const StakingContainer = styled.div`
@@ -159,6 +159,7 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
   const [confirming, setConfirming] = useState(false)
   const steps = useMemo(() => [], [])
   const now = Math.floor(Date.now() / 1000)
+  const {toastDefault} = useToast()
   enum Step {
     UnlockSpawningPool,
     ApproveZombie,
@@ -170,21 +171,25 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
     label: `Unlock`,
     sent: `Unlocking...`,
     func: onUnlock,
+    toast: {title: 'Spawning Pool Unlocked'}
   }
   steps[Step.ApproveZombie] = {
     label: `Approve ZMBE`,
     sent: `Approving...`,
     func: approveZombie,
+    toast: {title: 'Approved ZMBE'}
   }
   steps[Step.StakeZombie] = {
     label: `Stake ZMBE`,
     sent: `Staking...`,
     func: onStake,
+    toast: {title: 'Staked ZMBE'}
   }
   steps[Step.Staked] = {
     label: `Stake ZMBE`,
     sent: `Staking...`,
     func: onStake,
+    toast: {title: 'Staked ZMBE'}
   }
 
   let currentStep = Step.UnlockSpawningPool
@@ -203,14 +208,18 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
 
   const handleTx = useCallback(async () => {
     setConfirming(true)
-    steps[currentStep].func()
-      .then(() => {
+    const step = steps[currentStep]
+    step.func()
+      .then((succeeded) => {
+        if(succeeded) {
+          toastDefault(step.toast.title, step.toast.description)
+        }
         setConfirming(false)
       })
       .catch(() => {
         setConfirming(false)
       })
-  }, [currentStep, steps])
+  }, [currentStep, steps, toastDefault])
 
   const changeStakeInput = (e) => {
     setStakeAmount(getDecimalAmount(new BigNumber(e.target.value)))

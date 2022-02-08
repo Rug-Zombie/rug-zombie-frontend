@@ -170,14 +170,21 @@ const ProfilePage: React.FC = () => {
               ${getFullDisplayBalance(graveSum.amount.times(zombiePriceUsd()), 18, 2)}
             </SubTitle>
             <SubTitle>
+              ${getFullDisplayBalance(graveSum.pending.times(zombiePriceUsd()), 18, 2)}
+            </SubTitle>
+
+          </Row>
+          <Row>
+            <ClaimButton>
+              <ButtonText>
+                Claim All
+              </ButtonText>
+            </ClaimButton>
+            <SubTitle>
               {graveSum.nfts} {graveSum.nfts === 1 ? 'NFT' : 'NFTS'} Ready
             </SubTitle>
           </Row>
-          <ClaimButton>
-            <ButtonText>
-              Claim All
-            </ButtonText>
-          </ClaimButton>
+
           <div style={{ paddingBottom: '35px' }} />
           <CardTitle>
             Tombs
@@ -203,14 +210,21 @@ const ProfilePage: React.FC = () => {
               ${tombSum.amountValueUsd.toFixed(2)}
             </SubTitle>
             <SubTitle>
+              ${getFullDisplayBalance(tombSum.pending.times(zombiePriceUsd()), 18, 2)}
+            </SubTitle>
+
+          </Row>
+          <Row>
+            <ClaimButton>
+              <ButtonText>
+                Claim All
+              </ButtonText>
+            </ClaimButton>
+            <SubTitle>
               {tombSum.nfts} {tombSum.nfts === 1 ? 'NFT' : 'NFTS'} Ready
             </SubTitle>
           </Row>
-          <ClaimButton>
-            <ButtonText>
-              Claim All
-            </ButtonText>
-          </ClaimButton>
+
           <div style={{ paddingBottom: '35px' }} />
           <CardTitle>
             Spawning Pools

@@ -29,7 +29,7 @@ const DepositNftModal:React.FC<DepositNftModalProps> = ({ id, updateResult, onDi
   const nft = useGetNftById(grave.depositNftId)
 
   const wallet = account()
-  const { toastSuccess } = useToast()
+  const { toastDefault } = useToast()
   const { t } = useTranslation()
 
   const nftOwnershipContract = useNftOwnership()
@@ -63,7 +63,7 @@ const DepositNftModal:React.FC<DepositNftModalProps> = ({ id, updateResult, onDi
   function handleDeposit() {
     if (wallet && approved) {
       drburn.methods.deposit(id, 0, selected).send({ from: wallet }).then(() => {
-        toastSuccess(t(`Deposited ${nft.symbol}`))
+        toastDefault(t(`Deposited ${nft.symbol}`))
         updateResult(id)
         onDismiss()
       });

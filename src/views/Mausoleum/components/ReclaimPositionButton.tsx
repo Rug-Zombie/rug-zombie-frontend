@@ -16,7 +16,7 @@ const ReclaimPositionButton: React.FC<ReclaimPositionButtonProps> = ({ epoch, on
   const { t } = useTranslation()
   const { account } = useWeb3React()
   const predictionsContract = usePredictionsContract()
-  const { toastSuccess, toastError } = useToast()
+  const { toastDefault, toastError } = useToast()
 
   const handleReclaim = () => {
     predictionsContract.methods
@@ -30,7 +30,7 @@ const ReclaimPositionButton: React.FC<ReclaimPositionButtonProps> = ({ epoch, on
           await onSuccess()
         }
         setIsPendingTx(false)
-        toastSuccess(t('Position reclaimed!'))
+        toastDefault(t('Position reclaimed!'))
       })
       .once('error', (error) => {
         setIsPendingTx(false)

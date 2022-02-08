@@ -1,14 +1,15 @@
 import React, { useCallback, useEffect, useRef } from 'react'
 import { CSSTransition } from 'react-transition-group'
 import styled from 'styled-components'
-import { Alert, alertVariants } from '@rug-zombie-libs/uikit'
 import { ToastProps, types } from './types'
 
-const alertTypeMap = {
-  [types.INFO]: alertVariants.INFO,
-  [types.SUCCESS]: alertVariants.SUCCESS,
-  [types.DANGER]: alertVariants.DANGER,
-  [types.WARNING]: alertVariants.WARNING,
+const colorMap = {
+  [types.GRAVES]: '#AE32AA',
+  [types.TOMBS]: '#4B7BDC',
+  [types.DEFAULT]: '#B8C00D',
+  [types.INFO]: 'yellow',
+  [types.DANGER]: 'red',
+  [types.WARNING]: 'orange',
 }
 
 const StyledToast = styled.div`
@@ -17,10 +18,31 @@ const StyledToast = styled.div`
   max-width: calc(100% - 32px);
   transition: all 250ms ease-in;
   width: 100%;
-
   ${({ theme }) => theme.mediaQueries.sm} {
     max-width: 400px;
   }
+`
+
+const CustomToast = styled.div<{ border: string }>`
+  background-color: #151E21;
+  border-radius: 10px;
+  border: ${props => `2px solid ${props.border}`};
+  padding: 10px;
+  height: 100%;
+`
+
+const Title = styled.text`
+  text-align: left;
+  font: normal normal normal 20px/36px Poppins;
+  letter-spacing: 0px;
+  font-weight: bolder;
+`
+
+const SubTitle = styled.text`
+  text-align: left;
+  font: normal normal normal 16px/36px Poppins;
+  letter-spacing: 0px;
+  color: #6B7682;
 `
 
 const Toast: React.FC<ToastProps> = ({ toast, onRemove, style, ttl, ...props }) => {
@@ -58,13 +80,15 @@ const Toast: React.FC<ToastProps> = ({ toast, onRemove, style, ttl, ...props }) 
       clearTimeout(timer.current)
     }
   }, [timer, ttl, handleRemove])
-
+  const color = colorMap[type]
   return (
     <CSSTransition nodeRef={ref} timeout={250} style={style} {...props}>
       <StyledToast ref={ref} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-        <Alert title={title} variant={alertTypeMap[type]} onClick={handleRemove}>
-          {description}
-        </Alert>
+        <CustomToast border={color || '#B8C00D'}>
+          <Title style={{ color: color || '#B8C00D' }}>{title}</Title>
+          <br/>
+          <SubTitle>{description}</SubTitle>
+        </CustomToast>
       </StyledToast>
     </CSSTransition>
   )

@@ -19,7 +19,7 @@ export interface DepositTokenModalProps {
 const DepositTokenModal: React.FC<DepositTokenModalProps> = ({ id, updateResult, onDismiss }) => {
   const [hasToken, setHasToken] = useState(false);
 
-  const { toastSuccess } = useToast();
+  const { toastDefault } = useToast();
   const { t } = useTranslation();
 
   const grave = burnGraveById(id);
@@ -41,7 +41,7 @@ const DepositTokenModal: React.FC<DepositTokenModalProps> = ({ id, updateResult,
       drBurnensteinContract.methods.deposit(id, BIG_TEN.pow(18).toString(), 0).send({ from: wallet })
         .then(() => {
           updateResult(id);
-          toastSuccess(t(`1 ${grave.depositToken.symbol} DEPOSITED`));
+          toastDefault(t(`1 ${grave.depositToken.symbol} DEPOSITED`));
           onDismiss();
         });
     }

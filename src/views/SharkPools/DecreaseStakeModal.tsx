@@ -29,7 +29,7 @@ const DecreaseStakeModal: React.FC<DecreaseStakeModalProps> = ({ id, updateResul
     const wallet = account();
     const { theme } = useTheme();
     const poolContract = useSharkpool(id);
-    const { toastSuccess } = useToast();
+    const { toastDefault } = useToast();
     const { t } = useTranslation();
 
     useEffect(() => {
@@ -94,7 +94,7 @@ const DecreaseStakeModal: React.FC<DecreaseStakeModalProps> = ({ id, updateResul
         poolContract.methods.withdraw(formattedAmount).send({ from: wallet })
             .then(() => {
                 updateResult(id);
-                toastSuccess(t(`Withdrew ${pool.stakeToken.symbol}`));
+                toastDefault(t(`Withdrew ${pool.stakeToken.symbol}`));
                 onDismiss();
             });
     }

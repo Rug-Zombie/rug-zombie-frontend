@@ -16,7 +16,7 @@ export interface DepositTokenProps {
 const DepositToken: React.FC<DepositTokenProps> = ({ id, updateResult }) => {
     const [isApproved, setIsApproved] = useState(false);
 
-    const { toastSuccess } = useToast();
+    const { toastDefault } = useToast();
     const { t } = useTranslation();    
 
     const wallet = account();
@@ -38,7 +38,7 @@ const DepositToken: React.FC<DepositTokenProps> = ({ id, updateResult }) => {
         if(wallet) {
             tokenContract.methods.approve(getDrBurnensteinAddress(), BIG_TEN.pow(18).toString()).send({ from: wallet })
                 .then(() => {
-                    toastSuccess(t(`Approved ${grave.depositToken.symbol}`));
+                    toastDefault(t(`Approved ${grave.depositToken.symbol}`));
                     setIsApproved(true);
                 });
         }

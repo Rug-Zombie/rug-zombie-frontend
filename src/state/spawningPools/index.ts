@@ -63,8 +63,6 @@ export const { setSpawningPoolInfo, setSpawningPoolUserInfo } = spawningPoolsSli
 // Thunks
 export const fetchSpawningPoolsPublicDataAsync = () => async (dispatch) => {
   const spawningPools = await fetchSpawningPools(spawningPoolsConfig)
-  console.log('yo')
-
   dispatch(setSpawningPoolInfo(spawningPools))
 }
 export const fetchSpawningPoolsUserDataAsync = (account: string) => async (dispatch) => {

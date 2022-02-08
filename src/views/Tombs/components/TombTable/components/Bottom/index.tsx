@@ -17,7 +17,6 @@ import {
   useUnstakeEarly,
 } from '../../../../../../hooks/useTomb'
 import { getId } from '../../../../../../utils'
-import { BIG_ZERO } from '../../../../../../utils/bigNumber'
 import { getBalanceNumber, getDecimalAmount, getFullDisplayBalance } from '../../../../../../utils/formatBalance'
 import {
   APESWAP_ADD_LIQUIDITY_URL,
@@ -27,6 +26,7 @@ import {
 } from '../../../../../../config'
 import tokens from '../../../../../../config/constants/tokens'
 import { Dex } from '../../../../../../config/constants/types'
+import useToast from '../../../../../../hooks/useToast'
 
 const Separator = styled.div`
   height: 0px;
@@ -153,7 +153,7 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
     dex,
     userInfo: { lpAllowance, lpBalance, nftMintTime, tokenWithdrawalDate, randomNumber, isMinting, amount },
     poolInfo: { mintingFee },
-    overlay
+    overlay,
   } = tomb
   const [stakeAmount, setStakeAmount] = useState(new BigNumber(null))
   const [unstakeAmount, setUnstakeAmount] = useState(new BigNumber(null))
@@ -173,6 +173,7 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
   const unstakingSteps = useMemo(() => [], [])
   const now = Math.floor(Date.now() / 1000)
   const mintingReady = randomNumber.gt(0)
+  const { toastTombs } = useToast()
 
   enum Step {
     PairLp,
@@ -206,16 +207,19 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
     label: `Approve ${lpName} LP`,
     sent: `Approving...`,
     func: approveLp,
+    toast: { title: `Approved ${lpName} LP` },
   }
   steps[Step.StakeLp] = {
     label: `Stake LP`,
     sent: `Staking...`,
     func: onStake,
+    toast: { title: `Staked ${lpName} LP` },
   }
   steps[Step.Staked] = {
     label: `Stake LP`,
     sent: `Staking...`,
     func: onStake,
+    toast: { title: `Staked ${lpName} LP` },
   }
   let currentStep = Step.PairLp
 
@@ -231,14 +235,18 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
 
   const handleTx = useCallback(async () => {
     setConfirming(true)
-    steps[currentStep].func()
-      .then(() => {
+      const step = steps[currentStep]
+    step.func()
+      .then((succeeded) => {
+        if(succeeded) {
+          toastTombs(step.toast.title, step.toast.description)
+        }
         setConfirming(false)
       })
       .catch(() => {
         setConfirming(false)
       })
-  }, [currentStep, steps])
+  }, [currentStep, steps, toastTombs])
 
   enum UnstakingStep {
     StartMinting,
@@ -253,40 +261,47 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
     label: `Start Minting`,
     sent: `Confirming...`,
     func: onStartMinting,
+    toast: { title: 'Started Minting', description: 'Please wait as Chainlink VRF generates your random number' },
   }
   unstakingSteps[UnstakingStep.MintingInProgress] = {
     label: `Minting in progress`,
     sent: `Confirming...`,
     func: null,
+    toast: { title: 'Minting Finished' },
   }
   unstakingSteps[UnstakingStep.FinishMinting] = {
     label: `Finish Minting`,
     sent: `Minting...`,
     func: onFinishMinting,
+    toast: { title: 'NFT Minted' },
   }
   unstakingSteps[UnstakingStep.Unstake] = {
     label: `Unstake`,
     sent: `Unstaking...`,
     func: onUnstake,
+    toast: { title: `Unstaked ${lpName} LP` },
+
   }
   unstakingSteps[UnstakingStep.UnstakeEarly] = {
     label: `Unstake Early`,
     sent: `Unstaking...`,
     func: onUnstakeEarly,
+    toast: { title: `Unstaked ${lpName} LP` },
+
   }
-    unstakingSteps[UnstakingStep.Harvest] = {
+  unstakingSteps[UnstakingStep.Harvest] = {
     label: `Harvest`,
     sent: `Harvesting...`,
     func: onHarvest,
+    toast: { title: `Harvested ZMBE` },
   }
-
 
   let currentUnstakingStep
   if (isMinting && !mintingReady) {
     currentUnstakingStep = UnstakingStep.MintingInProgress
   } else if (isMinting && mintingReady) {
     currentUnstakingStep = UnstakingStep.FinishMinting
-  } else if(amount.gt(0) && nftMintTime.isZero()) {
+  } else if (amount.gt(0) && nftMintTime.isZero()) {
     currentUnstakingStep = UnstakingStep.StartMinting
   } else if ((unstakeAmount.isZero() || unstakeAmount.isNaN()) && amount.gt(0)) {
     currentUnstakingStep = UnstakingStep.Harvest
@@ -298,14 +313,16 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
 
   const handleUnstakingTx = useCallback(async () => {
     setConfirmingUnstake(true)
-    unstakingSteps[currentUnstakingStep].func()
+    const step = unstakingSteps[currentUnstakingStep]
+    step.func()
       .then(() => {
+        toastTombs(step.toast.title, step.toast.description)
         setConfirmingUnstake(false)
       })
       .catch(() => {
         setConfirmingUnstake(false)
       })
-  }, [currentUnstakingStep, unstakingSteps])
+  }, [currentUnstakingStep, toastTombs, unstakingSteps])
 
   const changeStakeInput = (e) => {
     setStakeAmount(getDecimalAmount(new BigNumber(e.target.value)))

@@ -44,7 +44,7 @@ const TransferNftModal: React.FC<TransferNftModalProps> = ({ id, tokenId, onDism
   const { account } = useWeb3React()
   const { address, name} = useGetNftById(id)
   const contract = useERC721(getAddress(address))
-  const { toastSuccess } = useToast()
+  const { toastDefault } = useToast()
 
   const handleConfirm = async () => {
     try {
@@ -56,7 +56,7 @@ const TransferNftModal: React.FC<TransferNftModalProps> = ({ id, tokenId, onDism
         contract.methods.transferFrom(account, value, tokenId).send({ from: account })
           .then(res => {
             onDismiss()
-            toastSuccess('NFT successfully transferred!', <ToastDescriptionWithTx txHash={res.transactionHash} />)
+            toastDefault('NFT successfully transferred!', <ToastDescriptionWithTx txHash={res.transactionHash} />)
           })
           .catch(() => {
             setError('Unable to transfer NFT')

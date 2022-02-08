@@ -1,6 +1,6 @@
 import React from 'react'
-import { ToastContainer } from '@rug-zombie-libs/uikit'
 import useToast from 'hooks/useToast'
+import { ToastContainer } from '../Toast'
 
 const ToastListener = () => {
   const { toasts, remove } = useToast()

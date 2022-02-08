@@ -29,7 +29,7 @@ const DecreaseStakeModal:React.FC<DecreaseStakeModalProps> = ({ id, updateResult
   const wallet = account()
   const { theme } = useTheme()
   const graveContract = useDrBurnenstein()
-  const { toastSuccess } = useToast()
+  const { toastDefault } = useToast()
   const { t } = useTranslation()
 
   useEffect(() => {
@@ -94,7 +94,7 @@ const DecreaseStakeModal:React.FC<DecreaseStakeModalProps> = ({ id, updateResult
     graveContract.methods.leaveStaking(id, formattedAmount).send({ from: wallet })
       .then(() => {
         updateResult(id)
-        toastSuccess(t(`Withdrew ${grave.stakingToken.symbol}`))
+        toastDefault(t(`Withdrew ${grave.stakingToken.symbol}`))
         onDismiss()
       })
   }

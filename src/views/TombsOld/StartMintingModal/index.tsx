@@ -15,7 +15,7 @@ interface StartMintingModalProps {
 }
 
 const StartMintingModal: React.FC<StartMintingModalProps> = ({ pid, onDismiss, updateOverlay }) => {
-  const { toastSuccess } = useToast()
+  const { toastDefault } = useToast()
   const { t } = useTranslation()
   const tombOverlay = useTombOverlay()
   const { account } = useWeb3React()
@@ -33,7 +33,7 @@ const StartMintingModal: React.FC<StartMintingModalProps> = ({ pid, onDismiss, u
       .then(fee => {
         tombOverlay.methods.startMinting(pid).send({ value: fee, from: account })
           .then(() => {
-            toastSuccess(t('Minting has started'))
+            toastDefault(t('Minting has started'))
             updateOverlay()
             onDismiss()
           })

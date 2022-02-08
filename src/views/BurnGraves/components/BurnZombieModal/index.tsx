@@ -34,7 +34,7 @@ const BurnZombieModal:React.FC<BurnZombieModalProps> = ({ id, updateResult, onDi
   const zombiePrice = zombiePriceUsd()
   const tokenBalance = useTokenBalance(getAddress(tokens.zmbe.address))
   const drburn = useDrBurnenstein()
-  const { toastSuccess } = useToast()
+  const { toastDefault } = useToast()
   const { t } = useTranslation()
 
   const handleBurnInputAmount = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,7 +78,7 @@ const BurnZombieModal:React.FC<BurnZombieModalProps> = ({ id, updateResult, onDi
     drburn.methods.burnZombie(id, formattedAmount).send({ from: wallet })
       .then(() => {
         updateResult(id)
-        toastSuccess(t('Burned ZMBE'))
+        toastDefault(t('Burned ZMBE'))
         onDismiss()
     })
   }

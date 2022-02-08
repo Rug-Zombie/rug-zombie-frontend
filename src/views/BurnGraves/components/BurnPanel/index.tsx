@@ -19,7 +19,7 @@ const BurnPanel: React.FC<BurnPanelProps> = ({ id, updateResult }) => {
   const wallet = account()
   const grave = burnGraveById(id)
   const drburn = useDrBurnenstein()
-  const { toastSuccess } = useToast()
+  const { toastDefault } = useToast()
   const { t } = useTranslation()
 
   const currentDate = Math.floor(Date.now() / 1000)
@@ -35,7 +35,7 @@ const BurnPanel: React.FC<BurnPanelProps> = ({ id, updateResult }) => {
     drburn.methods.leaveStaking(id, 0).send({ from: wallet })
       .then(() => {
         updateResult(id)
-        toastSuccess(t('Minted NFT'))
+        toastDefault(t('Minted NFT'))
       })
   }
 

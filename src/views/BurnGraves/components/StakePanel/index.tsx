@@ -30,7 +30,7 @@ export interface StakePanelProps {
 const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
   const [isApproved, setIsApproved] = useState(false)
 
-  const { toastSuccess } = useToast()
+  const { toastDefault } = useToast()
   const { t } = useTranslation()
 
   const grave = burnGraveById(id)
@@ -57,7 +57,7 @@ const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
     if (wallet) {
       tokenContract.methods.approve(getDrBurnensteinAddress(), ethers.constants.MaxUint256).send({ from: wallet })
         .then(() => {
-          toastSuccess(t(`Approved ${grave.stakingToken.symbol}`))
+          toastDefault(t(`Approved ${grave.stakingToken.symbol}`))
           setIsApproved(true)
         })
     }
@@ -69,7 +69,7 @@ const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
         drBurnenstein.methods.unlock(id)
           .send({ from: wallet, value: res }).then(() => {
 
-          toastSuccess(t('TombTable unlocked'))
+          toastDefault(t('TombTable unlocked'))
           updateResult(id)
         })
       })

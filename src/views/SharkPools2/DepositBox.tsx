@@ -15,7 +15,7 @@ interface DepositBoxProps {
 }
 
 const DepositBox: React.FC<DepositBoxProps> = ({ id, onDeposit }) => {
-    const { toastSuccess } = useToast();
+    const { toastDefault } = useToast();
     const { t } = useTranslation();
     const wallet = account();    
     const pool = sharkpools.find(a => a.id === id);
@@ -25,7 +25,7 @@ const DepositBox: React.FC<DepositBoxProps> = ({ id, onDeposit }) => {
         if(wallet) {
             tokenContract.methods.approve(pool.address, BIG_TEN.pow(18).toString()).send({ from: wallet })
                 .then(() => {
-                    toastSuccess(t('Approved cJAWS'));
+                    toastDefault(t('Approved cJAWS'));
                     pool.approvedDeposit = true;
                 });
         }

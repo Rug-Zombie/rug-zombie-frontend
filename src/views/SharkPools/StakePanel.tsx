@@ -31,7 +31,7 @@ const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
     const [isApproved, setIsApproved] = useState(false);
 
     const wallet = account();
-    const { toastSuccess } = useToast();
+    const { toastDefault } = useToast();
     const { t } = useTranslation();
     const pool = sharkPoolById(id);
     const tokenContract = useERC20(getAddress(pool.stakeToken.address));
@@ -56,7 +56,7 @@ const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
           .then(res => {
             poolContract.methods.unlock().send({ from: wallet, value: res })
               .then(() => {
-                toastSuccess(t('Pool unlocked'));
+                toastDefault(t('Pool unlocked'));
                 updateResult(id);
               });
           });
@@ -66,7 +66,7 @@ const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
     const handleApprove = () => {
         tokenContract.methods.approve(getAddress(pool.address), ethers.constants.MaxUint256).send({ from: wallet })
             .then(() => {
-                toastSuccess(t(`Approved ${pool.stakeToken.symbol}`));
+                toastDefault(t(`Approved ${pool.stakeToken.symbol}`));
                 setIsApproved(true);
             });
     }

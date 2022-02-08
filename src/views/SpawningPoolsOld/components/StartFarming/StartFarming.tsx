@@ -39,7 +39,7 @@ interface StartFarmingProps {
 
 const StartFarming: React.FC<StartFarmingProps> = ({ id, zombieUsdPrice }) => {
   const zombie = useZombie()
-  const { toastSuccess } = useToast()
+  const { toastDefault } = useToast()
   const { t } = useTranslation()
   const pool = spawningPoolById(id)
   const { userInfo } = pool
@@ -87,7 +87,7 @@ const StartFarming: React.FC<StartFarmingProps> = ({ id, zombieUsdPrice }) => {
     spawningPoolContract.methods.unlockFeeInBnb().call().then((res) => {
       spawningPoolContract.methods.unlock()
         .send({ from: get.account(), value: res }).then(() => {
-          toastSuccess(t('Pool unlocked'))
+          toastDefault(t('Pool unlocked'))
           onUpdate();
         })
     });
@@ -98,7 +98,7 @@ const StartFarming: React.FC<StartFarmingProps> = ({ id, zombieUsdPrice }) => {
     // console.log(getSpawningPoolAddress(id))
       zmbeContract.methods.approve(getSpawningPoolAddress(id), ethers.constants.MaxUint256)
         .send({ from: get.account() }).then(() => {
-          toastSuccess(t('Approved ZMBE'))
+          toastDefault(t('Approved ZMBE'))
           setZombieAllowance(true)
       })
     }

@@ -17,7 +17,7 @@ interface ConvertNftProps {
 const ConvertNftModal: React.FC<ConvertNftProps> = ({ rznftid, onDismiss }) => {
     const rznft = nfts.find(a => a.id === rznftid);
     const wallet = account();
-    const { toastSuccess } = useToast();
+    const { toastDefault } = useToast();
     const { t } = useTranslation();
 
     const nftOwnershipContract = useNftOwnership();
@@ -56,7 +56,7 @@ const ConvertNftModal: React.FC<ConvertNftProps> = ({ rznftid, onDismiss }) => {
     function handleConvertNft() {
         if (wallet && approved) {
             nftSwapperContract.methods.swapNft(getAddress(rznft.address), selected).send({ from: wallet }).then(() => {
-                toastSuccess(t(`Converted ${rznft.symbol}`));
+                toastDefault(t(`Converted ${rznft.symbol}`));
                 onDismiss();
             });
         }

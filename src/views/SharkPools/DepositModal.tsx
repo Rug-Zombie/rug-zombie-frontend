@@ -21,7 +21,7 @@ const DepositModal: React.FC<DepositModalProps> = ({ id, updateResult, onDismiss
     const sharkpoolContract = useSharkpool(id);
     const token = useERC20(getAddress(pool.depositToken.address));
     const wallet = account();
-    const { toastSuccess } = useToast();
+    const { toastDefault } = useToast();
     const { t } = useTranslation();
 
     useEffect(() => {
@@ -37,7 +37,7 @@ const DepositModal: React.FC<DepositModalProps> = ({ id, updateResult, onDismiss
         sharkpoolContract.methods.depositUnlock().send({ from: wallet })
             .then(() => {
                 updateResult(id);
-                toastSuccess(t(`1 ${pool.depositToken.symbol} DEPOSITED`));
+                toastDefault(t(`1 ${pool.depositToken.symbol} DEPOSITED`));
                 onDismiss();
             });
     };

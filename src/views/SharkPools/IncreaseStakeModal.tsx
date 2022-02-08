@@ -33,7 +33,7 @@ const IncreaseStakeModal: React.FC<IncreaseStakeModalProps> = ({ id, updateResul
     const { theme } = useTheme();
     const tokenBalance = useTokenBalance(getAddress(pool.stakeToken.address));
     const poolContract = useSharkpool(id);
-    const { toastSuccess } = useToast();
+    const { toastDefault } = useToast();
     const { t } = useTranslation();
 
     useEffect(() => {
@@ -73,7 +73,7 @@ const IncreaseStakeModal: React.FC<IncreaseStakeModalProps> = ({ id, updateResul
     
         poolContract.methods.deposit(formattedAmount).send({ from: wallet }).then(() => {
             updateResult(id);
-            toastSuccess(t(`Staked ${pool.stakeToken.symbol}`));
+            toastDefault(t(`Staked ${pool.stakeToken.symbol}`));
             onDismiss();
         })
     }
