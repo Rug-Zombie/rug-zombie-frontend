@@ -10,9 +10,8 @@ import SpawningPoolTable from './components/SpawningPoolTable'
 import Footer from '../../components/Footer'
 import { useAppDispatch } from '../../state'
 import { fetchSpawningPoolsPublicDataAsync, fetchSpawningPoolsUserDataAsync } from '../../state/spawningPools'
-import { useGetNftById, useGetSpawningPools } from '../../state/hooks'
-import { SpawningPoolFilter, spawningPoolFilters } from './filterConfig'
-import { getNftConfigById } from '../../state/nfts/hooks'
+
+import { useGetFilteredSpawningPools } from '../../state/hooks'
 
 const SpawningPoolPage = styled(Page)`
   min-width: 80vw;
@@ -67,20 +66,15 @@ const SpawningPools: React.FC = () => {
   useEffect(() => {
     dispatch(fetchSpawningPoolsPublicDataAsync())
   }, [dispatch])
+  
+  const [filter, setFilter] = useState('All graves')
+  const [search, setSearch] = useState('')
 
-  const [spawningPoolFilter, setSpawningPoolFilter] = useState(SpawningPoolFilter.All)
-  const [searchFilter, setSearchFilter] = useState('')
+  const spawningPools = useGetFilteredSpawningPools([search, filter])
 
-  let spawningPools = useGetSpawningPools().data
-  spawningPools = spawningPoolFilters[spawningPoolFilter].filter(spawningPools)
 
-  if (searchFilter) {
-    spawningPools = spawningPools.filter(({ name, rewardToken: { symbol }, nftId }) => {
-      const searchString = searchFilter.toLowerCase()
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      return name.toLowerCase().includes(searchString) || symbol.toLowerCase().includes(searchString) || getNftConfigById(nftId).name.toLowerCase().includes(searchString)
-    })
-  }
+  const handleFilter = (condition: string) => setFilter(condition)
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)
 
   return (
     <>
@@ -90,9 +84,11 @@ const SpawningPools: React.FC = () => {
             <HeaderCard />
           </Header>
           <SpawningPoolsColumn>
-            <Filter spawningPoolsList={spawningPoolFilters.map(f => f.label)}
-                    spawningPoolFilter={{ value: spawningPoolFilter, set: setSpawningPoolFilter }}
-                    setSearch={setSearchFilter} />
+            <Filter
+              searchValue={search}
+              handleFilter={handleFilter}
+              handleSearch={handleSearch}
+            />
             {spawningPools.map(sp => {
               return <SpawningPoolTable spawningPool={sp} key={sp.id} />
             })}
