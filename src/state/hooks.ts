@@ -11,6 +11,7 @@ import pancakeFactoryAbi from '../config/abi/pancakeFactoryAbi.json'
 import tokens from '../config/constants/tokens'
 import contracts from '../config/constants/contracts'
 import { getId } from '../utils'
+import { now } from '../utils/timerHelpers'
 
 export const getBnbPriceinBusd = () => {
   return axios.get('https://api.binance.com/api/v3/avgPrice?symbol=BNBBUSD')
@@ -124,6 +125,41 @@ export const useGetTombs = () => {
 export const useGetSpawningPools = () => {
   return useSelector((state: State) => state.spawningPools)
 }
+
+export const useGetFilteredSpawningPools = (filter: string[]) => {
+  return useSelector((state: State) => selectFilteredSpawningPools(state, filter))
+}
+
+const selectFilteredSpawningPools = createSelector(
+  (state: State) => state.spawningPools, 
+  (state: State) => state.nfts,
+  (state: State, filter: string[]) => filter,
+  (spawningPools, nfts, filter) => {
+    // search parameters
+    if (filter[0] !== '') {
+      return spawningPools.data.filter(({ name, rewardToken: { symbol }, nftId }) => {
+        const searchString = filter[0].toLowerCase()
+        const hasNameMatch = name.toLowerCase().includes(searchString)
+        const hasSymbolMatch = symbol.toLowerCase().includes(searchString)
+        const hasNftNameMatch = nfts.data.find(n => n.id === nftId).name.toLowerCase().includes(searchString)
+        
+        return hasNameMatch || hasSymbolMatch || hasNftNameMatch
+      })
+    }
+    
+    // filter parameters
+    switch(filter[1]) {
+      case 'All Pools':
+        return spawningPools.data.filter(sp => sp.endDate > now())
+      case 'Staked':
+        return spawningPools.data.filter(sp => sp.userInfo.amount.gt(0))
+      case 'Ended':
+        return spawningPools.data.filter(sp => sp.endDate <= now())
+      default:
+        return spawningPools.data.filter(sp => sp.endDate > now())
+    }
+  }
+)
 
 export const useGetUserActivities = () => {
   return useSelector((state: State) => state.userActivity)
