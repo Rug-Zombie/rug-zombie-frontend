@@ -7,7 +7,7 @@ import {
   getBep20Contract,
   getDrFrankensteinContract,
   getPancakePair,
-  getZombieContract, getDrBurnensteinContract
+  getZombieContract, getDrBurnensteinContract, getRugMarketContract,
 } from '../utils/contractHelpers'
 
 import store from './store'
@@ -29,7 +29,7 @@ import {
   updateAuctionUserInfo,
   updateDrFrankensteinTotalAllocPoint, updateBnbBalance,
   updateTombOverlayPoolInfo, updateTombOverlayUserInfo, updateSharkPoolInfo, updateSharkPoolUserInfo,
-  updateBurnGravePoolInfo, updateBurnGraveUserInfo,
+  updateBurnGravePoolInfo, updateBurnGraveUserInfo, updateRugMarketListing, addRugMarketListing,
 } from './actions'
 import {
   getAddress,
@@ -53,6 +53,7 @@ import web3 from '../utils/web3'
 import { multicallv2 } from '../utils/multicall'
 import { getId } from '../utils'
 import { tokenByAddress } from '../utils/tokenHelper'
+import { RugMarketListing } from './types'
 
 export const initialData = (accountAddress: string, setZombiePrice?: any) => {
   store.dispatch(updateAccount(accountAddress))

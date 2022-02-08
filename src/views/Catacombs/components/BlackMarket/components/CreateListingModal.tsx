@@ -20,7 +20,7 @@ interface ModalProps {
 const CreateListingModal: React.FC<ModalProps> = ({onDismiss}) => {
 
   const web3 = useWeb3()
-  const {toastSuccess} = useToast()
+  const {toastDefault} = useToast()
   const wallet = account()
   const rugMarketContract = useRugMarket()
   const [quantity, setQuantity] = useState(BIG_ZERO)
@@ -63,12 +63,12 @@ const CreateListingModal: React.FC<ModalProps> = ({onDismiss}) => {
       .send({from: account()}).then(() => {
       setRugApproved(true)
       setApproveRuggedTokenText('Approved')
-      toastSuccess(`${selectedRug.symbol} Approved`)
+      toastDefault(`${selectedRug.symbol} Approved`)
       setCreateListingButtontext('Create Listing')
       setCreateButtonDisabled(false)
     })
       .catch(() => {
-        toastSuccess('Something went wrong! Please try again.')
+        toastDefault('Something went wrong! Please try again.')
         setApproveRuggedTokenText('Approve Rugged Token')
         setRugApproved(false)
       })
@@ -84,11 +84,11 @@ const CreateListingModal: React.FC<ModalProps> = ({onDismiss}) => {
 
   const handleCreate = () => {
     if (quantity.lt(1)) {
-      toastSuccess('Quantity should be at least one.')
+      toastDefault('Quantity should be at least one.')
       return
     }
     if (price.lt(1)) {
-      toastSuccess('You sure want to sell your rugged tokens for free?')
+      toastDefault('You sure want to sell your rugged tokens for free?')
       return
     }
     if (wallet) {
@@ -98,15 +98,15 @@ const CreateListingModal: React.FC<ModalProps> = ({onDismiss}) => {
           if (rugBalance.gte(quantity)) {
             rugMarketContract.methods.add(getAddress(tokens[ruggedToken].address), quantity.toString(), price.toString()).send({'from': wallet})
               .then(() => {
-                toastSuccess('Listing Created Successfully')
+                toastDefault('Listing Created Successfully')
                 onDismiss()
               })
           } else {
-            toastSuccess('Not enough balance')
+            toastDefault('Not enough balance')
           }
         })
     } else {
-      toastSuccess('Wallet not connected')
+      toastDefault('Wallet not connected')
     }
   }
 

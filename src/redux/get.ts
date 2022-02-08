@@ -1,10 +1,21 @@
 import { BigNumber } from 'bignumber.js'
 import axios from 'axios'
 import store from './store'
-import { Grave, Tomb, SpawningPool, UserInfo, Auction, TombOverlay, SharkPool, BurnGrave } from './types'
+import {
+  Grave,
+  Tomb,
+  SpawningPool,
+  UserInfo,
+  Auction,
+  TombOverlay,
+  SharkPool,
+  BurnGrave,
+  RugMarketListing,
+} from './types'
 import { getBalanceAmount } from '../utils/formatBalance'
 import { getId } from '../utils'
 import { Id } from '../config/constants/types'
+import * as actions from './actions'
 
 export const account = (): string => {
   return store.getState().account

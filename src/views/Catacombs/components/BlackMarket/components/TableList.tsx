@@ -28,7 +28,7 @@ interface TableListProps {
 
 const TableList: React.FC<TableListProps> = ({id}) => {
 
-    const {toastSuccess} = useToast();
+    const {toastDefault} = useToast();
     const {t} = useTranslation();
     const wallet = account();
     const rugMarketContract = useRugMarket();
@@ -61,7 +61,7 @@ const TableList: React.FC<TableListProps> = ({id}) => {
     const handleApprove = () => {
         zmbeContract.methods.approve(getRugMarketAddress(), ethers.constants.MaxUint256).send({from: wallet})
             .then(() => {
-                    toastSuccess(t(`Approved ZMBE`));
+                toastDefault(t(`Approved ZMBE`));
                     setIsApproved(true);
                     renderButtons()
                 }
@@ -71,7 +71,7 @@ const TableList: React.FC<TableListProps> = ({id}) => {
     const handleBuy = () => {
         rugMarketContract.methods.buy(id).send({'from': wallet})
             .then(() => {
-                toastSuccess(t(`Swap successful`));
+                toastDefault(t(`Swap successful`));
                 markRugMarketListingSold(id);
             })
     }
@@ -79,7 +79,7 @@ const TableList: React.FC<TableListProps> = ({id}) => {
     const handleCancel = () => {
         rugMarketContract.methods.cancel(id).send({'from': wallet})
             .then(() => {
-                toastSuccess(t(`Listing Cancelled`));
+                toastDefault(t(`Listing Cancelled`));
                 cancelRugMarketListing(id)
             });
     }

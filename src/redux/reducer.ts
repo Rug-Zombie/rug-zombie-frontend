@@ -8,6 +8,8 @@ import auctions from './auctions'
 import burnGraves from './burnGraves'
 import { getId } from '../utils'
 import tombOverlays from './tombOverlays'
+import rugMarketListings from "./rugMarketListings";
+import {RugMarketListing} from "./types";
 
 const defaultState = {
   account: '',
@@ -19,6 +21,7 @@ const defaultState = {
   sharkPools,
   bnbPriceUsd: 0,
   auctions,
+  rugMarketListings,
   bnbBalance: BIG_ZERO,
   zombie: {
     allowance: BIG_ZERO,
@@ -151,8 +154,53 @@ export default function reducer(state = defaultState, action) {
         ...state,
         burnGraves: state.burnGraves.map(burnGrave => getId(burnGrave.id) === action.payload.id ? { ...burnGrave, userInfo: { ...burnGrave.userInfo, ...action.payload.userInfo } } : burnGrave),
       }
+    case types.ADD_RUG_MARKET_LISTING:
+      return {
+        ...state,
+        rugMarketListings: pushListingIfNotExists(action.payload.listing),
+      }
+    case types.UPDATE_RUG_MARKET_LISTING:
+      return {
+        ...state,
+        rugMarketListings: pushListingIfNotExists(action.payload.listing),
+      }
+    case types.MARK_RUG_MARKET_LISTING_SOLD:
+      return {
+        ...state,
+        rugMarketListings: markRugMarketListingSold(action.payload.listingId),
+      }
+    case types.CANCEL_RUG_MARKET_LISTING:
+      return {
+        ...state,
+        rugMarketListings: cancelRugMarketListing(action.payload.listingId),
+      }
 
     default:
       return state
   }
+}
+
+function cancelRugMarketListing(listingId): RugMarketListing[] {
+  const index = rugMarketListings.findIndex(listing => listing.id === listingId);
+  const listings = rugMarketListings;
+  // @ts-ignore
+  listings[index].state = '2';
+  return listings
+}
+
+function markRugMarketListingSold(listingId): RugMarketListing[] {
+  const index = rugMarketListings.findIndex(listing => listing.id === listingId);
+  const listings = rugMarketListings;
+  // @ts-ignore
+  listings[index].state = '1';
+  return listings
+}
+
+function pushListingIfNotExists(newListing): RugMarketListing[] {
+  const index = rugMarketListings.findIndex(listing => listing.id === newListing.id);
+  const listings = rugMarketListings;
+  if (index === -1) {
+    listings.push(newListing)
+  }
+  return listings
 }

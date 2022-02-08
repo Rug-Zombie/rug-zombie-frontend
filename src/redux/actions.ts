@@ -8,7 +8,7 @@ import {
   TombUserInfo,
   UserInfo,
   TombOverlayPoolInfo, TombOverlayUserInfo, SharkPoolInfo, SharkPoolUserInfo,
-  BurnGravePoolInfo, BurnGraveUserInfo
+  BurnGravePoolInfo, BurnGraveUserInfo, RugMarketListing,
 } from './types'
 
 export const updateAccount = (account: string) => ({
@@ -187,5 +187,34 @@ export const updateBurnGraveUserInfo = (id: number, userInfo: BurnGraveUserInfo)
   payload: {
     id,
     userInfo
+  }
+})
+
+
+export const addRugMarketListing = (listing: RugMarketListing) => ({
+  type: actions.ADD_RUG_MARKET_LISTING,
+  payload: {
+    listing
+  }
+})
+
+export const updateRugMarketListing = (listing: RugMarketListing) => ({
+  type: actions.UPDATE_RUG_MARKET_LISTING,
+  payload: {
+    listing
+  }
+})
+
+export const cancelRugMarketListing = (listingId: number) => ({
+  type: actions.CANCEL_RUG_MARKET_LISTING,
+  payload:  {
+    listingId
+  }
+})
+
+export const markRugMarketListingSold = (listingId: number) => ({
+  type: actions.MARK_RUG_MARKET_LISTING_SOLD,
+  payload:  {
+    listingId
   }
 })

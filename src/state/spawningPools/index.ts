@@ -65,6 +65,7 @@ export const fetchSpawningPoolsPublicDataAsync = () => async (dispatch) => {
   const spawningPools = await fetchSpawningPools(spawningPoolsConfig)
   dispatch(setSpawningPoolInfo(spawningPools))
 }
+
 export const fetchSpawningPoolsUserDataAsync = (account: string) => async (dispatch) => {
   const userInfos = await fetchSpawningPoolUserInfo(account, spawningPoolsConfig)
   const userSpawningPoolRewards = await fetchSpawningPoolUserEarnings(account, spawningPoolsConfig)

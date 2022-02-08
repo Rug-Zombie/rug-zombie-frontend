@@ -87,14 +87,13 @@ const fetchSpawningPools = async (spawningPoolToFetch: SpawningPoolConfig[]) => 
       const bnbReserve = reserves[equalAddresses(token0, getAddress(wbnb)) ? 0 : 1]
       const rewardTokenReserve = reserves[equalAddresses(token0, getAddress(wbnb)) ? 1 : 0]
       const rewardTokenPriceBnb = getBalanceAmount(new BigNumber(bnbReserve._hex)).div(getBalanceAmount(rewardTokenReserve._hex, spawningPoolConfig.rewardToken.decimals))
-
       return {
         ...spawningPoolConfig,
         poolInfo: {
           rewardPerBlock: new BigNumber(rewardPerBlock),
           unlockFee: new BigNumber(unlockFee),
           minimumStake: new BigNumber(minimumStake),
-          minimumStakingTime: new BigNumber(minimumStakingTime),
+          withdrawalCooldown: new BigNumber(minimumStakingTime),
           nftMintTime: new BigNumber(nftMintTime),
           totalAmount: new BigNumber(totalAmount),
           rewardTokenPriceBnb,

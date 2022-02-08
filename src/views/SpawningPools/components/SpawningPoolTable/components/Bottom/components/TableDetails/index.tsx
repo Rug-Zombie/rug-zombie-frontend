@@ -4,7 +4,7 @@ import numeral from 'numeral'
 import { bnbPriceUsd, zombiePriceUsd } from '../../../../../../../../redux/get'
 import { getBalanceAmount, getFullDisplayBalance } from '../../../../../../../../utils/formatBalance'
 import { SpawningPool } from '../../../../../../../../state/types'
-import { formatDays } from '../../../../../../../../utils/timerHelpers'
+import { formatDays, formatDuration, now } from '../../../../../../../../utils/timerHelpers'
 import { useGetNftById } from '../../../../../../../../state/hooks'
 
 export enum SpawningPoolItemType {
@@ -92,6 +92,7 @@ const Text = styled.span`
 const TableDetails: React.FC<TableDetailsProps> = ({ spawningPool }) => {
   const {
     nftId,
+    endDate,
     poolInfo: { withdrawCooldown, nftMintTime, totalAmount, minimumStake, unlockFee },
   } = spawningPool
   const { name, path, type } = useGetNftById(nftId)
@@ -106,7 +107,7 @@ const TableDetails: React.FC<TableDetailsProps> = ({ spawningPool }) => {
     source.remove()
   }
 
-
+console.log(withdrawCooldown.toNumber())
 
   return <Container>
     <NftImageContainer>
@@ -138,6 +139,9 @@ const TableDetails: React.FC<TableDetailsProps> = ({ spawningPool }) => {
         </SubHeaderText>
         <SubHeaderText>
           Minimum Stake: <Text>{getBalanceAmount(minimumStake).toString()} ZMBE</Text>
+        </SubHeaderText>
+        <SubHeaderText>
+          Rewards end: <Text>{formatDuration( endDate - now())}</Text>
         </SubHeaderText>
       </SpawningPoolInfo>
     </Details>

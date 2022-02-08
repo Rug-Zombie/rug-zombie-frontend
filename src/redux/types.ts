@@ -271,3 +271,13 @@ export interface BurnGraveUserInfo {
   nftMintDate: number,
   burnedAmount: BigNumber
 }
+
+export interface RugMarketListing {
+  id: number,
+  owner: string,
+  token: Token,
+  quantity: string,
+  price: string,
+  taxedToken: boolean,
+  state: string
+}

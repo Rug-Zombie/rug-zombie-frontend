@@ -42,7 +42,7 @@ interface ViewCardProps {
 
 const RugRollCard: React.FC<ViewCardProps> = () => {
   const web3 = useWeb3()
-  const { toastSuccess } = useToast()
+  const { toastDefault } = useToast()
   const [burnAmount, setBurnAmount] = useState(BIG_ZERO)
   const rugRollContract = useRugRollContract()
   const zombie = useZombie()
@@ -65,7 +65,7 @@ const RugRollCard: React.FC<ViewCardProps> = () => {
         .then(() => {
           setZombieApprovalPending(false)
           setZombieApproval(BIG_TEN)
-          toastSuccess('ZMBE Approved')
+          toastDefault('ZMBE Approved')
         })
         .catch(() => {
           setZombieApprovalPending(false)
@@ -123,7 +123,7 @@ const RugRollCard: React.FC<ViewCardProps> = () => {
       .send({ from: account() }).then(() => {
       setRugApprovalPending(false)
       setRugApproved(true)
-      toastSuccess(`${selectedRug.symbol} Approved`)
+      toastDefault(`${selectedRug.symbol} Approved`)
     })
       .catch(() => {
         setRugApprovalPending(false)
@@ -138,9 +138,9 @@ const RugRollCard: React.FC<ViewCardProps> = () => {
         setRugRollPending(false)
         const receivedToken = tokenByAddress(tx.events.Swapped.returnValues._returnedRug)
         if (receivedToken) {
-          toastSuccess(`Received ${receivedToken.symbol}`,<ToastDescriptionWithTx txHash={tx.transactionHash} />)
+          toastDefault(`Received ${receivedToken.symbol}`,<ToastDescriptionWithTx txHash={tx.transactionHash} />)
         } else {
-          toastSuccess(`Received token`,<ToastDescriptionWithTx txHash={tx.transactionHash} />)
+          toastDefault(`Received token`,<ToastDescriptionWithTx txHash={tx.transactionHash} />)
 
         }
       })
