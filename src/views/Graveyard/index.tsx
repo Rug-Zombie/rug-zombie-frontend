@@ -65,7 +65,7 @@ const Graveyard: React.FC = () => {
           title="Explore the Graveyard"
         />
         <SubTextBox>
-          View our NFT collection powering the RugZombie gaming ecosystem… Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+          View our NFT collection powering the RugZombie gaming ecosystem.
         </SubTextBox>
         <SectionEnd />
       </TitleSection>
