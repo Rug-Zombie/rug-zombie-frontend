@@ -127,7 +127,7 @@ const ProfilePage: React.FC = () => {
       </Page>
 
       <NftsContainer>
-          {ownedNfts.map(nft => <NftCard showOwned key={nft.id} id={nft.id} />)}
+          {ownedNfts.slice().reverse().map(nft => <NftCard showOwned key={nft.id} id={nft.id} />)}
         </NftsContainer>
 
     </>

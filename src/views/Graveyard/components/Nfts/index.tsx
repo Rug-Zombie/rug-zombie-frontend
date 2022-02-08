@@ -18,8 +18,7 @@ interface NftsProps {
 
 const Nfts: React.FC<NftsProps> = ({ filter, inWallet }) => {
   const [items, setItems] = useState([])
-  const nfts = useGetNfts().data.reverse()
-
+  const nfts = useGetNfts().data.slice().reverse()
   useEffect(() => {
     if (filter === 'All') setItems(nfts)
     else setItems(nfts.filter(nft => nft.rarity === filter))
