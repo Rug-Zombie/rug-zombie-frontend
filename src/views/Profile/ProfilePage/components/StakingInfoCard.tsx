@@ -14,6 +14,9 @@ import { fetchSpawningPoolsPublicDataAsync, fetchSpawningPoolsUserDataAsync } fr
 import { fetchTombsPublicDataAsync, fetchTombsUserDataAsync } from '../../../../state/tombs'
 import { getId } from '../../../../utils'
 import { useDrFrankenstein } from '../../../../hooks/useContract'
+import { getAddress } from '../../../../utils/addressHelpers'
+import { getSpawningPoolContract } from '../../../../utils/contractHelpers'
+import useWeb3 from '../../../../hooks/useWeb3'
 
 const Card = styled.div`
   min-width: 317px;
@@ -63,6 +66,9 @@ const ClaimButton = styled.button`
   border: 2px solid #30C00D;
   border-radius: 20px;
   background: none;
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 const ButtonText = styled.text`
@@ -80,6 +86,7 @@ const InnerCardDiv = styled.div`
 
 const ProfilePage: React.FC = () => {
   const { account } = useWeb3React()
+  const web3 = useWeb3()
   const dispatch = useAppDispatch()
   useEffect(() => {
     if (account) {
@@ -109,7 +116,7 @@ const ProfilePage: React.FC = () => {
 
   const stakedGraveIds = []
   const stakedTombIds = []
-  const stakedSpawningPoolIds = []
+  const stakedSpawningPoolAddresses = []
 
   const graveSum = useGetGraves().data.reduce((sum, { pid, userInfo: { amount, pendingZombie, nftMintDate } }) => {
     if (amount.gt(0)) {
@@ -125,14 +132,14 @@ const ProfilePage: React.FC = () => {
 
 
   const spawningPoolSum = useGetSpawningPools().data.reduce((sum, {
-    id,
+    address,
     rewardToken,
     unknownPrice,
     poolInfo: { rewardTokenPriceBnb },
     userInfo: { amount, pendingReward, nftMintDate },
   }) => {
     if (amount.gt(0)) {
-      stakedSpawningPoolIds.push(id)
+      stakedSpawningPoolAddresses.push(getAddress(address))
     }
     const rewardTokenPrice = rewardTokenPriceBnb.times(bnbPriceUsd()).toNumber()
     return {
@@ -161,11 +168,15 @@ const ProfilePage: React.FC = () => {
 
   const drFrankenstein = useDrFrankenstein()
   const claimGraves = async () => {
-    return Promise.all(stakedGraveIds.map(id => drFrankenstein.methods.withdraw(id, 0).send( { from: account })))
+    return Promise.all(stakedGraveIds.map(id => drFrankenstein.methods.withdraw(id, 0).send({ from: account })))
   }
 
   const claimTombs = async () => {
-    return Promise.all(stakedTombIds.map(id => drFrankenstein.methods.withdraw(id, 0).send( { from: account })))
+    return Promise.all(stakedTombIds.map(id => drFrankenstein.methods.withdraw(id, 0).send({ from: account })))
+  }
+
+  const claimSpwaningPools = async () => {
+    return Promise.all(stakedSpawningPoolAddresses.map(address => getSpawningPoolContract(address, web3).methods.withdraw(0).send({ from: account })))
   }
 
   return (
@@ -282,7 +293,7 @@ const ProfilePage: React.FC = () => {
             {spawningPoolSum.nfts} {spawningPoolSum.nfts === 1 ? 'NFT' : 'NFTS'} Ready
           </SubTitle>
         </Row>
-        <ClaimButton>
+        <ClaimButton onClick={claimSpwaningPools}>
           <ButtonText>
             Claim All
           </ButtonText>
