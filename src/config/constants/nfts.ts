@@ -1359,6 +1359,55 @@ const nfts: Nft[] = [
     artist: artists.jussjoshinduh,
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 85,
+    name: 'Farmer Zoe',
+    symbol: 'ZOE',
+    description: '',
+    address: {
+      56: '0xf06AE181fA63fF0F10063857da7575Ab4fC5C4C6',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmW2HpTsZsRYM759q2o9j3qPbZH6oefCbt2iEYAkZnuYnG',
+    type: 'image',
+    rarity: 'Legendary',
+    artist: artists.canadiancryptojunkie,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
+  {
+    id: 86,
+    name: 'Argalus',
+    symbol: 'ARGALUS',
+    description: '',
+    address: {
+      56: '0xd0A803B68fA17252d245369Bd24668d3b216C05d',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmQN5zX2NS3Yrj6VpxwHgoS83jDr5xuEFE4a1zZYpDe86m',
+    type: 'image',
+    rarity: 'Legendary',
+    artist: artists.canadiancryptojunkie,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
+  {
+    id: 87,
+    name: 'Ol Jeb',
+    symbol: 'JEB',
+    description: 'Every gun makes its own tune.',
+    address: {
+      56: '0x477Fd709be679D89B37681398D926538E3932f69',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmUqZ6p2afdtjVQJQ6tHZVxW17NT9pPsUSGUePrk1vJzrN',
+    type: 'video',
+    rarity: 'Legendary',
+    artist: artists.febryangraves,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
+
 ]
 
 

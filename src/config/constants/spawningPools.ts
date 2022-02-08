@@ -3,6 +3,145 @@ import tokens from './tokens'
 
 const spawningPools: SpawningPoolConfig[] = [
   {
+    id: 19,
+    name: 'Farmaggedon Legendary',
+    nftId: 85,
+    address: {
+      56: '0xFaAa54ec46a9BA92694DdA390a54A713b9Ce1332',
+      97: '0xFaAa54ec46a9BA92694DdA390a54A713b9Ce1332',
+    },
+    endBlock: 17450000,
+    endDate: 1651463999,
+    project: {
+      name: 'Farmaggedon',
+      description: 'Farmageddon is used to power a platform that brings the lucrative yet complicated process of yield farming to the masses. After choosing the Farm you want to stake into. All you need to do is enter the quantity of FG tokens you want staked. Leave the rest to us. As your rewards start growing you will then be able to compound your rewards back into the farm with one simple click.',
+      additionalDetails: [
+        {
+          name: 'Project website',
+          url: tokens.frt.projectLink,
+        },
+        {
+          name: 'Whitepaper',
+          url: 'https://farmageddon.gitbook.io/farmageddon/farmageddon-whitepaper',
+        },
+        {
+          name: 'Telegram',
+          url: 'https://t.me/FARMAGEDDON_TOKEN',
+        },
+      ],
+    },
+    rewardToken: tokens.frt,
+    dex: Dex.PCS_V2,
+    isNew: true,
+  },
+  {
+    id: 18,
+    name: 'Sparten Token Legendary',
+    nftId: 86,
+    address: {
+      56: '0xe43cf2bd5076C480410AC0065BBc8b3029C609c3',
+      97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
+    },
+    endBlock: 17450000,
+    endDate: 1651463999,
+    project: {
+      name: 'Spartan Army',
+      description: 'The Spartans project vision is to educate, reward, and simplify the complicated world of Defi to crypto investors. Spartan holders benefit by being a part of the powerful Decentralized Exchange (DEX) of the KnightSwap ecosystem, being the first token that emits $KNIGHT tokens to Spartan holders.',
+      additionalDetails: [
+        {
+          name: 'Youtube',
+          url: 'https://www.youtube.com/channel/UC_rRWe4zY_5zP0j3L_lqDZg',
+        },
+        {
+          name: 'Project website',
+          url: tokens.spa.projectLink,
+        },
+        {
+          name: 'Whitepaper',
+          url: 'https://info-121.gitbook.io/welcome-to-the-spartan-army/',
+        },
+        {
+          name: 'Telegram',
+          url: 'https://t.me/+AzNvB9nnf2A0ZjU5',
+        },
+      ],
+    },
+    rewardToken: tokens.spa,
+    dex: Dex.PCS_V2,
+    isNew: true,
+    color: 'orange',
+  },
+  {
+    id: 17,
+    name: 'Blockmine Legendary',
+    nftId: 87,
+    address: {
+      56: '0xc7D99410737B1601464f27cDDab9c2875A4da042',
+      97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
+    },
+    endBlock: 17080500,
+    endDate: 1650340799,
+    project: {
+      name: 'Blockmine',
+      description: 'Blockmine is a project that\'s goal is to solve existing issues with liquidity mining while incorporating metaverse and blockchain features. Watch the video to learn more!',
+      additionalDetails: [
+        {
+          name: 'Video',
+          url: 'https://www.youtube.com/watch?v=e8eZLYjv90I',
+        },
+        {
+          name: 'Project website',
+          url: tokens.goldbar.projectLink,
+        },
+        {
+          name: 'Whitepaper',
+          url: 'https://docs.block-mine.io/whitepaper/whitepaper',
+        },
+        {
+          name: 'Telegram',
+          url: 'https://t.me/blockmine_io',
+        },
+      ],
+    },
+    rewardToken: tokens.goldbar,
+    dex: Dex.APESWAP,
+    isNew: false,
+    color: 'orange',
+  },
+  {
+    id: 16,
+    name: 'French Connection V2 Legendary',
+    nftId: 82,
+    address: {
+      56: '0xAf0ed0352dCAbc57aa101dBd186C6abFb9C2a7F4',
+      97: '0xBf559640BCEa0f19eC0B1dc30B7F294e4194a300',
+    },
+    endBlock: 17000000,
+    endDate: 1650168000,
+    project: {
+      name: 'French Connection Finance',
+      description: 'French Connection Finance aims to create the world\'s first credit card to cryptocurrency encrypted online payment gateway, which rewards its holders with 9% fully automated BNB reflection on all the transactions made with $FCF during the same 24 hour period.',
+      additionalDetails: [
+        {
+          name: 'Project website',
+          url: tokens.fcf.projectLink,
+        },
+        {
+          name: 'Whitepaper',
+          url: 'https://frenchconnection.finance/white-paper/',
+        },
+        {
+          name: 'Telegram',
+          url: 'https://t.me/frenchconnection_bsc',
+        },
+      ],
+    },
+    rewardToken: tokens.fcf,
+    dex: Dex.PCS_V2,
+    isNew: true,
+    color: 'brown',
+  },
+  {
     id: 15,
     name: 'L1GHT L1ST Legendary',
     nftId: 74,

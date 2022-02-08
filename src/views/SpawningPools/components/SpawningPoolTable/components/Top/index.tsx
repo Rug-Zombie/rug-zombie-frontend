@@ -58,13 +58,15 @@ const TabFlex = styled.div`
 `
 
 const GreenTab = styled.div`
-  width: 49px;
+  min-width: 49px;
   height: 30px;
   border: 2px solid #B8C00D;
   border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-left: 10px;
+  padding-right: 10px;
   margin: 0 5px;
   @media (max-width: 527px) {
     margin: 0;
