@@ -243,7 +243,7 @@ const graves: GraveConfig[] = [
     rug: tokens.panther,
     rugDex: Dex.PCS_V2,
     isClosed: true,
-    endDate: 1637750171,
+    isRetired: true
   },
   {
     pid: {
