@@ -16,7 +16,8 @@ import '../../Profile.Styles.css'
 
 const Card = styled.div`
   min-width: 317px;
-  width: 40vw;
+  max-width: 630px;
+  width: 100%;
   height: 450px;
   background-color: #151E21;
   border-radius: 10px;

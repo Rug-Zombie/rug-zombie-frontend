@@ -19,7 +19,7 @@ const TutorialSection: React.FC = () => {
         <TutorialItem>
           <TutorialItemIcon />
           <TutorialItemText>
-            Use your ZMBE, LP tokens and dead tokens to earn NFTs and ZMBE rewards.
+            Use your ZMBE, LP tokens and dead tokens to earn NFTs and ZMBE rewards
           </TutorialItemText>
         </TutorialItem>
         <TutorialItem>
@@ -37,7 +37,7 @@ const TutorialSection: React.FC = () => {
         <TutorialItem>
           <TutorialItemIcon />
           <TutorialItemText>
-            Venture into the catacombs...
+            Trade your NFTs on a sister project, the Oblivion Marketplace and take advantage of low fees, ZMBE rebates and special NFT Drops.
           </TutorialItemText>
         </TutorialItem>
       </TutorialItems>

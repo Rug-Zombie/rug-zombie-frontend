@@ -2,7 +2,7 @@ import React, { useCallback, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import { BigNumber } from 'bignumber.js'
 import numeral from 'numeral'
-import { useModal } from '@rug-zombie-libs/uikit'
+import { LinkExternal, useModal } from '@rug-zombie-libs/uikit'
 import ProgressBar from './components/ProgressBar'
 import TableDetails from './components/TableDetails'
 import { Grave } from '../../../../../../state/types'
@@ -75,6 +75,14 @@ const InputControl = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 104px;
+`
+
+const Link = styled(LinkExternal)`
+  text-align: left;
+  text-decoration: underline;
+  font: normal normal normal 16px/30px Poppins;
+  letter-spacing: 0px;
+  color: #AE32AA;
 `
 
 const StakingInput = styled.input`
@@ -151,6 +159,18 @@ const AmountText = styled.p`
   margin: 0;
 `
 
+const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`
+
+const FlexRow = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+`
+
 interface BottomProps {
   grave: Grave;
 }
@@ -209,8 +229,10 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     ConvertDepositNft,
   }
 
-  const validStakeAmount = amount.plus(stakeAmount).gte(minimumStake)
+  const insufficientStakeAmount = amount.plus(stakeAmount).lt(minimumStake)
+  const insufficientZombieBalance = stakeAmount.gt(zombieBalance())
   const validUnstakeAmount = amount.minus(unstakeAmount).gte(minimumStake) || amount.minus(unstakeAmount).isZero()
+  const insufficientStakedBalance = unstakeAmount.gt(amount)
 
   const [onConvertNftModal] = useModal(<ConvertNftModal nftConverterPid={nftConverterPid}
                                                         depositNftId={depositNftId} />)
@@ -298,12 +320,22 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     if (stakingSteps[currentStep].nonAsync) {
       stakingSteps[currentStep].func()
     } else {
-      if (!validStakeAmount && currentStep === StakingStep.StakeZombie) {
-        toastGraves(
-          'Insufficient Stake',
-          `This grave requires a minimum of ${getFullDisplayBalance(minimumStake)} ZMBE`
-        )
-        return
+      if (currentStep === StakingStep.StakeZombie) {
+        if (insufficientZombieBalance) {
+          toastGraves(
+            'Insufficient ZMBE balance',
+            <Link href={`https://swap.rugzombie.io/swap?outputCurrency=${getAddress(tokens.zmbe.address)}`}>Buy
+              ZMBE</Link>,
+          )
+          return
+        }
+        if (insufficientStakeAmount) {
+          toastGraves(
+            'Insufficient Stake',
+            `This grave requires a minimum of ${getFullDisplayBalance(minimumStake)} ZMBE`,
+          )
+          return
+        }
       }
 
       setConfirmingStake(true)
@@ -318,7 +350,7 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
           setConfirmingStake(false)
         })
     }
-  }, [StakingStep.StakeZombie, currentStep, minimumStake, stakingSteps, toastGraves, validStakeAmount])
+  }, [stakingSteps, currentStep, StakingStep.StakeZombie, insufficientZombieBalance, insufficientStakeAmount, toastGraves, minimumStake])
 
   enum UnstakingStep {
     MintNft,
@@ -366,6 +398,38 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   }
 
   const handleUnstakeTx = useCallback(async () => {
+    if (currentUnstakingStep === UnstakingStep.Unstake || currentUnstakingStep === UnstakingStep.UnstakeEarly) {
+      if (insufficientStakedBalance) {
+        toastGraves(
+          'Insufficient staked balance',
+          'The amount specified exceeds your staked balance',
+        )
+        return
+      }
+      if (!validUnstakeAmount) {
+        toastGraves(
+          'Invalid amount',
+          <FlexColumn>
+            <text>You must leave a minimum of {getFullDisplayBalance(minimumStake)} ZMBE in the grave</text>
+            <FlexRow>
+              <PrimaryStakeButton onClick={() => {
+                setUnstakeAmount(amount.minus(minimumStake))
+              }}>
+                <PrimaryStakeButtonText>Leave minimum</PrimaryStakeButtonText>
+              </PrimaryStakeButton>
+              <SecondaryStakeButton onClick={() => {
+                setUnstakeAmount(amount)
+              }}>
+                <SecondaryStakeButtonText>Withdraw max</SecondaryStakeButtonText>
+              </SecondaryStakeButton>
+            </FlexRow>
+
+          </FlexColumn>,
+        )
+        return
+      }
+    }
+
     setConfirmingUnstake(true)
     unstakingSteps[currentUnstakingStep].func()
       .then(succeeded => {
@@ -377,7 +441,17 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
       .catch(() => {
         setConfirmingUnstake(false)
       })
-  }, [currentUnstakingStep, toastGraves, unstakingSteps])
+  }, [
+    UnstakingStep.Unstake,
+    UnstakingStep.UnstakeEarly,
+    amount,
+    currentUnstakingStep,
+    insufficientStakedBalance,
+    minimumStake,
+    toastGraves,
+    unstakingSteps,
+    validUnstakeAmount,
+  ])
 
   const decimals = currentStep === StakingStep.ApproveRug || currentStep === StakingStep.DepositRug ? rug.decimals : tokens.zmbe.decimals
   const changeStakeInput = (e) => {
