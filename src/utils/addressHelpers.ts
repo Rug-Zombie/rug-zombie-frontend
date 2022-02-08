@@ -103,3 +103,7 @@ export const getPancakeFactoryAddress = () => {
 export const getApeswapFactoryAddress = () => {
   return getAddress(addresses.apeswapFactory);
 }
+
+export const getRugMarketAddress = () => {
+  return getAddress(addresses.rugMarket)
+}

@@ -131,5 +131,9 @@ export default {
   pancakeRouter: {
     56: '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73',
     97: '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73'
-  }
+  },
+  rugMarket: {
+    56: '0x07C953A44Dc83EfeE503C2Df43eA216A880C2B35',
+    97: '0x5e0B065De8aeDfF0ef509c8cA77d0eebD6c5C16b',
+  },
 }

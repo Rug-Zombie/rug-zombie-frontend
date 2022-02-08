@@ -143,3 +143,31 @@ export const burnGraves = (): BurnGrave[] => {
 export const burnGraveById = (id: number): BurnGrave => {
   return store.getState().burnGraves.find(a => getId(a.id) === id);
 }
+
+export const rugMarketListings = (filter, wallet): RugMarketListing[] => {
+  switch (filter) {
+    case 0:
+      return store.getState().rugMarketListings.filter(listing => listing.state === "0" && listing.owner !== wallet);
+      break
+    case 1:
+      return store.getState().rugMarketListings.filter(listing => listing.owner === wallet);
+      break
+    case 2:
+      return store.getState().rugMarketListings.filter(listing => listing.state === "1");
+      break
+    default:
+      return store.getState().rugMarketListings
+  }
+}
+
+export const rugMarketListingById = (id: number): RugMarketListing => {
+  return store.getState().rugMarketListings.find(listing => listing.id === id);
+}
+
+export const markRugMarketListingSold = (id: number) => {
+  store.dispatch(actions.markRugMarketListingSold(id))
+}
+
+export const cancelRugMarketListing = (id: number) => {
+  store.dispatch(actions.cancelRugMarketListing(id))
+}

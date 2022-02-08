@@ -62,7 +62,7 @@ const InstabuyCard: React.FC<InstabuyCardProps> = ({ id, modalObj }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [nftInfo, setNftInfo] = useState(initialNftInfo)
   const instaBuy = useInstaBuyContract(version)
-  const { toastDefault } = useToast()
+  const { toastSuccess } = useToast()
 
   useEffect(() => {
     instaBuy.methods.nftInfo(getAddress(address)).call()
@@ -95,7 +95,7 @@ const InstabuyCard: React.FC<InstabuyCardProps> = ({ id, modalObj }) => {
     instaBuy.methods.priceInBnb(getAddress(address)).call().then(res => {
       instaBuy.methods.instaBuy(getAddress(address))
         .send({ from: account(), value: res }).then(() => {
-        toastDefault(`Bought ${symbol}`)
+        toastSuccess(`Bought ${symbol}`)
       })
     })
   }

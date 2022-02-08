@@ -6,8 +6,8 @@ import {
   CardFooter,
   Flex,
 } from '@rug-zombie-libs/uikit'
+import { nftById } from '../../../../../redux/get'
 import Video from '../../../../../components/Video'
-import { useGetNftById } from '../../../../../state/hooks'
 
 const StyleDetails = styled.div`
   display: flex;
@@ -20,7 +20,7 @@ interface ViewCardProps {
 }
 
 const InstabuyViewCard: React.FC<ViewCardProps> = ({ id }) => {
-  const { path, type, userInfo: { ownedIds } } = useGetNftById(id);
+  const { path, type, userInfo: { ownedIds } } = nftById(id);
   const isOwned = ownedIds.length > 0
 
   return (
