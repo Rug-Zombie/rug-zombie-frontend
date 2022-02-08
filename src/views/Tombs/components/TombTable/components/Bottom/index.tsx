@@ -182,7 +182,7 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
     Staked
   }
 
-  const lpName = `${token2.symbol}-${token1.symbol} LP`
+  const lpName = `${token2.symbol}-${token1.symbol}`
 
   let addLiquidityUrl: string
   const sortedTokens = token1 === tokens.wbnb ? [token1, token2] : [token2, token1]
