@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { ArrowDownIcon, Button, ChartIcon, useModal } from '@rug-zombie-libs/uikit'
-import { useIsChartPaneOpen } from 'state/hooks'
 import SwiperCore, { Keyboard, Mousewheel } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -69,13 +68,10 @@ interface MobileProps {
 
 const Mobile: React.FC<MobileProps> = ({ refresh, setRefresh, userInfo, id }) => {
   const { setSwiper } = useSwiper()
-  const isChartPaneOpen = useIsChartPaneOpen()
   const dispatch = useAppDispatch()
   const [refreshMob, setRefreshMob] = useState(false)
   const { auctionInfo: { bids, lastBidId, endDate } } = auctionById(id)
-  const toggleChartPane = () => {
-    dispatch(setChartPaneState(!isChartPaneOpen))
-  }
+  const toggleChartPane = null
 
 
   const [onPresentPrize] = useModal(
@@ -150,14 +146,14 @@ const Mobile: React.FC<MobileProps> = ({ refresh, setRefresh, userInfo, id }) =>
         left: '0',
         width: '100%',
       }}>
-        <ChartPane isChartPaneOpen={isChartPaneOpen}>
+        <ChartPane isChartPaneOpen={false}>
           <ExpandChartButton
             variant='tertiary'
             scale='sm'
-            startIcon={isChartPaneOpen ? <ArrowDownIcon /> : <ChartIcon />}
+            startIcon={<ArrowDownIcon />}
             onClick={toggleChartPane}
           >
-            {isChartPaneOpen ? 'Close' : 'Auction details'}
+            Auction details
           </ExpandChartButton>
         </ChartPane>
         <MobileMenu id={id} refreshMobile={refreshMobile} />

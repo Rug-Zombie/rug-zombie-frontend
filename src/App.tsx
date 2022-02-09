@@ -137,12 +137,39 @@ const App: React.FC = () => {
               </AppContainer>
             </>
           </Route>
-          <Menu>
-            <Route exact path={routes.MAUSOLEUM}><PredictionsHome /></Route>
-            <Route exact path={routes.AUCTION}><Mausoleum /></Route>
-            <Route exact path={routes.SHARKTANK}><SharkPools /></Route>
-            <Route exact path={routes.BURNGRAVES}><BurnGraves /></Route>
-          </Menu>
+          <Route exact path={routes.MAUSOLEUM}>
+            <>
+              <TopMenu />
+              <AppContainer>
+                <PredictionsHome />
+              </AppContainer>
+            </>
+          </Route>
+          <Route exact path={routes.AUCTION}>
+            <>
+              <TopMenu />
+              <AppContainer>
+                <Mausoleum />
+              </AppContainer>
+            </>
+          </Route>
+          <Route exact path={routes.SHARKTANK}>
+            <>
+              <TopMenu />
+              <AppContainer>
+                <SharkPools />
+              </AppContainer>
+            </>
+          </Route>
+          <Route exact path={routes.BURNGRAVES}>
+            <>
+              <TopMenu />
+              <AppContainer>
+                <SharkPools />
+              </AppContainer>
+            </>
+          </Route>
+
         </Switch>
       </SuspenseWithChunkError>
       <ToastListener />

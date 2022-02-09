@@ -25,14 +25,6 @@ const config = [
   ],
   [
     {
-      label: 'Shark Tank',
-      href: '/sharktank',
-    },
-    {
-      label: 'Mausoleum',
-      href: '/mausoleum',
-    },
-    {
       label: 'Graveyard',
       href: '/graveyard',
     },
@@ -40,11 +32,19 @@ const config = [
       label: 'Catacombs',
       href: '/catacombs',
     },
+    {
+      label: 'Shark Tank',
+      href: '/sharktank',
+    },
+    {
+      label: 'Mausoleum',
+      href: '/mausoleum',
+    },
   ],
   [
     {
-      label: 'Referral program',
-      href: '/',
+      label: 'Burn Graves',
+      href: '/burngraves',
     },
     {
       label: 'Contact',

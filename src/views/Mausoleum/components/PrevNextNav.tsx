@@ -1,7 +1,6 @@
 import React from 'react'
 import { ArrowBackIcon, ArrowForwardIcon, Card, IconButton } from '@rug-zombie-libs/uikit'
 import styled from 'styled-components'
-import { useGetCurrentEpoch, useGetSortedRounds } from 'state/hooks'
 import useSwiper from '../hooks/useSwiper'
 
 const StyledPrevNextNav = styled(Card)`
@@ -26,8 +25,6 @@ const Icon = styled.div`
 
 const PrevNextNav = () => {
   const { swiper } = useSwiper()
-  const currentEpoch = useGetCurrentEpoch()
-  const rounds = useGetSortedRounds()
 
   const handlePrevSlide = () => {
     swiper.slidePrev()
@@ -38,7 +35,7 @@ const PrevNextNav = () => {
   }
 
   const handleSlideToLive = () => {
-    const currentEpochIndex = rounds.findIndex((round) => round.epoch === currentEpoch)
+    const currentEpochIndex = 0
 
     swiper.slideTo(currentEpochIndex - 1)
     swiper.update()

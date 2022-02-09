@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { useAppDispatch } from 'state'
 import { ArrowDownIcon, Button, ChartIcon } from '@rug-zombie-libs/uikit'
-import { useIsChartPaneOpen, useIsHistoryPaneOpen } from 'state/hooks'
 import { setChartPaneState } from 'state/predictions'
 import { useTranslation } from 'contexts/Localization'
 import PrizeTab from './components/PrizeTab'
@@ -75,8 +74,8 @@ interface DesktopProps {
 }
 
 const Desktop: React.FC<DesktopProps> = ({ refresh, id, setRefresh }) => {
-  const isHistoryPaneOpen = useIsHistoryPaneOpen()
-  const isChartPaneOpen = useIsChartPaneOpen()
+  const isHistoryPaneOpen = false
+  const isChartPaneOpen = false
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
 

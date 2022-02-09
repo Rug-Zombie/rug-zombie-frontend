@@ -15,7 +15,6 @@ import {
 } from '@rug-zombie-libs/uikit'
 import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
-import { useGetMinBetAmount } from 'state/hooks'
 import { useTranslation } from 'contexts/Localization'
 import { useMausoleum } from 'hooks/useContract'
 import useToast from 'hooks/useToast'
@@ -73,7 +72,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({ id, onBack, onSuccess
   const [errorMessage, setErrorMessage] = useState(null)
   const { account } = useWeb3React()
   const { swiper } = useSwiper()
-  const minBetAmount = useGetMinBetAmount()
+  const minBetAmount = BIG_ZERO
   const { t } = useTranslation()
   const { toastError } = useToast()
   const { aid, version, bidToken } = auctionById(id)

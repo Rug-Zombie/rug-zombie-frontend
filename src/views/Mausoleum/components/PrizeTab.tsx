@@ -55,7 +55,7 @@ const PrizeTab:  React.FC<PrizeTabProps> = ({ id }) => {
                       View NFT Artist
                     </LinkExternal>
                   </span>
-                  {additionalDetails.map(({ url, name }) => {
+                  {additionalDetails?.map(({ url, name }) => {
                     return <>
                       <LinkExternal href={url}>
                         <br/>

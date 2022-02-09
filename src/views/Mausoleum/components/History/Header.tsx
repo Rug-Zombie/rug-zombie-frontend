@@ -4,7 +4,6 @@ import { ArrowForwardIcon, Box, Button, Radio, Flex, Heading, Text } from '@rug-
 import { useAppDispatch } from 'state'
 import { HistoryFilter } from 'state/types'
 import { setHistoryFilter, setHistoryPaneState, fetchHistory } from 'state/predictions'
-import { useGetHistoryFilter, useGetIsFetchingHistory } from 'state/hooks'
 import { useTranslation } from 'contexts/Localization'
 import styled from 'styled-components'
 import { getBubbleGumBackground } from '../../helpers'
@@ -35,8 +34,6 @@ const getClaimParam = (historyFilter: HistoryFilter) => {
 }
 
 const Header = () => {
-  const historyFilter = useGetHistoryFilter()
-  const isFetchingHistory = useGetIsFetchingHistory()
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const { account } = useWeb3React()
@@ -45,13 +42,7 @@ const Header = () => {
     dispatch(setHistoryPaneState(false))
   }
 
-  const handleChange = (newFilter: HistoryFilter) => async () => {
-    if (newFilter !== historyFilter) {
-      // @ts-ignore
-      await dispatch(fetchHistory({ account, claimed: getClaimParam(newFilter) }))
-      dispatch(setHistoryFilter(newFilter))
-    }
-  }
+  const handleChange = null
 
   return (
     <StyledHeader>
@@ -68,30 +59,6 @@ const Header = () => {
       </Text>
       <Flex alignItems="center">
         <Filter>
-          <Radio
-            scale="sm"
-            checked={historyFilter === HistoryFilter.ALL}
-            disabled={isFetchingHistory || !account}
-            onChange={handleChange(HistoryFilter.ALL)}
-          />
-          <Text ml="4px">{t('All')}</Text>
-        </Filter>
-        <Filter>
-          <Radio
-            scale="sm"
-            checked={historyFilter === HistoryFilter.COLLECTED}
-            disabled={isFetchingHistory || !account}
-            onChange={handleChange(HistoryFilter.COLLECTED)}
-          />
-          <Text ml="4px">{t('Collected')}</Text>
-        </Filter>
-        <Filter>
-          <Radio
-            scale="sm"
-            checked={historyFilter === HistoryFilter.UNCOLLECTED}
-            disabled={isFetchingHistory || !account}
-            onChange={handleChange(HistoryFilter.UNCOLLECTED)}
-          />
           <Text ml="4px">{t('Uncollected')}</Text>
         </Filter>
       </Flex>

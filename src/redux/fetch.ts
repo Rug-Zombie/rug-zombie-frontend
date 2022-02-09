@@ -503,7 +503,7 @@ export const auction = (
               {
                 lastBidId: parseInt(bidsLengthRes),
                 bids,
-                endDate: auctionInfoRes.endDate.toNumber(),
+                endDate: auctionInfoRes.endDate?.toNumber(),
                 finalized: auctionInfoRes.finalized,
                 unlockFeeInBnb: v3 ? BIG_ZERO : new BigNumber(res[1].toString()),
               },
