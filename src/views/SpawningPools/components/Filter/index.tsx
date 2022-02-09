@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import downpointer from 'images/spawningPools/Down_Arrow.svg'
 import upPointer from 'images/spawningPools/Up_Arrow.svg'
 import searchIcon from 'images/spawningPools/Search_Icon.svg'
-import { SpawningPoolFilter, spawningPoolFilters } from '../../filterConfig'
 
 const FilterContainer = styled.div`
   display: flex;
@@ -117,53 +116,51 @@ const UpPointer = <div style={{ marginRight: '10px' }}>
 </div>
 
 interface FilterProps {
-  spawningPoolsList: string[];
-  spawningPoolFilter: { value: SpawningPoolFilter, set: any };
-  setSearch: any;
+  searchValue: string;
+  handleSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleFilter: (condition: string) => void;
 }
 
-const Filter: React.FC<FilterProps> = ({ spawningPoolsList, spawningPoolFilter, setSearch }) => {
+const POOLS_FILTER = [
+  'All Pools',
+  'Staked',
+  'Ended',
+]
+
+const Filter: React.FC<FilterProps> = ({
+  searchValue,
+  handleSearch,
+  handleFilter,
+}) => {
   const [showSpawningPoolsMenu, setShowSpawningPoolsMenu] = useState(false)
-  const [showTypeMenu, setShowTypeMenu] = useState(false)
+  const [poolsLabel, setPoolsLabel] = useState('All Pools')
 
-  const handleDropdownClick = (e, condition) => {
+  const handleDropdownClick = (e: any) => {
     e.preventDefault()
-    if (condition === 'spawningPools') {
-      setShowSpawningPoolsMenu(prev => !prev)
-      setShowTypeMenu(false)
-    } else if (condition === 'types') {
-      setShowTypeMenu(prev => !prev)
-      setShowSpawningPoolsMenu(false)
-    }
+    setShowSpawningPoolsMenu(prev => !prev)
   }
 
-  const handleItemClick = (e, condition) => {
+  const handleItemClick = (e: any) => {
     e.preventDefault()
-    if (condition === 'spawningPools') {
-      spawningPoolFilter.set(spawningPoolFilters.findIndex(f => f.label === e.target.textContent))
-      setShowSpawningPoolsMenu(false)
-    }
-  }
-
-  const handleSearch = (e) => {
-    setSearch(e.target.value)
+    handleFilter(e.target.textContent)
+    setPoolsLabel(e.target.textContent)
   }
 
   return <FilterContainer>
     <Dropdowns>
-      <Dropdown onClick={(e) => handleDropdownClick(e, 'spawningPools')}>
+      <Dropdown onClick={handleDropdownClick}>
         <DropdownText>
-          {spawningPoolFilters[spawningPoolFilter.value].label}
+          {poolsLabel}
         </DropdownText>
         {showSpawningPoolsMenu ? UpPointer : DownPointer }
         <DropdownMenu>
           {showSpawningPoolsMenu ? (
             <DropdownContent>
-              {spawningPoolsList.map(spawningPool => {
+              {POOLS_FILTER.map(spawningPool => {
                   return (
                     <DropdownItem
                       key={spawningPool}
-                      onClick={(e) => handleItemClick(e, 'spawningPools')}
+                      onClick={handleItemClick}
                     >
                       <MenuText>{spawningPool}</MenuText>
                     </DropdownItem>
@@ -176,7 +173,7 @@ const Filter: React.FC<FilterProps> = ({ spawningPoolsList, spawningPoolFilter, 
       </Dropdown>
     </Dropdowns>
     <SearchBar>
-      <Input onInput={handleSearch} placeholder='Search by name, symbol or NFT' />
+      <Input onInput={handleSearch} value={searchValue} placeholder='Search by name, symbol or NFT' />
     </SearchBar>
   </FilterContainer>
 }
