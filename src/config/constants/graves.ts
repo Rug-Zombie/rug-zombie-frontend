@@ -64,6 +64,7 @@ const graves: GraveConfig[] = [
     depositNftId: 6,
     nftConverterPid: 0,
     graveNftToken: '0x22e42D9425b55FD2262bfF72a316bb052DDb2a77',
+    endDate: 1648051200,
   },
   {
     pid: {

@@ -12,6 +12,7 @@ import { useAppDispatch } from '../../state'
 import { fetchSpawningPoolsPublicDataAsync, fetchSpawningPoolsUserDataAsync } from '../../state/spawningPools'
 import { useGetNftById, useGetSpawningPools } from '../../state/hooks'
 import { SpawningPoolFilter, spawningPoolFilters } from './filterConfig'
+import { getNftConfigById } from '../../state/nfts/hooks'
 
 const SpawningPoolPage = styled(Page)`
   min-width: 80vw;
@@ -77,7 +78,7 @@ const SpawningPools: React.FC = () => {
     spawningPools = spawningPools.filter(({ name, rewardToken: { symbol }, nftId }) => {
       const searchString = searchFilter.toLowerCase()
       // eslint-disable-next-line react-hooks/rules-of-hooks
-      return name.toLowerCase().includes(searchString) || symbol.toLowerCase().includes(searchString)
+      return name.toLowerCase().includes(searchString) || symbol.toLowerCase().includes(searchString) || getNftConfigById(nftId).name.toLowerCase().includes(searchString)
     })
   }
 

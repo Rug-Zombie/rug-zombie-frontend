@@ -24,7 +24,7 @@ const tombs: TombConfig[] = [
       commonId: 44,
       uncommonId: 45,
       rareId: 46,
-      legendaryId: 47,
+      legendaryId: 48,
     }
   },
   {
@@ -73,7 +73,7 @@ const tombs: TombConfig[] = [
       commonId: 44,
       uncommonId: 45,
       rareId: 46,
-      legendaryId: 47,
+      legendaryId: 78,
     }
   },
 ]

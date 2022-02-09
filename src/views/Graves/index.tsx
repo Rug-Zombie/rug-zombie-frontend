@@ -13,6 +13,7 @@ import { useAppDispatch } from '../../state'
 import { fetchGravesPublicDataAsync, fetchGravesUserDataAsync } from '../../state/graves'
 import { useGetGraves, useGetNftById } from '../../state/hooks'
 import { GraveFilter, graveFilters, RarityFilter, rarityFilters } from './filterConfig'
+import { getNftConfigById } from '../../state/nfts/hooks'
 
 const GravePage = styled(Page)`
   min-width: 80vw;
@@ -78,7 +79,7 @@ const Graves: React.FC = () => {
     graves = graves.filter(({name, rug: {symbol}, nftId}) => {
       const searchString = searchFilter.toLowerCase()
       // eslint-disable-next-line react-hooks/rules-of-hooks
-      return name.toLowerCase().includes(searchString) || symbol.toLowerCase().includes(searchString)
+      return name.toLowerCase().includes(searchString) || symbol.toLowerCase().includes(searchString) || getNftConfigById(nftId).name.toLowerCase().includes(searchString)
     })
   }
 

@@ -12,8 +12,8 @@ import Footer from '../../components/Footer'
 import { useAppDispatch } from '../../state'
 import { fetchTombsPublicDataAsync, fetchTombsUserDataAsync } from '../../state/tombs'
 import { useGetTombs } from '../../state/hooks'
-import { TombFilter, tombFilters, RarityFilter, rarityFilters } from './filterConfig'
-import useToast from '../../hooks/useToast'
+import { RarityFilter, rarityFilters, TombFilter, tombFilters } from './filterConfig'
+import { getNftConfigById } from '../../state/nfts/hooks'
 
 const TombPage = styled(Page)`
   min-width: 80vw;
@@ -74,9 +74,9 @@ const Tombs: React.FC = () => {
   tombs = rarityFilters[rarityFilter].filter(tombs)
 
   if (searchFilter) {
-    tombs = tombs.filter(({ token1, token2 }) => {
-      const searchString = searchFilter.toLowerCase().replace('-','')
-      return token1.symbol.toLowerCase().includes(searchString) || token2.symbol.toLowerCase().includes(searchString)
+    tombs = tombs.filter(({ token1, token2, overlay: { legendaryId } }) => {
+      const searchString = searchFilter.toLowerCase().replace('-', '')
+      return token1.symbol.toLowerCase().includes(searchString) || token2.symbol.toLowerCase().includes(searchString) || getNftConfigById(legendaryId).name.toLowerCase().includes(searchString)
     })
   }
 
