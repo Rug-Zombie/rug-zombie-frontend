@@ -12,7 +12,10 @@ import { getId } from '../../utils'
 import Footer from '../../components/Footer'
 import { useAppDispatch } from '../../state'
 import { fetchGravesPublicDataAsync, fetchGravesUserDataAsync } from '../../state/graves'
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5975115f1a01a6c21fc914c192f983631222bcea
 
 const GravePage = styled(Page)`
   min-width: 80vw;
@@ -71,6 +74,7 @@ const Graves: React.FC = () => {
 
   const graves = useGetFilteredGraves([search, filter])
 
+<<<<<<< HEAD
   // graves = graveFilters[graveFilter].filter(graves)
   // graves = rarityFilters[rarityFilter].filter(graves)
 
@@ -93,6 +97,8 @@ const Graves: React.FC = () => {
     remainingGraves.sort((a, b) => a.poolInfo.allocPoint.gt(b.poolInfo.allocPoint) ? -1 : a.poolInfo.allocPoint.lt(b.poolInfo.allocPoint) ? 1 : 0)
   )
 
+=======
+>>>>>>> 5975115f1a01a6c21fc914c192f983631222bcea
   const handleFilter = (condition: string) => setFilter(condition)
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)
 
@@ -109,7 +115,11 @@ const Graves: React.FC = () => {
               handleFilter={handleFilter}
               handleSearch={handleSearch}
             />
+<<<<<<< HEAD
             {orderedGraves.map(g => {
+=======
+            {graves.map(g => {
+>>>>>>> 5975115f1a01a6c21fc914c192f983631222bcea
               return <GraveTable grave={g} key={getId(g.pid)} />
             })}
           </GravesColumn>

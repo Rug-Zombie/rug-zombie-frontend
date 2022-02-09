@@ -10,7 +10,6 @@ import SpawningPoolTable from './components/SpawningPoolTable'
 import Footer from '../../components/Footer'
 import { useAppDispatch } from '../../state'
 import { fetchSpawningPoolsPublicDataAsync, fetchSpawningPoolsUserDataAsync } from '../../state/spawningPools'
-
 import { useGetFilteredSpawningPools } from '../../state/hooks'
 
 const SpawningPoolPage = styled(Page)`
@@ -71,8 +70,6 @@ const SpawningPools: React.FC = () => {
   const [search, setSearch] = useState('')
 
   const spawningPools = useGetFilteredSpawningPools([search, filter])
-
-
   const handleFilter = (condition: string) => setFilter(condition)
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)
 
