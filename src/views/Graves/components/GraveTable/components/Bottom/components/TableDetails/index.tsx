@@ -4,7 +4,7 @@ import numeral from 'numeral'
 import { bnbPriceUsd, zombiePriceUsd } from '../../../../../../../../redux/get'
 import { getBalanceAmount, getFullDisplayBalance } from '../../../../../../../../utils/formatBalance'
 import { Grave } from '../../../../../../../../state/types'
-import { formatDays } from '../../../../../../../../utils/timerHelpers'
+import { formatDays, formatDuration, now } from '../../../../../../../../utils/timerHelpers'
 import { useGetNftById } from '../../../../../../../../state/hooks'
 
 export enum GraveItemType {
@@ -92,6 +92,7 @@ const Text = styled.span`
 const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
   const {
     nftId,
+    endDate,
     poolInfo: { allocPoint, withdrawCooldown, nftMintTime, tokenAmount, minimumStake, unlockFee },
   } = grave
   const { name, path, type } = useGetNftById(nftId)
@@ -138,6 +139,9 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
         <SubHeaderText>
           Minimum Stake: <Text>{getBalanceAmount(minimumStake).toString()} ZMBE</Text>
         </SubHeaderText>
+        {endDate ? <SubHeaderText>
+          End date: <Text>{formatDuration( endDate - now())}</Text>
+        </SubHeaderText> : null}
       </GraveInfo>
     </Details>
   </Container>

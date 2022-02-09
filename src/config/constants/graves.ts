@@ -108,7 +108,7 @@ const graves: GraveConfig[] = [
     },
     nftId: 72,
     rug: tokens.iron,
-    isNew: true,
+    endDate: 1647017999,
   },
   {
     pid: {
