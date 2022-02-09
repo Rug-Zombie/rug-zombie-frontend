@@ -89,6 +89,7 @@ export interface GraveConfig {
   nft?: number,
   depositNftId?: number,
   isNew?: boolean,
+  isFeatured?: boolean,
   isClosed?: boolean,
   endDate?: number,
   startingDate?: number,

@@ -75,6 +75,25 @@ const Graves: React.FC = () => {
   graves = graveFilters[graveFilter].filter(graves)
   graves = rarityFilters[rarityFilter].filter(graves)
 
+  const featuredGraves = []
+  const newGraves = []
+  const remainingGraves = []
+  graves.forEach(g => {
+    if(g.isFeatured) {
+      featuredGraves.push(g)
+    } else if(g.isNew) {
+      newGraves.push(g)
+    } else {
+      remainingGraves.push(g)
+    }
+  })
+
+  graves = featuredGraves.concat(
+    newGraves,
+    // eslint-disable-next-line no-nested-ternary
+    remainingGraves.sort((a, b) => a.poolInfo.allocPoint.gt(b.poolInfo.allocPoint) ? -1 : a.poolInfo.allocPoint.lt(b.poolInfo.allocPoint) ? 1 : 0)
+  )
+
   if (searchFilter) {
     graves = graves.filter(({name, rug: {symbol}, nftId}) => {
       const searchString = searchFilter.toLowerCase()

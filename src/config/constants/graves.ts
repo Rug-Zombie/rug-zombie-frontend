@@ -12,6 +12,7 @@ const graves: GraveConfig[] = [
     nftId: 6,
     rug: tokens.zmbe,
     rugDex: Dex.PCS_V2,
+    isFeatured: true,
   },
   {
     pid: {
@@ -38,6 +39,7 @@ const graves: GraveConfig[] = [
     depositNftId: 6,
     nftConverterPid: 0,
     graveNftToken: '0x22e42D9425b55FD2262bfF72a316bb052DDb2a77',
+    isFeatured: true,
   },
   {
     pid: {
@@ -51,6 +53,7 @@ const graves: GraveConfig[] = [
     depositNftId: 19,
     nftConverterPid: 1,
     graveNftToken: '0xE30043524ADb329169b11eDfe833a9beDd4D2A11',
+    isFeatured: true,
   },
   {
     pid: {
@@ -65,6 +68,7 @@ const graves: GraveConfig[] = [
     nftConverterPid: 0,
     graveNftToken: '0x22e42D9425b55FD2262bfF72a316bb052DDb2a77',
     endDate: 1648051200,
+    isFeatured: true,
   },
   {
     pid: {
