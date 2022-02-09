@@ -25,6 +25,7 @@ import { useGetNfts } from '../../../../../../state/hooks'
 import ConvertNftModal from './components/ConvertNftModal'
 import BurnZombieModal from './components/BurnZombieModal'
 import useToast from '../../../../../../hooks/useToast'
+import { formatDuration, now } from '../../../../../../utils/timerHelpers'
 
 const Separator = styled.div`
   height: 0px;
@@ -182,6 +183,8 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     nftId,
     depositNftId,
     nftConverterPid,
+    endDate,
+    isRetired,
     userInfo: {
       rugDeposited,
       rugAllowance,
@@ -192,7 +195,7 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
       nftMintDate,
       tokenWithdrawalDate,
     },
-    poolInfo: { unlockFee, minimumStake },
+    poolInfo: { unlockFee, minimumStake, nftMintTime },
   } = grave
 
   const [stakeAmount, setStakeAmount] = useState(new BigNumber(null))
@@ -211,7 +214,6 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   const [confirmingUnstake, setConfirmingUnstake] = useState(false)
   const stakingSteps = useMemo(() => [], [])
   const unstakingSteps = useMemo(() => [], [])
-  const now = Math.floor(Date.now() / 1000)
   const isFirstGrave = getId(pid) === 22
   const nfts = useGetNfts().data
   const depositNft = depositNftId ? nfts.find(n => n.id === depositNftId) : null
@@ -317,15 +319,17 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   }
 
   const handleTx = useCallback(async () => {
-    if (stakingSteps[currentStep].nonAsync) {
-      stakingSteps[currentStep].func()
+    const step = stakingSteps[currentStep]
+    if (step.nonAsync) {
+      step.func()
     } else {
       if (currentStep === StakingStep.StakeZombie) {
         if (insufficientZombieBalance) {
           toastGraves(
             'Insufficient ZMBE balance',
-            <Link href={`https://swap.rugzombie.io/swap?outputCurrency=${getAddress(tokens.zmbe.address)}`}>Buy
-              ZMBE</Link>,
+            <Link href={`https://swap.rugzombie.io/swap?outputCurrency=${getAddress(tokens.zmbe.address)}`}>
+              Buy ZMBE
+            </Link>,
           )
           return
         }
@@ -337,12 +341,32 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
           return
         }
       }
+      if ((nftMintTime.gt(endDate - now()) || isRetired) && [StakingStep.DepositRug, StakingStep.StakeZombie, StakingStep.UnlockGrave].includes(currentStep)) {
+        toastGraves(
+          'Notice',
+          <FlexColumn>
+            <text>
+              {(endDate - now() > 0 || isRetired) ?
+                'This grave is retired. ' : `This grave retires in ${formatDuration(endDate - now())}. `}
+              You will can no longer earn the {nft.name} NFT by staking.
+            </text>
+            <FlexRow>
+              <PrimaryStakeButton onClick={step.func}>
+                <PrimaryStakeButtonText>Proceed</PrimaryStakeButtonText>
+              </PrimaryStakeButton>
+            </FlexRow>
+
+          </FlexColumn>,
+        )
+        return
+
+      }
 
       setConfirmingStake(true)
-      stakingSteps[currentStep].func()
+      step.func()
         .then(succeeded => {
           if (succeeded) {
-            toastGraves(stakingSteps[currentStep].toast.title)
+            toastGraves(step.toast.title)
           }
           setConfirmingStake(false)
         })
@@ -350,7 +374,21 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
           setConfirmingStake(false)
         })
     }
-  }, [stakingSteps, currentStep, StakingStep.StakeZombie, insufficientZombieBalance, insufficientStakeAmount, toastGraves, minimumStake])
+  }, [
+    stakingSteps,
+    currentStep,
+    StakingStep.StakeZombie,
+    StakingStep.DepositRug,
+    StakingStep.UnlockGrave,
+    nftMintTime,
+    endDate,
+    insufficientZombieBalance,
+    insufficientStakeAmount,
+    toastGraves,
+    minimumStake,
+    nft.name,
+    isRetired,
+  ])
 
   enum UnstakingStep {
     MintNft,
@@ -388,11 +426,11 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
 
   let currentUnstakingStep = UnstakingStep.Unstake
   if (amount.gt(0)) {
-    if (nftMintDate.lte(now)) {
+    if (nftMintDate.lte(now())) {
       currentUnstakingStep = UnstakingStep.MintNft
     } else if (unstakeAmount.isZero() || unstakeAmount.isNaN()) {
       currentUnstakingStep = UnstakingStep.Harvest
-    } else if (tokenWithdrawalDate.gt(now)) {
+    } else if (tokenWithdrawalDate.gt(now())) {
       currentUnstakingStep = UnstakingStep.UnstakeEarly
     }
   }

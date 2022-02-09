@@ -1169,8 +1169,9 @@ const tokens = {
       56: '0x50ba8BF9E34f0F83F96a340387d1d3888BA4B3b5',
       97: '',
     },
-    decimals: 0,
+    decimals: 18,
     projectLink: '',
+    tokenLogo: 'images/tokens/clear.png'
   },
 }
 
