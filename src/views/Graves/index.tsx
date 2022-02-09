@@ -87,7 +87,7 @@ const Graves: React.FC = () => {
     }
   })
 
-  graves = featuredGraves.concat(
+  const orderedGraves = featuredGraves.concat(
     newGraves,
     // eslint-disable-next-line no-nested-ternary
     remainingGraves.sort((a, b) => a.poolInfo.allocPoint.gt(b.poolInfo.allocPoint) ? -1 : a.poolInfo.allocPoint.lt(b.poolInfo.allocPoint) ? 1 : 0)
@@ -109,7 +109,7 @@ const Graves: React.FC = () => {
               handleFilter={handleFilter}
               handleSearch={handleSearch}
             />
-            {graves.map(g => {
+            {orderedGraves.map(g => {
               return <GraveTable grave={g} key={getId(g.pid)} />
             })}
           </GravesColumn>
