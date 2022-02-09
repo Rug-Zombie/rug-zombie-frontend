@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
+import { useGetFilteredGraves } from 'state/hooks'
 import Page from '../../components/layout/Page'
 import './Graves.Styles.css'
 import HeaderCard from './components/HeaderCard'
@@ -11,9 +12,10 @@ import { getId } from '../../utils'
 import Footer from '../../components/Footer'
 import { useAppDispatch } from '../../state'
 import { fetchGravesPublicDataAsync, fetchGravesUserDataAsync } from '../../state/graves'
-import { useGetGraves, useGetNftById } from '../../state/hooks'
-import { GraveFilter, graveFilters, RarityFilter, rarityFilters } from './filterConfig'
-import { getNftConfigById } from '../../state/nfts/hooks'
+<<<<<<< HEAD
+
+=======
+>>>>>>> 5975115f1a01a6c21fc914c192f983631222bcea
 
 const GravePage = styled(Page)`
   min-width: 80vw;
@@ -59,6 +61,7 @@ const GravesColumn = styled.div`
 const Graves: React.FC = () => {
   const { account } = useWeb3React()
   const dispatch = useAppDispatch()
+
   useEffect(() => {
     dispatch(fetchGravesPublicDataAsync())
     if (account) {
@@ -66,14 +69,14 @@ const Graves: React.FC = () => {
     }
   }, [dispatch, account])
 
-  const [graveFilter, setGraveFilter] = useState(GraveFilter.All)
-  const [rarityFilter, setRarityFilter] = useState(RarityFilter.All)
-  const [searchFilter, setSearchFilter] = useState('')
+  const [filter, setFilter] = useState('All graves')
+  const [search, setSearch] = useState('')
 
-  let graves = useGetGraves().data
+  const graves = useGetFilteredGraves([search, filter])
 
-  graves = graveFilters[graveFilter].filter(graves)
-  graves = rarityFilters[rarityFilter].filter(graves)
+<<<<<<< HEAD
+  // graves = graveFilters[graveFilter].filter(graves)
+  // graves = rarityFilters[rarityFilter].filter(graves)
 
   const featuredGraves = []
   const newGraves = []
@@ -88,19 +91,16 @@ const Graves: React.FC = () => {
     }
   })
 
-  graves = featuredGraves.concat(
+  const orderedGraves = featuredGraves.concat(
     newGraves,
     // eslint-disable-next-line no-nested-ternary
     remainingGraves.sort((a, b) => a.poolInfo.allocPoint.gt(b.poolInfo.allocPoint) ? -1 : a.poolInfo.allocPoint.lt(b.poolInfo.allocPoint) ? 1 : 0)
   )
 
-  if (searchFilter) {
-    graves = graves.filter(({name, rug: {symbol}, nftId}) => {
-      const searchString = searchFilter.toLowerCase()
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      return name.toLowerCase().includes(searchString) || symbol.toLowerCase().includes(searchString) || getNftConfigById(nftId).name.toLowerCase().includes(searchString)
-    })
-  }
+=======
+>>>>>>> 5975115f1a01a6c21fc914c192f983631222bcea
+  const handleFilter = (condition: string) => setFilter(condition)
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)
 
   return (
     <>
@@ -110,10 +110,16 @@ const Graves: React.FC = () => {
             <HeaderCard />
           </Header>
           <GravesColumn>
-            <Filter gravesList={graveFilters.map(f => f.label)} raritiesList={rarityFilters.map(f => f.label)}
-                    graveFilter={{ value: graveFilter, set: setGraveFilter }}
-                    rarityFilter={{ value: rarityFilter, set: setRarityFilter }} setSearch={setSearchFilter} />
+            <Filter
+              searchValue={search}
+              handleFilter={handleFilter}
+              handleSearch={handleSearch}
+            />
+<<<<<<< HEAD
+            {orderedGraves.map(g => {
+=======
             {graves.map(g => {
+>>>>>>> 5975115f1a01a6c21fc914c192f983631222bcea
               return <GraveTable grave={g} key={getId(g.pid)} />
             })}
           </GravesColumn>
