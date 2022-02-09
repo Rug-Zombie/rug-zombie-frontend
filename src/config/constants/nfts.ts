@@ -1349,7 +1349,7 @@ const nfts: Nft[] = [
     symbol: 'CAP-DM',
     description: 'I am sorry to see you here, but if you had fought like a man, you needn’t be hanged like a dog.',
     address: {
-      56: '0x3DB5809DCCD497B7184C0a920410476e210EC81d',
+      56: '0x5e723083ACb8b445fD8a0d31daEdA7688b9b41d5',
       97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
     },
     totalSupply: BIG_ZERO,
