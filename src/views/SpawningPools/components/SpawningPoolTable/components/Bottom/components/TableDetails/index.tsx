@@ -107,8 +107,6 @@ const TableDetails: React.FC<TableDetailsProps> = ({ spawningPool }) => {
     source.remove()
   }
 
-console.log(withdrawCooldown.toNumber())
-
   return <Container>
     <NftImageContainer>
       {type === 'video' ? <NftVideo autoPlay loop muted>

@@ -150,7 +150,7 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
   const [stakeAmount, setStakeAmount] = useState(new BigNumber(null))
   const [unstakeAmount, setUnstakeAmount] = useState(new BigNumber(null))
   const spawningPoolContract = useSpawningPool(getAddress(address))
-  const approveZombie = useApprove(useZombie(), getAddress(address)).onApprove
+  const approveZombie = useApprove(useZombie(), getAddress(address), true).onApprove
   const { onStake } = useStake(spawningPoolContract, stakeAmount)
   const { onUnlock } = useUnlock(spawningPoolContract, unlockFee)
   const { onUnstake } = useUnstake(spawningPoolContract, unstakeAmount)
@@ -205,6 +205,8 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
   if (zombieAllowance.isZero() && amount.gt(0)) {
     currentStep = Step.ApproveZombie
   }
+
+  console.log(zombieAllowance.toNumber())
 
   const handleTx = useCallback(async () => {
     setConfirming(true)

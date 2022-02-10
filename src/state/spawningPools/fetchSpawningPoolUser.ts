@@ -40,7 +40,7 @@ export const fetchSpawningPoolUserTokenInfo = async (account: string, spawningPo
     return tokenInfos.concat([{
       address: getZombieAddress(),
       name: 'allowance',
-      params: [account, getDrFrankensteinAddress()],
+      params: [account, getAddress(spawningPoolConfig.address)],
     },
       {
         address: getZombieAddress(),

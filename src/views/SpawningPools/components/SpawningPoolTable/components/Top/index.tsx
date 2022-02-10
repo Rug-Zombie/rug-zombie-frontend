@@ -149,11 +149,6 @@ const Top: React.FC<TopProps> = ({ spawningPool, open, setOpen }) => {
 
   const now = Math.floor(Date.now() / 1000)
 
-  if (id === 15) {
-    console.log(pendingReward.toString())
-
-  }
-
   const cooldownTime = () => {
     if (amount.isZero()) {
       return <CardItem label='Withdrawal Timer' value='N/A' valueType={CardItemValueType.Text} />
