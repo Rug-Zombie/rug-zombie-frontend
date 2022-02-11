@@ -33,6 +33,12 @@ const TopMenu = () => {
     setShowMenu(prev => !prev)
   }
 
+  const handleDropdownItemClick = (e, item) => {
+    e.preventDefault()
+    setShowMenu(false)
+    history.push(item.href)
+  }
+
   return (
     <Navbar>
       <NavbarContent>
@@ -64,7 +70,7 @@ const TopMenu = () => {
                     <MenuText>{i.label}</MenuText>
                   </DropdownItem>
                 }
-                return <DropdownItem onClick={()=> history.push(i.href)}>
+                return <DropdownItem onClick={(e) => handleDropdownItemClick(e, i)}>
                   <MenuText>{i.label}</MenuText>
                 </DropdownItem>
               },
