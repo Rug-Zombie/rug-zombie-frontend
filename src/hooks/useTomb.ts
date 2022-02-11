@@ -4,7 +4,16 @@ import { BigNumber } from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
 import { useCallback } from 'react'
 import { useAppDispatch } from '../state'
-import { depositRug, finishMinting, stake, startMinting, unlock, unstake, unstakeEarly } from '../utils/callHelpers'
+import {
+  depositRug,
+  emergencyWithdraw,
+  finishMinting,
+  stake,
+  startMinting,
+  unlock,
+  unstake,
+  unstakeEarly,
+} from '../utils/callHelpers'
 import { fetchGravesUserDataAsync } from '../state/graves'
 import { BIG_ZERO } from '../utils/bigNumber'
 import { fetchTombsUserDataAsync } from '../state/tombs'
@@ -61,6 +70,24 @@ export const useUnstakeEarly = (drFrankensteinContract: Contract, pid: number, a
   }, [drFrankensteinContract, pid, amount, account, dispatch])
 
   return { onUnstakeEarly: handleUnstakeEarly }
+}
+
+export const useEmergencyWithdraw = (drFrankensteinContract: Contract, pid: number) => {
+  const dispatch = useAppDispatch()
+  const { account } = useWeb3React()
+
+  const handleEmergencyWithdraw = useCallback(async () => {
+    try {
+      const tx = await emergencyWithdraw(drFrankensteinContract, pid, account)
+      // @ts-ignore
+      dispatch(fetchTombsUserDataAsync(account))
+      return tx
+    } catch (e) {
+      return false
+    }
+  }, [drFrankensteinContract, pid, account, dispatch])
+
+  return { onEmergencyWithdraw: handleEmergencyWithdraw }
 }
 
 export const useHarvest = (drFrankensteinContract: Contract, pid: number) => {

@@ -60,6 +60,15 @@ export const unstakeEarly = async (drFrankensteinContract, pid, amount, account)
     })
 }
 
+export const emergencyWithdraw = async (drFrankensteinContract, pid, account) => {
+  return drFrankensteinContract.methods
+    .emergencyWithdraw(pid)
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
 export const unlock = async (drFrankensteinContract, pid, amount, account) => {
   return drFrankensteinContract.methods
     .unlock(pid)

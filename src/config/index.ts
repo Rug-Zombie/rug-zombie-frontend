@@ -1,5 +1,6 @@
 import BigNumber from 'bignumber.js/bignumber'
 import { BIG_TEN } from 'utils/bigNumber'
+import { Dex } from './constants/types'
 
 BigNumber.config({
   EXPONENTIAL_AT: 1000,
@@ -47,7 +48,7 @@ export const LOTTERY_TICKET_PRICE = 1
 export const DEFAULT_TOKEN_DECIMAL = BIG_TEN.pow(18)
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 export const DEXS = ['ZombieSwap', 'Pancakeswap V1', 'Pancakeswap', 'Autoshark', 'Apeswap']
-
+export const NATIVE_DEX = Dex.PCS_V2
 export const BASE_BSC_SCAN_URLS = {
   56: 'https://bscscan.com',
   97: 'https://testnet.bscscan.com',

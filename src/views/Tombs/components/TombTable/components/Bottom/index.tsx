@@ -9,6 +9,7 @@ import useApprove, { ApproveTarget } from '../../../../../../hooks/useApprove'
 import { getAddress, getDrFrankensteinAddress } from '../../../../../../utils/addressHelpers'
 import { useDrFrankenstein, useERC20, useTombOverlay } from '../../../../../../hooks/useContract'
 import {
+  useEmergencyWithdraw,
   useFinishMinting,
   useHarvest,
   useStake,
@@ -22,11 +23,12 @@ import {
   APESWAP_ADD_LIQUIDITY_URL,
   AUTOSHARK_ADD_LIQUIDITY_URL,
   BASE_ADD_LIQUIDITY_URL,
-  DEXS,
+  DEXS, NATIVE_DEX,
 } from '../../../../../../config'
 import tokens from '../../../../../../config/constants/tokens'
 import { Dex } from '../../../../../../config/constants/types'
 import useToast from '../../../../../../hooks/useToast'
+import { formatDuration, now } from '../../../../../../utils/timerHelpers'
 
 const Separator = styled.div`
   height: 0px;
@@ -135,6 +137,18 @@ const BalanceText = styled.button`
   }
 `
 
+const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`
+
+const FlexRow = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+`
+
 const AmountText = styled.p`
   font: normal normal normal 14px/21px Poppins;
   margin: 0;
@@ -164,6 +178,7 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
   const { onStake } = useStake(drFrankenstein, getId(pid), stakeAmount)
   const { onUnstake } = useUnstake(drFrankenstein, getId(pid), unstakeAmount)
   const { onUnstakeEarly } = useUnstakeEarly(drFrankenstein, getId(pid), unstakeAmount)
+  const { onEmergencyWithdraw } = useEmergencyWithdraw(drFrankenstein, getId(pid))
   const { onHarvest } = useHarvest(drFrankenstein, getId(pid))
   const { onStartMinting } = useStartMinting(tombOverlay, getId(overlay.pid), mintingFee)
   const { onFinishMinting } = useFinishMinting(tombOverlay, getId(overlay.pid))
@@ -171,7 +186,6 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
   const [confirmingUnstake, setConfirmingUnstake] = useState(false)
   const steps = useMemo(() => [], [])
   const unstakingSteps = useMemo(() => [], [])
-  const now = Math.floor(Date.now() / 1000)
   const mintingReady = randomNumber.gt(0)
   const { toastTombs } = useToast()
 
@@ -258,6 +272,7 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
     Harvest,
     Unstake,
     UnstakeEarly,
+    EmergencyWithdraw,
   }
 
   unstakingSteps[UnstakingStep.StartMinting] = {
@@ -290,6 +305,12 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
     sent: `Unstaking...`,
     func: onUnstakeEarly,
     toast: { title: `Unstaked ${lpName} LP` },
+  }
+  unstakingSteps[UnstakingStep.EmergencyWithdraw] = {
+    label: `Unstake Early`,
+    sent: `Unstaking...`,
+    func: onEmergencyWithdraw,
+    toast: { title: `Unstaked ${lpName} LP` },
 
   }
   unstakingSteps[UnstakingStep.Harvest] = {
@@ -308,8 +329,12 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
     currentUnstakingStep = UnstakingStep.StartMinting
   } else if ((unstakeAmount.isZero() || unstakeAmount.isNaN()) && amount.gt(0)) {
     currentUnstakingStep = UnstakingStep.Harvest
-  } else if (tokenWithdrawalDate.gt(now)) {
-    currentUnstakingStep = UnstakingStep.UnstakeEarly
+  } else if (tokenWithdrawalDate.gt(now()) && amount.gt(0)) {
+    if(dex === NATIVE_DEX) {
+      currentUnstakingStep = UnstakingStep.UnstakeEarly
+    } else {
+      currentUnstakingStep = UnstakingStep.EmergencyWithdraw
+    }
   } else {
     currentUnstakingStep = UnstakingStep.Unstake
   }
@@ -317,6 +342,22 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
   const handleUnstakingTx = useCallback(async () => {
     setConfirmingUnstake(true)
     const step = unstakingSteps[currentUnstakingStep]
+    if(currentUnstakingStep === UnstakingStep.EmergencyWithdraw && !unstakeAmount.eq(amount)) {
+      toastTombs(
+        'Notice',
+        <FlexColumn>
+          <text>
+            Partial early withdrawals are disabled on this tomb. Either wait {formatDuration(tokenWithdrawalDate.minus(now()).toNumber())} or withdraw all.
+          </text>
+          <FlexRow>
+            <SecondaryStakeButton onClick={onEmergencyWithdraw}>
+              <SecondaryStakeButtonText>Withdraw All</SecondaryStakeButtonText>
+            </SecondaryStakeButton>
+          </FlexRow>
+        </FlexColumn>,
+      )
+      return
+    }
     step.func()
       .then(() => {
         toastTombs(step.toast.title, step.toast.description)
@@ -325,7 +366,7 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
       .catch(() => {
         setConfirmingUnstake(false)
       })
-  }, [currentUnstakingStep, toastTombs, unstakingSteps])
+  }, [UnstakingStep.EmergencyWithdraw, amount, currentUnstakingStep, onEmergencyWithdraw, toastTombs, tokenWithdrawalDate, unstakeAmount, unstakingSteps])
 
   const changeStakeInput = (e) => {
     setStakeAmount(getDecimalAmount(new BigNumber(e.target.value)))
