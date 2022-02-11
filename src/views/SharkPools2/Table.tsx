@@ -78,7 +78,6 @@ const Table: React.FC<TableProps> = ({ id }) => {
     }
 
     const initializePoolInfo = () => {
-        console.log('HIT');
         stakeTokenContract.methods.balanceOf(pool.address).call()
             .then(res => {
                 pool.totalStaked = new BigNumber(res.toString());
@@ -141,7 +140,6 @@ const Table: React.FC<TableProps> = ({ id }) => {
 
     const initialize = () => {
         if (!initialized) {
-            console.log('HIT');
             initializePoolInfo();
             setIsInitialized(true);      
         }

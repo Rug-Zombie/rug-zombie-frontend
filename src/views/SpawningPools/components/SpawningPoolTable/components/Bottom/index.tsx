@@ -205,8 +205,6 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
     currentStep = Step.ApproveZombie
   }
 
-  console.log(zombieAllowance.toNumber())
-
   const handleTx = useCallback(async () => {
     setConfirming(true)
     const step = steps[currentStep]
