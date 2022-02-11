@@ -189,11 +189,11 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
   const quoteTokenUrl = dex === Dex.APESWAP ? 'ETH' : 'BNB'
 
   if (dex === Dex.APESWAP) {
-    addLiquidityUrl = `${APESWAP_ADD_LIQUIDITY_URL}/${quoteTokenUrl}/${sortedTokens[1]}`
+    addLiquidityUrl = `${APESWAP_ADD_LIQUIDITY_URL}/${quoteTokenUrl}/${getAddress(sortedTokens[1].address)}`
   } else if (dex === Dex.AUTOSHARK) {
-    addLiquidityUrl = `${AUTOSHARK_ADD_LIQUIDITY_URL}/${quoteTokenUrl}/${sortedTokens[1]}`
+    addLiquidityUrl = `${AUTOSHARK_ADD_LIQUIDITY_URL}/${quoteTokenUrl}/${getAddress(sortedTokens[1].address)}`
   } else {
-    addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${quoteTokenUrl}/${sortedTokens[1]}`
+    addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${quoteTokenUrl}/${getAddress(sortedTokens[1].address)}`
   }
 
   steps[Step.PairLp] = {
@@ -229,7 +229,7 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
   if (amount.gt(0)) {
     currentStep = Step.Staked
   }
-  if (amount.isZero()) {
+  if (lpBalance.isZero()) {
     currentStep = Step.PairLp
   }
 

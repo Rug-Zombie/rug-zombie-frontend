@@ -105,7 +105,6 @@ const spawningPools: SpawningPoolConfig[] = [
     },
     rewardToken: tokens.goldbar,
     dex: Dex.APESWAP,
-    isNew: false,
     color: 'orange',
     unknownPrice: true,
   },
@@ -139,7 +138,6 @@ const spawningPools: SpawningPoolConfig[] = [
     },
     rewardToken: tokens.fcf,
     dex: Dex.PCS_V2,
-    isNew: true,
     color: 'brown',
   },
   {
@@ -172,7 +170,6 @@ const spawningPools: SpawningPoolConfig[] = [
     },
     rewardToken: tokens.l1ghtv2,
     dex: Dex.PCS_V2,
-    isNew: true,
   },
   {
     id: 14,
