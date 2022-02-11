@@ -223,14 +223,17 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
   }
   let currentStep = Step.PairLp
 
+  if (lpBalance.gt(0)) {
+    currentStep = Step.ApproveLp
+  }
   if (lpAllowance.gt(0)) {
     currentStep = Step.StakeLp
   }
   if (amount.gt(0)) {
     currentStep = Step.Staked
   }
-  if (lpBalance.isZero()) {
-    currentStep = Step.PairLp
+  if (lpAllowance.isZero() && amount.gt(0)) {
+    currentStep = Step.ApproveLp
   }
 
   const handleTx = useCallback(async () => {
