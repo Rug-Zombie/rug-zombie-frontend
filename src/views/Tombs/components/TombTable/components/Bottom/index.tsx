@@ -359,8 +359,10 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
       return
     }
     step.func()
-      .then(() => {
-        toastTombs(step.toast.title, step.toast.description)
+      .then((succeeded) => {
+        if(succeeded) {
+          toastTombs(step.toast.title, step.toast.description)
+        }
         setConfirmingUnstake(false)
       })
       .catch(() => {
