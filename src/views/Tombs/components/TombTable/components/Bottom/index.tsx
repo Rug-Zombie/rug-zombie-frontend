@@ -5,7 +5,7 @@ import numeral from 'numeral'
 import ProgressBar from './components/ProgressBar'
 import TableDetails from './components/TableDetails'
 import { Tomb } from '../../../../../../state/types'
-import useApprove from '../../../../../../hooks/useApprove'
+import useApprove, { ApproveTarget } from '../../../../../../hooks/useApprove'
 import { getAddress, getDrFrankensteinAddress } from '../../../../../../utils/addressHelpers'
 import { useDrFrankenstein, useERC20, useTombOverlay } from '../../../../../../hooks/useContract'
 import {
@@ -160,7 +160,7 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
   const lpContract = useERC20(getAddress(lpAddress))
   const drFrankenstein = useDrFrankenstein()
   const tombOverlay = useTombOverlay()
-  const approveLp = useApprove(lpContract, getDrFrankensteinAddress()).onApprove
+  const approveLp = useApprove(lpContract, getDrFrankensteinAddress(), ApproveTarget.Tombs).onApprove
   const { onStake } = useStake(drFrankenstein, getId(pid), stakeAmount)
   const { onUnstake } = useUnstake(drFrankenstein, getId(pid), unstakeAmount)
   const { onUnstakeEarly } = useUnstakeEarly(drFrankenstein, getId(pid), unstakeAmount)

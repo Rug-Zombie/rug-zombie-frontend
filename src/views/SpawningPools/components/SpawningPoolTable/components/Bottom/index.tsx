@@ -5,11 +5,10 @@ import numeral from 'numeral'
 import ProgressBar from './components/ProgressBar'
 import TableDetails from './components/TableDetails'
 import { SpawningPool } from '../../../../../../state/types'
-import useApprove from '../../../../../../hooks/useApprove'
+import useApprove, { ApproveTarget } from '../../../../../../hooks/useApprove'
 import { getAddress } from '../../../../../../utils/addressHelpers'
 import { useSpawningPool, useZombie } from '../../../../../../hooks/useContract'
 import { useHarvest, useStake, useUnlock, useUnstake, useUnstakeEarly } from '../../../../../../hooks/useSpawningPool'
-import { BIG_ZERO } from '../../../../../../utils/bigNumber'
 import { getBalanceNumber, getDecimalAmount, getFullDisplayBalance } from '../../../../../../utils/formatBalance'
 import useToast from '../../../../../../hooks/useToast'
 
@@ -150,7 +149,7 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
   const [stakeAmount, setStakeAmount] = useState(new BigNumber(null))
   const [unstakeAmount, setUnstakeAmount] = useState(new BigNumber(null))
   const spawningPoolContract = useSpawningPool(getAddress(address))
-  const approveZombie = useApprove(useZombie(), getAddress(address), true).onApprove
+  const approveZombie = useApprove(useZombie(), getAddress(address), ApproveTarget.SpawningPools).onApprove
   const { onStake } = useStake(spawningPoolContract, stakeAmount)
   const { onUnlock } = useUnlock(spawningPoolContract, unlockFee)
   const { onUnstake } = useUnstake(spawningPoolContract, unstakeAmount)

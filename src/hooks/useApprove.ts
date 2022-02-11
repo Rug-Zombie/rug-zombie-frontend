@@ -6,18 +6,26 @@ import { fetchGravesUserDataAsync } from 'state/graves'
 import { approve } from 'utils/callHelpers'
 import { fetchSpawningPoolUserInfo } from '../state/spawningPools/fetchSpawningPoolUser'
 import { fetchSpawningPoolsUserDataAsync } from '../state/spawningPools'
+import { fetchTombsUserDataAsync } from '../state/tombs'
+
+export enum ApproveTarget {
+  Graves,
+  Tombs,
+  SpawningPools
+}
 
 // Approve an address
-const useApprove = (tokenContract: Contract, spenderAddress: string, isSpawningPool?: boolean) => {
+const useApprove = (tokenContract: Contract, spenderAddress: string, approveTarget?: ApproveTarget) => {
   const dispatch = useAppDispatch()
   const { account } = useWeb3React()
 
   const handleApprove = useCallback(async () => {
     try {
       const tx = await approve(tokenContract, spenderAddress, account)
-      // @ts-ignore
-      if(isSpawningPool) {
+      if(approveTarget === ApproveTarget.SpawningPools) {
         dispatch(fetchSpawningPoolsUserDataAsync(account))
+      } else if(approveTarget === ApproveTarget.Tombs) {
+        dispatch(fetchTombsUserDataAsync(account))
       } else {
         dispatch(fetchGravesUserDataAsync(account))
       }
@@ -25,7 +33,7 @@ const useApprove = (tokenContract: Contract, spenderAddress: string, isSpawningP
     } catch (e) {
       return false
     }
-  }, [tokenContract, spenderAddress, account, isSpawningPool, dispatch])
+  }, [tokenContract, spenderAddress, account, approveTarget, dispatch])
 
   return { onApprove: handleApprove }
 }
