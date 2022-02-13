@@ -72,17 +72,6 @@ const graves: GraveConfig[] = [
   },
   {
     pid: {
-      56: 46,
-      97: 1,
-    },
-    name: 'CxCoin Uncommon',
-    nftId: 88,
-    rug: tokens.cx,
-    rugDex: Dex.PCS_V2,
-    isNew: true,
-  },
-  {
-    pid: {
       56: 45,
       97: 1,
     },
@@ -92,7 +81,17 @@ const graves: GraveConfig[] = [
     rugDex: Dex.PCS_V2,
     isNew: true,
   },
-
+  {
+    pid: {
+      56: 46,
+      97: 1,
+    },
+    name: 'CxCoin Uncommon',
+    nftId: 88,
+    rug: tokens.cx,
+    rugDex: Dex.PCS_V2,
+    isNew: true,
+  },
   {
     pid: {
       56: 44,

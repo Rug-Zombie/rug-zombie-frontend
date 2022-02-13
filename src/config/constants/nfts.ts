@@ -1243,8 +1243,8 @@ const nfts: Nft[] = [
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/QmYZZSJahiBKWUhwJMcgQT4xJYnqFjWWT1XQSUnPdhZseU',
     type: 'image',
-    rarity: 'Rare',
-    artist: artists.ZomBaes,
+    rarity: 'Common',
+    artist: artists.canadiancryptojunkie,
     userInfo: { ...DEFAULT_USER_INFO },
   },
   {
@@ -1260,7 +1260,7 @@ const nfts: Nft[] = [
     path: 'https://ipfs.io/ipfs/Qmbn35zChcRM5UWQFHwk4zF4bY9Ku4bq4YiW7qaamKkWsw',
     type: 'image',
     rarity: 'Common',
-    artist: artists.canadiancryptojunkie,
+    artist: artists.jussjoshinduh,
     userInfo: { ...DEFAULT_USER_INFO },
   },
   {

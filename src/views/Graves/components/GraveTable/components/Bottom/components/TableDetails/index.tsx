@@ -1,11 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 import numeral from 'numeral'
+import { LinkExternal } from '@rug-zombie-libs/uikit'
 import { bnbPriceUsd, zombiePriceUsd } from '../../../../../../../../redux/get'
 import { getBalanceAmount, getFullDisplayBalance } from '../../../../../../../../utils/formatBalance'
 import { Grave } from '../../../../../../../../state/types'
 import { formatDays, formatDuration, now } from '../../../../../../../../utils/timerHelpers'
 import { useGetNftById } from '../../../../../../../../state/hooks'
+import { BASE_EXCHANGE_URL } from '../../../../../../../../config'
+import { getAddress } from '../../../../../../../../utils/addressHelpers'
+import { Dex } from '../../../../../../../../config/constants/types'
 
 export enum GraveItemType {
   Number,
@@ -89,10 +93,16 @@ const Text = styled.span`
   white-space: nowrap;
 `;
 
+const Link = styled(LinkExternal)`
+  color: #AE32AA;
+`
+
 const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
   const {
     nftId,
     endDate,
+    rug,
+    rugDex,
     poolInfo: { allocPoint, withdrawCooldown, nftMintTime, tokenAmount, minimumStake, unlockFee },
   } = grave
   const { name, path, type } = useGetNftById(nftId)
@@ -124,6 +134,10 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
         <SubHeaderText>
           Grave TVL: <Text>{numeral(tvl.toString()).format('$ (0.00 a)')}</Text>
         </SubHeaderText>
+        {rugDex === Dex.PCS_V2 ? <Link href={`${BASE_EXCHANGE_URL}/swap?outputCurrency=${getAddress(rug.address)}`}>
+          Get {rug.symbol}
+        </Link> : null}
+
       </GraveInfo>
       <GraveInfo>
         <HeaderText>Unlock Fees: {getFullDisplayBalance(unlockFee)} BNB (~ ${getFullDisplayBalance(unlockFeeUsd, 18, 2)})</HeaderText>
