@@ -113,7 +113,7 @@ const ConvertNftModal: React.FC<ConvertNftModalProps> = ({ depositNftId, nftConv
         </Button>
         <Text mt='8px' color='textSubtle' fontSize='12px' mb='8px' style={{ width: '10%' }} />
         <Button onClick={async () => {
-          if (selected) {
+          if (selected && depositButton) {
             await handleConvert()
           }
         }} disabled={!depositButton} mt='8px' as='a' variant={selected ? 'secondary' : 'primary'}>
