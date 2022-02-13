@@ -1407,7 +1407,22 @@ const nfts: Nft[] = [
     artist: artists.febryangraves,
     userInfo: { ...DEFAULT_USER_INFO },
   },
-
+  {
+    id: 88,
+    name: 'Polar Ice Zombie',
+    symbol: 'POLAR-ICE',
+    description: 'Just looking out for himself.',
+    address: {
+      56: '0xc2D9164079eb785eD26C4D2091472D9069b31e3e',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'images/rugZombie/PolarIceZombie.jpeg',
+    type: 'image',
+    rarity: 'Uncommon',
+    artist: artists.febryangraves,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 

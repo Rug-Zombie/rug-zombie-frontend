@@ -72,6 +72,17 @@ const graves: GraveConfig[] = [
   },
   {
     pid: {
+      56: 46,
+      97: 1,
+    },
+    name: 'CxCoin Uncommon',
+    nftId: 88,
+    rug: tokens.cx,
+    rugDex: Dex.PCS_V2,
+    isNew: true,
+  },
+  {
+    pid: {
       56: 45,
       97: 1,
     },
@@ -81,6 +92,7 @@ const graves: GraveConfig[] = [
     rugDex: Dex.PCS_V2,
     isNew: true,
   },
+
   {
     pid: {
       56: 44,
@@ -90,7 +102,6 @@ const graves: GraveConfig[] = [
     nftId: 80,
     rug: tokens.zroningmz,
     liquidityDetails: 'None! RONINGMZ holders can claim ZRONINGMZ on the homepage Victim Pools card. ZRONINGMZ can also be found in the Blackmarket and RugRoll in the Catacombs!',
-    isNew: true,
     endDate: 1646283600,
   },
   {
@@ -102,7 +113,6 @@ const graves: GraveConfig[] = [
     nftId: 80,
     rug: tokens.roningmz,
     liquidityDetails: 'None! Trading on the Ronin contract has been halted, a new grave will be available for new stakers shortly.',
-    isNew: true,
     endDate: 1646283600,
   },
   {
@@ -124,7 +134,6 @@ const graves: GraveConfig[] = [
     nftId: 79,
     rug: tokens.hunny,
     rugDex: Dex.PCS_V2,
-    isNew: true,
   },
   {
     pid: {

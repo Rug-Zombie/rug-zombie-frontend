@@ -100,6 +100,15 @@ const tokens = {
     projectLink: 'https://l1ghtl1st.io/',
     tokenLogo: 'https://d1muf25xaso8hp.cloudfront.net/https%3A%2F%2Fs3.amazonaws.com%2Fappforest_uf%2Ff1634140724647x381024309361064100%2FNewToken.png?w=384&h=384&auto=compress&fit=crop&dpr=2'
   },
+  cx: {
+    symbol: 'CX',
+    address: {
+      56: '0xd09092b1c9c495eb7e0a043927492cf2dee68a86',
+      97: '',
+    },
+    decimals: 9,
+    tokenLogo: 'https://assets.coingecko.com/coins/images/17129/small/X2zoTDW.png?1626410291'
+  },
   rugbiden: {
     symbol: 'RUGBIDEN',
     address: {
