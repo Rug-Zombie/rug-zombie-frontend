@@ -46,9 +46,9 @@ const TopMenu = () => {
         <Links>
           {config.map(i => {
             if (i.type === MenuItem.External) {
-              return <MenuText href={i.href}>{i.label}</MenuText>
+              return <MenuText key={i.label} href={i.href}>{i.label}</MenuText>
             }
-            return <MenuText onClick={() => history.push(i.href)}>{i.label}</MenuText>
+            return <MenuText key={i.label} onClick={() => history.push(i.href)}>{i.label}</MenuText>
           })}
         </Links>
         <DropdownMenu>
@@ -66,11 +66,11 @@ const TopMenu = () => {
             <DropdownContent>
               {config.map(i => {
                 if (i.type === MenuItem.External) {
-                  return <DropdownItem onClick={()=> {window.location.href = i.href}}>
+                  return <DropdownItem key={i.label} onClick={()=> {window.location.href = i.href}}>
                     <MenuText>{i.label}</MenuText>
                   </DropdownItem>
                 }
-                return <DropdownItem onClick={(e) => handleDropdownItemClick(e, i)}>
+                return <DropdownItem key={i.label} onClick={(e) => handleDropdownItemClick(e, i)}>
                   <MenuText>{i.label}</MenuText>
                 </DropdownItem>
               },
