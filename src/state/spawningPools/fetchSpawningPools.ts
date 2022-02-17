@@ -7,7 +7,6 @@ import { Dex, SpawningPoolConfig } from 'config/constants/types'
 import { getApeswapFactoryContract, getPancakeFactoryContract, getZombieContract } from '../../utils/contractHelpers'
 import { equalAddresses } from '../../utils'
 import { getBalanceAmount } from '../../utils/formatBalance'
-import { DEXS } from '../../config'
 
 const fetchSpawningPools = async (spawningPoolToFetch: SpawningPoolConfig[]) => {
   const wbnb = {

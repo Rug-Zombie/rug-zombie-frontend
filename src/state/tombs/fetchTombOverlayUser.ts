@@ -8,8 +8,6 @@ import {
 } from 'utils/addressHelpers'
 import { TombConfig } from 'config/constants/types'
 import { getId } from '../../utils'
-import { tombOverlayById } from '../../redux/get'
-import { getTombOverlayContract } from '../../utils/contractHelpers'
 
 export const fetchTombUserEarnings = async (account: string, tombsToFetch: TombConfig[]) => {
   const drFrankensteinAddress = getDrFrankensteinAddress()

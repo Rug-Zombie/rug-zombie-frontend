@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { ArrowDownIcon, Button, ChartIcon, useModal } from '@rug-zombie-libs/uikit'
+import { ArrowDownIcon, Button, useModal } from '@rug-zombie-libs/uikit'
 import SwiperCore, { Keyboard, Mousewheel } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
@@ -12,8 +12,6 @@ import SoonRoundCard from './components/RoundCard/SoonRoundCard'
 import IncreaseBidCard from './components/RoundCard/IncreaseBidCard'
 import RoundCard from './components/RoundCard'
 import MobileTopMenu from './components/MobileTopMenu'
-import { setChartPaneState } from '../../state/predictions'
-import { useAppDispatch } from '../../state'
 import { auctionById } from '../../redux/get'
 import PrizeModal from './PrizeModal'
 import AuctionEndCard from './components/RoundCard/AuctionEndCard'
@@ -68,7 +66,6 @@ interface MobileProps {
 
 const Mobile: React.FC<MobileProps> = ({ refresh, setRefresh, userInfo, id }) => {
   const { setSwiper } = useSwiper()
-  const dispatch = useAppDispatch()
   const [refreshMob, setRefreshMob] = useState(false)
   const { auctionInfo: { bids, lastBidId, endDate } } = auctionById(id)
   const toggleChartPane = null

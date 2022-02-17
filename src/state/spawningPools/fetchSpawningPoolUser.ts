@@ -2,9 +2,8 @@ import BigNumber from 'bignumber.js'
 import erc20ABI from 'config/abi/erc20.json'
 import spawningPoolAbi from 'config/abi/spawningPool.json'
 import multicall from 'utils/multicall'
-import { getAddress, getDrFrankensteinAddress, getZombieAddress } from 'utils/addressHelpers'
-import { GraveConfig, SpawningPoolConfig } from 'config/constants/types'
-import { getId } from '../../utils'
+import { getAddress, getZombieAddress } from 'utils/addressHelpers'
+import { SpawningPoolConfig } from 'config/constants/types'
 
 export const fetchSpawningPoolUserInfo = async (account: string, spawningPoolsToFetch: SpawningPoolConfig[]) => {
 
@@ -29,10 +28,7 @@ export const fetchSpawningPoolUserEarnings = async (account: string, spawningPoo
   })
 
   const rawEarnings = await multicall(spawningPoolAbi, calls)
-  const parsedEarnings = rawEarnings.map((earnings) => {
-    return new BigNumber(earnings)
-  })
-  return parsedEarnings
+  return rawEarnings.map((earnings) => new BigNumber(earnings))
 }
 
 export const fetchSpawningPoolUserTokenInfo = async (account: string, spawningPoolsToFetch: SpawningPoolConfig[]) => {

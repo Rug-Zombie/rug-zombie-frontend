@@ -52,7 +52,6 @@ const App: React.FC = () => {
     console.warn = () => null
   }, [])
 
-  const [isAuthenticated, setAuthenticated] = useState(false)
   const [, setZombiePrice] = useState(0)
   const [modal, setModal] = useState(null)
 

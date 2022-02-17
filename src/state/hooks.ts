@@ -1,8 +1,5 @@
-import { useMemo } from 'react'
-import BigNumber from 'bignumber.js'
 import { useSelector } from 'react-redux'
 import { createSelector } from '@reduxjs/toolkit'
-import { orderBy } from 'lodash'
 import { getAddress } from 'utils/addressHelpers'
 import axios from 'axios'
 import { State } from './types'

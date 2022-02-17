@@ -1,23 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import PageHeader from 'components/PageHeader';
 import { Flex, Heading } from '@rug-zombie-libs/uikit';
-import { burnGraves, account, zombiePriceUsd, zmbeBnbLpPriceUsd } from 'redux/get'
+import { burnGraves, zombiePriceUsd } from 'redux/get'
 import { burnGrave, initialBurnGraveData } from 'redux/fetch';
-import BigNumber from 'bignumber.js';
-import { BIG_ZERO } from 'utils/bigNumber';
-import numeral from 'numeral';
-import { getBalanceAmount } from 'utils/formatBalance';
 import { getId } from 'utils';
 import Page from 'components/layout/Page';
 import Table from './components/Table';
 
-const filterGraves = (a) => {
-    switch (a) {
-        case 0: return burnGraves().filter(g => g.poolInfo.isEnabled);
-        case 1: return burnGraves().filter(g => !g.poolInfo.isEnabled);
-        default: return burnGraves();
-    }
-}
 
 const BurnGraves: React.FC = () => {
     const [updateUserInfo, setUpdateUserInfo] = useState(false);

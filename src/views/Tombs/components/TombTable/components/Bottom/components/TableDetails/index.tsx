@@ -1,11 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import numeral from 'numeral'
-import { bnbPriceUsd, tombOverlayById } from '../../../../../../../../redux/get'
+import { bnbPriceUsd } from '../../../../../../../../redux/get'
 import { getFullDisplayBalance } from '../../../../../../../../utils/formatBalance'
 import { Tomb } from '../../../../../../../../state/types'
 import { formatDays } from '../../../../../../../../utils/timerHelpers'
-import { getId } from '../../../../../../../../utils'
 import { useGetNftById } from '../../../../../../../../state/hooks'
 
 export enum TombItemType {

@@ -1,9 +1,7 @@
 import React from 'react'
-import { useWeb3React } from '@web3-react/core'
-import { ArrowForwardIcon, Box, Button, Radio, Flex, Heading, Text } from '@rug-zombie-libs/uikit'
+import { ArrowForwardIcon, Box, Button, Flex, Heading, Text } from '@rug-zombie-libs/uikit'
 import { useAppDispatch } from 'state'
-import { HistoryFilter } from 'state/types'
-import { setHistoryFilter, setHistoryPaneState, fetchHistory } from 'state/predictions'
+import { setHistoryPaneState } from 'state/predictions'
 import { useTranslation } from 'contexts/Localization'
 import styled from 'styled-components'
 import { getBubbleGumBackground } from '../../helpers'
@@ -21,28 +19,14 @@ const StyledHeader = styled(Box)`
   padding: 16px;
 `
 
-const getClaimParam = (historyFilter: HistoryFilter) => {
-  switch (historyFilter) {
-    case HistoryFilter.COLLECTED:
-      return true
-    case HistoryFilter.UNCOLLECTED:
-      return false
-    case HistoryFilter.ALL:
-    default:
-      return undefined
-  }
-}
 
 const Header = () => {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
-  const { account } = useWeb3React()
 
   const handleClick = () => {
     dispatch(setHistoryPaneState(false))
   }
-
-  const handleChange = null
 
   return (
     <StyledHeader>

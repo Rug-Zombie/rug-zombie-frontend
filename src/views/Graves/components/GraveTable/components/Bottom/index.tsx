@@ -33,18 +33,6 @@ const Separator = styled.div`
   margin: 25px 0 0 0;
 `
 
-const BalanceContainer = styled.div`
-  width: 50%;
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: nowrap;
-  margin: 25px 0 0 0;
-  white-space: nowrap;
-  @media (max-width: 771px) {
-    width: 100%;
-  }
-
-`
 
 const StakingContainer = styled.div`
   width: 100%;

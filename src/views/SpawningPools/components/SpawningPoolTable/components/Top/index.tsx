@@ -128,7 +128,6 @@ interface TopProps {
 
 const Top: React.FC<TopProps> = ({ spawningPool, open, setOpen }) => {
   const {
-    id,
     name,
     rewardToken,
     isNew,
