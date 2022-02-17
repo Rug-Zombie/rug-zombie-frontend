@@ -83,6 +83,17 @@ const graves: GraveConfig[] = [
   },
   {
     pid: {
+      56: 47,
+      97: 1,
+    },
+    name: 'CxCoin Rare',
+    nftId: 89,
+    rug: tokens.cx,
+    rugDex: Dex.PCS_V2,
+    isNew: true,
+  },
+  {
+    pid: {
       56: 46,
       97: 1,
     },

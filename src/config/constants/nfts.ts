@@ -1410,7 +1410,7 @@ const nfts: Nft[] = [
   {
     id: 88,
     name: 'Polar Ice Zombie',
-    symbol: 'POLAR-ICE',
+    symbol: 'SOG',
     description: 'Just looking out for himself.',
     address: {
       56: '0xc2D9164079eb785eD26C4D2091472D9069b31e3e',
@@ -1420,7 +1420,23 @@ const nfts: Nft[] = [
     path: 'images/rugZombie/PolarIceZombie.jpeg',
     type: 'image',
     rarity: 'Uncommon',
-    artist: artists.febryangraves,
+    artist: artists.rugzombie,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
+  {
+    id: 89,
+    name: 'Polar Ice Zombie',
+    symbol: 'SOG',
+    description: 'He\'s always beating dead horses.',
+    address: {
+      56: '0xd30CBaA2d07329737bee4e154B5Fb26334329B6d',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'ihttps://storage.googleapis.com/rug-zombie/POS-min.jpeg',
+    type: 'image',
+    rarity: 'Rare',
+    artist: artists.ayaz_psd,
     userInfo: { ...DEFAULT_USER_INFO },
   },
 ]
