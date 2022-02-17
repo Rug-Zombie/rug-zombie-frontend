@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/prefer-default-export
-export const routes = { 
+export const routes = {
+    HOME: '/home',
     LANDING: '/',
     SPAWNWITHUS:'/spawnwithus',
     GRAVEDIGGER:'/gravedigger',

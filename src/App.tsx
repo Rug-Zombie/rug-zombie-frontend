@@ -1,5 +1,5 @@
 import React, { useEffect, lazy, useState } from 'react'
-import { Router, Route, Switch } from 'react-router-dom'
+import { Router, Route, Switch, Redirect } from 'react-router-dom'
 import { ResetCSS } from '@rug-zombie-libs/uikit'
 import BigNumber from 'bignumber.js'
 import useEagerConnect from 'hooks/useEagerConnect'
@@ -7,14 +7,12 @@ import ToastListener from 'components/ToastListener'
 import { routes } from 'routes'
 import TopMenu from 'components/TopMenu'
 import AppContainer from 'components/AppContainer'
-import Menu from 'components/Menu'
 import Loader from 'components/Loader'
 import Tombs from 'views/Tombs'
 import Gravedigger from 'views/Gravedigger/'
 import { useWeb3React } from '@web3-react/core'
 import SpawnWithUs from 'views/SpawnWithUs'
 import Catacombs from 'views/Catacombs'
-import BurnGraves from 'views/BurnGraves'
 import SuspenseWithChunkError from './components/SuspenseWithChunkError'
 import history from './routerHistory'
 import GlobalStyle from './style/Global'
@@ -89,6 +87,7 @@ const App: React.FC = () => {
           </Route>
           <Route exact path={routes.BLACKMARKET}><BlackMarket /></Route>
           <Route exact path={routes.BARRACKS}><Barracks /></Route>
+          <Route exact path={routes.HOME}><Redirect to={routes.LANDING} /></Route>
           <Route exact path={routes.LANDING}>
             <>
               <TopMenu />
