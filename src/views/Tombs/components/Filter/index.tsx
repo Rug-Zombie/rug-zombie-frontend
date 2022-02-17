@@ -105,7 +105,7 @@ const DropdownText = styled.p`
   font: normal normal normal 14px/30px Poppins;
   color: #FFFFFF;
   padding: 0 10px 0 20px;
-  margin: 0;
+  margin: 0 auto 0 0;
 `
 
 const DownPointer = <div style={{ marginRight: '10px' }}>
@@ -143,10 +143,8 @@ const Filter: React.FC<FilterProps> = ({ tombsList, raritiesList, tombFilter, ra
     e.preventDefault()
     if (condition === 'tombs') {
       tombFilter.set(tombFilters.findIndex(f => f.label === e.target.textContent))
-      setShowTombsMenu(false)
     } else if (condition === 'types') {
       rarityFilter.set(rarityFilters.findIndex(f => f.label === e.target.textContent))
-      setShowTypeMenu(false)
     }
   }
 

@@ -104,7 +104,7 @@ const DropdownText = styled.p`
   font: normal normal normal 14px/30px Poppins;
   color: #FFFFFF;
   padding: 0 10px 0 20px;
-  margin: 0;
+  margin: 0 auto 0 0;
 `
 
 const DownPointer = <div style={{ marginRight: '10px' }}>
