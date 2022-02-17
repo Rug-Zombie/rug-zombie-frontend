@@ -46,7 +46,6 @@ const StyleCardHeader = styled.div`
 
 interface InstabuyCardProps {
   id: number;
-  refresh: () => void;
   modalObj: { modal: boolean, setModal: any };
 }
 

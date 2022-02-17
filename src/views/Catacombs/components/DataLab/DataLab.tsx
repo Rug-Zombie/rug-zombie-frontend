@@ -81,19 +81,17 @@ const DataLab: React.FC<DataLabProps> = ({ modalObj }) => {
                 >
                   <SwiperSlide>
                     <div style={{ paddingTop: '15px', paddingBottom: '15px' }}>
-                      <InstabuyCard id={3} refresh={null} modalObj={modalObj} />
+                      <InstabuyCard id={3} modalObj={modalObj} />
                     </div>
                   </SwiperSlide>
                   <SwiperSlide>
                     <div style={{ paddingTop: '15px', paddingBottom: '15px' }}>
-
-                      <InstabuyCard id={4} refresh={null} modalObj={modalObj} />
+                      <InstabuyCard id={4} modalObj={modalObj} />
                     </div>
                   </SwiperSlide>
                   <SwiperSlide>
                     <div style={{ paddingTop: '15px', paddingBottom: '15px' }}>
-
-                      <InstabuyCard id={5} refresh={null} modalObj={modalObj} />
+                      <InstabuyCard id={5} modalObj={modalObj} />
                     </div>
                   </SwiperSlide>
                 </Swiper>
