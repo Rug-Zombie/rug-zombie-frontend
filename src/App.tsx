@@ -34,6 +34,7 @@ import SwiperProvider from './views/Mausoleum/context/SwiperProvider'
 import SharkPools from './views/SharkPools'
 import { useAppDispatch } from './state'
 import { fetchNftPublicDataAsync } from './state/nfts'
+import Nfts from './views/Nfts'
 
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page
@@ -134,6 +135,14 @@ const App: React.FC = () => {
               <TopMenu />
               <AppContainer>
                 <Graveyard />
+              </AppContainer>
+            </>
+          </Route>
+          <Route exact path={routes.NFTS}>
+            <>
+              <TopMenu />
+              <AppContainer>
+                <Nfts />
               </AppContainer>
             </>
           </Route>

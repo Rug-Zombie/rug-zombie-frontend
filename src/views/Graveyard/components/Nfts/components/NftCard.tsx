@@ -17,6 +17,10 @@ const Card = styled.div`
   flex-direction: column;
   width: 300px;
   margin: 15px;
+  
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 const Shadow = styled.div`

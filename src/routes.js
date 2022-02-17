@@ -12,6 +12,7 @@ export const routes = {
     GRAVEYARD:'/graveyard',
     SHARKTANK:'/sharktank',
     BURNGRAVES:'/burngraves',
+    NFTS: '/nfts/:id',
 
     // Catacombs
     CATACOMBS:'/catacombs',
