@@ -62,10 +62,8 @@ const SpawningPools: React.FC = () => {
       dispatch(fetchSpawningPoolsUserDataAsync(account))
     }
   }, [dispatch, account])
-  useEffect(() => {
-    dispatch(fetchSpawningPoolsPublicDataAsync())
-  }, [dispatch])
-  
+
+
   const [filter, setFilter] = useState('All graves')
   const [search, setSearch] = useState('')
 

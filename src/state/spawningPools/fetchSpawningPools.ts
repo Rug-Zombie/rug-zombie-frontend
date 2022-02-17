@@ -92,7 +92,7 @@ const fetchSpawningPools = async (spawningPoolToFetch: SpawningPoolConfig[]) => 
           rewardPerBlock: new BigNumber(rewardPerBlock),
           unlockFee: new BigNumber(unlockFee),
           minimumStake: new BigNumber(minimumStake),
-          withdrawalCooldown: new BigNumber(minimumStakingTime),
+          withdrawCooldown: new BigNumber(minimumStakingTime),
           nftMintTime: new BigNumber(nftMintTime),
           totalAmount: new BigNumber(totalAmount),
           rewardTokenPriceBnb,
