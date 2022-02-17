@@ -1425,7 +1425,7 @@ const nfts: Nft[] = [
   },
   {
     id: 89,
-    name: 'Polar Ice Zombie',
+    name: 'Son of the Giants',
     symbol: 'SOG',
     description: 'He\'s always beating dead horses.',
     address: {
@@ -1433,7 +1433,7 @@ const nfts: Nft[] = [
       97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
     },
     totalSupply: BIG_ZERO,
-    path: 'ihttps://storage.googleapis.com/rug-zombie/POS-min.jpeg',
+    path: 'https://storage.googleapis.com/rug-zombie/POS-min.jpeg',
     type: 'image',
     rarity: 'Rare',
     artist: artists.ayaz_psd,
