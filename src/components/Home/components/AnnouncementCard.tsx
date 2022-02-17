@@ -4,28 +4,6 @@ import { Heading, Card, CardBody, Text, LinkExternal, Flex } from '@rug-zombie-l
 import { useTranslation } from 'contexts/Localization'
 import { Lightbox } from "react-modal-image";
 
-// import { Tweet } from 'react-twitter-widgets'
-
-// const TwitterContainer = () => {
-//   return (
-//     <section className='twitterContainer'>
-//       <div className='twitter-embed' style={{
-//         maxHeight: '320px',
-//         overflow: 'scroll',
-//       }}>
-//         <Tweet
-//           options={{
-//             width: '100%',
-//             height: '100%',
-//             theme: 'dark',
-//           }}
-//           tweetId='1413144215026995215'
-//         />
-//       </div>
-//     </section>
-//   )
-// }
-
 const StyledAnnouncementCard = styled(Card)`
   background-size: 300px 300px;
   background-position-x: 100px;
