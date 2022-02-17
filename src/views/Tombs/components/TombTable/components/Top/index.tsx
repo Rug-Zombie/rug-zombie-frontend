@@ -85,12 +85,12 @@ const GreyTab = styled.div`
   }
 `
 
-const GreenTabText = styled.text`
+const GreenTabText = styled.p`
   font: normal normal normal 12px/30px Poppins;
   color: #FFFFFF;
 `
 
-const GreyTabText = styled.text`
+const GreyTabText = styled.p`
   font: normal normal normal 12px/30px Poppins;
   color: #6B7682;
 `
