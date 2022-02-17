@@ -4,6 +4,7 @@ import erc20ABI from 'config/abi/erc20.json'
 import tokens from 'config/constants/tokens'
 import { Token } from 'config/constants/types'
 import multicall from 'utils/multicall'
+import { chunk } from 'lodash'
 
 const symbolsExcludedFromAllTests = new Set([
   'BNB', 'Zombie (No Relation)', '',
@@ -26,20 +27,26 @@ const toComparableSymbol = (s: string) => (
   .toLowerCase()
   .replace('rzgnt', ''));
 
-describe('Config tokens', () => {
+describe('Config tokens',  () => {
+  const contractInfoByToken = new Map()
+
+  beforeAll(async () => {
+    const tokenAddressesToTest = Object.values(tokensToTest)
+        .map(({ address }) => address[56])
+    const results: Array<Array<string | number>> = await multicall(
+        erc20ABI,
+        tokenAddressesToTest
+            .flatMap((address) => [
+              { address, name: 'symbol' },
+              { address, name: 'decimals' },
+            ]))
+    chunk(results, 2).forEach(([[symbol], [decimals]], i) => (
+        contractInfoByToken.set(tokenAddressesToTest[i], { symbol, decimals })))
+  })
+
   it.each(map(tokensToTest, (token, key) => [key, token]))(
-    'Token %s has the correct key, symbol, and decimal',
-    async (key, token: Token) => {
-      const [[symbol], [decimals]] = await multicall(erc20ABI, [
-        {
-          address: token.address[56],
-          name: 'symbol',
-        },
-        {
-          address: token.address[56],
-          name: 'decimals',
-        },
-      ])
+    'Token %s has the correct key, symbol, and decimal', (key, token: Token) => {
+      const { symbol, decimals } = contractInfoByToken.get(token.address[56])
 
       if (!keysExcludedFromKeyTest.has(key)) {
         expect(toComparableSymbol(key))
