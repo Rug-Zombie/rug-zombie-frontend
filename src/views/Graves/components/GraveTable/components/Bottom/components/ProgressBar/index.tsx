@@ -72,8 +72,6 @@ const ProgressBar: React.FC<StakingProgressBarProps> = ({ grave }) => {
     // currentStep -= 1
   }
   if(amount.gt(0)) {
-    console.log('staked')
-
     currentStep = Step.Staked
   }
   if(zombieAllowance.isZero() && amount.gt(0)) {

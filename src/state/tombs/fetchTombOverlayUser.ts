@@ -32,7 +32,6 @@ export const fetchTombUserEarnings = async (account: string, tombsToFetch: TombC
 export const fetchTombOverlayUserInfo = async (account: string, tombOverlaysToFetch: TombConfig[]) => {
   const calls = tombOverlaysToFetch.reduce((userInfos, tombConfig) => {
     const overlayId = getId(tombConfig.overlay.pid).toString()
-    console.log(overlayId)
     return userInfos.concat([{
       address: getTombOverlayAddress(),
       name: 'userInfo',
@@ -50,8 +49,6 @@ export const fetchTombOverlayUserInfo = async (account: string, tombOverlaysToFe
 
   const pairedUserInfos = []
   for (let i = 0; i < userInfos.length; i += 2) {
-    console.log(userInfos[i].toString())
-
     pairedUserInfos.push({
       nextNftMintDate: userInfos[i].nextNftMintDate,
       isMinting: userInfos[i].isMinting,
