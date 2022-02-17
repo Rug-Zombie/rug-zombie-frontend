@@ -98,7 +98,7 @@ export const spUnstake = async (spawningPoolContract, amount, account) => {
 
 export const spUnstakeEarly = async (spawningPoolContract, amount, account) => {
   return spawningPoolContract.methods
-    .leaveStakingEarly(amount.toString())
+    .withdrawEarly(amount.toString())
     .send({ from: account })
     .on('transactionHash', (tx) => {
       return tx.transactionHash

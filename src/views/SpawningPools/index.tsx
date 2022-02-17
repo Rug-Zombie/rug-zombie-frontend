@@ -63,7 +63,6 @@ const SpawningPools: React.FC = () => {
     }
   }, [dispatch, account])
 
-
   const [filter, setFilter] = useState('All graves')
   const [search, setSearch] = useState('')
 
