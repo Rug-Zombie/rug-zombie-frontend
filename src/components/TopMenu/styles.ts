@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { PrimaryButton, SecondaryButton } from '../Buttons'
+import { SecondaryButton } from '../Buttons'
 
 export const Navbar = styled.nav`
   width: 100%;

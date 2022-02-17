@@ -4,7 +4,6 @@ import styled from 'styled-components'
 import Top from './components/Top'
 import Bottom from './components/Bottom'
 import { SpawningPool } from '../../../../state/types'
-import { getId } from '../../../../utils'
 
 const SpawningPoolCard = styled.div<{ open: boolean }>`
   width: 100%;

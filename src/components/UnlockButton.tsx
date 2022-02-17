@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, useWalletModal } from '@rug-zombie-libs/uikit'
+import { useWalletModal } from '@rug-zombie-libs/uikit'
 import useAuth from 'hooks/useAuth'
 import { useTranslation } from 'contexts/Localization'
 import styled from 'styled-components'

@@ -13,14 +13,6 @@ import {useModal} from '@rug-zombie-libs/uikit'
 import {useTranslation} from 'contexts/Localization'
 import CreateListingModal from "./CreateListingModal";
 
-const ButtonText = styled(Text)`
-  display: none;
-
-  ${({theme}) => theme.mediaQueries.lg} {
-    display: block;
-  }
-`
-
 const StyledButton = styled(Button)`
   border: 2px solid white;
   background: black;

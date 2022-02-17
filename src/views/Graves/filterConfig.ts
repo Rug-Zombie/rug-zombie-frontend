@@ -1,4 +1,3 @@
-import { useGetNftById } from '../../state/hooks'
 import { getNftConfigById } from '../../state/nfts/hooks'
 
 export enum GraveFilter {

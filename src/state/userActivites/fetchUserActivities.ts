@@ -72,7 +72,7 @@ export const fetchDrFEvents = async (account: string, toBlock?: number) => {
   ])
 
   const events: UserActivity[] = await Promise.all(deposits.concat(withdrawals, withdrawEarlys, emergencyWithdrawals, nftMints).map(async (event) => {
-    let timestamp = (await web3.eth.getBlock(event.blockNumber)).timestamp
+    let { timestamp } = (await web3.eth.getBlock(event.blockNumber))
     if (typeof timestamp === 'string') {
       timestamp = parseInt(timestamp)
     }

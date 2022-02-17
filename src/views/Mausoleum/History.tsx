@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
-import { Box, Heading, Spinner, Text } from '@rug-zombie-libs/uikit'
-import { useWeb3React } from '@web3-react/core'
+import React from 'react'
+import { Box, Heading, Text } from '@rug-zombie-libs/uikit'
 import styled from 'styled-components'
 import { useTranslation } from 'contexts/Localization'
 import { Header } from './components/History'
@@ -19,17 +18,6 @@ const BetWrapper = styled.div`
   position: relative;
 `
 
-const SpinnerWrapper = styled.div`
-  align-items: center;
-  background-color: ${({ theme }) => theme.card.background};
-  display: flex;
-  left: 0;
-  height: 100%;
-  justify-content: center;
-  position: absolute;
-  top: 0;
-  width: 100%;
-`
 
 const History: React.FC = () => {
   const { t } = useTranslation()

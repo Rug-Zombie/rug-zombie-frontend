@@ -42,13 +42,6 @@ const InfoCardSubHeader = styled.h4`
   padding: 0 10px;
 `
 
-const InfoCardLink = styled.p`
-  text-align: left;
-  text-decoration: underline;
-  font: normal normal normal 16px/30px Poppins;
-  letter-spacing: 0px;
-  color: #AE32AA;
-`
 
 const InfoCardHeader = styled.div`
   display: flex;

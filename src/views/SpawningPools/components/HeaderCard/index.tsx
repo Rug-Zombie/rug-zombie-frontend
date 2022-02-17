@@ -1,12 +1,10 @@
 /* eslint-disable no-param-reassign */
 import React from 'react'
-import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
 import numeral from 'numeral'
 import { useGetSpawningPools } from '../../../../state/hooks'
-import { bnbPriceUsd, zombiePriceUsd } from '../../../../redux/get'
+import { zombiePriceUsd } from '../../../../redux/get'
 import { getBalanceNumber } from '../../../../utils/formatBalance'
-import { now } from '../../../../utils/timerHelpers'
 import { BIG_ZERO } from '../../../../utils/bigNumber'
 
 const InfoCard = styled.header`
@@ -43,13 +41,6 @@ const InfoCardSubHeader = styled.h4`
   padding: 0 10px;
 `
 
-const InfoCardLink = styled.p`
-  text-align: left;
-  text-decoration: underline;
-  font: normal normal normal 16px/30px Poppins;
-  letter-spacing: 0px;
-  color: #AE32AA;
-`
 
 const InfoCardHeader = styled.div`
   display: flex;

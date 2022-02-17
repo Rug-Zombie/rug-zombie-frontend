@@ -5,7 +5,6 @@ import { useWeb3React } from '@web3-react/core'
 import { useCallback } from 'react'
 import { useAppDispatch } from '../state'
 import {
-  depositRug,
   emergencyWithdraw,
   finishMinting,
   stake,
@@ -14,7 +13,6 @@ import {
   unstake,
   unstakeEarly,
 } from '../utils/callHelpers'
-import { fetchGravesUserDataAsync } from '../state/graves'
 import { BIG_ZERO } from '../utils/bigNumber'
 import { fetchTombsUserDataAsync } from '../state/tombs'
 

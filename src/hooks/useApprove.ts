@@ -4,7 +4,6 @@ import { Contract } from 'web3-eth-contract'
 import { useAppDispatch } from 'state'
 import { fetchGravesUserDataAsync } from 'state/graves'
 import { approve } from 'utils/callHelpers'
-import { fetchSpawningPoolUserInfo } from '../state/spawningPools/fetchSpawningPoolUser'
 import { fetchSpawningPoolsUserDataAsync } from '../state/spawningPools'
 import { fetchTombsUserDataAsync } from '../state/tombs'
 
