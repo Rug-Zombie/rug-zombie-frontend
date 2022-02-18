@@ -18,8 +18,8 @@ const Video: React.FC<VideoProps> = ({ path }) => {
       <source src={path} type="video/webm" />
     </video>
   ) : (
-    // eslint-disable-next-line
     <div
+      // eslint-disable-next-line
       dangerouslySetInnerHTML={{
         __html: `
                 <video autoPlay loop muted style='max-height: ${maxMobileHeight}px; max-width: ${maxMobileWidth}px'>

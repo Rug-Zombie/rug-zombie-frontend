@@ -143,6 +143,7 @@ const SetPositionCard: React.FC<SetPositionCardProps> = ({ id, onBack, onSuccess
       decimalValue = new BigNumber(maxBalance)
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-extra-semi -- Prettier insists
     ;(version === 'v3'
       ? mausoleum.methods.increaseBid(aid).send({ from: account, value: decimalValue })
       : mausoleum.methods.increaseBid(aid, decimalValue).send({ from: account })

@@ -88,8 +88,8 @@ const Graves: React.FC = () => {
 
   const orderedGraves = featuredGraves.concat(
     newGraves,
-    // eslint-disable-next-line no-nested-ternary
     remainingGraves.sort((a, b) =>
+      // eslint-disable-next-line no-nested-ternary
       a.poolInfo.allocPoint.gt(b.poolInfo.allocPoint) ? -1 : a.poolInfo.allocPoint.lt(b.poolInfo.allocPoint) ? 1 : 0,
     ),
   )

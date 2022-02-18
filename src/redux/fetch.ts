@@ -200,9 +200,10 @@ export const tomb = (
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const initialTombData = (
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   updatePoolObj?: { update: number; setUpdate: any },
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   updateUserObj?: { update: number; setUpdate: any },
 ) => {
   let index = 0

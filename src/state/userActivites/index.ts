@@ -44,8 +44,8 @@ export const fetchUserActivityAsync = (account: string) => async (dispatch) => {
 
   const drFEvents = flatten(drFEventChunks)
 
-  // eslint-disable-next-line no-nested-ternary
   const arrayOfUserEventObjects = drFEvents.sort((a, b) =>
+    // eslint-disable-next-line no-nested-ternary
     a.timestamp > b.timestamp ? -1 : a.timestamp < b.timestamp ? 1 : 0,
   )
   dispatch(setUserActivity(arrayOfUserEventObjects))

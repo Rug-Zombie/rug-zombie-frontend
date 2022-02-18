@@ -178,6 +178,7 @@ const RugRollCard: React.FC<ViewCardProps> = () => {
           {
             // eslint-disable-next-line no-nested-ternary
             account() ? (
+              // eslint-disable-next-line no-nested-ternary
               zombieBalance().lt(burnAmount) ? (
                 <Button
                   mt="24px"
