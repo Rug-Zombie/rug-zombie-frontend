@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { BaseLayout, useMatchBreakpoints } from '@rug-zombie-libs/uikit';
-import { getBalanceAmount, getFullDisplayBalance } from 'utils/formatBalance';
+import { getBalanceAmount } from 'utils/formatBalance';
 import numeral from 'numeral';
 import sharkpools from './SharkSetup';
 

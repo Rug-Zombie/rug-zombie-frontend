@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PageHeader from 'components/PageHeader';
-import { coingeckoPrice, account } from 'redux/get';
 import { Flex, Heading, LinkExternal } from '@rug-zombie-libs/uikit';
 import Page from 'components/layout/Page';
 import sharkpools from './SharkSetup';
