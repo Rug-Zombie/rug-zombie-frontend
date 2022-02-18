@@ -1,6 +1,5 @@
-import {RugMarketListing} from "./types";
+import { RugMarketListing } from './types'
 
-
-const rugMarketListings: RugMarketListing[]= []
+const rugMarketListings: RugMarketListing[] = []
 
 export default rugMarketListings

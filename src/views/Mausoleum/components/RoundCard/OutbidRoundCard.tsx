@@ -7,9 +7,9 @@ import Card from './Card'
 import CardHeader from './CardHeader'
 
 interface ExpiredRoundCardProps {
-  bid: any;
-  id: number;
-  bidId: number;
+  bid: any
+  id: number
+  bidId: number
 }
 
 const StyledExpiredRoundCard = styled(Card)`

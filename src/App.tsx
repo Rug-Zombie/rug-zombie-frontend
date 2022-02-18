@@ -55,7 +55,6 @@ const App: React.FC = () => {
   const [, setZombiePrice] = useState(0)
   const [modal, setModal] = useState(null)
 
-
   useEffect(() => {
     document.title = 'RugZombie'
   })
@@ -76,18 +75,32 @@ const App: React.FC = () => {
       <GlobalStyle />
       <SuspenseWithChunkError fallback={<Loader />}>
         <Switch>
-          <Route exact path={routes.GRAVEDIGGER}><Gravedigger /></Route>
-          <Route exact path={routes.SPAWNWITHUS}><SpawnWithUs /></Route>
-          <Route exact path={routes.CATACOMBS}><Catacombs /></Route>
-          <Route exact path={routes.RUGROLL}><RugRoll /></Route>
+          <Route exact path={routes.GRAVEDIGGER}>
+            <Gravedigger />
+          </Route>
+          <Route exact path={routes.SPAWNWITHUS}>
+            <SpawnWithUs />
+          </Route>
+          <Route exact path={routes.CATACOMBS}>
+            <Catacombs />
+          </Route>
+          <Route exact path={routes.RUGROLL}>
+            <RugRoll />
+          </Route>
           <Route exact path={routes.DATALAB}>
             <SwiperProvider>
               <DataLab modalObj={{ modal, setModal }} />
             </SwiperProvider>
           </Route>
-          <Route exact path={routes.BLACKMARKET}><BlackMarket /></Route>
-          <Route exact path={routes.BARRACKS}><Barracks /></Route>
-          <Route exact path={routes.HOME}><Redirect to={routes.LANDING} /></Route>
+          <Route exact path={routes.BLACKMARKET}>
+            <BlackMarket />
+          </Route>
+          <Route exact path={routes.BARRACKS}>
+            <Barracks />
+          </Route>
+          <Route exact path={routes.HOME}>
+            <Redirect to={routes.LANDING} />
+          </Route>
           <Route exact path={routes.LANDING}>
             <>
               <TopMenu />
@@ -168,7 +181,6 @@ const App: React.FC = () => {
               </AppContainer>
             </>
           </Route>
-
         </Switch>
       </SuspenseWithChunkError>
       <ToastListener />

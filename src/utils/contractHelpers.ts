@@ -93,7 +93,7 @@ export const getSpawningPoolContract = (address: string, web3?: Web3) => {
   return getContract(spawningPoolAbi, address, web3)
 }
 export const getSharkpoolContract = (id: number, web3?: Web3) => {
-  return getContract(sharkpoolAbi, getSharkPoolAddress(id), web3);
+  return getContract(sharkpoolAbi, getSharkPoolAddress(id), web3)
 }
 export const getNftConverterContract = (web3?: Web3) => {
   return getContract(nftConverterAbi, getNftConverterAddress(), web3)
@@ -122,7 +122,7 @@ export const getRugRollContract = (web3?: Web3) => {
 }
 
 export const getNftSwapperContract = (web3?: Web3) => {
-  return getContract(nftSwapperAbi, getNftSwapperAddress(), web3);
+  return getContract(nftSwapperAbi, getNftSwapperAddress(), web3)
 }
 
 export const getZTokenSwapperContract = (web3?: Web3) => {
@@ -130,15 +130,15 @@ export const getZTokenSwapperContract = (web3?: Web3) => {
 }
 
 export const getDrBurnensteinContract = (web3?: Web3) => {
-  return getContract(drBurnensteinAbi, getDrBurnensteinAddress(), web3);
+  return getContract(drBurnensteinAbi, getDrBurnensteinAddress(), web3)
 }
 
 export const getPancakeFactoryContract = (web3?: Web3) => {
-  return getContract(pancakeFactory, getPancakeFactoryAddress(), web3);
+  return getContract(pancakeFactory, getPancakeFactoryAddress(), web3)
 }
 
 export const getApeswapFactoryContract = (web3?: Web3) => {
-  return getContract(pancakeFactory, getApeswapFactoryAddress(), web3);
+  return getContract(pancakeFactory, getApeswapFactoryAddress(), web3)
 }
 
 export const getRugMarketContract = (web3?: Web3) => {

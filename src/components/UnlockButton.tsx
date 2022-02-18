@@ -14,13 +14,15 @@ export const ConnectButton = styled(PrimaryButton)`
   &:hover {
     cursor: pointer;
   }
-`;
+`
 
 export const ConnectText = styled(Text)`
   color: black;
-  &:hover { text-shadow: 0 0 5px limegreen; };
+  &:hover {
+    text-shadow: 0 0 5px limegreen;
+  }
   font-weight: bold;
-`;
+`
 
 const UnlockButton = (props) => {
   const { t } = useTranslation()

@@ -1,10 +1,5 @@
 import React, { useState } from 'react'
-import {
-  Box,
-  Flex,
-  PlayCircleOutlineIcon,
-  Text,
-} from '@rug-zombie-libs/uikit'
+import { Box, Flex, PlayCircleOutlineIcon, Text } from '@rug-zombie-libs/uikit'
 import styled from 'styled-components'
 import { useTranslation } from 'contexts/Localization'
 
@@ -29,28 +24,28 @@ const HistoricalBet: React.FC<BetProps> = () => {
   const toggleOpen = () => setIsOpen(!isOpen)
 
   // const getRoundColor = () => {
-    // switch (result) {
-    //   case Result.WIN:
+  // switch (result) {
+  //   case Result.WIN:
   //      return 'success'
-      // case Result.LOSE:
-      //   return 'failure'
-      // case Result.CANCELED:
-      //   return 'textDisabled'
-      // default:
-      //   return 'text'
-    // }
+  // case Result.LOSE:
+  //   return 'failure'
+  // case Result.CANCELED:
+  //   return 'textDisabled'
+  // default:
+  //   return 'text'
+  // }
   // }
 
   const renderBetLabel = () => {
     // if (true) {
-      return (
-        <Flex alignItems="center">
-          <PlayCircleOutlineIcon color="primary" mr="6px" width="24px" />
-          <Text color="primary" bold>
-            {t('Starting Soon')}
-          </Text>
-        </Flex>
-      )
+    return (
+      <Flex alignItems="center">
+        <PlayCircleOutlineIcon color="primary" mr="6px" width="24px" />
+        <Text color="primary" bold>
+          {t('Starting Soon')}
+        </Text>
+      </Flex>
+    )
     // }
 
     // if (true) {
@@ -102,17 +97,17 @@ const HistoricalBet: React.FC<BetProps> = () => {
         {/*    {t('Collect')} */}
         {/*  </CollectWinningsButton> */}
         {/* )} */}
-      {/*  {roundResult === Result.CANCELED && !claimed && ( */}
-      {/*    <ReclaimPositionButton onSuccess={handleSuccess} epoch={bet.round.epoch} scale="sm" mr="8px"> */}
-      {/*      {t('Reclaim')} */}
-      {/*    </ReclaimPositionButton> */}
-      {/*  )} */}
-      {/*  {!isOpenRound && !isLiveRound && ( */}
-      {/*    <IconButton variant="text" scale="sm"> */}
-      {/*      {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />} */}
-      {/*    </IconButton> */}
-      {/*  )} */}
-       </StyledBet>
+        {/*  {roundResult === Result.CANCELED && !claimed && ( */}
+        {/*    <ReclaimPositionButton onSuccess={handleSuccess} epoch={bet.round.epoch} scale="sm" mr="8px"> */}
+        {/*      {t('Reclaim')} */}
+        {/*    </ReclaimPositionButton> */}
+        {/*  )} */}
+        {/*  {!isOpenRound && !isLiveRound && ( */}
+        {/*    <IconButton variant="text" scale="sm"> */}
+        {/*      {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />} */}
+        {/*    </IconButton> */}
+        {/*  )} */}
+      </StyledBet>
       {/* {isOpen && <BetDetails bid={bid} result={getRoundResult()} />} */}
     </>
   )

@@ -20,7 +20,7 @@ export const HeroContent = styled.div`
   flex-wrap: wrap;
   max-width: 55vw;
   @media (max-width: 599px) {
-    max-width: 90vw
+    max-width: 90vw;
   }
 `
 
@@ -29,14 +29,14 @@ export const TitleTextBox = styled.h1`
   text-align: left;
   font: normal normal 600 60px/72px Poppins, SemiBold;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
 `
 
 export const SubTextBox = styled.div`
   text-align: left;
   font: normal normal 300 20px/36px Poppins;
   letter-spacing: 0px;
-  color: #6B7682;
+  color: #6b7682;
   margin: 1vw 0 1vw 0;
 `
 
@@ -44,7 +44,7 @@ export const TvlText = styled.p`
   text-align: left;
   font: normal normal 300 20px/36px Poppins;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 1vw 0 1vw 0;
 `
 
@@ -52,7 +52,7 @@ export const TvlNumber = styled.p`
   text-align: left;
   font: normal normal 300 36px/36px Poppins;
   letter-spacing: 0px;
-  color: #30C00D;
+  color: #30c00d;
   margin: 1vw 0 0 0;
 `
 
@@ -63,7 +63,7 @@ export const ButtonsDiv = styled.div`
 `
 
 export const PrimaryLinkButton = styled(PrimaryButton)`
-  margin: .5vw .5vw .5vw .5vw;
+  margin: 0.5vw 0.5vw 0.5vw 0.5vw;
 
   &:hover {
     cursor: pointer;
@@ -71,7 +71,7 @@ export const PrimaryLinkButton = styled(PrimaryButton)`
 `
 
 export const StakeNowButton = styled(SecondaryButton)`
-  margin: .5vw .5vw .5vw .5vw;
+  margin: 0.5vw 0.5vw 0.5vw 0.5vw;
 
   &:hover {
     cursor: pointer;

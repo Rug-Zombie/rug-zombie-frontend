@@ -15,27 +15,35 @@ const Catacombs: React.FC = () => {
 
   useEffect(() => {
     if (account()) {
-      catacombs.methods.isUnlocked(account()).call()
-        .then(
-          res => {
-            setUnlocked(res)
-            setLoading(false)
-          })
+      catacombs.methods
+        .isUnlocked(account())
+        .call()
+        .then((res) => {
+          setUnlocked(res)
+          setLoading(false)
+        })
     }
   }, [catacombs.methods])
   return (
     <>
       {/* eslint-disable-next-line no-nested-ternary */}
-      {loading && account() ? <>
-        <Flex alignItems='center' justifyContent='center' mb='16px'>
-          <img src='images/rugZombie/BasicZombie.gif' alt='loading' />
-        </Flex>
-        <Flex alignItems='center' justifyContent='center' mb='16px'>
-          <Text color='white' bold fontSize='30px'>Entering the Catacombs</Text>
-        </Flex>
-      </> : unlocked ? <Home /> : <Entry setUnlocked={setUnlocked} />}
+      {loading && account() ? (
+        <>
+          <Flex alignItems="center" justifyContent="center" mb="16px">
+            <img src="images/rugZombie/BasicZombie.gif" alt="loading" />
+          </Flex>
+          <Flex alignItems="center" justifyContent="center" mb="16px">
+            <Text color="white" bold fontSize="30px">
+              Entering the Catacombs
+            </Text>
+          </Flex>
+        </>
+      ) : unlocked ? (
+        <Home />
+      ) : (
+        <Entry setUnlocked={setUnlocked} />
+      )}
     </>
-
   )
 }
 

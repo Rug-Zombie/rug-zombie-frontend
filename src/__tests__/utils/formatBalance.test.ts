@@ -21,10 +21,10 @@ describe('getBalance[Amount|Number]', () => {
   it('should move decimal place right by default decimal count', () => {
     testGetBalanceAmountAndNumber(new BigNumber(15e18), new BigNumber(15))
   })
-  it('should move number with decimal\'s place right by number right by  default decimal count', () => {
+  it("should move number with decimal's place right by number right by  default decimal count", () => {
     testGetBalanceAmountAndNumber(new BigNumber(15.123456e18), new BigNumber(15.123456))
   })
-  it('should move fractional number\'s decimal right by default decimal count', () => {
+  it("should move fractional number's decimal right by default decimal count", () => {
     testGetBalanceAmountAndNumber(new BigNumber(15.123456e13), new BigNumber(0.00015123456))
   })
 })
@@ -38,13 +38,13 @@ describe('getDecimalAmount', () => {
   })
   it('should zero-pad number with decimal to default decimal count', () => {
     const inputAmount = new BigNumber(12.123)
-    const decimalAmount =  getDecimalAmount(inputAmount)
+    const decimalAmount = getDecimalAmount(inputAmount)
 
     expect(decimalAmount).toEqual(new BigNumber(12.123e18))
   })
   it('should zero-pad fractional number to default decimal count', () => {
     const inputAmount = new BigNumber(0.0012123)
-    const decimalAmount =  getDecimalAmount(inputAmount)
+    const decimalAmount = getDecimalAmount(inputAmount)
 
     expect(decimalAmount).toEqual(new BigNumber(12.123e14))
   })

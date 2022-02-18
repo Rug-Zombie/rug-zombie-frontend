@@ -68,8 +68,8 @@ const StyledDesktop = styled.div`
 `
 
 interface DesktopProps {
-  setRefresh: any,
-  refresh: boolean,
+  setRefresh: any
+  refresh: boolean
   id: number
 }
 
@@ -92,8 +92,8 @@ const Desktop: React.FC<DesktopProps> = ({ refresh, id, setRefresh }) => {
           </PositionsPane>
           <ChartPane isChartPaneOpen={isChartPaneOpen}>
             <ExpandChartButton
-              variant='tertiary'
-              scale='sm'
+              variant="tertiary"
+              scale="sm"
               startIcon={isChartPaneOpen ? <ArrowDownIcon /> : <ChartIcon />}
               onClick={toggleChartPane}
             >

@@ -9,7 +9,7 @@ import { useGetGraveByPid, useGetGraves } from '../../../../state/hooks'
 import { getId } from '../../../../utils'
 
 const InfoCard = styled.header`
-  background-color: #151E21;
+  background-color: #151e21;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -21,14 +21,14 @@ const HalfLine = styled.div`
   margin: 0 auto;
   height: 5px;
   width: 80%;
-  background-color: #AE32AA;
+  background-color: #ae32aa;
 `
 
 const InfoCardTitle = styled.h3`
   text-align: left;
   font: normal normal 500 1.6rem Poppins;
   letter-spacing: 0.5px;
-  color: #FFFFFF;
+  color: #ffffff;
   width: 100%;
   padding: 0 10px;
 `
@@ -38,31 +38,30 @@ const InfoCardSubHeader = styled.h4`
   text-align: left;
   font: normal normal normal 16px/30px Poppins;
   letter-spacing: 0px;
-  color: #6B7682;
+  color: #6b7682;
   padding: 0 10px;
 `
-
 
 const InfoCardHeader = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  width: 100%
+  width: 100%;
 `
 
 const InfoCardContent = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 20px 20px 20px;
-  width: 100%
+  width: 100%;
 `
 
 const InfoCardSubtitle = styled.p`
   text-align: left;
   font: normal normal normal 12px/30px Poppins;
   letter-spacing: 0px;
-  color: #6B7682;
+  color: #6b7682;
   padding: 0 10px;
 `
 
@@ -70,7 +69,7 @@ const InfoCardValue = styled.p`
   text-align: left;
   font: normal normal normal 30px/36px Poppins;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   opacity: 1;
   padding: 0 10px 10px 10px;
 `
@@ -89,44 +88,36 @@ const Shadow = styled.div`
 `
 
 const HeaderCard: React.FC = () => {
-  const graveSum = useGetGraves().data.reduce((sum, { pid, poolInfo: { tokenAmount }, userInfo: { amount } }) => {
-    return {
-      amount: sum.amount.plus(amount),
-      totalAmount: getId(pid) === 0 ? sum.totalAmount : sum.totalAmount.plus(tokenAmount),
-    }
-  }, { amount: BIG_ZERO, totalAmount: BIG_ZERO })
+  const graveSum = useGetGraves().data.reduce(
+    (sum, { pid, poolInfo: { tokenAmount }, userInfo: { amount } }) => {
+      return {
+        amount: sum.amount.plus(amount),
+        totalAmount: getId(pid) === 0 ? sum.totalAmount : sum.totalAmount.plus(tokenAmount),
+      }
+    },
+    { amount: BIG_ZERO, totalAmount: BIG_ZERO },
+  )
 
-  const legacyGraveTvl = getBalanceNumber(
-    useGetGraveByPid(0).poolInfo.tokenAmount.minus(graveSum.totalAmount),
-  ) * zombiePriceUsd()
-  const graveTvl = getBalanceNumber(graveSum.totalAmount) * (zombiePriceUsd()) + legacyGraveTvl
-  const userTvl = getBalanceNumber(graveSum.amount) * (zombiePriceUsd())
+  const legacyGraveTvl =
+    getBalanceNumber(useGetGraveByPid(0).poolInfo.tokenAmount.minus(graveSum.totalAmount)) * zombiePriceUsd()
+  const graveTvl = getBalanceNumber(graveSum.totalAmount) * zombiePriceUsd() + legacyGraveTvl
+  const userTvl = getBalanceNumber(graveSum.amount) * zombiePriceUsd()
 
   return (
     <>
       <InfoCard>
         <HalfLine />
         <InfoCardHeader>
-          <InfoCardTitle>
-            Graves
-          </InfoCardTitle>
+          <InfoCardTitle>Graves</InfoCardTitle>
           <InfoCardSubHeader>
             Use your dead tokens to unlock graves then stake ZMBE to earn Zombie & NFT rewards.
           </InfoCardSubHeader>
         </InfoCardHeader>
         <InfoCardContent>
-          <InfoCardSubtitle>
-            Graves TVL
-          </InfoCardSubtitle>
-          <InfoCardValue>
-            {numeral(graveTvl).format('($ 0,0)')}
-          </InfoCardValue>
-          <InfoCardSubtitle>
-            My Holdings
-          </InfoCardSubtitle>
-          <InfoCardValue>
-            {numeral(userTvl).format('($ 0,0)')}
-          </InfoCardValue>
+          <InfoCardSubtitle>Graves TVL</InfoCardSubtitle>
+          <InfoCardValue>{numeral(graveTvl).format('($ 0,0)')}</InfoCardValue>
+          <InfoCardSubtitle>My Holdings</InfoCardSubtitle>
+          <InfoCardValue>{numeral(userTvl).format('($ 0,0)')}</InfoCardValue>
         </InfoCardContent>
       </InfoCard>
       <Shadow />

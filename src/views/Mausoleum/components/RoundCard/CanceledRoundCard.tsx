@@ -8,7 +8,7 @@ import Card from './Card'
 import CardHeader from './CardHeader'
 
 interface CanceledRoundCardProps {
-  bid: any,
+  bid: any
   id: number
 }
 

@@ -76,10 +76,10 @@ const Graves: React.FC = () => {
   const featuredGraves = []
   const newGraves = []
   const remainingGraves = []
-  graves.forEach(g => {
-    if(g.isFeatured) {
+  graves.forEach((g) => {
+    if (g.isFeatured) {
       featuredGraves.push(g)
-    } else if(g.isNew) {
+    } else if (g.isNew) {
       newGraves.push(g)
     } else {
       remainingGraves.push(g)
@@ -89,9 +89,10 @@ const Graves: React.FC = () => {
   const orderedGraves = featuredGraves.concat(
     newGraves,
     // eslint-disable-next-line no-nested-ternary
-    remainingGraves.sort((a, b) => a.poolInfo.allocPoint.gt(b.poolInfo.allocPoint) ? -1 : a.poolInfo.allocPoint.lt(b.poolInfo.allocPoint) ? 1 : 0)
+    remainingGraves.sort((a, b) =>
+      a.poolInfo.allocPoint.gt(b.poolInfo.allocPoint) ? -1 : a.poolInfo.allocPoint.lt(b.poolInfo.allocPoint) ? 1 : 0,
+    ),
   )
-
 
   const handleFilter = (condition: string) => setFilter(condition)
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)
@@ -104,12 +105,8 @@ const Graves: React.FC = () => {
             <HeaderCard />
           </Header>
           <GravesColumn>
-            <Filter
-              searchValue={search}
-              handleFilter={handleFilter}
-              handleSearch={handleSearch}
-            />
-            {orderedGraves.map(g => {
+            <Filter searchValue={search} handleFilter={handleFilter} handleSearch={handleSearch} />
+            {orderedGraves.map((g) => {
               return <GraveTable grave={g} key={getId(g.pid)} />
             })}
           </GravesColumn>

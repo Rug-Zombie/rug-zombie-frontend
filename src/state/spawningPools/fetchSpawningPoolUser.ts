@@ -6,7 +6,6 @@ import { getAddress, getZombieAddress } from 'utils/addressHelpers'
 import { SpawningPoolConfig } from 'config/constants/types'
 
 export const fetchSpawningPoolUserInfo = async (account: string, spawningPoolsToFetch: SpawningPoolConfig[]) => {
-
   const calls = spawningPoolsToFetch.map((spawningPool) => {
     return {
       address: getAddress(spawningPool.address),
@@ -33,11 +32,12 @@ export const fetchSpawningPoolUserEarnings = async (account: string, spawningPoo
 
 export const fetchSpawningPoolUserTokenInfo = async (account: string, spawningPoolsToFetch: SpawningPoolConfig[]) => {
   const calls = spawningPoolsToFetch.reduce((tokenInfos, spawningPoolConfig) => {
-    return tokenInfos.concat([{
-      address: getZombieAddress(),
-      name: 'allowance',
-      params: [account, getAddress(spawningPoolConfig.address)],
-    },
+    return tokenInfos.concat([
+      {
+        address: getZombieAddress(),
+        name: 'allowance',
+        params: [account, getAddress(spawningPoolConfig.address)],
+      },
       {
         address: getZombieAddress(),
         name: 'balanceOf',
@@ -51,7 +51,7 @@ export const fetchSpawningPoolUserTokenInfo = async (account: string, spawningPo
   for (let i = 0; i < tokenInfos.length; i += 2) {
     pairedRugInfos.push({
       allowance: tokenInfos[i],
-      balance: tokenInfos[i+1],
+      balance: tokenInfos[i + 1],
     })
   }
   return pairedRugInfos

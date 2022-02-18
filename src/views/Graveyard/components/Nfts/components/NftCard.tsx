@@ -10,8 +10,8 @@ const Container = styled.div`
 `
 
 const Card = styled.div`
-   min-height: 410px;
-  background: #151E21;
+  min-height: 410px;
+  background: #151e21;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -22,7 +22,7 @@ const Card = styled.div`
 const Shadow = styled.div`
   width: 90%;
   height: 40px;
-  background: #30C00D 0% 0% no-repeat padding-box;
+  background: #30c00d 0% 0% no-repeat padding-box;
   border-radius: 10px;
   opacity: 0.5;
   filter: blur(10px);
@@ -58,7 +58,7 @@ const Title = styled.div`
   text-align: left;
   font: normal normal normal 20px/30px Poppins;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   padding-right: 30px;
   padding-left: 30px;
 `
@@ -67,11 +67,10 @@ const RarityText = styled.div`
   text-align: left;
   font: normal normal normal 14px/30px Poppins;
   letter-spacing: 0px;
-  color: #30C00D;
+  color: #30c00d;
   padding-right: 30px;
   padding-left: 30px;
 `
-
 
 const SubText = styled.span`
   text-align: left;
@@ -80,38 +79,48 @@ const SubText = styled.span`
 `
 
 interface CollectionCardProps {
-  id: number;
+  id: number
   showOwned?: boolean
   showTotalSupply?: boolean
 }
 
 const NftCard: React.FC<CollectionCardProps> = ({ id, showOwned, showTotalSupply }) => {
-  const { name, path, totalSupply, rarity, type, userInfo: { ownedIds } } = useGetNftById(id)
-  return <Container>
-    <Card>
-      <PreviewDiv>
-        {type === 'image'
-          ? <PreviewImage src={path} alt={`${name} NFT`} />
-          : <PreviewVid path={path} />
-        }
-      </PreviewDiv>
-      <div style={{ paddingTop: '20px' }} />
-      <RarityText>{rarity}</RarityText>
-      <div style={{ paddingTop: '10px' }} />
-      <Title>{name}</Title>
-      <div style={{ paddingTop: '22px' }} />
-      {showTotalSupply ? <p style={{ paddingLeft: '30px', paddingBottom: '10px' }}>
-        <SubText style={{ color: '#6B7682' }}>Total supply:&nbsp;&nbsp;</SubText>
-        <SubText style={{ color: '#FFFFFF' }}>{totalSupply.toString()}</SubText>
-      </p> : null}
-      {showOwned ? <p style={{ paddingLeft: '30px' }}>
-        <SubText style={{ color: '#6B7682' }}>Variants owned:&nbsp;&nbsp;</SubText>
-        <SubText style={{ color: '#FFFFFF' }}>{ownedIds.length}</SubText>
-      </p> : null}
-      <div style={{paddingBottom: '10px'}}/>
-    </Card>
-    {ownedIds.length > 0 ? <Shadow /> : null}
-  </Container>
+  const {
+    name,
+    path,
+    totalSupply,
+    rarity,
+    type,
+    userInfo: { ownedIds },
+  } = useGetNftById(id)
+  return (
+    <Container>
+      <Card>
+        <PreviewDiv>
+          {type === 'image' ? <PreviewImage src={path} alt={`${name} NFT`} /> : <PreviewVid path={path} />}
+        </PreviewDiv>
+        <div style={{ paddingTop: '20px' }} />
+        <RarityText>{rarity}</RarityText>
+        <div style={{ paddingTop: '10px' }} />
+        <Title>{name}</Title>
+        <div style={{ paddingTop: '22px' }} />
+        {showTotalSupply ? (
+          <p style={{ paddingLeft: '30px', paddingBottom: '10px' }}>
+            <SubText style={{ color: '#6B7682' }}>Total supply:&nbsp;&nbsp;</SubText>
+            <SubText style={{ color: '#FFFFFF' }}>{totalSupply.toString()}</SubText>
+          </p>
+        ) : null}
+        {showOwned ? (
+          <p style={{ paddingLeft: '30px' }}>
+            <SubText style={{ color: '#6B7682' }}>Variants owned:&nbsp;&nbsp;</SubText>
+            <SubText style={{ color: '#FFFFFF' }}>{ownedIds.length}</SubText>
+          </p>
+        ) : null}
+        <div style={{ paddingBottom: '10px' }} />
+      </Card>
+      {ownedIds.length > 0 ? <Shadow /> : null}
+    </Container>
+  )
 }
 
 export default NftCard

@@ -21,10 +21,7 @@ const fetchTombOverlays = async (tombsToFetch: TombConfig[]) => {
         },
       ]
 
-      const [
-        info,
-        fee
-      ] = await multicall(tombOverlay, calls)
+      const [info, fee] = await multicall(tombOverlay, calls)
 
       return {
         ...tombConfig,
@@ -32,7 +29,7 @@ const fetchTombOverlays = async (tombsToFetch: TombConfig[]) => {
           mintingIsEnabled: info.isEnabled,
           nftMintTime: new BigNumber(info.mintingTime._hex),
           mintingFee: new BigNumber(fee),
-        }
+        },
       }
     }),
   )
