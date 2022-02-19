@@ -1,17 +1,17 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import {
-    ButtonMenu,
-    ButtonMenuItem,
-    Button,
-    Text,
-    Flex,
-    NotificationDot,
-    useMatchBreakpoints,
+  ButtonMenu,
+  ButtonMenuItem,
+  Button,
+  Text,
+  Flex,
+  NotificationDot,
+  useMatchBreakpoints,
 } from '@catacombs-libs/uikit'
-import {useModal} from '@rug-zombie-libs/uikit'
-import {useTranslation} from 'contexts/Localization'
-import CreateListingModal from "./CreateListingModal";
+import { useModal } from '@rug-zombie-libs/uikit'
+import { useTranslation } from 'contexts/Localization'
+import CreateListingModal from './CreateListingModal'
 
 const StyledButton = styled(Button)`
   border: 2px solid white;
@@ -23,77 +23,82 @@ const StyledButton = styled(Button)`
 
 const FILTERS = ['Open', 'My listings', 'Sold']
 
-const TabButtons = ({setFilter}) => {
-    const {t} = useTranslation()
-    const [index, setIndex] = useState(0)
-    const {isLg, isXl, isMd} = useMatchBreakpoints()
-    const isDesktop = isLg || isXl || isMd
+const TabButtons = ({ setFilter }) => {
+  const { t } = useTranslation()
+  const [index, setIndex] = useState(0)
+  const { isLg, isXl, isMd } = useMatchBreakpoints()
+  const isDesktop = isLg || isXl || isMd
 
-    const [handleCreateListing] = useModal(<CreateListingModal />)
+  const [handleCreateListing] = useModal(<CreateListingModal />)
 
-    const toggleButtonMenu = (i) => {
-        setFilter(i)
-        setIndex(i)
+  const toggleButtonMenu = (i) => {
+    setFilter(i)
+    setIndex(i)
+  }
+
+  const nextFilter = () => {
+    if (index === 2) {
+      toggleButtonMenu(0)
+    } else {
+      toggleButtonMenu(index + 1)
     }
+  }
 
-    const nextFilter = () => {
-        if (index === 2) {
-            toggleButtonMenu(0)
-        } else {
-            toggleButtonMenu(index + 1)
-        }
-    }
-
-    return (
-        <Flex alignItems='center' justifyContent='center' mb='32px'>
-            <Wrapper>
-                {isDesktop ?
-                    <ButtonMenu onItemClick={toggleButtonMenu} activeIndex={index} scale='sm'>
-                        <ButtonMenuItem>
-                            <Text color="tertiary" bold>
-                                {t('Open')}
-                            </Text>
-                        </ButtonMenuItem>
-                        <NotificationDot>
-                            <ButtonMenuItem>
-                                <Text color="tertiary" bold>
-                                    {t('My listings')}
-                                </Text>
-                            </ButtonMenuItem>
-                        </NotificationDot>
-                        <NotificationDot>
-                            <ButtonMenuItem>
-                                <Text color="tertiary" bold>
-                                    {t('Sold')}
-                                </Text>
-                            </ButtonMenuItem>
-                        </NotificationDot>
-                    </ButtonMenu> :
-                    <StyledButton onClick={nextFilter} className="total-earned text-shadow">
-                        <Text color="tertiary" bold>
-                            {t('Showing:')} {t(FILTERS[index])}
-                        </Text>
-                    </StyledButton>}
-            </Wrapper>
-            <Flex ml='24px' alignItems='center' justifyContent='flex-end'>
-                <button type="button" style={{
-                    background: 'black',
-                    color: 'white',
-                    border: '2px solid white',
-                    boxShadow: 'inset 0 0 10px, 0 0 10px'
-                }}
-                        className="btn w-100" onClick={handleCreateListing}>
-                    <Text color='white' bold fontSize='16px'>
-                        {isDesktop ? t('Create Listing') : '+'}
-                    </Text>
-                </button>
-            </Flex>
-        </Flex>
-    )
+  return (
+    <Flex alignItems="center" justifyContent="center" mb="32px">
+      <Wrapper>
+        {isDesktop ? (
+          <ButtonMenu onItemClick={toggleButtonMenu} activeIndex={index} scale="sm">
+            <ButtonMenuItem>
+              <Text color="tertiary" bold>
+                {t('Open')}
+              </Text>
+            </ButtonMenuItem>
+            <NotificationDot>
+              <ButtonMenuItem>
+                <Text color="tertiary" bold>
+                  {t('My listings')}
+                </Text>
+              </ButtonMenuItem>
+            </NotificationDot>
+            <NotificationDot>
+              <ButtonMenuItem>
+                <Text color="tertiary" bold>
+                  {t('Sold')}
+                </Text>
+              </ButtonMenuItem>
+            </NotificationDot>
+          </ButtonMenu>
+        ) : (
+          <StyledButton onClick={nextFilter} className="total-earned text-shadow">
+            <Text color="tertiary" bold>
+              {t('Showing:')} {t(FILTERS[index])}
+            </Text>
+          </StyledButton>
+        )}
+      </Wrapper>
+      <Flex ml="24px" alignItems="center" justifyContent="flex-end">
+        <button
+          type="button"
+          style={{
+            background: 'black',
+            color: 'white',
+            border: '2px solid white',
+            boxShadow: 'inset 0 0 10px, 0 0 10px',
+          }}
+          className="btn w-100"
+          onClick={handleCreateListing}
+        >
+          <Text color="white" bold fontSize="16px">
+            {isDesktop ? t('Create Listing') : '+'}
+          </Text>
+        </button>
+      </Flex>
+    </Flex>
+  )
 }
 
 export default TabButtons
-
 
 const Wrapper = styled.div`
   display: flex;
@@ -105,7 +110,7 @@ const Wrapper = styled.div`
     padding-right: 12px;
   }
 
-  ${({theme}) => theme.mediaQueries.sm} {
+  ${({ theme }) => theme.mediaQueries.sm} {
     margin-left: 16px;
   }
 `

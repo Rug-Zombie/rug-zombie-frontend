@@ -3,10 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import gravesConfig from 'config/constants/graves'
 import { BigNumber } from 'bignumber.js'
 import fetchGraves from './fetchGraves'
-import {
-  fetchGraveUserEarnings,
-  fetchGraveUserInfo, fetchGraveUserTokenInfo,
-} from './fetchGraveUser'
+import { fetchGraveUserEarnings, fetchGraveUserInfo, fetchGraveUserTokenInfo } from './fetchGraveUser'
 import { GravesState, Grave } from '../types'
 import { BIG_ZERO } from '../../utils/bigNumber'
 import { getId } from '../../utils'
@@ -47,7 +44,7 @@ export const gravesSlice = createSlice({
       const liveGravesData: Grave[] = action.payload
       state.data = state.data.map((grave) => {
         const liveGraveData = liveGravesData.find((g) => getId(g.pid) === getId(grave.pid))
-        return { ...grave, poolInfo: { ...grave.poolInfo, ...liveGraveData.poolInfo }  }
+        return { ...grave, poolInfo: { ...grave.poolInfo, ...liveGraveData.poolInfo } }
       })
     },
     setGraveUserInfo: (state, action) => {
@@ -87,7 +84,6 @@ export const fetchGravesUserDataAsync = (account: string) => async (dispatch) =>
       rugAllowance: new BigNumber(userGraveRugInfo[index].allowance),
       rugBalance: new BigNumber(userGraveRugInfo[index].balance),
       zombieAllowance: new BigNumber(userGraveRugInfo[index].zombieAllowance),
-
     }
   })
 

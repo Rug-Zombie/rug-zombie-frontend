@@ -5,8 +5,8 @@ import { Flex, Text, Link, Heading } from '@rug-zombie-libs/uikit'
 import { RoundResult } from '../RoundResult'
 
 interface BetDetailsProps {
-  bid: any;
-  id: number;
+  bid: any
+  id: number
 }
 
 const StyledBetDetails = styled.div`

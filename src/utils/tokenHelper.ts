@@ -6,6 +6,6 @@ import { getAddress } from './addressHelpers'
 export const tokenByAddress = (address: string): Token => {
   const keys = Object.keys(tokens)
   const values = Object.values(tokens)
-  const keyIndex = values.findIndex(v => getAddress(v.address) === address)
+  const keyIndex = values.findIndex((v) => getAddress(v.address) === address)
   return tokens[keys[keyIndex]]
 }

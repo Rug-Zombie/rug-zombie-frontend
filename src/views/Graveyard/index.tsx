@@ -18,41 +18,41 @@ const Banner = styled.div`
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-`;
+`
 
 const TitleSection = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`;
+`
 
 const SubTextBox = styled.p`
   width: 45%;
   text-align: center;
   font: normal normal 300 20px/30px Poppins;
-  color: #6B7682;
+  color: #6b7682;
   margin: 25px 0;
   @media (max-width: 999px) {
     width: 70%;
   }
   @media (max-width: 499px) {
-    width: 90%
+    width: 90%;
   }
-`;
+`
 
 const SectionEnd = styled(FooterImage)`
   top: -200px;
   width: 100%;
-`;
+`
 
 const Graveyard: React.FC = () => {
   const dispatch = useAppDispatch()
-  const {account} = useWeb3React()
+  const { account } = useWeb3React()
 
   useEffect(() => {
     dispatch(fetchNftPublicDataAsync())
-    if(account) {
+    if (account) {
       dispatch(fetchNftUserDataAsync(account))
     }
   }, [account, dispatch])
@@ -60,18 +60,14 @@ const Graveyard: React.FC = () => {
     <>
       <Banner />
       <TitleSection>
-        <SectionHeader 
-          title="Explore the Graveyard"
-        />
-        <SubTextBox>
-          View our NFT collection powering the RugZombie gaming ecosystem.
-        </SubTextBox>
+        <SectionHeader title="Explore the Graveyard" />
+        <SubTextBox>View our NFT collection powering the RugZombie gaming ecosystem.</SubTextBox>
         <SectionEnd />
       </TitleSection>
       <Collections />
       <Footer />
     </>
-  );
+  )
 }
 
 export default Graveyard

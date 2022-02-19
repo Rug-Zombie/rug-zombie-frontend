@@ -18,7 +18,6 @@ const BetWrapper = styled.div`
   position: relative;
 `
 
-
 const History: React.FC = () => {
   const { t } = useTranslation()
 
@@ -26,16 +25,16 @@ const History: React.FC = () => {
     <StyledHistory>
       <Header />
       <BetWrapper>
-          <Box p="24px">
-            <Heading size="lg" textAlign="center" mb="8px">
-              {t('No predictions history available')}
-            </Heading>
-            <Text as="p" textAlign="center">
-              {t(
-                'If you are sure you should see history here, make sure you’re connected to the correct wallet and try again.',
-              )}
-            </Text>
-          </Box>
+        <Box p="24px">
+          <Heading size="lg" textAlign="center" mb="8px">
+            {t('No predictions history available')}
+          </Heading>
+          <Text as="p" textAlign="center">
+            {t(
+              'If you are sure you should see history here, make sure you’re connected to the correct wallet and try again.',
+            )}
+          </Text>
+        </Box>
         {/* )} */}
       </BetWrapper>
     </StyledHistory>

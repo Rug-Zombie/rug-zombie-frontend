@@ -31,20 +31,18 @@ const StakedSpawningPools: React.FC<{ zombieStaked }> = ({ zombieStaked }) => {
   const web3 = useWeb3()
   const multi = useMultiCall()
   const zombie = useZombie()
-  const stakedSpawningPools = spawningPools().filter(sp => !sp.userInfo.amount.isZero())
+  const stakedSpawningPools = spawningPools().filter((sp) => !sp.userInfo.amount.isZero())
   const { isLg, isXl } = useMatchBreakpoints()
   const isDesktop = isLg || isXl
   const handleHarvest = () => {
     stakedSpawningPools.forEach((sp) => {
-      getSpawningPoolContract(getAddress(sp.address), web3).methods.withdraw(0)
-        .send({ from: account()
-        })
+      getSpawningPoolContract(getAddress(sp.address), web3).methods.withdraw(0).send({ from: account() })
     })
   }
   const nftsReady = () => {
-    let count = 0;
+    let count = 0
     stakedSpawningPools.forEach((sp) => {
-      if(Math.floor(Date.now() / 1000) > sp.userInfo.nftRevivalDate) {
+      if (Math.floor(Date.now() / 1000) > sp.userInfo.nftRevivalDate) {
         count++
       }
     })
@@ -52,41 +50,44 @@ const StakedSpawningPools: React.FC<{ zombieStaked }> = ({ zombieStaked }) => {
   }
 
   useEffect(() => {
-    if(updateUserInfo === 0) {
-      initialSpawningPoolData(
-        zombie,
-        undefined,
-        { update: updateUserInfo, setUpdate: setUpdateUserInfo },
-      )
+    if (updateUserInfo === 0) {
+      initialSpawningPoolData(zombie, undefined, { update: updateUserInfo, setUpdate: setUpdateUserInfo })
     }
   }, [multi, updateUserInfo, zombie])
 
-  const buttonStyle = isDesktop ? { } : { fontSize: "10px"}
+  const buttonStyle = isDesktop ? {} : { fontSize: '10px' }
   return (
-    <Flex justifyContent='center'>
+    <Flex justifyContent="center">
       <TableCards>
-        <div className='frank-card'>
-          <Flex justifyContent='center'>
-            <td className='td-width-25'>
+        <div className="frank-card">
+          <Flex justifyContent="center">
+            <td className="td-width-25">
               <DisplayFlex>
-                <div className='small-text'>
-                  <span className='green-color'>Zombie </span>
-                  <span className='white-color'>STAKED</span>
+                <div className="small-text">
+                  <span className="green-color">Zombie </span>
+                  <span className="white-color">STAKED</span>
                 </div>
-                <span className='total-earned'>{getFullDisplayBalance(zombieStaked, 18, 2)}</span>
+                <span className="total-earned">{getFullDisplayBalance(zombieStaked, 18, 2)}</span>
               </DisplayFlex>
             </td>
-            <td className='td-width-25'>
+            <td className="td-width-25">
               <DisplayFlex>
-                <div className='small-text'>
-                  <span className='green-color'>NFTs </span>
-                  <span className='white-color'>READY</span>
+                <div className="small-text">
+                  <span className="green-color">NFTs </span>
+                  <span className="white-color">READY</span>
                 </div>
-                <span className='total-earned'>{nftsReady()}</span>
+                <span className="total-earned">{nftsReady()}</span>
               </DisplayFlex>
             </td>
-            <td className='td-width-17'>
-              <button onClick={handleHarvest}  className={isDesktop ? 'btn w-auto harvest' : 'btn w-100 harvest'} style={buttonStyle} type='button'><span>Harvest All ({stakedSpawningPools.length})</span></button>
+            <td className="td-width-17">
+              <button
+                onClick={handleHarvest}
+                className={isDesktop ? 'btn w-auto harvest' : 'btn w-100 harvest'}
+                style={buttonStyle}
+                type="button"
+              >
+                <span>Harvest All ({stakedSpawningPools.length})</span>
+              </button>
             </td>
           </Flex>
         </div>

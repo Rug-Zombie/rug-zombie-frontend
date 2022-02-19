@@ -30,7 +30,7 @@ const TopMenu = () => {
   const history = useHistory()
   const handleClick = (e) => {
     e.preventDefault()
-    setShowMenu(prev => !prev)
+    setShowMenu((prev) => !prev)
   }
 
   const handleDropdownItemClick = (e, item) => {
@@ -42,9 +42,9 @@ const TopMenu = () => {
   return (
     <Navbar>
       <NavbarContent>
-        <Logo src={logo} alt='RugZombie Logo' onClick={() => history.push('/')}/>
+        <Logo src={logo} alt="RugZombie Logo" onClick={() => history.push('/')} />
         <Links>
-          {config.map(i => {
+          {config.map((i) => {
             if (i.type === MenuItem.External) {
               return <MenuText href={i.href}>{i.label}</MenuText>
             }
@@ -52,43 +52,54 @@ const TopMenu = () => {
           })}
         </Links>
         <DropdownMenu>
-          <button type='button' onClick={handleClick} style={{
-            outline: 'none',
-            background: 'transparent',
-            border: '1px solid transparent',
-          }}>
-            {showMenu
-              ? <img src={hideDropdownIcon} alt='Hide Dropdown Icon' />
-              : <img src={dropdownIcon} alt='Dropdown Icon' />
-            }
+          <button
+            type="button"
+            onClick={handleClick}
+            style={{
+              outline: 'none',
+              background: 'transparent',
+              border: '1px solid transparent',
+            }}
+          >
+            {showMenu ? (
+              <img src={hideDropdownIcon} alt="Hide Dropdown Icon" />
+            ) : (
+              <img src={dropdownIcon} alt="Dropdown Icon" />
+            )}
           </button>
           {showMenu ? (
             <DropdownContent>
-              {config.map(i => {
+              {config.map((i) => {
                 if (i.type === MenuItem.External) {
-                  return <DropdownItem onClick={()=> {window.location.href = i.href}}>
+                  return (
+                    <DropdownItem
+                      onClick={() => {
+                        window.location.href = i.href
+                      }}
+                    >
+                      <MenuText>{i.label}</MenuText>
+                    </DropdownItem>
+                  )
+                }
+                return (
+                  <DropdownItem onClick={(e) => handleDropdownItemClick(e, i)}>
                     <MenuText>{i.label}</MenuText>
                   </DropdownItem>
-                }
-                return <DropdownItem onClick={(e) => handleDropdownItemClick(e, i)}>
-                  <MenuText>{i.label}</MenuText>
-                </DropdownItem>
-              },
-              )}
+                )
+              })}
             </DropdownContent>
           ) : null}
         </DropdownMenu>
         <Buttons>
           <TokenButton style={{ flexDirection: 'row' }}>
-            <img src={zombiehead} alt='Zombie Icon' style={{ height: '70%', paddingRight: '20px' }} />
+            <img src={zombiehead} alt="Zombie Icon" style={{ height: '70%', paddingRight: '20px' }} />
             <Text style={{ fontWeight: 'bold' }}>${zombiePriceUsd().toPrecision(1)}</Text>
           </TokenButton>
           <UnlockButton />
-            <ProfileImage onClick={() => history.push(routes.PROFILE)} src={basiczombie} alt='Profile Image' />
+          <ProfileImage onClick={() => history.push(routes.PROFILE)} src={basiczombie} alt="Profile Image" />
         </Buttons>
       </NavbarContent>
     </Navbar>
-
   )
 }
 

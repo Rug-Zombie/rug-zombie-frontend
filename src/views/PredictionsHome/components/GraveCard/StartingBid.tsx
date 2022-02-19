@@ -16,26 +16,28 @@ const StartingBid: React.FC<MinimumStakeProps> = ({ id }) => {
   const mausoleum = useMausoleum(version)
   const [lastBidAmount, setLastBidAmount] = useState(BIG_ZERO)
   useEffect(() => {
-    mausoleum.methods.lastBid(aid).call()
-      .then(res => {
+    mausoleum.methods
+      .lastBid(aid)
+      .call()
+      .then((res) => {
         setLastBidAmount(new BigNumber(res.amount))
       })
   }, [aid, mausoleum.methods])
   return (
     <>
-    <Flex alignItems="center" justifyContent="space-between">
-      <TooltipText >Starting Bid:</TooltipText>
-        {startingBid} { v3 ? 'BNB' : 'BT' }
-    </Flex>
       <Flex alignItems="center" justifyContent="space-between">
-  <TooltipText >{isFinished ? "Final Bid:" : "Current Bid:" }</TooltipText>
-  {lastBidAmount.isZero() ? (
-    <Skeleton width="82px" height="32px" />
-  ) : (
-    <Flex alignItems="center">
-      {getFullDisplayBalance(lastBidAmount, 18, 2)} { v3 ? 'BNB' : 'BT' }
-    </Flex>
-  )}
+        <TooltipText>Starting Bid:</TooltipText>
+        {startingBid} {v3 ? 'BNB' : 'BT'}
+      </Flex>
+      <Flex alignItems="center" justifyContent="space-between">
+        <TooltipText>{isFinished ? 'Final Bid:' : 'Current Bid:'}</TooltipText>
+        {lastBidAmount.isZero() ? (
+          <Skeleton width="82px" height="32px" />
+        ) : (
+          <Flex alignItems="center">
+            {getFullDisplayBalance(lastBidAmount, 18, 2)} {v3 ? 'BNB' : 'BT'}
+          </Flex>
+        )}
       </Flex>
     </>
   )

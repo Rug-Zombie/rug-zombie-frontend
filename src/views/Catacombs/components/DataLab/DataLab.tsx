@@ -49,7 +49,7 @@ const StyledSwiper = styled.div`
 `
 
 interface DataLabProps {
-  modalObj: { modal: boolean, setModal: any };
+  modalObj: { modal: boolean; setModal: any }
 }
 
 const DataLab: React.FC<DataLabProps> = ({ modalObj }) => {
@@ -60,10 +60,12 @@ const DataLab: React.FC<DataLabProps> = ({ modalObj }) => {
   return (
     <Menu>
       <StyledDiv>
-        {isDesktop ? <img src={CatacombsBackgroundDesktopSVG} alt='catacombs-rug-zombie' /> :
-          <img src={CatacombsBackgroundMobileSVG} alt='catacombs-rug-zombie' />
-        }
-        <Flex justifyContent='center'>
+        {isDesktop ? (
+          <img src={CatacombsBackgroundDesktopSVG} alt="catacombs-rug-zombie" />
+        ) : (
+          <img src={CatacombsBackgroundMobileSVG} alt="catacombs-rug-zombie" />
+        )}
+        <Flex justifyContent="center">
           <Container>
             <Page>
               <StyledSwiper>
@@ -71,7 +73,7 @@ const DataLab: React.FC<DataLabProps> = ({ modalObj }) => {
                   initialSlide={1}
                   onSwiper={setSwiper}
                   spaceBetween={64}
-                  slidesPerView='auto'
+                  slidesPerView="auto"
                   freeMode
                   freeModeSticky
                   centeredSlides

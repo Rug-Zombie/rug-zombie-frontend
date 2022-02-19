@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js'
 import drFrankenstein from 'config/abi/drFrankenstein.json'
 import multicall from 'utils/multicall'
 import { getDrFrankensteinAddress } from 'utils/addressHelpers'
-import {  GraveConfig } from 'config/constants/types'
+import { GraveConfig } from 'config/constants/types'
 import { getId } from '../../utils'
 import { getBep20Contract } from '../../utils/contractHelpers'
 
@@ -26,14 +26,12 @@ const fetchGraves = async (gravesToFetch: GraveConfig[]) => {
         },
       ]
 
-      const [
-        info,
-        unlockFee,
-        totalAllocPoint
-      ] = await multicall(drFrankenstein, calls)
+      const [info, unlockFee, totalAllocPoint] = await multicall(drFrankenstein, calls)
       const allocPoint = new BigNumber(info.allocPoint._hex)
       const weight = allocPoint.div(new BigNumber(totalAllocPoint))
-      const tokenAmount = new BigNumber((await getBep20Contract(info.lpToken).methods.balanceOf(getDrFrankensteinAddress()).call()))
+      const tokenAmount = new BigNumber(
+        await getBep20Contract(info.lpToken).methods.balanceOf(getDrFrankensteinAddress()).call(),
+      )
       return {
         ...graveConfig,
         poolInfo: {
@@ -45,7 +43,7 @@ const fetchGraves = async (gravesToFetch: GraveConfig[]) => {
           tokenAmount,
           allocPoint,
           weight,
-        }
+        },
       }
     }),
   )

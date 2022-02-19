@@ -1,9 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import {
-  Text, Button,
-  Cards, Flex,
-} from '@rug-zombie-libs/uikit'
+import { Text, Button, Cards, Flex } from '@rug-zombie-libs/uikit'
 import { getFullDisplayBalance } from '../../../utils/formatBalance'
 import { APESWAP_ADD_LIQUIDITY_URL } from '../../../config'
 import { auctionById } from '../../../redux/get'
@@ -22,39 +19,39 @@ const StyledMobileMenu = styled.div`
   }
 `
 interface MobileMenuProps {
-  id: number;
-  refreshMobile: any;
+  id: number
+  refreshMobile: any
 }
 
 const MobileMenu: React.FC<MobileMenuProps> = ({ id, refreshMobile }) => {
-  const {token0, token1, version, userInfo: { bid }} = auctionById(id)
+  const {
+    token0,
+    token1,
+    version,
+    userInfo: { bid },
+  } = auctionById(id)
   const v3 = version === 'v3'
   const handleItemClick = () => {
-
     refreshMobile()
   }
-
 
   return (
     <StyledMobileMenu>
       <Flex justifyContent="space-between" pl="10px" pr="10px" alignItems="center" height="100%" width="100%">
-        <Button scale="sm">
-          Your Bid: {getFullDisplayBalance(bid)}
+        <Button scale="sm">Your Bid: {getFullDisplayBalance(bid)}</Button>
+        <Button scale="sm" onClick={handleItemClick}>
+          <Cards color="tertiary" />
+          <Text color="tertiary" bold>
+            &nbsp;Auction Info
+          </Text>
         </Button>
-          <Button scale="sm" onClick={handleItemClick}>
-            <Cards color="tertiary" />
-            <Text color="tertiary" bold>
-              &nbsp;Auction Info
-            </Text>
-
-          </Button>
-      {!v3 ? <ButtonNav>
-        <a href={`${APESWAP_ADD_LIQUIDITY_URL}//${token0}/${token1}`} target='_blank' rel='noreferrer'>
-          <Button variant='text'>
-            Get BT (Bid Tokens):
-          </Button>
-        </a>
-      </ButtonNav> : null}
+        {!v3 ? (
+          <ButtonNav>
+            <a href={`${APESWAP_ADD_LIQUIDITY_URL}//${token0}/${token1}`} target="_blank" rel="noreferrer">
+              <Button variant="text">Get BT (Bid Tokens):</Button>
+            </a>
+          </ButtonNav>
+        ) : null}
       </Flex>
     </StyledMobileMenu>
   )

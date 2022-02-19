@@ -4,11 +4,7 @@ import { BigNumber } from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
 import { useCallback } from 'react'
 import { useAppDispatch } from '../state'
-import {
-  spStake, spUnlock,
-  spUnstake,
-  spUnstakeEarly,
-} from '../utils/callHelpers'
+import { spStake, spUnlock, spUnstake, spUnstakeEarly } from '../utils/callHelpers'
 import { BIG_ZERO } from '../utils/bigNumber'
 import { fetchSpawningPoolsUserDataAsync } from '../state/spawningPools'
 

@@ -8,7 +8,7 @@ import { getBalanceNumber } from '../../../../utils/formatBalance'
 import { BIG_ZERO } from '../../../../utils/bigNumber'
 
 const InfoCard = styled.header`
-  background-color: #151E21;
+  background-color: #151e21;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -20,14 +20,14 @@ const HalfLine = styled.div`
   margin: 0 auto;
   height: 5px;
   width: 80%;
-  background-color: #4B7BDC;
+  background-color: #4b7bdc;
 `
 
 const InfoCardTitle = styled.h3`
   text-align: left;
   font: normal normal 500 1.6rem Poppins;
   letter-spacing: 0.5px;
-  color: #FFFFFF;
+  color: #ffffff;
   width: 100%;
   padding: 0 10px;
 `
@@ -37,31 +37,30 @@ const InfoCardSubHeader = styled.h4`
   text-align: left;
   font: normal normal normal 16px/30px Poppins;
   letter-spacing: 0px;
-  color: #6B7682;
+  color: #6b7682;
   padding: 0 10px;
 `
-
 
 const InfoCardHeader = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  width: 100%
+  width: 100%;
 `
 
 const InfoCardContent = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 20px 20px 20px;
-  width: 100%
+  width: 100%;
 `
 
 const InfoCardSubtitle = styled.p`
   text-align: left;
   font: normal normal normal 12px/30px Poppins;
   letter-spacing: 0px;
-  color: #6B7682;
+  color: #6b7682;
   padding: 0 10px;
 `
 
@@ -69,7 +68,7 @@ const InfoCardValue = styled.p`
   text-align: left;
   font: normal normal normal 30px/36px Poppins;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   opacity: 1;
   padding: 0 10px 10px 10px;
 `
@@ -88,45 +87,36 @@ const Shadow = styled.div`
 `
 
 const HeaderCard: React.FC = () => {
-  const tombSum = useGetTombs().data.reduce((sum, {
-    poolInfo: { tokenAmount, lpPriceBnb },
-    userInfo: { amount},
-  }) => {
-    const lpPrice = lpPriceBnb.times(bnbPriceUsd()).toNumber()
-    return {
-      amountTvl: sum.amountTvl.plus(getBalanceNumber(amount.times(lpPrice))),
-      tokenAmountTvl: sum.tokenAmountTvl.plus(getBalanceNumber(tokenAmount.times(lpPrice))),
-    }
-  }, { amountTvl: BIG_ZERO, tokenAmountTvl: BIG_ZERO })
+  const tombSum = useGetTombs().data.reduce(
+    (sum, { poolInfo: { tokenAmount, lpPriceBnb }, userInfo: { amount } }) => {
+      const lpPrice = lpPriceBnb.times(bnbPriceUsd()).toNumber()
+      return {
+        amountTvl: sum.amountTvl.plus(getBalanceNumber(amount.times(lpPrice))),
+        tokenAmountTvl: sum.tokenAmountTvl.plus(getBalanceNumber(tokenAmount.times(lpPrice))),
+      }
+    },
+    { amountTvl: BIG_ZERO, tokenAmountTvl: BIG_ZERO },
+  )
 
   return (
     <>
       <InfoCard>
         <HalfLine />
         <InfoCardHeader>
-          <InfoCardTitle>
-            Tombs
-          </InfoCardTitle>
+          <InfoCardTitle>Tombs</InfoCardTitle>
           <InfoCardSubHeader>
-            Provide liquidity to roll for various NFTs. Increase your stake in the tombs to increase your chance at rolling rare NFTs.
+            Provide liquidity to roll for various NFTs. Increase your stake in the tombs to increase your chance at
+            rolling rare NFTs.
           </InfoCardSubHeader>
         </InfoCardHeader>
         <InfoCardContent>
-          <InfoCardSubtitle>
-            Tombs TVL
-          </InfoCardSubtitle>
-          <InfoCardValue>
-            {numeral(tombSum.tokenAmountTvl).format('($ 0,0)')}
-          </InfoCardValue>
-          <InfoCardSubtitle>
-            My Holdings
-          </InfoCardSubtitle>
-          <InfoCardValue>
-            {numeral(tombSum.amountTvl).format('($ 0,0)')}
-          </InfoCardValue>
+          <InfoCardSubtitle>Tombs TVL</InfoCardSubtitle>
+          <InfoCardValue>{numeral(tombSum.tokenAmountTvl).format('($ 0,0)')}</InfoCardValue>
+          <InfoCardSubtitle>My Holdings</InfoCardSubtitle>
+          <InfoCardValue>{numeral(tombSum.amountTvl).format('($ 0,0)')}</InfoCardValue>
         </InfoCardContent>
       </InfoCard>
-      <Shadow/>
+      <Shadow />
     </>
   )
 }

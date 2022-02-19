@@ -10,7 +10,7 @@ import { fetchTombsUserDataAsync } from '../state/tombs'
 export enum ApproveTarget {
   Graves,
   Tombs,
-  SpawningPools
+  SpawningPools,
 }
 
 // Approve an address
@@ -21,9 +21,9 @@ const useApprove = (tokenContract: Contract, spenderAddress: string, approveTarg
   const handleApprove = useCallback(async () => {
     try {
       const tx = await approve(tokenContract, spenderAddress, account)
-      if(approveTarget === ApproveTarget.SpawningPools) {
+      if (approveTarget === ApproveTarget.SpawningPools) {
         dispatch(fetchSpawningPoolsUserDataAsync(account))
-      } else if(approveTarget === ApproveTarget.Tombs) {
+      } else if (approveTarget === ApproveTarget.Tombs) {
         dispatch(fetchTombsUserDataAsync(account))
       } else {
         dispatch(fetchGravesUserDataAsync(account))
