@@ -8,8 +8,8 @@ import auctions from './auctions'
 import burnGraves from './burnGraves'
 import { getId } from '../utils'
 import tombOverlays from './tombOverlays'
-import rugMarketListings from "./rugMarketListings";
-import {RugMarketListing} from "./types";
+import rugMarketListings from './rugMarketListings'
+import { RugMarketListing } from './types'
 
 const defaultState = {
   account: '',
@@ -31,7 +31,7 @@ const defaultState = {
   },
   drFrankenstein: {
     zombieBalance: BIG_ZERO,
-    totalAllocPoint: BIG_ZERO
+    totalAllocPoint: BIG_ZERO,
   },
 }
 
@@ -70,32 +70,56 @@ export default function reducer(state = defaultState, action) {
     case types.UPDATE_GRAVE_POOL_INFO:
       return {
         ...state,
-        graves: state.graves.map(grave => getId(grave.pid) === action.payload.pid ? { ...grave, poolInfo: { ...grave.poolInfo, ...action.payload.poolInfo } } : grave),
+        graves: state.graves.map((grave) =>
+          getId(grave.pid) === action.payload.pid
+            ? { ...grave, poolInfo: { ...grave.poolInfo, ...action.payload.poolInfo } }
+            : grave,
+        ),
       }
     case types.UPDATE_GRAVE_USER_INFO:
       return {
         ...state,
-        graves: state.graves.map(grave => getId(grave.pid) === action.payload.pid ? { ...grave, userInfo: { ...grave.userInfo, ...action.payload.userInfo } } : grave),
+        graves: state.graves.map((grave) =>
+          getId(grave.pid) === action.payload.pid
+            ? { ...grave, userInfo: { ...grave.userInfo, ...action.payload.userInfo } }
+            : grave,
+        ),
       }
     case types.UPDATE_TOMB_USER_INFO:
       return {
         ...state,
-        tombs: state.tombs.map(tomb => getId(tomb.pid) === action.payload.pid ? { ...tomb, userInfo: { ...tomb.userInfo, ...action.payload.userInfo } } : tomb),
+        tombs: state.tombs.map((tomb) =>
+          getId(tomb.pid) === action.payload.pid
+            ? { ...tomb, userInfo: { ...tomb.userInfo, ...action.payload.userInfo } }
+            : tomb,
+        ),
       }
     case types.UPDATE_TOMB_POOL_INFO:
       return {
         ...state,
-        tombs: state.tombs.map(tomb => getId(tomb.pid) === action.payload.pid ? { ...tomb, poolInfo: { ...tomb.poolInfo, ...action.payload.poolInfo } } : tomb),
+        tombs: state.tombs.map((tomb) =>
+          getId(tomb.pid) === action.payload.pid
+            ? { ...tomb, poolInfo: { ...tomb.poolInfo, ...action.payload.poolInfo } }
+            : tomb,
+        ),
       }
     case types.UPDATE_SPAWNING_POOL_INFO:
       return {
         ...state,
-        spawningPools: state.spawningPools.map(spawningPool => spawningPool.id === action.payload.id ? { ...spawningPool, poolInfo: { ...spawningPool.poolInfo, ...action.payload.poolInfo } } : spawningPool),
+        spawningPools: state.spawningPools.map((spawningPool) =>
+          spawningPool.id === action.payload.id
+            ? { ...spawningPool, poolInfo: { ...spawningPool.poolInfo, ...action.payload.poolInfo } }
+            : spawningPool,
+        ),
       }
     case types.UPDATE_SPAWNING_POOL_USER_INFO:
       return {
         ...state,
-        spawningPools: state.spawningPools.map(spawningPool => spawningPool.id === action.payload.id ? { ...spawningPool, userInfo: { ...spawningPool.userInfo, ...action.payload.userInfo } } : spawningPool),
+        spawningPools: state.spawningPools.map((spawningPool) =>
+          spawningPool.id === action.payload.id
+            ? { ...spawningPool, userInfo: { ...spawningPool.userInfo, ...action.payload.userInfo } }
+            : spawningPool,
+        ),
       }
     case types.UPDATE_DR_FRANKENSTEIN_ZOMBIE_BALANCE:
       return {
@@ -110,49 +134,81 @@ export default function reducer(state = defaultState, action) {
     case types.UPDATE_AUCTION_INFO:
       return {
         ...state,
-        auctions: state.auctions.map(auction => auction.id === action.payload.id ? { ...auction, auctionInfo: { ...auction.auctionInfo, ...action.payload.auctionInfo } } : auction)
+        auctions: state.auctions.map((auction) =>
+          auction.id === action.payload.id
+            ? { ...auction, auctionInfo: { ...auction.auctionInfo, ...action.payload.auctionInfo } }
+            : auction,
+        ),
       }
     case types.UPDATE_AUCTION_USER_INFO:
       return {
         ...state,
-        auctions: state.auctions.map(auction => auction.id === action.payload.id ? { ...auction, userInfo: { ...auction.userInfo, ...action.payload.userInfo } } : auction)
+        auctions: state.auctions.map((auction) =>
+          auction.id === action.payload.id
+            ? { ...auction, userInfo: { ...auction.userInfo, ...action.payload.userInfo } }
+            : auction,
+        ),
       }
     case types.UPDATE_BNB_BALANCE:
       return {
         ...state,
-        bnbBalance: action.payload.bnbBalance
+        bnbBalance: action.payload.bnbBalance,
       }
     case types.UPDATE_TOMB_OVERLAY_POOL_INFO:
       return {
         ...state,
-        tombOverlays: state.tombOverlays.map(tombOverlay => getId(tombOverlay.pid) === action.payload.pid ? { ...tombOverlay, poolInfo: { ...tombOverlay.poolInfo, ...action.payload.poolInfo } } : tombOverlay),
-      }  
+        tombOverlays: state.tombOverlays.map((tombOverlay) =>
+          getId(tombOverlay.pid) === action.payload.pid
+            ? { ...tombOverlay, poolInfo: { ...tombOverlay.poolInfo, ...action.payload.poolInfo } }
+            : tombOverlay,
+        ),
+      }
     case types.UPDATE_TOMB_OVERLAY_USER_INFO:
       return {
         ...state,
-        tombOverlays: state.tombOverlays.map(tombOverlay => getId(tombOverlay.pid) === action.payload.pid ? { ...tombOverlay, userInfo: { ...tombOverlay.userInfo, ...action.payload.userInfo } } : tombOverlay),
-      }  
+        tombOverlays: state.tombOverlays.map((tombOverlay) =>
+          getId(tombOverlay.pid) === action.payload.pid
+            ? { ...tombOverlay, userInfo: { ...tombOverlay.userInfo, ...action.payload.userInfo } }
+            : tombOverlay,
+        ),
+      }
     case types.UPDATE_SHARKPOOL_INFO:
       return {
         ...state,
-        sharkPools: state.sharkPools.map(sharkPool => sharkPool.id === action.payload.id ? { ...sharkPool, poolInfo: { ...sharkPool.poolInfo, ...action.payload.poolInfo } } : sharkPool),
+        sharkPools: state.sharkPools.map((sharkPool) =>
+          sharkPool.id === action.payload.id
+            ? { ...sharkPool, poolInfo: { ...sharkPool.poolInfo, ...action.payload.poolInfo } }
+            : sharkPool,
+        ),
       }
     case types.UPDATE_SHARKPOOL_USER_INFO:
       return {
         ...state,
-        sharkPools: state.sharkPools.map(sharkPool => sharkPool.id === action.payload.id ? { ...sharkPool, userInfo: { ...sharkPool.userInfo, ...action.payload.userInfo } } : sharkPool),
+        sharkPools: state.sharkPools.map((sharkPool) =>
+          sharkPool.id === action.payload.id
+            ? { ...sharkPool, userInfo: { ...sharkPool.userInfo, ...action.payload.userInfo } }
+            : sharkPool,
+        ),
       }
 
     case types.UPDATE_BURNGRAVE_POOL_INFO:
       return {
         ...state,
-        burnGraves: state.burnGraves.map(burnGrave => getId(burnGrave.id) === action.payload.id ? { ...burnGrave, poolInfo: { ...burnGrave.poolInfo, ...action.payload.poolInfo } } : burnGrave),
+        burnGraves: state.burnGraves.map((burnGrave) =>
+          getId(burnGrave.id) === action.payload.id
+            ? { ...burnGrave, poolInfo: { ...burnGrave.poolInfo, ...action.payload.poolInfo } }
+            : burnGrave,
+        ),
       }
 
     case types.UPDATE_BURNGRAVE_USER_INFO:
       return {
         ...state,
-        burnGraves: state.burnGraves.map(burnGrave => getId(burnGrave.id) === action.payload.id ? { ...burnGrave, userInfo: { ...burnGrave.userInfo, ...action.payload.userInfo } } : burnGrave),
+        burnGraves: state.burnGraves.map((burnGrave) =>
+          getId(burnGrave.id) === action.payload.id
+            ? { ...burnGrave, userInfo: { ...burnGrave.userInfo, ...action.payload.userInfo } }
+            : burnGrave,
+        ),
       }
     case types.ADD_RUG_MARKET_LISTING:
       return {
@@ -181,24 +237,24 @@ export default function reducer(state = defaultState, action) {
 }
 
 function cancelRugMarketListing(listingId): RugMarketListing[] {
-  const index = rugMarketListings.findIndex(listing => listing.id === listingId);
-  const listings = rugMarketListings;
+  const index = rugMarketListings.findIndex((listing) => listing.id === listingId)
+  const listings = rugMarketListings
   // @ts-ignore
-  listings[index].state = '2';
+  listings[index].state = '2'
   return listings
 }
 
 function markRugMarketListingSold(listingId): RugMarketListing[] {
-  const index = rugMarketListings.findIndex(listing => listing.id === listingId);
-  const listings = rugMarketListings;
+  const index = rugMarketListings.findIndex((listing) => listing.id === listingId)
+  const listings = rugMarketListings
   // @ts-ignore
-  listings[index].state = '1';
+  listings[index].state = '1'
   return listings
 }
 
 function pushListingIfNotExists(newListing): RugMarketListing[] {
-  const index = rugMarketListings.findIndex(listing => listing.id === newListing.id);
-  const listings = rugMarketListings;
+  const index = rugMarketListings.findIndex((listing) => listing.id === newListing.id)
+  const listings = rugMarketListings
   if (index === -1) {
     listings.push(newListing)
   }

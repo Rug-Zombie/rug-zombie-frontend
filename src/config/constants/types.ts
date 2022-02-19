@@ -71,7 +71,7 @@ export enum Dex {
   PCS_V1,
   PCS_V2,
   AUTOSHARK,
-  APESWAP
+  APESWAP,
 }
 
 export enum UserActivityType {
@@ -83,57 +83,57 @@ export enum UserActivityType {
 }
 
 export interface GraveConfig {
-  pid: Id,
-  name: string,
-  nftId: number,
-  nft?: number,
-  depositNftId?: number,
-  isNew?: boolean,
-  isFeatured?: boolean,
-  isClosed?: boolean,
-  endDate?: number,
-  startingDate?: number,
-  nftConverterPid?: number, // remove move to own type
-  graveNftToken?: string,   // remove move to own type
-  additionalDetails?: any[],
-  rug: Token,
-  rugDex?: Dex,
-  liquidityDetails?: string,
+  pid: Id
+  name: string
+  nftId: number
+  nft?: number
+  depositNftId?: number
+  isNew?: boolean
+  isFeatured?: boolean
+  isClosed?: boolean
+  endDate?: number
+  startingDate?: number
+  nftConverterPid?: number // remove move to own type
+  graveNftToken?: string // remove move to own type
+  additionalDetails?: any[]
+  rug: Token
+  rugDex?: Dex
+  liquidityDetails?: string
   isRetired?: boolean
 }
 
 export interface TombOverlayConfig {
-  pid: Id,
-  commonId: number,
-  uncommonId: number,
-  rareId: number,
-  legendaryId: number,
+  pid: Id
+  commonId: number
+  uncommonId: number
+  rareId: number
+  legendaryId: number
 }
 
 export interface TombConfig {
-  id: number,
-  pid: Id,
-  token1: Token,
-  token2: Token,
-  dex: Dex,
-  lpAddress: Address,
-  notNativeDex?: boolean,
-  isNew?: boolean,
+  id: number
+  pid: Id
+  token1: Token
+  token2: Token
+  dex: Dex
+  lpAddress: Address
+  notNativeDex?: boolean
+  isNew?: boolean
   overlay: TombOverlayConfig
 }
 
 export interface SpawningPoolConfig {
-  id: number,
-  name: string,
-  address: Address,
-  project: any,
-  endBlock: number,
-  endDate: number,
-  isNew?: boolean,
-  rewardToken: Token,
-  dex: Dex,
-  nftId: number,
-  color?: string,
+  id: number
+  name: string
+  address: Address
+  project: any
+  endBlock: number
+  endDate: number
+  isNew?: boolean
+  rewardToken: Token
+  dex: Dex
+  nftId: number
+  color?: string
   unknownPrice?: boolean
 }
 
@@ -158,9 +158,9 @@ export type Images = {
 }
 
 export interface Artist {
-  name: string,
-  twitter?: string,
-  instagram?: string,
+  name: string
+  twitter?: string
+  instagram?: string
 }
 
 export type NftImages = {

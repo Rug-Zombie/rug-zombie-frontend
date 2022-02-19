@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import nftConfig from 'config/constants/nfts';
+import nftConfig from 'config/constants/nfts'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Nft, NftState } from '../types'
 import fetchNftsUser, { NftIdAndUserInfo } from './fetchNftsUser'
@@ -19,7 +19,7 @@ export const nftSlice = createSlice({
     setNftInfo: (state, action: PayloadAction<Nft[]>) => {
       const liveNftsData = action.payload
       state.data = state.data.map((nft) => {
-        const liveNftData = liveNftsData.find(n => n.id === nft.id)
+        const liveNftData = liveNftsData.find((n) => n.id === nft.id)
         return { ...nft, totalSupply: liveNftData.totalSupply }
       })
     },
@@ -31,7 +31,7 @@ export const nftSlice = createSlice({
       })
       state.userDataLoaded = true
     },
-  }
+  },
 })
 
 // Actions

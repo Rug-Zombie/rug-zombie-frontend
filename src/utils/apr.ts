@@ -21,7 +21,11 @@ export const getSpawningPoolApr = (
   return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
 }
 
-export const getGraveTombApr = (poolWeight: BigNumber, zmbePriceUsd: BigNumber, poolLiquidityUsd: BigNumber): number => {
+export const getGraveTombApr = (
+  poolWeight: BigNumber,
+  zmbePriceUsd: BigNumber,
+  poolLiquidityUsd: BigNumber,
+): number => {
   const yearlyZmbeRewardAllocation = ZMBE_PER_BLOCK.times(BLOCKS_PER_YEAR).times(poolWeight)
   const apr = yearlyZmbeRewardAllocation.times(zmbePriceUsd).div(poolLiquidityUsd)
   return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()

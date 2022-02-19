@@ -28,7 +28,6 @@ const ThemeContextProvider = ({ children }) => {
   )
 }
 
-
 const CatacombsThemeContextProvider = ({ children }) => {
   const [isDark, setIsDark] = useState(() => {
     const isDarkUserSetting = localStorage.getItem(CACHE_KEY)

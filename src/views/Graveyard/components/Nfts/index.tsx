@@ -12,8 +12,8 @@ const NftsContainer = styled.div`
 `
 
 interface NftsProps {
-  filter?: string;
-  inWallet?: boolean;
+  filter?: string
+  inWallet?: boolean
 }
 
 const Nfts: React.FC<NftsProps> = ({ filter, inWallet }) => {
@@ -21,18 +21,14 @@ const Nfts: React.FC<NftsProps> = ({ filter, inWallet }) => {
   const nfts = useGetNfts().data.slice().reverse()
   useEffect(() => {
     if (filter === 'All') setItems(nfts)
-    else setItems(nfts.filter(nft => nft.rarity === filter))
+    else setItems(nfts.filter((nft) => nft.rarity === filter))
 
-    if (inWallet) setItems(prev => prev.filter(nft => nft.userInfo.ownedIds.length > 0))
+    if (inWallet) setItems((prev) => prev.filter((nft) => nft.userInfo.ownedIds.length > 0))
   }, [filter, inWallet, nfts])
 
-  const NftCardList = items.map(nft => <NftCard showTotalSupply key={nft.id} id={nft.id} />)
+  const NftCardList = items.map((nft) => <NftCard showTotalSupply key={nft.id} id={nft.id} />)
 
-  return (
-    <NftsContainer>
-      {NftCardList}
-    </NftsContainer>
-  )
+  return <NftsContainer>{NftCardList}</NftsContainer>
 }
 
 export default Nfts

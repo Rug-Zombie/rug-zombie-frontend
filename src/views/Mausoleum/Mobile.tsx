@@ -29,7 +29,6 @@ const StyledSwiper = styled.div`
   }
 `
 
-
 const ChartPane = styled.div<{ isChartPaneOpen: boolean }>`
   height: ${({ isChartPaneOpen }) => (isChartPaneOpen ? '100%' : 0)};
   position: relative;
@@ -57,23 +56,22 @@ const ExpandChartButton = styled(Button)`
 `
 
 interface MobileProps {
-  id: number,
-  userInfo: any,
-  aid: number,
-  setRefresh: any,
+  id: number
+  userInfo: any
+  aid: number
+  setRefresh: any
   refresh: boolean
 }
 
 const Mobile: React.FC<MobileProps> = ({ refresh, setRefresh, userInfo, id }) => {
   const { setSwiper } = useSwiper()
   const [refreshMob, setRefreshMob] = useState(false)
-  const { auctionInfo: { bids, lastBidId, endDate } } = auctionById(id)
+  const {
+    auctionInfo: { bids, lastBidId, endDate },
+  } = auctionById(id)
   const toggleChartPane = null
 
-
-  const [onPresentPrize] = useModal(
-    <PrizeModal id={id} setSwiper={setSwiper} />,
-  )
+  const [onPresentPrize] = useModal(<PrizeModal id={id} setSwiper={setSwiper} />)
 
   const refreshMobile = () => {
     onPresentPrize()
@@ -98,9 +96,9 @@ const Mobile: React.FC<MobileProps> = ({ refresh, setRefresh, userInfo, id }) =>
           initialSlide={3}
           onSwiper={setSwiper}
           spaceBetween={16}
-          slidesPerView='auto'
+          slidesPerView="auto"
           freeMode
-          direction='vertical'
+          direction="vertical"
           freeModeSticky
           centeredSlides
           mousewheel
@@ -110,46 +108,47 @@ const Mobile: React.FC<MobileProps> = ({ refresh, setRefresh, userInfo, id }) =>
           <SwiperSlide>
             <SoonRoundCard lastBidId={lastBidId} bidId={lastBidId + 1} id={id} />
           </SwiperSlide>
-          {bids.length > 0 ?
+          {bids.length > 0 ? (
             <SwiperSlide>
-              {Math.floor(Date.now() / 1000) > endDate ?
+              {Math.floor(Date.now() / 1000) > endDate ? (
                 <AuctionEndCard
                   lastBid={formattedBids[bids.length - 1]}
                   id={id}
                   bidId={lastBidId + 1}
                   setRefresh={setRefresh}
                   refresh={refresh}
-                /> : <IncreaseBidCard
+                />
+              ) : (
+                <IncreaseBidCard
                   lastBid={formattedBids[bids.length - 1]}
                   id={id}
                   bidId={lastBidId + 1}
                   setRefresh={setRefresh}
                   refresh={refresh}
-                />}
-            </SwiperSlide> :
-            null
-          }
-          {formattedBids.reverse().map(bid => {
-            return <SwiperSlide key={bid.id}>
-              <RoundCard bid={bid} id={id} bidId={bid.id} lastBidId={lastBidId} />
+                />
+              )}
             </SwiperSlide>
+          ) : null}
+          {formattedBids.reverse().map((bid) => {
+            return (
+              <SwiperSlide key={bid.id}>
+                <RoundCard bid={bid} id={id} bidId={bid.id} lastBidId={lastBidId} />
+              </SwiperSlide>
+            )
           })}
         </Swiper>
       </StyledSwiper>
-      <div style={{
-        position: 'fixed',
-        zIndex: 100,
-        bottom: '0',
-        left: '0',
-        width: '100%',
-      }}>
+      <div
+        style={{
+          position: 'fixed',
+          zIndex: 100,
+          bottom: '0',
+          left: '0',
+          width: '100%',
+        }}
+      >
         <ChartPane isChartPaneOpen={false}>
-          <ExpandChartButton
-            variant='tertiary'
-            scale='sm'
-            startIcon={<ArrowDownIcon />}
-            onClick={toggleChartPane}
-          >
+          <ExpandChartButton variant="tertiary" scale="sm" startIcon={<ArrowDownIcon />} onClick={toggleChartPane}>
             Auction details
           </ExpandChartButton>
         </ChartPane>

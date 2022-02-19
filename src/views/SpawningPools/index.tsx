@@ -78,12 +78,8 @@ const SpawningPools: React.FC = () => {
             <HeaderCard />
           </Header>
           <SpawningPoolsColumn>
-            <Filter
-              searchValue={search}
-              handleFilter={handleFilter}
-              handleSearch={handleSearch}
-            />
-            {spawningPools.map(sp => {
+            <Filter searchValue={search} handleFilter={handleFilter} handleSearch={handleSearch} />
+            {spawningPools.map((sp) => {
               return <SpawningPoolTable spawningPool={sp} key={sp.id} />
             })}
           </SpawningPoolsColumn>

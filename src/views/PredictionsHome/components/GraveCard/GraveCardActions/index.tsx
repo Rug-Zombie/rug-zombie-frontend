@@ -12,28 +12,28 @@ const InlineText = styled(Text)`
 
 // async function getZombieAllowance(account, setState) {
 
-  // zombie.methods.allowance(account, getRestorationChefAddress()).call()
-  //   .then(amount => {
-  //     lastZombieAllowanceQuery = Date.now()
-  //     const allowance = new BigNumber(amount)
-  //     setState(allowance)
-  //   })
-  //   .catch(() => {
-  //     console.log('Failed to get zombie allowance')
-  //   })
+// zombie.methods.allowance(account, getRestorationChefAddress()).call()
+//   .then(amount => {
+//     lastZombieAllowanceQuery = Date.now()
+//     const allowance = new BigNumber(amount)
+//     setState(allowance)
+//   })
+//   .catch(() => {
+//     console.log('Failed to get zombie allowance')
+//   })
 // }
 
 // async function getTokenAllowance(account, token, setState, resetTimer, web3) {
-  // const tokenContract = getBep20Contract(getAddress(token.address), web3)
-  // tokenContract.methods.allowance(account, getRestorationChefAddress()).call()
-  //   .then(amount => {
-  //     resetTimer()
-  //     const allowance = new BigNumber(amount)
-  //     setState(allowance)
-  //   })
-  //   .catch(() => {
-  //     console.log(`Failed to get ${token.symbol} allowance`)
-  //   })
+// const tokenContract = getBep20Contract(getAddress(token.address), web3)
+// tokenContract.methods.allowance(account, getRestorationChefAddress()).call()
+//   .then(amount => {
+//     resetTimer()
+//     const allowance = new BigNumber(amount)
+//     setState(allowance)
+//   })
+//   .catch(() => {
+//     console.log(`Failed to get ${token.symbol} allowance`)
+//   })
 // }
 
 const GraveCardActions: React.FC<{ id: number }> = ({ id }) => {
@@ -46,51 +46,35 @@ const GraveCardActions: React.FC<{ id: number }> = ({ id }) => {
     setInterval(() => {
       setRemainingTime(end - Math.floor(Date.now() / 1000))
       setTimerSet(true)
-    },1000)
+    }, 1000)
   })
   return (
-    <Flex flexDirection='column'>
-      <Flex flexDirection='column'>
-        <Box display='inline'>
-          <InlineText
-            color="textSubtle"
-            textTransform='uppercase'
-            bold
-            fontSize='12px'
-          >
+    <Flex flexDirection="column">
+      <Flex flexDirection="column">
+        <Box display="inline">
+          <InlineText color="textSubtle" textTransform="uppercase" bold fontSize="12px">
             Bid Token:&nbsp;
           </InlineText>
-          <InlineText
-            color="secondary"
-            textTransform='uppercase'
-            bold
-            fontSize='12px'
-          >
+          <InlineText color="secondary" textTransform="uppercase" bold fontSize="12px">
             {bt}
           </InlineText>
         </Box>
-        { !isFinished ? <>
-        <Box display='inline'>
-          <InlineText
-            color='textSubtle'
-            textTransform='uppercase'
-            bold
-            fontSize='12px'
-          >
-            Ends in:&nbsp;
-          </InlineText>
-          <InlineText
-            color='secondary'
-            textTransform='uppercase'
-            bold
-            fontSize='12px'
-          >
-            {formatDuration(remainingTime, true)}
-          </InlineText>
-        </Box>
-          <br/>
-        </> : <br/>}
-        <Button onClick={() => history.push(`${routes.MAUSOLEUM }/${id}`)}>ENTER</Button>
+        {!isFinished ? (
+          <>
+            <Box display="inline">
+              <InlineText color="textSubtle" textTransform="uppercase" bold fontSize="12px">
+                Ends in:&nbsp;
+              </InlineText>
+              <InlineText color="secondary" textTransform="uppercase" bold fontSize="12px">
+                {formatDuration(remainingTime, true)}
+              </InlineText>
+            </Box>
+            <br />
+          </>
+        ) : (
+          <br />
+        )}
+        <Button onClick={() => history.push(`${routes.MAUSOLEUM}/${id}`)}>ENTER</Button>
       </Flex>
     </Flex>
   )

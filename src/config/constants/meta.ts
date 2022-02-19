@@ -2,8 +2,7 @@ import { PageMeta } from './types'
 
 export const DEFAULT_META: PageMeta = {
   title: 'RugZombie',
-  description:
-    'Bringing your rugged tokens back from the dead.',
+  description: 'Bringing your rugged tokens back from the dead.',
   image: 'https://storage.googleapis.com/rug-zombie/6.png',
 }
 

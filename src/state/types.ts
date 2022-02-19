@@ -1,13 +1,6 @@
 import BigNumber from 'bignumber.js'
 
-import {
-  Address,
-  Artist,
-  GraveConfig,
-  SpawningPoolConfig,
-  TombConfig,
-  UserActivityType,
-} from 'config/constants/types'
+import { Address, Artist, GraveConfig, SpawningPoolConfig, TombConfig, UserActivityType } from 'config/constants/types'
 
 export type TranslatableText =
   | string
@@ -31,19 +24,19 @@ export interface GraveUserInfo {
 }
 
 export interface GravePoolInfo {
-  lpToken: string;
-  allocPoint: BigNumber;
-  weight: BigNumber;
-  unlockFee: BigNumber;
-  minimumStake: BigNumber;
-  tokenAmount: BigNumber;
-  withdrawCooldown: BigNumber;
-  nftMintTime: BigNumber;
+  lpToken: string
+  allocPoint: BigNumber
+  weight: BigNumber
+  unlockFee: BigNumber
+  minimumStake: BigNumber
+  tokenAmount: BigNumber
+  withdrawCooldown: BigNumber
+  nftMintTime: BigNumber
 }
 
 export interface Grave extends GraveConfig {
-  userInfo?: GraveUserInfo;
-  poolInfo: GravePoolInfo;
+  userInfo?: GraveUserInfo
+  poolInfo: GravePoolInfo
 }
 
 export interface TombUserInfo {
@@ -58,11 +51,11 @@ export interface TombUserInfo {
 }
 
 export interface TombPoolInfo {
-  allocPoint: BigNumber;
-  weight: BigNumber;
-  tokenAmount: BigNumber;
-  withdrawCooldown: BigNumber;
-  nftMintTime: BigNumber;
+  allocPoint: BigNumber
+  weight: BigNumber
+  tokenAmount: BigNumber
+  withdrawCooldown: BigNumber
+  nftMintTime: BigNumber
   mintingFee: BigNumber
   lpPriceBnb: BigNumber
 }
@@ -73,28 +66,28 @@ export interface Tomb extends TombConfig {
 }
 
 export interface SpawningPoolInfo {
-  rewardPerBlock: BigNumber,
-  unlockFee: BigNumber,
-  minimumStake: BigNumber,
-  totalAmount: BigNumber,
-  withdrawCooldown: BigNumber,
-  nftMintTime: BigNumber,
+  rewardPerBlock: BigNumber
+  unlockFee: BigNumber
+  minimumStake: BigNumber
+  totalAmount: BigNumber
+  withdrawCooldown: BigNumber
+  nftMintTime: BigNumber
   rewardTokenPriceBnb: BigNumber
 }
 
 export interface SpawningPoolUserInfo {
-  paidUnlockFee: boolean,
-  tokenWithdrawalDate: BigNumber,
-  nftMintDate: BigNumber,
-  amount: BigNumber,
-  pendingReward: BigNumber,
-  zombieAllowance: BigNumber,
-  zombieBalance: BigNumber,
+  paidUnlockFee: boolean
+  tokenWithdrawalDate: BigNumber
+  nftMintDate: BigNumber
+  amount: BigNumber
+  pendingReward: BigNumber
+  zombieAllowance: BigNumber
+  zombieBalance: BigNumber
 }
 
 export interface SpawningPool extends SpawningPoolConfig {
-  userInfo?: SpawningPoolUserInfo;
-  poolInfo: SpawningPoolInfo;
+  userInfo?: SpawningPoolUserInfo
+  poolInfo: SpawningPoolInfo
 }
 
 export interface UserActivity {
@@ -174,21 +167,21 @@ export interface BlockState {
 // Graveyard
 
 export interface NftUserInfo {
-  ownedIds: number[],
+  ownedIds: number[]
 }
 
 export interface Nft {
-  id: number,
-  name: string,
-  description: string,
-  symbol: string,
-  address: Address,
-  totalSupply: BigNumber,
-  path: string,
-  type: string,
-  rarity: string,
-  artist?: Artist,
-  userInfo: NftUserInfo,
+  id: number
+  name: string
+  description: string
+  symbol: string
+  address: Address
+  totalSupply: BigNumber
+  path: string
+  type: string
+  rarity: string
+  artist?: Artist
+  userInfo: NftUserInfo
 }
 
 export interface NftState {

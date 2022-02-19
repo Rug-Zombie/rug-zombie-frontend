@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
 const Section = styled.div`
   margin: 100px 0 80px 0;
@@ -10,31 +10,29 @@ const SectionTitle = styled.h2`
   text-align: center;
   font: normal normal 600 36px/72px Poppins;
   letter-spacing: 1.8px;
-  color: #FFFFFF;
-`;
+  color: #ffffff;
+`
 
 const Hr = styled.hr`
   width: 30px;
   height: 5px;
-  background-color: #B8C00D;
+  background-color: #b8c00d;
   border-radius: 3px;
-  border: 0 solid #B8C00D;
+  border: 0 solid #b8c00d;
   margin: 0 auto;
-`;
+`
 
 interface SectionHeaderProps {
-  title: string;
+  title: string
 }
 
 const SectionHeader: React.FC<SectionHeaderProps> = ({ title }) => {
   return (
     <Section>
-      <SectionTitle>
-        {title}
-      </SectionTitle>
+      <SectionTitle>{title}</SectionTitle>
       <Hr />
     </Section>
-  );
-};
+  )
+}
 
-export default SectionHeader;
+export default SectionHeader

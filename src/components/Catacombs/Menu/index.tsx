@@ -14,28 +14,28 @@ const Menu = (props) => {
   const { currentLanguage, setLanguage } = useTranslation()
   return (
     <CatacombsThemeContextProvider>
-    <UikitMenu
-      account={account}
-      login={login}
-      logout={logout}
-      currentLang={currentLanguage.code}
-      langs={languageList}
-      setLang={(langType) => {
-        setLanguage(langType as Language)
-      }}
-      cakePriceUsd={zombiePriceUsd()}
-      links={config}
-      profile={{
-        username: undefined,
-        image: '/images/rugZombie/BasicZombie.png',
-        profileLink: '/profile',
-        noProfileLink: '/profile',
-        showPip: undefined,
-      }}
-      {...props}
-    />
+      <UikitMenu
+        account={account}
+        login={login}
+        logout={logout}
+        currentLang={currentLanguage.code}
+        langs={languageList}
+        setLang={(langType) => {
+          setLanguage(langType as Language)
+        }}
+        cakePriceUsd={zombiePriceUsd()}
+        links={config}
+        profile={{
+          username: undefined,
+          image: '/images/rugZombie/BasicZombie.png',
+          profileLink: '/profile',
+          noProfileLink: '/profile',
+          showPip: undefined,
+        }}
+        {...props}
+      />
     </CatacombsThemeContextProvider>
   )
 }
 
-export default Menu;
+export default Menu

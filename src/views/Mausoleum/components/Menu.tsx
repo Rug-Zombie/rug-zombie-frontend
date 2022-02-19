@@ -26,7 +26,7 @@ interface MenuProps {
   id: number
 }
 
-const Menu: React.FC<MenuProps> = ({id}) => {
+const Menu: React.FC<MenuProps> = ({ id }) => {
   return (
     <FlexRow alignItems="center" p="16px">
       <SetCol>

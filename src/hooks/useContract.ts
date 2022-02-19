@@ -14,9 +14,13 @@ import {
   getMulticallContract,
   getCatacombsContract,
   getInstaBuyContract,
-  getTombOverlayContract, getRugRollContract,
-  getNftSwapperContract, getZTokenSwapperContract,
-  getSharkpoolContract, getDrBurnensteinContract, getRugMarketContract,
+  getTombOverlayContract,
+  getRugRollContract,
+  getNftSwapperContract,
+  getZTokenSwapperContract,
+  getSharkpoolContract,
+  getDrBurnensteinContract,
+  getRugMarketContract,
 } from 'utils/contractHelpers'
 
 /**

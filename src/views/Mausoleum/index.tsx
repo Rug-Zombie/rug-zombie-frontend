@@ -42,20 +42,29 @@ const Mausoleum = () => {
 
   return (
     <>
-      {!updateAuctionInfo && !updateUserInfo ? <>
-        <Flex alignItems='center' justifyContent='center' mb='16px'>
-          <img src='https://storage.googleapis.com/rug-zombie/BasicZombie.gif' alt='loading' />
-        </Flex>
-        <Flex alignItems='center' justifyContent='center' mb='16px'>
-          <Text bold fontSize="30px">Entering Mausoleum</Text>
-        </Flex>
-      </> : <SwiperProvider>
-        <Container>
-          {isDesktop ? <Desktop refresh={refresh} setRefresh={setRefresh} id={auctionId} /> :
-            <Mobile refresh={refresh} setRefresh={setRefresh} userInfo={userInfo} aid={auctionId} id={auctionId} />}
-          <CollectWinningsPopup />
-        </Container>
-      </SwiperProvider>}
+      {!updateAuctionInfo && !updateUserInfo ? (
+        <>
+          <Flex alignItems="center" justifyContent="center" mb="16px">
+            <img src="https://storage.googleapis.com/rug-zombie/BasicZombie.gif" alt="loading" />
+          </Flex>
+          <Flex alignItems="center" justifyContent="center" mb="16px">
+            <Text bold fontSize="30px">
+              Entering Mausoleum
+            </Text>
+          </Flex>
+        </>
+      ) : (
+        <SwiperProvider>
+          <Container>
+            {isDesktop ? (
+              <Desktop refresh={refresh} setRefresh={setRefresh} id={auctionId} />
+            ) : (
+              <Mobile refresh={refresh} setRefresh={setRefresh} userInfo={userInfo} aid={auctionId} id={auctionId} />
+            )}
+            <CollectWinningsPopup />
+          </Container>
+        </SwiperProvider>
+      )}
     </>
   )
 }

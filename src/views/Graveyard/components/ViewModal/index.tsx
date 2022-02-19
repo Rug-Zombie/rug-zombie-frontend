@@ -8,9 +8,9 @@ import ViewCard from '../ViewCard'
 import { useGetNftById } from '../../../../state/nfts/hooks'
 
 interface ViewModalProps {
-  id: number;
-  onDismiss?: any;
-  setSwiper: any;
+  id: number
+  onDismiss?: any
+  setSwiper: any
 }
 
 const StyledSwiper = styled.div`
@@ -25,29 +25,41 @@ const StyledSwiper = styled.div`
 `
 
 const ViewModal: React.FC<ViewModalProps> = ({ id, onDismiss, setSwiper }) => {
-  const { userInfo: { ownedIds } } = useGetNftById(id)
+  const {
+    userInfo: { ownedIds },
+  } = useGetNftById(id)
   const { theme } = useTheme()
-  return <Modal onDismiss={onDismiss} title='In Wallet' headerBackground={theme.colors.backgroundAlt}
-                style={{ minWidth: '50%' }}>
-    <StyledSwiper style={{ width: '100%' }}>
-      <Swiper
-        initialSlide={0.5}
-        onSwiper={setSwiper}
-        spaceBetween={32}
-        slidesPerView='auto'
-        freeMode
-        freeModeSticky
-        centeredSlides
-        mousewheel
-        keyboard
-        resizeObserver
-      >
-        {ownedIds.map(ownedId => {
-          return <SwiperSlide><ViewCard id={id} nftId={ownedId} /></SwiperSlide>
-        })}
-      </Swiper>
-    </StyledSwiper>
-  </Modal>
+  return (
+    <Modal
+      onDismiss={onDismiss}
+      title="In Wallet"
+      headerBackground={theme.colors.backgroundAlt}
+      style={{ minWidth: '50%' }}
+    >
+      <StyledSwiper style={{ width: '100%' }}>
+        <Swiper
+          initialSlide={0.5}
+          onSwiper={setSwiper}
+          spaceBetween={32}
+          slidesPerView="auto"
+          freeMode
+          freeModeSticky
+          centeredSlides
+          mousewheel
+          keyboard
+          resizeObserver
+        >
+          {ownedIds.map((ownedId) => {
+            return (
+              <SwiperSlide>
+                <ViewCard id={id} nftId={ownedId} />
+              </SwiperSlide>
+            )
+          })}
+        </Swiper>
+      </StyledSwiper>
+    </Modal>
+  )
 }
 
 export default ViewModal

@@ -7,8 +7,8 @@ type Status = 'outbid' | 'live' | 'next' | 'soon' | 'canceled' | 'calculating'
 interface CardHeaderProps {
   status: Status
   title: string
-  bid: any,
-  id: number,
+  bid: any
+  id: number
   icon?: ReactElement
 }
 
@@ -75,7 +75,7 @@ const CardHeader: React.FC<CardHeaderProps> = ({ status, title, icon, bid }) => 
       </Flex>
       <Round>
         <Text fontSize={isLive ? '14px' : '12px'} color={getTextColorByStatus(status, 'textSubtle')} textAlign="center">
-           {`#${bid.id}`}
+          {`#${bid.id}`}
         </Text>
       </Round>
     </StyledCardHeader>

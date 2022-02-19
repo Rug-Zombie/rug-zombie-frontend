@@ -1,12 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import {
-  ButtonMenu,
-  ButtonMenuItem,
-  Text,
-  Flex,
-  NotificationDot,
-} from '@rug-zombie-libs/uikit'
+import { ButtonMenu, ButtonMenuItem, Text, Flex, NotificationDot } from '@rug-zombie-libs/uikit'
 import { useTranslation } from 'contexts/Localization'
 
 const GraveTabButtons = ({ setFilter }) => {
@@ -19,24 +13,24 @@ const GraveTabButtons = ({ setFilter }) => {
   }
 
   return (
-    <Flex alignItems='center' justifyContent='center' mb='32px'>
+    <Flex alignItems="center" justifyContent="center" mb="32px">
       <Wrapper>
-        <ButtonMenu onItemClick={toggleButtonMenu} activeIndex={index} scale='sm'>
+        <ButtonMenu onItemClick={toggleButtonMenu} activeIndex={index} scale="sm">
           <ButtonMenuItem>
-            <Text color='tertiary' bold>
+            <Text color="tertiary" bold>
               {t('All')}
             </Text>
           </ButtonMenuItem>
           <NotificationDot>
             <ButtonMenuItem>
-              <Text color='tertiary' bold>
+              <Text color="tertiary" bold>
                 {t('In Wallet')}
               </Text>
             </ButtonMenuItem>
           </NotificationDot>
           <NotificationDot>
             <ButtonMenuItem>
-              <Text color='tertiary' bold>
+              <Text color="tertiary" bold>
                 {t('Not Owned')}
               </Text>
             </ButtonMenuItem>
@@ -48,7 +42,6 @@ const GraveTabButtons = ({ setFilter }) => {
 }
 
 export default GraveTabButtons
-
 
 const Wrapper = styled.div`
   display: flex;

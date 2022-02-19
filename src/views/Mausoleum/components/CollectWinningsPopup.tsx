@@ -131,7 +131,6 @@ const CollectWinningsPopup = () => {
     clearInterval(timer.current)
   }
 
-
   return (
     <CSSTransition in={isOpen} unmountOnExit nodeRef={ref} timeout={1000} classNames="popup">
       <Wrapper ref={ref}>

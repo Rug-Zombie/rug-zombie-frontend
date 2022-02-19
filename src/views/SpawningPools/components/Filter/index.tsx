@@ -26,7 +26,7 @@ const Dropdowns = styled.div`
 
 const Dropdown = styled.div`
   height: 60px;
-  border: 2px solid #151E21;
+  border: 2px solid #151e21;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -51,9 +51,9 @@ const SearchBar = styled.div`
 `
 
 const Input = styled.input`
-  border: 2px solid #151E21;
+  border: 2px solid #151e21;
   border-radius: 10px;
-  background: #0D1517 url(${searchIcon}) 93% no-repeat;
+  background: #0d1517 url(${searchIcon}) 93% no-repeat;
   caret-color: #fff;
   color: #fff;
   padding: 0 60px 0 20px;
@@ -82,9 +82,9 @@ const DropdownContent = styled.div`
 const DropdownItem = styled.div`
   &:hover {
     cursor: pointer;
-    background-color: #151E21;
+    background-color: #151e21;
     border-radius: 10px;
-    color: #30C00D;
+    color: #30c00d;
   }
 
   padding: 0 15px 0 15px;
@@ -92,52 +92,48 @@ const DropdownItem = styled.div`
 
 const MenuText = styled.p`
   padding: 5px;
-  color: #6B7682;
+  color: #6b7682;
   font: normal normal normal 14px/30px Poppins;
 
   &:hover {
-    color: #30C00D;
+    color: #30c00d;
   }
 `
 
 const DropdownText = styled.p`
   font: normal normal normal 14px/30px Poppins;
-  color: #FFFFFF;
+  color: #ffffff;
   padding: 0 10px 0 20px;
   margin: 0 auto 0 0;
 `
 
-const DownPointer = <div style={{ marginRight: '10px' }}>
-  <img src={downpointer} alt='Dropdown menu' width='30px' />
-</div>
+const DownPointer = (
+  <div style={{ marginRight: '10px' }}>
+    <img src={downpointer} alt="Dropdown menu" width="30px" />
+  </div>
+)
 
-const UpPointer = <div style={{ marginRight: '10px' }}>
-  <img src={upPointer} alt='Hide Dropdown menu' width='30px' />
-</div>
+const UpPointer = (
+  <div style={{ marginRight: '10px' }}>
+    <img src={upPointer} alt="Hide Dropdown menu" width="30px" />
+  </div>
+)
 
 interface FilterProps {
-  searchValue: string;
-  handleSearch: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleFilter: (condition: string) => void;
+  searchValue: string
+  handleSearch: (e: React.ChangeEvent<HTMLInputElement>) => void
+  handleFilter: (condition: string) => void
 }
 
-const POOLS_FILTER = [
-  'All Pools',
-  'Staked',
-  'Ended',
-]
+const POOLS_FILTER = ['All Pools', 'Staked', 'Ended']
 
-const Filter: React.FC<FilterProps> = ({
-  searchValue,
-  handleSearch,
-  handleFilter,
-}) => {
+const Filter: React.FC<FilterProps> = ({ searchValue, handleSearch, handleFilter }) => {
   const [showSpawningPoolsMenu, setShowSpawningPoolsMenu] = useState(false)
   const [poolsLabel, setPoolsLabel] = useState('All Pools')
 
   const handleDropdownClick = (e: any) => {
     e.preventDefault()
-    setShowSpawningPoolsMenu(prev => !prev)
+    setShowSpawningPoolsMenu((prev) => !prev)
   }
 
   const handleItemClick = (e: any) => {
@@ -146,36 +142,32 @@ const Filter: React.FC<FilterProps> = ({
     setPoolsLabel(e.target.textContent)
   }
 
-  return <FilterContainer>
-    <Dropdowns>
-      <Dropdown onClick={handleDropdownClick}>
-        <DropdownText>
-          {poolsLabel}
-        </DropdownText>
-        {showSpawningPoolsMenu ? UpPointer : DownPointer }
-        <DropdownMenu>
-          {showSpawningPoolsMenu ? (
-            <DropdownContent>
-              {POOLS_FILTER.map(spawningPool => {
+  return (
+    <FilterContainer>
+      <Dropdowns>
+        <Dropdown onClick={handleDropdownClick}>
+          <DropdownText>{poolsLabel}</DropdownText>
+          {showSpawningPoolsMenu ? UpPointer : DownPointer}
+          <DropdownMenu>
+            {showSpawningPoolsMenu ? (
+              <DropdownContent>
+                {POOLS_FILTER.map((spawningPool) => {
                   return (
-                    <DropdownItem
-                      key={spawningPool}
-                      onClick={handleItemClick}
-                    >
+                    <DropdownItem key={spawningPool} onClick={handleItemClick}>
                       <MenuText>{spawningPool}</MenuText>
                     </DropdownItem>
                   )
-                },
-              )}
-            </DropdownContent>
-          ) : null}
-        </DropdownMenu>
-      </Dropdown>
-    </Dropdowns>
-    <SearchBar>
-      <Input onInput={handleSearch} value={searchValue} placeholder='Search by name, symbol or NFT' />
-    </SearchBar>
-  </FilterContainer>
+                })}
+              </DropdownContent>
+            ) : null}
+          </DropdownMenu>
+        </Dropdown>
+      </Dropdowns>
+      <SearchBar>
+        <Input onInput={handleSearch} value={searchValue} placeholder="Search by name, symbol or NFT" />
+      </SearchBar>
+    </FilterContainer>
+  )
 }
 
 export default Filter

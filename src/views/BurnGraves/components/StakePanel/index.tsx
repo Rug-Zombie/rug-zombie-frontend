@@ -23,7 +23,7 @@ const DisplayFlex = styled(BaseLayout)`
 }`
 
 export interface StakePanelProps {
-  id: number,
+  id: number
   updateResult: any
 }
 
@@ -41,8 +41,10 @@ const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
 
   useEffect(() => {
     if (wallet) {
-      tokenContract.methods.allowance(wallet, getDrBurnensteinAddress()).call()
-        .then(res => {
+      tokenContract.methods
+        .allowance(wallet, getDrBurnensteinAddress())
+        .call()
+        .then((res) => {
           if (parseInt(res.toString()) !== 0) {
             setIsApproved(true)
           } else {
@@ -52,10 +54,11 @@ const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
     }
   }, [tokenContract, wallet, setIsApproved])
 
-
   const handleApprove = () => {
     if (wallet) {
-      tokenContract.methods.approve(getDrBurnensteinAddress(), ethers.constants.MaxUint256).send({ from: wallet })
+      tokenContract.methods
+        .approve(getDrBurnensteinAddress(), ethers.constants.MaxUint256)
+        .send({ from: wallet })
         .then(() => {
           toastDefault(t(`Approved ${grave.stakingToken.symbol}`))
           setIsApproved(true)
@@ -64,24 +67,23 @@ const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
   }
 
   const handleUnlock = () => {
-    drBurnenstein.methods.priceInBnb(id).call()
-      .then(res => {
-        drBurnenstein.methods.unlock(id)
-          .send({ from: wallet, value: res }).then(() => {
-
-          toastDefault(t('TombTable unlocked'))
-          updateResult(id)
-        })
+    drBurnenstein.methods
+      .priceInBnb(id)
+      .call()
+      .then((res) => {
+        drBurnenstein.methods
+          .unlock(id)
+          .send({ from: wallet, value: res })
+          .then(() => {
+            toastDefault(t('TombTable unlocked'))
+            updateResult(id)
+          })
       })
   }
 
-  const [handleIncreaseStake] = useModal(
-    <IncreaseStakeModal id={id} updateResult={updateResult} />
-  )
+  const [handleIncreaseStake] = useModal(<IncreaseStakeModal id={id} updateResult={updateResult} />)
 
-  const [handleDecreaseStake] = useModal(
-    <DecreaseStakeModal id={id} updateResult={updateResult} />
-  )
+  const [handleDecreaseStake] = useModal(<DecreaseStakeModal id={id} updateResult={updateResult} />)
 
   const renderButtons = () => {
     if (!wallet) {
@@ -93,21 +95,29 @@ const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
     }
 
     if (!grave.userInfo.hasUnlocked) {
-      return <div className='frank-card'>
-        <div className='small-text'>
-          <span className='white-color'>STAKING</span>
+      return (
+        <div className="frank-card">
+          <div className="small-text">
+            <span className="white-color">STAKING</span>
+          </div>
+          <button onClick={handleUnlock} className="btn w-100" type="button">
+            UNLOCK
+          </button>
         </div>
-        <button onClick={handleUnlock} className='btn w-100' type='button'>UNLOCK</button>
-      </div>
+      )
     }
 
     if (!isApproved) {
-      return <div className="frank-card">
-        <div className="small-text">
-          <span className="white-color">STAKING</span>
+      return (
+        <div className="frank-card">
+          <div className="small-text">
+            <span className="white-color">STAKING</span>
+          </div>
+          <button onClick={handleApprove} className="btn w-100" type="button">
+            APPROVE
+          </button>
         </div>
-        <button onClick={handleApprove} className='btn w-100' type='button'>APPROVE</button>
-      </div>
+      )
     }
 
     return (
@@ -116,20 +126,26 @@ const StakePanel: React.FC<StakePanelProps> = ({ id, updateResult }) => {
           <span className="white-color">STAKING</span>
         </div>
         <DisplayFlex>
-          <span style={{ paddingRight: '50px' }}
-                className='total-earned text-shadow'>{getFullDisplayBalance(new BigNumber(grave.userInfo.stakedAmount), grave.stakingToken.decimals, 4)}</span>
-          <button onClick={handleDecreaseStake} style={{ marginRight: '10px' }} className='btn w-100' type='button'>-
+          <span style={{ paddingRight: '50px' }} className="total-earned text-shadow">
+            {getFullDisplayBalance(new BigNumber(grave.userInfo.stakedAmount), grave.stakingToken.decimals, 4)}
+          </span>
+          <button onClick={handleDecreaseStake} style={{ marginRight: '10px' }} className="btn w-100" type="button">
+            -
           </button>
-          <button onClick={handleIncreaseStake} disabled={grave.isClosed}
-                  className={`btn w-100 ${grave.isClosed ? 'btn-disabled' : ''}`} type='button'>+
+          <button
+            onClick={handleIncreaseStake}
+            disabled={grave.isClosed}
+            className={`btn w-100 ${grave.isClosed ? 'btn-disabled' : ''}`}
+            type="button"
+          >
+            +
           </button>
         </DisplayFlex>
       </div>
     )
   }
 
-return renderButtons()
-
+  return renderButtons()
 }
 
 export default StakePanel

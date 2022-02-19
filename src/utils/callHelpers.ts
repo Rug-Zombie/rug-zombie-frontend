@@ -1,9 +1,7 @@
 import { ethers } from 'ethers'
 
 export const approve = async (tokenContract, spenderAddress, account) => {
-  return tokenContract.methods
-    .approve(spenderAddress, ethers.constants.MaxUint256)
-    .send({ from: account })
+  return tokenContract.methods.approve(spenderAddress, ethers.constants.MaxUint256).send({ from: account })
 }
 
 export const stake = async (drFrankensteinContract, pid, amount, account) => {
