@@ -23,7 +23,7 @@ const fetchNftsUser = async (account: string, nftsToFetch: Nft[]): Promise<NftId
 
   const contract = getNftOwnership()
   const resultBatches: NftIdAndUserInfo[][] = await Promise.all(
-    chunk(nftsToFetch, 32).map((nftBatch) =>
+    chunk(nftsToFetch, 30).map((nftBatch) =>
       contract.methods
         .massCheckOwnership(
           account,
