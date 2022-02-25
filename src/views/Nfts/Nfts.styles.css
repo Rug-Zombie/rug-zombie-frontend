@@ -1,5 +1,5 @@
 .scroll {
-    overflow-x: scroll;
+    /*overflow-x: scroll;*/
 }
 .scroll::-webkit-scrollbar {
     background: #1f4a21 0% 0% no-repeat padding-box;
