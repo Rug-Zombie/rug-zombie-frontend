@@ -41,10 +41,15 @@ const Small = styled.img`
 `
 
 const Title = styled.div`
+  max-width: 350px;
   text-align: left;
   font: normal normal 600 60px Poppins;
   letter-spacing: 0;
   color: #FFFFFF;
+  @media (max-width: 1083px) {
+    max-width: 100%;
+    text-align: center;
+  }
 `
 const Regular = styled.div`
   padding-left: 10px;
@@ -95,13 +100,6 @@ const HighlightSmall = styled.div`
 //  width: 17px;
 //  height: 20px;
 // `
-
-const Wrapper = styled.div`
-  overflow: visible;
-  // background: green;
-  height: 520px;
-`
-
 
 const Left = styled.div`
   float:left;
@@ -233,11 +231,6 @@ const Nfts: React.FC = () => {
 
   const nft = useGetNftById(parseInt(id))
 
-
-
-  // console.log(nft.userInfo.ownedIds)
-
-  // const { name, preview, temp: { owner } } = collection
 
   return (
     <Container>
