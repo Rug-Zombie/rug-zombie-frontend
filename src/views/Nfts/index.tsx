@@ -2,19 +2,18 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { useWeb3React } from '@web3-react/core'
-import {LinkExternal} from "@rug-zombie-libs/uikit";
+import { LinkExternal } from '@rug-zombie-libs/uikit'
 import Page from '../../components/layout/Page'
 // import badge from '../../images/icons/Icon feather-award.svg'
 // import user from '../../images/icons/Icon feather-user-check.svg'
-
 import { useAppDispatch } from '../../state'
 import { fetchNftUserDataAsync } from '../../state/nfts'
-import {useGetNftById} from '../../state/hooks'
+import { useGetNftById } from '../../state/hooks'
 import './Nfts.styles.css'
-import {getAddress} from "../../utils/addressHelpers";
-import {formatAddress} from "../../utils";
-import {PreviewVideo,SmallPreviewVideo} from "../../components/Video/NftVideo";
-
+import { getAddress } from '../../utils/addressHelpers'
+import { formatAddress } from '../../utils'
+import { PreviewVideo, SmallPreviewVideo } from '../../components/Video/NftVideo'
+import Footer from '../../components/Footer'
 
 
 const Image = styled.img`
@@ -97,7 +96,7 @@ const HighlightSmall = styled.div`
 // `
 
 const Left = styled.div`
-  float:left;
+  float: left;
   padding-right: 20px;
   padding-left: 20px;
   max-width: 520px;
@@ -198,7 +197,7 @@ const Link = styled(LinkExternal)`
 
 const PreviewVid = styled(PreviewVideo)`
   max-width: 520px;
-  min-width: 320px;
+  min-width: 300px;
   width: 100%;
   object-fit: cover;
 `
@@ -216,6 +215,9 @@ const VidDiv = styled.div`
   border-radius: 20px;
 `
 
+const NftPage = styled(Page)`
+  margin-bottom: 200px;
+`
 
 interface ParamTypes {
   id: string
@@ -227,69 +229,68 @@ const Nfts: React.FC = () => {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if(account) {
+    if (account) {
       dispatch(fetchNftUserDataAsync(account))
     }
   }, [account, dispatch])
 
   const nft = useGetNftById(parseInt(id))
 
-
-
-  // console.log(nft.userInfo.ownedIds)
-
-  // const { name, preview, temp: { owner } } = collection
-
-
   return (
-      <Page>
-          <Left>
-            {nft.type==='image' ? <Image src={nft.path}/> : <VidDiv><PreviewVid path={nft.path}/></VidDiv>}
-          </Left>
-          <Right>
-            <Title>{nft.name}</Title>
-            <Subtle>{nft.description}</Subtle>
-            <Subtle>Rarity: <Highlighted>{nft.rarity}</Highlighted></Subtle>
+    <>
+      <NftPage>
+        <Left>
+          {nft.type === 'image' ? <Image src={nft.path} /> : <VidDiv><PreviewVid path={nft.path} /></VidDiv>}
+        </Left>
+        <Right>
+          <Title>{nft.name}</Title>
+          <Subtle>{nft.description}</Subtle>
+          <Subtle>Rarity: <Highlighted>{nft.rarity}</Highlighted></Subtle>
+          <Row>
+            <RowItem><Subtle>Collection By</Subtle></RowItem>
+            <RowItem><Highlighted>RugZombie</Highlighted></RowItem>
+          </Row>
+          {nft.artist ? <Row>
+            <RowItem><Subtle>Artist</Subtle></RowItem>
+            <RowItem><Link
+              href={nft.artist.twitter ? nft.artist.twitter : nft.artist.instagram}>{nft.artist.name}</Link></RowItem>
+          </Row> : null}
+          <TabRight>
             <Row>
-              <RowItem><Subtle>Collection By</Subtle></RowItem>
-              <RowItem><Highlighted>RugZombie</Highlighted></RowItem>
+              <RowItem><Regular>Owned Variants</Regular></RowItem>
             </Row>
-            {nft.artist ? <Row>
-              <RowItem><Subtle>Artist</Subtle></RowItem>
-              <RowItem><Link href={nft.artist.twitter ? nft.artist.twitter : nft.artist.instagram}>{nft.artist.name}</Link></RowItem>
-            </Row>: null}
-            <TabRight>
-              <Row>
-                <RowItem><Regular>Owned Variants</Regular></RowItem>
-              </Row>
-              <Row>
-                <RowItem><Normal>You own {nft.userInfo.ownedIds.length} variants of this nft</Normal></RowItem>
-              </Row>
-              <Row>
-                <Variants>{nft.userInfo.ownedIds.map((value,index) =>
-                    <Variant>{nft.type==='image' ? <Small src={nft.path}/> : <VidDiv><SmallVid path={nft.path}/></VidDiv>}<HighlightSmall>{value}</HighlightSmall></Variant> )}
-                </Variants>
+            <Row>
+              <RowItem><Normal>You own {nft.userInfo.ownedIds.length} variants of this nft</Normal></RowItem>
+            </Row>
+            <Row>
+              <Variants>{nft.userInfo.ownedIds.map((value) =>
+                <Variant>{nft.type === 'image' ? <Small src={nft.path} /> :
+                  <VidDiv><SmallVid path={nft.path} /></VidDiv>}<HighlightSmall>{value}</HighlightSmall></Variant>)}
+              </Variants>
 
-              </Row>
-            </TabRight><br/>
-            <TabRight>
-              <DetailsContainer>
-                <DetailFlex>
-                  <DetailName>Total Supply</DetailName>
-                  <DetailValue>{nft.totalSupply.toString()}</DetailValue>
-                </DetailFlex>
-                <DetailFlex>
-                  <DetailName>Contract Address</DetailName>
-                  <DetailValue>{formatAddress(getAddress(nft.address))}</DetailValue>
-                </DetailFlex>
-                <DetailFlex>
-                  <DetailName>Token Standard</DetailName>
-                  <DetailValue>ERC-721</DetailValue>
-                </DetailFlex>
-              </DetailsContainer>
-            </TabRight>
-          </Right>
-      </Page>
+            </Row>
+          </TabRight><br />
+          <TabRight>
+            <DetailsContainer>
+              <DetailFlex>
+                <DetailName>Total Supply</DetailName>
+                <DetailValue>{nft.totalSupply.toString()}</DetailValue>
+              </DetailFlex>
+              <DetailFlex>
+                <DetailName>Contract Address</DetailName>
+                <DetailValue>{formatAddress(getAddress(nft.address))}</DetailValue>
+              </DetailFlex>
+              <DetailFlex>
+                <DetailName>Token Standard</DetailName>
+                <DetailValue>ERC-721</DetailValue>
+              </DetailFlex>
+            </DetailsContainer>
+          </TabRight>
+        </Right>
+      </NftPage>
+      <Footer />
+    </>
+
   )
 
 }
