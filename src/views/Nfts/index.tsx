@@ -13,7 +13,7 @@ import {useGetNftById} from '../../state/hooks'
 import './Nfts.styles.css'
 import {getAddress} from "../../utils/addressHelpers";
 import {formatAddress} from "../../utils";
-import NftVideo from "../../components/Video/NftVideo";
+import {PreviewVideo,SmallPreviewVideo} from "../../components/Video/NftVideo";
 
 
 const Container = styled.div`
@@ -201,11 +201,19 @@ const Link = styled(LinkExternal)`
   color: #00B1FF;
 `
 
-const PreviewVid = styled(NftVideo)`
+const PreviewVid = styled(PreviewVideo)`
   max-width: 520px;
   min-width: 320px;
   width: 100%;
   object-fit: cover;
+`
+const SmallVid = styled(SmallPreviewVideo)`
+  position: relative;
+  max-width: 100px;
+  min-width: 70px;
+  width: 100%;
+  border-radius: 6px;
+  padding: 8px;
 `
 
 const VidDiv = styled.div`
@@ -230,6 +238,12 @@ const Nfts: React.FC = () => {
   }, [account, dispatch])
 
   const nft = useGetNftById(parseInt(id))
+
+
+
+  // console.log(nft.userInfo.ownedIds)
+
+  // const { name, preview, temp: { owner } } = collection
 
 
   return (
@@ -258,7 +272,10 @@ const Nfts: React.FC = () => {
                 <RowItem><Normal>You own {nft.userInfo.ownedIds.length} variants of this nft</Normal></RowItem>
               </Row>
               <Row>
-                <Variants>{nft.userInfo.ownedIds.map((value) => <Variant><div><Small src={nft.path}/></div> <HighlightSmall>{value}</HighlightSmall></Variant> )}</Variants>
+                <Variants>{nft.userInfo.ownedIds.map((value,index) =>
+                    <Variant>{nft.type==='image' ? <Small src={nft.path}/> : <VidDiv><SmallVid path={nft.path}/></VidDiv>}<HighlightSmall>{value}</HighlightSmall></Variant> )}
+                </Variants>
+
               </Row>
             </TabRight><br/>
             <TabRight>
