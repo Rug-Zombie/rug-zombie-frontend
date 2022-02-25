@@ -18,7 +18,13 @@ export interface ConvertNftModalProps {
 const ConvertNftModal: React.FC<ConvertNftModalProps> = ({ depositNftId, nftConverterPid, onDismiss }) => {
   const { account } = useWeb3React()
   const dispatch = useAppDispatch()
-  const { symbol, type, path, address, userInfo: { ownedIds } } = useGetNftById(depositNftId)
+  const {
+    symbol,
+    type,
+    path,
+    address,
+    userInfo: { ownedIds },
+  } = useGetNftById(depositNftId)
   const nftContract = useERC721(getAddress(address))
   const nftConverterContract = useNftConverter()
   const [selected, setSelected] = useState(null)
@@ -34,9 +40,12 @@ const ConvertNftModal: React.FC<ConvertNftModalProps> = ({ depositNftId, nftConv
 
   useEffect(() => {
     if (selected && account) {
-      nftContract.methods.getApproved(selected).call().then(res => {
-        setApproved(equalAddresses(res, getNftConverterAddress()))
-      })
+      nftContract.methods
+        .getApproved(selected)
+        .call()
+        .then((res) => {
+          setApproved(equalAddresses(res, getNftConverterAddress()))
+        })
     }
   }, [selected, nftContract.methods, account])
 
@@ -55,7 +64,9 @@ const ConvertNftModal: React.FC<ConvertNftModalProps> = ({ depositNftId, nftConv
   const handleApprove = () => {
     if (account && !approved) {
       setApproving(true)
-      nftContract.methods.approve(getNftConverterAddress(), selected).send({ from: account })
+      nftContract.methods
+        .approve(getNftConverterAddress(), selected)
+        .send({ from: account })
         .then(() => {
           setApproved(true)
           setApproving(false)
@@ -70,53 +81,76 @@ const ConvertNftModal: React.FC<ConvertNftModalProps> = ({ depositNftId, nftConv
   const depositButton = selected && approved
 
   return (
-    <Modal onDismiss={onDismiss} title={`Convert ${symbol}`} headerBackground='black'>
-      <Flex alignItems='center' justifyContent='space-between' mb='8px'>
+    <Modal onDismiss={onDismiss} title={`Convert ${symbol}`} headerBackground="black">
+      <Flex alignItems="center" justifyContent="space-between" mb="8px">
         <Text bold>Select ID of NFT:</Text>
-        <Flex alignItems='center' minWidth='70px'>
-          <Text ml='4px' bold>{symbol}</Text>
+        <Flex alignItems="center" minWidth="70px">
+          <Text ml="4px" bold>
+            {symbol}
+          </Text>
         </Flex>
       </Flex>
-      <Flex justifyContent='center' style={{ maxHeight: '200px', maxWidth: '400px' }}>
+      <Flex justifyContent="center" style={{ maxHeight: '200px', maxWidth: '400px' }}>
         {type === 'image' ? (
-          <img
-            src={path} alt='test'
-            style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain' }} />
+          <img src={path} alt="test" style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain' }} />
         ) : (
-          <video autoPlay loop className='sc-cxNHIi bjMxQn'>
-            <source src={path} type='video/webm' />
+          <video autoPlay loop className="sc-cxNHIi bjMxQn">
+            <source src={path} type="video/webm" />
           </video>
         )}
       </Flex>
-      <Text mt='8px' color='textSubtle' fontSize='12px' mb='8px' style={{ width: '100%' }}>
+      <Text mt="8px" color="textSubtle" fontSize="12px" mb="8px" style={{ width: '100%' }}>
         Balance: {nftBalance.toString()}
-        {nftBalance === 0
-          ? <Text mt='8px' ml='auto' color='tertiary' fontSize='12px' mb='8px'>
+        {nftBalance === 0 ? (
+          <Text mt="8px" ml="auto" color="tertiary" fontSize="12px" mb="8px">
             Must have {symbol} NFT before you can deposit
           </Text>
-          : <Text bold>IDS in your wallet:</Text>}
+        ) : (
+          <Text bold>IDS in your wallet:</Text>
+        )}
       </Text>
-      <Flex justifyContent='center'>
-        {ownedIds.map(currentId => {
-          return <div id={currentId.toString()} key={currentId} style={{ padding: '10px' }}><Button onClick={() => {
-            setSelected(currentId)
-          }} variant={currentId === selected ? 'secondary' : 'primary'}>{currentId}</Button></div>
+      <Flex justifyContent="center">
+        {ownedIds.map((currentId) => {
+          return (
+            <div id={currentId.toString()} key={currentId} style={{ padding: '10px' }}>
+              <Button
+                onClick={() => {
+                  setSelected(currentId)
+                }}
+                variant={currentId === selected ? 'secondary' : 'primary'}
+              >
+                {currentId}
+              </Button>
+            </div>
+          )
         })}
       </Flex>
-      <Flex justifyContent='center'>
-        <Button onClick={() => {
-          if (selected) {
-            handleApprove()
-          }
-        }} disabled={!approveButton} mt='8px' as='a' variant={selected ? 'secondary' : 'primary'}>
+      <Flex justifyContent="center">
+        <Button
+          onClick={() => {
+            if (selected) {
+              handleApprove()
+            }
+          }}
+          disabled={!approveButton}
+          mt="8px"
+          as="a"
+          variant={selected ? 'secondary' : 'primary'}
+        >
           {approving ? 'Approving...' : 'Approve NFT'}
         </Button>
-        <Text mt='8px' color='textSubtle' fontSize='12px' mb='8px' style={{ width: '10%' }} />
-        <Button onClick={async () => {
-          if (selected && depositButton) {
-            await handleConvert()
-          }
-        }} disabled={!depositButton} mt='8px' as='a' variant={selected ? 'secondary' : 'primary'}>
+        <Text mt="8px" color="textSubtle" fontSize="12px" mb="8px" style={{ width: '10%' }} />
+        <Button
+          onClick={async () => {
+            if (selected && depositButton) {
+              await handleConvert()
+            }
+          }}
+          disabled={!depositButton}
+          mt="8px"
+          as="a"
+          variant={selected ? 'secondary' : 'primary'}
+        >
           {converting ? 'Converting...' : `Convert ${symbol}`}
         </Button>
       </Flex>

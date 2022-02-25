@@ -19,7 +19,6 @@ const StyledHeader = styled(Box)`
   padding: 16px;
 `
 
-
 const Header = () => {
   const { t } = useTranslation()
   const dispatch = useAppDispatch()

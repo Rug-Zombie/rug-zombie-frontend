@@ -22,9 +22,9 @@ export const getBalanceNumber = (balance: BigNumber, decimals = DEFAULT_DECIMAL_
 }
 
 export const getFullDisplayBalance = (
-    balance: BigNumber,
-    decimals = DEFAULT_DECIMAL_COUNT,
-    decimalsToAppear?: number,
+  balance: BigNumber,
+  decimals = DEFAULT_DECIMAL_COUNT,
+  decimalsToAppear?: number,
 ): string => {
   return getBalanceAmount(balance, decimals).toFixed(decimalsToAppear, BigNumber.ROUND_FLOOR)
 }

@@ -29,7 +29,8 @@ const ZmbeStats: React.FC = () => {
   const burnedBalance = getBalanceNumber(useBurnedBalance(getZombieAddress()))
   const zmbeSupply = totalSupply ? getBalanceNumber(totalSupply) - burnedBalance : 0
 
-  return ( // TODO Set proper values for these cards
+  return (
+    // TODO Set proper values for these cards
     <StyledCakeStats>
       <CardBody>
         <Heading size="xl" mb="24px">
@@ -48,7 +49,7 @@ const ZmbeStats: React.FC = () => {
           <CardValue fontSize="14px" decimals={0} value={10} />
         </Row>
         <Row>
-          <Text fontSize="14px">{t('Total NFT\'s Minted')}</Text>
+          <Text fontSize="14px">{t("Total NFT's Minted")}</Text>
           <CardValue fontSize="14px" decimals={0} value={useGetNftTotalSupply().toNumber()} />
         </Row>
       </CardBody>

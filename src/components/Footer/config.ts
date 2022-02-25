@@ -1,6 +1,6 @@
 export enum Type {
   InternalLink,
-  ExternalLink
+  ExternalLink,
 }
 
 const config = [
@@ -53,12 +53,12 @@ const config = [
     {
       label: 'Github',
       href: 'https://github.com/Rug-Zombie',
-      type: Type.ExternalLink
+      type: Type.ExternalLink,
     },
     {
       label: 'Docs',
       href: 'https://rugzombie.gitbook.io/docs/',
-      type: Type.ExternalLink
+      type: Type.ExternalLink,
     },
   ],
 ]

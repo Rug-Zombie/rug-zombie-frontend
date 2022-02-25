@@ -24,9 +24,9 @@ const StyledToast = styled.div`
 `
 
 const CustomToast = styled.div<{ border: string }>`
-  background-color: #151E21;
+  background-color: #151e21;
   border-radius: 10px;
-  border: ${props => `2px solid ${props.border}`};
+  border: ${(props) => `2px solid ${props.border}`};
   padding: 10px;
   height: 100%;
 `
@@ -42,7 +42,7 @@ const SubTitle = styled.p`
   text-align: left;
   font: normal normal normal 16px/36px Poppins;
   letter-spacing: 0px;
-  color: #6B7682;
+  color: #6b7682;
 `
 
 const Toast: React.FC<ToastProps> = ({ toast, onRemove, style, ttl, ...props }) => {
@@ -86,7 +86,7 @@ const Toast: React.FC<ToastProps> = ({ toast, onRemove, style, ttl, ...props }) 
       <StyledToast ref={ref} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <CustomToast border={color || '#B8C00D'}>
           <Title style={{ color: color || '#B8C00D' }}>{title}</Title>
-          <br/>
+          <br />
           <SubTitle>{description}</SubTitle>
         </CustomToast>
       </StyledToast>

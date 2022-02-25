@@ -33,7 +33,7 @@ const UserName = styled.p`
   text-align: center;
   font: normal normal 600 30px/42px Poppins;
   letter-spacing: 1.5px;
-  color: #FFFFFF;
+  color: #ffffff;
   opacity: 1;
 `
 
@@ -41,7 +41,7 @@ const UserAddress = styled(LinkExternal)`
   text-align: center;
   font: normal normal 300 18px/42px Poppins;
   letter-spacing: 0px;
-  color: #6B7682;
+  color: #6b7682;
   opacity: 1;
 `
 
@@ -64,7 +64,7 @@ const Tab = styled.img`
 
 const Separator = styled.div`
   height: 0px;
-  border: 1px solid #6B7682;
+  border: 1px solid #6b7682;
   margin: 25px 0 0 0;
 `
 
@@ -76,7 +76,7 @@ const CardDiv = styled.div`
 
 const SectionTitle = styled.p`
   font: normal normal normal 36px/36px Poppins;
-  color: #FFFFFF;
+  color: #ffffff;
   padding: 20px;
 `
 
@@ -92,7 +92,7 @@ const ProfilePage: React.FC = () => {
   const dispatch = useAppDispatch()
   const nfts = useGetNfts().data
 
-  const ownedNfts = nfts.filter(nft => nft.userInfo.ownedIds.length > 0)
+  const ownedNfts = nfts.filter((nft) => nft.userInfo.ownedIds.length > 0)
   const accountLength = account ? account.length : 0
   const displayAccount = account ? `${account.slice(0, 6)}...${account.slice(accountLength - 4, accountLength)}` : ''
 
@@ -100,10 +100,9 @@ const ProfilePage: React.FC = () => {
     dispatch(fetchNftUserDataAsync(account))
   }, [dispatch, account])
 
-
   return (
     <>
-      <Page style={{minHeight: '0'}}>
+      <Page style={{ minHeight: '0' }}>
         <BannerImage src={DefaultBannerImage} />
         <UserDiv>
           <UserAvatar src={BasicZombie} />
@@ -111,8 +110,8 @@ const ProfilePage: React.FC = () => {
           <UserAddress href={`https://bscscan.com/address/${account}`}>{displayAccount}</UserAddress>
         </UserDiv>
         <TabDiv>
-          <Tab style={{ marginRight: '10px' }} src={OblivionTab} alt='Oblivion tab' />
-          <Tab style={{ marginLeft: '10px' }} src={RugZombieTab} alt='RugZombie tab' />
+          <Tab style={{ marginRight: '10px' }} src={OblivionTab} alt="Oblivion tab" />
+          <Tab style={{ marginLeft: '10px' }} src={RugZombieTab} alt="RugZombie tab" />
         </TabDiv>
         <Separator />
       </Page>
@@ -120,16 +119,18 @@ const ProfilePage: React.FC = () => {
         <StakingInfoCard />
         <ActivityCard />
       </CardDiv>
-      <Page style={{minHeight: '0', width: '100%'}}>
-        <SectionTitle>
-          Your Assets
-        </SectionTitle>
+      <Page style={{ minHeight: '0', width: '100%' }}>
+        <SectionTitle>Your Assets</SectionTitle>
       </Page>
 
       <NftsContainer>
-          {ownedNfts.slice().reverse().map(nft => <NftCard showOwned key={nft.id} id={nft.id} />)}
-        </NftsContainer>
-
+        {ownedNfts
+          .slice()
+          .reverse()
+          .map((nft) => (
+            <NftCard showOwned key={nft.id} id={nft.id} />
+          ))}
+      </NftsContainer>
     </>
   )
 }

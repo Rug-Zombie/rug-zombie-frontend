@@ -111,7 +111,8 @@ const graves: GraveConfig[] = [
     name: 'zRonin Gamez Legendary',
     nftId: 80,
     rug: tokens.zroningmz,
-    liquidityDetails: 'None! RONINGMZ holders can claim ZRONINGMZ on the homepage Victim Pools card. ZRONINGMZ can also be found in the Blackmarket and RugRoll in the Catacombs!',
+    liquidityDetails:
+      'None! RONINGMZ holders can claim ZRONINGMZ on the homepage Victim Pools card. ZRONINGMZ can also be found in the Blackmarket and RugRoll in the Catacombs!',
     endDate: 1646283600,
   },
   {
@@ -122,7 +123,8 @@ const graves: GraveConfig[] = [
     name: 'Ronin Gamez Legendary',
     nftId: 80,
     rug: tokens.roningmz,
-    liquidityDetails: 'None! Trading on the Ronin contract has been halted, a new grave will be available for new stakers shortly.',
+    liquidityDetails:
+      'None! Trading on the Ronin contract has been halted, a new grave will be available for new stakers shortly.',
     endDate: 1646283600,
   },
   {
@@ -153,7 +155,8 @@ const graves: GraveConfig[] = [
     name: 'Minereum BSC Common',
     nftId: 77,
     rug: tokens.zmneb,
-    liquidityDetails: 'None! zMinereum BSC can be claimed by MNEB holders on the home page or rolled for in the Catacombs! ',
+    liquidityDetails:
+      'None! zMinereum BSC can be claimed by MNEB holders on the home page or rolled for in the Catacombs! ',
   },
   {
     pid: {
@@ -267,7 +270,7 @@ const graves: GraveConfig[] = [
     rug: tokens.panther,
     rugDex: Dex.PCS_V2,
     isClosed: true,
-    isRetired: true
+    isRetired: true,
   },
   {
     pid: {
@@ -287,7 +290,8 @@ const graves: GraveConfig[] = [
     name: 'Emperor Token Rare',
     nftId: 22,
     rug: tokens.zmpr,
-    liquidityDetails: 'None! The ZMPR token was airdropped to EMPR holders so you will have to ask around the telegram.',
+    liquidityDetails:
+      'None! The ZMPR token was airdropped to EMPR holders so you will have to ask around the telegram.',
   },
   {
     pid: {

@@ -5,7 +5,8 @@ import { BigNumber } from 'bignumber.js'
 import fetchSpawningPools from './fetchSpawningPools'
 import {
   fetchSpawningPoolUserEarnings,
-  fetchSpawningPoolUserInfo, fetchSpawningPoolUserTokenInfo,
+  fetchSpawningPoolUserInfo,
+  fetchSpawningPoolUserTokenInfo,
 } from './fetchSpawningPoolUser'
 import { SpawningPool, SpawningPoolState } from '../types'
 import { BIG_ZERO } from '../../utils/bigNumber'
@@ -41,8 +42,8 @@ export const spawningPoolsSlice = createSlice({
     setSpawningPoolInfo: (state, action) => {
       const liveSpawningPoolsData: SpawningPool[] = action.payload
       state.data = state.data.map((spawningPool) => {
-        const liveSpawningPoolData = liveSpawningPoolsData.find(s => s.id === spawningPool.id)
-        return { ...spawningPool, poolInfo: { ...spawningPool.poolInfo, ...liveSpawningPoolData.poolInfo }  }
+        const liveSpawningPoolData = liveSpawningPoolsData.find((s) => s.id === spawningPool.id)
+        return { ...spawningPool, poolInfo: { ...spawningPool.poolInfo, ...liveSpawningPoolData.poolInfo } }
       })
     },
     setSpawningPoolUserInfo: (state, action) => {

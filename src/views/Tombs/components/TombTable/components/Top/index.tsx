@@ -41,12 +41,13 @@ const TombTitle = styled.div`
   text-align: left;
   font: normal normal normal 20px Poppins;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   padding-left: 20px;
   min-width: 40.5%;
   @media (max-width: 527px) {
-    width: 100%;;
-  }`
+    width: 100%;
+  }
+`
 
 const TabFlex = styled.div`
   display: flex;
@@ -61,7 +62,7 @@ const TabFlex = styled.div`
 const GreenTab = styled.div`
   width: 49px;
   height: 30px;
-  border: 2px solid #B8C00D;
+  border: 2px solid #b8c00d;
   border-radius: 15px;
   display: flex;
   align-items: center;
@@ -75,7 +76,7 @@ const GreenTab = styled.div`
 const GreyTab = styled.div`
   height: 30px;
   padding: 5px;
-  border: 2px solid #6B7682;
+  border: 2px solid #6b7682;
   border-radius: 15px;
   display: flex;
   align-items: center;
@@ -87,12 +88,12 @@ const GreyTab = styled.div`
 
 const GreenTabText = styled.p`
   font: normal normal normal 12px/30px Poppins;
-  color: #FFFFFF;
+  color: #ffffff;
 `
 
 const GreyTabText = styled.p`
   font: normal normal normal 12px/30px Poppins;
-  color: #6B7682;
+  color: #6b7682;
 `
 
 const TombSubRow = styled.div`
@@ -119,10 +120,9 @@ const Percentages = styled.div`
 `
 
 interface TopProps {
-  tomb: Tomb;
-  open: boolean;
-  setOpen: any;
-
+  tomb: Tomb
+  open: boolean
+  setOpen: any
 }
 
 const Top: React.FC<TopProps> = ({ tomb, open, setOpen }) => {
@@ -148,13 +148,13 @@ const Top: React.FC<TopProps> = ({ tomb, open, setOpen }) => {
 
   const cooldownTime = () => {
     if (amount.isZero()) {
-      return <CardItem label='Withdrawal Timer' value='N/A' valueType={CardItemValueType.Text} />
+      return <CardItem label="Withdrawal Timer" value="N/A" valueType={CardItemValueType.Text} />
     }
     const remainingCooldownTime = tokenWithdrawalDate.toNumber() - now
     if (remainingCooldownTime <= 0) {
-      return <CardItem label='Withdrawal Timer' value='None' valueType={CardItemValueType.Text} />
+      return <CardItem label="Withdrawal Timer" value="None" valueType={CardItemValueType.Text} />
     }
-    return <CardItem label='Withdrawal Timer' value={remainingCooldownTime} valueType={CardItemValueType.Duration} />
+    return <CardItem label="Withdrawal Timer" value={remainingCooldownTime} valueType={CardItemValueType.Duration} />
   }
 
   const lpName = `${token2.symbol}-${token1.symbol} LP`
@@ -163,35 +163,52 @@ const Top: React.FC<TopProps> = ({ tomb, open, setOpen }) => {
     <TombColumn onClick={toggleOpen}>
       <TombHeaderRow>
         <TokenFlex>
-          <img src={tokenImage(token1)} style={{ width: '30px', height: '30px' }} alt='Token1 icon' />
-          <img src={tokenImage(token2)} style={{ width: '30px', height: '30px' }} alt='Token2 icon' />
+          <img src={tokenImage(token1)} style={{ width: '30px', height: '30px' }} alt="Token1 icon" />
+          <img src={tokenImage(token2)} style={{ width: '30px', height: '30px' }} alt="Token2 icon" />
         </TokenFlex>
-        <TombTitle>
-          {lpName}
-        </TombTitle>
+        <TombTitle>{lpName}</TombTitle>
         <TabFlex>
-          <GreenTab><GreenTabText>{allocPoint.div(100).toString()}X</GreenTabText></GreenTab>
-          <GreyTab><GreyTabText>{DEXS[dex]}</GreyTabText></GreyTab>
-          {isNew ? <GreenTab><GreenTabText>NEW</GreenTabText></GreenTab> : null}
+          <GreenTab>
+            <GreenTabText>{allocPoint.div(100).toString()}X</GreenTabText>
+          </GreenTab>
+          <GreyTab>
+            <GreyTabText>{DEXS[dex]}</GreyTabText>
+          </GreyTab>
+          {isNew ? (
+            <GreenTab>
+              <GreenTabText>NEW</GreenTabText>
+            </GreenTab>
+          ) : null}
         </TabFlex>
       </TombHeaderRow>
       <TombSubRow>
         <Amounts>
-          <CardItem label='Earned' highlightable unit='ZMBE' value={getBalanceNumber(pendingZombie)}
-                    isHighlighted={(value) => !!value} valueType={CardItemValueType.Number} />
-          <CardItem label='Yearly' value={yearly} valueType={CardItemValueType.Percentage} />
-          <CardItem label='Daily' value={daily} valueType={CardItemValueType.Percentage} />
-          <CardItem label='TVL' value={tvl} valueType={CardItemValueType.Money} />
+          <CardItem
+            label="Earned"
+            highlightable
+            unit="ZMBE"
+            value={getBalanceNumber(pendingZombie)}
+            isHighlighted={(value) => !!value}
+            valueType={CardItemValueType.Number}
+          />
+          <CardItem label="Yearly" value={yearly} valueType={CardItemValueType.Percentage} />
+          <CardItem label="Daily" value={daily} valueType={CardItemValueType.Percentage} />
+          <CardItem label="TVL" value={tvl} valueType={CardItemValueType.Money} />
         </Amounts>
         <Percentages>
-          <NftTimerCardItem mintDate={nftMintTime} amountStaked={amount} mintingReady={mintingReady}
-                            isMinting={isMinting} secondsUntilMintable={nftMintTime.toNumber()} />
+          <NftTimerCardItem
+            mintDate={nftMintTime}
+            amountStaked={amount}
+            mintingReady={mintingReady}
+            isMinting={isMinting}
+            secondsUntilMintable={nftMintTime.toNumber()}
+          />
           {cooldownTime()}
-          {
-            open
-              ? <img src={uppointer} alt='Close Tomb' style={{ width: '35px', height: '35px' }} />
-              : <img src={downpointer} alt='Open Tomb' style={{ width: '35px', height: '35px' }} />
-          }
+          {open ? (
+            <img src={uppointer} alt="Close Tomb" style={{ width: '35px', height: '35px' }} />
+          ) : (
+            <img src={downpointer} alt="Open Tomb" style={{ width: '35px', height: '35px' }} />
+          )}
         </Percentages>
       </TombSubRow>
     </TombColumn>

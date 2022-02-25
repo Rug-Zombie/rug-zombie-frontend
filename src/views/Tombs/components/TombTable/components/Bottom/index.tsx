@@ -23,7 +23,8 @@ import {
   APESWAP_ADD_LIQUIDITY_URL,
   AUTOSHARK_ADD_LIQUIDITY_URL,
   BASE_ADD_LIQUIDITY_URL,
-  DEXS, NATIVE_DEX,
+  DEXS,
+  NATIVE_DEX,
 } from '../../../../../../config'
 import tokens from '../../../../../../config/constants/tokens'
 import { Dex } from '../../../../../../config/constants/types'
@@ -32,7 +33,7 @@ import { formatDuration, now } from '../../../../../../utils/timerHelpers'
 
 const Separator = styled.div`
   height: 0px;
-  border: 1px dashed #6B7682;
+  border: 1px dashed #6b7682;
   margin: 25px 0 0 0;
 `
 
@@ -71,20 +72,20 @@ const InputControl = styled.div`
 const StakingInput = styled.input`
   width: 150px;
   height: 60px;
-  background: #0D1417 0% 0% no-repeat padding-box;
+  background: #0d1417 0% 0% no-repeat padding-box;
   border-radius: 10px;
   padding-left: 20px;
   border: none;
   text-align: left;
   font: normal normal normal 14px/30px Poppins;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 0 2px;
 `
 
 const PrimaryStakeButton = styled.button`
   height: 60px;
   width: 150px;
-  background: #B8C00D 0% 0% no-repeat padding-box;
+  background: #b8c00d 0% 0% no-repeat padding-box;
   border-radius: 10px;
   border: none;
   display: flex;
@@ -100,7 +101,7 @@ const PrimaryStakeButton = styled.button`
 const SecondaryStakeButton = styled.button`
   height: 60px;
   width: 150px;
-  border: 2px solid #B8C00D;
+  border: 2px solid #b8c00d;
   border-radius: 10px;
   background: none;
   display: flex;
@@ -122,12 +123,12 @@ const PrimaryStakeButtonText = styled.p`
 const SecondaryStakeButtonText = styled.p`
   text-align: center;
   font: normal normal normal 16px/25px Poppins;
-  color: #FFFFFF;
+  color: #ffffff;
 `
 
 const BalanceText = styled.button`
   font: normal normal normal 14px/21px Poppins;
-  color: #6B7682;
+  color: #6b7682;
   background: none;
   border: none;
   width: 150px;
@@ -155,7 +156,7 @@ const AmountText = styled.p`
 `
 
 interface BottomProps {
-  tomb: Tomb;
+  tomb: Tomb
 }
 
 const Bottom: React.FC<BottomProps> = ({ tomb }) => {
@@ -193,7 +194,7 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
     PairLp,
     ApproveLp,
     StakeLp,
-    Staked
+    Staked,
   }
 
   const lpName = `${token2.symbol}-${token1.symbol}`
@@ -252,10 +253,11 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
 
   const handleTx = useCallback(async () => {
     setConfirming(true)
-      const step = steps[currentStep]
-    step.func()
+    const step = steps[currentStep]
+    step
+      .func()
       .then((succeeded) => {
-        if(succeeded) {
+        if (succeeded) {
           toastTombs(step.toast.title, step.toast.description)
         }
         setConfirming(false)
@@ -298,7 +300,6 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
     sent: `Unstaking...`,
     func: onUnstake,
     toast: { title: `Unstaked ${lpName} LP` },
-
   }
   unstakingSteps[UnstakingStep.UnstakeEarly] = {
     label: `Unstake Early`,
@@ -311,7 +312,6 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
     sent: `Unstaking...`,
     func: onEmergencyWithdraw,
     toast: { title: `Unstaked ${lpName} LP` },
-
   }
   unstakingSteps[UnstakingStep.Harvest] = {
     label: `Harvest`,
@@ -330,7 +330,7 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
   } else if ((unstakeAmount.isZero() || unstakeAmount.isNaN()) && amount.gt(0)) {
     currentUnstakingStep = UnstakingStep.Harvest
   } else if (tokenWithdrawalDate.gt(now()) && amount.gt(0)) {
-    if(dex === NATIVE_DEX) {
+    if (dex === NATIVE_DEX) {
       currentUnstakingStep = UnstakingStep.UnstakeEarly
     } else {
       currentUnstakingStep = UnstakingStep.EmergencyWithdraw
@@ -342,12 +342,13 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
   const handleUnstakingTx = useCallback(async () => {
     setConfirmingUnstake(true)
     const step = unstakingSteps[currentUnstakingStep]
-    if(currentUnstakingStep === UnstakingStep.EmergencyWithdraw && !unstakeAmount.eq(amount)) {
+    if (currentUnstakingStep === UnstakingStep.EmergencyWithdraw && !unstakeAmount.eq(amount)) {
       toastTombs(
         'Notice',
         <FlexColumn>
           <text>
-            Partial early withdrawals are disabled on this tomb. Either wait {formatDuration(tokenWithdrawalDate.minus(now()).toNumber())} or withdraw all.
+            Partial early withdrawals are disabled on this tomb. Either wait{' '}
+            {formatDuration(tokenWithdrawalDate.minus(now()).toNumber())} or withdraw all.
           </text>
           <FlexRow>
             <SecondaryStakeButton onClick={onEmergencyWithdraw}>
@@ -358,9 +359,10 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
       )
       return
     }
-    step.func()
+    step
+      .func()
       .then((succeeded) => {
-        if(succeeded) {
+        if (succeeded) {
           toastTombs(step.toast.title, step.toast.description)
         }
         setConfirmingUnstake(false)
@@ -368,7 +370,16 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
       .catch(() => {
         setConfirmingUnstake(false)
       })
-  }, [UnstakingStep.EmergencyWithdraw, amount, currentUnstakingStep, onEmergencyWithdraw, toastTombs, tokenWithdrawalDate, unstakeAmount, unstakingSteps])
+  }, [
+    UnstakingStep.EmergencyWithdraw,
+    amount,
+    currentUnstakingStep,
+    onEmergencyWithdraw,
+    toastTombs,
+    tokenWithdrawalDate,
+    unstakeAmount,
+    unstakingSteps,
+  ])
 
   const changeStakeInput = (e) => {
     setStakeAmount(getDecimalAmount(new BigNumber(e.target.value)))
@@ -386,46 +397,54 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
     setUnstakeAmount(amount)
   }
 
-  return <>
-    <Separator />
-    <StakingContainer>
-      <Inputs>
-        <InputControl>
-          <BalanceText onClick={maxStakeAmount}>
-            Wallet Balance: <AmountText>{numeral(getFullDisplayBalance(lpBalance)).format('(0.00 a)')} LP</AmountText>
-          </BalanceText>
-          <StakingInput
-            onInput={changeStakeInput}
-            value={getBalanceNumber(stakeAmount)}
-            placeholder='Stake amount'
-            type='number'
-          />
-        </InputControl>
-        <InputControl>
-          <BalanceText onClick={maxUnstakeAmount}>
-            Your Staked: <AmountText>{numeral(getFullDisplayBalance(amount)).format('(0.00 a)')} LP</AmountText>
-          </BalanceText>
-          <StakingInput
-            onInput={changeUnstakeInput}
-            value={getBalanceNumber(unstakeAmount)}
-            placeholder='Unstake amount'
-            type='number'
-          />
-        </InputControl>
-      </Inputs>
-      <Buttons>
-        <PrimaryStakeButton onClick={handleTx}>
-          <PrimaryStakeButtonText>{confirming ? steps[currentStep].sent : steps[currentStep].label}</PrimaryStakeButtonText>
-        </PrimaryStakeButton>
-        <SecondaryStakeButton onClick={handleUnstakingTx}>
-          <SecondaryStakeButtonText>{confirmingUnstake ? unstakingSteps[currentUnstakingStep].sent : unstakingSteps[currentUnstakingStep].label}</SecondaryStakeButtonText>
-        </SecondaryStakeButton>
-      </Buttons>
-    </StakingContainer>
-    <ProgressBar tomb={tomb} />
-    <Separator />
-    <TableDetails tomb={tomb} />
-  </>
+  return (
+    <>
+      <Separator />
+      <StakingContainer>
+        <Inputs>
+          <InputControl>
+            <BalanceText onClick={maxStakeAmount}>
+              Wallet Balance: <AmountText>{numeral(getFullDisplayBalance(lpBalance)).format('(0.00 a)')} LP</AmountText>
+            </BalanceText>
+            <StakingInput
+              onInput={changeStakeInput}
+              value={getBalanceNumber(stakeAmount)}
+              placeholder="Stake amount"
+              type="number"
+            />
+          </InputControl>
+          <InputControl>
+            <BalanceText onClick={maxUnstakeAmount}>
+              Your Staked: <AmountText>{numeral(getFullDisplayBalance(amount)).format('(0.00 a)')} LP</AmountText>
+            </BalanceText>
+            <StakingInput
+              onInput={changeUnstakeInput}
+              value={getBalanceNumber(unstakeAmount)}
+              placeholder="Unstake amount"
+              type="number"
+            />
+          </InputControl>
+        </Inputs>
+        <Buttons>
+          <PrimaryStakeButton onClick={handleTx}>
+            <PrimaryStakeButtonText>
+              {confirming ? steps[currentStep].sent : steps[currentStep].label}
+            </PrimaryStakeButtonText>
+          </PrimaryStakeButton>
+          <SecondaryStakeButton onClick={handleUnstakingTx}>
+            <SecondaryStakeButtonText>
+              {confirmingUnstake
+                ? unstakingSteps[currentUnstakingStep].sent
+                : unstakingSteps[currentUnstakingStep].label}
+            </SecondaryStakeButtonText>
+          </SecondaryStakeButton>
+        </Buttons>
+      </StakingContainer>
+      <ProgressBar tomb={tomb} />
+      <Separator />
+      <TableDetails tomb={tomb} />
+    </>
+  )
 }
 
 export default Bottom

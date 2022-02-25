@@ -43,36 +43,43 @@ interface Props {
   label: string
   unit?: string
   value: number | string
-  highlightable?: boolean,
+  highlightable?: boolean
   isHighlighted?: (value: number | string) => boolean
   valueType?: CardItemValueType
   additionalHighlightClassNames?: string[]
 }
 
 const CardItem: React.FC<Props> = ({
-    label,
-    unit,
-    value,
-    highlightable = false,
-    isHighlighted = (v) => v > 0,
-    valueType = CardItemValueType.Text,
-    additionalHighlightClassNames = [],
+  label,
+  unit,
+  value,
+  highlightable = false,
+  isHighlighted = (v) => v > 0,
+  valueType = CardItemValueType.Text,
+  additionalHighlightClassNames = [],
 }) => {
   let valueClassNames = ['item-text']
   if (highlightable && isHighlighted(value)) {
-    valueClassNames = valueClassNames.concat([ 'highlighted', ...(additionalHighlightClassNames || [])])
+    valueClassNames = valueClassNames.concat(['highlighted', ...(additionalHighlightClassNames || [])])
   }
 
-  return <div style={{
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    marginRight: 'auto',
-  }}>
-    <p className='item-text'>{label}</p>
-    <p className={valueClassNames.join(' ')}>{getFormattedValue(value, valueType)}{unit ? ` ${unit}` : null}</p>
-  </div>
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        marginRight: 'auto',
+      }}
+    >
+      <p className="item-text">{label}</p>
+      <p className={valueClassNames.join(' ')}>
+        {getFormattedValue(value, valueType)}
+        {unit ? ` ${unit}` : null}
+      </p>
+    </div>
+  )
 }
 
 export default CardItem

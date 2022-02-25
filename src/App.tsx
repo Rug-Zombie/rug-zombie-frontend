@@ -32,6 +32,7 @@ import SwiperProvider from './views/Mausoleum/context/SwiperProvider'
 import SharkPools from './views/SharkPools'
 import { useAppDispatch } from './state'
 import { fetchNftPublicDataAsync } from './state/nfts'
+import Nfts from './views/Nfts'
 import BurnGraves from './views/BurnGraves'
 
 // Route-based code splitting
@@ -55,7 +56,6 @@ const App: React.FC = () => {
   const [, setZombiePrice] = useState(0)
   const [modal, setModal] = useState(null)
 
-
   useEffect(() => {
     document.title = 'RugZombie'
   })
@@ -76,18 +76,32 @@ const App: React.FC = () => {
       <GlobalStyle />
       <SuspenseWithChunkError fallback={<Loader />}>
         <Switch>
-          <Route exact path={routes.GRAVEDIGGER}><Gravedigger /></Route>
-          <Route exact path={routes.SPAWNWITHUS}><SpawnWithUs /></Route>
-          <Route exact path={routes.CATACOMBS}><Catacombs /></Route>
-          <Route exact path={routes.RUGROLL}><RugRoll /></Route>
+          <Route exact path={routes.GRAVEDIGGER}>
+            <Gravedigger />
+          </Route>
+          <Route exact path={routes.SPAWNWITHUS}>
+            <SpawnWithUs />
+          </Route>
+          <Route exact path={routes.CATACOMBS}>
+            <Catacombs />
+          </Route>
+          <Route exact path={routes.RUGROLL}>
+            <RugRoll />
+          </Route>
           <Route exact path={routes.DATALAB}>
             <SwiperProvider>
               <DataLab modalObj={{ modal, setModal }} />
             </SwiperProvider>
           </Route>
-          <Route exact path={routes.BLACKMARKET}><BlackMarket /></Route>
-          <Route exact path={routes.BARRACKS}><Barracks /></Route>
-          <Route exact path={routes.HOME}><Redirect to={routes.LANDING} /></Route>
+          <Route exact path={routes.BLACKMARKET}>
+            <BlackMarket />
+          </Route>
+          <Route exact path={routes.BARRACKS}>
+            <Barracks />
+          </Route>
+          <Route exact path={routes.HOME}>
+            <Redirect to={routes.LANDING} />
+          </Route>
           <Route exact path={routes.LANDING}>
             <>
               <TopMenu />
@@ -136,6 +150,14 @@ const App: React.FC = () => {
               </AppContainer>
             </>
           </Route>
+          <Route exact path={routes.NFTS}>
+            <>
+              <TopMenu />
+              <AppContainer>
+                <Nfts />
+              </AppContainer>
+            </>
+          </Route>
           <Route exact path={routes.MAUSOLEUM}>
             <>
               <TopMenu />
@@ -168,7 +190,6 @@ const App: React.FC = () => {
               </AppContainer>
             </>
           </Route>
-
         </Switch>
       </SuspenseWithChunkError>
       <ToastListener />
