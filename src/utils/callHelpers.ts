@@ -1,9 +1,7 @@
 import { ethers } from 'ethers'
 
 export const approve = async (tokenContract, spenderAddress, account) => {
-  return tokenContract.methods
-    .approve(spenderAddress, ethers.constants.MaxUint256)
-    .send({ from: account })
+  return tokenContract.methods.approve(spenderAddress, ethers.constants.MaxUint256).send({ from: account })
 }
 
 export const stake = async (drFrankensteinContract, pid, amount, account) => {
@@ -98,7 +96,7 @@ export const spUnstake = async (spawningPoolContract, amount, account) => {
 
 export const spUnstakeEarly = async (spawningPoolContract, amount, account) => {
   return spawningPoolContract.methods
-    .leaveStakingEarly(amount.toString())
+    .withdrawEarly(amount.toString())
     .send({ from: account })
     .on('transactionHash', (tx) => {
       return tx.transactionHash

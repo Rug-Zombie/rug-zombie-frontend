@@ -14,11 +14,11 @@ export const routes = {
     BURNGRAVES:'/burngraves',
     NFTS: '/nfts/:id',
 
-    // Catacombs
-    CATACOMBS:'/catacombs',
-    PROFILE:'/profile',
-    RUGROLL: '/rugroll',
-    BLACKMARKET:'/blackmarket',
-    BARRACKS:'/barracks',
-    DATALAB:'/datalab',
+  // Catacombs
+  CATACOMBS: '/catacombs',
+  PROFILE: '/profile',
+  RUGROLL: '/rugroll',
+  BLACKMARKET: '/blackmarket',
+  BARRACKS: '/barracks',
+  DATALAB: '/datalab',
 }

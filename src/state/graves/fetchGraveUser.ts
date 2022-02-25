@@ -40,17 +40,19 @@ export const fetchGraveUserEarnings = async (account: string, gravesToFetch: Gra
 
 export const fetchGraveUserTokenInfo = async (account: string, gravesToFetch: GraveConfig[]) => {
   const calls = gravesToFetch.reduce((rugInfos, graveConfig) => {
-    return rugInfos.concat([{
-      address: getAddress(graveConfig.rug.address),
-      name: 'allowance',
-      params: [account, getDrFrankensteinAddress()],
-    },
+    return rugInfos.concat([
+      {
+        address: getAddress(graveConfig.rug.address),
+        name: 'allowance',
+        params: [account, getDrFrankensteinAddress()],
+      },
       {
         address: getAddress(graveConfig.rug.address),
         name: 'balanceOf',
         params: [account],
       },
-      { // Separate in the future
+      {
+        // Separate in the future
         address: getZombieAddress(),
         name: 'allowance',
         params: [account, getDrFrankensteinAddress()],
@@ -63,8 +65,8 @@ export const fetchGraveUserTokenInfo = async (account: string, gravesToFetch: Gr
   for (let i = 0; i < tokenInfos.length; i += 3) {
     pairedRugInfos.push({
       allowance: tokenInfos[i],
-      balance: tokenInfos[i+1],
-      zombieAllowance: tokenInfos[i+2]
+      balance: tokenInfos[i + 1],
+      zombieAllowance: tokenInfos[i + 2],
     })
   }
   return pairedRugInfos

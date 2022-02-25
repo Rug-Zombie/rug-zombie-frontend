@@ -2,8 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Heading, Card, CardBody } from '@rug-zombie-libs/uikit'
 import { useTranslation } from 'contexts/Localization'
-import YouTube from 'react-youtube';
-
+import YouTube from 'react-youtube'
 
 const StyledFarmStakingCard = styled(Card)`
   background-image: url('/images/zmbe-bg.png');
@@ -20,20 +19,18 @@ const GraveStakingCard: React.FC = () => {
 
   const _onReady = ({ target }) => {
     // access to player in all event handlers via event.target
-    target.pauseVideo();
+    target.pauseVideo()
   }
 
   const opts = {
     width: '100%',
-
-  };
+  }
   return (
     <StyledFarmStakingCard>
       <CardBody>
         <Heading size="xl" mb="24px">
           {t('For Newcomers')}
         </Heading>
-
 
         <YouTube videoId="WFHuSIvC6cg" opts={opts} onReady={_onReady} />
       </CardBody>

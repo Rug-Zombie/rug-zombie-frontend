@@ -10,7 +10,8 @@ const config: MenuEntry[] = [
     label: 'Exchange',
     icon: 'ExchangeIcon',
     href: 'https://swap.rugzombie.io/',
-  },  {
+  },
+  {
     label: 'Graves',
     icon: 'GravesIcon',
     href: '/graves',
@@ -23,17 +24,17 @@ const config: MenuEntry[] = [
   {
     label: 'Spawning Pools',
     icon: 'SpawningPoolIcon',
-    href: '/spawning_pools'
+    href: '/spawning_pools',
   },
   {
     label: 'Burn Graves',
     icon: 'BurnGraves',
-    href: '/burngraves'
+    href: '/burngraves',
   },
   {
     label: 'Shark Tank',
     icon: 'SharkTankIcon',
-    href: '/sharktank'
+    href: '/sharktank',
   },
   {
     label: 'Mausoleum (BETA)',
@@ -43,17 +44,17 @@ const config: MenuEntry[] = [
   {
     label: 'Graveyard',
     icon: 'GraveyardIcon',
-    href: '/graveyard'
+    href: '/graveyard',
   },
   {
     label: 'Catacombs',
     icon: 'CatacombsIcon',
-    href: '/catacombs'
+    href: '/catacombs',
   },
   {
     label: 'Profile',
     icon: 'ProfileIcon',
-    href: '/profile'
+    href: '/profile',
   },
   {
     label: 'Referral Program',

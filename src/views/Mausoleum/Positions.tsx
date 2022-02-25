@@ -28,14 +28,16 @@ const StyledSwiper = styled.div`
 `
 
 interface PositionsProps {
-  id: number,
-  setRefresh: any,
+  id: number
+  setRefresh: any
   refresh: boolean
 }
 
 const Positions: React.FC<PositionsProps> = ({ setRefresh, refresh, id }) => {
   const { setSwiper } = useSwiper()
-  const {auctionInfo: { bids, lastBidId, endDate } } = auctionById(id)
+  const {
+    auctionInfo: { bids, lastBidId, endDate },
+  } = auctionById(id)
   const initialIndex = Math.floor(1)
   // useOnNextRound()
 
@@ -49,14 +51,14 @@ const Positions: React.FC<PositionsProps> = ({ setRefresh, refresh, id }) => {
   })
 
   return (
-    <Box overflowX='hidden' overflowY='auto' style={{ width: '100%' }}>
+    <Box overflowX="hidden" overflowY="auto" style={{ width: '100%' }}>
       <Menu id={id} />
       <StyledSwiper style={{ width: '100%' }}>
         <Swiper
           initialSlide={initialIndex}
           onSwiper={setSwiper}
           spaceBetween={16}
-          slidesPerView='auto'
+          slidesPerView="auto"
           freeMode
           freeModeSticky
           centeredSlides
@@ -64,30 +66,34 @@ const Positions: React.FC<PositionsProps> = ({ setRefresh, refresh, id }) => {
           keyboard
           resizeObserver
         >
-          {formattedBids.map(bid => {
-            return <SwiperSlide key={bid.id}>
-              <RoundCard bid={bid} id={id} bidId={bid.id} lastBidId={lastBidId} />
-            </SwiperSlide>
+          {formattedBids.map((bid) => {
+            return (
+              <SwiperSlide key={bid.id}>
+                <RoundCard bid={bid} id={id} bidId={bid.id} lastBidId={lastBidId} />
+              </SwiperSlide>
+            )
           })}
-          {bids.length > 0 ?
+          {bids.length > 0 ? (
             <SwiperSlide>
-              { Math.floor(Date.now() / 1000) > endDate ?
+              {Math.floor(Date.now() / 1000) > endDate ? (
                 <AuctionEndCard
                   lastBid={formattedBids[bids.length - 1]}
                   id={id}
                   bidId={lastBidId + 1}
                   setRefresh={setRefresh}
                   refresh={refresh}
-                /> : <IncreaseBidCard
-                lastBid={formattedBids[bids.length - 1]}
-                id={id}
-                bidId={lastBidId + 1}
-                setRefresh={setRefresh}
-                refresh={refresh}
-              />}
-            </SwiperSlide> :
-            null
-          }
+                />
+              ) : (
+                <IncreaseBidCard
+                  lastBid={formattedBids[bids.length - 1]}
+                  id={id}
+                  bidId={lastBidId + 1}
+                  setRefresh={setRefresh}
+                  refresh={refresh}
+                />
+              )}
+            </SwiperSlide>
+          ) : null}
           <SwiperSlide>
             <SoonRoundCard lastBidId={lastBidId} bidId={lastBidId + 1} id={id} />
           </SwiperSlide>

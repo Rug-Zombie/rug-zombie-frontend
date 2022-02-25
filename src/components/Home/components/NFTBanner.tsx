@@ -1,15 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import {
-  Text,
-  Flex,
-  ArrowForwardIcon,
-  Button,
-  useMatchBreakpoints,
-} from '@rug-zombie-libs/uikit'
+import { Text, Flex, ArrowForwardIcon, Button, useMatchBreakpoints } from '@rug-zombie-libs/uikit'
 import { useTranslation } from 'contexts/Localization'
 import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
-import Container from '../../../components/layout/Container'
+import Container from '../../layout/Container'
 import { auctionById } from '../../../redux/get'
 
 const NowLive = styled(Text)`
@@ -68,49 +62,56 @@ const NFTBanner: React.FC = () => {
     setInterval(() => {
       setRemainingTime(end - Math.floor(Date.now() / 1000))
       setTimerSet(true)
-    },1000)
+    }, 1000)
   })
 
   return (
-    <Wrapper style={{width: "100%"}}>
-      <Inner style={{width: "100%"}}>
+    <Wrapper style={{ width: '100%' }}>
+      <Inner style={{ width: '100%' }}>
         <LeftWrapper width="100%">
           {/* <NowLive>{t('Mausoleum End:')} {formatDuration(remainingTime, true)}</NowLive> */}
           <NowLive>{t('Mausoleum is Live!')}</NowLive>
-          { isDesktop ? <Flex>
-            <Over fontSize='35px' bold mr='8px' style={{ whiteSpace: 'nowrap' }}>
-              {t('The final')}
-            </Over>
-            <Over fontSize='35px' color='primary' bold mr='8px' style={{ whiteSpace: 'nowrap' }}>
-              PATIENT-ZERO
-            </Over>
-            <Over fontSize='35px' bold mr='8px'>
-              NFT is being auctioned in the Mausoleum.
-            </Over>
-          </Flex> :
-            <>
-              <Over fontSize='40px' bold mr='8px'>
+          {isDesktop ? (
+            <Flex>
+              <Over fontSize="35px" bold mr="8px" style={{ whiteSpace: 'nowrap' }}>
                 {t('The final')}
               </Over>
-              <Over fontSize='40px' color='primary' bold mr='8px'>
+              <Over fontSize="35px" color="primary" bold mr="8px" style={{ whiteSpace: 'nowrap' }}>
                 PATIENT-ZERO
               </Over>
-              <Over fontSize='40px' bold mr='8px'>
+              <Over fontSize="35px" bold mr="8px">
+                NFT is being auctioned in the Mausoleum.
+              </Over>
+            </Flex>
+          ) : (
+            <>
+              <Over fontSize="40px" bold mr="8px">
+                {t('The final')}
+              </Over>
+              <Over fontSize="40px" color="primary" bold mr="8px">
+                PATIENT-ZERO
+              </Over>
+              <Over fontSize="40px" bold mr="8px">
                 NFT is being auctioned in the Mausoleum.
               </Over>
             </>
-          }
-          <NavLink exact activeClassName='active' to='/mausoleum/3' id='lottery-pot-banner' style={{paddingTop: "8px"}}>
+          )}
+          <NavLink
+            exact
+            activeClassName="active"
+            to="/mausoleum/3"
+            id="lottery-pot-banner"
+            style={{ paddingTop: '8px' }}
+          >
             <Button>
-              <Text color='white' bold fontSize='16px' mr='4px'>
+              <Text color="white" bold fontSize="16px" mr="4px">
                 {t('Enter the Mausoleum')}
               </Text>
-              <ArrowForwardIcon color='white' />
+              <ArrowForwardIcon color="white" />
             </Button>
           </NavLink>
         </LeftWrapper>
       </Inner>
-
     </Wrapper>
   )
 }

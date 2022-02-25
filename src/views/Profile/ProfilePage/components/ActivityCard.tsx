@@ -19,7 +19,7 @@ const Card = styled.div`
   max-width: 630px;
   width: 100%;
   height: 450px;
-  background-color: #151E21;
+  background-color: #151e21;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -32,7 +32,7 @@ const CardTitle = styled.p`
   text-align: left;
   font: normal normal normal 20px/36px Poppins;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   padding-bottom: 35px;
 `
 
@@ -55,7 +55,7 @@ const DateText = styled.p`
   text-align: right;
   font: normal normal 300 14px/40px Poppins;
   letter-spacing: 0px;
-  color: #6B7682;
+  color: #6b7682;
   width: 35%;
   white-space: nowrap;
   padding-right: 25px;
@@ -65,9 +65,9 @@ const ActivityText = styled.p`
   text-align: left;
   font: normal normal 300 14px/40px Poppins;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   flex-shrink: 2;
-  width: 65%;;
+  width: 65%; ;
 `
 
 const ProfilePage: React.FC = () => {
@@ -81,7 +81,7 @@ const ProfilePage: React.FC = () => {
     }
   }, [account, dispatch])
 
-  const getNftByAddress = (address: string) => nfts.find(n => equalAddresses(getAddress(n.address), address))
+  const getNftByAddress = (address: string) => nfts.find((n) => equalAddresses(getAddress(n.address), address))
 
   const activities = useGetUserActivities().data
 
@@ -93,11 +93,17 @@ const ProfilePage: React.FC = () => {
     switch (type) {
       case UserActivityType.DrFDeposit:
         if (tombPids().includes(pid)) {
-          return <ActivityText>Staked {numeral(getBalanceNumber(amount)).format('(0.00 a)')} LP
-            in {getDrFPoolName(pid)} tomb</ActivityText>
+          return (
+            <ActivityText>
+              Staked {numeral(getBalanceNumber(amount)).format('(0.00 a)')} LP in {getDrFPoolName(pid)} tomb
+            </ActivityText>
+          )
         }
-        return <ActivityText>Staked {numeral(getBalanceNumber(amount)).format('(0.00 a)')} ZMBE
-          in {getDrFPoolName(pid)} grave</ActivityText>
+        return (
+          <ActivityText>
+            Staked {numeral(getBalanceNumber(amount)).format('(0.00 a)')} ZMBE in {getDrFPoolName(pid)} grave
+          </ActivityText>
+        )
       case UserActivityType.DrFHarvest:
         if (tombPids().includes(pid)) {
           return <ActivityText>Harvested {getDrFPoolName(pid)} tomb</ActivityText>
@@ -105,18 +111,34 @@ const ProfilePage: React.FC = () => {
         return <ActivityText>Harvested {getDrFPoolName(pid)} grave</ActivityText>
       case UserActivityType.DrFWithdraw:
         if (tombPids().includes(pid)) {
-          return <ActivityText>Unstaked {numeral(getBalanceNumber(amountWithdrawn)).format('(0.00 a)')} LP
-            from {getDrFPoolName(pid)} tomb</ActivityText>
+          return (
+            <ActivityText>
+              Unstaked {numeral(getBalanceNumber(amountWithdrawn)).format('(0.00 a)')} LP from {getDrFPoolName(pid)}{' '}
+              tomb
+            </ActivityText>
+          )
         }
-        return <ActivityText>Withdrew {numeral(getBalanceNumber(amountWithdrawn)).format('(0.00 a)')} ZMBE
-          from {getDrFPoolName(pid)} grave</ActivityText>
+        return (
+          <ActivityText>
+            Withdrew {numeral(getBalanceNumber(amountWithdrawn)).format('(0.00 a)')} ZMBE from {getDrFPoolName(pid)}{' '}
+            grave
+          </ActivityText>
+        )
       case UserActivityType.DrFWithdrawEarly:
         if (tombPids().includes(pid)) {
-          return <ActivityText>Unstaked {numeral(getBalanceNumber(amountWithdrawn)).format('(0.00 a)')} LP Early
-            from {getDrFPoolName(pid)} tomb</ActivityText>
+          return (
+            <ActivityText>
+              Unstaked {numeral(getBalanceNumber(amountWithdrawn)).format('(0.00 a)')} LP Early from{' '}
+              {getDrFPoolName(pid)} tomb
+            </ActivityText>
+          )
         }
-        return <ActivityText>Unstaked {numeral(getBalanceNumber(amountWithdrawn)).format('(0.00 a)')} ZMBE Early
-          from {getDrFPoolName(pid)} grave</ActivityText>
+        return (
+          <ActivityText>
+            Unstaked {numeral(getBalanceNumber(amountWithdrawn)).format('(0.00 a)')} ZMBE Early from{' '}
+            {getDrFPoolName(pid)} grave
+          </ActivityText>
+        )
 
       case UserActivityType.DrFMintNft:
         return <ActivityText>Minted {getNftByAddress(data.nft).name} NFT</ActivityText>
@@ -127,19 +149,19 @@ const ProfilePage: React.FC = () => {
 
   return (
     <Card>
-      <CardTitle>
-        Activity
-      </CardTitle>
-      <InnerCardDiv className='scroll'>
+      <CardTitle>Activity</CardTitle>
+      <InnerCardDiv className="scroll">
         <ActivitiesFlex>
-          {activities.map(activity => {
+          {activities.map((activity) => {
             // if (activity.type === UserActivityType.DrFHarvest) {
             //   return null
             // }
-            return <ActivityDiv>
-              <DateText>{formatDuration(now() - activity.timestamp, false, true)} ago</DateText>
-              <ActivityText>{activityText(activity)}</ActivityText>
-            </ActivityDiv>
+            return (
+              <ActivityDiv>
+                <DateText>{formatDuration(now() - activity.timestamp, false, true)} ago</DateText>
+                <ActivityText>{activityText(activity)}</ActivityText>
+              </ActivityDiv>
+            )
           })}
         </ActivitiesFlex>
       </InnerCardDiv>

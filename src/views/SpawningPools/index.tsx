@@ -62,10 +62,7 @@ const SpawningPools: React.FC = () => {
       dispatch(fetchSpawningPoolsUserDataAsync(account))
     }
   }, [dispatch, account])
-  useEffect(() => {
-    dispatch(fetchSpawningPoolsPublicDataAsync())
-  }, [dispatch])
-  
+
   const [filter, setFilter] = useState('All graves')
   const [search, setSearch] = useState('')
 
@@ -81,12 +78,8 @@ const SpawningPools: React.FC = () => {
             <HeaderCard />
           </Header>
           <SpawningPoolsColumn>
-            <Filter
-              searchValue={search}
-              handleFilter={handleFilter}
-              handleSearch={handleSearch}
-            />
-            {spawningPools.map(sp => {
+            <Filter searchValue={search} handleFilter={handleFilter} handleSearch={handleSearch} />
+            {spawningPools.map((sp) => {
               return <SpawningPoolTable spawningPool={sp} key={sp.id} />
             })}
           </SpawningPoolsColumn>

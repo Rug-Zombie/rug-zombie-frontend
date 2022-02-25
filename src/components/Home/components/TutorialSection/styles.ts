@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { PlusIcon } from 'components/Icons';
+import styled from 'styled-components'
+import { PlusIcon } from 'components/Icons'
 
 export const TutorialItems = styled.div`
   padding: 20px 30px;
@@ -7,7 +7,7 @@ export const TutorialItems = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 60px;
-`;
+`
 
 export const TutorialItem = styled.div`
   width: 90vw;
@@ -18,15 +18,15 @@ export const TutorialItem = styled.div`
   display: flex;
   justify-content: left;
   align-items: center;
-`;
+`
 
 export const TutorialItemIcon = styled(PlusIcon)`
   padding-left: 25px;
-`;
+`
 
 export const TutorialItemText = styled.p`
   text-align: left;
   font: normal normal normal 18px/36px Poppins;
-  color: #FFFFFF;
+  color: #ffffff;
   padding-left: 25px;
-`;
+`

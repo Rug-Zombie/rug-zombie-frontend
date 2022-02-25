@@ -29,21 +29,8 @@ import { formatDuration, now } from '../../../../../../utils/timerHelpers'
 
 const Separator = styled.div`
   height: 0px;
-  border: 1px dashed #6B7682;
+  border: 1px dashed #6b7682;
   margin: 25px 0 0 0;
-`
-
-const BalanceContainer = styled.div`
-  width: 50%;
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: nowrap;
-  margin: 25px 0 0 0;
-  white-space: nowrap;
-  @media (max-width: 771px) {
-    width: 100%;
-  }
-
 `
 
 const StakingContainer = styled.div`
@@ -83,26 +70,26 @@ const Link = styled(LinkExternal)`
   text-decoration: underline;
   font: normal normal normal 16px/30px Poppins;
   letter-spacing: 0px;
-  color: #AE32AA;
+  color: #ae32aa;
 `
 
 const StakingInput = styled.input`
   width: 150px;
   height: 60px;
-  background: #0D1417 0% 0% no-repeat padding-box;
+  background: #0d1417 0% 0% no-repeat padding-box;
   border-radius: 10px;
   padding-left: 20px;
   border: none;
   text-align: left;
   font: normal normal normal 14px/30px Poppins;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 0 2px;
 `
 
 const PrimaryStakeButton = styled.button`
   height: 60px;
   width: 150px;
-  background: #B8C00D 0% 0% no-repeat padding-box;
+  background: #b8c00d 0% 0% no-repeat padding-box;
   border-radius: 10px;
   border: none;
   display: flex;
@@ -118,7 +105,7 @@ const PrimaryStakeButton = styled.button`
 const SecondaryStakeButton = styled.button`
   height: 60px;
   width: 150px;
-  border: 2px solid #B8C00D;
+  border: 2px solid #b8c00d;
   border-radius: 10px;
   background: none;
   display: flex;
@@ -140,12 +127,12 @@ const PrimaryStakeButtonText = styled.text`
 const SecondaryStakeButtonText = styled.text`
   text-align: center;
   font: normal normal normal 16px/25px Poppins;
-  color: #FFFFFF;
+  color: #ffffff;
 `
 
 const BalanceText = styled.button`
   font: normal normal normal 14px/21px Poppins;
-  color: #6B7682;
+  color: #6b7682;
   background: none;
   border: none;
   width: 150px;
@@ -173,7 +160,7 @@ const FlexRow = styled.div`
 `
 
 interface BottomProps {
-  grave: Grave;
+  grave: Grave
 }
 
 const Bottom: React.FC<BottomProps> = ({ grave }) => {
@@ -216,8 +203,8 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   const unstakingSteps = useMemo(() => [], [])
   const isFirstGrave = getId(pid) === 22
   const nfts = useGetNfts().data
-  const depositNft = depositNftId ? nfts.find(n => n.id === depositNftId) : null
-  const nft = nfts.find(n => n.id === nftId)
+  const depositNft = depositNftId ? nfts.find((n) => n.id === depositNftId) : null
+  const nft = nfts.find((n) => n.id === nftId)
   const { toastGraves } = useToast()
 
   enum StakingStep {
@@ -236,8 +223,9 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   const validUnstakeAmount = amount.minus(unstakeAmount).gte(minimumStake) || amount.minus(unstakeAmount).isZero()
   const insufficientStakedBalance = unstakeAmount.gt(amount)
 
-  const [onConvertNftModal] = useModal(<ConvertNftModal nftConverterPid={nftConverterPid}
-                                                        depositNftId={depositNftId} />)
+  const [onConvertNftModal] = useModal(
+    <ConvertNftModal nftConverterPid={nftConverterPid} depositNftId={depositNftId} />,
+  )
   const [onBurnZombieModal] = useModal(<BurnZombieModal pid={getId(pid)} />)
 
   if (depositNftId) {
@@ -285,7 +273,6 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     sent: `Staking...`,
     func: onStake,
     toast: { title: 'Staked ZMBE' },
-
   }
   stakingSteps[StakingStep.Staked] = {
     label: `Stake ZMBE`,
@@ -341,13 +328,17 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
           return
         }
       }
-      if ((nftMintTime.gt(endDate - now()) || isRetired) && [StakingStep.DepositRug, StakingStep.StakeZombie, StakingStep.UnlockGrave].includes(currentStep)) {
+      if (
+        (nftMintTime.gt(endDate - now()) || isRetired) &&
+        [StakingStep.DepositRug, StakingStep.StakeZombie, StakingStep.UnlockGrave].includes(currentStep)
+      ) {
         toastGraves(
           'Notice',
           <FlexColumn>
             <text>
-              {(endDate - now() > 0 || isRetired) ?
-                'This grave is retired. ' : `This grave retires in ${formatDuration(endDate - now())}. `}
+              {endDate - now() > 0 || isRetired
+                ? 'This grave is retired. '
+                : `This grave retires in ${formatDuration(endDate - now())}. `}
               You will can no longer earn the {nft.name} NFT by staking.
             </text>
             <FlexRow>
@@ -355,16 +346,15 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
                 <PrimaryStakeButtonText>Proceed</PrimaryStakeButtonText>
               </PrimaryStakeButton>
             </FlexRow>
-
           </FlexColumn>,
         )
         return
-
       }
 
       setConfirmingStake(true)
-      step.func()
-        .then(succeeded => {
+      step
+        .func()
+        .then((succeeded) => {
           if (succeeded) {
             toastGraves(step.toast.title)
           }
@@ -438,10 +428,7 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   const handleUnstakeTx = useCallback(async () => {
     if (currentUnstakingStep === UnstakingStep.Unstake || currentUnstakingStep === UnstakingStep.UnstakeEarly) {
       if (insufficientStakedBalance) {
-        toastGraves(
-          'Insufficient staked balance',
-          'The amount specified exceeds your staked balance',
-        )
+        toastGraves('Insufficient staked balance', 'The amount specified exceeds your staked balance')
         return
       }
       if (!validUnstakeAmount) {
@@ -450,18 +437,21 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
           <FlexColumn>
             <text>You must leave a minimum of {getFullDisplayBalance(minimumStake)} ZMBE in the grave</text>
             <FlexRow>
-              <PrimaryStakeButton onClick={() => {
-                setUnstakeAmount(amount.minus(minimumStake))
-              }}>
+              <PrimaryStakeButton
+                onClick={() => {
+                  setUnstakeAmount(amount.minus(minimumStake))
+                }}
+              >
                 <PrimaryStakeButtonText>Leave minimum</PrimaryStakeButtonText>
               </PrimaryStakeButton>
-              <SecondaryStakeButton onClick={() => {
-                setUnstakeAmount(amount)
-              }}>
+              <SecondaryStakeButton
+                onClick={() => {
+                  setUnstakeAmount(amount)
+                }}
+              >
                 <SecondaryStakeButtonText>Withdraw max</SecondaryStakeButtonText>
               </SecondaryStakeButton>
             </FlexRow>
-
           </FlexColumn>,
         )
         return
@@ -469,8 +459,9 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     }
 
     setConfirmingUnstake(true)
-    unstakingSteps[currentUnstakingStep].func()
-      .then(succeeded => {
+    unstakingSteps[currentUnstakingStep]
+      .func()
+      .then((succeeded) => {
         if (succeeded) {
           toastGraves(unstakingSteps[currentUnstakingStep].toast.title)
         }
@@ -491,7 +482,10 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     validUnstakeAmount,
   ])
 
-  const decimals = currentStep === StakingStep.ApproveRug || currentStep === StakingStep.DepositRug ? rug.decimals : tokens.zmbe.decimals
+  const decimals =
+    currentStep === StakingStep.ApproveRug || currentStep === StakingStep.DepositRug
+      ? rug.decimals
+      : tokens.zmbe.decimals
   const changeStakeInput = (e) => {
     setStakeAmount(getDecimalAmount(new BigNumber(e.target.value), decimals))
   }
@@ -501,7 +495,8 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   }
 
   const maxStakeAmount = () => {
-    const maxAmount = currentStep === StakingStep.ApproveRug || currentStep === StakingStep.DepositRug ? rugBalance : zombieBalance()
+    const maxAmount =
+      currentStep === StakingStep.ApproveRug || currentStep === StakingStep.DepositRug ? rugBalance : zombieBalance()
     setStakeAmount(maxAmount)
   }
 
@@ -509,52 +504,64 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     setUnstakeAmount(amount)
   }
 
-  return <>
-    <Separator />
-    <StakingContainer>
-      <Inputs>
-        <InputControl>
-          {currentStep === StakingStep.ApproveRug || currentStep === StakingStep.DepositRug
-            ? <BalanceText onClick={maxStakeAmount}>
-              Wallet
-              Balance: <AmountText>{numeral(getFullDisplayBalance(rugBalance, rug.decimals)).format('(0.00 a)')} {rug.symbol}</AmountText>
+  return (
+    <>
+      <Separator />
+      <StakingContainer>
+        <Inputs>
+          <InputControl>
+            {currentStep === StakingStep.ApproveRug || currentStep === StakingStep.DepositRug ? (
+              <BalanceText onClick={maxStakeAmount}>
+                Wallet Balance:{' '}
+                <AmountText>
+                  {numeral(getFullDisplayBalance(rugBalance, rug.decimals)).format('(0.00 a)')} {rug.symbol}
+                </AmountText>
+              </BalanceText>
+            ) : (
+              <BalanceText onClick={maxStakeAmount}>
+                Wallet Balance:{' '}
+                <AmountText>{numeral(getFullDisplayBalance(zombieBalance())).format('(0.00 a)')} ZMBE</AmountText>
+              </BalanceText>
+            )}
+            <StakingInput
+              onInput={changeStakeInput}
+              value={getBalanceNumber(stakeAmount, decimals)}
+              placeholder="Stake amount"
+              type="number"
+            />
+          </InputControl>
+          <InputControl>
+            <BalanceText onClick={maxUnstakeAmount}>
+              Your Staked: <AmountText>{numeral(getFullDisplayBalance(amount)).format('(0.00 a)')} ZMBE</AmountText>
             </BalanceText>
-            : <BalanceText onClick={maxStakeAmount}>
-              Wallet
-              Balance: <AmountText>{numeral(getFullDisplayBalance(zombieBalance())).format('(0.00 a)')} ZMBE</AmountText>
-            </BalanceText>
-          }
-          <StakingInput
-            onInput={changeStakeInput}
-            value={getBalanceNumber(stakeAmount, decimals)}
-            placeholder='Stake amount' type='number'
-          />
-        </InputControl>
-        <InputControl>
-          <BalanceText onClick={maxUnstakeAmount}>
-            Your Staked: <AmountText>{numeral(getFullDisplayBalance(amount)).format('(0.00 a)')} ZMBE</AmountText>
-          </BalanceText>
-          <StakingInput
-            onInput={changeUnstakeInput}
-            value={getBalanceNumber(unstakeAmount)}
-            placeholder='Unstake amount'
-            type='number'
-          />
-        </InputControl>
-      </Inputs>
-      <Buttons>
-        <PrimaryStakeButton onClick={handleTx}>
-          <PrimaryStakeButtonText>{confirmingStake ? stakingSteps[currentStep].sent : stakingSteps[currentStep].label}</PrimaryStakeButtonText>
-        </PrimaryStakeButton>
-        <SecondaryStakeButton onClick={handleUnstakeTx}>
-          <SecondaryStakeButtonText>{confirmingUnstake ? unstakingSteps[currentUnstakingStep].sent : unstakingSteps[currentUnstakingStep].label}</SecondaryStakeButtonText>
-        </SecondaryStakeButton>
-      </Buttons>
-    </StakingContainer>
-    <ProgressBar grave={grave} />
-    <Separator />
-    <TableDetails grave={grave} />
-  </>
+            <StakingInput
+              onInput={changeUnstakeInput}
+              value={getBalanceNumber(unstakeAmount)}
+              placeholder="Unstake amount"
+              type="number"
+            />
+          </InputControl>
+        </Inputs>
+        <Buttons>
+          <PrimaryStakeButton onClick={handleTx}>
+            <PrimaryStakeButtonText>
+              {confirmingStake ? stakingSteps[currentStep].sent : stakingSteps[currentStep].label}
+            </PrimaryStakeButtonText>
+          </PrimaryStakeButton>
+          <SecondaryStakeButton onClick={handleUnstakeTx}>
+            <SecondaryStakeButtonText>
+              {confirmingUnstake
+                ? unstakingSteps[currentUnstakingStep].sent
+                : unstakingSteps[currentUnstakingStep].label}
+            </SecondaryStakeButtonText>
+          </SecondaryStakeButton>
+        </Buttons>
+      </StakingContainer>
+      <ProgressBar grave={grave} />
+      <Separator />
+      <TableDetails grave={grave} />
+    </>
+  )
 }
 
 export default Bottom

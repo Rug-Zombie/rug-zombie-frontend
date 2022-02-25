@@ -1,16 +1,14 @@
 /* eslint-disable no-param-reassign */
 import React from 'react'
-import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
 import numeral from 'numeral'
 import { useGetSpawningPools } from '../../../../state/hooks'
-import { bnbPriceUsd, zombiePriceUsd } from '../../../../redux/get'
+import { zombiePriceUsd } from '../../../../redux/get'
 import { getBalanceNumber } from '../../../../utils/formatBalance'
-import { now } from '../../../../utils/timerHelpers'
 import { BIG_ZERO } from '../../../../utils/bigNumber'
 
 const InfoCard = styled.header`
-  background-color: #151E21;
+  background-color: #151e21;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -22,14 +20,14 @@ const HalfLine = styled.div`
   margin: 0 auto;
   height: 5px;
   width: 80%;
-  background-color: #30C00D;
+  background-color: #30c00d;
 `
 
 const InfoCardTitle = styled.h3`
   text-align: left;
   font: normal normal 500 1.6rem Poppins;
   letter-spacing: 0.5px;
-  color: #FFFFFF;
+  color: #ffffff;
   width: 100%;
   padding: 0 10px;
 `
@@ -39,16 +37,8 @@ const InfoCardSubHeader = styled.h4`
   text-align: left;
   font: normal normal normal 16px/30px Poppins;
   letter-spacing: 0px;
-  color: #6B7682;
+  color: #6b7682;
   padding: 0 10px;
-`
-
-const InfoCardLink = styled.p`
-  text-align: left;
-  text-decoration: underline;
-  font: normal normal normal 16px/30px Poppins;
-  letter-spacing: 0px;
-  color: #AE32AA;
 `
 
 const InfoCardHeader = styled.div`
@@ -56,21 +46,21 @@ const InfoCardHeader = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  width: 100%
+  width: 100%;
 `
 
 const InfoCardContent = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 20px 20px 20px;
-  width: 100%
+  width: 100%;
 `
 
 const InfoCardSubtitle = styled.p`
   text-align: left;
   font: normal normal normal 12px/30px Poppins;
   letter-spacing: 0px;
-  color: #6B7682;
+  color: #6b7682;
   padding: 0 10px;
 `
 
@@ -78,7 +68,7 @@ const InfoCardValue = styled.p`
   text-align: left;
   font: normal normal normal 30px/36px Poppins;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   opacity: 1;
   padding: 0 10px 10px 10px;
 `
@@ -97,15 +87,15 @@ const Shadow = styled.div`
 `
 
 const HeaderCard: React.FC = () => {
-  const spawningPoolSum = useGetSpawningPools().data.reduce((sum, {
-    poolInfo: { totalAmount },
-    userInfo: { amount},
-  }) => {
-    return {
-      amount: sum.amount.plus(amount),
-      totalAmount: sum.totalAmount.plus(totalAmount)
-    }
-  }, { amount: BIG_ZERO, totalAmount: BIG_ZERO })
+  const spawningPoolSum = useGetSpawningPools().data.reduce(
+    (sum, { poolInfo: { totalAmount }, userInfo: { amount } }) => {
+      return {
+        amount: sum.amount.plus(amount),
+        totalAmount: sum.totalAmount.plus(totalAmount),
+      }
+    },
+    { amount: BIG_ZERO, totalAmount: BIG_ZERO },
+  )
 
   const spawningPoolsTvl = getBalanceNumber(spawningPoolSum.totalAmount) * zombiePriceUsd()
   const userTvl = getBalanceNumber(spawningPoolSum.amount) * zombiePriceUsd()
@@ -115,29 +105,17 @@ const HeaderCard: React.FC = () => {
       <InfoCard>
         <HalfLine />
         <InfoCardHeader>
-          <InfoCardTitle>
-            SpawningPools
-          </InfoCardTitle>
-          <InfoCardSubHeader>
-            Stake your ZMBE to earn NFTs and rewards in partnered project tokens.
-          </InfoCardSubHeader>
+          <InfoCardTitle>SpawningPools</InfoCardTitle>
+          <InfoCardSubHeader>Stake your ZMBE to earn NFTs and rewards in partnered project tokens.</InfoCardSubHeader>
         </InfoCardHeader>
         <InfoCardContent>
-          <InfoCardSubtitle>
-            Spawning Pools TVL
-          </InfoCardSubtitle>
-          <InfoCardValue>
-            {numeral(spawningPoolsTvl).format('($ 0,0)')}
-          </InfoCardValue>
-          <InfoCardSubtitle>
-            My Holdings
-          </InfoCardSubtitle>
-          <InfoCardValue>
-            {numeral(userTvl).format('($ 0,0)')}
-          </InfoCardValue>
+          <InfoCardSubtitle>Spawning Pools TVL</InfoCardSubtitle>
+          <InfoCardValue>{numeral(spawningPoolsTvl).format('($ 0,0)')}</InfoCardValue>
+          <InfoCardSubtitle>My Holdings</InfoCardSubtitle>
+          <InfoCardValue>{numeral(userTvl).format('($ 0,0)')}</InfoCardValue>
         </InfoCardContent>
       </InfoCard>
-      <Shadow/>
+      <Shadow />
     </>
   )
 }

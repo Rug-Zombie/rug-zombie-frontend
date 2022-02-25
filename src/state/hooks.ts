@@ -1,8 +1,5 @@
-import { useMemo } from 'react'
-import BigNumber from 'bignumber.js'
 import { useSelector } from 'react-redux'
 import { createSelector } from '@reduxjs/toolkit'
-import { orderBy } from 'lodash'
 import { getAddress } from 'utils/addressHelpers'
 import axios from 'axios'
 import { State } from './types'
@@ -18,7 +15,9 @@ export const getBnbPriceinBusd = () => {
 }
 
 export const fetchZmbeBnbAddress = (): Promise<string> => {
-  return getContract(pancakeFactoryAbi, getAddress(contracts.pancakeFactory)).methods.getPair(getAddress(tokens.zmbe.address), getAddress(tokens.wbnb.address)).call()
+  return getContract(pancakeFactoryAbi, getAddress(contracts.pancakeFactory))
+    .methods.getPair(getAddress(tokens.zmbe.address), getAddress(tokens.wbnb.address))
+    .call()
 }
 
 export const fetchLpReserves = (address): Promise<any> => {
@@ -43,49 +42,52 @@ export const useGetFilteredGraves = (filter: string[]) => {
 }
 
 const selectFilteredGraves = createSelector(
-  (state: State) => state.graves, 
+  (state: State) => state.graves,
   (state: State) => state.nfts,
   (state: State, filter: string[]) => filter,
   (graves, nfts, filter) => {
     // search parameters
     if (filter[0] !== '') {
-      return graves.data.filter(({name, rug: {symbol}, nftId}) => {
+      return graves.data.filter(({ name, rug: { symbol }, nftId }) => {
         const searchString = filter[0].toLowerCase()
         const hasNameMatch = name.toLowerCase().includes(searchString)
         const hasSymbolMatch = symbol.toLowerCase().includes(searchString)
-        const hasNftNameMatch = nfts.data.find(n => n.id === nftId).name.toLowerCase().includes(searchString)
+        const hasNftNameMatch = nfts.data
+          .find((n) => n.id === nftId)
+          .name.toLowerCase()
+          .includes(searchString)
 
         return hasNameMatch || hasSymbolMatch || hasNftNameMatch
       })
     }
-    
+
     // filter parameters
-    switch(filter[1]) {
+    switch (filter[1]) {
       case 'All graves':
       case 'All types':
-        return graves.data.filter(g => !g.isRetired && g.poolInfo.allocPoint.gt(0))
+        return graves.data.filter((g) => !g.isRetired && g.poolInfo.allocPoint.gt(0))
       case 'Staked':
-        return graves.data.filter(g => g.userInfo.amount.gt(0))
+        return graves.data.filter((g) => g.userInfo.amount.gt(0))
       case 'NFT-only':
-        return graves.data.filter(g => !g.isRetired && g.poolInfo.allocPoint.isZero())
+        return graves.data.filter((g) => !g.isRetired && g.poolInfo.allocPoint.isZero())
       case 'Retired':
-        return graves.data.filter(g => g.isRetired)
+        return graves.data.filter((g) => g.isRetired)
       case 'Legendary':
-        return graves.data.filter(g => nfts.data.find(n => n.id === g.nftId).rarity === 'Legendary')
+        return graves.data.filter((g) => nfts.data.find((n) => n.id === g.nftId).rarity === 'Legendary')
       case 'Rare':
-        return graves.data.filter(g => nfts.data.find(n => n.id === g.nftId).rarity === 'Rare')
+        return graves.data.filter((g) => nfts.data.find((n) => n.id === g.nftId).rarity === 'Rare')
       case 'Uncommon':
-        return graves.data.filter(g => nfts.data.find(n => n.id === g.nftId).rarity === 'Uncommon')
+        return graves.data.filter((g) => nfts.data.find((n) => n.id === g.nftId).rarity === 'Uncommon')
       case 'Common':
-        return graves.data.filter(g => nfts.data.find(n => n.id === g.nftId).rarity === 'Common')
+        return graves.data.filter((g) => nfts.data.find((n) => n.id === g.nftId).rarity === 'Common')
       default:
         return graves.data
     }
-  }
+  },
 )
 
 export const useGetGraveByPid = (pid: number) => {
-  return useGetGraves().data.find(g => getId(g.pid) === pid)
+  return useGetGraves().data.find((g) => getId(g.pid) === pid)
 }
 
 export const useGetTombs = () => {
@@ -101,7 +103,7 @@ export const useGetFilteredSpawningPools = (filter: string[]) => {
 }
 
 const selectFilteredSpawningPools = createSelector(
-  (state: State) => state.spawningPools, 
+  (state: State) => state.spawningPools,
   (state: State) => state.nfts,
   (state: State, filter: string[]) => filter,
   (spawningPools, nfts, filter) => {
@@ -111,34 +113,31 @@ const selectFilteredSpawningPools = createSelector(
         const searchString = filter[0].toLowerCase()
         const hasNameMatch = name.toLowerCase().includes(searchString)
         const hasSymbolMatch = symbol.toLowerCase().includes(searchString)
-        const hasNftNameMatch = nfts.data.find(n => n.id === nftId).name.toLowerCase().includes(searchString)
-        
+        const hasNftNameMatch = nfts.data
+          .find((n) => n.id === nftId)
+          .name.toLowerCase()
+          .includes(searchString)
+
         return hasNameMatch || hasSymbolMatch || hasNftNameMatch
       })
     }
-    
+
     // filter parameters
-    switch(filter[1]) {
+    switch (filter[1]) {
       case 'All Pools':
-        return spawningPools.data.filter(sp => sp.endDate > now())
+        return spawningPools.data.filter((sp) => sp.endDate > now())
       case 'Staked':
-        return spawningPools.data.filter(sp => sp.userInfo.amount.gt(0))
+        return spawningPools.data.filter((sp) => sp.userInfo.amount.gt(0))
       case 'Ended':
-        return spawningPools.data.filter(sp => sp.endDate <= now())
+        return spawningPools.data.filter((sp) => sp.endDate <= now())
       default:
-        return spawningPools.data.filter(sp => sp.endDate > now())
+        return spawningPools.data.filter((sp) => sp.endDate > now())
     }
-  }
+  },
 )
 
 export const useGetUserActivities = () => {
   return useSelector((state: State) => state.userActivity)
 }
 
-
-
-export {
-  useGetNfts,
-  useGetNftById,
-  useGetNftTotalSupply,
-} from './nfts/hooks'
+export { useGetNfts, useGetNftById, useGetNftTotalSupply } from './nfts/hooks'

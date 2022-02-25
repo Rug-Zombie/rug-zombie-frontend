@@ -1,5 +1,5 @@
 import React, { useEffect, lazy, useState } from 'react'
-import { Router, Route, Switch } from 'react-router-dom'
+import { Router, Route, Switch, Redirect } from 'react-router-dom'
 import { ResetCSS } from '@rug-zombie-libs/uikit'
 import BigNumber from 'bignumber.js'
 import useEagerConnect from 'hooks/useEagerConnect'
@@ -7,14 +7,12 @@ import ToastListener from 'components/ToastListener'
 import { routes } from 'routes'
 import TopMenu from 'components/TopMenu'
 import AppContainer from 'components/AppContainer'
-import Menu from 'components/Menu'
 import Loader from 'components/Loader'
 import Tombs from 'views/Tombs'
 import Gravedigger from 'views/Gravedigger/'
 import { useWeb3React } from '@web3-react/core'
 import SpawnWithUs from 'views/SpawnWithUs'
 import Catacombs from 'views/Catacombs'
-import BurnGraves from 'views/BurnGraves'
 import SuspenseWithChunkError from './components/SuspenseWithChunkError'
 import history from './routerHistory'
 import GlobalStyle from './style/Global'
@@ -35,6 +33,7 @@ import SharkPools from './views/SharkPools'
 import { useAppDispatch } from './state'
 import { fetchNftPublicDataAsync } from './state/nfts'
 import Nfts from './views/Nfts'
+import BurnGraves from './views/BurnGraves'
 
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page
@@ -54,10 +53,8 @@ const App: React.FC = () => {
     console.warn = () => null
   }, [])
 
-  const [isAuthenticated, setAuthenticated] = useState(false)
   const [, setZombiePrice] = useState(0)
   const [modal, setModal] = useState(null)
-
 
   useEffect(() => {
     document.title = 'RugZombie'
@@ -79,17 +76,32 @@ const App: React.FC = () => {
       <GlobalStyle />
       <SuspenseWithChunkError fallback={<Loader />}>
         <Switch>
-          <Route exact path={routes.GRAVEDIGGER}><Gravedigger /></Route>
-          <Route exact path={routes.SPAWNWITHUS}><SpawnWithUs /></Route>
-          <Route exact path={routes.CATACOMBS}><Catacombs /></Route>
-          <Route exact path={routes.RUGROLL}><RugRoll /></Route>
+          <Route exact path={routes.GRAVEDIGGER}>
+            <Gravedigger />
+          </Route>
+          <Route exact path={routes.SPAWNWITHUS}>
+            <SpawnWithUs />
+          </Route>
+          <Route exact path={routes.CATACOMBS}>
+            <Catacombs />
+          </Route>
+          <Route exact path={routes.RUGROLL}>
+            <RugRoll />
+          </Route>
           <Route exact path={routes.DATALAB}>
             <SwiperProvider>
               <DataLab modalObj={{ modal, setModal }} />
             </SwiperProvider>
           </Route>
-          <Route exact path={routes.BLACKMARKET}><BlackMarket /></Route>
-          <Route exact path={routes.BARRACKS}><Barracks /></Route>
+          <Route exact path={routes.BLACKMARKET}>
+            <BlackMarket />
+          </Route>
+          <Route exact path={routes.BARRACKS}>
+            <Barracks />
+          </Route>
+          <Route exact path={routes.HOME}>
+            <Redirect to={routes.LANDING} />
+          </Route>
           <Route exact path={routes.LANDING}>
             <>
               <TopMenu />
@@ -174,11 +186,10 @@ const App: React.FC = () => {
             <>
               <TopMenu />
               <AppContainer>
-                <SharkPools />
+                <BurnGraves />
               </AppContainer>
             </>
           </Route>
-
         </Switch>
       </SuspenseWithChunkError>
       <ToastListener />

@@ -2,14 +2,9 @@ import BigNumber from 'bignumber.js'
 import tombOverlay from 'config/abi/tombOverlay.json'
 import drFrankenstein from 'config/abi/drFrankenstein.json'
 import multicall from 'utils/multicall'
-import {
-  getDrFrankensteinAddress,
-  getTombOverlayAddress,
-} from 'utils/addressHelpers'
+import { getDrFrankensteinAddress, getTombOverlayAddress } from 'utils/addressHelpers'
 import { TombConfig } from 'config/constants/types'
 import { getId } from '../../utils'
-import { tombOverlayById } from '../../redux/get'
-import { getTombOverlayContract } from '../../utils/contractHelpers'
 
 export const fetchTombUserEarnings = async (account: string, tombsToFetch: TombConfig[]) => {
   const drFrankensteinAddress = getDrFrankensteinAddress()
@@ -32,12 +27,12 @@ export const fetchTombUserEarnings = async (account: string, tombsToFetch: TombC
 export const fetchTombOverlayUserInfo = async (account: string, tombOverlaysToFetch: TombConfig[]) => {
   const calls = tombOverlaysToFetch.reduce((userInfos, tombConfig) => {
     const overlayId = getId(tombConfig.overlay.pid).toString()
-    console.log(overlayId)
-    return userInfos.concat([{
-      address: getTombOverlayAddress(),
-      name: 'userInfo',
-      params: [overlayId, account],
-    },
+    return userInfos.concat([
+      {
+        address: getTombOverlayAddress(),
+        name: 'userInfo',
+        params: [overlayId, account],
+      },
       {
         address: getTombOverlayAddress(),
         name: 'nftMintTime',
@@ -50,13 +45,11 @@ export const fetchTombOverlayUserInfo = async (account: string, tombOverlaysToFe
 
   const pairedUserInfos = []
   for (let i = 0; i < userInfos.length; i += 2) {
-    console.log(userInfos[i].toString())
-
     pairedUserInfos.push({
       nextNftMintDate: userInfos[i].nextNftMintDate,
       isMinting: userInfos[i].isMinting,
       randomNumber: userInfos[i].randomNumber,
-      nftMintTime: userInfos[i+1],
+      nftMintTime: userInfos[i + 1],
     })
   }
   return pairedUserInfos

@@ -34,21 +34,21 @@ const CollectWinningsOverlay: React.FC<CollectWinningsOverlayProps> = () => {
   // We do it here because it is not gaurenteed the bet info will be in the history
   // useEffect(() => {
   //   const fetchBet = async () => {
-      // const bets = await getBetHistory({ user: account.toLowerCase(), round: roundId, claimed: false })
+  // const bets = await getBetHistory({ user: account.toLowerCase(), round: roundId, claimed: false })
 
-      // if (bets.length === 1) {
-      //   const [firstBetResponse] = bets
-      //   const bet = transformBetResponse(firstBetResponse)
-      //
-      //   if (bet.position === bet.round.position) {
-      //     setState({
-      //       betId: bet.id,
-      //       epoch: bet.round.epoch,
-      //       payout: getPayout(bet),
-      //     })
-      //   }
-      // }
-    // }
+  // if (bets.length === 1) {
+  //   const [firstBetResponse] = bets
+  //   const bet = transformBetResponse(firstBetResponse)
+  //
+  //   if (bet.position === bet.round.position) {
+  //     setState({
+  //       betId: bet.id,
+  //       epoch: bet.round.epoch,
+  //       payout: getPayout(bet),
+  //     })
+  //   }
+  // }
+  // }
 
   // }, [account, roundId, currentEpoch, setState])
 

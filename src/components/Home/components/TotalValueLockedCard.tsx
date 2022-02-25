@@ -3,13 +3,7 @@ import styled from 'styled-components'
 import { Card, CardBody, Heading, Text } from '@rug-zombie-libs/uikit'
 import numeral from 'numeral'
 import { getBalanceAmount } from '../../../utils/formatBalance'
-import {
-  bnbPriceUsd,
-  drFrankensteinZombieBalance,
-  zombiePriceUsd,
-  tombs,
-  spawningPools,
-} from '../../../redux/get'
+import { bnbPriceUsd, drFrankensteinZombieBalance, zombiePriceUsd, tombs, spawningPools } from '../../../redux/get'
 import { initialTombData, initialSpawningPoolData } from '../../../redux/fetch'
 
 import { useMultiCall, useZombie } from '../../../hooks/useContract'
@@ -42,16 +36,20 @@ const TotalValueLockedCard: React.FC = () => {
     }
   }, [multi, updatePoolInfo, zombie])
 
-
   const totalSpawningPoolStaked = spawningPools().reduce((accumulator, sp) => {
     return sp.poolInfo.totalZombieStaked.plus(accumulator)
   }, BIG_ZERO)
 
   const zombiePrice = zombiePriceUsd()
   let tombsTvl = BIG_ZERO
-  tombs().forEach(t => {
-    const { poolInfo: { reserves, lpTotalSupply, totalStaked } } = t
-    const reservesUsd = [getBalanceAmount(reserves[0]).times(zombiePrice), getBalanceAmount(reserves[1]).times(bnbPriceUsd())]
+  tombs().forEach((t) => {
+    const {
+      poolInfo: { reserves, lpTotalSupply, totalStaked },
+    } = t
+    const reservesUsd = [
+      getBalanceAmount(reserves[0]).times(zombiePrice),
+      getBalanceAmount(reserves[1]).times(bnbPriceUsd()),
+    ]
     const bnbLpTokenPrice = reservesUsd[0].plus(reservesUsd[1]).div(lpTotalSupply)
     tombsTvl = tombsTvl.plus(totalStaked.times(bnbLpTokenPrice))
   })
@@ -67,19 +65,18 @@ const TotalValueLockedCard: React.FC = () => {
   }, [newTvl, tvl])
 
   return (
-    <div style={{paddingTop: "15px"}}>
+    <div style={{ paddingTop: '15px' }}>
       <StyledTotalValueLockedCard>
         <CardBody>
-          <Heading size='lg' mb='24px'>
+          <Heading size="lg" mb="24px">
             Total Value Locked (TVL)
           </Heading>
           <>
-            <Heading size='xl'>{`$${numeral(tvl).format('(0.00 a)')}`}</Heading>
+            <Heading size="xl">{`$${numeral(tvl).format('(0.00 a)')}`}</Heading>
             <Row>
-              <Text fontSize='14px'>Across all Tombs and Graves</Text>
+              <Text fontSize="14px">Across all Tombs and Graves</Text>
             </Row>
           </>
-
         </CardBody>
       </StyledTotalValueLockedCard>
     </div>

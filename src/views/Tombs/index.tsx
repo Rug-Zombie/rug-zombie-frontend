@@ -76,7 +76,11 @@ const Tombs: React.FC = () => {
   if (searchFilter) {
     tombs = tombs.filter(({ token1, token2, overlay: { legendaryId } }) => {
       const searchString = searchFilter.toLowerCase().replace('-', '')
-      return token1.symbol.toLowerCase().includes(searchString) || token2.symbol.toLowerCase().includes(searchString) || getNftConfigById(legendaryId).name.toLowerCase().includes(searchString)
+      return (
+        token1.symbol.toLowerCase().includes(searchString) ||
+        token2.symbol.toLowerCase().includes(searchString) ||
+        getNftConfigById(legendaryId).name.toLowerCase().includes(searchString)
+      )
     })
   }
 
@@ -88,10 +92,14 @@ const Tombs: React.FC = () => {
             <HeaderCard />
           </Header>
           <TombsColumn>
-            <Filter tombsList={tombFilters.map(f => f.label)} raritiesList={rarityFilters.map(f => f.label)}
-                    tombFilter={{ value: tombFilter, set: setTombFilter }}
-                    rarityFilter={{ value: rarityFilter, set: setRarityFilter }} setSearch={setSearchFilter} />
-            {tombs.map(g => {
+            <Filter
+              tombsList={tombFilters.map((f) => f.label)}
+              raritiesList={rarityFilters.map((f) => f.label)}
+              tombFilter={{ value: tombFilter, set: setTombFilter }}
+              rarityFilter={{ value: rarityFilter, set: setRarityFilter }}
+              setSearch={setSearchFilter}
+            />
+            {tombs.map((g) => {
               return <TombTable tomb={g} key={getId(g.pid)} />
             })}
           </TombsColumn>

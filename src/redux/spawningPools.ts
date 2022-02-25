@@ -19,7 +19,8 @@ const spawningPools: SpawningPool[] = [
     endDate: 1647147599,
     project: {
       name: 'L1GHT L1ST',
-      description: 'L1ght L1st was founded with the intention of bridging ambitious investors to the most innovative and remarkable projects on the blockchain. Shifting the focus from hype to utility and long term market validation. Their goal is to offer investors the exclusive opportunity to invest in innovative startups, while offering remarkable start ups the early exposure necessary for success allowing them to pay in their own token and set their own terms for launch.',
+      description:
+        'L1ght L1st was founded with the intention of bridging ambitious investors to the most innovative and remarkable projects on the blockchain. Shifting the focus from hype to utility and long term market validation. Their goal is to offer investors the exclusive opportunity to invest in innovative startups, while offering remarkable start ups the early exposure necessary for success allowing them to pay in their own token and set their own terms for launch.',
       additionalDetails: [
         {
           name: 'Project website',
@@ -76,7 +77,8 @@ const spawningPools: SpawningPool[] = [
     endDate: 1646888399,
     project: {
       name: 'Street Punks',
-      description: 'StreetPunks is a spinoff inspired by the CryptoPunks project created by a small group of CryptoPunk fans. They strive to contribute to the CryptoPunks hype by creatively adding streetwear and (popular) theme orientated costumes. StreetPunks offers the average CyberPunk lover to invest early into the next stage of the CryptoPunks hype.',
+      description:
+        'StreetPunks is a spinoff inspired by the CryptoPunks project created by a small group of CryptoPunk fans. They strive to contribute to the CryptoPunks hype by creatively adding streetwear and (popular) theme orientated costumes. StreetPunks offers the average CyberPunk lover to invest early into the next stage of the CryptoPunks hype.',
       additionalDetails: [
         {
           name: 'Project website',
@@ -102,7 +104,7 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v2',
     liquidityDetails: '',
     isNew: true,
-    color: "silver",
+    color: 'silver',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -134,7 +136,8 @@ const spawningPools: SpawningPool[] = [
     endDate: 1646197199,
     project: {
       name: 'Black Eye Galaxy',
-      description: 'Black Eye Galaxy is a Metaverse designed to create a space exploration experience for its members. Offering tradable assets from planets to spaceships and buildings, BYG is a Play-To-Earn game meaning that just by doing tasks in-game the player will be rewarded BYG tokens.',
+      description:
+        'Black Eye Galaxy is a Metaverse designed to create a space exploration experience for its members. Offering tradable assets from planets to spaceships and buildings, BYG is a Play-To-Earn game meaning that just by doing tasks in-game the player will be rewarded BYG tokens.',
       additionalDetails: [
         {
           name: 'Project website',
@@ -159,7 +162,7 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v2',
     liquidityDetails: '',
     isNew: true,
-    color: "silver",
+    color: 'silver',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -191,7 +194,8 @@ const spawningPools: SpawningPool[] = [
     endDate: 1645073999,
     project: {
       name: 'InfiniteOne',
-      description: 'InfiniteOne Token is the only token you truly need in your wallet. It rewards you in multiple ways just for holding it. It supplies you with Infinite rewards through the ups and downs of the market.',
+      description:
+        'InfiniteOne Token is the only token you truly need in your wallet. It rewards you in multiple ways just for holding it. It supplies you with Infinite rewards through the ups and downs of the market.',
       additionalDetails: [
         {
           name: 'Project website',
@@ -217,7 +221,7 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v2',
     liquidityDetails: '',
     isNew: false,
-    color: "grey",
+    color: 'grey',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -238,7 +242,7 @@ const spawningPools: SpawningPool[] = [
   {
     id: 11,
     name: 'Squid Stake Legendary',
-    subtitle: 'Don\'t mess with Cthulhu',
+    subtitle: "Don't mess with Cthulhu",
     path: 'https://ipfs.io/ipfs/QmQ11oNLDfg7c3k1S6sfBEhcHWHtc9ykTQJhXhNU25fp7V',
     type: 'image',
     address: {
@@ -275,7 +279,7 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v2',
     liquidityDetails: '',
     isNew: false,
-    color: "pink",
+    color: 'pink',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -307,7 +311,8 @@ const spawningPools: SpawningPool[] = [
     endDate: 1641646800,
     project: {
       name: 'French Connection Finance',
-      description: 'French Connection Finance aims to create the world\'s first credit card to cryptocurrency encrypted online payment gateway, which rewards its holders with 9% fully automated BNB reflection on all the transactions made with $FCF during the same 24 hour period.',
+      description:
+        "French Connection Finance aims to create the world's first credit card to cryptocurrency encrypted online payment gateway, which rewards its holders with 9% fully automated BNB reflection on all the transactions made with $FCF during the same 24 hour period.",
       additionalDetails: [
         {
           name: 'Project website',
@@ -333,7 +338,7 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v2',
     liquidityDetails: '',
     isNew: false,
-    color: "brown",
+    color: 'brown',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -365,7 +370,8 @@ const spawningPools: SpawningPool[] = [
     endDate: 1640523600,
     project: {
       name: 'Autoshark',
-      description: 'AutoShark Finance is the 1st Cross-Chain Hybrid AMM and Yield Optimizer, offering unparalleled access to farming opportunities through the use of superior yield strategies, auto-compounding vaults, and NFT-powered farming.',
+      description:
+        'AutoShark Finance is the 1st Cross-Chain Hybrid AMM and Yield Optimizer, offering unparalleled access to farming opportunities through the use of superior yield strategies, auto-compounding vaults, and NFT-powered farming.',
       additionalDetails: [
         {
           name: 'Project website',
@@ -391,8 +397,8 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v2',
     liquidityDetails: '',
     isNew: false,
-    tokenLogoFormat: "svg",
-    color: "#9400d3",
+    tokenLogoFormat: 'svg',
+    color: '#9400d3',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -424,7 +430,8 @@ const spawningPools: SpawningPool[] = [
     endDate: 1640188800,
     project: {
       name: 'Bingus Network',
-      description: 'The Bingus project was launched as an animal charity / meme token on BSC. Bingus Network aims to save as many animals as possible. A percentage of every Bingus Network transaction is donated to animal shelters and charities and over $120k has been donated since April.',
+      description:
+        'The Bingus project was launched as an animal charity / meme token on BSC. Bingus Network aims to save as many animals as possible. A percentage of every Bingus Network transaction is donated to animal shelters and charities and over $120k has been donated since April.',
       additionalDetails: [
         {
           name: 'Project website',
@@ -450,7 +457,7 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v2',
     liquidityDetails: '',
     isNew: false,
-    color: "#C4A484",
+    color: '#C4A484',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -482,7 +489,8 @@ const spawningPools: SpawningPool[] = [
     endDate: 1639940400,
     project: {
       name: 'Octaplex Network',
-      description: 'Octaplex Network is an ecosystem with a unique and revolutionary concept bringing a new template for the future development of DeFi and yield bearing tokens. They aim to create an ecosystem of tokens in which users shall be rewarded and will be able to get special deals by holding their native $PLX token as well as our partner project tokens.',
+      description:
+        'Octaplex Network is an ecosystem with a unique and revolutionary concept bringing a new template for the future development of DeFi and yield bearing tokens. They aim to create an ecosystem of tokens in which users shall be rewarded and will be able to get special deals by holding their native $PLX token as well as our partner project tokens.',
       additionalDetails: [
         {
           name: 'Project website',
@@ -508,7 +516,7 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v2',
     liquidityDetails: '',
     isNew: false,
-    color: "violet",
+    color: 'violet',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -540,7 +548,8 @@ const spawningPools: SpawningPool[] = [
     endDate: 1639771200,
     project: {
       name: 'AtmosSoft',
-      description: 'AtmosSoft is an NFT Play-2-Earn collectible card game where you Earn $ATMSSFT just by playing. NFT Staking and Farming including P2P gameplay to earn a spot in tournaments with prize pools.',
+      description:
+        'AtmosSoft is an NFT Play-2-Earn collectible card game where you Earn $ATMSSFT just by playing. NFT Staking and Farming including P2P gameplay to earn a spot in tournaments with prize pools.',
       additionalDetails: [
         {
           name: 'Project website',
@@ -566,7 +575,7 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v2',
     liquidityDetails: '',
     isNew: false,
-    color: "red",
+    color: 'red',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -598,7 +607,8 @@ const spawningPools: SpawningPool[] = [
     endDate: 1639576800,
     project: {
       name: 'CryptoMonkey Empire',
-      description: 'CryptoMonkey Empire is a Massively Multiplayer Online Real Time Strategy video game. Where you, the player manages monkeys to build an Empire. You will collect resources by raiding other player\'s empires to build up a city and make technological progress. Their MonkeyCoin token is used in game as a resource and your army is used to steal other player\'s cryptocurrency during raids.',
+      description:
+        "CryptoMonkey Empire is a Massively Multiplayer Online Real Time Strategy video game. Where you, the player manages monkeys to build an Empire. You will collect resources by raiding other player's empires to build up a city and make technological progress. Their MonkeyCoin token is used in game as a resource and your army is used to steal other player's cryptocurrency during raids.",
       additionalDetails: [
         {
           name: 'Project website',
@@ -628,7 +638,7 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v2',
     liquidityDetails: '',
     isNew: false,
-    color: "red",
+    color: 'red',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -660,7 +670,8 @@ const spawningPools: SpawningPool[] = [
     endDate: 1639101600,
     project: {
       name: 'WalletNow',
-      description: 'WalletNow is an advanced crypto portfolio monitoring solution. It aggregates all your DeFi & CeFi investments in a searchable table and actively monitors it with an integrated Telegram Bot. With detailed LP information, impermanent loss and yields calculation, you are always in control of your wallet.',
+      description:
+        'WalletNow is an advanced crypto portfolio monitoring solution. It aggregates all your DeFi & CeFi investments in a searchable table and actively monitors it with an integrated Telegram Bot. With detailed LP information, impermanent loss and yields calculation, you are always in control of your wallet.',
       additionalDetails: [
         {
           name: 'Project website',
@@ -682,7 +693,7 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v2',
     liquidityDetails: '',
     isNew: false,
-    color: "rgb(0, 150, 255)",
+    color: 'rgb(0, 150, 255)',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -714,7 +725,8 @@ const spawningPools: SpawningPool[] = [
     endDate: 1638453600,
     project: {
       name: 'Koala Defi',
-      description: 'Koala DeFi Finance is a yield farming dapp running on Binance Smart Chain and ApeSwap exchange, with cool new features that let you earn and win LYPTUS tokens. The idea behind this project is to create a safe place for conservative yield farmers. ',
+      description:
+        'Koala DeFi Finance is a yield farming dapp running on Binance Smart Chain and ApeSwap exchange, with cool new features that let you earn and win LYPTUS tokens. The idea behind this project is to create a safe place for conservative yield farmers. ',
       additionalDetails: [
         {
           name: 'Project website',
@@ -767,7 +779,8 @@ const spawningPools: SpawningPool[] = [
     endDate: 1637366400,
     project: {
       name: 'Main Street',
-      description: 'Main Street is a deflationary token that provides its holders with a space to find new high use case tokens in their Neighborhood and Alley, as well as entertainment and games in their Shops.',
+      description:
+        'Main Street is a deflationary token that provides its holders with a space to find new high use case tokens in their Neighborhood and Alley, as well as entertainment and games in their Shops.',
       additionalDetails: [
         {
           name: 'Project website',
@@ -809,8 +822,8 @@ const spawningPools: SpawningPool[] = [
   {
     id: 1,
     name: 'Euler Tools Legendary',
-    subtitle: 'Leonhard Euler\'s Day Off',
-    path: 'images/rugZombie/Leonhard Euler\'s Day Off.gif',
+    subtitle: "Leonhard Euler's Day Off",
+    path: "images/rugZombie/Leonhard Euler's Day Off.gif",
     type: 'image',
     address: {
       56: '0x637810116bfdEcA4bB38c61D9FeBC5911440B0eF',
@@ -820,7 +833,8 @@ const spawningPools: SpawningPool[] = [
     endDate: 1636189527,
     project: {
       name: 'Euler Tools',
-      description: 'Euler Tools is a platform to explore and discover blockchain content. With a clean, usable and responsive interface.',
+      description:
+        'Euler Tools is a platform to explore and discover blockchain content. With a clean, usable and responsive interface.',
       additionalDetails: [
         {
           name: 'Project website',
@@ -849,7 +863,7 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v2',
     liquidityDetails: '',
     isNew: false,
-    color: "rgb(0, 150, 255)",
+    color: 'rgb(0, 150, 255)',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,
@@ -881,7 +895,8 @@ const spawningPools: SpawningPool[] = [
     endDate: 1635608820,
     project: {
       name: 'Gorilla-Fi',
-      description: 'Gorilla-Fi is a comprehensive De-Fi earnings ecosystem that allows anyone with a smartphone to earn passive income.',
+      description:
+        'Gorilla-Fi is a comprehensive De-Fi earnings ecosystem that allows anyone with a smartphone to earn passive income.',
       additionalDetails: [
         {
           name: 'Project website',
@@ -900,7 +915,6 @@ const spawningPools: SpawningPool[] = [
           url: 'https://rugzombie.medium.com/first-spawn-gorilla-fi-g-fi-f16a234047f7',
         },
       ],
-
     },
     withdrawalCooldown: '3 days',
     nftRevivalTime: '45 days',
@@ -911,7 +925,7 @@ const spawningPools: SpawningPool[] = [
     pcsVersion: 'v1',
     liquidityDetails: '',
     isNew: false,
-    color: "rgb(0, 150, 255)",
+    color: 'rgb(0, 150, 255)',
     userInfo: {
       paidUnlockFee: false,
       tokenWithdrawalDate: 0,

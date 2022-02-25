@@ -1,12 +1,12 @@
 import styled from 'styled-components'
-import { PrimaryButton, SecondaryButton } from '../Buttons'
+import { SecondaryButton } from '../Buttons'
 
 export const Navbar = styled.nav`
   width: 100%;
   background-color: #010202;
   opacity: 1;
   z-index: 0;
-`;
+`
 
 export const NavbarContent = styled.div`
   height: 100px;
@@ -16,13 +16,15 @@ export const NavbarContent = styled.div`
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
-`;
+`
 
 export const Logo = styled.img`
   height: 36px;
   margin: 0 20px 0 20px;
-  &:hover { cursor: pointer; }
-`;
+  &:hover {
+    cursor: pointer;
+  }
+`
 
 export const Links = styled.div`
   display: flex;
@@ -30,7 +32,7 @@ export const Links = styled.div`
   @media (max-width: 1279px) {
     display: none;
   }
-`;
+`
 
 export const DropdownMenu = styled.div`
   visibility: hidden;
@@ -43,7 +45,7 @@ export const DropdownMenu = styled.div`
     opacity: 1;
     display: inline-block;
   }
-`;
+`
 
 export const DropdownContent = styled.div`
   position: absolute;
@@ -53,42 +55,44 @@ export const DropdownContent = styled.div`
   border-radius: 10px;
   right: 0px;
   z-index: 1;
-`;
+`
 
 export const DropdownItem = styled.div`
   &:hover {
     cursor: pointer;
-    background-color: #151E21;
+    background-color: #151e21;
     border-radius: 10px;
-    color: #30C00D;
+    color: #30c00d;
   }
   padding: 0 15px 0 15px;
-`; 
+`
 
 export const Text = styled.a`
   text-align: center;
   font: normal normal normal 16px Poppins;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   opacity: 1;
   white-space: nowrap;
-  &:hover { text-shadow: 0 0 5px white; }
-`;
+  &:hover {
+    text-shadow: 0 0 5px white;
+  }
+`
 
 export const MenuText = styled(Text)`
   padding: 5px;
-  color: #6B7682;
+  color: #6b7682;
   font: normal normal normal 14px/30px Poppins;
   &:hover {
-    color: #30C00D;
+    color: #30c00d;
     cursor: pointer;
   }
-`;
+`
 
 export const Buttons = styled.div`
   display: flex;
   justify-content: space-between;
-`;
+`
 
 export const TokenButton = styled(SecondaryButton)`
   padding: 0 25px 0 25px;
@@ -96,9 +100,7 @@ export const TokenButton = styled(SecondaryButton)`
   &:hover {
     cursor: pointer;
   }
-`;
-
-
+`
 
 export const ProfileImage = styled.img`
   width: 50px;

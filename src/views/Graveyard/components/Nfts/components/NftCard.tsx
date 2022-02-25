@@ -11,8 +11,8 @@ const Container = styled.div`
 `
 
 const Card = styled.div`
-   min-height: 410px;
-  background: #151E21;
+  min-height: 410px;
+  background: #151e21;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -27,7 +27,7 @@ const Card = styled.div`
 const Shadow = styled.div`
   width: 90%;
   height: 40px;
-  background: #30C00D 0% 0% no-repeat padding-box;
+  background: #30c00d 0% 0% no-repeat padding-box;
   border-radius: 10px;
   opacity: 0.5;
   filter: blur(10px);
@@ -63,7 +63,7 @@ const Title = styled.div`
   text-align: left;
   font: normal normal normal 20px/30px Poppins;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   padding-right: 30px;
   padding-left: 30px;
 `
@@ -72,11 +72,10 @@ const RarityText = styled.div`
   text-align: left;
   font: normal normal normal 14px/30px Poppins;
   letter-spacing: 0px;
-  color: #30C00D;
+  color: #30c00d;
   padding-right: 30px;
   padding-left: 30px;
 `
-
 
 const SubText = styled.span`
   text-align: left;
@@ -85,7 +84,7 @@ const SubText = styled.span`
 `
 
 interface CollectionCardProps {
-  id: number;
+  id: number
   showOwned?: boolean
   showTotalSupply?: boolean
 }

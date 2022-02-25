@@ -14,20 +14,8 @@ import useToast from '../../../../../../hooks/useToast'
 
 const Separator = styled.div`
   height: 0px;
-  border: 1px dashed #6B7682;
+  border: 1px dashed #6b7682;
   margin: 25px 0 0 0;
-`
-
-const BalanceContainer = styled.div`
-  width: 50%;
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: nowrap;
-  margin: 25px 0 0 0;
-  white-space: nowrap;
-  @media (max-width: 771px) {
-    width: 100%;;
-  }
 `
 
 const StakingContainer = styled.div`
@@ -65,20 +53,20 @@ const InputControl = styled.div`
 const StakingInput = styled.input`
   width: 150px;
   height: 60px;
-  background: #0D1417 0% 0% no-repeat padding-box;
+  background: #0d1417 0% 0% no-repeat padding-box;
   border-radius: 10px;
   padding-left: 20px;
   border: none;
   text-align: left;
   font: normal normal normal 14px/30px Poppins;
-  color: #FFFFFF;
+  color: #ffffff;
   margin: 0 2px;
 `
 
 const PrimaryStakeButton = styled.button`
   height: 60px;
   width: 150px;
-  background: #B8C00D 0% 0% no-repeat padding-box;
+  background: #b8c00d 0% 0% no-repeat padding-box;
   border-radius: 10px;
   border: none;
   display: flex;
@@ -94,7 +82,7 @@ const PrimaryStakeButton = styled.button`
 const SecondaryStakeButton = styled.button`
   height: 60px;
   width: 150px;
-  border: 2px solid #B8C00D;
+  border: 2px solid #b8c00d;
   border-radius: 10px;
   background: none;
   display: flex;
@@ -116,12 +104,12 @@ const PrimaryStakeButtonText = styled.text`
 const SecondaryStakeButtonText = styled.text`
   text-align: center;
   font: normal normal normal 16px/25px Poppins;
-  color: #FFFFFF;
+  color: #ffffff;
 `
 
 const BalanceText = styled.button`
   font: normal normal normal 14px/21px Poppins;
-  color: #6B7682;
+  color: #6b7682;
   background: none;
   border: none;
 
@@ -136,12 +124,11 @@ const AmountText = styled.p`
 `
 
 interface BottomProps {
-  spawningPool: SpawningPool;
+  spawningPool: SpawningPool
 }
 
 const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
   const {
-    id,
     address,
     userInfo: { zombieBalance, paidUnlockFee, amount, zombieAllowance, nftMintDate, tokenWithdrawalDate },
     poolInfo: { unlockFee },
@@ -158,7 +145,7 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
   const [confirming, setConfirming] = useState(false)
   const steps = useMemo(() => [], [])
   const now = Math.floor(Date.now() / 1000)
-  const {toastDefault} = useToast()
+  const { toastDefault } = useToast()
   enum Step {
     UnlockSpawningPool,
     ApproveZombie,
@@ -170,25 +157,25 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
     label: `Unlock`,
     sent: `Unlocking...`,
     func: onUnlock,
-    toast: {title: 'Spawning Pool Unlocked'}
+    toast: { title: 'Spawning Pool Unlocked' },
   }
   steps[Step.ApproveZombie] = {
     label: `Approve ZMBE`,
     sent: `Approving...`,
     func: approveZombie,
-    toast: {title: 'Approved ZMBE'}
+    toast: { title: 'Approved ZMBE' },
   }
   steps[Step.StakeZombie] = {
     label: `Stake ZMBE`,
     sent: `Staking...`,
     func: onStake,
-    toast: {title: 'Staked ZMBE'}
+    toast: { title: 'Staked ZMBE' },
   }
   steps[Step.Staked] = {
     label: `Stake ZMBE`,
     sent: `Staking...`,
     func: onStake,
-    toast: {title: 'Staked ZMBE'}
+    toast: { title: 'Staked ZMBE' },
   }
 
   let currentStep = Step.UnlockSpawningPool
@@ -205,14 +192,13 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
     currentStep = Step.ApproveZombie
   }
 
-  console.log(zombieAllowance.toNumber())
-
   const handleTx = useCallback(async () => {
     setConfirming(true)
     const step = steps[currentStep]
-    step.func()
+    step
+      .func()
       .then((succeeded) => {
-        if(succeeded) {
+        if (succeeded) {
           toastDefault(step.toast.title, step.toast.description)
         }
         setConfirming(false)
@@ -241,65 +227,78 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
   const withdrawButton = () => {
     if (amount.gt(0)) {
       if (nftMintDate.lte(now)) {
-        return <SecondaryStakeButton onClick={onHarvest}>
-          <SecondaryStakeButtonText>Mint NFT</SecondaryStakeButtonText>
-        </SecondaryStakeButton>
+        return (
+          <SecondaryStakeButton onClick={onHarvest}>
+            <SecondaryStakeButtonText>Mint NFT</SecondaryStakeButtonText>
+          </SecondaryStakeButton>
+        )
       }
       if (unstakeAmount.isZero() || unstakeAmount.isNaN()) {
-        return <SecondaryStakeButton onClick={onHarvest}>
-          <SecondaryStakeButtonText>Harvest</SecondaryStakeButtonText>
-        </SecondaryStakeButton>
+        return (
+          <SecondaryStakeButton onClick={onHarvest}>
+            <SecondaryStakeButtonText>Harvest</SecondaryStakeButtonText>
+          </SecondaryStakeButton>
+        )
       }
       if (tokenWithdrawalDate.gt(now)) {
-        return <SecondaryStakeButton onClick={onUnstakeEarly}>
-          <SecondaryStakeButtonText>Unstake Early</SecondaryStakeButtonText>
-        </SecondaryStakeButton>
+        return (
+          <SecondaryStakeButton onClick={onUnstakeEarly}>
+            <SecondaryStakeButtonText>Unstake Early</SecondaryStakeButtonText>
+          </SecondaryStakeButton>
+        )
       }
     }
 
-    return <SecondaryStakeButton onClick={onUnstake}>
-      <SecondaryStakeButtonText>Unstake</SecondaryStakeButtonText>
-    </SecondaryStakeButton>
+    return (
+      <SecondaryStakeButton onClick={onUnstake}>
+        <SecondaryStakeButtonText>Unstake</SecondaryStakeButtonText>
+      </SecondaryStakeButton>
+    )
   }
 
-  return <>
-    <Separator />
-    <StakingContainer>
-      <Inputs>
-        <InputControl>
-          <BalanceText onClick={maxStakeAmount}>
-            Wallet Balance: <AmountText>{numeral(getFullDisplayBalance(zombieBalance)).format('(0.00 a)')} ZMBE</AmountText>
-          </BalanceText>
-          <StakingInput
-            onInput={changeStakeInput}
-            value={getBalanceNumber(stakeAmount)}
-            placeholder='Stake amount'
-            type='number'
-          />
-        </InputControl>
-        <InputControl>
-          <BalanceText onClick={maxUnstakeAmount}>
-            Your Staked: <AmountText>{numeral(getFullDisplayBalance(amount)).format('(0.00 a)')} ZMBE</AmountText>
-          </BalanceText>
-          <StakingInput
-            onInput={changeUnstakeInput}
-            value={getBalanceNumber(unstakeAmount)}
-            placeholder='Unstake amount'
-            type='number'
-          />
-        </InputControl>
-      </Inputs>
-      <Buttons>
-        <PrimaryStakeButton onClick={handleTx}>
-          <PrimaryStakeButtonText>{confirming ? steps[currentStep].sent : steps[currentStep].label}</PrimaryStakeButtonText>
-        </PrimaryStakeButton>
-        {withdrawButton()}
-      </Buttons>
-    </StakingContainer>
-    <ProgressBar spawningPool={spawningPool} />
-    <Separator />
-    <TableDetails spawningPool={spawningPool} />
-  </>
+  return (
+    <>
+      <Separator />
+      <StakingContainer>
+        <Inputs>
+          <InputControl>
+            <BalanceText onClick={maxStakeAmount}>
+              Wallet Balance:{' '}
+              <AmountText>{numeral(getFullDisplayBalance(zombieBalance)).format('(0.00 a)')} ZMBE</AmountText>
+            </BalanceText>
+            <StakingInput
+              onInput={changeStakeInput}
+              value={getBalanceNumber(stakeAmount)}
+              placeholder="Stake amount"
+              type="number"
+            />
+          </InputControl>
+          <InputControl>
+            <BalanceText onClick={maxUnstakeAmount}>
+              Your Staked: <AmountText>{numeral(getFullDisplayBalance(amount)).format('(0.00 a)')} ZMBE</AmountText>
+            </BalanceText>
+            <StakingInput
+              onInput={changeUnstakeInput}
+              value={getBalanceNumber(unstakeAmount)}
+              placeholder="Unstake amount"
+              type="number"
+            />
+          </InputControl>
+        </Inputs>
+        <Buttons>
+          <PrimaryStakeButton onClick={handleTx}>
+            <PrimaryStakeButtonText>
+              {confirming ? steps[currentStep].sent : steps[currentStep].label}
+            </PrimaryStakeButtonText>
+          </PrimaryStakeButton>
+          {withdrawButton()}
+        </Buttons>
+      </StakingContainer>
+      <ProgressBar spawningPool={spawningPool} />
+      <Separator />
+      <TableDetails spawningPool={spawningPool} />
+    </>
+  )
 }
 
 export default Bottom

@@ -1,6 +1,5 @@
 // Approve an address
 import { Contract } from 'web3-eth-contract'
-import { BigNumber } from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
 import { useCallback } from 'react'
 import { useAppDispatch } from '../state'
@@ -19,7 +18,6 @@ export const useConvertNft = (nftSwapperContract: Contract, nftConverterPid: num
       dispatch(fetchGravesUserDataAsync(account))
       return tx
     } catch (e) {
-      console.log(e)
       return false
     }
   }, [nftSwapperContract, nftConverterPid, tokenId, account, dispatch])

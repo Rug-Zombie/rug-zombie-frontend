@@ -75,54 +75,54 @@ const Pools: React.FC = () => {
   // This pool is passed explicitly to the cake vault
   // const cakePoolData = useMemo(() => openGraves.find((pool) => pool.sousId === 0), [openGraves])
   // const backgroundColor = "#101820"
-  return <div/>
-    // <>
-    // <PageHeader background={backgroundColor}>
-    //  <Flex justifyContent="space-between" flexDirection={['column', null, 'row']}>
-    //    <Flex flexDirection="column" mr={['8px', 0]}>
-    //      <Heading as="h1" size="xxl" color="secondary" mb="24px">
-    //        {t('Graves')}
-    //      </Heading>
-    //      <Heading size="md" color="text">
-    //        {t('Resurrect rugged tokens.')}
-    //      </Heading>
-    //      <Heading size="md" color="text">
-    //        {t('Stake them for NFT rewards.')}
-    //      </Heading>
-    //    </Flex>
-    //  </Flex>
-    // </PageHeader>
-    // <Page>
-    //  <PoolTabButtons
-    //    stakedOnly={stakedOnly}
-    //    setStakedOnly={setStakedOnly}
-    //    hasStakeInFinishedPools={hasStakeInFinishedPools}
-    //  />
-    //  <FlexLayout>
-    //    <Route exact path={`${path}`}>
-    //      <>
-    //        {openGraves.map(grave => {
-    //          console.log('account')
-    //          console.log(account)
-    //          return <GraveCard grave={grave} gid={0} account={account} />
-    //        })}
-    //      </>
-    //    </Route>
-    //    <Route path={`${path}/history`}>
-    //       /!* {orderBy(finishedPools, ['sortOrder']).map((pool) => ( *!/
-    //       /!* <GraveCard key={pool.sousId} pool={pool} account={account} /> *!/
-    //       /!* ) )} *!/
-    //    </Route>
-    //  </FlexLayout>
-    //  <Image
-    //    mx="auto"
-    //    mt="12px"
-    //    src="https://storage.googleapis.com/rug-zombie/running-zombie-1.png"
-    //    alt="zombie running"
-    //    width={207}
-    //    height={142}
-    //  />
-    // </Page>
+  return <div />
+  // <>
+  // <PageHeader background={backgroundColor}>
+  //  <Flex justifyContent="space-between" flexDirection={['column', null, 'row']}>
+  //    <Flex flexDirection="column" mr={['8px', 0]}>
+  //      <Heading as="h1" size="xxl" color="secondary" mb="24px">
+  //        {t('Graves')}
+  //      </Heading>
+  //      <Heading size="md" color="text">
+  //        {t('Resurrect rugged tokens.')}
+  //      </Heading>
+  //      <Heading size="md" color="text">
+  //        {t('Stake them for NFT rewards.')}
+  //      </Heading>
+  //    </Flex>
+  //  </Flex>
+  // </PageHeader>
+  // <Page>
+  //  <PoolTabButtons
+  //    stakedOnly={stakedOnly}
+  //    setStakedOnly={setStakedOnly}
+  //    hasStakeInFinishedPools={hasStakeInFinishedPools}
+  //  />
+  //  <FlexLayout>
+  //    <Route exact path={`${path}`}>
+  //      <>
+  //        {openGraves.map(grave => {
+  //          console.log('account')
+  //          console.log(account)
+  //          return <GraveCard grave={grave} gid={0} account={account} />
+  //        })}
+  //      </>
+  //    </Route>
+  //    <Route path={`${path}/history`}>
+  //       /!* {orderBy(finishedPools, ['sortOrder']).map((pool) => ( *!/
+  //       /!* <GraveCard key={pool.sousId} pool={pool} account={account} /> *!/
+  //       /!* ) )} *!/
+  //    </Route>
+  //  </FlexLayout>
+  //  <Image
+  //    mx="auto"
+  //    mt="12px"
+  //    src="https://storage.googleapis.com/rug-zombie/running-zombie-1.png"
+  //    alt="zombie running"
+  //    width={207}
+  //    height={142}
+  //  />
+  // </Page>
   // </>
 }
 

@@ -3,7 +3,7 @@ import React from 'react'
 import { Text } from '@catacombs-libs/uikit'
 import { useModal } from '@rug-zombie-libs/uikit'
 
-import { isMobile } from 'react-device-detect';
+import { isMobile } from 'react-device-detect'
 import Typewriter from 'typewriter-effect'
 import styled from 'styled-components'
 import Page from '../../../components/layout/Page'
@@ -28,11 +28,9 @@ interface EntryProps {
 const Entry: React.FC<EntryProps> = ({ setUnlocked }) => {
   const { t } = useTranslation()
 
-  const [onBurnZombie] = useModal(
-    <BurnZombieConfirmationModal  setUnlocked={setUnlocked}/>,
-  );
+  const [onBurnZombie] = useModal(<BurnZombieConfirmationModal setUnlocked={setUnlocked} />)
 
-  const [onWrongPassword] = useModal(<WrongPasswordModal/>);
+  const [onWrongPassword] = useModal(<WrongPasswordModal />)
 
   const Input = () => {
     const handleKeyDown = (event) => {
@@ -45,37 +43,37 @@ const Entry: React.FC<EntryProps> = ({ setUnlocked }) => {
       }
     }
     // eslint-disable-next-line jsx-a11y/no-autofocus
-    return <input type='password' className='password-input' onKeyDown={handleKeyDown} maxLength={8} autoFocus />
+    return <input type="password" className="password-input" onKeyDown={handleKeyDown} maxLength={8} autoFocus />
   }
   return (
     <>
       <Page>
-        <div className='parent-div'>
-          { 
-            isMobile ? <img src={CatacombsEntryBackgroundMobileSVG} alt='catacombs-rug-zombie' className='backgroundImageStyle' /> :
-            <img src={CatacombsEntryBackgroundDesktopSVG} alt='catacombs-rug-zombie' className='backgroundImageStyle' />
-          }
-          <div className='main-text'>
-            <Typewriter options={{ cursor: '' }}
-                        onInit={(typewriter) => {
-                          typewriter
-                            .pauseFor(150)
-                            .changeDelay(50)
-                            .typeString(
-                              '<p class="text-size">You found the black market.' +
-                              '<br><br>Clever humans have been hiding in the catacombs for years.' +
-                              '<br><br>Enter at your own risk.</p>',
-                            )
-                            .start()
-                        }}
+        <div className="parent-div">
+          {isMobile ? (
+            <img src={CatacombsEntryBackgroundMobileSVG} alt="catacombs-rug-zombie" className="backgroundImageStyle" />
+          ) : (
+            <img src={CatacombsEntryBackgroundDesktopSVG} alt="catacombs-rug-zombie" className="backgroundImageStyle" />
+          )}
+          <div className="main-text">
+            <Typewriter
+              options={{ cursor: '' }}
+              onInit={(typewriter) => {
+                typewriter
+                  .pauseFor(150)
+                  .changeDelay(50)
+                  .typeString(
+                    '<p class="text-size">You found the black market.' +
+                      '<br><br>Clever humans have been hiding in the catacombs for years.' +
+                      '<br><br>Enter at your own risk.</p>',
+                  )
+                  .start()
+              }}
             />
           </div>
-          <div className='enter-password'>
-            <StyledText>
-              {t('Enter Password : ')}
-            </StyledText>
+          <div className="enter-password">
+            <StyledText>{t('Enter Password : ')}</StyledText>
           </div>
-          <div className='password'>
+          <div className="password">
             <Input />
           </div>
         </div>

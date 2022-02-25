@@ -28,10 +28,10 @@ const StyledLink = styled(UiKitLink)`
 const PoolTabButtons = ({ setAuctions }) => {
   const { t } = useTranslation()
   const [index, setIndex] = useState(0)
-  const liveAuctions = auctions().filter(a => !a.isFinished)
+  const liveAuctions = auctions().filter((a) => !a.isFinished)
 
   const toggleButtonMenu = () => {
-    if(index === 0) {
+    if (index === 0) {
       setIndex(1)
       setAuctions(liveAuctions)
     } else {
@@ -40,19 +40,18 @@ const PoolTabButtons = ({ setAuctions }) => {
     }
   }
 
-
   return (
-    <Flex alignItems='center' justifyContent='center' mb='32px'>
-      <Flex alignItems='center' flexDirection={['column', null, 'row', null]}>
-        <ButtonMenu onItemClick={toggleButtonMenu} activeIndex={index} scale='sm'>
-          <ButtonMenuItem >
-            <Text color='secondary' bold fontSize='16px'>
+    <Flex alignItems="center" justifyContent="center" mb="32px">
+      <Flex alignItems="center" flexDirection={['column', null, 'row', null]}>
+        <ButtonMenu onItemClick={toggleButtonMenu} activeIndex={index} scale="sm">
+          <ButtonMenuItem>
+            <Text color="secondary" bold fontSize="16px">
               {t('All')}
             </Text>
           </ButtonMenuItem>
-          <NotificationDot >
+          <NotificationDot>
             <ButtonMenuItem>
-              <Text color='secondary' bold fontSize='16px'>
+              <Text color="secondary" bold fontSize="16px">
                 {t('Live')}
               </Text>
             </ButtonMenuItem>
@@ -63,13 +62,16 @@ const PoolTabButtons = ({ setAuctions }) => {
         {/*  <Text ml='8px'>{t('Staked only')}</Text> */}
         {/* </Flex> */}
       </Flex>
-      <Flex ml='24px' alignItems='center' justifyContent='flex-end'>
-        <StyledLink external href='https://rugzombie.medium.com/new-feature-alert-introducing-the-mausoleum-4867bb4bdcbb'>
-          <Button px={['14px', null, null, null, '20px']}  >
-            <ButtonText color='secondary' bold fontSize='16px'>
+      <Flex ml="24px" alignItems="center" justifyContent="flex-end">
+        <StyledLink
+          external
+          href="https://rugzombie.medium.com/new-feature-alert-introducing-the-mausoleum-4867bb4bdcbb"
+        >
+          <Button px={['14px', null, null, null, '20px']}>
+            <ButtonText color="secondary" bold fontSize="16px">
               {t('Learn More')}
             </ButtonText>
-            <HelpIcon color='secondary' ml={[null, null, null, 0, '6px']} />
+            <HelpIcon color="secondary" ml={[null, null, null, 0, '6px']} />
           </Button>
         </StyledLink>
       </Flex>
