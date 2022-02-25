@@ -9,7 +9,7 @@ import Page from '../../components/layout/Page'
 
 import { useAppDispatch } from '../../state'
 import { fetchNftUserDataAsync } from '../../state/nfts'
-import {useGetNftById, useGetNftTotalSupply} from '../../state/hooks'
+import {useGetNftById} from '../../state/hooks'
 import './Nfts.styles.css'
 import {getAddress} from "../../utils/addressHelpers";
 import {formatAddress} from "../../utils";
@@ -275,6 +275,7 @@ const Nfts: React.FC = () => {
                 <Variants>{nft.userInfo.ownedIds.map((value,index) =>
                     <Variant>{nft.type==='image' ? <Small src={nft.path}/> : <VidDiv><SmallVid path={nft.path}/></VidDiv>}<HighlightSmall>{value}</HighlightSmall></Variant> )}
                 </Variants>
+
               </Row>
             </TabRight><br/>
             <TabRight>
