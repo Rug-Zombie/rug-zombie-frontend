@@ -31,14 +31,14 @@ const CustomToast = styled.div<{ border: string }>`
   height: 100%;
 `
 
-const Title = styled.text`
+const Title = styled.p`
   text-align: left;
   font: normal normal normal 20px/36px Poppins;
   letter-spacing: 0px;
   font-weight: bolder;
 `
 
-const SubTitle = styled.text`
+const SubTitle = styled.p`
   text-align: left;
   font: normal normal normal 16px/36px Poppins;
   letter-spacing: 0px;

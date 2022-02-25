@@ -32,7 +32,7 @@ const Card = styled.div`
   box-shadow: 0 20px 20px -20px #000000;
 `
 
-const CardTitle = styled.text`
+const CardTitle = styled.p`
   text-align: left;
   font: normal normal normal 20px/36px Poppins;
   letter-spacing: 0px;
@@ -47,14 +47,14 @@ const Row = styled.div`
   padding-right: 20px;
 `
 
-const SubTitle = styled.text`
+const SubTitle = styled.p`
   text-align: left;
   font: normal normal normal 16px/36px Poppins;
   letter-spacing: 0px;
   color: #6b7682;
 `
 
-const Value = styled.text`
+const Value = styled.p`
   font: normal normal normal 24px/36px Poppins;
   letter-spacing: 0px;
   color: #ffffff;
@@ -71,7 +71,7 @@ const ClaimButton = styled.button`
   }
 `
 
-const ButtonText = styled.text`
+const ButtonText = styled.p`
   text-align: center;
   font: normal normal medium 16px/25px Poppins;
   letter-spacing: 0px;

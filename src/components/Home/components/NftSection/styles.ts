@@ -52,7 +52,7 @@ export const NftCardSubText = styled.div`
   color: #ffffff;
 `
 
-export const NftCardText = styled.text`
+export const NftCardText = styled.p`
   text-align: left;
   font: normal normal normal 16px/30px Poppins;
   color: ${({ color }) => color || '#6B7682'};
