@@ -14,7 +14,17 @@ const StyledVideo = styled.video`
   box-shadow: 5px 15px 20px 0px #000000;
 `
 
-const PreviewVideo: React.FC<VideoProps> = ({ path }) => {
+const StyledSmallVideo = styled.video`
+  max-width: 100px;
+  min-width: 70px;
+  width: 100%;
+  padding-left: 4px;
+  padding-right: 4px;
+  object-fit: cover;
+  border-radius: 16px;
+`
+
+export const PreviewVideo: React.FC<VideoProps> = ({ path }) => {
   return (
     <StyledVideo autoPlay controls={false} loop muted>
       <source src={path} type='video/webm' />
@@ -22,4 +32,10 @@ const PreviewVideo: React.FC<VideoProps> = ({ path }) => {
   )
 }
 
-export default PreviewVideo
+export const SmallPreviewVideo: React.FC<VideoProps> = ({ path }) => {
+    return (
+        <StyledSmallVideo autoPlay controls={false} loop muted>
+            <source src={path} type='video/webm' />
+        </StyledSmallVideo>
+    )
+}
