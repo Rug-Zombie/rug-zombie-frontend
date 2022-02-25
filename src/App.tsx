@@ -32,6 +32,7 @@ import SwiperProvider from './views/Mausoleum/context/SwiperProvider'
 import SharkPools from './views/SharkPools'
 import { useAppDispatch } from './state'
 import { fetchNftPublicDataAsync } from './state/nfts'
+import Nfts from './views/Nfts'
 import BurnGraves from './views/BurnGraves'
 
 // Route-based code splitting
@@ -146,6 +147,14 @@ const App: React.FC = () => {
               <TopMenu />
               <AppContainer>
                 <Graveyard />
+              </AppContainer>
+            </>
+          </Route>
+          <Route exact path={routes.NFTS}>
+            <>
+              <TopMenu />
+              <AppContainer>
+                <Nfts />
               </AppContainer>
             </>
           </Route>
