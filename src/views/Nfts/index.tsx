@@ -16,11 +16,6 @@ import {formatAddress} from "../../utils";
 import {PreviewVideo,SmallPreviewVideo} from "../../components/Video/NftVideo";
 
 
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-`
 
 const Image = styled.img`
   margin-top: 20px;
@@ -103,10 +98,10 @@ const HighlightSmall = styled.div`
 
 const Left = styled.div`
   float:left;
-  margin-right: 20px;
-  margin-left: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
   max-width: 520px;
-  min-width: 480px;
+  min-width: 380px;
   @media (max-width: 1083px) {
     display: flex;
     flex-direction: column;
@@ -118,8 +113,8 @@ const Left = styled.div`
 
 const Right = styled.div`
   float: right;
-  margin-right: 20px;
-  margin-left: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
   max-width: 690px;
   min-width: 400px;
   @media (max-width: 1083px) {
@@ -247,7 +242,6 @@ const Nfts: React.FC = () => {
 
 
   return (
-    <Container>
       <Page>
           <Left>
             {nft.type==='image' ? <Image src={nft.path}/> : <VidDiv><PreviewVid path={nft.path}/></VidDiv>}
@@ -296,7 +290,6 @@ const Nfts: React.FC = () => {
             </TabRight>
           </Right>
       </Page>
-    </Container>
   )
 
 }
