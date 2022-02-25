@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import PreviewVideo from 'components/Video/PreviewVideo'
+import {useHistory} from "react-router";
 import { useGetNftById } from '../../../../../state/nfts/hooks'
 
 const Container = styled.div`
@@ -91,8 +92,9 @@ interface CollectionCardProps {
 
 const NftCard: React.FC<CollectionCardProps> = ({ id, showOwned, showTotalSupply }) => {
   const { name, path, totalSupply, rarity, type, userInfo: { ownedIds } } = useGetNftById(id)
+  const history = useHistory()
   return <Container>
-    <Card>
+    <Card onClick={()=>{history.push(`nfts/${id}`)}}>
       <PreviewDiv>
         {type === 'image'
           ? <PreviewImage src={path} alt={`${name} NFT`} />
