@@ -2,10 +2,9 @@ import React, { createContext, ReactNode, useCallback, useState } from 'react'
 import { kebabCase } from 'lodash'
 import { ToastContextApi } from './types'
 import { Toast } from '../../components/Toast'
-import {types} from '../../components/Toast/types'
+import { types } from '../../components/Toast/types'
 
 export const ToastsContext = createContext<ToastContextApi>(undefined)
-
 
 export const ToastsProvider: React.FC = ({ children }) => {
   const [toasts, setToasts] = useState<ToastContextApi['toasts']>([])
@@ -56,7 +55,9 @@ export const ToastsProvider: React.FC = ({ children }) => {
   }
 
   return (
-    <ToastsContext.Provider value={{ toasts, clear, remove, toastError, toastInfo, toastDefault, toastGraves, toastTombs, toastWarning }}>
+    <ToastsContext.Provider
+      value={{ toasts, clear, remove, toastError, toastInfo, toastDefault, toastGraves, toastTombs, toastWarning }}
+    >
       {children}
     </ToastsContext.Provider>
   )

@@ -1,11 +1,11 @@
 // import { useTranslation } from 'contexts/Localization'
 import React from 'react'
 import styled from 'styled-components'
-import {useMatchBreakpoints} from "@rug-zombie-libs/uikit";
-import {Flex} from "@catacombs-libs/uikit";
+import { useMatchBreakpoints } from '@rug-zombie-libs/uikit'
+import { Flex } from '@catacombs-libs/uikit'
 import Menu from '../../../../components/Catacombs/Menu'
 import Page from '../../../../components/layout/Page'
-import RugRollCard from "./components/RugRollCard";
+import RugRollCard from './components/RugRollCard'
 import CatacombsBackgroundDesktopSVG from '../../../../images/CatacombsMain-1920x1080px.svg'
 import CatacombsBackgroundMobileSVG from '../../../../images/CatacombsMain-414x720px.svg'
 
@@ -39,12 +39,14 @@ const RugRoll: React.FC = () => {
   return (
     <Menu>
       <StyledDiv>
-        {isDesktop ? <img src={CatacombsBackgroundDesktopSVG} alt='catacombs-rug-zombie' /> :
-          <img src={CatacombsBackgroundMobileSVG} alt='catacombs-rug-zombie' />
-        }
-        <Flex justifyContent='center'>
+        {isDesktop ? (
+          <img src={CatacombsBackgroundDesktopSVG} alt="catacombs-rug-zombie" />
+        ) : (
+          <img src={CatacombsBackgroundMobileSVG} alt="catacombs-rug-zombie" />
+        )}
+        <Flex justifyContent="center">
           <Container>
-            <Page >
+            <Page>
               <RugRollCard />
             </Page>
           </Container>

@@ -42,7 +42,7 @@ const TransferNftModal: React.FC<TransferNftModalProps> = ({ id, tokenId, onDism
   const [value, setValue] = useState('')
   const [error, setError] = useState(null)
   const { account } = useWeb3React()
-  const { address, name} = useGetNftById(id)
+  const { address, name } = useGetNftById(id)
   const contract = useERC721(getAddress(address))
   const { toastDefault } = useToast()
 
@@ -53,8 +53,10 @@ const TransferNftModal: React.FC<TransferNftModalProps> = ({ id, tokenId, onDism
       if (!isValidAddress) {
         setError('Please enter a valid wallet address')
       } else {
-        contract.methods.transferFrom(account, value, tokenId).send({ from: account })
-          .then(res => {
+        contract.methods
+          .transferFrom(account, value, tokenId)
+          .send({ from: account })
+          .then((res) => {
             onDismiss()
             toastDefault('NFT successfully transferred!', <ToastDescriptionWithTx txHash={res.transactionHash} />)
           })

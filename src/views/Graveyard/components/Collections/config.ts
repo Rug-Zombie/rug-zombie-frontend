@@ -1,7 +1,7 @@
 interface Collection {
-  title: string;
-  description: string;
-  nftId: number;
+  title: string
+  description: string
+  nftId: number
 }
 
 const config: Collection[] = [

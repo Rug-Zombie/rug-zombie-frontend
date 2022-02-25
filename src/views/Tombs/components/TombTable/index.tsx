@@ -4,15 +4,14 @@ import styled from 'styled-components'
 import Top from './components/Top'
 import Bottom from './components/Bottom'
 import { Tomb } from '../../../../state/types'
-import { getId } from '../../../../utils'
 
 const TombCard = styled.div<{ open: boolean }>`
   width: 100%;
   min-width: 260px;
   min-height: 130px;
-  background-color: #151E21;
+  background-color: #151e21;
   border-radius: 10px;
-  border: ${props => (props.open ? '2px solid #4B7BDC' : '2px solid #151E21')};
+  border: ${(props) => (props.open ? '2px solid #4B7BDC' : '2px solid #151E21')};
   padding: 20px;
   margin: 0 0 0 0;
   display: flex;
@@ -21,7 +20,7 @@ const TombCard = styled.div<{ open: boolean }>`
   @media (min-width: 1280px) {
     min-width: 668px;
   }
-`;
+`
 
 const Shadow = styled.div`
   width: 100%;
@@ -45,13 +44,12 @@ const TombTable: React.FC<TombProps> = ({ tomb }) => {
 
   return (
     <>
-    <TombCard open={open}>
-      <Top tomb={tomb} open={open} setOpen={setOpen} />
-      {open ? <Bottom tomb={tomb}/> : null}
-    </TombCard>
-      <Shadow/>
+      <TombCard open={open}>
+        <Top tomb={tomb} open={open} setOpen={setOpen} />
+        {open ? <Bottom tomb={tomb} /> : null}
+      </TombCard>
+      <Shadow />
     </>
-
   )
 }
 

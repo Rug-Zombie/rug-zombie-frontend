@@ -3,10 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import tombsConfig from 'config/constants/tombs'
 import { BigNumber } from 'bignumber.js'
 import fetchTombs from './fetchTombs'
-import {
-  fetchTombUserEarnings,
-  fetchTombUserInfo, fetchTombUserTokenInfo,
-} from './fetchTombUser'
+import { fetchTombUserEarnings, fetchTombUserInfo, fetchTombUserTokenInfo } from './fetchTombUser'
 import { Tomb, TombsState } from '../types'
 import { BIG_ZERO } from '../../utils/bigNumber'
 import { getId } from '../../utils'
@@ -22,7 +19,7 @@ const noAccountTombConfig: Tomb[] = tombsConfig.map((tomb) => ({
     withdrawCooldown: BIG_ZERO,
     nftMintTime: BIG_ZERO,
     mintingFee: BIG_ZERO,
-    lpPriceBnb: BIG_ZERO
+    lpPriceBnb: BIG_ZERO,
   },
   userInfo: {
     tokenWithdrawalDate: BIG_ZERO,
@@ -32,7 +29,7 @@ const noAccountTombConfig: Tomb[] = tombsConfig.map((tomb) => ({
     lpBalance: BIG_ZERO,
     lpAllowance: BIG_ZERO,
     randomNumber: BIG_ZERO,
-    isMinting: false
+    isMinting: false,
   },
 }))
 
@@ -73,8 +70,8 @@ export const fetchTombsPublicDataAsync = () => async (dispatch) => {
       ...tomb,
       poolInfo: {
         ...tomb.poolInfo,
-        ...tombOverlays[index].poolInfo
-      }
+        ...tombOverlays[index].poolInfo,
+      },
     }
   })
 

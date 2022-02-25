@@ -4,7 +4,6 @@ import multicall from 'utils/multicall'
 import { getTombOverlayAddress } from 'utils/addressHelpers'
 import { TombConfig } from 'config/constants/types'
 import { getId } from '../../utils'
-import { tombOverlayById } from '../../redux/get'
 
 const fetchTombOverlays = async (tombsToFetch: TombConfig[]) => {
   const data = await Promise.all(
@@ -22,10 +21,7 @@ const fetchTombOverlays = async (tombsToFetch: TombConfig[]) => {
         },
       ]
 
-      const [
-        info,
-        fee
-      ] = await multicall(tombOverlay, calls)
+      const [info, fee] = await multicall(tombOverlay, calls)
 
       return {
         ...tombConfig,
@@ -33,7 +29,7 @@ const fetchTombOverlays = async (tombsToFetch: TombConfig[]) => {
           mintingIsEnabled: info.isEnabled,
           nftMintTime: new BigNumber(info.mintingTime._hex),
           mintingFee: new BigNumber(fee),
-        }
+        },
       }
     }),
   )

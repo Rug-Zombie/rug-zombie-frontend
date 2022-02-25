@@ -27,7 +27,7 @@ const TableCards = styled(BaseLayout)`
   }
 `
 const StakedGraves: React.FC<{ zombieStaked }> = ({ zombieStaked }) => {
-  const stakedGraves = graves().filter(g => !g.userInfo.amount.isZero())
+  const stakedGraves = graves().filter((g) => !g.userInfo.amount.isZero())
   const { isLg, isXl } = useMatchBreakpoints()
   const isDesktop = isLg || isXl
 
@@ -48,63 +48,70 @@ const StakedGraves: React.FC<{ zombieStaked }> = ({ zombieStaked }) => {
     return total
   }
 
-
-    const drFrankenstein = useDrFrankenstein();
-    const { toastDefault } = useToast()
-    const { t } = useTranslation()
-    const handleHarvest = () => {
-
-      stakedGraves.forEach((stakedGrave) => {
-        if (getId(stakedGrave.pid) === 0) {
-          drFrankenstein.methods.leaveStaking(0)
-          .send({from: account()}).then(() => {
+  const drFrankenstein = useDrFrankenstein()
+  const { toastDefault } = useToast()
+  const { t } = useTranslation()
+  const handleHarvest = () => {
+    stakedGraves.forEach((stakedGrave) => {
+      if (getId(stakedGrave.pid) === 0) {
+        drFrankenstein.methods
+          .leaveStaking(0)
+          .send({ from: account() })
+          .then(() => {
             toastDefault(t('Claimed ZMBE'))
-          });
-        } else {
-          drFrankenstein.methods.withdraw(getId(stakedGrave.pid), 0)
-          .send({from: account()}).then(() => {
+          })
+      } else {
+        drFrankenstein.methods
+          .withdraw(getId(stakedGrave.pid), 0)
+          .send({ from: account() })
+          .then(() => {
             toastDefault(t('Claimed ZMBE'))
-          });
-        }
-      })
+          })
       }
-
+    })
+  }
 
   const buttonStyle = isDesktop ? {} : { fontSize: '10px' }
   return (
     <TableCards>
-      <div className='frank-card'>
-        <Flex justifyContent='center'>
-          <td className='td-width-25'>
+      <div className="frank-card">
+        <Flex justifyContent="center">
+          <td className="td-width-25">
             <DisplayFlex>
-              <div className='small-text'>
-                <span className='green-color'>Zombie </span>
-                <span className='white-color'>STAKED</span>
+              <div className="small-text">
+                <span className="green-color">Zombie </span>
+                <span className="white-color">STAKED</span>
               </div>
-              <span className='total-earned'>{getFullDisplayBalance(zombieStaked, 18, 2)}</span>
+              <span className="total-earned">{getFullDisplayBalance(zombieStaked, 18, 2)}</span>
             </DisplayFlex>
           </td>
-          <td className='td-width-25'>
+          <td className="td-width-25">
             <DisplayFlex>
-              <div className='small-text'>
-                <span className='green-color'>Zombie </span>
-                <span className='white-color'>EARNED</span>
+              <div className="small-text">
+                <span className="green-color">Zombie </span>
+                <span className="white-color">EARNED</span>
               </div>
-              <span className='total-earned text-shadow'>{getFullDisplayBalance(zombieEarned(), 18, 2)}</span>
+              <span className="total-earned text-shadow">{getFullDisplayBalance(zombieEarned(), 18, 2)}</span>
             </DisplayFlex>
           </td>
-          <td className='td-width-25'>
+          <td className="td-width-25">
             <DisplayFlex>
-              <div className='small-text'>
-                <span className='green-color'>NFTs </span>
-                <span className='white-color'>READY</span>
+              <div className="small-text">
+                <span className="green-color">NFTs </span>
+                <span className="white-color">READY</span>
               </div>
-              <span className='total-earned'>{nftsReady()}</span>
+              <span className="total-earned">{nftsReady()}</span>
             </DisplayFlex>
           </td>
-          <td className='td-width-17'>
-            <button onClick={handleHarvest} className={isDesktop ? 'btn w-auto harvest' : 'btn w-100 harvest'}
-                    style={buttonStyle} type='button'><span>Harvest All ({stakedGraves.length})</span></button>
+          <td className="td-width-17">
+            <button
+              onClick={handleHarvest}
+              className={isDesktop ? 'btn w-auto harvest' : 'btn w-100 harvest'}
+              style={buttonStyle}
+              type="button"
+            >
+              <span>Harvest All ({stakedGraves.length})</span>
+            </button>
           </td>
         </Flex>
       </div>

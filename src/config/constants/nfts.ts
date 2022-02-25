@@ -30,7 +30,6 @@ const nfts: Nft[] = [
     address: {
       56: '0x864661Cd1FDedf6Bc249beB8B76CeaD629B48122',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'images/rugZombie/yPandaCommon.jpeg',
@@ -42,11 +41,11 @@ const nfts: Nft[] = [
     id: 2,
     name: 'DragonFarm Finance Common',
     symbol: 'DRAGON-COMMON',
-    description: 'My armor is like tenfold shields, my teeth are swords, my claws spears, the shock of my tail a thunderbolt, my wings a hurricane, and my breath death!',
+    description:
+      'My armor is like tenfold shields, my teeth are swords, my claws spears, the shock of my tail a thunderbolt, my wings a hurricane, and my breath death!',
     address: {
       56: '0x983608174E9ae08D938433119aD5C4b1f8B29A03',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'images/rugZombie/CommonDragonFarmFinance.webm',
@@ -58,11 +57,10 @@ const nfts: Nft[] = [
     id: 3,
     name: 'Fairmoon Common',
     symbol: 'FAIRMOON-COMMON',
-    description: 'It\'s fairly common.',
+    description: "It's fairly common.",
     address: {
       56: '0x47367847B67b5D4fe905d18D2Cc4e0D149008C41',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'images/rugZombie/FairmoonCommon.webm',
@@ -78,7 +76,6 @@ const nfts: Nft[] = [
     address: {
       56: '0x0b0dEa27fD22009A8ee2d0222025Eb9a81a9B26E',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'images/rugZombie/FairmoonUncommon.webm',
@@ -99,17 +96,16 @@ const nfts: Nft[] = [
     path: '/images/rugZombie/Patient Zero.jpg',
     type: 'image',
     rarity: 'Biblical',
-    userInfo: { ...DEFAULT_USER_INFO }
+    userInfo: { ...DEFAULT_USER_INFO },
   },
   {
     id: 6,
     name: 'Basic Zombie',
     symbol: 'BASIC-ZMBE',
-    description: 'This grave\'s multiplier is suspiciously low, what could frankenstein be planning.',
+    description: "This grave's multiplier is suspiciously low, what could frankenstein be planning.",
     address: {
       56: '0x6209E17d98ba2089571476940751802AAc4249e8',
       97: '0xe06DdB8c0cC6c0CB35e252f9c333dCa7b0362Dc4',
-
     },
     totalSupply: BIG_ZERO,
     path: 'images/rugZombie/BasicZombie.gif',
@@ -155,7 +151,6 @@ const nfts: Nft[] = [
     address: {
       56: '0xeC1CC772F2ad80D8341351a532303d986B41D5e4',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'images/rugZombie/Zombie100.gif',
@@ -167,11 +162,10 @@ const nfts: Nft[] = [
     id: 10,
     name: 'Raremoon',
     symbol: 'RAREMOON',
-    description: 'Fair moon risin\' in a sky of black dust.',
+    description: "Fair moon risin' in a sky of black dust.",
     address: {
       56: '0x6195E792F558A2BEA35f54bA8FF9897445867951',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'images/rugZombie/Raremoon.jpeg',
@@ -187,7 +181,6 @@ const nfts: Nft[] = [
     address: {
       56: '0x52ECFee39530A35696F6633Cba0e957657a66357',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'images/rugZombie/My Name Is MERL.png',
@@ -199,11 +192,10 @@ const nfts: Nft[] = [
     id: 12,
     name: 'Chompers',
     symbol: 'CHOMP',
-    description: 'Live every week like it\'s shark week.',
+    description: "Live every week like it's shark week.",
     address: {
       56: '0x37E178be665fE4bFD9dAd0F537B9f3E60a05Ff9A',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'images/rugZombie/Chompers.webm',
@@ -219,7 +211,6 @@ const nfts: Nft[] = [
     address: {
       56: '0x09853d458bfcD6690eB626302ca2A79ae98933F8',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'images/rugZombie/DeadDollar.png',
@@ -235,7 +226,6 @@ const nfts: Nft[] = [
     address: {
       56: '0xd39c4280b080d33352d79c08d763570d7d7e62bb',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'images/rugZombie/The Rad Chad.png',
@@ -247,11 +237,10 @@ const nfts: Nft[] = [
     id: 15,
     name: 'Zombiden',
     symbol: 'Z-BIDEN',
-    description: 'C\'mon man.',
+    description: "C'mon man.",
     address: {
       56: '0x1050DC60784117fcc4F995Ca6980a3beE2765564',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://storage.googleapis.com/rug-zombie/RUGBIDEN.webm',
@@ -267,7 +256,6 @@ const nfts: Nft[] = [
     address: {
       56: '0xD0AA831AcC0EE1d3b7aAA209Ab44eA680074C2Ed',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'images/rugZombie/Zomburger.jpeg',
@@ -283,7 +271,6 @@ const nfts: Nft[] = [
     address: {
       56: '0xa8740132360f5c1C487259066ddb5C5c4292def2',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'images/rugZombie/Silverback.webm',
@@ -299,13 +286,12 @@ const nfts: Nft[] = [
     address: {
       56: '0xc4Ba6d56C162efBFA881DAd69AAcC9263A352C8A',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://storage.googleapis.com/rug-zombie/PatientZeroBeta.png',
     type: 'image',
     rarity: 'Biblical',
-    userInfo: { ...DEFAULT_USER_INFO }
+    userInfo: { ...DEFAULT_USER_INFO },
   },
   {
     id: 66,
@@ -321,7 +307,7 @@ const nfts: Nft[] = [
     type: 'image',
     rarity: 'Biblical',
     userInfo: { ...DEFAULT_USER_INFO },
-    artist: artists.jussjoshinduh
+    artist: artists.jussjoshinduh,
   },
   {
     id: 19,
@@ -331,7 +317,6 @@ const nfts: Nft[] = [
     address: {
       56: '0xABef28a6686A75c24c79fD95d31E7bD9828Ab1B8',
       97: '0x996540168b5981A5a249e44BA4347fd099a6d1e7',
-
     },
     totalSupply: BIG_ZERO,
     path: 'images/rugZombie/Zombie Multiplier.png',
@@ -347,7 +332,6 @@ const nfts: Nft[] = [
     address: {
       56: '0xce428a085298e89034195c776cc8a5904093a532',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://storage.googleapis.com/rug-zombie/Main%20Street.png',
@@ -359,11 +343,11 @@ const nfts: Nft[] = [
     id: 21,
     name: 'Electric Zombie',
     symbol: 'ELECTRIC',
-    description: 'There was no help, no help from you. Sound of the drums, beating in my heart, the thunder of guns tore me apart.',
+    description:
+      'There was no help, no help from you. Sound of the drums, beating in my heart, the thunder of guns tore me apart.',
     address: {
       56: '0x61ea827873Ee1fAcD5c6Cc4D86c5477192AD7E34',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'images/rugZombie/Electric Zombie.png',
@@ -379,7 +363,6 @@ const nfts: Nft[] = [
     address: {
       56: '0x84890D06cD06778CfE7206A8c72b51551Fe26DF3',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://storage.googleapis.com/rug-zombie/Young%20Fool.jpeg',
@@ -391,11 +374,11 @@ const nfts: Nft[] = [
     id: 23,
     name: 'Rugian Shield',
     symbol: 'SHIELD',
-    description: '"The twilight there holds a serene beauty... you have seen it yourself as sun sets on this world. Bathed in the light, all the people were pure and gentle."',
+    description:
+      '"The twilight there holds a serene beauty... you have seen it yourself as sun sets on this world. Bathed in the light, all the people were pure and gentle."',
     address: {
       56: '0xeD84e84F95170bcdDCE92aD44e1E93ACe511Bb1d',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://storage.googleapis.com/rug-zombie/Rugian%20Shield.png',
@@ -411,7 +394,6 @@ const nfts: Nft[] = [
     address: {
       56: '0xd10A49fb53cFCc3b9C2c27aB314BCC8dB2A144A3',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://storage.googleapis.com/rug-zombie/GlitchLink.webm',
@@ -421,16 +403,15 @@ const nfts: Nft[] = [
   },
   {
     id: 25,
-    name: 'Leonhard Euler\'s Day Off',
+    name: "Leonhard Euler's Day Off",
     symbol: 'EULER',
     description: 'Now I will have less distraction.',
     address: {
       56: '0x58D739aF3aBBb8d34A2D9068dCC60a95D172f80c',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
-    path: 'images/rugZombie/Leonhard Euler\'s Day Off.gif',
+    path: "images/rugZombie/Leonhard Euler's Day Off.gif",
     type: 'image',
     rarity: 'Legendary',
     userInfo: { ...DEFAULT_USER_INFO },
@@ -443,7 +424,6 @@ const nfts: Nft[] = [
     address: {
       56: '0x1443f5Cb7F3128a9c09289dD48B41d200e0BE590',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://storage.googleapis.com/rug-zombie/ApeSwap-min.png',
@@ -459,7 +439,6 @@ const nfts: Nft[] = [
     address: {
       56: '0xe10F32986c97F9c74bD604E081Db114Ca17D3B5a',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/QmaTXD2A7dfTaMhGzDU9ubFwVS79GF9EPMRFkGc6G9XEHf',
@@ -475,7 +454,6 @@ const nfts: Nft[] = [
     address: {
       56: '0xe72CfFDEFfd85f2a2b83B58fDBF3cCAba578599a',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/QmXcs1Bpp3d16pF6HEKGmo4WTj8WU7YyaGi9b6F71StvDF',
@@ -491,7 +469,6 @@ const nfts: Nft[] = [
     address: {
       56: '0x72762C0D0812F157b59CecF0eeC6b1B15d175b97',
       97: '0x71332418219A3529e317806F4E9Ee0B5efe5C30d',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/Qmdi7wTt8iF62ay8foD7nqP5F7qSB9YGaYgY3NL1URA5Cw',
@@ -507,7 +484,6 @@ const nfts: Nft[] = [
     address: {
       56: '0xcf9ce4bb89a7848015b1b281427694d417a0ce2a',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/QmcvagniUfh9k8Ks42pJPnDicHBGSkFgLB6dcUbJKnTB4p',
@@ -523,7 +499,6 @@ const nfts: Nft[] = [
     address: {
       56: '0xB48b4aAC280C2a89b58272f942c46C66C1b42e20',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/QmeRBJF6shwm23FrvCQ3SU69wWFcN3kJXNqseTxCyvi3LN',
@@ -535,11 +510,11 @@ const nfts: Nft[] = [
     id: 32,
     name: 'The Killmonger',
     symbol: 'KILLMONGER',
-    description: 'Bury me in the ocean, with my ancestors that jumped from the ships, because they knew death was better than bondage',
+    description:
+      'Bury me in the ocean, with my ancestors that jumped from the ships, because they knew death was better than bondage',
     address: {
       56: '0x33566cd376B81975f23c74Fe0105cf198342Ac74',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'images/rugZombie/The Killmonger min.jpeg',
@@ -555,7 +530,6 @@ const nfts: Nft[] = [
     address: {
       56: '0xe6BCC4522FbBC2B6B064b3614D3a8d578aB077A4',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://storage.googleapis.com/rug-zombie/Zombi_Monkey-min.jpg',
@@ -571,7 +545,6 @@ const nfts: Nft[] = [
     address: {
       56: '0xa6D1442807316e163e7fc739281e3e1b93CF0960',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/QmVGjzRvf2WD5JKjh5wNVjVtimPv9R2mzeuYUNin2cFsc7',
@@ -587,7 +560,6 @@ const nfts: Nft[] = [
     address: {
       56: '0x835a932909c97bb68160be4547bc196abb73475a',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/QmafkchvcXFDdMkdJzQFjWaXcZQyGfe4F8p35X4TQVVGH3',
@@ -603,7 +575,6 @@ const nfts: Nft[] = [
     address: {
       56: '0xA626c9CE2FcCAeD9C604Ebd38C4545c153D051E5',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/QmYvobX57rSxJE9LC2tgQhWKKirZQRmnfTHFy12tR8SQba',
@@ -619,7 +590,6 @@ const nfts: Nft[] = [
     address: {
       56: '0x0Fa3AbBD69226164b9960ed0AfE4B7224ACc0eCc',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/QmSwn2nVZ7onSrh59LTtiC4o44Qbzzdk5eQFJkPB6wxbWw',
@@ -631,11 +601,10 @@ const nfts: Nft[] = [
     id: 38,
     name: 'Zombie Trader Common',
     symbol: 'TRADER-COMMON',
-    description: 'Price is what you pay. Value is what you get. Risk comes from not knowing what you\'re doing.',
+    description: "Price is what you pay. Value is what you get. Risk comes from not knowing what you're doing.",
     address: {
       56: '0x9E926ba265AaE57Cf50193f6984E7e44A2763E4a',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/QmPiLdr6ZRieLFLYNRA2ch1PUr9aDqw7QAm832VZ9Texyj',
@@ -651,7 +620,6 @@ const nfts: Nft[] = [
     address: {
       56: '0xADEbC6fe47Baf315bfbD66F8Ce515fBc78Bf42EB',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/QmQnj8i4k2kwoboNN2TMoJ5ugH1Mxav4r8zAsz6PmXvP7P',
@@ -663,11 +631,10 @@ const nfts: Nft[] = [
     id: 40,
     name: 'Trust Us',
     symbol: 'TRUST',
-    description: 'Or don\'t, we will just zombie on.',
+    description: "Or don't, we will just zombie on.",
     address: {
       56: '0xaCA0503F854fF89a7FFA75CE139fdaEa3DccD21B',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://storage.googleapis.com/rug-zombie/Trust%20Us.jpeg',
@@ -683,7 +650,6 @@ const nfts: Nft[] = [
     address: {
       56: '0x9609Ee9f17987587083279e60ca5e86c30FF28A2',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/Qmet1ztQoPXekbc8AK3VkxJK62CAQJC35weUKM6iz4Mn8s',
@@ -695,11 +661,10 @@ const nfts: Nft[] = [
     id: 42,
     name: 'Fluffy',
     symbol: 'FLUFFY',
-    description: 'C\'est simple comme bonjour',
+    description: "C'est simple comme bonjour",
     address: {
       56: '0x988EE236F4c3E0244e7785F2a41FE8533AE1A7f3',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/QmdRJp1tPFNdg9WP1V1A3KTGYaF74zs6vT5yodhsn9FGcn',
@@ -714,13 +679,13 @@ const nfts: Nft[] = [
     description: 'They lurk down there.',
     address: {
       56: '0xbAcDdD813c4C786eFB43d899C9b5d9E7F43e5A20',
-      97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295'
+      97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
     },
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/QmbCfEW45ZFBXs1NgRHYyMXd2u9bUAeL8poHybZ1kP5oLY',
     type: 'image',
     rarity: 'Mythic',
-    userInfo: { ...DEFAULT_USER_INFO }
+    userInfo: { ...DEFAULT_USER_INFO },
   },
   {
     id: 44,
@@ -730,7 +695,6 @@ const nfts: Nft[] = [
     address: {
       56: '0x4CD0F32bf663EF1d8C016E393243dA753Db19CF3',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/QmTKuQUr7t4rTmFCSm2kFD8azSK24ysUDWDKBDtHXnkhmT',
@@ -747,7 +711,6 @@ const nfts: Nft[] = [
     address: {
       56: '0xb256Bf0E888c34FE67a4169f0A5f80AC9F9e2f6D',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
-
     },
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/QmcDG9auXhMRJdF9eaSMhrmcWeJe6kHrDAbYvDrVTYPaub',
@@ -776,7 +739,7 @@ const nfts: Nft[] = [
     id: 47,
     name: 'Ocean',
     symbol: 'OCEAN',
-    description: 'It\'s the shark\'s house.',
+    description: "It's the shark's house.",
     address: {
       56: '0x8c1F3947881662C7F1753A3432891227ffab92B1',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
@@ -872,7 +835,7 @@ const nfts: Nft[] = [
     id: 53,
     name: 'Sergeant Ser Silverback',
     symbol: 'SERGEANT',
-    description: 'Tonight, we\'ll see the good and evil inside everyone.',
+    description: "Tonight, we'll see the good and evil inside everyone.",
     address: {
       56: '0xE1D5868ce6B10b0E213A66a360F59c0298218603',
       97: '0x701855c54F7084D494DA18157bD164d3AB32a0a0',
@@ -952,7 +915,7 @@ const nfts: Nft[] = [
     id: 58,
     name: 'Zash',
     symbol: 'ZASH',
-    description: 'It\'s his destiny.',
+    description: "It's his destiny.",
     address: {
       56: '0xeA6803331247b6116F142a6AfBbc13878561EE9E',
       97: '0x701855c54F7084D494DA18157bD164d3AB32a0a0',
@@ -968,7 +931,7 @@ const nfts: Nft[] = [
     id: 59,
     name: 'Me and the Boys',
     symbol: 'THEBOYS',
-    description: 'Don\'t worry the kids are saved.',
+    description: "Don't worry the kids are saved.",
     address: {
       56: '0x70E72B22B348b871FA56fC6a27B0bEadfFCC723b',
       97: '0x701855c54F7084D494DA18157bD164d3AB32a0a0',
@@ -1000,7 +963,7 @@ const nfts: Nft[] = [
     id: 61,
     name: 'The Double Black Diamond',
     symbol: 'DBD',
-    description: 'When you\'re on a merry-go-round, you miss a lot of the scenery',
+    description: "When you're on a merry-go-round, you miss a lot of the scenery",
     address: {
       56: '0x3a56ffFE595CA8e9d8eC46D74721F60B3aF9FE74',
       97: '0x701855c54F7084D494DA18157bD164d3AB32a0a0',
@@ -1026,7 +989,7 @@ const nfts: Nft[] = [
     type: 'image',
     rarity: 'Rare',
     userInfo: { ...DEFAULT_USER_INFO },
-    artist: artists.jussjoshinduh
+    artist: artists.jussjoshinduh,
   },
   {
     id: 63,
@@ -1042,11 +1005,11 @@ const nfts: Nft[] = [
     type: 'image',
     rarity: 'Rare',
     userInfo: { ...DEFAULT_USER_INFO },
-    artist: artists.canadiancryptojunkie
+    artist: artists.canadiancryptojunkie,
   },
   {
     id: 64,
-    name: 'Don\'t mess with Cthulhu',
+    name: "Don't mess with Cthulhu",
     symbol: 'CTHULHU',
     description: 'Waiting, dreaming.',
     address: {
@@ -1058,13 +1021,13 @@ const nfts: Nft[] = [
     type: 'image',
     rarity: 'Legendary',
     userInfo: { ...DEFAULT_USER_INFO },
-    artist: artists.canadiancryptojunkie
+    artist: artists.canadiancryptojunkie,
   },
   {
     id: 65,
     name: 'Infinite Zombie',
     symbol: 'IFZ',
-    description: 'Don\'t worry, I\'m the strongest.',
+    description: "Don't worry, I'm the strongest.",
     address: {
       56: '0xD9a1E771bf857f49db78E96B01Dd4E0BD4A68f29',
       97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
@@ -1074,7 +1037,7 @@ const nfts: Nft[] = [
     type: 'image',
     rarity: 'Legendary',
     userInfo: { ...DEFAULT_USER_INFO },
-    artist: artists.canadiancryptojunkie
+    artist: artists.canadiancryptojunkie,
   },
   {
     id: 67,
@@ -1090,7 +1053,7 @@ const nfts: Nft[] = [
     type: 'image',
     rarity: 'Rare',
     userInfo: { ...DEFAULT_USER_INFO },
-    artist: artists.trippynazz
+    artist: artists.trippynazz,
   },
   {
     id: 68,
@@ -1106,7 +1069,7 @@ const nfts: Nft[] = [
     type: 'image',
     rarity: 'Legendary',
     userInfo: { ...DEFAULT_USER_INFO },
-    artist: artists.ayaz_psd
+    artist: artists.ayaz_psd,
   },
   {
     id: 69,
@@ -1122,7 +1085,7 @@ const nfts: Nft[] = [
     type: 'image',
     rarity: 'Mythic',
     userInfo: { ...DEFAULT_USER_INFO },
-    artist: artists.ayaz_psd
+    artist: artists.ayaz_psd,
   },
   {
     id: 70,
@@ -1153,12 +1116,12 @@ const nfts: Nft[] = [
     type: 'image',
     rarity: 'Special',
     userInfo: { ...DEFAULT_USER_INFO },
-  },  
+  },
   {
     id: 72,
     name: 'Collectorate #1',
     symbol: 'COLLECTORATE #1',
-    description: 'Don\'t call him cubes.',
+    description: "Don't call him cubes.",
     address: {
       56: '0xe8399d697989d147efed8e5eead42716ee1b95b8',
       97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
@@ -1173,7 +1136,7 @@ const nfts: Nft[] = [
     id: 73,
     name: 'Street Zombies',
     symbol: 'STREETZ',
-    description: 'Life\'s a one way street, and you\'re not coming back.',
+    description: "Life's a one way street, and you're not coming back.",
     address: {
       56: '0x51424Aaa5043e127abdF2F6cA8Aad25BDea48F1C',
       97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
@@ -1199,7 +1162,7 @@ const nfts: Nft[] = [
     rarity: 'Legendary',
     userInfo: { ...DEFAULT_USER_INFO },
   },
-      {
+  {
     id: 75,
     name: 'TreTre',
     symbol: 'TRETRE',
@@ -1215,11 +1178,11 @@ const nfts: Nft[] = [
     artist: artists.trippynazz,
     userInfo: { ...DEFAULT_USER_INFO },
   },
-    {
+  {
     id: 76,
     name: 'Carllito',
     symbol: 'CARLLITO',
-    description: 'Don\'t Look Him in the Eyes',
+    description: "Don't Look Him in the Eyes",
     address: {
       56: '0xc850E5e15B3cE6Ff55Ff5B47dE789B6826aEEA5F',
       97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
@@ -1235,7 +1198,7 @@ const nfts: Nft[] = [
     id: 77,
     name: 'Mines of Mineria',
     symbol: 'MINERIA',
-    description: 'You\'re gonna need a bigger hammer.',
+    description: "You're gonna need a bigger hammer.",
     address: {
       56: '0xd95795DD72082A344455192CA7E2Dd4b8A28894d',
       97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
@@ -1265,7 +1228,7 @@ const nfts: Nft[] = [
   },
   {
     id: 79,
-    name: 'Hunny Badger Don\'t Care',
+    name: "Hunny Badger Don't Care",
     symbol: 'HUNNYB',
     description: 'Look at her, just grunting, and eating snakes.',
     address: {
@@ -1283,7 +1246,8 @@ const nfts: Nft[] = [
     id: 80,
     name: 'Ronin',
     symbol: 'RONIN',
-    description: 'Burying the eversoul where no one would ever find it; this could be his only solace. May no one else ever bear the burden he shouldered.',
+    description:
+      'Burying the eversoul where no one would ever find it; this could be his only solace. May no one else ever bear the burden he shouldered.',
     address: {
       56: '0x08e6670b53d2c4822C479C55E6B79f1B75A2a7FB',
       97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
@@ -1427,7 +1391,7 @@ const nfts: Nft[] = [
     id: 89,
     name: 'Son of the Giants',
     symbol: 'SOG',
-    description: 'He\'s always beating dead horses.',
+    description: "He's always beating dead horses.",
     address: {
       56: '0xd30CBaA2d07329737bee4e154B5Fb26334329B6d',
       97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
@@ -1440,6 +1404,5 @@ const nfts: Nft[] = [
     userInfo: { ...DEFAULT_USER_INFO },
   },
 ]
-
 
 export default nfts

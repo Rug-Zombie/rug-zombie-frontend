@@ -2,13 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 
 interface ProgressLineProps {
-  active: boolean;
+  active: boolean
 }
 
 const ActiveLine = styled.div`
   width: 100%;
   height: 2px;
-  background: #30C00D 0% 0% no-repeat padding-box;
+  background: #30c00d 0% 0% no-repeat padding-box;
   position: relative;
   bottom: 1px;
 `
@@ -16,7 +16,7 @@ const ActiveLine = styled.div`
 const InactiveLine = styled.div`
   width: 100%;
   height: 2px;
-  background: #0D1417 0% 0% no-repeat padding-box;
+  background: #0d1417 0% 0% no-repeat padding-box;
   position: relative;
   bottom: 1px;
 `

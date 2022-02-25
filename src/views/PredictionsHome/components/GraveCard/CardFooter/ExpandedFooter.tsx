@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
-import {
-  Flex,
-  Text,
-  LinkExternal,
-  Skeleton,
-} from '@rug-zombie-libs/uikit'
+import { Flex, Text, LinkExternal, Skeleton } from '@rug-zombie-libs/uikit'
 import { auctionById } from '../../../../../redux/get'
 import { BIG_ZERO } from '../../../../../utils/bigNumber'
 import { useMausoleum } from '../../../../../hooks/useContract'
@@ -27,8 +22,10 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ id }) => {
   const mausoleum = useMausoleum(version)
   const [totalBids, setTotalBids] = useState(BIG_ZERO)
   useEffect(() => {
-    mausoleum.methods.bidsLength(aid).call()
-      .then(res => {
+    mausoleum.methods
+      .bidsLength(aid)
+      .call()
+      .then((res) => {
         setTotalBids(new BigNumber(res))
       })
   }, [aid, mausoleum.methods])
@@ -37,11 +34,7 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ id }) => {
       <Flex mb="2px" justifyContent="space-between" alignItems="center">
         <Text small>Total bids:</Text>
         <Flex alignItems="flex-start">
-          {!totalBids.isZero() ? (
-            <div>{totalBids.toString()}</div>
-          ) : (
-            <Skeleton width="90px" height="21px" />
-          )}
+          {!totalBids.isZero() ? <div>{totalBids.toString()}</div> : <Skeleton width="90px" height="21px" />}
         </Flex>
       </Flex>
       <Flex mb="2px" justifyContent="flex-end">

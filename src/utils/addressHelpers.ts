@@ -9,7 +9,6 @@ export const getAddress = (address: Address): string => {
   return address[chainId] ? address[chainId] : address[mainNetChainId]
 }
 
-
 export const getZombieAddress = () => {
   return getAddress(tokens.zmbe.address)
 }
@@ -93,15 +92,15 @@ export const getSharkPoolAddress = (id: number) => {
 }
 
 export const getDrBurnensteinAddress = () => {
-  return getAddress(addresses.drburnenstein);
+  return getAddress(addresses.drburnenstein)
 }
 
 export const getPancakeFactoryAddress = () => {
-  return getAddress(addresses.pancakeFactory);
+  return getAddress(addresses.pancakeFactory)
 }
 
 export const getApeswapFactoryAddress = () => {
-  return getAddress(addresses.apeswapFactory);
+  return getAddress(addresses.apeswapFactory)
 }
 
 export const getRugMarketAddress = () => {

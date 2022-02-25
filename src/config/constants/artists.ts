@@ -43,11 +43,11 @@ const artists: { [name: string]: Artist } = {
   },
   trippynazz: {
     name: 'TrippyNaz',
-    twitter: 'https://twitter.com/trippynazz'
+    twitter: 'https://twitter.com/trippynazz',
   },
   canadiancryptojunkie: {
     name: 'Canadian Crypto Junkie 🍁',
-    twitter: 'https://twitter.com/CA_CryptoJunkie'
+    twitter: 'https://twitter.com/CA_CryptoJunkie',
   },
   none: {
     name: '',

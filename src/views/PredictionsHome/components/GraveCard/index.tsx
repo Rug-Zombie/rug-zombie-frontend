@@ -19,31 +19,26 @@ const AuctionCard: React.FC<{ id: number }> = ({ id }) => {
   const { prize, path, type } = auctionById(id)
   const isLoading = false
   return (
-    <StyledCard isStaking={false} style={{
-      minWidth: '350px',
-    }} >
-      <StyledCardHeader id={id}/>
+    <StyledCard
+      isStaking={false}
+      style={{
+        minWidth: '350px',
+      }}
+    >
+      <StyledCardHeader id={id} />
       <StyledCardBody isLoading={isLoading}>
         <StartingBid id={id} />
         <MinimumStakingTime period="1000" />
         <br />
         <br />
-        <Flex justifyContent='center'> {prize} </Flex>
-        <br/>
+        <Flex justifyContent="center"> {prize} </Flex>
+        <br />
         <Flex justifyContent="center">
-          {
-            type === 'image' ?
-              <img
-                src={path}
-                alt='auction prize'
-                style={{width: "50%"}}
-              /> :
-              <Video path={path} />
-          }
+          {type === 'image' ? <img src={path} alt="auction prize" style={{ width: '50%' }} /> : <Video path={path} />}
         </Flex>
-        <Flex mt='24px' flexDirection='column'>
+        <Flex mt="24px" flexDirection="column">
           {account() ? (
-            <GraveCardActions id={id}/>
+            <GraveCardActions id={id} />
           ) : (
             <>
               <UnlockButton />

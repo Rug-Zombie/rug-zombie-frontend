@@ -35,11 +35,11 @@ export function getId(id: Id): number {
   return id[chainId] || id[chainId] === 0 ? id[chainId] : id[mainNetChainId]
 }
 
-export function instaBuyById (id: number) {
-  return instabuys.find(i => i.id === id)
+export function instaBuyById(id: number) {
+  return instabuys.find((i) => i.id === id)
 }
 
-export function formatAddress (address: string): string {
+export function formatAddress(address: string): string {
   return `${address.slice(0, 4)}...${address.slice(address.length - 4, address.length)}`
 }
 
@@ -48,14 +48,14 @@ export function equalAddresses(addr1: string, addr2: string): boolean {
 }
 
 export function getDrFPoolName(pid: number): string {
-  if(tombPids().includes(pid)) {
-    return `${DEXS[tombs.find(t => getId(t.pid) === pid).dex]}`
+  if (tombPids().includes(pid)) {
+    return `${DEXS[tombs.find((t) => getId(t.pid) === pid).dex]}`
   }
-  return `${graves.find(g => getId(g.pid) === pid).name}`
+  return `${graves.find((g) => getId(g.pid) === pid).name}`
 }
 
 export function tombPids(): number[] {
-  return tombs.map(t => getId(t.pid))
+  return tombs.map((t) => getId(t.pid))
 }
 
-export const range = (start, end) => Array.from(Array(end - start + 1).keys()).map(x => x + start);
+export const range = (start, end) => Array.from(Array(end - start + 1).keys()).map((x) => x + start)

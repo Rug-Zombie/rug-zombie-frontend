@@ -126,11 +126,7 @@ export default {
   },
   drburnenstein: {
     56: '0x7590FA9B94f6E030E6d0A86a4ed10B31f558CFDE',
-    97: '0x8fe29fA5b27f800077dE4f712f3B394BeB876608'
-  },
-  pancakeRouter: {
-    56: '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73',
-    97: '0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73'
+    97: '0x8fe29fA5b27f800077dE4f712f3B394BeB876608',
   },
   rugMarket: {
     56: '0x07C953A44Dc83EfeE503C2Df43eA216A880C2B35',

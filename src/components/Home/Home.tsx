@@ -24,16 +24,20 @@ const Home: React.FC = () => {
     }
   }, [multi, updatePoolInfo, zombie])
 
-
   const totalSpawningPoolStaked = spawningPools().reduce((accumulator, sp) => {
     return sp.poolInfo.totalZombieStaked.plus(accumulator)
   }, BIG_ZERO)
 
   const zombiePrice = zombiePriceUsd()
   let tombsTvl = BIG_ZERO
-  tombs().forEach(t => {
-    const { poolInfo: { reserves, lpTotalSupply, totalStaked } } = t
-    const reservesUsd = [getBalanceAmount(reserves[0]).times(zombiePrice), getBalanceAmount(reserves[1]).times(bnbPriceUsd())]
+  tombs().forEach((t) => {
+    const {
+      poolInfo: { reserves, lpTotalSupply, totalStaked },
+    } = t
+    const reservesUsd = [
+      getBalanceAmount(reserves[0]).times(zombiePrice),
+      getBalanceAmount(reserves[1]).times(bnbPriceUsd()),
+    ]
     const bnbLpTokenPrice = reservesUsd[0].plus(reservesUsd[1]).div(lpTotalSupply)
     tombsTvl = tombsTvl.plus(totalStaked.times(bnbLpTokenPrice))
   })

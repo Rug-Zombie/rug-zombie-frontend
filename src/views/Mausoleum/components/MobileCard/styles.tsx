@@ -10,7 +10,7 @@ import { formatNumber, getBalanceAmount } from '../../../../utils/formatBalance'
 
 // PrizePoolRow
 interface PrizePoolRowProps extends FlexProps {
-  totalAmount: Round['totalAmount'],
+  totalAmount: Round['totalAmount']
   bt?: boolean
 }
 
@@ -22,37 +22,42 @@ const getPrizePoolAmount = (totalAmount: PrizePoolRowProps['totalAmount']) => {
   return formatBnb(totalAmount)
 }
 
-export const PrizePoolRow: React.FC<PrizePoolRowProps> = ({ totalAmount,bt, ...props }) => {
+export const PrizePoolRow: React.FC<PrizePoolRowProps> = ({ totalAmount, bt, ...props }) => {
   const { t } = useTranslation()
 
   return (
-    <Flex alignItems='center' justifyContent='space-between' {...props}>
+    <Flex alignItems="center" justifyContent="space-between" {...props}>
       <Text bold>{t('Bid Value')}:</Text>
-      <Text bold>{`${getPrizePoolAmount(totalAmount)} ${bt ? "BT" : "BNB"}`}</Text>
+      <Text bold>{`${getPrizePoolAmount(totalAmount)} ${bt ? 'BT' : 'BNB'}`}</Text>
     </Flex>
   )
 }
 
 // LockPriceRow
-interface LockPriceRowProps  {
-  bid: any;
-  id: number;
+interface LockPriceRowProps {
+  bid: any
+  id: number
 }
 
-export const LockPriceRow: React.FC<LockPriceRowProps> = ({ id , bid, ...props }) => {
+export const LockPriceRow: React.FC<LockPriceRowProps> = ({ id, bid, ...props }) => {
   const { t } = useTranslation()
   const quarterBid = bid.amount / 4
   const { version } = auctionById(id)
 
   return (
     <>
-      <Flex alignItems='center' justifyContent='space-between' {...props}>
-        <Text fontSize='14px'>{t('ZMBE Burned')}:</Text>
-        <Text fontSize='14px'>{formatNumber(getBalanceAmount(zmbeBnbLpPriceBnb().times(quarterBid * 3)).toNumber())}</Text>
+      <Flex alignItems="center" justifyContent="space-between" {...props}>
+        <Text fontSize="14px">{t('ZMBE Burned')}:</Text>
+        <Text fontSize="14px">
+          {formatNumber(getBalanceAmount(zmbeBnbLpPriceBnb().times(quarterBid * 3)).toNumber())}
+        </Text>
       </Flex>
-      <Flex alignItems='center' justifyContent='space-between' {...props}>
-        <Text fontSize='14px'>{t('LP Locked')}:</Text>
-        <Text fontSize='14px'>{Math.round(getBalanceAmount(new BigNumber(quarterBid)).toNumber() * 100) / 100} { version === 'v3' ? 'BNB' : 'BT'}</Text>
+      <Flex alignItems="center" justifyContent="space-between" {...props}>
+        <Text fontSize="14px">{t('LP Locked')}:</Text>
+        <Text fontSize="14px">
+          {Math.round(getBalanceAmount(new BigNumber(quarterBid)).toNumber() * 100) / 100}{' '}
+          {version === 'v3' ? 'BNB' : 'BT'}
+        </Text>
       </Flex>
     </>
   )
@@ -67,12 +72,12 @@ interface RoundResultBoxProps {
 }
 
 const getBackgroundColor = ({
-                              theme,
-                              betPosition,
-                              isNext,
-                              isLive,
-                              hasEntered,
-                            }: RoundResultBoxProps & { theme: DefaultTheme }) => {
+  theme,
+  betPosition,
+  isNext,
+  isLive,
+  hasEntered,
+}: RoundResultBoxProps & { theme: DefaultTheme }) => {
   if (isNext) {
     return 'linear-gradient(180deg, #53DEE9 0%, #7645D9 100%)'
   }
@@ -104,9 +109,9 @@ const StyledRoundResultBox = styled.div`
   padding: 16px;
 `
 
-export const RoundResultBox: React.FC<RoundResultBoxProps> = ({ children}) => {
+export const RoundResultBox: React.FC<RoundResultBoxProps> = ({ children }) => {
   return (
-    <Background >
+    <Background>
       <StyledRoundResultBox>{children}</StyledRoundResultBox>
     </Background>
   )

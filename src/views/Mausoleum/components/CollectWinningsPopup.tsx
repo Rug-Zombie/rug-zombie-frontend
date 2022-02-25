@@ -1,10 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useWeb3React } from '@web3-react/core'
+import React, { useRef, useState } from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import { Button, CloseIcon, IconButton, TrophyGoldIcon } from '@rug-zombie-libs/uikit'
 import { CSSTransition } from 'react-transition-group'
 import { useTranslation } from 'contexts/Localization'
-import { getBetHistory } from 'state/predictions/helpers'
 import { useAppDispatch } from 'state'
 import { setHistoryPaneState } from 'state/predictions'
 
@@ -132,7 +130,6 @@ const CollectWinningsPopup = () => {
     setIsOpen(false)
     clearInterval(timer.current)
   }
-
 
   return (
     <CSSTransition in={isOpen} unmountOnExit nodeRef={ref} timeout={1000} classNames="popup">

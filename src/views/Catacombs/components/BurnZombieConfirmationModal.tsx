@@ -13,9 +13,8 @@ import UnlockButton from '../../../components/UnlockButton'
 import { BIG_ZERO } from '../../../utils/bigNumber'
 import { getFullDisplayBalance } from '../../../utils/formatBalance'
 
-
 interface BurnZombieModalProps {
-  onDismiss?: () => void,
+  onDismiss?: () => void
   setUnlocked: any
 }
 
@@ -27,17 +26,20 @@ const BurnZombieConfirmationModal: React.FC<BurnZombieModalProps> = ({ onDismiss
   const zombie = useZombie()
 
   useEffect(() => {
-    catacombs.methods.burnAmount().call()
-      .then(
-        res => {
-          setBurnAmount(new BigNumber(res))
-        })
+    catacombs.methods
+      .burnAmount()
+      .call()
+      .then((res) => {
+        setBurnAmount(new BigNumber(res))
+      })
   }, [catacombs.methods])
 
   useEffect(() => {
-    if(account()) {
-      zombie.methods.allowance(account(), getCatacombsAddress()).call()
-        .then(res => {
+    if (account()) {
+      zombie.methods
+        .allowance(account(), getCatacombsAddress())
+        .call()
+        .then((res) => {
           setAllowance(new BigNumber(res))
         })
     }
@@ -45,56 +47,84 @@ const BurnZombieConfirmationModal: React.FC<BurnZombieModalProps> = ({ onDismiss
 
   const handleBurnZombie = () => {
     if (account()) {
-      catacombs.methods.UnlockCatacombs().send({ from: account() }).then(() => {
-        setBurned(!burned)
-        setUnlocked(true)
-        onDismiss()
-      })
+      catacombs.methods
+        .UnlockCatacombs()
+        .send({ from: account() })
+        .then(() => {
+          setBurned(!burned)
+          setUnlocked(true)
+          onDismiss()
+        })
     }
   }
 
   const handleApproveAndBurnZombie = () => {
     if (account()) {
-      zombie.methods.approve(getAddress(addresses.catacombs), burnAmount.toString()).send({ from: account() }).then(() => {
-        catacombs.methods.UnlockCatacombs().send({ from: account() }).then(() => {
-          setBurned(!burned)
-          setUnlocked(true)
-          onDismiss()
+      zombie.methods
+        .approve(getAddress(addresses.catacombs), burnAmount.toString())
+        .send({ from: account() })
+        .then(() => {
+          catacombs.methods
+            .UnlockCatacombs()
+            .send({ from: account() })
+            .then(() => {
+              setBurned(!burned)
+              setUnlocked(true)
+              onDismiss()
+            })
         })
-      })
     }
   }
 
-  return <Modal onDismiss={onDismiss} title='Congratulations!. You cracked the code.' background='black!important'
-                color='white!important'
-                border='1px solid white!important'>
-    <Flex alignItems='center' justifyContent='space-between' mb='8px' background='black!important'>
-      <Flex alignItems='center' minWidth='70px' background='black'>
-        <Image src={`/images/tokens/${tokens.zmbe.symbol}.png`} width={24} height={24} alt='ZMBE' />
-        <Text ml='4px' bold color='white'>
-          {tokens.zmbe.symbol}
-        </Text>
+  return (
+    <Modal
+      onDismiss={onDismiss}
+      title="Congratulations!. You cracked the code."
+      background="black!important"
+      color="white!important"
+      border="1px solid white!important"
+    >
+      <Flex alignItems="center" justifyContent="space-between" mb="8px" background="black!important">
+        <Flex alignItems="center" minWidth="70px" background="black">
+          <Image src={`/images/tokens/${tokens.zmbe.symbol}.png`} width={24} height={24} alt="ZMBE" />
+          <Text ml="4px" bold color="white">
+            {tokens.zmbe.symbol}
+          </Text>
+        </Flex>
       </Flex>
-    </Flex>
-    <Text mt='8px' ml='auto' bold color='white' fontSize='14px' mb='8px'>
-      The remaining humans hide in the Catacombs. Burn {getFullDisplayBalance(burnAmount).toString()} Zombie to enter.
-      <br />
-      Don’t worry, they won’t feel it because they’re already dead.
-    </Text>
-    {
-      // eslint-disable-next-line no-nested-ternary
-      account() ? zombieBalance().isZero() ?
-        <Button mt='8px' as='a' href={`${APESWAP_EXCHANGE_URL}/swap?outputCurrency=${getZombieAddress()}`}
-                variant='secondary'>
-          <Text color='white'>Get ZMBE</Text>
-        </Button> :
-          <Button onClick={allowance.gte(burnAmount) ? handleBurnZombie : handleApproveAndBurnZombie} mt='8px' as='a' variant='secondary'>
-            <Text color='white'>Burn {getFullDisplayBalance(burnAmount).toString()} ZMBE</Text>
-          </Button> :
-        <UnlockButton />
-    }
-  </Modal>
+      <Text mt="8px" ml="auto" bold color="white" fontSize="14px" mb="8px">
+        The remaining humans hide in the Catacombs. Burn {getFullDisplayBalance(burnAmount).toString()} Zombie to enter.
+        <br />
+        Don’t worry, they won’t feel it because they’re already dead.
+      </Text>
+      {
+        // eslint-disable-next-line no-nested-ternary
+        account() ? (
+          zombieBalance().isZero() ? (
+            <Button
+              mt="8px"
+              as="a"
+              href={`${APESWAP_EXCHANGE_URL}/swap?outputCurrency=${getZombieAddress()}`}
+              variant="secondary"
+            >
+              <Text color="white">Get ZMBE</Text>
+            </Button>
+          ) : (
+            <Button
+              onClick={allowance.gte(burnAmount) ? handleBurnZombie : handleApproveAndBurnZombie}
+              mt="8px"
+              as="a"
+              variant="secondary"
+            >
+              <Text color="white">Burn {getFullDisplayBalance(burnAmount).toString()} ZMBE</Text>
+            </Button>
+          )
+        ) : (
+          <UnlockButton />
+        )
+      }
+    </Modal>
+  )
 }
 
 export default BurnZombieConfirmationModal
-

@@ -2,12 +2,10 @@ import BigNumber from 'bignumber.js'
 import erc20ABI from 'config/abi/erc20.json'
 import spawningPoolAbi from 'config/abi/spawningPool.json'
 import multicall from 'utils/multicall'
-import { getAddress, getDrFrankensteinAddress, getZombieAddress } from 'utils/addressHelpers'
-import { GraveConfig, SpawningPoolConfig } from 'config/constants/types'
-import { getId } from '../../utils'
+import { getAddress, getZombieAddress } from 'utils/addressHelpers'
+import { SpawningPoolConfig } from 'config/constants/types'
 
 export const fetchSpawningPoolUserInfo = async (account: string, spawningPoolsToFetch: SpawningPoolConfig[]) => {
-
   const calls = spawningPoolsToFetch.map((spawningPool) => {
     return {
       address: getAddress(spawningPool.address),
@@ -29,19 +27,17 @@ export const fetchSpawningPoolUserEarnings = async (account: string, spawningPoo
   })
 
   const rawEarnings = await multicall(spawningPoolAbi, calls)
-  const parsedEarnings = rawEarnings.map((earnings) => {
-    return new BigNumber(earnings)
-  })
-  return parsedEarnings
+  return rawEarnings.map((earnings) => new BigNumber(earnings))
 }
 
 export const fetchSpawningPoolUserTokenInfo = async (account: string, spawningPoolsToFetch: SpawningPoolConfig[]) => {
   const calls = spawningPoolsToFetch.reduce((tokenInfos, spawningPoolConfig) => {
-    return tokenInfos.concat([{
-      address: getZombieAddress(),
-      name: 'allowance',
-      params: [account, getAddress(spawningPoolConfig.address)],
-    },
+    return tokenInfos.concat([
+      {
+        address: getZombieAddress(),
+        name: 'allowance',
+        params: [account, getAddress(spawningPoolConfig.address)],
+      },
       {
         address: getZombieAddress(),
         name: 'balanceOf',
@@ -55,7 +51,7 @@ export const fetchSpawningPoolUserTokenInfo = async (account: string, spawningPo
   for (let i = 0; i < tokenInfos.length; i += 2) {
     pairedRugInfos.push({
       allowance: tokenInfos[i],
-      balance: tokenInfos[i+1],
+      balance: tokenInfos[i + 1],
     })
   }
   return pairedRugInfos

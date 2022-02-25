@@ -29,47 +29,52 @@ const TextFlex = styled.div`
 `
 
 interface StakingProgressBarProps {
-  tomb: Tomb;
+  tomb: Tomb
 }
 
 enum Step {
   PairLp,
   ApproveLp,
   StakeZombie,
-  Staked
+  Staked,
 }
 
 const ProgressBar: React.FC<StakingProgressBarProps> = ({ tomb }) => {
-  const { userInfo: { lpBalance, lpAllowance, amount } } = tomb
+  const {
+    userInfo: { lpBalance, lpAllowance, amount },
+  } = tomb
   const steps = ['Pair LP', 'Approve LP', 'Stake LP']
 
   let currentStep = Step.PairLp
-  if(lpBalance.gt(0)) {
+  if (lpBalance.gt(0)) {
     currentStep = Step.ApproveLp
   }
-  if(lpAllowance.gt(0)) {
+  if (lpAllowance.gt(0)) {
     currentStep = Step.StakeZombie
   }
-  if(amount.gt(0)) {
+  if (amount.gt(0)) {
     currentStep = Step.Staked
   }
 
-  return <ProgressFlex>
-    <IconFlex>
-      {steps.map((step, index) => {
-        return <>
-          <ProgressCircle active={index < currentStep} step={index + 1} />
-          { index !== steps.length - 1 ? <ProgressLine active={index + 1 < currentStep} /> : null }
-        </>
-      })}
-    </IconFlex>
-    <TextFlex>
-      {steps.map((step, index) => {
-        return <ProgressText active={index <= currentStep}>{step}</ProgressText>
-      })}
-    </TextFlex>
-  </ProgressFlex>
-
+  return (
+    <ProgressFlex>
+      <IconFlex>
+        {steps.map((step, index) => {
+          return (
+            <>
+              <ProgressCircle active={index < currentStep} step={index + 1} />
+              {index !== steps.length - 1 ? <ProgressLine active={index + 1 < currentStep} /> : null}
+            </>
+          )
+        })}
+      </IconFlex>
+      <TextFlex>
+        {steps.map((step, index) => {
+          return <ProgressText active={index <= currentStep}>{step}</ProgressText>
+        })}
+      </TextFlex>
+    </ProgressFlex>
+  )
 }
 
 export default ProgressBar
