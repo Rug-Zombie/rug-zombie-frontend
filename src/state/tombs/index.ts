@@ -7,7 +7,7 @@ import { fetchTombUserEarnings, fetchTombUserInfo, fetchTombUserTokenInfo } from
 import { Tomb, TombsState } from '../types'
 import { BIG_ZERO } from '../../utils/bigNumber'
 import { getId } from '../../utils'
-import { fetchTombOverlayUserInfo } from './fetchTombOverlayUser'
+import fetchTombOverlayUserInfo from './fetchTombOverlayUser'
 import fetchTombOverlays from './fetchTombOverlays'
 
 const noAccountTombConfig: Tomb[] = tombsConfig.map((tomb) => ({
