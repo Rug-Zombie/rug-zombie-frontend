@@ -1,10 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { useWeb3React } from '@web3-react/core'
 import { BigNumber } from 'bignumber.js'
 import numeral from 'numeral'
-import { fetchUserActivityAsync } from '../../../../state/userActivites'
-import { useAppDispatch } from '../../../../state'
 import { useGetNfts, useGetUserActivities } from '../../../../state/hooks'
 import { UserActivity } from '../../../../state/types'
 import { UserActivityType } from '../../../../config/constants/types'
@@ -71,15 +68,7 @@ const ActivityText = styled.p`
 `
 
 const ProfilePage: React.FC = () => {
-  const { account } = useWeb3React()
-  const dispatch = useAppDispatch()
   const nfts = useGetNfts().data
-
-  useEffect(() => {
-    if (account) {
-      dispatch(fetchUserActivityAsync(account))
-    }
-  }, [account, dispatch])
 
   const getNftByAddress = (address: string) => nfts.find((n) => equalAddresses(getAddress(n.address), address))
 
