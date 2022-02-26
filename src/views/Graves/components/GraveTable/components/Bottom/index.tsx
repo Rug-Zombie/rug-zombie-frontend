@@ -301,7 +301,7 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   if (amount.gt(0)) {
     currentStep = StakingStep.Staked
   }
-  if (zombieAllowance.isZero()) {
+  if (zombieAllowance.isZero() && amount.gt(0)) {
     currentStep = StakingStep.ApproveZombie
   }
 
