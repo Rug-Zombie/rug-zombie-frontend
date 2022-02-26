@@ -13,7 +13,7 @@ export const PrimaryButton = styled.button`
   border: none;
 `
 
-export const PrimaryButtonText = styled.p`
+export const PrimaryButtonText = styled.div`
   text-align: center;
   font: normal normal medium 16px/25px Poppins;
   letter-spacing: 0px;
@@ -34,7 +34,7 @@ export const SecondaryButton = styled.button`
   background: none;
 `
 
-export const SecondaryButtonText = styled.p`
+export const SecondaryButtonText = styled.div`
   text-align: center;
   font: normal normal medium 16px/25px Poppins;
   letter-spacing: 0px;
