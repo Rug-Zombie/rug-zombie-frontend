@@ -26,6 +26,7 @@ import ConvertNftModal from './components/ConvertNftModal'
 import BurnZombieModal from './components/BurnZombieModal'
 import useToast from '../../../../../../hooks/useToast'
 import { formatDuration, now } from '../../../../../../utils/timerHelpers'
+import PreApprovalProgressBar from './components/PreApprovalProgressBar'
 
 const Separator = styled.div`
   height: 0px;
@@ -557,7 +558,8 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
           </SecondaryStakeButton>
         </Buttons>
       </StakingContainer>
-      <ProgressBar grave={grave} />
+      {/* eslint-disable-next-line react/jsx-no-undef */}
+      { zombieAllowance.gt(0) ? <ProgressBar grave={grave} /> : <PreApprovalProgressBar grave={grave} /> }
       <Separator />
       <TableDetails grave={grave} />
     </>

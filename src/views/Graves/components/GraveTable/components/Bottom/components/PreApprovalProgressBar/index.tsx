@@ -42,13 +42,13 @@ enum Step {
   Staked,
 }
 
-const ProgressBar: React.FC<StakingProgressBarProps> = ({ grave }) => {
+const PreApprovalProgressBar: React.FC<StakingProgressBarProps> = ({ grave }) => {
   const {
     pid,
     depositNftId,
     userInfo: { rugDeposited, rugAllowance, zombieAllowance, paidUnlockFee, amount },
   } = grave
-  const steps = ['Approve rug', 'Deposit rug', 'Unlock grave', 'Stake ZMBE']
+  const steps = ['Approve rug', 'Deposit rug', 'Unlock grave', 'Approve ZMBE', 'Stake ZMBE']
   if (depositNftId) {
     steps[Step.ApproveRug] = 'Convert Nft'
     steps[Step.DepositRug] = 'Deposit Nft'
@@ -70,10 +70,6 @@ const ProgressBar: React.FC<StakingProgressBarProps> = ({ grave }) => {
   if (paidUnlockFee) {
     currentStep = Step.ApproveZombie
   }
-  // if ((zombieAllowance.gt(0) && paidUnlockFee) || isFirstGrave) {
-  //   steps.splice(Step.ApproveZombie, 1)
-  //   // currentStep -= 1
-  // }
   if (amount.gt(0)) {
     currentStep = Step.Staked
   }
@@ -102,4 +98,4 @@ const ProgressBar: React.FC<StakingProgressBarProps> = ({ grave }) => {
   )
 }
 
-export default ProgressBar
+export default PreApprovalProgressBar
