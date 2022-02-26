@@ -73,7 +73,7 @@ const GraveInfo = styled.div`
   padding: 0 10px;
 `
 
-const HeaderText = styled.p`
+const HeaderText = styled.div`
   text-align: left;
   font: normal normal normal 16px/30px Poppins;
   color: #ffffff;

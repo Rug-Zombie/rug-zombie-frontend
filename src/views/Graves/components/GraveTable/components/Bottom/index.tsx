@@ -118,13 +118,13 @@ const SecondaryStakeButton = styled.button`
   }
 `
 
-const PrimaryStakeButtonText = styled.p`
+const PrimaryStakeButtonText = styled.div`
   text-align: center;
   font: normal normal normal 16px/25px Poppins;
   color: #010202;
 `
 
-const SecondaryStakeButtonText = styled.p`
+const SecondaryStakeButtonText = styled.div`
   text-align: center;
   font: normal normal normal 16px/25px Poppins;
   color: #ffffff;
