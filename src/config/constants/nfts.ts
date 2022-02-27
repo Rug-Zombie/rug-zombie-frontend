@@ -1374,7 +1374,7 @@ const nfts: Nft[] = [
   {
     id: 88,
     name: 'Polar Ice Zombie',
-    symbol: 'SOG',
+    symbol: 'POLAR',
     description: 'Just looking out for himself.',
     address: {
       56: '0xc2D9164079eb785eD26C4D2091472D9069b31e3e',
