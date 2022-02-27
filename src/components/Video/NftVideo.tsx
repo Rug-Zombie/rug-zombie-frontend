@@ -3,7 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 interface VideoProps {
-  path: string;
+  path: string
 }
 
 const StyledVideo = styled.video`
@@ -27,15 +27,15 @@ const StyledSmallVideo = styled.video`
 export const PreviewVideo: React.FC<VideoProps> = ({ path }) => {
   return (
     <StyledVideo autoPlay controls={false} loop muted>
-      <source src={path} type='video/webm' />
+      <source src={path} type="video/webm" />
     </StyledVideo>
   )
 }
 
 export const SmallPreviewVideo: React.FC<VideoProps> = ({ path }) => {
-    return (
-        <StyledSmallVideo autoPlay controls={false} loop muted>
-            <source src={path} type='video/webm' />
-        </StyledSmallVideo>
-    )
+  return (
+    <StyledSmallVideo autoPlay controls={false} loop muted>
+      <source src={path} type="video/webm" />
+    </StyledSmallVideo>
+  )
 }
