@@ -52,16 +52,15 @@ const getStats = async (spawningPoolAddresses: string[]): Promise<Stats[]> => {
   )
 
   const results: number[] = await multicall(spawningPool, calls)
-  return chunk(
-    results,
-    5,
-  ).map(([rewardPerBlock, unlockFeeInBnb, minimumStake, minimumStakingTime, nftIntervalTime]) => ({
-    rewardPerBlock,
-    unlockFee: unlockFeeInBnb,
-    minimumStake,
-    minimumStakingTime,
-    nftMintTime: nftIntervalTime,
-  }))
+  return chunk(results, 5).map(
+    ([rewardPerBlock, unlockFeeInBnb, minimumStake, minimumStakingTime, nftIntervalTime]) => ({
+      rewardPerBlock,
+      unlockFee: unlockFeeInBnb,
+      minimumStake,
+      minimumStakingTime,
+      nftMintTime: nftIntervalTime,
+    }),
+  )
 }
 
 const getLpAddresses = async (spawningPoolConfigs: SpawningPoolConfig[]): Promise<string[]> => {
