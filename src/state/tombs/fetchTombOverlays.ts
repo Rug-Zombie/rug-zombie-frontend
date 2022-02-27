@@ -22,12 +22,12 @@ const fetchTombOverlays = async (tombsToFetch: TombConfig[]) => {
 
   const responses = await multicall(tombOverlay, calls)
 
-  return zipWith(tombsToFetch, chunk(responses, 2) as [TombPoolInfo, EthersBigNumber][], (tomb, [info, fee]) => ({
+  return zipWith(tombsToFetch, chunk(responses, 2) as [TombPoolInfo, number][], (tomb, [info, fee]) => ({
     ...tomb,
     poolInfo: {
       mintingIsEnabled: info.isEnabled,
       nftMintTime: new BigNumber(info.mintingTime._hex),
-      mintingFee: new BigNumber(fee._hex),
+      mintingFee: new BigNumber(fee),
     },
   }))
 }
