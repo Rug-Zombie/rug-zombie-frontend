@@ -15,7 +15,6 @@ import { formatAddress } from '../../utils'
 import { PreviewVideo, SmallPreviewVideo } from '../../components/Video/NftVideo'
 import Footer from '../../components/Footer'
 
-
 const Image = styled.img`
   margin-top: 20px;
   max-width: 520px;
@@ -39,7 +38,7 @@ const Title = styled.div`
   text-align: left;
   font: normal normal 600 60px Poppins;
   letter-spacing: 0;
-  color: #FFFFFF;
+  color: #ffffff;
   @media (max-width: 1083px) {
     max-width: 100%;
     text-align: center;
@@ -74,20 +73,20 @@ const Subtle = styled.p`
   text-align: left;
   font: normal normal 300 18px/42px Poppins;
   letter-spacing: 0;
-  color: #777BAB;
+  color: #777bab;
 `
 
 const Highlighted = styled.text`
   text-align: left;
   font: normal normal 300 18px/42px Poppins;
   letter-spacing: 0;
-  color: #00B1FF;
+  color: #00b1ff;
 `
 const HighlightSmall = styled.div`
   text-align: left;
   font: normal normal 300 14px/36px Poppins;
   letter-spacing: 0;
-  color: #00B1FF;
+  color: #00b1ff;
 `
 
 // const Icon = styled.img`
@@ -126,7 +125,6 @@ const Right = styled.div`
   }
 `
 
-
 const TabRight = styled.div`
   position: relative;
   top: 50px;
@@ -164,7 +162,7 @@ const DetailName = styled.div`
   text-align: left;
   font: normal normal 300 16px/30px Poppins;
   letter-spacing: 0;
-  color: #777BAB;
+  color: #777bab;
 `
 
 const DetailValue = styled.div`
@@ -175,13 +173,13 @@ const DetailValue = styled.div`
   text-align: left;
   font: normal normal 300 16px/30px Poppins;
   letter-spacing: 0;
-  color: #00B1FF;
+  color: #00b1ff;
 `
 
 const DetailFlex = styled.div`
   display: flex;
-  line-height: initial;`
-
+  line-height: initial;
+`
 
 const DetailsContainer = styled.div`
   padding: 5% 0%;
@@ -192,7 +190,7 @@ const DetailsContainer = styled.div`
 
 const Link = styled(LinkExternal)`
   font: normal normal 300 16px/30px Poppins;
-  color: #00B1FF;
+  color: #00b1ff;
 `
 
 const PreviewVid = styled(PreviewVideo)`
@@ -240,36 +238,67 @@ const Nfts: React.FC = () => {
     <>
       <NftPage>
         <Left>
-          {nft.type === 'image' ? <Image src={nft.path} /> : <VidDiv><PreviewVid path={nft.path} /></VidDiv>}
+          {nft.type === 'image' ? (
+            <Image src={nft.path} />
+          ) : (
+            <VidDiv>
+              <PreviewVid path={nft.path} />
+            </VidDiv>
+          )}
         </Left>
         <Right>
           <Title>{nft.name}</Title>
           <Subtle>{nft.description}</Subtle>
-          <Subtle>Rarity: <Highlighted>{nft.rarity}</Highlighted></Subtle>
+          <Subtle>
+            Rarity: <Highlighted>{nft.rarity}</Highlighted>
+          </Subtle>
           <Row>
-            <RowItem><Subtle>Collection By</Subtle></RowItem>
-            <RowItem><Highlighted>RugZombie</Highlighted></RowItem>
+            <RowItem>
+              <Subtle>Collection By</Subtle>
+            </RowItem>
+            <RowItem>
+              <Highlighted>RugZombie</Highlighted>
+            </RowItem>
           </Row>
-          {nft.artist ? <Row>
-            <RowItem><Subtle>Artist</Subtle></RowItem>
-            <RowItem><Link
-              href={nft.artist.twitter ? nft.artist.twitter : nft.artist.instagram}>{nft.artist.name}</Link></RowItem>
-          </Row> : null}
+          {nft.artist ? (
+            <Row>
+              <RowItem>
+                <Subtle>Artist</Subtle>
+              </RowItem>
+              <RowItem>
+                <Link href={nft.artist.twitter ? nft.artist.twitter : nft.artist.instagram}>{nft.artist.name}</Link>
+              </RowItem>
+            </Row>
+          ) : null}
           <TabRight>
             <Row>
-              <RowItem><Regular>Owned Variants</Regular></RowItem>
+              <RowItem>
+                <Regular>Owned Variants</Regular>
+              </RowItem>
             </Row>
             <Row>
-              <RowItem><Normal>You own {nft.userInfo.ownedIds.length} variants of this nft</Normal></RowItem>
+              <RowItem>
+                <Normal>You own {nft.userInfo.ownedIds.length} variants of this nft</Normal>
+              </RowItem>
             </Row>
             <Row>
-              <Variants>{nft.userInfo.ownedIds.map((value) =>
-                <Variant>{nft.type === 'image' ? <Small src={nft.path} /> :
-                  <VidDiv><SmallVid path={nft.path} /></VidDiv>}<HighlightSmall>{value}</HighlightSmall></Variant>)}
+              <Variants>
+                {nft.userInfo.ownedIds.map((value) => (
+                  <Variant>
+                    {nft.type === 'image' ? (
+                      <Small src={nft.path} />
+                    ) : (
+                      <VidDiv>
+                        <SmallVid path={nft.path} />
+                      </VidDiv>
+                    )}
+                    <HighlightSmall>{value}</HighlightSmall>
+                  </Variant>
+                ))}
               </Variants>
-
             </Row>
-          </TabRight><br />
+          </TabRight>
+          <br />
           <TabRight>
             <DetailsContainer>
               <DetailFlex>
@@ -290,9 +319,7 @@ const Nfts: React.FC = () => {
       </NftPage>
       <Footer />
     </>
-
   )
-
 }
 
 export default Nfts

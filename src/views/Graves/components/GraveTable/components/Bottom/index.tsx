@@ -559,7 +559,7 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
         </Buttons>
       </StakingContainer>
       {/* eslint-disable-next-line react/jsx-no-undef */}
-      { zombieAllowance.gt(0) ? <ProgressBar grave={grave} /> : <PreApprovalProgressBar grave={grave} /> }
+      {zombieAllowance.gt(0) ? <ProgressBar grave={grave} /> : <PreApprovalProgressBar grave={grave} />}
       <Separator />
       <TableDetails grave={grave} />
     </>

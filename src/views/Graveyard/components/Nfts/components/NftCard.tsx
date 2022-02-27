@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import PreviewVideo from 'components/Video/PreviewVideo'
-import {useHistory} from "react-router";
+import { useHistory } from 'react-router'
 import { useGetNftById } from '../../../../../state/nfts/hooks'
 
 const Container = styled.div`
@@ -18,7 +18,7 @@ const Card = styled.div`
   flex-direction: column;
   width: 300px;
   margin: 15px;
-  
+
   &:hover {
     cursor: pointer;
   }
@@ -90,33 +90,47 @@ interface CollectionCardProps {
 }
 
 const NftCard: React.FC<CollectionCardProps> = ({ id, showOwned, showTotalSupply }) => {
-  const { name, path, totalSupply, rarity, type, userInfo: { ownedIds } } = useGetNftById(id)
+  const {
+    name,
+    path,
+    totalSupply,
+    rarity,
+    type,
+    userInfo: { ownedIds },
+  } = useGetNftById(id)
   const history = useHistory()
-  return <Container>
-    <Card onClick={()=>{history.push(`nfts/${id}`)}}>
-      <PreviewDiv>
-        {type === 'image'
-          ? <PreviewImage src={path} alt={`${name} NFT`} />
-          : <PreviewVid path={path} />
-        }
-      </PreviewDiv>
-      <div style={{ paddingTop: '20px' }} />
-      <RarityText>{rarity}</RarityText>
-      <div style={{ paddingTop: '10px' }} />
-      <Title>{name}</Title>
-      <div style={{ paddingTop: '22px' }} />
-      {showTotalSupply ? <p style={{ paddingLeft: '30px', paddingBottom: '10px' }}>
-        <SubText style={{ color: '#6B7682' }}>Total supply:&nbsp;&nbsp;</SubText>
-        <SubText style={{ color: '#FFFFFF' }}>{totalSupply.toString()}</SubText>
-      </p> : null}
-      {showOwned ? <p style={{ paddingLeft: '30px' }}>
-        <SubText style={{ color: '#6B7682' }}>Variants owned:&nbsp;&nbsp;</SubText>
-        <SubText style={{ color: '#FFFFFF' }}>{ownedIds.length}</SubText>
-      </p> : null}
-      <div style={{paddingBottom: '10px'}}/>
-    </Card>
-    {ownedIds.length > 0 ? <Shadow /> : null}
-  </Container>
+  return (
+    <Container>
+      <Card
+        onClick={() => {
+          history.push(`nfts/${id}`)
+        }}
+      >
+        <PreviewDiv>
+          {type === 'image' ? <PreviewImage src={path} alt={`${name} NFT`} /> : <PreviewVid path={path} />}
+        </PreviewDiv>
+        <div style={{ paddingTop: '20px' }} />
+        <RarityText>{rarity}</RarityText>
+        <div style={{ paddingTop: '10px' }} />
+        <Title>{name}</Title>
+        <div style={{ paddingTop: '22px' }} />
+        {showTotalSupply ? (
+          <p style={{ paddingLeft: '30px', paddingBottom: '10px' }}>
+            <SubText style={{ color: '#6B7682' }}>Total supply:&nbsp;&nbsp;</SubText>
+            <SubText style={{ color: '#FFFFFF' }}>{totalSupply.toString()}</SubText>
+          </p>
+        ) : null}
+        {showOwned ? (
+          <p style={{ paddingLeft: '30px' }}>
+            <SubText style={{ color: '#6B7682' }}>Variants owned:&nbsp;&nbsp;</SubText>
+            <SubText style={{ color: '#FFFFFF' }}>{ownedIds.length}</SubText>
+          </p>
+        ) : null}
+        <div style={{ paddingBottom: '10px' }} />
+      </Card>
+      {ownedIds.length > 0 ? <Shadow /> : null}
+    </Container>
+  )
 }
 
 export default NftCard
