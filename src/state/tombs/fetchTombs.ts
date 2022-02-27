@@ -6,7 +6,7 @@ import drFrankenstein from 'config/abi/drFrankenstein.json'
 import lpPair from 'config/abi/pancakePairAbi.json'
 import bep20Abi from 'config/abi/erc20.json'
 import multicall from 'utils/multicall'
-import {getAddress, getDrFrankensteinAddress, getWbnbAddress} from 'utils/addressHelpers'
+import { getAddress, getDrFrankensteinAddress, getWbnbAddress } from 'utils/addressHelpers'
 import { TombConfig } from 'config/constants/types'
 import { getId } from '../../utils'
 
@@ -51,21 +51,27 @@ const getLpInfo = async (tombConfigs: TombConfig[]): Promise<LpInfo[]> => {
   return zipWith(
     chunk(infoResults, 3) as [[EthersBigNumber, EthersBigNumber], number, string][],
     amountResults as number[],
-    ([ reserves, totalSupply, token0 ], tokenAmount) => ({
-      reserves, totalSupply, token0, tokenAmount,
-    }))
+    ([reserves, totalSupply, token0], tokenAmount) => ({
+      reserves,
+      totalSupply,
+      token0,
+      tokenAmount,
+    }),
+  )
 }
 
 const getTombInfo = async (
   tombConfigs: TombConfig[],
-): Promise<{
-  info: {
-    allocPoint: EthersBigNumber,
-    lpToken: string,
-    minimumStakingTime: EthersBigNumber,
-  },
-  totalAllocPoint: number,
-}[]> => {
+): Promise<
+  {
+    info: {
+      allocPoint: EthersBigNumber
+      lpToken: string
+      minimumStakingTime: EthersBigNumber
+    }
+    totalAllocPoint: number
+  }[]
+> => {
   const address = getDrFrankensteinAddress()
   const calls = tombConfigs.flatMap(({ pid }) => [
     {
@@ -76,7 +82,7 @@ const getTombInfo = async (
     {
       address,
       name: 'totalAllocPoint',
-    }
+    },
   ])
 
   const results = await multicall(drFrankenstein, calls)
@@ -89,10 +95,7 @@ const getTombInfo = async (
 const fetchTombs = async (tombsToFetch: TombConfig[]) => {
   const wbnbAddress = getWbnbAddress()
 
-  const [lpInfos, tombInfos] = await Promise.all([
-    getLpInfo(tombsToFetch),
-    getTombInfo(tombsToFetch),
-  ])
+  const [lpInfos, tombInfos] = await Promise.all([getLpInfo(tombsToFetch), getTombInfo(tombsToFetch)])
 
   return zipWith(tombsToFetch, lpInfos, tombInfos, (tombConfig, lpInfo, tombInfo) => {
     const { reserves, totalSupply, token0, tokenAmount } = lpInfo

@@ -9,27 +9,27 @@ import { TombConfig } from 'config/constants/types'
 import { getId } from '../../utils'
 
 interface TombPoolInfo {
-    isEnabled: boolean
-    mintingTime: EthersBigNumber
+  isEnabled: boolean
+  mintingTime: EthersBigNumber
 }
 
 const fetchTombOverlays = async (tombsToFetch: TombConfig[]) => {
-    const tombOverlayAddress = getTombOverlayAddress()
-    const calls = tombsToFetch.flatMap((tomb) => [
-        { address: tombOverlayAddress, name: 'poolInfo', params: [getId(tomb.overlay.pid)] },
-        { address: tombOverlayAddress, name: 'mintingFeeInBnb', params: [] }
-    ])
+  const tombOverlayAddress = getTombOverlayAddress()
+  const calls = tombsToFetch.flatMap((tomb) => [
+    { address: tombOverlayAddress, name: 'poolInfo', params: [getId(tomb.overlay.pid)] },
+    { address: tombOverlayAddress, name: 'mintingFeeInBnb', params: [] },
+  ])
 
-    const responses = await multicall(tombOverlay, calls)
+  const responses = await multicall(tombOverlay, calls)
 
-    return zipWith(tombsToFetch, chunk(responses, 2) as [TombPoolInfo, EthersBigNumber][], (tomb, [info, fee]) => ({
-        ...tomb,
-        poolInfo: {
-            mintingIsEnabled: info.isEnabled,
-            nftMintTime: new BigNumber(info.mintingTime._hex),
-            mintingFee: new BigNumber(fee._hex),
-        }
-    }))
+  return zipWith(tombsToFetch, chunk(responses, 2) as [TombPoolInfo, EthersBigNumber][], (tomb, [info, fee]) => ({
+    ...tomb,
+    poolInfo: {
+      mintingIsEnabled: info.isEnabled,
+      nftMintTime: new BigNumber(info.mintingTime._hex),
+      mintingFee: new BigNumber(fee._hex),
+    },
+  }))
 }
 
 export default fetchTombOverlays

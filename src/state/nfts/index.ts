@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import nftConfig from 'config/constants/nfts'
-import {createSlice, PayloadAction} from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Nft, NftState } from '../types'
 import fetchNftsUser, { NftIdAndUserInfo } from './fetchNftsUser'
 import fetchNfts from './fetchNfts'

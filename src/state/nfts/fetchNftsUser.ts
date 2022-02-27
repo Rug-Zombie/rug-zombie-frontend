@@ -1,4 +1,4 @@
-import {chunk, zipWith} from 'lodash'
+import { chunk, zipWith } from 'lodash'
 
 import { getAddress } from '../../utils/addressHelpers'
 import { Nft, NftUserInfo } from '../types'
@@ -22,8 +22,8 @@ const getOwnedIds = async (account: string, nfts: Nft[]): Promise<number[][]> =>
   const nftOwnershipContract = getNftOwnership()
   const addressBatches: string[][] = chunk(nfts.map(({ address }) => getAddress(address), FETCH_BATCH_SIZE))
   const resultBatches: number[][][] = await Promise.all(
-    addressBatches.map(
-      (addresses) => nftOwnershipContract.methods.massCheckOwnership(account, addresses).call()))
+    addressBatches.map((addresses) => nftOwnershipContract.methods.massCheckOwnership(account, addresses).call()),
+  )
 
   return resultBatches.flat()
 }
@@ -34,7 +34,7 @@ const fetchNftsUser = async (account: string, nftsToFetch: Nft[]): Promise<NftId
   }
 
   const ownerships: number[][] = await getOwnedIds(account, nftsToFetch)
-  return zipWith(nftsToFetch, ownerships, ({ id }, ownedIds) => ({ id, userInfo: { ownedIds }}))
+  return zipWith(nftsToFetch, ownerships, ({ id }, ownedIds) => ({ id, userInfo: { ownedIds } }))
 }
 
 export default fetchNftsUser

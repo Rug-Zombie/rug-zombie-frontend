@@ -6,13 +6,13 @@ import multicall from '../../utils/multicall'
 const fetchNfts = async (nftsToFetch: Nft[]): Promise<Nft[]> => {
   const calls = nftsToFetch.map(({ address }) => ({
     address: getAddress(address),
-    name: 'totalSupply'
+    name: 'totalSupply',
   }))
 
   const totalSupplies = await multicall(erc721Abi, calls)
   return nftsToFetch.map((nft, i) => ({
     ...nft,
-    totalSupply: totalSupplies[i]
+    totalSupply: totalSupplies[i],
   }))
 }
 

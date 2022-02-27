@@ -23,15 +23,20 @@ const fetchGraves = async (gravesToFetch: GraveConfig[]): Promise<Grave[]> => {
   }
 
   const graveInfoSlices = await multicall(drFrankenstein, gravesToFetch.flatMap(getCallsForGrave))
-  const graveInfos = chunk(graveInfoSlices, 3).map(([poolInfo, unlockFee, totalAllocPoint]) => ({
-    poolInfo, unlockFee, totalAllocPoint,
-  }) as { poolInfo: any, unlockFee: number, totalAllocPoint: number })
+  const graveInfos = chunk(graveInfoSlices, 3).map(
+    ([poolInfo, unlockFee, totalAllocPoint]) =>
+      ({
+        poolInfo,
+        unlockFee,
+        totalAllocPoint,
+      } as { poolInfo: any; unlockFee: number; totalAllocPoint: number }),
+  )
 
   const balanceCalls = graveInfos.map(({ poolInfo }) => ({
-        address: poolInfo.lpToken,
-        name: 'balanceOf',
-        params: [drFrankensteinAddress],
-      }))
+    address: poolInfo.lpToken,
+    name: 'balanceOf',
+    params: [drFrankensteinAddress],
+  }))
   const balances: EthersBigNumber[][] = await multicall(bep20Abi, balanceCalls)
 
   return gravesToFetch.map((grave, i) => {
