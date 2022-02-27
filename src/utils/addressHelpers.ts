@@ -48,15 +48,6 @@ export const getWbnbAddress = () => {
 export const getNftConverterAddress = () => {
   return getAddress(addresses.nftConverter)
 }
-export const getLotteryAddress = () => {
-  return getAddress(addresses.lottery)
-}
-export const getLotteryTicketAddress = () => {
-  return getAddress(addresses.lotteryNFT)
-}
-export const getTradingCompetitionAddress = () => {
-  return getAddress(addresses.tradingCompetition)
-}
 export const getPredictionsAddress = () => {
   return getAddress(addresses.predictions)
 }
