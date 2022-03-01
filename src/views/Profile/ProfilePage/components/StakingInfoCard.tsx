@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useWeb3React } from '@web3-react/core'
-import { fetchUserActivityAsync } from '../../../../state/userActivites'
 import { useAppDispatch } from '../../../../state'
 import { useGetGraves, useGetSpawningPools, useGetTombs } from '../../../../state/hooks'
 import '../../Profile.Styles.css'
@@ -89,11 +88,6 @@ const ProfilePage: React.FC = () => {
   const { account } = useWeb3React()
   const web3 = useWeb3()
   const dispatch = useAppDispatch()
-  useEffect(() => {
-    if (account) {
-      dispatch(fetchUserActivityAsync(account))
-    }
-  }, [account, dispatch])
 
   useEffect(() => {
     if (account) {

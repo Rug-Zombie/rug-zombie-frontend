@@ -1,83 +1,91 @@
+import { EventData } from 'web3-eth-contract'
+
 import { BigNumber } from 'bignumber.js'
 import { getDrFrankensteinContract } from '../../utils/contractHelpers'
 import web3 from '../../utils/web3'
-import { UserActivity } from '../types'
 import { UserActivityType } from '../../config/constants/types'
+import { UserActivity } from '../types'
+import { range } from '../../utils'
+import { invokeAfter, retry } from '../../utils/asyncHelpers'
 
-const getEventType = (event) => {
-  switch (event.event) {
-    case 'Deposit':
-      return UserActivityType.DrFDeposit
-    case 'Withdraw':
-      if (new BigNumber(event.returnValues.amount).isZero()) {
-        return UserActivityType.DrFHarvest
-      }
-      return UserActivityType.DrFWithdraw
-    case 'WithdrawEarly':
-      return UserActivityType.DrFWithdrawEarly
-    case 'ReviveRug':
-      return UserActivityType.DrFMintNft
-    default:
-      return -1
+// excludes 'Withdraw' due to overlap between harvest and withdraw activity types
+const EVENT_NAME_TO_ACTIVITY_TYPE: Map<string, UserActivityType> = new Map([
+  ['Deposit', UserActivityType.DrFDeposit],
+  ['WithdrawEarly', UserActivityType.DrFWithdrawEarly],
+  ['ReviveRug', UserActivityType.DrFMintNft],
+])
+const RELEVANT_EVENT_TYPES: Set<string> = new Set(['Deposit', 'Withdraw', 'WithdrawEarly', 'ReviveRug'])
+const getActivityType = (event: EventData): UserActivityType => {
+  const { event: eventName, returnValues } = event
+
+  if (!RELEVANT_EVENT_TYPES.has(eventName)) {
+    return -1
   }
+
+  if (eventName === 'Withdraw') {
+    return new BigNumber(returnValues.amount).isZero() ? UserActivityType.DrFHarvest : UserActivityType.DrFWithdraw
+  }
+
+  return EVENT_NAME_TO_ACTIVITY_TYPE.get(eventName)
 }
 
-// eslint-disable-next-line import/prefer-default-export
-export const fetchDrFEvents = async (account: string, toBlock?: number) => {
-  const drFrankenstein = getDrFrankensteinContract()
-  const currentBlock = toBlock || (await web3.eth.getBlockNumber())
+const EVENT_USER_TOPIC_INDEX = 0
+const isRelevantForUser = (account: string) => ({ event, returnValues }: EventData): boolean => {
+  if (!RELEVANT_EVENT_TYPES.has(event)) {
+    return false
+  }
 
-  const depositsPromise = drFrankenstein.getPastEvents('Deposit', {
-    fromBlock: currentBlock - 5000,
-    toBlock: currentBlock,
-    filter: { user: account },
+  const eventUser = returnValues[EVENT_USER_TOPIC_INDEX]
+  return eventUser && eventUser.toLowerCase() === account.toLowerCase()
+}
+
+const MAX_BLOCK_QUERY_SIZE = 5000
+
+const getRelevantEventsInInterval = (fromBlock: number, toBlock: number, userAddress: string): Promise<EventData[]> =>
+  retry(() => getDrFrankensteinContract().getPastEvents('allEvents', { fromBlock, toBlock }), 3, 250).then((events) =>
+    events.filter(isRelevantForUser(userAddress)),
+  )
+
+const getBlockTimestamp = async (blockNumber: number): Promise<number> => {
+  const { timestamp: rawTimestamp } = await web3.eth.getBlock(blockNumber, false)
+  return typeof rawTimestamp === 'string' ? parseInt(rawTimestamp) : rawTimestamp
+}
+
+const fetchDrFEvents = async (
+  account: string,
+  fromBlocksAgo: number = MAX_BLOCK_QUERY_SIZE * 5,
+): Promise<UserActivity[]> => {
+  const searchEndBlock = await web3.eth.getBlockNumber()
+  const searchStartBlock = searchEndBlock - fromBlocksAgo
+
+  const queries = range(0, fromBlocksAgo / MAX_BLOCK_QUERY_SIZE).map((i) => {
+    const end = searchEndBlock - i * MAX_BLOCK_QUERY_SIZE
+    return {
+      fromBlock: Math.max(end - MAX_BLOCK_QUERY_SIZE, searchStartBlock),
+      toBlock: end,
+      delay: i * 100,
+    }
   })
 
-  const withdrawalsPromise = drFrankenstein.getPastEvents('Withdraw', {
-    fromBlock: currentBlock - 5000,
-    toBlock: currentBlock,
-    filter: { user: account },
-  })
+  const eventChunks: EventData[][] = await Promise.all(
+    queries.map(({ fromBlock, toBlock, delay }) =>
+      invokeAfter(() => getRelevantEventsInInterval(fromBlock, toBlock, account), delay),
+    ),
+  )
 
-  const withdrawEarlysPromise = drFrankenstein.getPastEvents('WithdrawEarly', {
-    fromBlock: currentBlock - 5000,
-    toBlock: currentBlock,
-    filter: { user: account },
-  })
+  const relevantEvents: EventData[] = eventChunks.flat()
+  return Promise.all(
+    relevantEvents.map(async (event) => {
+      const { returnValues, blockNumber } = event
+      const timestamp = await getBlockTimestamp(blockNumber)
 
-  const emergencyWithdrawalsPromise = drFrankenstein.getPastEvents('WithdrawEarly', {
-    fromBlock: currentBlock - 5000,
-    toBlock: currentBlock,
-    filter: { user: account },
-  })
-
-  const nftMintsPromise = drFrankenstein.getPastEvents('ReviveRug', {
-    fromBlock: currentBlock - 5000,
-    toBlock: currentBlock,
-    filter: { to: account },
-  })
-
-  const [deposits, withdrawals, withdrawEarlys, emergencyWithdrawals, nftMints] = await Promise.all([
-    depositsPromise,
-    withdrawalsPromise,
-    withdrawEarlysPromise,
-    emergencyWithdrawalsPromise,
-    nftMintsPromise,
-  ])
-
-  const events: UserActivity[] = await Promise.all(
-    deposits.concat(withdrawals, withdrawEarlys, emergencyWithdrawals, nftMints).map(async (event) => {
-      let { timestamp } = await web3.eth.getBlock(event.blockNumber)
-      if (typeof timestamp === 'string') {
-        timestamp = parseInt(timestamp)
-      }
       return {
-        type: getEventType(event),
-        data: event.returnValues,
+        type: getActivityType(event),
+        data: returnValues,
         timestamp,
       }
     }),
   )
-
-  return events
 }
+
+export default fetchDrFEvents
