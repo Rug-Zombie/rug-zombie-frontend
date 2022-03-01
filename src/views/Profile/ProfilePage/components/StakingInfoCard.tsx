@@ -71,7 +71,7 @@ const ClaimButton = styled.button`
   }
 `
 
-const ButtonText = styled.p`
+const ButtonText = styled.div`
   text-align: center;
   font: normal normal medium 16px/25px Poppins;
   letter-spacing: 0px;
