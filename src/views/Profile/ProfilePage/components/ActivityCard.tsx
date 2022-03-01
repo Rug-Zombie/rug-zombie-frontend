@@ -64,7 +64,17 @@ const ActivityText = styled.p`
   letter-spacing: 0px;
   color: #ffffff;
   flex-shrink: 2;
-  width: 65%; ;
+  width: 65%;;
+`
+
+const Loading = styled.p`
+  text-align: left;
+  font: normal normal 300 14px/40px Poppins;
+  letter-spacing: 0px;
+  color: #ffffff;
+  flex-shrink: 2;
+  width: 65%;;
+  padding-left: 50px;
 `
 
 const ProfilePage: React.FC = () => {
@@ -72,7 +82,9 @@ const ProfilePage: React.FC = () => {
 
   const getNftByAddress = (address: string) => nfts.find((n) => equalAddresses(getAddress(n.address), address))
 
-  const activities = useGetUserActivities().data
+  const activityState = useGetUserActivities()
+  const activities = activityState.data
+  const loaded = activityState.userDataLoaded
 
   const activityText = ({ type, data }: UserActivity) => {
     const amount = new BigNumber(data.amount)
@@ -102,14 +114,16 @@ const ProfilePage: React.FC = () => {
         if (tombPids().includes(pid)) {
           return (
             <ActivityText>
-              Unstaked {numeral(getBalanceNumber(amountWithdrawn)).format('(0.00 a)')} LP from {getDrFPoolName(pid)}{' '}
+              Unstaked {numeral(getBalanceNumber(amountWithdrawn)).format('(0.00 a)')} LP
+              from {getDrFPoolName(pid)}{' '}
               tomb
             </ActivityText>
           )
         }
         return (
           <ActivityText>
-            Withdrew {numeral(getBalanceNumber(amountWithdrawn)).format('(0.00 a)')} ZMBE from {getDrFPoolName(pid)}{' '}
+            Withdrew {numeral(getBalanceNumber(amountWithdrawn)).format('(0.00 a)')} ZMBE
+            from {getDrFPoolName(pid)}{' '}
             grave
           </ActivityText>
         )
@@ -139,19 +153,21 @@ const ProfilePage: React.FC = () => {
   return (
     <Card>
       <CardTitle>Activity</CardTitle>
-      <InnerCardDiv className="scroll">
+      <InnerCardDiv className='scroll'>
         <ActivitiesFlex>
-          {activities.map((activity) => {
-            // if (activity.type === UserActivityType.DrFHarvest) {
-            //   return null
-            // }
-            return (
-              <ActivityDiv>
-                <DateText>{formatDuration(now() - activity.timestamp, false, true)} ago</DateText>
-                <ActivityText>{activityText(activity)}</ActivityText>
-              </ActivityDiv>
-            )
-          })}
+          {/* eslint-disable-next-line no-nested-ternary */}
+          {loaded ? activities.length > 0 ? activities.map((activity) => {
+              // if (activity.type === UserActivityType.DrFHarvest) {
+              //   return null
+              // }
+              return (
+                <ActivityDiv>
+                  <DateText>{formatDuration(now() - activity.timestamp, false, true)} ago</DateText>
+                  <ActivityText>{activityText(activity)}</ActivityText>
+                </ActivityDiv>
+              )
+            }) : <Loading>No recent activity...</Loading>
+            : <Loading>Loading your activity...</Loading>}
         </ActivitiesFlex>
       </InnerCardDiv>
     </Card>

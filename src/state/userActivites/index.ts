@@ -10,6 +10,7 @@ export const userActivitySlice = createSlice({
   initialState,
   reducers: {
     setUserActivity: (state, action) => {
+      state.userDataLoaded = true
       state.data = action.payload
     },
   },
