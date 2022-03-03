@@ -11,7 +11,7 @@ import { fetchNftUserDataAsync } from '../../state/nfts'
 import { useGetNftById } from '../../state/hooks'
 import './Nfts.styles.css'
 import { getAddress } from '../../utils/addressHelpers'
-import { formatAddress } from '../../utils'
+import { formatAddress, getBscScanLink } from '../../utils'
 import { PreviewVideo, SmallPreviewVideo } from '../../components/Video/NftVideo'
 import Footer from '../../components/Footer'
 
@@ -165,7 +165,7 @@ const DetailName = styled.div`
   color: #777bab;
 `
 
-const DetailValue = styled.div`
+const DetailValue = styled.a`
   width: 50%;
   display: flex;
   flex-direction: column;
@@ -307,7 +307,7 @@ const Nfts: React.FC = () => {
               </DetailFlex>
               <DetailFlex>
                 <DetailName>Contract Address</DetailName>
-                <DetailValue>{formatAddress(getAddress(nft.address))}</DetailValue>
+                <DetailValue href={getBscScanLink(getAddress(nft.address), 'address')}>{formatAddress(getAddress(nft.address))}</DetailValue>
               </DetailFlex>
               <DetailFlex>
                 <DetailName>Token Standard</DetailName>

@@ -14,6 +14,7 @@ import ActivityCard from './components/ActivityCard'
 import StakingInfoCard from './components/StakingInfoCard'
 import NftCard from '../../Graveyard/components/Nfts/components/NftCard'
 import Page from '../../../components/layout/Page'
+import { fetchUserActivityAsync } from '../../../state/userActivites'
 
 const BannerImage = styled.img`
   min-width: 317px;
@@ -98,6 +99,11 @@ const ProfilePage: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchNftUserDataAsync(account))
+  }, [dispatch, account])
+  useEffect(() => {
+    if (account) {
+      dispatch(fetchUserActivityAsync(account))
+    }
   }, [dispatch, account])
 
   return (
