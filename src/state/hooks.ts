@@ -71,7 +71,7 @@ const selectFilteredGraves = createSelector(
       case 'NFT-only':
         return graves.data.filter((g) => !g.isRetired && g.poolInfo.allocPoint.isZero())
       case 'Retired':
-        return graves.data.filter((g) => g.isRetired)
+        return graves.data.filter((g) => g.isRetired || now() > g.endDate)
       case 'Legendary':
         return graves.data.filter((g) => nfts.data.find((n) => n.id === g.nftId).rarity === 'Legendary')
       case 'Rare':
