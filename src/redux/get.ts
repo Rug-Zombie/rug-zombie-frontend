@@ -12,9 +12,9 @@ import {
   BurnGrave,
   RugMarketListing,
 } from './types'
-import { getBalanceAmount } from '../utils/formatBalance'
-import { getId } from '../utils'
 import { Id } from '../config/constants/types'
+import { getId } from '../utils'
+import { getBalanceAmount } from '../utils/formatBalance'
 import * as actions from './actions'
 
 export const account = (): string => {
@@ -39,14 +39,6 @@ export const zombieTotalSupply = (): BigNumber => {
 
 export const zombiePriceBnb = (): BigNumber => {
   return store.getState().zombie.priceBnb
-}
-
-export const bnbPriceUsd = (): number => {
-  return store.getState().bnbPriceUsd
-}
-
-export const zombiePriceUsd = (): number => {
-  return zombiePriceBnb().times(bnbPriceUsd()).toNumber()
 }
 
 export const drFrankensteinZombieBalance = (): BigNumber => {
@@ -125,10 +117,6 @@ export const zmbeBnbLpPriceBnb = () => {
   const reservesBnb = [new BigNumber(reserves[0]).times(zombiePriceBnb()), getBalanceAmount(reserves[1])]
   const bnbLpTokenPrice = reservesBnb[0].plus(reservesBnb[1]).div(lpTotalSupply)
   return bnbLpTokenPrice
-}
-
-export const zmbeBnbLpPriceUsd = () => {
-  return zmbeBnbLpPriceBnb().times(bnbPriceUsd())
 }
 
 export const zmbePerZmbeBnbLp = () => {

@@ -4,7 +4,8 @@ import { BaseLayout, LinkExternal, Modal } from '@rug-zombie-libs/uikit'
 import useTheme from 'hooks/useTheme'
 import styled from 'styled-components'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { auctionById, bnbPriceUsd } from '../../redux/get'
+import { auctionById } from '../../redux/get'
+import { useGetBnbPriceUsd } from '../../state/hooks'
 import { getBalanceAmount } from '../../utils/formatBalance'
 
 interface PrizeModalProps {
@@ -110,7 +111,8 @@ const PrizeModal: React.FC<PrizeModalProps> = ({ id, setSwiper, onDismiss }) => 
                         <div className="direction-column">
                           <span className="indetails-type">
                             Unlock Fees: {getBalanceAmount(unlockFeeInBnb).toString()} BNB (
-                            {Math.round(getBalanceAmount(unlockFeeInBnb).times(bnbPriceUsd()).toNumber() * 100) / 100}{' '}
+                            {Math.round(getBalanceAmount(unlockFeeInBnb).times(useGetBnbPriceUsd()).toNumber() * 100) /
+                              100}{' '}
                             in USD)
                           </span>
                         </div>

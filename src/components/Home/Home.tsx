@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { initialSpawningPoolData, initialTombData } from 'redux/fetch'
-import { bnbPriceUsd, drFrankensteinZombieBalance, spawningPools, tombs, zombiePriceUsd } from 'redux/get'
+import { drFrankensteinZombieBalance, spawningPools, tombs } from 'redux/get'
 import { BIG_ZERO } from 'utils/bigNumber'
 import { getBalanceAmount } from 'utils/formatBalance'
 import { useMultiCall, useZombie } from 'hooks/useContract'
 import Footer from 'components/Footer'
+import { useGetBnbPriceUsd, useGetZombiePriceUsd } from '../../state/hooks'
 import Hero from './components/Hero'
 import NftSection from './components/NftSection'
 import TutorialSection from './components/TutorialSection'
@@ -28,7 +29,8 @@ const Home: React.FC = () => {
     return sp.poolInfo.totalZombieStaked.plus(accumulator)
   }, BIG_ZERO)
 
-  const zombiePrice = zombiePriceUsd()
+  const zombiePrice = useGetZombiePriceUsd()
+  const bnbPriceUsd = useGetBnbPriceUsd()
   let tombsTvl = BIG_ZERO
   tombs().forEach((t) => {
     const {
@@ -36,7 +38,7 @@ const Home: React.FC = () => {
     } = t
     const reservesUsd = [
       getBalanceAmount(reserves[0]).times(zombiePrice),
-      getBalanceAmount(reserves[1]).times(bnbPriceUsd()),
+      getBalanceAmount(reserves[1]).times(bnbPriceUsd),
     ]
     const bnbLpTokenPrice = reservesUsd[0].plus(reservesUsd[1]).div(lpTotalSupply)
     tombsTvl = tombsTvl.plus(totalStaked.times(bnbLpTokenPrice))

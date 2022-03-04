@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { BaseLayout, Flex, useMatchBreakpoints } from '@rug-zombie-libs/uikit'
 import styled from 'styled-components'
 import { getBalanceAmount, getDecimalAmount, getFullDisplayBalance } from 'utils/formatBalance'
-import { account, bnbPriceUsd, tombs, zmbeBnbTomb, zombiePriceUsd } from 'redux/get'
+import { account, tombs, zmbeBnbTomb } from 'redux/get'
 import { useDrFrankenstein, useMultiCall } from 'hooks/useContract'
+import { useGetBnbPriceUsd, useGetZombiePriceUsd } from '../../../../state/hooks'
 import { BIG_ZERO } from '../../../../utils/bigNumber'
 import { initialTombData } from '../../../../redux/fetch'
 import { getId } from '../../../../utils'
@@ -39,8 +40,8 @@ const StakedTombs: React.FC = () => {
   const { isLg, isXl } = useMatchBreakpoints()
   const isDesktop = isLg || isXl
   const reservesUsd = [
-    getBalanceAmount(reserves[0]).times(zombiePriceUsd()),
-    getBalanceAmount(reserves[1]).times(bnbPriceUsd()),
+    getBalanceAmount(reserves[0]).times(useGetZombiePriceUsd()),
+    getBalanceAmount(reserves[1]).times(useGetBnbPriceUsd()),
   ]
   const lpTokenPrice = reservesUsd[0].plus(reservesUsd[1]).div(lpTotalSupply)
 

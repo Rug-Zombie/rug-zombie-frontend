@@ -2,12 +2,17 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useWeb3React } from '@web3-react/core'
 import { useAppDispatch } from '../../../../state'
-import { useGetGraves, useGetSpawningPools, useGetTombs } from '../../../../state/hooks'
+import {
+  useGetBnbPriceUsd,
+  useGetGraves,
+  useGetSpawningPools,
+  useGetTombs,
+  useGetZombiePriceUsd,
+} from '../../../../state/hooks'
 import '../../Profile.Styles.css'
 import { BIG_ZERO } from '../../../../utils/bigNumber'
 import { fetchGravesUserDataAsync } from '../../../../state/graves'
 import { getBalanceNumber, getFullDisplayBalance } from '../../../../utils/formatBalance'
-import { bnbPriceUsd, zombiePriceUsd } from '../../../../redux/get'
 import { now } from '../../../../utils/timerHelpers'
 import { fetchSpawningPoolsPublicDataAsync, fetchSpawningPoolsUserDataAsync } from '../../../../state/spawningPools'
 import { fetchTombsPublicDataAsync, fetchTombsUserDataAsync } from '../../../../state/tombs'
@@ -128,6 +133,7 @@ const ProfilePage: React.FC = () => {
     { amount: BIG_ZERO, pending: BIG_ZERO, nfts: 0 },
   )
 
+  const bnbPriceUsd = useGetBnbPriceUsd()
   const spawningPoolSum = useGetSpawningPools().data.reduce(
     (
       sum,
@@ -142,7 +148,7 @@ const ProfilePage: React.FC = () => {
       if (amount.gt(0)) {
         stakedSpawningPoolAddresses.push(getAddress(address))
       }
-      const rewardTokenPrice = rewardTokenPriceBnb.times(bnbPriceUsd()).toNumber()
+      const rewardTokenPrice = rewardTokenPriceBnb.times(bnbPriceUsd).toNumber()
       return {
         amount: sum.amount.plus(amount),
         pendingValueUsd: unknownPrice
@@ -159,7 +165,7 @@ const ProfilePage: React.FC = () => {
       if (amount.gt(0)) {
         stakedTombIds.push(getId(pid))
       }
-      const lpPrice = lpPriceBnb.times(bnbPriceUsd()).toNumber()
+      const lpPrice = lpPriceBnb.times(bnbPriceUsd).toNumber()
       return {
         amount: sum.amount.plus(amount),
         amountValueUsd: sum.amountValueUsd + getBalanceNumber(amount.times(lpPrice)),
@@ -187,6 +193,7 @@ const ProfilePage: React.FC = () => {
     )
   }
 
+  const zombiePriceUsd = useGetZombiePriceUsd()
   return (
     <Card>
       <CardTitle style={{ fontWeight: 'normal' }}>Staking Info</CardTitle>
@@ -202,8 +209,8 @@ const ProfilePage: React.FC = () => {
           <Value>{getFullDisplayBalance(graveSum.pending, 18, 2)} ZMBE</Value>
         </Row>
         <Row>
-          <SubTitle>${getFullDisplayBalance(graveSum.amount.times(zombiePriceUsd()), 18, 2)}</SubTitle>
-          <SubTitle>${getFullDisplayBalance(graveSum.pending.times(zombiePriceUsd()), 18, 2)}</SubTitle>
+          <SubTitle>${getFullDisplayBalance(graveSum.amount.times(zombiePriceUsd), 18, 2)}</SubTitle>
+          <SubTitle>${getFullDisplayBalance(graveSum.pending.times(zombiePriceUsd), 18, 2)}</SubTitle>
         </Row>
         <Row>
           <ClaimButton onClick={claimGraves}>
@@ -226,7 +233,7 @@ const ProfilePage: React.FC = () => {
         </Row>
         <Row>
           <SubTitle>${tombSum.amountValueUsd.toFixed(2)}</SubTitle>
-          <SubTitle>${getFullDisplayBalance(tombSum.pending.times(zombiePriceUsd()), 18, 2)}</SubTitle>
+          <SubTitle>${getFullDisplayBalance(tombSum.pending.times(zombiePriceUsd), 18, 2)}</SubTitle>
         </Row>
         <Row>
           <ClaimButton onClick={claimTombs}>
@@ -248,7 +255,7 @@ const ProfilePage: React.FC = () => {
           <Value>${spawningPoolSum.pendingValueUsd.toFixed(2)}</Value>
         </Row>
         <Row>
-          <SubTitle>${getFullDisplayBalance(spawningPoolSum.amount.times(zombiePriceUsd()), 18, 2)}</SubTitle>
+          <SubTitle>${getFullDisplayBalance(spawningPoolSum.amount.times(zombiePriceUsd), 18, 2)}</SubTitle>
           <SubTitle>
             {spawningPoolSum.nfts} {spawningPoolSum.nfts === 1 ? 'NFT' : 'NFTS'} Ready
           </SubTitle>

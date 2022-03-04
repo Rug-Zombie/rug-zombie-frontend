@@ -4,8 +4,7 @@ import styled from 'styled-components'
 import numeral from 'numeral'
 import { BIG_ZERO } from '../../../../utils/bigNumber'
 import { getBalanceNumber } from '../../../../utils/formatBalance'
-import { zombiePriceUsd } from '../../../../redux/get'
-import { useGetGraveByPid, useGetGraves } from '../../../../state/hooks'
+import { useGetGraveByPid, useGetGraves, useGetZombiePriceUsd } from '../../../../state/hooks'
 import { getId } from '../../../../utils'
 
 const InfoCard = styled.header`
@@ -98,10 +97,11 @@ const HeaderCard: React.FC = () => {
     { amount: BIG_ZERO, totalAmount: BIG_ZERO },
   )
 
+  const zombiePriceUsd = useGetZombiePriceUsd()
   const legacyGraveTvl =
-    getBalanceNumber(useGetGraveByPid(0).poolInfo.tokenAmount.minus(graveSum.totalAmount)) * zombiePriceUsd()
-  const graveTvl = getBalanceNumber(graveSum.totalAmount) * zombiePriceUsd() + legacyGraveTvl
-  const userTvl = getBalanceNumber(graveSum.amount) * zombiePriceUsd()
+    getBalanceNumber(useGetGraveByPid(0).poolInfo.tokenAmount.minus(graveSum.totalAmount)) * zombiePriceUsd
+  const graveTvl = getBalanceNumber(graveSum.totalAmount) * zombiePriceUsd + legacyGraveTvl
+  const userTvl = getBalanceNumber(graveSum.amount) * zombiePriceUsd
 
   return (
     <>

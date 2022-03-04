@@ -123,38 +123,23 @@ export interface GraveState {
   userDataLoaded: boolean
 }
 
-// API Price State
-export interface PriceApiList {
-  /* eslint-disable camelcase */
-  [key: string]: {
-    name: string
-    symbol: string
-    price: string
-    price_BNB: string
-  }
+export interface TokenPrices {
+  priceUsd: number
+  priceBnb: number
 }
 
-export interface PriceApiListThunk {
-  /* eslint-disable camelcase */
-  [key: string]: number
-}
-
-export interface PriceApiResponse {
-  /* eslint-disable camelcase */
-  updated_at: string
-  data: PriceApiList
+export interface TokenPriceMap {
+  [key: string]: TokenPrices
 }
 
 export interface PriceApiThunk {
-  /* eslint-disable camelcase */
-  updated_at: string
-  data: PriceApiListThunk
+  updatedAt: string
+  prices: TokenPriceMap
 }
 
 export interface PriceState {
-  isLoading: boolean
   lastUpdated: string
-  data: PriceApiListThunk
+  prices: { [key: string]: TokenPrices }
 }
 
 // Block

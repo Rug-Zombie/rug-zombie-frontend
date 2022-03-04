@@ -140,4 +140,5 @@ export const useGetUserActivities = () => {
   return useSelector((state: State) => state.userActivity)
 }
 
+export { useGetZombiePriceUsd, useGetBnbPriceUsd } from './prices/hooks'
 export { useGetNfts, useGetNftById, useGetNftTotalSupply } from './nfts/hooks'

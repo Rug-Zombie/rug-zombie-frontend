@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import tokens from 'config/constants/tokens'
 import uppointer from 'images/spawningPools/Hide_Dropdown.svg'
 import downpointer from 'images/spawningPools/Dropdown_icon.svg'
-import { bnbPriceUsd, zombiePriceUsd } from 'redux/get'
 import { Token } from 'config/constants/types'
+import { useGetBnbPriceUsd, useGetZombiePriceUsd } from '../../../../../../state/hooks'
 import { SpawningPool } from '../../../../../../state/types'
 import { getBalanceNumber, getFullDisplayBalance } from '../../../../../../utils/formatBalance'
 import { getSpawningPoolApr } from '../../../../../../utils/apr'
@@ -139,12 +139,13 @@ const Top: React.FC<TopProps> = ({ spawningPool, open, setOpen }) => {
   const tokenImage = (token: Token) => {
     return token.tokenLogo ? token.tokenLogo : `images/tokens/${token.symbol}.png`
   }
-  const bigTvl = totalAmount.times(zombiePriceUsd())
-  const tvl = getBalanceNumber(bigTvl)
+  const zombiePriceUsd = useGetZombiePriceUsd()
+  const bigTvl = totalAmount.times(zombiePriceUsd)
 
-  const rewardTokenPrice = rewardTokenPriceBnb.times(bnbPriceUsd()).toNumber()
+  const tvl = getBalanceNumber(bigTvl)
+  const rewardTokenPrice = rewardTokenPriceBnb.times(useGetBnbPriceUsd()).toNumber()
   const yearly = getSpawningPoolApr(
-    zombiePriceUsd(),
+    zombiePriceUsd,
     rewardTokenPrice,
     getBalanceNumber(totalAmount),
     getBalanceNumber(rewardPerBlock, rewardToken.decimals),

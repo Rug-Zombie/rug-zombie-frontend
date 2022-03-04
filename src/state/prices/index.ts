@@ -1,44 +1,34 @@
 /* eslint-disable no-param-reassign */
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { PriceApiResponse, PriceApiThunk, PriceState } from 'state/types'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { PriceApiThunk, PriceState } from 'state/types'
+import fetchPrices from './fetchPrices'
 
 const initialState: PriceState = {
-  isLoading: false,
   lastUpdated: null,
-  data: null,
+  prices: {},
 }
-
-// Thunks
-export const fetchPrices = createAsyncThunk<PriceApiThunk>('prices/fetch', async () => {
-  const response = await fetch('https://api.pancakeswap.info/api/v2/tokens')
-  const data = (await response.json()) as PriceApiResponse
-
-  // Return normalized token names
-  return {
-    updated_at: data.updated_at,
-    data: Object.keys(data.data).reduce((accum, token) => {
-      return {
-        ...accum,
-        [token.toLowerCase()]: parseFloat(data.data[token].price),
-      }
-    }, {}),
-  }
-})
 
 export const pricesSlice = createSlice({
   name: 'prices',
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(fetchPrices.pending, (state) => {
-      state.isLoading = true
-    })
-    builder.addCase(fetchPrices.fulfilled, (state, action: PayloadAction<PriceApiThunk>) => {
-      state.isLoading = false
-      state.lastUpdated = action.payload.updated_at
-      state.data = action.payload.data
-    })
+  reducers: {
+    setPrices: (state, action: PayloadAction<PriceApiThunk>) => {
+      const { updatedAt, prices } = action.payload
+
+      Object.entries(prices).forEach(([token, tokenPrices]) => {
+        state.prices[token] = tokenPrices
+      })
+      state.lastUpdated = updatedAt
+    },
   },
 })
+
+export const { setPrices } = pricesSlice.actions
+
+// Thunks
+export const fetchPricesAsync = () => async (dispatch) => {
+  const prices = await fetchPrices()
+  dispatch(setPrices(prices))
+}
 
 export default pricesSlice.reducer
