@@ -1,21 +1,9 @@
-import { BigNumber } from 'bignumber.js'
 import axios from 'axios'
-import store from './store'
-import {
-  Grave,
-  Tomb,
-  SpawningPool,
-  UserInfo,
-  Auction,
-  TombOverlay,
-  SharkPool,
-  BurnGrave,
-  RugMarketListing,
-} from './types'
-import { Id } from '../config/constants/types'
+import { BigNumber } from 'bignumber.js'
 import { getId } from '../utils'
-import { getBalanceAmount } from '../utils/formatBalance'
 import * as actions from './actions'
+import store from './store'
+import { Auction, BurnGrave, Grave, RugMarketListing, SharkPool, SpawningPool, UserInfo } from './types'
 
 export const account = (): string => {
   return store.getState().account
@@ -37,10 +25,6 @@ export const zombieTotalSupply = (): BigNumber => {
   return store.getState().zombie.totalSupply
 }
 
-export const zombiePriceBnb = (): BigNumber => {
-  return store.getState().zombie.priceBnb
-}
-
 export const drFrankensteinZombieBalance = (): BigNumber => {
   return store.getState().drFrankenstein.zombieBalance
 }
@@ -49,20 +33,8 @@ export const totalAllocPoint = (): BigNumber => {
   return store.getState().drFrankenstein.totalAllocPoint
 }
 
-export const tombByPid = (pid: number): Tomb => {
-  return store.getState().tombs.find((t) => getId(t.pid) === pid)
-}
-
 export const coingeckoPrice = (id: string) => {
   return axios.get(`https://api.coingecko.com/api/v3/simple/price?ids=${id}&vs_currencies=usd`)
-}
-
-export const zmbeBnbTomb = (): Tomb => {
-  const pancakeZmbeBnbTombPid: Id = {
-    56: 11,
-    97: 2,
-  }
-  return tombByPid(getId(pancakeZmbeBnbTombPid))
 }
 
 export const graveByPid = (pid: number): Grave => {
@@ -97,45 +69,12 @@ export const grave = (pid: number): Grave => {
   return store.getState().graves.find((g) => getId(g.pid) === pid)
 }
 
-export const tombs = (): Tomb[] => {
-  return store.getState().tombs
-}
-
 export const auctions = (): Auction[] => {
   return store.getState().auctions
 }
 
 export const auctionById = (id: number): Auction => {
   return auctions().find((a) => a.id === id)
-}
-
-// store lpreserves
-export const zmbeBnbLpPriceBnb = () => {
-  const {
-    poolInfo: { reserves, lpTotalSupply },
-  } = zmbeBnbTomb()
-  const reservesBnb = [new BigNumber(reserves[0]).times(zombiePriceBnb()), getBalanceAmount(reserves[1])]
-  const bnbLpTokenPrice = reservesBnb[0].plus(reservesBnb[1]).div(lpTotalSupply)
-  return bnbLpTokenPrice
-}
-
-export const zmbePerZmbeBnbLp = () => {
-  const {
-    poolInfo: { reserves, lpTotalSupply },
-  } = zmbeBnbTomb()
-  return reserves[0].div(lpTotalSupply)
-}
-
-export const tombOverlays = (): TombOverlay[] => {
-  return store.getState().tombOverlays
-}
-
-export const tombOverlayByPoolId = (poolId: number): TombOverlay => {
-  return store.getState().tombOverlays.find((t) => getId(t.pid) === poolId)
-}
-
-export const tombOverlayById = (id: number): TombOverlay => {
-  return store.getState().tombOverlays.find((t) => t.id === id)
 }
 
 export const burnGraves = (): BurnGrave[] => {

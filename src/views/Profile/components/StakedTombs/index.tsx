@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { BaseLayout, Flex, useMatchBreakpoints } from '@rug-zombie-libs/uikit'
 import styled from 'styled-components'
-import { getBalanceAmount, getDecimalAmount, getFullDisplayBalance } from 'utils/formatBalance'
-import { account, tombs, zmbeBnbTomb } from 'redux/get'
-import { useDrFrankenstein, useMultiCall } from 'hooks/useContract'
-import { useGetBnbPriceUsd, useGetZombiePriceUsd } from '../../../../state/hooks'
+import { getDecimalAmount, getFullDisplayBalance } from 'utils/formatBalance'
+import { account } from 'redux/get'
+import { useDrFrankenstein } from 'hooks/useContract'
+import { useGetBnbPriceUsd, useGetUserStakedTombs, useGetZombieBnbTomb } from '../../../../state/hooks'
 import { BIG_ZERO } from '../../../../utils/bigNumber'
-import { initialTombData } from '../../../../redux/fetch'
 import { getId } from '../../../../utils'
 
 const TableCards = styled(BaseLayout)`
@@ -30,20 +29,13 @@ const DisplayFlex = styled(BaseLayout)`
 
 const StakedTombs: React.FC = () => {
   const drFrankenstein = useDrFrankenstein()
-  const stakedTombs = tombs().filter((t) => !t.userInfo.amount.isZero())
-  const [updateTombUserInfo, setUpdateTombUserInfo] = useState(0)
-  const [updateTombPoolInfo, setUpdateTombPoolInfo] = useState(0)
-  const multi = useMultiCall()
+  const stakedTombs = useGetUserStakedTombs()
   const {
-    poolInfo: { reserves, lpTotalSupply },
-  } = zmbeBnbTomb()
+    poolInfo: { lpPriceBnb },
+  } = useGetZombieBnbTomb()
   const { isLg, isXl } = useMatchBreakpoints()
   const isDesktop = isLg || isXl
-  const reservesUsd = [
-    getBalanceAmount(reserves[0]).times(useGetZombiePriceUsd()),
-    getBalanceAmount(reserves[1]).times(useGetBnbPriceUsd()),
-  ]
-  const lpTokenPrice = reservesUsd[0].plus(reservesUsd[1]).div(lpTotalSupply)
+  const lpTokenPrice = lpPriceBnb.times(useGetBnbPriceUsd())
 
   const lpStaked = () => {
     let total = BIG_ZERO
@@ -66,15 +58,6 @@ const StakedTombs: React.FC = () => {
       drFrankenstein.methods.withdraw(getId(t.pid), 0).send({ from: account() })
     })
   }
-
-  useEffect(() => {
-    if (updateTombUserInfo === 0) {
-      initialTombData(
-        { update: updateTombPoolInfo, setUpdate: setUpdateTombPoolInfo },
-        { update: updateTombUserInfo, setUpdate: setUpdateTombUserInfo },
-      )
-    }
-  }, [drFrankenstein.methods, multi, updateTombPoolInfo, updateTombUserInfo])
 
   const buttonStyle = isDesktop ? {} : { fontSize: '10px' }
   return (

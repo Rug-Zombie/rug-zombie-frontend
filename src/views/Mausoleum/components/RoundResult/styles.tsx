@@ -5,8 +5,8 @@ import { formatBnb } from 'views/Mausoleum/helpers'
 import { useTranslation } from 'contexts/Localization'
 import { BetPosition, Round } from 'state/types'
 import { BigNumber } from 'bignumber.js'
-import { auctionById, zmbePerZmbeBnbLp } from '../../../../redux/get'
-import { useGetBnbPriceUsd } from '../../../../state/hooks'
+import { auctionById } from '../../../../redux/get'
+import { useGetBnbPriceUsd, useGetZombiePerZombieBnbLp } from '../../../../state/hooks'
 import { formatNumber, getBalanceAmount } from '../../../../utils/formatBalance'
 
 // PrizePoolRow
@@ -46,6 +46,7 @@ export const UsdPriceRow: React.FC<LockPriceRowProps> = ({ id, bid, ...props }) 
   const { version } = auctionById(id)
   const v3 = version === 'v3'
   const bnbPriceUsd = useGetBnbPriceUsd()
+  const zombiePerZombieBnbLp = useGetZombiePerZombieBnbLp()
   return (
     <>
       {v3 ? (
@@ -58,7 +59,7 @@ export const UsdPriceRow: React.FC<LockPriceRowProps> = ({ id, bid, ...props }) 
           <Flex alignItems="center" justifyContent="space-between" {...props}>
             <Text fontSize="14px">{t('ZMBE Burned')}:</Text>
             <Text fontSize="14px">
-              {formatNumber(getBalanceAmount(zmbePerZmbeBnbLp().times(quarterBid * 3)).toNumber())}
+              {formatNumber(getBalanceAmount(zombiePerZombieBnbLp.times(quarterBid * 3)).toNumber())}
             </Text>
           </Flex>
           <Flex alignItems="center" justifyContent="space-between" {...props}>

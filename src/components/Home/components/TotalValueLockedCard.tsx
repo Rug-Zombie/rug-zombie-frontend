@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Card, CardBody, Heading, Text } from '@rug-zombie-libs/uikit'
 import numeral from 'numeral'
-import { useGetBnbPriceUsd, useGetZombiePriceUsd } from '../../../state/hooks'
+import { useGetTombsTvlUsd, useGetZombiePriceUsd } from '../../../state/hooks'
 import { getBalanceAmount } from '../../../utils/formatBalance'
-import { drFrankensteinZombieBalance, tombs, spawningPools } from '../../../redux/get'
-import { initialTombData, initialSpawningPoolData } from '../../../redux/fetch'
+import { drFrankensteinZombieBalance, spawningPools } from '../../../redux/get'
+import { initialSpawningPoolData } from '../../../redux/fetch'
 
 import { useMultiCall, useZombie } from '../../../hooks/useContract'
 import { BIG_ZERO } from '../../../utils/bigNumber'
@@ -29,9 +29,6 @@ const TotalValueLockedCard: React.FC = () => {
   const zombie = useZombie()
   const [updatePoolInfo, setUpdatePoolInfo] = useState(0)
   useEffect(() => {
-    initialTombData()
-  }, [])
-  useEffect(() => {
     if (updatePoolInfo === 0) {
       initialSpawningPoolData(zombie, { update: updatePoolInfo, setUpdate: setUpdatePoolInfo })
     }
@@ -42,19 +39,7 @@ const TotalValueLockedCard: React.FC = () => {
   }, BIG_ZERO)
 
   const zombiePrice = useGetZombiePriceUsd()
-  const bnbPriceUsd = useGetBnbPriceUsd()
-  let tombsTvl = BIG_ZERO
-  tombs().forEach((t) => {
-    const {
-      poolInfo: { reserves, lpTotalSupply, totalStaked },
-    } = t
-    const reservesUsd = [
-      getBalanceAmount(reserves[0]).times(zombiePrice),
-      getBalanceAmount(reserves[1]).times(bnbPriceUsd),
-    ]
-    const bnbLpTokenPrice = reservesUsd[0].plus(reservesUsd[1]).div(lpTotalSupply)
-    tombsTvl = tombsTvl.plus(totalStaked.times(bnbLpTokenPrice))
-  })
+  const tombsTvl = useGetTombsTvlUsd()
 
   const zombieBalance = getBalanceAmount(drFrankensteinZombieBalance()).times(zombiePrice)
   const spawningPoolTvl = getBalanceAmount(totalSpawningPoolStaked).times(zombiePrice)

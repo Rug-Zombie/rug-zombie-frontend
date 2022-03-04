@@ -5,7 +5,8 @@ import { formatBnb } from 'views/Mausoleum/helpers'
 import { useTranslation } from 'contexts/Localization'
 import { BetPosition, Round } from 'state/types'
 import { BigNumber } from 'bignumber.js'
-import { auctionById, zmbeBnbLpPriceBnb } from '../../../../redux/get'
+import { auctionById } from '../../../../redux/get'
+import { useGetZombieBnbLpPriceBnb } from '../../../../state/hooks'
 import { formatNumber, getBalanceAmount } from '../../../../utils/formatBalance'
 
 // PrizePoolRow
@@ -49,7 +50,7 @@ export const LockPriceRow: React.FC<LockPriceRowProps> = ({ id, bid, ...props })
       <Flex alignItems="center" justifyContent="space-between" {...props}>
         <Text fontSize="14px">{t('ZMBE Burned')}:</Text>
         <Text fontSize="14px">
-          {formatNumber(getBalanceAmount(zmbeBnbLpPriceBnb().times(quarterBid * 3)).toNumber())}
+          {formatNumber(getBalanceAmount(useGetZombieBnbLpPriceBnb().times(quarterBid * 3)).toNumber())}
         </Text>
       </Flex>
       <Flex alignItems="center" justifyContent="space-between" {...props}>
