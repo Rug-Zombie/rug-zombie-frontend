@@ -1,100 +1,91 @@
 /* eslint-disable no-param-reassign */
 import React, { useEffect, useState } from 'react'
-import PageHeader from 'components/PageHeader'
-import { Flex, Heading, LinkExternal } from '@rug-zombie-libs/uikit'
 import { useWeb3React } from '@web3-react/core'
-import { getSpawningPoolAddress } from 'utils/addressHelpers'
+import styled from 'styled-components'
 import Page from '../../components/layout/Page'
-import Table from './components/Table'
 import './SpawningPools.Styles.css'
-import { initialSpawningPoolData, spawningPool } from '../../redux/fetch'
-import * as get from '../../redux/get'
-import { useZombie } from '../../hooks/useContract'
-import { spawningPools } from '../../redux/get'
-import SpawningPoolTabButtons from './components/SpawningPoolTabButtons'
+import HeaderCard from './components/HeaderCard'
+import Filter from './components/Filter'
+import SpawningPoolTable from './components/SpawningPoolTable'
+import Footer from '../../components/Footer'
+import { useAppDispatch } from '../../state'
+import { fetchSpawningPoolsPublicDataAsync, fetchSpawningPoolsUserDataAsync } from '../../state/spawningPools'
+import { useGetFilteredSpawningPools } from '../../state/hooks'
 
-let accountAddress
-const now = Math.floor(Date.now() / 1000)
+const SpawningPoolPage = styled(Page)`
+  min-width: 80vw;
+`
 
-const filterPools = (i) => {
-  switch(i) {
-    case 0: // Live
-      return spawningPools()
-    case 1: // Ended
-      return spawningPools().filter(sp => sp.endDate < now)
-    default:
-      return spawningPools()
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  @media (max-width: 1279px) {
+    max-width: 748px;
   }
-}
+`
+
+const Header = styled.div`
+  max-width: 15vw;
+  min-width: 266px;
+  margin: 0 20px 0 0;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 1279px) {
+    max-width: 100vw;
+    margin: 10px auto;
+  }
+`
+
+const SpawningPoolsColumn = styled.div`
+  max-width: 70vw;
+  min-width: 50vw;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  @media (max-width: 1279px) {
+    max-width: 100%;
+    flex-grow: 1;
+    margin: 0 auto;
+  }
+`
 
 const SpawningPools: React.FC = () => {
   const { account } = useWeb3React()
-  const zombie = useZombie()
-  const [isAllowance, setIsAllowance] = useState(false)
-  const id = 0
-  const [updatePoolInfo, setUpdatePoolInfo] = useState(0)
-  const [updateUserInfo, setUpdateUserInfo] = useState(0)
-  const [filter, setFilter] = useState(0)
-  const [stakedOnly, setStakedOnly] = useState(false)
+  const dispatch = useAppDispatch()
   useEffect(() => {
-    if(account) {
-      if(updateUserInfo === 0) {
-        initialSpawningPoolData(zombie, undefined,{update: updateUserInfo, setUpdate: setUpdateUserInfo})
-      }
-    } else if(updatePoolInfo === 0) {
-        initialSpawningPoolData(zombie, {update: updatePoolInfo, setUpdate: setUpdatePoolInfo})
+    dispatch(fetchSpawningPoolsPublicDataAsync())
+    if (account) {
+      dispatch(fetchSpawningPoolsUserDataAsync(account))
     }
+  }, [dispatch, account])
 
-  }, [account, updatePoolInfo, updateUserInfo, zombie])
+  const [filter, setFilter] = useState('All graves')
+  const [search, setSearch] = useState('')
 
-  accountAddress = account
-  const [bnbInBusd, ] = useState(0)
-
-  const updateResult = (pid) => {
-    spawningPool(pid, zombie)
-  }
-    const updateAllowance = (tokenContact, pid) => {
-      tokenContact.methods.allowance(accountAddress, getSpawningPoolAddress(id)).call()
-        .then(res => {
-          if (parseInt(res.toString()) !== 0) {
-            setIsAllowance(true)
-          } else {
-            setIsAllowance(false)
-          }
-          updateResult(pid)
-        })
-    }
-
-  const visiblePools = stakedOnly ? filterPools(filter).filter(sp => !sp.userInfo.amount.isZero()) : filterPools(filter).filter(sp => sp.endDate > now || filter === 1)
+  const spawningPools = useGetFilteredSpawningPools([search, filter])
+  const handleFilter = (condition: string) => setFilter(condition)
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)
 
   return (
     <>
-      <PageHeader background="#101820">
-        <Flex justifyContent='space-between' flexDirection={['column', null, 'row']}>
-          <Flex flexDirection='column' mr={['8px', 0]}>
-            <Heading as='h1' size='xxl' color='secondary' mb='24px'>
-              Spawning Pools
-            </Heading>
-            <Heading size='md' color='text'>
-              Earn partner project tokens and NFTs by staking $ZMBE
-            </Heading>
-            <br/>
-            <LinkExternal href="https://rugzombie.medium.com/happy-spawntemberfest-eca586d78b6b">
-              Spawntemberfest release schedule
-            </LinkExternal>
-          </Flex>
-        </Flex>
-      </PageHeader>
-      <Page>
-        <SpawningPoolTabButtons setFilter={setFilter} stakedOnly={stakedOnly} setStakedOnly={setStakedOnly} />
-      <div>
-        {visiblePools.map((g) => {
-          return <Table zombieUsdPrice={get.zombiePriceUsd()}
-                        updateResult={updateResult} updateAllowance={updateAllowance} bnbInBusd={bnbInBusd}
-                        isAllowance={isAllowance} key={g.id} id={g.id} account={accountAddress} />
-        })}
-      </div>
-    </Page>
+      <SpawningPoolPage>
+        <Row>
+          <Header>
+            <HeaderCard />
+          </Header>
+          <SpawningPoolsColumn>
+            <Filter searchValue={search} handleFilter={handleFilter} handleSearch={handleSearch} />
+            {spawningPools.map((sp) => {
+              return <SpawningPoolTable spawningPool={sp} key={sp.id} />
+            })}
+          </SpawningPoolsColumn>
+        </Row>
+      </SpawningPoolPage>
+      <Footer />
     </>
   )
 }

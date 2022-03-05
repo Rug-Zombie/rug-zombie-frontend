@@ -3,7 +3,6 @@ import { Route, Redirect } from 'react-router-dom'
 import { routes } from 'routes'
 
 const PrivateRoute = ({ component: Component, authenticated, ...rest }) => {
-  console.log(Component, "hi")
   return (
     <Route
       {...rest}
@@ -23,4 +22,4 @@ const PrivateRoute = ({ component: Component, authenticated, ...rest }) => {
   )
 }
 
-export default PrivateRoute;
+export default PrivateRoute

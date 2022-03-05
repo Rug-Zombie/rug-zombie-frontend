@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { BalanceInput, Button, Flex, Image, Modal, Slider, Text } from '@rug-zombie-libs/uikit';
-import useTheme from 'hooks/useTheme';
+import React, { useState, useEffect } from 'react'
+import styled from 'styled-components'
+import { BalanceInput, Button, Flex, Image, Modal, Slider, Text } from '@rug-zombie-libs/uikit'
+import useTheme from 'hooks/useTheme'
 import { account, coingeckoPrice, burnGraveById } from 'redux/get'
-import { getBalanceAmount, getDecimalAmount, getFullDisplayBalance } from 'utils/formatBalance';
-import BigNumber from 'bignumber.js';
+import { getBalanceAmount, getDecimalAmount, getFullDisplayBalance } from 'utils/formatBalance'
+import BigNumber from 'bignumber.js'
 import { useDrBurnenstein } from 'hooks/useContract'
-import { useTranslation } from 'contexts/Localization';
-import useToast from 'hooks/useToast';
-import { BIG_TEN, BIG_ZERO } from 'utils/bigNumber';
+import { useTranslation } from 'contexts/Localization'
+import useToast from 'hooks/useToast'
+import { BIG_TEN, BIG_ZERO } from 'utils/bigNumber'
 
 const StyledButton = styled(Button)`
-    flex-grow: 1;
+  flex-grow: 1;
 `
 
 export interface DecreaseStakeModalProps {
-  id: number,
-  updateResult: any,
+  id: number
+  updateResult: any
   onDismiss?: () => void
 }
 
-const DecreaseStakeModal:React.FC<DecreaseStakeModalProps> = ({ id, updateResult, onDismiss }) => {
+const DecreaseStakeModal: React.FC<DecreaseStakeModalProps> = ({ id, updateResult, onDismiss }) => {
   const grave = burnGraveById(id)
   const [stakeAmount, setStakeAmount] = useState(new BigNumber(grave.poolInfo.minimumStake))
   const [percent, setPercent] = useState(0)
@@ -29,16 +29,16 @@ const DecreaseStakeModal:React.FC<DecreaseStakeModalProps> = ({ id, updateResult
   const wallet = account()
   const { theme } = useTheme()
   const graveContract = useDrBurnenstein()
-  const { toastSuccess } = useToast()
+  const { toastDefault } = useToast()
   const { t } = useTranslation()
 
   useEffect(() => {
     if (grave.geckoId) {
-      coingeckoPrice(grave.geckoId).then(res => {
+      coingeckoPrice(grave.geckoId).then((res) => {
         setStakeTokenPrice(res.data[grave.geckoId].usd)
       })
     }
-  }, [ grave, setStakeTokenPrice ])
+  }, [grave, setStakeTokenPrice])
 
   let withdrawalDetails = <div />
   let isDisabled = false
@@ -53,14 +53,14 @@ const DecreaseStakeModal:React.FC<DecreaseStakeModalProps> = ({ id, updateResult
     const distanceFromMax = Math.abs(bigInputValue.minus(grave.userInfo.stakedAmount).toNumber())
 
     if (distanceFromPartialMax < ether.toNumber()) {
-      bigInputValue = maxPartialAmount;
+      bigInputValue = maxPartialAmount
     }
 
     if (distanceFromMax < ether.toNumber()) {
       bigInputValue = new BigNumber(grave.userInfo.stakedAmount)
     }
 
-    setStakeAmount(bigInputValue);
+    setStakeAmount(bigInputValue)
   }
 
   const staked = new BigNumber(grave.userInfo.stakedAmount)
@@ -91,10 +91,12 @@ const DecreaseStakeModal:React.FC<DecreaseStakeModalProps> = ({ id, updateResult
       formattedAmount = formattedAmount.substring(0, index)
     }
 
-    graveContract.methods.leaveStaking(id, formattedAmount).send({ from: wallet })
+    graveContract.methods
+      .leaveStaking(id, formattedAmount)
+      .send({ from: wallet })
       .then(() => {
         updateResult(id)
-        toastSuccess(t(`Withdrew ${grave.stakingToken.symbol}`))
+        toastDefault(t(`Withdrew ${grave.stakingToken.symbol}`))
         onDismiss()
       })
   }
@@ -102,37 +104,54 @@ const DecreaseStakeModal:React.FC<DecreaseStakeModalProps> = ({ id, updateResult
   if (stakeAmount.gt(grave.userInfo.stakedAmount)) {
     isDisabled = true
     withdrawalDetails = (
-      <Text mt='8px' ml='auto' color='tertiary' fontSize='12px' mb='8px'>
+      <Text mt="8px" ml="auto" color="tertiary" fontSize="12px" mb="8px">
         Invalid Withdrawal: Insufficient {grave.stakingToken.symbol} Staked
-      </Text>)
+      </Text>
+    )
   } else if (remainingAmount.lt(grave.poolInfo.minimumStake) && !remainingAmount.eq(BIG_ZERO)) {
     isDisabled = true
     withdrawalDetails = (
       <>
-        <Text mt='8px' ml='auto' color='tertiary' fontSize='12px' mb='8px'>
+        <Text mt="8px" ml="auto" color="tertiary" fontSize="12px" mb="8px">
           Invalid Withdrawal: Remaining balance
         </Text>
-        <Text mt='8px' ml='auto' color='tertiary' fontSize='12px' mb='8px'>
-          {`must be a minimum of ${getBalanceAmount(grave.poolInfo.minimumStake).toString()} ${grave.stakingToken.symbol}`}
+        <Text mt="8px" ml="auto" color="tertiary" fontSize="12px" mb="8px">
+          {`must be a minimum of ${getBalanceAmount(grave.poolInfo.minimumStake).toString()} ${
+            grave.stakingToken.symbol
+          }`}
         </Text>
-      </>)
+      </>
+    )
   }
 
-  return(
-    <Modal onDismiss={onDismiss} title={`Withdraw ${grave.stakingToken.symbol}`} headerBackground={theme.colors.gradients.cardHeader}>
-      <Flex alignItems='center' justifyContent='space-between' mb='8px'>
+  return (
+    <Modal
+      onDismiss={onDismiss}
+      title={`Withdraw ${grave.stakingToken.symbol}`}
+      headerBackground={theme.colors.gradients.cardHeader}
+    >
+      <Flex alignItems="center" justifyContent="space-between" mb="8px">
         <Text bold>Decrease Stake</Text>
-        <Flex alignItems='center' minWidth='70px'>
-          <Image src={`/images/tokens/${grave.stakingToken.symbol}.png`} width={24} height={24} alt={grave.stakingToken.symbol} />
-          <Text ml='4px' bold>{grave.stakingToken.symbol}</Text>
+        <Flex alignItems="center" minWidth="70px">
+          <Image
+            src={`/images/tokens/${grave.stakingToken.symbol}.png`}
+            width={24}
+            height={24}
+            alt={grave.stakingToken.symbol}
+          />
+          <Text ml="4px" bold>
+            {grave.stakingToken.symbol}
+          </Text>
         </Flex>
       </Flex>
       <BalanceInput
         value={Math.round(getBalanceAmount(stakeAmount).times(100).toNumber()) / 100}
         onChange={handleStakeInputChange}
-        currencyValue={`${Math.round(getBalanceAmount(stakeAmount).times(stakeTokenPrice).times(100).toNumber()) / 100} USD`}
+        currencyValue={`${
+          Math.round(getBalanceAmount(stakeAmount).times(stakeTokenPrice).times(100).toNumber()) / 100
+        } USD`}
       />
-      <Text mt='8px' ml='auto' color='textSubtle' fontSize='12px' mb='8px'>
+      <Text mt="8px" ml="auto" color="textSubtle" fontSize="12px" mb="8px">
         Balance: {getFullDisplayBalance(grave.userInfo.stakedAmount, grave.stakingToken.decimals, 2)}
       </Text>
       {withdrawalDetails}
@@ -141,29 +160,29 @@ const DecreaseStakeModal:React.FC<DecreaseStakeModalProps> = ({ id, updateResult
         max={100}
         value={percent}
         onValueChanged={handleChangePercent}
-        name='stake'
+        name="stake"
         valueLabel={`${percent}%`}
         step={1}
       />
-      <Flex alignItems='center' justifyContent='space-between' mt='8px'>
-        <StyledButton scale='xs' mx='2px' p='4px 16px' variant='tertiary' onClick={() => handleChangePercent(25)}>
+      <Flex alignItems="center" justifyContent="space-between" mt="8px">
+        <StyledButton scale="xs" mx="2px" p="4px 16px" variant="tertiary" onClick={() => handleChangePercent(25)}>
           25%
         </StyledButton>
-        <StyledButton scale='xs' mx='2px' p='4px 16px' variant='tertiary' onClick={() => handleChangePercent(50)}>
+        <StyledButton scale="xs" mx="2px" p="4px 16px" variant="tertiary" onClick={() => handleChangePercent(50)}>
           50%
         </StyledButton>
-        <StyledButton scale='xs' mx='2px' p='4px 16px' variant='tertiary' onClick={() => handleChangePercent(75)}>
+        <StyledButton scale="xs" mx="2px" p="4px 16px" variant="tertiary" onClick={() => handleChangePercent(75)}>
           75%
         </StyledButton>
-        <StyledButton scale='xs' mx='2px' p='4px 16px' varian='tertiary' onClick={() => handleChangePercent(100)}>
+        <StyledButton scale="xs" mx="2px" p="4px 16px" varian="tertiary" onClick={() => handleChangePercent(100)}>
           MAX
         </StyledButton>
       </Flex>
-      <Button mt='8px' as='a' onClick={handleWithdraw} disabled={isDisabled} variant='secondary'>
+      <Button mt="8px" as="a" onClick={handleWithdraw} disabled={isDisabled} variant="secondary">
         Withdraw {grave.stakingToken.symbol}
       </Button>
     </Modal>
   )
 }
 
-export default DecreaseStakeModal;
+export default DecreaseStakeModal

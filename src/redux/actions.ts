@@ -1,15 +1,21 @@
 import { BigNumber } from 'bignumber.js'
 import * as actions from './actionTypes'
 import {
-  AuctionInfo, AuctionUserInfo, NftUserInfo,
+  AuctionInfo,
+  AuctionUserInfo,
   PoolInfo,
   SpawningPoolInfo,
   SpawningUserInfo,
   TombPoolInfo,
   TombUserInfo,
   UserInfo,
-  TombOverlayPoolInfo, TombOverlayUserInfo, SharkPoolInfo, SharkPoolUserInfo,
-  BurnGravePoolInfo, BurnGraveUserInfo
+  TombOverlayPoolInfo,
+  TombOverlayUserInfo,
+  SharkPoolInfo,
+  SharkPoolUserInfo,
+  BurnGravePoolInfo,
+  BurnGraveUserInfo,
+  RugMarketListing,
 } from './types'
 
 export const updateAccount = (account: string) => ({
@@ -68,7 +74,8 @@ export const updateBnbPriceUsd = (bnbPriceUsd: number) => ({
   },
 })
 
-export const updateTombPoolInfo = (pid: number, poolInfo: TombPoolInfo) => ({ // todo add tomb result type restriction
+export const updateTombPoolInfo = (pid: number, poolInfo: TombPoolInfo) => ({
+  // todo add tomb result type restriction
   type: actions.UPDATE_TOMB_POOL_INFO,
   payload: {
     pid,
@@ -76,7 +83,8 @@ export const updateTombPoolInfo = (pid: number, poolInfo: TombPoolInfo) => ({ //
   },
 })
 
-export const updateTombUserInfo = (pid: number, userInfo: TombUserInfo) => ({ // todo add tomb result type restriction
+export const updateTombUserInfo = (pid: number, userInfo: TombUserInfo) => ({
+  // todo add tomb result type restriction
   type: actions.UPDATE_TOMB_USER_INFO,
   payload: {
     pid,
@@ -102,14 +110,6 @@ export const updateGraveUserInfo = (pid: number, userInfo: UserInfo) => ({
   },
 })
 
-export const updateNftTotalSupply = (id: number, totalSupply: BigNumber) => ({
-  type: actions.UPDATE_NFT_TOTAL_SUPPLY,
-  payload: {
-    id,
-    totalSupply,
-  },
-})
-
 export const updateSpawningPoolInfo = (id: number, poolInfo: SpawningPoolInfo) => ({
   type: actions.UPDATE_SPAWNING_POOL_INFO,
   payload: {
@@ -122,8 +122,8 @@ export const updateSharkPoolInfo = (id: number, poolInfo: SharkPoolInfo) => ({
   type: actions.UPDATE_SHARKPOOL_INFO,
   payload: {
     id,
-    poolInfo
-  }
+    poolInfo,
+  },
 })
 
 export const updateSpawningPoolUserInfo = (id: number, userInfo: SpawningUserInfo) => ({
@@ -138,8 +138,8 @@ export const updateSharkPoolUserInfo = (id: number, userInfo: SharkPoolUserInfo)
   type: actions.UPDATE_SHARKPOOL_USER_INFO,
   payload: {
     id,
-    userInfo
-  }
+    userInfo,
+  },
 })
 
 export const updateAuctionInfo = (id: number, auctionInfo: AuctionInfo) => ({
@@ -158,14 +158,6 @@ export const updateAuctionUserInfo = (id: number, userInfo: AuctionUserInfo) => 
   },
 })
 
-export const updateNftUserInfo = (id: number, userInfo: NftUserInfo) => ({
-  type: actions.UPDATE_NFT_USER_INFO,
-  payload: {
-    id,
-    userInfo,
-  },
-})
-
 export const updateBnbBalance = (bnbBalance: BigNumber) => ({
   type: actions.UPDATE_BNB_BALANCE,
   payload: {
@@ -177,30 +169,58 @@ export const updateTombOverlayPoolInfo = (pid: number, poolInfo: TombOverlayPool
   type: actions.UPDATE_TOMB_OVERLAY_POOL_INFO,
   payload: {
     pid,
-    poolInfo
-  }
+    poolInfo,
+  },
 })
 
 export const updateTombOverlayUserInfo = (pid: number, userInfo: TombOverlayUserInfo) => ({
   type: actions.UPDATE_TOMB_OVERLAY_USER_INFO,
   payload: {
     pid,
-    userInfo
-  }
+    userInfo,
+  },
 })
 
 export const updateBurnGravePoolInfo = (id: number, poolInfo: BurnGravePoolInfo) => ({
   type: actions.UPDATE_BURNGRAVE_POOL_INFO,
   payload: {
     id,
-    poolInfo
-  }
+    poolInfo,
+  },
 })
 
 export const updateBurnGraveUserInfo = (id: number, userInfo: BurnGraveUserInfo) => ({
   type: actions.UPDATE_BURNGRAVE_USER_INFO,
   payload: {
     id,
-    userInfo
-  }
+    userInfo,
+  },
+})
+
+export const addRugMarketListing = (listing: RugMarketListing) => ({
+  type: actions.ADD_RUG_MARKET_LISTING,
+  payload: {
+    listing,
+  },
+})
+
+export const updateRugMarketListing = (listing: RugMarketListing) => ({
+  type: actions.UPDATE_RUG_MARKET_LISTING,
+  payload: {
+    listing,
+  },
+})
+
+export const cancelRugMarketListing = (listingId: number) => ({
+  type: actions.CANCEL_RUG_MARKET_LISTING,
+  payload: {
+    listingId,
+  },
+})
+
+export const markRugMarketListingSold = (listingId: number) => ({
+  type: actions.MARK_RUG_MARKET_LISTING_SOLD,
+  payload: {
+    listingId,
+  },
 })

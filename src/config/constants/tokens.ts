@@ -7,6 +7,7 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://www.binance.com/',
+    geckoId: 'binancecoin',
   },
   cake: {
     symbol: 'CAKE',
@@ -16,6 +17,7 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://rugzombie.io/',
+    geckoId: 'pancakeswap-token',
   },
   zmbe: {
     symbol: 'ZMBE',
@@ -25,6 +27,30 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://rugzombie.io/',
+    geckoId: 'rugzombie',
+  },
+  spa: {
+    symbol: 'SPA',
+    address: {
+      56: '0xbcfe392E778dbB59DcAd624F10f7fa8C4a910B1e',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
+    },
+    decimals: 18,
+    projectLink: 'https://spartans.army/',
+    geckoId: 'spartan-token',
+    tokenLogo: 'https://assets.coingecko.com/coins/images/22787/small/Spartan_Logo.png?1642580873',
+  },
+  frt: {
+    symbol: 'FRT',
+    address: {
+      56: '0xd51237a6f3219d186f0c8d8dd957b1bcb3ce5d48',
+      97: '0xd51237a6f3219d186f0c8d8dd957b1bcb3ce5d48',
+    },
+    decimals: 18,
+    projectLink: 'https://farmageddon.farm/',
+    geckoId: 'fertilizer',
+    tokenLogo:
+      'https://assets.coingecko.com/coins/images/20173/small/Untitled-design-7-removebg-preview-2.png?1637155311',
   },
   euler: {
     symbol: 'EULER',
@@ -34,7 +60,7 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://euler.tools/',
-    tokenLogo: 'https://bscscan.com/token/images/eulertools_32.png'
+    tokenLogo: 'https://bscscan.com/token/images/eulertools_32.png',
   },
   if1: {
     symbol: 'IF1',
@@ -53,17 +79,18 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://www.blackeyegalaxy.space/',
-    tokenLogo: 'https://assets.coingecko.com/coins/images/16814/small/logo_200_white.png?1625150910'
+    tokenLogo: 'https://assets.coingecko.com/coins/images/16814/small/logo_200_white.png?1625150910',
   },
   punks: {
     symbol: 'PUNKS',
     address: {
-      56: '0x306d8c5B2Fa6999D2Af31a966FB4Eb76E0FEc955',
+      56: '0xf428fc1126b7c1b1bd266f1e415ac05255fa7748',
       97: '',
     },
     decimals: 9,
     projectLink: 'https://streetpunks.org/',
-    tokenLogo: 'https://i0.wp.com/streetpunks.org/wp-content/uploads/2021/11/cropped-2021-11-16_20h34_53-1.png?w=826&ssl=1'
+    tokenLogo:
+      'https://i0.wp.com/streetpunks.org/wp-content/uploads/2021/11/cropped-2021-11-16_20h34_53-1.png?w=826&ssl=1',
   },
   l1ghtv2: {
     symbol: 'L1ght',
@@ -73,7 +100,17 @@ const tokens = {
     },
     decimals: 9,
     projectLink: 'https://l1ghtl1st.io/',
-    tokenLogo: 'https://d1muf25xaso8hp.cloudfront.net/https%3A%2F%2Fs3.amazonaws.com%2Fappforest_uf%2Ff1634140724647x381024309361064100%2FNewToken.png?w=384&h=384&auto=compress&fit=crop&dpr=2'
+    tokenLogo:
+      'https://d1muf25xaso8hp.cloudfront.net/https%3A%2F%2Fs3.amazonaws.com%2Fappforest_uf%2Ff1634140724647x381024309361064100%2FNewToken.png?w=384&h=384&auto=compress&fit=crop&dpr=2',
+  },
+  cx: {
+    symbol: 'CX',
+    address: {
+      56: '0xd09092b1c9c495eb7e0a043927492cf2dee68a86',
+      97: '',
+    },
+    decimals: 9,
+    tokenLogo: 'https://assets.coingecko.com/coins/images/17129/small/X2zoTDW.png?1626410291',
   },
   rugbiden: {
     symbol: 'RUGBIDEN',
@@ -100,7 +137,7 @@ const tokens = {
       97: '0x40ab94f28fbf07ae45b9e50132da643a720e0e32',
     },
     decimals: 18,
-    projectLink: ''
+    projectLink: '',
   },
   gfi: {
     symbol: 'G-Fi',
@@ -110,7 +147,7 @@ const tokens = {
     },
     decimals: 8,
     projectLink: 'https://www.gorillafi.com/',
-    tokenLogo: 'https://bscscan.com/token/images/gorillafi2_32.png'
+    tokenLogo: 'https://bscscan.com/token/images/gorillafi2_32.png',
   },
   merl: {
     symbol: 'MERL',
@@ -119,7 +156,7 @@ const tokens = {
       97: '0xda360309c59cb8c434b28a91b823344a96444278',
     },
     decimals: 18,
-    projectLink: ''
+    projectLink: '',
   },
   undead: {
     symbol: 'UNDEAD',
@@ -174,7 +211,7 @@ const tokens = {
     },
     decimals: 18,
     projectLink: '',
-    tokenLogo: 'https://assets.coingecko.com/coins/images/20506/small/Squid_Game_Logo-0001.png?1637150038'
+    tokenLogo: 'https://assets.coingecko.com/coins/images/20506/small/Squid_Game_Logo-0001.png?1637150038',
   },
   iron: {
     symbol: 'IRON',
@@ -184,7 +221,38 @@ const tokens = {
     },
     decimals: 18,
     projectLink: '',
-    tokenLogo: 'https://assets.coingecko.com/coins/images/14588/small/logo_-_2021-03-31T123525.615.png?1617165339'
+    tokenLogo: 'https://assets.coingecko.com/coins/images/14588/small/logo_-_2021-03-31T123525.615.png?1617165339',
+  },
+  roningmz: {
+    symbol: 'RONINGMZ',
+    address: {
+      56: '0x980b37a82b60a32965b6e56356d14e0410ea440f',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: '',
+    tokenLogo: 'https://assets.coingecko.com/coins/images/19203/small/logo_200x200_%285%29.png?1634682332',
+  },
+  zroningmz: {
+    symbol: 'ZRONINGMZ',
+    address: {
+      56: '0x1e25f2da754ebe4eb1cc11c255da8cafa37b9472',
+      97: '',
+    },
+    decimals: 0,
+    projectLink: '',
+    tokenLogo: 'https://assets.coingecko.com/coins/images/19203/small/logo_200x200_%285%29.png?1634682332',
+  },
+  hunny: {
+    symbol: 'HUNNY',
+    address: {
+      56: '0x565b72163f17849832a692a3c5928cc502f46d69',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: '',
+    tokenLogo:
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDAyIDc5LjE2NDM1MiwgMjAyMC8wMS8zMC0xNTo1MDozOCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIxLjEgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkJBQjZCNzJCQzUwMDExRUJCRTAwRTFBQTcxNUZEMzY3IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkJBQjZCNzJDQzUwMDExRUJCRTAwRTFBQTcxNUZEMzY3Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QkFCNkI3MjlDNTAwMTFFQkJFMDBFMUFBNzE1RkQzNjciIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QkFCNkI3MkFDNTAwMTFFQkJFMDBFMUFBNzE1RkQzNjciLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5fVWEDAAAN0klEQVR42uxaC3QU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',
   },
   mneb: {
     symbol: 'MNEB',
@@ -194,7 +262,7 @@ const tokens = {
     },
     decimals: 8,
     projectLink: '',
-    tokenLogo: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1673.png'
+    tokenLogo: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1673.png',
   },
   zmneb: {
     symbol: 'zMNEB',
@@ -204,7 +272,7 @@ const tokens = {
     },
     decimals: 0,
     projectLink: '',
-    tokenLogo: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1673.png'
+    tokenLogo: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1673.png',
   },
   yape: {
     symbol: 'yAPE',
@@ -237,7 +305,7 @@ const tokens = {
     symbol: 'ZMPR',
     address: {
       56: '0x103ED7038914AB877cfA4A8961333D9af8236852',
-      97: ''
+      97: '',
     },
     decimals: 0,
   },
@@ -245,46 +313,46 @@ const tokens = {
     symbol: 'RUPEE',
     address: {
       56: '0x7b0409a3a3f79baa284035d48e1dfd581d7d7654',
-      97: ''
+      97: '',
     },
     decimals: 18,
-    projectLink: 'https://app.hyruleswap.com/'
+    projectLink: 'https://app.hyruleswap.com/',
   },
   grupee: {
     symbol: 'gRUPEE',
     address: {
       56: '0x8efa59bf5f47c6fe0e97c15cad12f2be6bb899a1',
-      97: ''
+      97: '',
     },
     decimals: 18,
-    projectLink: 'https://app.hyruleswap.com/'
+    projectLink: 'https://app.hyruleswap.com/',
   },
   mainst: {
-    symbol: "$MAINST",
+    symbol: '$MAINST',
     address: {
       56: '0x8fc1a944c149762b6b578a06c0de2abd6b7d2b89',
-      97: ''
+      97: '',
     },
     decimals: 9,
     projectLink: 'https://www.buymainstreet.com/',
   },
   nalis: {
-    symbol: "NALIS",
+    symbol: 'NALIS',
     address: {
       56: '0xb2ebaa0ad65e9c888008bf10646016f7fcdd73c3',
-      97: ''
+      97: '',
     },
     decimals: 18,
     projectLink: 'https://app.koaladefi.finance/',
   },
   panther: {
-    symbol: "PANTHER",
+    symbol: 'PANTHER',
     address: {
       56: '0x1f546ad641b56b86fd9dceac473d1c7a357276b7',
-      97: '0x8CD20B92A5853b50AADbf355e46A0E995A170286'
+      97: '0x8CD20B92A5853b50AADbf355e46A0E995A170286',
     },
     decimals: 18,
-    projectLink: 'https://pantherswap.com/'
+    projectLink: 'https://pantherswap.com/',
   },
   tndr: {
     symbol: 'TNDR',
@@ -301,7 +369,7 @@ const tokens = {
       56: '0x9d8aac497a4b8fe697dd63101d793f0c6a6eebb6',
       97: '',
     },
-    decimals: 18,
+    decimals: 9,
     projectLink: 'https://defi100.org/',
   },
   msc: {
@@ -330,7 +398,7 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://walletnow.net/',
-    tokenLogo: 'https://bscscan.com/token/images/walletnow_32.png'
+    tokenLogo: 'https://bscscan.com/token/images/walletnow_32.png',
   },
   bingus: {
     symbol: 'BINGUS',
@@ -385,7 +453,7 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://autoshark.finance/',
-    tokenLogo: 'images/tokens/FINS.svg'
+    tokenLogo: 'images/tokens/FINS.svg',
   },
   finsbnb: {
     symbol: 'FINS-BNB LP',
@@ -395,7 +463,7 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://autoshark.finance/',
-    tokenLogo: 'images/tokens/FINS.svg'
+    tokenLogo: 'images/tokens/FINS.svg',
   },
   jawsbnb: {
     symbol: 'JAWS-BNB LP',
@@ -481,7 +549,7 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://www.atmossoftdefi.app/',
-    tokenLogo: 'https://bscscan.com/token/images/atmossoft_32.png'
+    tokenLogo: 'https://bscscan.com/token/images/atmossoft_32.png',
   },
   plx: {
     symbol: 'PLX',
@@ -491,7 +559,7 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://octaplex.io/',
-    tokenLogo: 'https://bscscan.com/token/images/octaplex_32.png'
+    tokenLogo: 'https://bscscan.com/token/images/octaplex_32.png',
   },
   fcf: {
     symbol: 'FCF',
@@ -502,6 +570,26 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://frenchconnection.finance/',
   },
+  goldbar: {
+    symbol: 'GOLDBAR',
+    address: {
+      56: '0x24f6ECAF0B9E99D42413F518812d2c4f3EeFEB12',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://block-mine.io/',
+    tokenLogo: 'https://assets.coingecko.com/coins/images/19008/small/gold_nugget.png?1636451377',
+  },
+  pirate: {
+    symbol: 'PIRATE',
+    address: {
+      56: '0x63041a8770c4cfe8193d784f3dc7826eab5b7fd2',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: '',
+    tokenLogo: 'https://s2.coinmarketcap.com/static/img/coins/64x64/10922.png',
+  },
   txl: {
     symbol: 'TXL',
     address: {
@@ -511,6 +599,15 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://tixl.org/',
   },
+  nuggetGoldbarApeLp: {
+    symbol: 'APE-LP',
+    address: {
+      56: '0x46Da2455D212bf8BC78D5fE557074dc7602969C0',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: '',
+  },
   cos: {
     symbol: 'COS',
     address: {
@@ -519,15 +616,6 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://www.contentos.io/',
-  },
-  bunny: {
-    symbol: 'BUNNY',
-    address: {
-      56: '0xc9849e6fdb743d08faee3e34dd2d1bc69ea11a51',
-      97: '',
-    },
-    decimals: 18,
-    projectLink: 'https://pancakebunny.finance/',
   },
   alice: {
     symbol: 'ALICE',
@@ -928,12 +1016,12 @@ const tokens = {
   squidstake: {
     symbol: 'SQUID',
     address: {
-      56: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
+      56: '0xae61e7dc989718e700c046a2483e93513edca484',
       97: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
     },
     decimals: 18,
     projectLink: 'https://squidstake.com',
-    tokenLogo: 'https://squidstake.com/tokens/0xAE61e7dc989718E700C046a2483e93513eDCA484.png'
+    tokenLogo: 'https://squidstake.com/tokens/0xAE61e7dc989718E700C046a2483e93513eDCA484.png',
   },
   sushi: {
     symbol: 'SUSHI',
@@ -1074,20 +1162,20 @@ const tokens = {
     symbol: 'JAWS',
     address: {
       56: '0xdd97ab35e3c0820215bc85a395e13671d84ccba2',
-      97: '0xCE2DFB3a10f534Fa18c9d15C0239938C06Ab3b24'
+      97: '0xCE2DFB3a10f534Fa18c9d15C0239938C06Ab3b24',
     },
     decimals: 18,
-    projectLink: 'https://autoshark.finance/'
+    projectLink: 'https://autoshark.finance/',
   },
   none: {
     symbol: '',
     address: {
-      56: '',
+      56: '0x50ba8BF9E34f0F83F96a340387d1d3888BA4B3b5',
       97: '',
     },
-    tokenLogo: 'images/tokens/clear.png',
-    decimals: 0,
+    decimals: 18,
     projectLink: '',
+    tokenLogo: 'images/tokens/clear.png',
   },
 }
 

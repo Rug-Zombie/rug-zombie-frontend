@@ -6,32 +6,37 @@ import { routes } from 'routes'
 import Container from './Container'
 
 const Row = styled.div`
-    display: flex;
+  display: flex;
 `
 const StyledCard = styled.div`
-    margin: 10px;
-    box-shadow: rgb(204 246 108) 0px 0px 20px;
+  margin: 10px;
+  box-shadow: rgb(204 246 108) 0px 0px 20px;
 `
 const StyledImage = styled.img`
-    height: 300px;
-    width: 300px;
+  height: 300px;
+  width: 300px;
 `
 
 const Auctions = (props) => {
-  const {auction} = props
+  const { auction } = props
   const history = useHistory()
   return (
     <StyledCard>
-      <StyledImage src="/images/rugZombie/Patient Zero.jpg" alt="AUCTION" onClick={() => history.push(`${routes.MAUSOLEUM  }${  auction.aid}`)}/>
+      <StyledImage
+        src="/images/rugZombie/Patient Zero.jpg"
+        alt="AUCTION"
+        onClick={() => history.push(`${routes.MAUSOLEUM}${auction.aid}`)}
+      />
     </StyledCard>
   )
 }
 const _PredictionsHome = () => {
-  return(
+  return (
     <Container>
       <Row>
-        {auctions.map((value) => <Auctions key={value.aid} auction={value}/>)
-        }
+        {auctions.map((value) => (
+          <Auctions key={value.aid} auction={value} />
+        ))}
       </Row>
     </Container>
   )

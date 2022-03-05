@@ -1,6 +1,8 @@
-import { BASE_BSC_SCAN_URLS } from '../config'
+import { BASE_BSC_SCAN_URLS, DEXS } from '../config'
 import { Id } from '../config/constants/types'
 import instabuys from '../config/constants/instabuys'
+import tombs from '../config/constants/tombs'
+import { graves } from '../config/constants'
 
 // eslint-disable-next-line import/prefer-default-export
 export function getBscScanLink(
@@ -33,6 +35,27 @@ export function getId(id: Id): number {
   return id[chainId] || id[chainId] === 0 ? id[chainId] : id[mainNetChainId]
 }
 
-export function instaBuyById (id: number) {
-  return instabuys.find(i => i.id === id)
+export function instaBuyById(id: number) {
+  return instabuys.find((i) => i.id === id)
 }
+
+export function formatAddress(address: string): string {
+  return `${address.slice(0, 4)}...${address.slice(address.length - 4, address.length)}`
+}
+
+export function equalAddresses(addr1: string, addr2: string): boolean {
+  return addr1.toLowerCase() === addr2.toLowerCase()
+}
+
+export function getDrFPoolName(pid: number): string {
+  if (tombPids().includes(pid)) {
+    return `${DEXS[tombs.find((t) => getId(t.pid) === pid).dex]}`
+  }
+  return `${graves.find((g) => getId(g.pid) === pid).name}`
+}
+
+export function tombPids(): number[] {
+  return tombs.map((t) => getId(t.pid))
+}
+
+export const range = (start, end) => Array.from(Array(end - start + 1).keys()).map((x) => x + start)

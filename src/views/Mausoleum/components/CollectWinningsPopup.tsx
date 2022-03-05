@@ -1,11 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { useWeb3React } from '@web3-react/core'
+import React, { useRef, useState } from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import { Button, CloseIcon, IconButton, TrophyGoldIcon } from '@rug-zombie-libs/uikit'
 import { CSSTransition } from 'react-transition-group'
 import { useTranslation } from 'contexts/Localization'
-import { getBetHistory } from 'state/predictions/helpers'
-import { useGetPredictionsStatus, useIsHistoryPaneOpen } from 'state/hooks'
 import { useAppDispatch } from 'state'
 import { setHistoryPaneState } from 'state/predictions'
 
@@ -123,9 +120,6 @@ const CollectWinningsPopup = () => {
   const { t } = useTranslation()
   const ref = useRef(null)
   const timer = useRef(null)
-  const { account } = useWeb3React()
-  const predictionStatus = useGetPredictionsStatus()
-  const isHistoryPaneOpen = useIsHistoryPaneOpen()
   const dispatch = useAppDispatch()
 
   const handleOpenHistory = () => {
@@ -136,35 +130,6 @@ const CollectWinningsPopup = () => {
     setIsOpen(false)
     clearInterval(timer.current)
   }
-
-  // Check user's history for unclaimed winners
-  useEffect(() => {
-    if (account) {
-      timer.current = setInterval(async () => {
-        const bets = await getBetHistory({ user: account.toLowerCase(), claimed: false })
-
-        // Filter out bets that were not winners
-        const winnerBets = bets.filter((bet) => {
-          return bet.position === bet.round.position
-        })
-
-        if (!isHistoryPaneOpen) {
-          setIsOpen(winnerBets.length > 0)
-        }
-      }, 30000)
-    }
-
-    return () => {
-      clearInterval(timer.current)
-    }
-  }, [account, timer, predictionStatus, setIsOpen, isHistoryPaneOpen])
-
-  // Any time the history pane is open make sure the popup closes
-  useEffect(() => {
-    if (isHistoryPaneOpen) {
-      setIsOpen(false)
-    }
-  }, [isHistoryPaneOpen, setIsOpen])
 
   return (
     <CSSTransition in={isOpen} unmountOnExit nodeRef={ref} timeout={1000} classNames="popup">

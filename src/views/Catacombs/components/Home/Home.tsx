@@ -91,16 +91,16 @@ const Home: React.FC = () => {
   const { t } = useTranslation()
   const { isLg, isXl } = useMatchBreakpoints()
   const isDesktop = isLg || isXl
-
   return (
     <Menu>
       <StyledDiv>
-        {isDesktop ? <img src={CatacombsBackgroundDesktopSVG} alt='catacombs-rug-zombie' /> :
-          <img src={CatacombsBackgroundMobileSVG} alt='catacombs-rug-zombie' />
-        }
+        {isDesktop ? (
+          <img src={CatacombsBackgroundDesktopSVG} alt="catacombs-rug-zombie" />
+        ) : (
+          <img src={CatacombsBackgroundMobileSVG} alt="catacombs-rug-zombie" />
+        )}
         <DataLabDiv>
-          <NavLink exact activeClassName='active' to='/datalab' id='lottery-pot-banner'
-                   style={{ paddingTop: '8px' }}>
+          <NavLink exact activeClassName="active" to="/datalab" id="lottery-pot-banner" style={{ paddingTop: '8px' }}>
             <StyledButton>{t('DATA LAB')}</StyledButton>
           </NavLink>
         </DataLabDiv>
@@ -108,13 +108,14 @@ const Home: React.FC = () => {
           <StyledButton>{t('BARRACKS')}</StyledButton>
         </BarracksDiv>
         <RugRollDiv>
-          <NavLink exact activeClassName='active' to='/rugroll' id='lottery-pot-banner'
-                   style={{ paddingTop: '8px' }}>
-          <StyledButton>{t('RUG ROLL')}</StyledButton>
+          <NavLink exact activeClassName="active" to="/rugroll" id="lottery-pot-banner" style={{ paddingTop: '8px' }}>
+            <StyledButton>{t('RUG ROLL')}</StyledButton>
           </NavLink>
         </RugRollDiv>
         <BlackMarketDiv>
-          <StyledButton>{t('BLACK MARKET')}</StyledButton>
+          <NavLink exact activeClassName="active" to="/blackmarket" id="lottery-pot-banner">
+            <StyledButton>{t('BLACK MARKET')}</StyledButton>
+          </NavLink>
         </BlackMarketDiv>
       </StyledDiv>
     </Menu>

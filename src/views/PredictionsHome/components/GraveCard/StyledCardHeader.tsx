@@ -4,8 +4,7 @@ import styled from 'styled-components'
 import { auctionById } from '../../../../redux/get'
 
 const Wrapper = styled(CardHeader)<{ isFinished?: boolean; background?: string }>`
-  background: ${({ isFinished, theme }) =>
-          isFinished ? '#101820' : theme.colors.primary};
+  background: ${({ isFinished, theme }) => (isFinished ? '#101820' : theme.colors.primary)};
 `
 
 const StyledCardHeader: React.FC<{ id: number }> = ({ id }) => {
@@ -15,10 +14,10 @@ const StyledCardHeader: React.FC<{ id: number }> = ({ id }) => {
   }
 
   return (
-    <Wrapper isFinished={isFinished} color='#101820'>
-      <Flex alignItems='center' justifyContent='space-between'>
-        <Flex flexDirection='column'>
-          <Heading color={isFinished ? 'textDisabled' : 'body'} size='lg'>
+    <Wrapper isFinished={isFinished} color="#101820">
+      <Flex alignItems="center" justifyContent="space-between">
+        <Flex flexDirection="column">
+          <Heading color={isFinished ? 'textDisabled' : 'body'} size="lg">
             {`${prizeSymbol} NFT`}
           </Heading>
           <Text color={isFinished ? 'textDisabled' : 'textSubtle'}>{getSubHeading()}</Text>

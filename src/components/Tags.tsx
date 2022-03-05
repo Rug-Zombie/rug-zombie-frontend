@@ -63,4 +63,14 @@ const OngoingTag = (props) => (
   </Tag>
 )
 
-export { CoreTag, CommunityTag, BinanceTag, DualTag, ManualPoolTag, CompoundingPoolTag, OngoingTag, EndedTag, UnlockedTag }
+export {
+  CoreTag,
+  CommunityTag,
+  BinanceTag,
+  DualTag,
+  ManualPoolTag,
+  CompoundingPoolTag,
+  OngoingTag,
+  EndedTag,
+  UnlockedTag,
+}

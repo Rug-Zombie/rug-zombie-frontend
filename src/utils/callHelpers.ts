@@ -1,115 +1,147 @@
-import BigNumber from 'bignumber.js'
-import { DEFAULT_TOKEN_DECIMAL } from 'config'
 import { ethers } from 'ethers'
-import { BIG_TEN, BIG_ZERO } from './bigNumber'
 
-export const approve = async (lpContract, masterChefContract, account) => {
-  return lpContract.methods
-    .approve(masterChefContract.options.address, ethers.constants.MaxUint256)
-    .send({ from: account })
+export const approve = async (tokenContract, spenderAddress, account) => {
+  return tokenContract.methods.approve(spenderAddress, ethers.constants.MaxUint256).send({ from: account })
 }
 
-export const stake = async (masterChefContract, pid, amount, account) => {
+export const stake = async (drFrankensteinContract, pid, amount, account) => {
   if (pid === 0) {
-    return masterChefContract.methods
-      .enterStaking(new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString())
-      .send({ from: account, gas: 200000 })
-      .on('transactionHash', (tx) => {
-        return tx.transactionHash
-      })
-  }
-
-  return masterChefContract.methods
-    .deposit(pid, new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString())
-    .send({ from: account, gas: 200000 })
-    .on('transactionHash', (tx) => {
-      return tx.transactionHash
-    })
-}
-
-export const sousStake = async (sousChefContract, amount, decimals = 18, account) => {
-  return sousChefContract.methods
-    .deposit(new BigNumber(amount).times(BIG_TEN.pow(decimals)).toString())
-    .send({ from: account, gas: 200000 })
-    .on('transactionHash', (tx) => {
-      return tx.transactionHash
-    })
-}
-
-export const sousStakeBnb = async (sousChefContract, amount, account) => {
-  return sousChefContract.methods
-    .deposit()
-    .send({ from: account, gas: 200000, value: new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString() })
-    .on('transactionHash', (tx) => {
-      return tx.transactionHash
-    })
-}
-
-export const unstake = async (masterChefContract, pid, amount, account) => {
-  if (pid === 0) {
-    return masterChefContract.methods
-      .leaveStaking(new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString())
-      .send({ from: account, gas: 200000 })
-      .on('transactionHash', (tx) => {
-        return tx.transactionHash
-      })
-  }
-
-  return masterChefContract.methods
-    .withdraw(pid, new BigNumber(amount).times(DEFAULT_TOKEN_DECIMAL).toString())
-    .send({ from: account, gas: 200000 })
-    .on('transactionHash', (tx) => {
-      return tx.transactionHash
-    })
-}
-
-export const sousUnstake = async (sousChefContract, amount, decimals = 18, account) => {
-  // shit code: hard fix for old CTK and BLK
-  if (sousChefContract.options.address === '0x3B9B74f48E89Ebd8b45a53444327013a2308A9BC') {
-    return sousChefContract.methods
-      .emergencyWithdraw()
-      .send({ from: account })
-      .on('transactionHash', (tx) => {
-        return tx.transactionHash
-      })
-  }
-  if (sousChefContract.options.address === '0xBb2B66a2c7C2fFFB06EA60BeaD69741b3f5BF831') {
-    return sousChefContract.methods
-      .emergencyWithdraw()
-      .send({ from: account })
-      .on('transactionHash', (tx) => {
-        return tx.transactionHash
-      })
-  }
-  if (sousChefContract.options.address === '0x453a75908fb5a36d482d5f8fe88eca836f32ead5') {
-    return sousChefContract.methods
-      .emergencyWithdraw()
+    return drFrankensteinContract.methods
+      .enterStaking(amount.toString())
       .send({ from: account })
       .on('transactionHash', (tx) => {
         return tx.transactionHash
       })
   }
 
-  return sousChefContract.methods
-    .withdraw(new BigNumber(amount).times(BIG_TEN.pow(decimals)).toString())
-    .send({ from: account, gas: 200000 })
-    .on('transactionHash', (tx) => {
-      return tx.transactionHash
-    })
-}
-
-export const sousEmergencyUnstake = async (sousChefContract, amount, account) => {
-  return sousChefContract.methods
-    .emergencyWithdraw()
+  return drFrankensteinContract.methods
+    .deposit(pid, amount.toString())
     .send({ from: account })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
     })
 }
 
-export const harvest = async (masterChefContract, pid, account) => {
+export const unstake = async (drFrankensteinContract, pid, amount, account) => {
   if (pid === 0) {
-    return masterChefContract.methods
+    return drFrankensteinContract.methods
+      .leaveStaking(amount.toString())
+      .send({ from: account })
+      .on('transactionHash', (tx) => {
+        return tx.transactionHash
+      })
+  }
+
+  return drFrankensteinContract.methods
+    .withdraw(pid, amount.toString())
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const unstakeEarly = async (drFrankensteinContract, pid, amount, account) => {
+  if (pid === 0) {
+    return drFrankensteinContract.methods
+      .leaveStakingEarly(amount.toString())
+      .send({ from: account })
+      .on('transactionHash', (tx) => {
+        return tx.transactionHash
+      })
+  }
+
+  return drFrankensteinContract.methods
+    .withdrawEarly(pid, amount.toString())
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const emergencyWithdraw = async (drFrankensteinContract, pid, account) => {
+  return drFrankensteinContract.methods
+    .emergencyWithdraw(pid)
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const unlock = async (drFrankensteinContract, pid, amount, account) => {
+  return drFrankensteinContract.methods
+    .unlock(pid)
+    .send({ from: account, value: amount.toString() })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const spStake = async (spawningPoolContract, amount, account) => {
+  return spawningPoolContract.methods
+    .deposit(amount.toString())
+    .send({ from: account.toString() })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const spUnstake = async (spawningPoolContract, amount, account) => {
+  return spawningPoolContract.methods
+    .withdraw(amount.toString())
+    .send({ from: account.toString() })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const spUnstakeEarly = async (spawningPoolContract, amount, account) => {
+  return spawningPoolContract.methods
+    .withdrawEarly(amount.toString())
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const spUnlock = async (spawningPoolContract, amount, account) => {
+  return spawningPoolContract.methods
+    .unlock()
+    .send({ from: account, value: amount.toString() })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const depositRug = async (drFrankensteinContract, pid, amount, account) => {
+  return drFrankensteinContract.methods
+    .depositRug(pid, amount.toString())
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const startMinting = async (tombOverlayContract, pid, fee, account) => {
+  return tombOverlayContract.methods
+    .startMinting(pid)
+    .send({ from: account, value: fee })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const finishMinting = async (tombOverlayContract, pid, account) => {
+  return tombOverlayContract.methods
+    .finishMinting(pid)
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const harvest = async (drFrankensteinContract, pid, account) => {
+  if (pid === 0) {
+    return drFrankensteinContract.methods
       .leaveStaking('0')
       .send({ from: account, gas: 200000 })
       .on('transactionHash', (tx) => {
@@ -117,7 +149,7 @@ export const harvest = async (masterChefContract, pid, account) => {
       })
   }
 
-  return masterChefContract.methods
+  return drFrankensteinContract.methods
     .deposit(pid, '0')
     .send({ from: account, gas: 200000 })
     .on('transactionHash', (tx) => {
@@ -125,19 +157,10 @@ export const harvest = async (masterChefContract, pid, account) => {
     })
 }
 
-export const soushHarvest = async (sousChefContract, account) => {
-  return sousChefContract.methods
-    .deposit('0')
+export const convertNft = async (nftSwapper, nftConverterPid, tokenId, account) => {
+  return nftSwapper.methods
+    .deposit(nftConverterPid, tokenId)
     .send({ from: account, gas: 200000 })
-    .on('transactionHash', (tx) => {
-      return tx.transactionHash
-    })
-}
-
-export const soushHarvestBnb = async (sousChefContract, account) => {
-  return sousChefContract.methods
-    .deposit()
-    .send({ from: account, gas: 200000, value: BIG_ZERO })
     .on('transactionHash', (tx) => {
       return tx.transactionHash
     })

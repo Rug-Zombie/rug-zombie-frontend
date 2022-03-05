@@ -1,5 +1,3 @@
-import { TranslatableText } from 'state/types'
-
 export interface Address {
   97?: string
   56: string
@@ -22,8 +20,6 @@ export enum PoolIds {
   poolBasic = 'poolBasic',
   poolUnlimited = 'poolUnlimited',
 }
-
-export type IfoStatus = 'idle' | 'coming_soon' | 'live' | 'finished'
 
 interface IfoPoolInfo {
   saleAmount: string
@@ -70,6 +66,77 @@ export interface FarmConfig {
   }
 }
 
+export enum Dex {
+  ZOMBIE_SWAP,
+  PCS_V1,
+  PCS_V2,
+  AUTOSHARK,
+  APESWAP,
+}
+
+export enum UserActivityType {
+  DrFDeposit,
+  DrFWithdraw,
+  DrFWithdrawEarly,
+  DrFHarvest,
+  DrFMintNft,
+}
+
+export interface GraveConfig {
+  pid: Id
+  name: string
+  nftId: number
+  nft?: number
+  depositNftId?: number
+  isNew?: boolean
+  isFeatured?: boolean
+  isClosed?: boolean
+  endDate?: number
+  startingDate?: number
+  nftConverterPid?: number // remove move to own type
+  graveNftToken?: string // remove move to own type
+  additionalDetails?: any[]
+  rug: Token
+  rugDex?: Dex
+  liquidityDetails?: string
+  isRetired?: boolean
+}
+
+export interface TombOverlayConfig {
+  pid: Id
+  commonId: number
+  uncommonId: number
+  rareId: number
+  legendaryId: number
+}
+
+export interface TombConfig {
+  id: number
+  pid: Id
+  token1: Token
+  token2: Token
+  dex: Dex
+  lpAddress: Address
+  notNativeDex?: boolean
+  isNew?: boolean
+  overlay: TombOverlayConfig
+}
+
+export interface SpawningPoolConfig {
+  id: number
+  name: string
+  address: Address
+  project: any
+  endBlock: number
+  endDate: number
+  isNew?: boolean
+  rewardToken: Token
+  dex: Dex
+  nftId: number
+  color?: string
+  unknownPrice?: boolean
+}
+
 export interface PoolConfig {
   sousId: number
   earningToken: Token
@@ -83,31 +150,17 @@ export interface PoolConfig {
   isFinished?: boolean
 }
 
-export interface GraveConfig {
-  gid: number
-  nftName: string
-  ruggedToken: Token
-  unlockingToken: Token
-  nftSrc: string,
-  rugSrc: string,
-  contractAddress: Address
-  unlockingFee: number
-  minimumStakingTime: number
-  displayMinimumStakingTime: string
-  minimumStakingAmount: number
-  earlyWithdrawalFee: number
-  artistUrl: string
-  startBlock?: number
-  sortOrder?: number
-  harvest?: boolean
-  isFinished?: boolean
-}
-
 export type Images = {
   lg: string
   md: string
   sm: string
   ipfs?: string
+}
+
+export interface Artist {
+  name: string
+  twitter?: string
+  instagram?: string
 }
 
 export type NftImages = {
@@ -145,32 +198,6 @@ export type Nft = {
 
   // Used to be "bunnyId". Used when minting NFT
   variationId?: number | string
-}
-
-export type TeamImages = {
-  alt: string
-} & Images
-
-export type Team = {
-  id: number
-  name: string
-  description: string
-  isJoinable?: boolean
-  users: number
-  points: number
-  images: TeamImages
-  background: string
-  textColor: string
-}
-
-export type CampaignType = 'ifo' | 'teambattle'
-
-export type Campaign = {
-  id: string
-  type: CampaignType
-  title?: TranslatableText
-  description?: TranslatableText
-  badge?: string
 }
 
 export type PageMeta = {

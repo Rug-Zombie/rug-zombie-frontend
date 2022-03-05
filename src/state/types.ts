@@ -1,5 +1,6 @@
 import BigNumber from 'bignumber.js'
-import { CampaignType, FarmConfig, Nft, PoolConfig, Team } from 'config/constants/types'
+
+import { Address, Artist, GraveConfig, SpawningPoolConfig, TombConfig, UserActivityType } from 'config/constants/types'
 
 export type TranslatableText =
   | string
@@ -10,96 +11,116 @@ export type TranslatableText =
       }
     }
 
-export interface Farm extends FarmConfig {
-  tokenAmount?: BigNumber
-  quoteTokenAmount?: BigNumber
-  lpTotalInQuoteToken?: BigNumber
-  lpTotalSupply?: BigNumber
-  tokenPriceVsQuote?: BigNumber
-  poolWeight?: BigNumber
-  userData?: {
-    allowance: string
-    tokenBalance: string
-    stakedBalance: string
-    earnings: string
-  }
+export interface GraveUserInfo {
+  paidUnlockFee: boolean
+  rugDeposited: BigNumber
+  rugAllowance: BigNumber
+  rugBalance: BigNumber
+  zombieAllowance: BigNumber
+  tokenWithdrawalDate: BigNumber
+  nftMintDate: BigNumber
+  amount: BigNumber
+  pendingZombie: BigNumber
 }
 
-export interface Pool extends PoolConfig {
-  totalStaked?: BigNumber
-  startBlock?: number
-  endBlock?: number
-  userData?: {
-    allowance: BigNumber
-    stakingTokenBalance: BigNumber
-    stakedBalance: BigNumber
-    pendingReward: BigNumber
-  }
+export interface GravePoolInfo {
+  lpToken: string
+  allocPoint: BigNumber
+  weight: BigNumber
+  unlockFee: BigNumber
+  minimumStake: BigNumber
+  tokenAmount: BigNumber
+  withdrawCooldown: BigNumber
+  nftMintTime: BigNumber
 }
 
-export interface Profile {
-  userId: number
-  points: number
-  teamId: number
-  nftAddress: string
-  tokenId: number
-  isActive: boolean
-  username: string
-  nft?: Nft
-  team: Team
-  hasRegistered: boolean
+export interface Grave extends GraveConfig {
+  userInfo?: GraveUserInfo
+  poolInfo: GravePoolInfo
+}
+
+export interface TombUserInfo {
+  tokenWithdrawalDate: BigNumber
+  nftMintTime: BigNumber
+  amount: BigNumber
+  pendingZombie: BigNumber
+  lpBalance: BigNumber
+  lpAllowance: BigNumber
+  randomNumber: BigNumber
+  isMinting: boolean
+}
+
+export interface TombPoolInfo {
+  allocPoint: BigNumber
+  weight: BigNumber
+  tokenAmount: BigNumber
+  withdrawCooldown: BigNumber
+  nftMintTime: BigNumber
+  mintingFee: BigNumber
+  lpPriceBnb: BigNumber
+}
+
+export interface Tomb extends TombConfig {
+  userInfo?: TombUserInfo
+  poolInfo: TombPoolInfo
+}
+
+export interface SpawningPoolInfo {
+  rewardPerBlock: BigNumber
+  unlockFee: BigNumber
+  minimumStake: BigNumber
+  totalAmount: BigNumber
+  withdrawCooldown: BigNumber
+  nftMintTime: BigNumber
+  rewardTokenPriceBnb: BigNumber
+}
+
+export interface SpawningPoolUserInfo {
+  paidUnlockFee: boolean
+  tokenWithdrawalDate: BigNumber
+  nftMintDate: BigNumber
+  amount: BigNumber
+  pendingReward: BigNumber
+  zombieAllowance: BigNumber
+  zombieBalance: BigNumber
+}
+
+export interface SpawningPool extends SpawningPoolConfig {
+  userInfo?: SpawningPoolUserInfo
+  poolInfo: SpawningPoolInfo
+}
+
+export interface UserActivity {
+  type: UserActivityType
+  timestamp: number
+  data: Record<string, any>
 }
 
 // Slices states
 
-export interface FarmsState {
-  data: Farm[]
-  loadArchivedFarmsData: boolean
+export interface GravesState {
+  data: Grave[]
   userDataLoaded: boolean
 }
 
-export interface PoolsState {
-  data: Pool[]
+export interface TombsState {
+  data: Tomb[]
+  userDataLoaded: boolean
 }
 
-
-export interface ProfileState {
-  isInitialized: boolean
-  isLoading: boolean
-  hasRegistered: boolean
-  data: Profile
+export interface SpawningPoolState {
+  data: SpawningPool[]
+  userDataLoaded: boolean
 }
 
-export type TeamResponse = {
-  0: string
-  1: string
-  2: string
-  3: string
-  4: boolean
+export interface UserActivityState {
+  data: UserActivity[]
+  userDataLoaded: boolean
 }
 
-export type TeamsById = {
-  [key: string]: Team
-}
-
-export interface TeamsState {
-  isInitialized: boolean
-  isLoading: boolean
-  data: TeamsById
-}
-
-export interface Achievement {
-  id: string
-  type: CampaignType
-  address: string
-  title: TranslatableText
-  description?: TranslatableText
-  badge: string
-  points: number
-}
-
-export interface AchievementState {
-  data: Achievement[]
+export interface GraveState {
+  data: Grave[]
+  userDataLoaded: boolean
 }
 
 // API Price State
@@ -145,12 +166,27 @@ export interface BlockState {
 
 // Graveyard
 
-export interface CollectiblesState {
-  isInitialized: boolean
-  isLoading: boolean
-  data: {
-    [key: string]: number[]
-  }
+export interface NftUserInfo {
+  ownedIds: number[]
+}
+
+export interface Nft {
+  id: number
+  name: string
+  description: string
+  symbol: string
+  address: Address
+  totalSupply: BigNumber
+  path: string
+  type: string
+  rarity: string
+  artist?: Artist
+  userInfo: NftUserInfo
+}
+
+export interface NftState {
+  data: Nft[]
+  userDataLoaded: boolean
 }
 
 // Mausoleum
@@ -253,13 +289,12 @@ export interface PredictionsState {
 // Global state
 
 export interface State {
-  achievements: AchievementState
   block: BlockState
-  farms: FarmsState
   prices: PriceState
-  pools: PoolsState
+  graves: GraveState
+  tombs: TombsState
+  spawningPools: SpawningPoolState
+  userActivity: UserActivityState
   predictions: PredictionsState
-  profile: ProfileState
-  teams: TeamsState
-  collectibles: CollectiblesState
+  nfts: NftState
 }

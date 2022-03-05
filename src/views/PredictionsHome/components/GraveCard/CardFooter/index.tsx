@@ -22,8 +22,8 @@ const Footer: React.FC<FooterProps> = ({ id }) => {
   const { t } = useTranslation()
   const { isFinished } = auctionById(id)
   const [isExpanded, setIsExpanded] = useState(false)
-  const manualTooltipText = isFinished ? "Auction has ended" : "Auction is live!"
-  const { targetRef, tooltip, tooltipVisible } = useTooltip( manualTooltipText, {
+  const manualTooltipText = isFinished ? 'Auction has ended' : 'Auction is live!'
+  const { targetRef, tooltip, tooltipVisible } = useTooltip(manualTooltipText, {
     placement: 'bottom-end',
   })
 
@@ -32,17 +32,13 @@ const Footer: React.FC<FooterProps> = ({ id }) => {
       <ExpandableButtonWrapper>
         <Flex alignItems="center">
           {tooltipVisible && tooltip}
-          <Box ref={targetRef}>
-            { isFinished ? <EndedTag/> : <OngoingTag/>}
-          </Box>
+          <Box ref={targetRef}>{isFinished ? <EndedTag /> : <OngoingTag />}</Box>
         </Flex>
         <ExpandableLabel expanded={isExpanded} onClick={() => setIsExpanded(!isExpanded)}>
           {isExpanded ? t('Hide') : t('Details')}
         </ExpandableLabel>
       </ExpandableButtonWrapper>
-      {isExpanded && (
-        <ExpandedFooter id={id} />
-      )}
+      {isExpanded && <ExpandedFooter id={id} />}
     </CardFooter>
   )
 }

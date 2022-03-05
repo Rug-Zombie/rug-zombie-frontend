@@ -12,7 +12,7 @@ import {
 } from '@catacombs-libs/uikit'
 import { BigNumber } from 'bignumber.js'
 import { Lightbox } from 'react-modal-image'
-import { account, nftById } from '../../../../redux/get'
+import { account } from '../../../../redux/get'
 import Video from '../../../../components/Video'
 
 import { useInstaBuyContract } from '../../../../hooks/useContract'
@@ -21,7 +21,7 @@ import { getFullDisplayBalance } from '../../../../utils/formatBalance'
 import useToast from '../../../../hooks/useToast'
 import { getAddress } from '../../../../utils/addressHelpers'
 import { instaBuyById } from '../../../../utils'
-
+import { useGetNftById } from '../../../../state/hooks'
 
 const StyleDetails = styled.div`
   display: flex;
@@ -44,9 +44,8 @@ const StyleCardHeader = styled.div`
 `
 
 interface InstabuyCardProps {
-  id: number;
-  refresh: () => void;
-  modalObj: { modal: boolean, setModal: any };
+  id: number
+  modalObj: { modal: boolean; setModal: any }
 }
 
 const initialNftInfo = {
@@ -57,15 +56,17 @@ const initialNftInfo = {
 
 const InstabuyCard: React.FC<InstabuyCardProps> = ({ id, modalObj }) => {
   const { nftId, version } = instaBuyById(id)
-  const { name, symbol, description, address, path, type, totalSupply } = nftById(nftId)
+  const { name, symbol, description, address, path, type, totalSupply } = useGetNftById(nftId)
   const [isOpen, setIsOpen] = useState(false)
   const [nftInfo, setNftInfo] = useState(initialNftInfo)
   const instaBuy = useInstaBuyContract(version)
-  const { toastSuccess } = useToast()
+  const { toastDefault } = useToast()
 
   useEffect(() => {
-    instaBuy.methods.nftInfo(getAddress(address)).call()
-      .then(res => {
+    instaBuy.methods
+      .nftInfo(getAddress(address))
+      .call()
+      .then((res) => {
         setNftInfo({
           price: new BigNumber(res.price),
           maxMints: new BigNumber(res.maxMints),
@@ -79,70 +80,70 @@ const InstabuyCard: React.FC<InstabuyCardProps> = ({ id, modalObj }) => {
   }
 
   const openModal = () => {
-    modalObj.setModal(
-      <Lightbox
-        large={path}
-        alt={name}
-        onClose={closeModal}
-        hideDownload
-      />,
-    )
+    modalObj.setModal(<Lightbox large={path} alt={name} onClose={closeModal} hideDownload />)
   }
 
-
   const handleInstabuy = () => {
-    instaBuy.methods.priceInBnb(getAddress(address)).call().then(res => {
-      instaBuy.methods.instaBuy(getAddress(address))
-        .send({ from: account(), value: res }).then(() => {
-        toastSuccess(`Bought ${symbol}`)
+    instaBuy.methods
+      .priceInBnb(getAddress(address))
+      .call()
+      .then((res) => {
+        instaBuy.methods
+          .instaBuy(getAddress(address))
+          .send({ from: account(), value: res })
+          .then(() => {
+            toastDefault(`Bought ${symbol}`)
+          })
       })
-    })
   }
 
   return (
     <div>
-      <Card className='card-active'>
+      <Card className="card-active">
         <StyleCardHeader>
-          <Flex justifyContent='center' paddingTop='5%' paddingBottom='5%' height='100%' onClick={openModal}>
-            {type === 'image' ? <img
-                src={path} alt='nft'
-                style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain' }} /> :
-              <Video path={path} />}
+          <Flex justifyContent="center" paddingTop="5%" paddingBottom="5%" height="100%" onClick={openModal}>
+            {type === 'image' ? (
+              <img src={path} alt="nft" style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain' }} />
+            ) : (
+              <Video path={path} />
+            )}
           </Flex>
         </StyleCardHeader>
         <CardBody>
-          <Heading as='h2' fontSize='18px'>{name} - {getFullDisplayBalance(nftInfo.price)} BNB</Heading>
+          <Heading as="h2" fontSize="18px">
+            {name} - {getFullDisplayBalance(nftInfo.price)} BNB
+          </Heading>
         </CardBody>
         <CardFooter>
           <StyleDetails>
-            <Flex justifyContent='center' alignItems='center'>
-              <div style={{ paddingRight: '10px' }}><StyledButton variant='secondary' onClick={handleInstabuy}>
-                Instabuy
-              </StyledButton>
+            <Flex justifyContent="center" alignItems="center">
+              <div style={{ paddingRight: '10px' }}>
+                <StyledButton variant="secondary" onClick={handleInstabuy}>
+                  Instabuy
+                </StyledButton>
               </div>
-              <StyleCursorPointer onClick={() => {
-                setIsOpen(!isOpen)
-              }}>
+              <StyleCursorPointer
+                onClick={() => {
+                  setIsOpen(!isOpen)
+                }}
+              >
                 Details
-                {
-                  isOpen ? <ChevronUpIcon color='text' ml='10px' />
-                    : <ChevronDownIcon color='text' ml='10px' />
-                }
+                {isOpen ? <ChevronUpIcon color="text" ml="10px" /> : <ChevronDownIcon color="text" ml="10px" />}
               </StyleCursorPointer>
             </Flex>
           </StyleDetails>
-          {
-            isOpen &&
-            <div className='direction-column' style={{ paddingTop: '5%' }}>
-              <span className='indetails-type'>{name}</span>
-              <span className='indetails-title'>{description}</span>
-              {!nftInfo.maxMints.isZero() ?
-                <span
-                  className='indetails-title'>{nftInfo.maxMintsPerUser.isZero() ? '' : `${nftInfo.maxMintsPerUser.toString()} per wallet`} ({nftInfo.maxMints.minus(totalSupply).toString()} remaining).</span> :
-                null}
-
+          {isOpen && (
+            <div className="direction-column" style={{ paddingTop: '5%' }}>
+              <span className="indetails-type">{name}</span>
+              <span className="indetails-title">{description}</span>
+              {!nftInfo.maxMints.isZero() ? (
+                <span className="indetails-title">
+                  {nftInfo.maxMintsPerUser.isZero() ? '' : `${nftInfo.maxMintsPerUser.toString()} per wallet`} (
+                  {nftInfo.maxMints.minus(totalSupply).toString()} remaining).
+                </span>
+              ) : null}
             </div>
-          }
+          )}
         </CardFooter>
       </Card>
     </div>

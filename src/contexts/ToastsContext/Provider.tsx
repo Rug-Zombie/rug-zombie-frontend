@@ -1,7 +1,8 @@
 import React, { createContext, ReactNode, useCallback, useState } from 'react'
 import { kebabCase } from 'lodash'
-import { Toast, toastTypes } from '@rug-zombie-libs/uikit'
 import { ToastContextApi } from './types'
+import { Toast } from '../../components/Toast'
+import { types } from '../../components/Toast/types'
 
 export const ToastsContext = createContext<ToastContextApi>(undefined)
 
@@ -31,16 +32,22 @@ export const ToastsProvider: React.FC = ({ children }) => {
   )
 
   const toastError = (title: string, description?: ReactNode) => {
-    return toast({ title, description, type: toastTypes.DANGER })
+    return toast({ title, description, type: types.DANGER })
   }
   const toastInfo = (title: string, description?: ReactNode) => {
-    return toast({ title, description, type: toastTypes.INFO })
+    return toast({ title, description, type: types.INFO })
   }
-  const toastSuccess = (title: string, description?: ReactNode) => {
-    return toast({ title, description, type: toastTypes.SUCCESS })
+  const toastGraves = (title: string, description?: ReactNode) => {
+    return toast({ title, description, type: types.GRAVES })
+  }
+  const toastTombs = (title: string, description?: ReactNode) => {
+    return toast({ title, description, type: types.TOMBS })
+  }
+  const toastDefault = (title: string, description?: ReactNode) => {
+    return toast({ title, description, type: types.DEFAULT })
   }
   const toastWarning = (title: string, description?: ReactNode) => {
-    return toast({ title, description, type: toastTypes.WARNING })
+    return toast({ title, description, type: types.WARNING })
   }
   const clear = () => setToasts([])
   const remove = (id: string) => {
@@ -48,7 +55,9 @@ export const ToastsProvider: React.FC = ({ children }) => {
   }
 
   return (
-    <ToastsContext.Provider value={{ toasts, clear, remove, toastError, toastInfo, toastSuccess, toastWarning }}>
+    <ToastsContext.Provider
+      value={{ toasts, clear, remove, toastError, toastInfo, toastDefault, toastGraves, toastTombs, toastWarning }}
+    >
       {children}
     </ToastsContext.Provider>
   )

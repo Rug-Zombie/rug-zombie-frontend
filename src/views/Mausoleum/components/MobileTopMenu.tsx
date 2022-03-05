@@ -63,18 +63,16 @@ interface MenuProps {
   userInfo: any
 }
 
-
 const MobileTopMenu: React.FC<MenuProps> = () => {
   return (
     <FlexRow alignItems="center" p="16px">
       <SetCol>
-        <Box pl='28px' position='relative'>
+        <Box pl="28px" position="relative">
           <Token style={{ position: 'relative', top: '35px', right: '25px' }}>
-            <Image src='/images/rugZombie/BasicZombie.png' width={50} height={50} alt='ZMBE' />
+            <Image src="/images/rugZombie/BasicZombie.png" width={50} height={50} alt="ZMBE" />
           </Token>
-
           <Label>
-            <Title bold textTransform='uppercase'>
+            <Title bold textTransform="uppercase">
               MAUSOLEUM (BETA)
             </Title>
           </Label>

@@ -1,48 +1,45 @@
 /* eslint-disable no-param-reassign */
 import React from 'react'
-import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
 import numeral from 'numeral'
+import { BIG_ZERO } from '../../../../utils/bigNumber'
+import { getBalanceNumber } from '../../../../utils/formatBalance'
+import { zombiePriceUsd } from '../../../../redux/get'
+import { useGetGraveByPid, useGetGraves } from '../../../../state/hooks'
+import { getId } from '../../../../utils'
 
 const InfoCard = styled.header`
-  min-width: 260px;
-  background-color: #151E21;
+  background-color: #151e21;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
+`
 
 const HalfLine = styled.div`
   border-radius: 0px 0px 5px 5px;
   margin: 0 auto;
   height: 5px;
   width: 80%;
-  background-color: #AE32AA;
-`;
+  background-color: #ae32aa;
+`
 
 const InfoCardTitle = styled.h3`
   text-align: left;
   font: normal normal 500 1.6rem Poppins;
   letter-spacing: 0.5px;
-  color: #FFFFFF;
-`;
+  color: #ffffff;
+  width: 100%;
+  padding: 0 10px;
+`
 
 const InfoCardSubHeader = styled.h4`
   width: 100%;
   text-align: left;
   font: normal normal normal 16px/30px Poppins;
   letter-spacing: 0px;
-  color: #6B7682;
+  color: #6b7682;
   padding: 0 10px;
-`;
-
-const InfoCardLink = styled.p`
-  text-align: left;
-  text-decoration: underline;
-  font: normal normal normal 16px/30px Poppins;
-  letter-spacing: 0px;
-  color: #AE32AA;
 `
 
 const InfoCardHeader = styled.div`
@@ -50,75 +47,82 @@ const InfoCardHeader = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  width: 100%
-`;
+  width: 100%;
+`
 
 const InfoCardContent = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 20px 20px 20px;
-  width: 100%
-`;
+  width: 100%;
+`
 
 const InfoCardSubtitle = styled.p`
   text-align: left;
   font: normal normal normal 12px/30px Poppins;
   letter-spacing: 0px;
-  color: #6B7682;
+  color: #6b7682;
   padding: 0 10px;
-`;
+`
 
 const InfoCardValue = styled.p`
   text-align: left;
   font: normal normal normal 30px/36px Poppins;
   letter-spacing: 0px;
-  color: #FFFFFF;
+  color: #ffffff;
   opacity: 1;
   padding: 0 10px 10px 10px;
-`;
+`
 
-interface HeaderCardProps {
-  tvl: number;
-  pageTvl: { page: string, tvl: number };
-  myHoldings: number;
-}
+const Shadow = styled.div`
+  width: 100%;
+  height: 40px;
+  background: #000000 0% 0% no-repeat padding-box;
+  border-radius: 10px;
+  opacity: 0.5;
+  filter: blur(10px);
+  position: relative;
+  bottom: 26px;
+  margin-bottom: -25px;
+  z-index: -1;
+`
 
-const HeaderCard: React.FC<HeaderCardProps> = ({ tvl, pageTvl, myHoldings }) => {
-  const { account } = useWeb3React()
+const HeaderCard: React.FC = () => {
+  const graveSum = useGetGraves().data.reduce(
+    (sum, { pid, poolInfo: { tokenAmount }, userInfo: { amount } }) => {
+      return {
+        amount: sum.amount.plus(amount),
+        totalAmount: getId(pid) === 0 ? sum.totalAmount : sum.totalAmount.plus(tokenAmount),
+      }
+    },
+    { amount: BIG_ZERO, totalAmount: BIG_ZERO },
+  )
+
+  const legacyGraveTvl =
+    getBalanceNumber(useGetGraveByPid(0).poolInfo.tokenAmount.minus(graveSum.totalAmount)) * zombiePriceUsd()
+  const graveTvl = getBalanceNumber(graveSum.totalAmount) * zombiePriceUsd() + legacyGraveTvl
+  const userTvl = getBalanceNumber(graveSum.amount) * zombiePriceUsd()
 
   return (
-    <InfoCard>
-      <HalfLine />
-      <InfoCardHeader>
-        <InfoCardTitle>
-          Graves
-        </InfoCardTitle>
-        <InfoCardSubHeader>
-          Use your dead tokens to unlock graves then stake ZMBE to earn Zombie & NFT rewards.
-        </InfoCardSubHeader>
-      </InfoCardHeader>
-      <InfoCardContent>
-        <InfoCardSubtitle>
-          Total Value Locked
-        </InfoCardSubtitle>
-        <InfoCardValue>
-          {numeral(tvl).format('($ 0,0)')}
-        </InfoCardValue>
-        <InfoCardSubtitle>
-          {pageTvl.page} TVL
-        </InfoCardSubtitle>
-        <InfoCardValue>
-          {numeral(pageTvl.tvl).format('($ 0,0)')}
-        </InfoCardValue>
-        <InfoCardSubtitle>
-          My Holdings
-        </InfoCardSubtitle>
-        <InfoCardValue>
-          {numeral(myHoldings).format('($ 0,0)')}
-        </InfoCardValue>
-      </InfoCardContent>
-    </InfoCard>
-  );
+    <>
+      <InfoCard>
+        <HalfLine />
+        <InfoCardHeader>
+          <InfoCardTitle>Graves</InfoCardTitle>
+          <InfoCardSubHeader>
+            Use your dead tokens to unlock graves then stake ZMBE to earn Zombie & NFT rewards.
+          </InfoCardSubHeader>
+        </InfoCardHeader>
+        <InfoCardContent>
+          <InfoCardSubtitle>Graves TVL</InfoCardSubtitle>
+          <InfoCardValue>{numeral(graveTvl).format('($ 0,0)')}</InfoCardValue>
+          <InfoCardSubtitle>My Holdings</InfoCardSubtitle>
+          <InfoCardValue>{numeral(userTvl).format('($ 0,0)')}</InfoCardValue>
+        </InfoCardContent>
+      </InfoCard>
+      <Shadow />
+    </>
+  )
 }
 
-export default HeaderCard;
+export default HeaderCard

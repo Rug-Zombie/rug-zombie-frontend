@@ -1,7 +1,9 @@
 import { ReactNode } from 'react'
 
 export const types = {
-  SUCCESS: 'success',
+  GRAVES: 'graves',
+  TOMBS: 'tombs',
+  DEFAULT: 'default',
   DANGER: 'danger',
   WARNING: 'warning',
   INFO: 'info',

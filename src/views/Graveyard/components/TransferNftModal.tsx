@@ -6,14 +6,13 @@ import { Button, Input, Modal, Text } from '@rug-zombie-libs/uikit'
 import useToast from 'hooks/useToast'
 import { useERC721 } from 'hooks/useContract'
 import InfoRow from './InfoRow'
-import { nftById } from '../../../redux/get'
 import { ToastDescriptionWithTx } from '../../../components/Toast'
 import { getAddress } from '../../../utils/addressHelpers'
+import { useGetNftById } from '../../../state/nfts/hooks'
 
 interface TransferNftModalProps {
   id: number
   tokenId: number
-  onSuccess: () => any
   onDismiss?: () => void
 }
 
@@ -38,14 +37,14 @@ const Label = styled.label`
   margin-top: 24px;
 `
 
-const TransferNftModal: React.FC<TransferNftModalProps> = ({ id, tokenId, onSuccess, onDismiss }) => {
+const TransferNftModal: React.FC<TransferNftModalProps> = ({ id, tokenId, onDismiss }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [value, setValue] = useState('')
   const [error, setError] = useState(null)
   const { account } = useWeb3React()
-  const { address, name} = nftById(id)
+  const { address, name } = useGetNftById(id)
   const contract = useERC721(getAddress(address))
-  const { toastSuccess } = useToast()
+  const { toastDefault } = useToast()
 
   const handleConfirm = async () => {
     try {
@@ -54,11 +53,12 @@ const TransferNftModal: React.FC<TransferNftModalProps> = ({ id, tokenId, onSucc
       if (!isValidAddress) {
         setError('Please enter a valid wallet address')
       } else {
-        contract.methods.transferFrom(account, value, tokenId).send({ from: account })
-          .then(res => {
+        contract.methods
+          .transferFrom(account, value, tokenId)
+          .send({ from: account })
+          .then((res) => {
             onDismiss()
-            onSuccess()
-            toastSuccess('NFT successfully transferred!', <ToastDescriptionWithTx txHash={res.transactionHash} />)
+            toastDefault('NFT successfully transferred!', <ToastDescriptionWithTx txHash={res.transactionHash} />)
           })
           .catch(() => {
             setError('Unable to transfer NFT')

@@ -1,4 +1,4 @@
-import { Toast } from '@rug-zombie-libs/uikit'
+import { Toast } from '../../components/Toast'
 
 type ToastSignature = (title: Toast['title'], description?: Toast['description']) => void
 
@@ -8,6 +8,8 @@ export interface ToastContextApi {
   remove: (id: string) => void
   toastError: ToastSignature
   toastInfo: ToastSignature
-  toastSuccess: ToastSignature
+  toastDefault: ToastSignature
+  toastGraves: ToastSignature
+  toastTombs: ToastSignature
   toastWarning: ToastSignature
 }

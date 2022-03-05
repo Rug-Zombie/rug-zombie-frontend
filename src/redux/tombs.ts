@@ -101,7 +101,7 @@ const tombs: Tomb[] = [
       amount: BIG_ZERO,
       pendingZombie: BIG_ZERO,
       lpAllowance: BIG_ZERO,
-      tokenWithdrawalDate: 0
+      tokenWithdrawalDate: 0,
     },
   },
 ]

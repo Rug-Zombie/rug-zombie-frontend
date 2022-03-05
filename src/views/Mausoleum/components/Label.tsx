@@ -61,13 +61,13 @@ const Label = styled(Card)<{ dir: 'left' | 'right' }>`
 
 export const PricePairLabel: React.FC = () => {
   return (
-    <Box pl='28px' position='relative' display='inline-block'>
+    <Box pl="28px" position="relative" display="inline-block">
       <Token style={{ position: 'relative', top: '43px', right: '10px' }}>
-        <Image src='/images/rugZombie/BasicZombie.png' width={50} height={50} alt='ZMBE' />
+        <Image src="/images/rugZombie/BasicZombie.png" width={50} height={50} alt="ZMBE" />
       </Token>
 
-      <Label dir='left'>
-        <Title bold textTransform='uppercase'>
+      <Label dir="left">
+        <Title bold textTransform="uppercase">
           MAUSOLEUM (BETA)
         </Title>
       </Label>
@@ -80,27 +80,31 @@ interface TimerLabelProps {
 }
 
 export const TimerLabel: React.FC<TimerLabelProps> = ({ id }) => {
-  const {token0, token1, userInfo, version} = auctionById(id)
+  const { token0, token1, userInfo, version } = auctionById(id)
 
   return (
-    <Box pr='100px' position='relative'>
-      <Flex alignItems='center' justifyContent='center'>
-        {version !== 'v3' ? <LinkExternal
-          href={`${APESWAP_ADD_LIQUIDITY_URL}/${token0}/${token1}`}
-          style={{
-            width: '200px',
-            justifyContent: 'center',
-            position: 'relative',
-            right: '10px',
-          }}
-        >
-          Get BT (Bid Tokens)
-        </LinkExternal> : null}
-        <Label dir='right' style={{width: "170px"}}>
-          <Title bold color='secondary'>
+    <Box pr="100px" position="relative">
+      <Flex alignItems="center" justifyContent="center">
+        {version !== 'v3' ? (
+          <LinkExternal
+            href={`${APESWAP_ADD_LIQUIDITY_URL}/${token0}/${token1}`}
+            style={{
+              width: '200px',
+              justifyContent: 'center',
+              position: 'relative',
+              right: '10px',
+            }}
+          >
+            Get BT (Bid Tokens)
+          </LinkExternal>
+        ) : null}
+        <Label dir="right" style={{ width: '170px' }}>
+          <Title bold color="secondary">
             Your Bid
           </Title>
-          <Interval paddingLeft="3px" fontSize='12px'>{Math.round(getBalanceAmount(userInfo.bid).toNumber() * 100) / 100} {version === 'v3' ? 'BNB' : 'BT'}</Interval>
+          <Interval paddingLeft="3px" fontSize="12px">
+            {Math.round(getBalanceAmount(userInfo.bid).toNumber() * 100) / 100} {version === 'v3' ? 'BNB' : 'BT'}
+          </Interval>
         </Label>
         <IconButton
           variant="subtle"
@@ -109,7 +113,7 @@ export const TimerLabel: React.FC<TimerLabelProps> = ({ id }) => {
           target="_blank"
           rel="noreferrer noopener"
         >
-        <HelpIcon paddingLeft="5px" width="35px" />
+          <HelpIcon paddingLeft="5px" width="35px" />
         </IconButton>
       </Flex>
     </Box>

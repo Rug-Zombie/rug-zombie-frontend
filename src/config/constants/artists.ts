@@ -1,4 +1,6 @@
-const artists = {
+import { Artist } from './types'
+
+const artists: { [name: string]: Artist } = {
   RugZombie: {
     name: 'Rug Zombie',
     twitter: 'https://twitter.com/rugzombie',
@@ -41,11 +43,11 @@ const artists = {
   },
   trippynazz: {
     name: 'TrippyNaz',
-    twitter: 'https://twitter.com/trippynazz'
+    twitter: 'https://twitter.com/trippynazz',
   },
   canadiancryptojunkie: {
     name: 'Canadian Crypto Junkie 🍁',
-    twitter: 'https://twitter.com/CA_CryptoJunkie'
+    twitter: 'https://twitter.com/CA_CryptoJunkie',
   },
   none: {
     name: '',
