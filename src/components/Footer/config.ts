@@ -60,6 +60,11 @@ const config = [
       href: 'https://rugzombie.gitbook.io/docs/',
       type: Type.ExternalLink
     },
+    {
+      label: 'Terms of service',
+      href: 'https://rugzombie.gitbook.io/docs/fine-print-stuff/terms-of-use',
+      type: Type.ExternalLink
+    },
   ],
 ]
 
