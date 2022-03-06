@@ -1,5 +1,6 @@
 import tombs from 'config/constants/tombs'
 import { getBep20Contract, getLpContract } from 'utils/contractHelpers'
+import hasValidAnnouncements from './common.test'
 
 const tombsToTest = tombs.filter((tomb) => tomb.id !== 0)
 
@@ -37,4 +38,5 @@ describe('Config tombs', () => {
     expect(parseInt(tokenAmount, 10)).toBeGreaterThan(0)
     expect(parseInt(quoteTokenAmount, 10)).toBeGreaterThan(0)
   })
+  it.each(tombs)('Tomb %p has valid announcements', hasValidAnnouncements)
 })

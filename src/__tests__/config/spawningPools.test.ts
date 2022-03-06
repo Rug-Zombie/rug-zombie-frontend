@@ -1,5 +1,6 @@
 import spawningPools from 'config/constants/spawningPools'
 import { getSpawningPoolContract } from 'utils/contractHelpers'
+import hasValidAnnouncements from './common.test'
 
 describe('Config spawning pools', () => {
   it.each(spawningPools.map((spawningPool) => spawningPool.id))('Spawning pool #%d has an unique id', (sousId) => {
@@ -24,4 +25,5 @@ describe('Config spawning pools', () => {
       expect(rewardTokenAddress.toLowerCase()).toBe(spawningPool.rewardToken.address[56].toLowerCase())
     },
   )
+  it.each(spawningPools)('Spawning pool %p has valid announcements', hasValidAnnouncements)
 })

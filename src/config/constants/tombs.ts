@@ -31,6 +31,7 @@ const tombs: TombConfig[] = [
       rareId: 46,
       legendaryId: 48,
     },
+    announcementIds: [82],
   },
   {
     id: 3,
@@ -52,6 +53,7 @@ const tombs: TombConfig[] = [
       rareId: 46,
       legendaryId: 78,
     },
+    announcementIds: [82],
   },
   {
     id: 2,
@@ -77,6 +79,7 @@ const tombs: TombConfig[] = [
       rareId: 46,
       legendaryId: 47,
     },
+    announcementIds: [81],
   },
 ]
 

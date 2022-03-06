@@ -13,6 +13,7 @@ const graves: GraveConfig[] = [
     rug: tokens.zmbe,
     rugDex: Dex.PCS_V2,
     isFeatured: true,
+    announcementIds: [84],
   },
   {
     pid: {
@@ -26,6 +27,7 @@ const graves: GraveConfig[] = [
     liquidityDetails: '',
     isClosed: true,
     isRetired: true,
+    announcementIds: [84],
   },
   {
     pid: {
@@ -40,6 +42,7 @@ const graves: GraveConfig[] = [
     nftConverterPid: 0,
     graveNftToken: '0x22e42D9425b55FD2262bfF72a316bb052DDb2a77',
     isFeatured: true,
+    announcementIds: [84],
   },
   {
     pid: {
@@ -54,6 +57,7 @@ const graves: GraveConfig[] = [
     nftConverterPid: 1,
     graveNftToken: '0xE30043524ADb329169b11eDfe833a9beDd4D2A11',
     isFeatured: true,
+    announcementIds: [84],
   },
   {
     pid: {
@@ -68,6 +72,7 @@ const graves: GraveConfig[] = [
     nftConverterPid: 0,
     graveNftToken: '0x22e42D9425b55FD2262bfF72a316bb052DDb2a77',
     endDate: 1648051200,
+    announcementIds: [77],
   },
   {
     pid: {
@@ -80,7 +85,8 @@ const graves: GraveConfig[] = [
     liquidityDetails: 'None! You must earn the Basic Zombie NFT from the RugZombie Common TombTable to gain access.',
     depositNftId: 6,
     nftConverterPid: 0,
-    isFeatured: true
+    isFeatured: true,
+    announcementIds: [133],
   },
   {
     pid: {
@@ -93,7 +99,8 @@ const graves: GraveConfig[] = [
     liquidityDetails: 'None! You must earn the Basic Zombie NFT from the RugZombie Common TombTable to gain access.',
     depositNftId: 6,
     nftConverterPid: 0,
-    isFeatured: true
+    isFeatured: true,
+    announcementIds: [133],
   },
 
   {
@@ -105,7 +112,8 @@ const graves: GraveConfig[] = [
     nftId: 97,
     rug: tokens.slvn,
     isNew: true,
-    rugDex: Dex.PCS_V2
+    rugDex: Dex.PCS_V2,
+    announcementIds: [132],
   },
   {
     pid: {
@@ -118,6 +126,7 @@ const graves: GraveConfig[] = [
     rug: tokens.babe,
     nftConverterPid: 5,
     isNew: true,
+    announcementIds: [69],
   },
   {
     pid: {
@@ -130,6 +139,7 @@ const graves: GraveConfig[] = [
     depositNftId: 33,
     nftConverterPid: 7,
     isNew: true,
+    announcementIds: [67],
   },
   {
     pid: {
@@ -142,6 +152,7 @@ const graves: GraveConfig[] = [
     depositNftId: 64,
     nftConverterPid: 6,
     isNew: true,
+    announcementIds: [99],
   },
   {
     pid: {
@@ -153,6 +164,7 @@ const graves: GraveConfig[] = [
     rug: tokens.atlas,
     rugDex: Dex.PCS_V2,
     isNew: true,
+    announcementIds: [129],
   },
   {
     pid: {
@@ -164,6 +176,7 @@ const graves: GraveConfig[] = [
     rug: tokens.cx,
     rugDex: Dex.PCS_V2,
     isNew: true,
+    announcementIds: [127],
   },
   {
     pid: {
@@ -175,6 +188,7 @@ const graves: GraveConfig[] = [
     rug: tokens.cx,
     rugDex: Dex.PCS_V2,
     isNew: true,
+    announcementIds: [127],
   },
   {
     pid: {
@@ -185,6 +199,7 @@ const graves: GraveConfig[] = [
     nftId: 84,
     rug: tokens.pirate,
     rugDex: Dex.PCS_V2,
+    announcementIds: [124],
   },
   {
     pid: {
@@ -197,6 +212,7 @@ const graves: GraveConfig[] = [
     liquidityDetails:
       'None! RONINGMZ holders can claim ZRONINGMZ on the homepage Victim Pools card. ZRONINGMZ can also be found in the Blackmarket and RugRoll in the Catacombs!',
     isRetired: true,
+    announcementIds: [119],
   },
   {
     pid: {
@@ -209,6 +225,7 @@ const graves: GraveConfig[] = [
     liquidityDetails:
       'None! Trading on the Ronin contract has been halted, a new grave will be available for new stakers shortly.',
     isRetired: true,
+    announcementIds: [117],
   },
   {
     name: 'Iron Finance Legendary',
@@ -219,6 +236,7 @@ const graves: GraveConfig[] = [
     nftId: 72,
     rug: tokens.iron,
     endDate: 1647017999,
+    announcementIds: [108, 56],
   },
   {
     pid: {
@@ -229,6 +247,7 @@ const graves: GraveConfig[] = [
     nftId: 79,
     rug: tokens.hunny,
     rugDex: Dex.PCS_V2,
+    announcementIds: [115, 108],
   },
   {
     pid: {
@@ -240,6 +259,7 @@ const graves: GraveConfig[] = [
     rug: tokens.zmneb,
     liquidityDetails:
       'None! zMinereum BSC can be claimed by MNEB holders on the home page or rolled for in the Catacombs! ',
+    announcementIds: [85],
   },
   {
     pid: {
@@ -256,6 +276,7 @@ const graves: GraveConfig[] = [
         url: 'https://l1ghtl1st.io/',
       },
     ],
+    announcementIds: [102],
   },
   {
     pid: {
@@ -266,6 +287,7 @@ const graves: GraveConfig[] = [
     nftId: 60,
     rug: tokens.zbog,
     liquidityDetails: 'None! BOG holders can claim ZBOG using the Victim Pools home card.',
+    announcementIds: [97],
   },
   {
     pid: {
@@ -276,6 +298,7 @@ const graves: GraveConfig[] = [
     nftId: 61,
     rug: tokens.zdiamonds,
     rugDex: Dex.PCS_V2,
+    announcementIds: [85],
   },
   {
     pid: {
@@ -286,6 +309,7 @@ const graves: GraveConfig[] = [
     nftId: 58,
     rug: tokens.pokecoin,
     rugDex: Dex.PCS_V2,
+    announcementIds: [96],
   },
   {
     pid: {
@@ -296,6 +320,7 @@ const graves: GraveConfig[] = [
     nftId: 59,
     rug: tokens.kids,
     rugDex: Dex.PCS_V2,
+    announcementIds: [93],
   },
   {
     pid: {
@@ -306,6 +331,7 @@ const graves: GraveConfig[] = [
     nftId: 54,
     rug: tokens.pokecoin,
     rugDex: Dex.PCS_V2,
+    announcementIds: [96],
   },
   {
     pid: {
@@ -316,6 +342,7 @@ const graves: GraveConfig[] = [
     nftId: 55,
     rug: tokens.zombie_no_relation,
     rugDex: Dex.PCS_V2,
+    announcementIds: [94],
   },
   {
     pid: {
@@ -326,6 +353,7 @@ const graves: GraveConfig[] = [
     nftId: 56,
     rug: tokens.llt,
     rugDex: Dex.PCS_V1,
+    announcementIds: [91],
   },
   {
     pid: {
@@ -342,6 +370,7 @@ const graves: GraveConfig[] = [
         url: tokens.mainst.projectLink,
       },
     ],
+    announcementIds: [95],
   },
   {
     pid: {
@@ -354,6 +383,7 @@ const graves: GraveConfig[] = [
     rugDex: Dex.PCS_V2,
     isClosed: true,
     isRetired: true,
+    announcementIds: [108, 64],
   },
   {
     pid: {
@@ -364,6 +394,7 @@ const graves: GraveConfig[] = [
     nftId: 41,
     rug: tokens.bonfire,
     rugDex: Dex.PCS_V1,
+    announcementIds: [79],
   },
   {
     pid: {
@@ -375,6 +406,7 @@ const graves: GraveConfig[] = [
     rug: tokens.zmpr,
     liquidityDetails:
       'None! The ZMPR token was airdropped to EMPR holders so you will have to ask around the telegram.',
+    announcementIds: [42],
   },
   {
     pid: {
@@ -385,6 +417,7 @@ const graves: GraveConfig[] = [
     nftId: 24,
     rug: tokens.grupee,
     rugDex: Dex.APESWAP,
+    announcementIds: [52],
   },
   {
     pid: {
@@ -395,6 +428,7 @@ const graves: GraveConfig[] = [
     nftId: 23,
     rug: tokens.rupee,
     rugDex: Dex.APESWAP,
+    announcementIds: [52],
   },
   {
     pid: {
@@ -405,6 +439,7 @@ const graves: GraveConfig[] = [
     nftId: 7,
     rug: tokens.viking,
     rugDex: Dex.PCS_V1,
+    announcementIds: [108],
   },
   {
     pid: {
@@ -415,6 +450,7 @@ const graves: GraveConfig[] = [
     nftId: 8,
     rug: tokens.msc,
     rugDex: Dex.PCS_V1,
+    announcementIds: [108],
   },
   {
     pid: {
@@ -425,6 +461,7 @@ const graves: GraveConfig[] = [
     nftId: 21,
     rug: tokens.tndr,
     rugDex: Dex.PCS_V1,
+    announcementIds: [29],
   },
   {
     pid: {
@@ -437,6 +474,7 @@ const graves: GraveConfig[] = [
     liquidityDetails: 'None! This grave is exclusive for victims of the flash loan attack on autoshark.',
     isClosed: true,
     isRetired: true,
+    announcementIds: [8],
   },
   {
     pid: {
@@ -447,6 +485,7 @@ const graves: GraveConfig[] = [
     nftId: 15,
     rug: tokens.rugbiden,
     rugDex: Dex.PCS_V1,
+    announcementIds: [41],
   },
   {
     pid: {
@@ -457,6 +496,7 @@ const graves: GraveConfig[] = [
     nftId: 16,
     rug: tokens.burger,
     rugDex: Dex.PCS_V1,
+    announcementIds: [108, 40],
   },
   {
     pid: {
@@ -467,6 +507,7 @@ const graves: GraveConfig[] = [
     nftId: 13,
     rug: tokens.busd,
     rugDex: Dex.PCS_V2,
+    announcementIds: [108, 33],
   },
   {
     pid: {
@@ -477,6 +518,7 @@ const graves: GraveConfig[] = [
     nftId: 9,
     rug: tokens.d100,
     rugDex: Dex.PCS_V1,
+    announcementIds: [108, 13],
   },
   {
     pid: {
@@ -487,6 +529,7 @@ const graves: GraveConfig[] = [
     nftId: 11,
     rug: tokens.merl,
     rugDex: Dex.PCS_V2,
+    announcementIds: [108, 24],
   },
   {
     pid: {
@@ -497,6 +540,7 @@ const graves: GraveConfig[] = [
     nftId: 10,
     rug: tokens.fairmoon,
     rugDex: Dex.PCS_V2,
+    announcementIds: [108, 18],
   },
   {
     pid: {
@@ -507,6 +551,7 @@ const graves: GraveConfig[] = [
     nftId: 14,
     rug: tokens.u92,
     rugDex: Dex.PCS_V2,
+    announcementIds: [34],
   },
   {
     pid: {
@@ -517,6 +562,7 @@ const graves: GraveConfig[] = [
     nftId: 4,
     rug: tokens.fairmoon,
     rugDex: Dex.PCS_V1,
+    announcementIds: [108, 18],
   },
   {
     pid: {
@@ -527,6 +573,7 @@ const graves: GraveConfig[] = [
     nftId: 31,
     rug: tokens.kcake,
     rugDex: Dex.PCS_V2,
+    announcementIds: [66],
   },
   {
     pid: {
@@ -537,6 +584,7 @@ const graves: GraveConfig[] = [
     nftId: 3,
     rug: tokens.fairmoon,
     rugDex: Dex.PCS_V1,
+    announcementIds: [18],
   },
   {
     pid: {
@@ -547,6 +595,7 @@ const graves: GraveConfig[] = [
     nftId: 0,
     rug: tokens.yape,
     rugDex: Dex.PCS_V1,
+    announcementIds: [20],
   },
   {
     pid: {
@@ -557,6 +606,7 @@ const graves: GraveConfig[] = [
     nftId: 2,
     rug: tokens.dragon,
     rugDex: Dex.PCS_V1,
+    announcementIds: [19],
   },
   {
     pid: {
@@ -567,6 +617,7 @@ const graves: GraveConfig[] = [
     nftId: 1,
     rug: tokens.ypanda,
     rugDex: Dex.PCS_V1,
+    announcementIds: [23],
   },
 ]
 

@@ -1,6 +1,7 @@
 import graves from 'config/constants/graves'
 import { getBep20Contract } from 'utils/contractHelpers'
 import tokens from '../../config/constants/tokens'
+import hasValidAnnouncements from './common.test'
 
 const gravesToTest = graves.filter((grave) => grave.pid[56] !== 0)
 
@@ -38,4 +39,5 @@ describe('Config graves', () => {
 
     expect(rugAddress.toLowerCase()).toBe(stakingTokenContract.options.address.toLowerCase())
   })
+  it.each(gravesToTest)('Grave %p has valid announcements', hasValidAnnouncements)
 })

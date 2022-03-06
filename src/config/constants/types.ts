@@ -8,12 +8,23 @@ export interface Id {
   56: number
 }
 
+export interface AnnouncementSubject {
+  announcementIds: number[],
+}
+
+export interface Announcement {
+  title: string
+  url: string
+  published: number
+}
+
 export interface Token {
   symbol: string
   address?: Address
   decimals?: number
   projectLink?: string
   tokenLogo?: string
+  geckoId?: string
 }
 
 export enum PoolIds {
@@ -82,7 +93,7 @@ export enum UserActivityType {
   DrFMintNft,
 }
 
-export interface GraveConfig {
+export interface GraveConfig extends AnnouncementSubject {
   pid: Id
   name: string
   nftId: number
@@ -110,7 +121,7 @@ export interface TombOverlayConfig {
   legendaryId: number
 }
 
-export interface TombConfig {
+export interface TombConfig extends AnnouncementSubject{
   id: number
   pid: Id
   token1: Token
@@ -122,7 +133,7 @@ export interface TombConfig {
   overlay: TombOverlayConfig
 }
 
-export interface SpawningPoolConfig {
+export interface SpawningPoolConfig extends AnnouncementSubject{
   id: number
   name: string
   address: Address

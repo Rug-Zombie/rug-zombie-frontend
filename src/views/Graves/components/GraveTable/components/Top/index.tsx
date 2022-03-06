@@ -1,3 +1,4 @@
+import AnnouncementLink from 'components/AnnouncementLink'
 import React from 'react'
 import styled from 'styled-components'
 import tokens from 'config/constants/tokens'
@@ -53,10 +54,15 @@ const GraveTitle = styled.div`
 const TabFlex = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  column-gap: 5px;
+  margin-left: 5px;
+  
   @media (max-width: 527px) {
     flex-direction: column;
     align-items: flex-end;
     justify-content: center;
+    row-gap: 5px;
   }
 `
 
@@ -68,27 +74,23 @@ const GreyTab = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  column-gap: 5px;
+  
   @media (max-width: 527px) {
-    margin: 5px 0;
+    row-gap: 5px;
   }
 `
 
 const GreenTab = styled(GreyTab)`
   border: 2px solid #b8c00d;
-  margin: 0 5px;
-  @media (max-width: 527px) {
-    margin: 0;
-  }
 `
 
 const BlueTab = styled(GreyTab)`
   border: 2px solid #4b7bdc;
-  margin-left: 5px;
 `
 
 const PinkTab = styled(GreyTab)`
   border: 2px solid #ae32aa;
-  margin-left: 5px;
 `
 
 const GreyTabText = styled.div`
@@ -199,7 +201,12 @@ const Top: React.FC<TopProps> = ({ grave, open, setOpen }) => {
       )
     }
 
-    return <TabFlex>{tabs}</TabFlex>
+    return (
+      <TabFlex>
+        {tabs}
+        <AnnouncementLink key="announcement-link" subject={grave} />
+      </TabFlex>
+    )
   }
 
   return (

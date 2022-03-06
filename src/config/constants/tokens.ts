@@ -1,4 +1,6 @@
-const tokens = {
+import { Token } from './types'
+
+const tokens: { [key: string]: Token } = {
   bnb: {
     symbol: 'BNB',
     address: {
