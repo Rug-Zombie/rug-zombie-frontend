@@ -72,12 +72,12 @@ const graves: GraveConfig[] = [
   },
   {
     pid: {
-      56: 45,
+      56: 48,
       97: 1,
     },
-    name: 'TreasureKey Rare',
-    nftId: 84,
-    rug: tokens.pirate,
+    name: 'Atlantis Token Rare',
+    nftId: 90,
+    rug: tokens.atlas,
     rugDex: Dex.PCS_V2,
     isNew: true,
   },
@@ -105,6 +105,16 @@ const graves: GraveConfig[] = [
   },
   {
     pid: {
+      56: 45,
+      97: 1,
+    },
+    name: 'TreasureKey Rare',
+    nftId: 84,
+    rug: tokens.pirate,
+    rugDex: Dex.PCS_V2,
+  },
+  {
+    pid: {
       56: 44,
       97: 1,
     },
@@ -113,7 +123,7 @@ const graves: GraveConfig[] = [
     rug: tokens.zroningmz,
     liquidityDetails:
       'None! RONINGMZ holders can claim ZRONINGMZ on the homepage Victim Pools card. ZRONINGMZ can also be found in the Blackmarket and RugRoll in the Catacombs!',
-    endDate: 1646283600,
+    isRetired: true,
   },
   {
     pid: {
@@ -125,7 +135,7 @@ const graves: GraveConfig[] = [
     rug: tokens.roningmz,
     liquidityDetails:
       'None! Trading on the Ronin contract has been halted, a new grave will be available for new stakers shortly.',
-    endDate: 1646283600,
+    isRetired: true,
   },
   {
     name: 'Iron Finance Legendary',

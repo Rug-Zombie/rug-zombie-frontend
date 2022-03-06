@@ -112,6 +112,15 @@ const tokens = {
     decimals: 9,
     tokenLogo: 'https://assets.coingecko.com/coins/images/17129/small/X2zoTDW.png?1626410291',
   },
+  atlas: {
+    symbol: 'ATLAS',
+    address: {
+      56: '0xcf87Ccf958d728f50d8ae5E4f15Bc4cA5733cDf5',
+      97: '',
+    },
+    decimals: 9,
+    tokenLogo: 'https://assets.coingecko.com/coins/images/20922/small/15211.png?1637926873',
+  },
   rugbiden: {
     symbol: 'RUGBIDEN',
     address: {

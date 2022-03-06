@@ -1403,6 +1403,22 @@ const nfts: Nft[] = [
     artist: artists.ayaz_psd,
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 90,
+    name: 'Deadlantis',
+    symbol: 'DATLAS',
+    description: "In a single day and night of misfortune, the island of deadlantis disappeared into the depths of the sea.",
+    address: {
+      56: '0xd30CBaA2d07329737bee4e154B5Fb26334329B6d',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://gateway.pinata.cloud/ipfs/Qmdg19WTKxcbKA5KfZda2L797w6CqTwNhNiseMUMF345DQ',
+    type: 'image',
+    rarity: 'Rare',
+    artist: artists.ayaz_psd,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts
