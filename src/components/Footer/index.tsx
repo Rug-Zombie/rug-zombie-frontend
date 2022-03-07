@@ -15,6 +15,7 @@ import {
   FooterList,
   FooterListItem,
   FooterIcons,
+  FooterIconLink,
   FooterIcon,
 } from './styles'
 
@@ -54,8 +55,12 @@ const Footer: React.FC = () => {
           })}
         </FooterLists>
         <FooterIcons>
-          <FooterIcon src={telegram} alt="Telegram Icon" onClick={() => window.open('https://t.me/rugzombie')} />
-          <FooterIcon src={twitter} alt="Twitter Icon" onClick={() => window.open('https://twitter.com/rugzombie')} />
+          <FooterIconLink href="https://t.me/rugzombie" target="_blank" rel="noopener noreferrer">
+            <FooterIcon src={telegram} alt="Telegram Icon" />
+          </FooterIconLink>
+          <FooterIconLink href="https://twitter.com/rugzombie" target="_blank" rel="noopener noreferrer">
+            <FooterIcon src={twitter} alt="Twitter Icon" />
+          </FooterIconLink>
         </FooterIcons>
       </FooterContent>
     </FooterContainer>
