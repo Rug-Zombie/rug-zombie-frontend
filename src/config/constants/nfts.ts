@@ -741,7 +741,7 @@ const nfts: Nft[] = [
     symbol: 'OCEAN',
     description: "It's the shark's house.",
     address: {
-      56: '0x8c1F3947881662C7F1753A3432891227ffab92B1',
+      56: '0x2759b5ac1c139d69269666Ee8D273d6c78bdAf53',
       97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
     },
     totalSupply: BIG_ZERO,
@@ -981,7 +981,7 @@ const nfts: Nft[] = [
     symbol: 'RIPSTER',
     description: 'Truly Jawsome.',
     address: {
-      56: '0x16f9f01AB90dC83FA41bAB2d10E63ef723Fa6A58',
+      56: '0xb4384BD302265F13a6A237cBE6ebeF03dB70873E',
       97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
     },
     totalSupply: BIG_ZERO,
@@ -997,7 +997,7 @@ const nfts: Nft[] = [
     symbol: 'CHOMPNADO',
     description: 'Sharks. I never saw that coming.',
     address: {
-      56: '0xAF1A40c4f497FEd95d799cD58A3b0dE8066c975E',
+      56: '0xBE475AB0455CC82c7e31b6d862B78C56FB35Ae74',
       97: '0x9Ba44B302148B1e6B8d5851409aA93666DdFa97A',
     },
     totalSupply: BIG_ZERO,
