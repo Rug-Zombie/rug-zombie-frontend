@@ -71,7 +71,12 @@ export const FooterIcons = styled.div`
 `
 
 export const FooterIcon = styled.img`
-  width: 50px;
-  height: 50px;
-  padding: 10px;
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  border-radius: 25px;
+  border: 1px solid #b8c00d;
+  :hover {
+    cursor: pointer;
+  }
 `

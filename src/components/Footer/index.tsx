@@ -54,8 +54,8 @@ const Footer: React.FC = () => {
           })}
         </FooterLists>
         <FooterIcons>
-          <FooterIcon src={telegram} alt="Telegram Icon" />
-          <FooterIcon src={twitter} alt="Twitter Icon" />
+          <FooterIcon src={telegram} alt="Telegram Icon" onClick={() => window.open('https://t.me/rugzombie')} />
+          <FooterIcon src={twitter} alt="Twitter Icon" onClick={() => window.open('https://twitter.com/rugzombie')} />
         </FooterIcons>
       </FooterContent>
     </FooterContainer>
