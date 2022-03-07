@@ -32,6 +32,10 @@ export const SecondaryButton = styled.button`
   justify-content: center;
   flex-direction: row;
   background: none;
+  
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 export const SecondaryButtonText = styled.div`

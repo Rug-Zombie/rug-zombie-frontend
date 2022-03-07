@@ -14,6 +14,7 @@ import { getAddress } from '../../utils/addressHelpers'
 import { formatAddress, getBscScanLink } from '../../utils'
 import { PreviewVideo, SmallPreviewVideo } from '../../components/Video/NftVideo'
 import Footer from '../../components/Footer'
+import { SecondaryButton } from '../../components/Buttons'
 
 const Image = styled.img`
   margin-top: 20px;
@@ -213,6 +214,15 @@ const VidDiv = styled.div`
   border-radius: 20px;
 `
 
+const OblivionButtonText = styled.div`
+  text-align: center;
+  font: normal normal 600 16px/25px Poppins;
+  letter-spacing: 0;
+  color: #FFFFFF;
+  white-space: nowrap;
+`
+
+
 const NftPage = styled(Page)`
   margin-bottom: 200px;
 `
@@ -225,7 +235,6 @@ const Nfts: React.FC = () => {
   const { id } = useParams<ParamTypes>()
   const { account } = useWeb3React()
   const dispatch = useAppDispatch()
-
   useEffect(() => {
     if (account) {
       dispatch(fetchNftUserDataAsync(account))
@@ -307,11 +316,23 @@ const Nfts: React.FC = () => {
               </DetailFlex>
               <DetailFlex>
                 <DetailName>Contract Address</DetailName>
-                <DetailValue href={getBscScanLink(getAddress(nft.address), 'address')}>{formatAddress(getAddress(nft.address))}</DetailValue>
+                <DetailValue
+                  href={getBscScanLink(getAddress(nft.address), 'address')}>{formatAddress(getAddress(nft.address))}</DetailValue>
               </DetailFlex>
               <DetailFlex>
                 <DetailName>Token Standard</DetailName>
                 <DetailValue>ERC-721</DetailValue>
+              </DetailFlex>
+            </DetailsContainer>
+          </TabRight>
+          <br />
+          <TabRight>
+            <DetailsContainer>
+              <DetailFlex>
+                <DetailName>Oblivion Marketplace</DetailName>
+                <SecondaryButton onClick={() => {
+                  window.location.href = `https://oblivion.art/create/${getAddress(nft.address)}`
+                }}><OblivionButtonText>List now</OblivionButtonText></SecondaryButton>
               </DetailFlex>
             </DetailsContainer>
           </TabRight>
