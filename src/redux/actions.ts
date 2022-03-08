@@ -6,11 +6,7 @@ import {
   PoolInfo,
   SpawningPoolInfo,
   SpawningUserInfo,
-  TombPoolInfo,
-  TombUserInfo,
   UserInfo,
-  TombOverlayPoolInfo,
-  TombOverlayUserInfo,
   SharkPoolInfo,
   SharkPoolUserInfo,
   BurnGravePoolInfo,
@@ -57,38 +53,6 @@ export const updateZombieBalance = (balance: BigNumber) => ({
   type: actions.UPDATE_ZOMBIE_BALANCE,
   payload: {
     balance,
-  },
-})
-
-export const updateZombiePriceBnb = (zombiePriceBnb: BigNumber) => ({
-  type: actions.UPDATE_ZOMBIE_PRICE_BNB,
-  payload: {
-    zombiePriceBnb,
-  },
-})
-
-export const updateBnbPriceUsd = (bnbPriceUsd: number) => ({
-  type: actions.UPDATE_BNB_PRICE_USD,
-  payload: {
-    bnbPriceUsd,
-  },
-})
-
-export const updateTombPoolInfo = (pid: number, poolInfo: TombPoolInfo) => ({
-  // todo add tomb result type restriction
-  type: actions.UPDATE_TOMB_POOL_INFO,
-  payload: {
-    pid,
-    poolInfo,
-  },
-})
-
-export const updateTombUserInfo = (pid: number, userInfo: TombUserInfo) => ({
-  // todo add tomb result type restriction
-  type: actions.UPDATE_TOMB_USER_INFO,
-  payload: {
-    pid,
-    userInfo,
   },
 })
 
@@ -162,22 +126,6 @@ export const updateBnbBalance = (bnbBalance: BigNumber) => ({
   type: actions.UPDATE_BNB_BALANCE,
   payload: {
     bnbBalance,
-  },
-})
-
-export const updateTombOverlayPoolInfo = (pid: number, poolInfo: TombOverlayPoolInfo) => ({
-  type: actions.UPDATE_TOMB_OVERLAY_POOL_INFO,
-  payload: {
-    pid,
-    poolInfo,
-  },
-})
-
-export const updateTombOverlayUserInfo = (pid: number, userInfo: TombOverlayUserInfo) => ({
-  type: actions.UPDATE_TOMB_OVERLAY_USER_INFO,
-  payload: {
-    pid,
-    userInfo,
   },
 })
 

@@ -1,14 +1,14 @@
-import { useSelector } from 'react-redux'
 import { createSelector } from '@reduxjs/toolkit'
-import { getAddress } from 'utils/addressHelpers'
 import axios from 'axios'
-import { State } from './types'
-import { getContract, getPancakePair } from '../utils/contractHelpers'
+import { useSelector } from 'react-redux'
+import { getAddress } from 'utils/addressHelpers'
 import pancakeFactoryAbi from '../config/abi/pancakeFactoryAbi.json'
-import tokens from '../config/constants/tokens'
 import contracts from '../config/constants/contracts'
+import tokens from '../config/constants/tokens'
 import { getId } from '../utils'
+import { getContract, getPancakePair } from '../utils/contractHelpers'
 import { now } from '../utils/timerHelpers'
+import { State } from './types'
 
 export const getBnbPriceinBusd = () => {
   return axios.get('https://api.binance.com/api/v3/avgPrice?symbol=BNBBUSD')
@@ -90,10 +90,6 @@ export const useGetGraveByPid = (pid: number) => {
   return useGetGraves().data.find((g) => getId(g.pid) === pid)
 }
 
-export const useGetTombs = () => {
-  return useSelector((state: State) => state.tombs)
-}
-
 export const useGetSpawningPools = () => {
   return useSelector((state: State) => state.spawningPools)
 }
@@ -142,3 +138,13 @@ export const useGetUserActivities = () => {
 
 export { useGetZombiePriceUsd, useGetBnbPriceUsd } from './prices/hooks'
 export { useGetNfts, useGetNftById, useGetNftTotalSupply } from './nfts/hooks'
+export {
+  useGetTombs,
+  useGetTombByPid,
+  useGetZombieBnbTomb,
+  useGetZombieBnbLpPriceBnb,
+  useGetZombiePerZombieBnbLp,
+  useGetTombsTvlBnb,
+  useGetTombsTvlUsd,
+  useGetUserStakedTombs,
+} from './tombs/hooks'

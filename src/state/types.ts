@@ -58,6 +58,8 @@ export interface TombPoolInfo {
   nftMintTime: BigNumber
   mintingFee: BigNumber
   lpPriceBnb: BigNumber
+  lpReserves: [BigNumber, BigNumber]
+  lpTotalSupply: BigNumber
 }
 
 export interface Tomb extends TombConfig {

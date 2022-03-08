@@ -1,9 +1,10 @@
 import React from 'react'
 import { Flex, Text } from '@rug-zombie-libs/uikit'
 import { BigNumber } from 'bignumber.js'
+import { useGetZombieBnbLpPriceBnb } from '../../../../state/hooks'
 import PositionTag from '../PositionTag'
 import { UsdPriceRow, PrizePoolRow, RoundResultBox } from './styles'
-import { auctionById, zmbeBnbLpPriceBnb } from '../../../../redux/get'
+import { auctionById } from '../../../../redux/get'
 import { getBalanceAmount } from '../../../../utils/formatBalance'
 
 interface RoundResultProps {
@@ -18,6 +19,9 @@ const RoundResult: React.FC<RoundResultProps> = ({ bid, id }) => {
   const displayBidder = `${bidder.slice(0, 6)}...${bidder.slice(bidderLength - 4, bidderLength)}`
   const { version } = auctionById(id)
   const v3 = version === 'v3'
+
+  const zombieBnbLpPriceBnb = useGetZombieBnbLpPriceBnb()
+
   return (
     <RoundResultBox betPosition={bid.amount}>
       <Text color="textSubtle" fontSize="12px" bold textTransform="uppercase" mb="8px">
@@ -34,7 +38,7 @@ const RoundResult: React.FC<RoundResultProps> = ({ bid, id }) => {
       </Flex>
       <UsdPriceRow bid={bid} id={id} />
       <PrizePoolRow
-        totalAmount={getBalanceAmount(v3 ? bid.amount : zmbeBnbLpPriceBnb().times(bid.amount)).toNumber()}
+        totalAmount={getBalanceAmount(v3 ? bid.amount : zombieBnbLpPriceBnb.times(bid.amount)).toNumber()}
       />
     </RoundResultBox>
   )
