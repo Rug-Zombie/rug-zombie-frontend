@@ -70,8 +70,16 @@ export const FooterIcons = styled.div`
   justify-content: flex-start;
 `
 
+export const FooterIconLink = styled.a`
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  border-radius: 25px;
+`
+
 export const FooterIcon = styled.img`
-  width: 50px;
-  height: 50px;
-  padding: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 25px;
+  border: 1px solid #b8c00d;
 `
