@@ -17,6 +17,7 @@ export interface GraveUserInfo {
   rugAllowance: BigNumber
   rugBalance: BigNumber
   zombieAllowance: BigNumber
+  zombieBalance: BigNumber
   tokenWithdrawalDate: BigNumber
   nftMintDate: BigNumber
   amount: BigNumber

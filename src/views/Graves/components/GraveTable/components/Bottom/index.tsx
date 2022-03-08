@@ -20,7 +20,6 @@ import {
 import { getId } from '../../../../../../utils'
 import tokens from '../../../../../../config/constants/tokens'
 import { getBalanceNumber, getDecimalAmount, getFullDisplayBalance } from '../../../../../../utils/formatBalance'
-import { zombieBalance } from '../../../../../../redux/get'
 import { useGetNfts } from '../../../../../../state/hooks'
 import ConvertNftModal from './components/ConvertNftModal'
 import BurnZombieModal from './components/BurnZombieModal'
@@ -180,6 +179,7 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
       paidUnlockFee,
       amount,
       zombieAllowance,
+      zombieBalance,
       nftMintDate,
       tokenWithdrawalDate,
     },
@@ -220,7 +220,7 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   }
 
   const insufficientStakeAmount = amount.plus(stakeAmount).lt(minimumStake)
-  const insufficientZombieBalance = stakeAmount.gt(zombieBalance())
+  const insufficientZombieBalance = stakeAmount.gt(zombieBalance)
   const validUnstakeAmount = amount.minus(unstakeAmount).gte(minimumStake) || amount.minus(unstakeAmount).isZero()
   const insufficientStakedBalance = unstakeAmount.gt(amount)
 
@@ -497,7 +497,7 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
 
   const maxStakeAmount = () => {
     const maxAmount =
-      currentStep === StakingStep.ApproveRug || currentStep === StakingStep.DepositRug ? rugBalance : zombieBalance()
+      currentStep === StakingStep.ApproveRug || currentStep === StakingStep.DepositRug ? rugBalance : zombieBalance
     setStakeAmount(maxAmount)
   }
 
@@ -521,7 +521,7 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
             ) : (
               <BalanceText onClick={maxStakeAmount}>
                 Wallet Balance:{' '}
-                <AmountText>{numeral(getFullDisplayBalance(zombieBalance())).format('(0.00 a)')} ZMBE</AmountText>
+                <AmountText>{numeral(getFullDisplayBalance(zombieBalance)).format('(0.00 a)')} ZMBE</AmountText>
               </BalanceText>
             )}
             <StakingInput

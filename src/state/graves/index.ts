@@ -27,6 +27,7 @@ const noAccountGraveConfig: Grave[] = gravesConfig.map((grave) => ({
     rugAllowance: BIG_ZERO,
     rugBalance: BIG_ZERO,
     zombieAllowance: BIG_ZERO,
+    zombieBalance: BIG_ZERO,
     tokenWithdrawalDate: BIG_ZERO,
     nftMintDate: BIG_ZERO,
     amount: BIG_ZERO,
@@ -84,6 +85,7 @@ export const fetchGravesUserDataAsync = (account: string) => async (dispatch) =>
       rugAllowance: new BigNumber(userGraveRugInfo[index].allowance),
       rugBalance: new BigNumber(userGraveRugInfo[index].balance),
       zombieAllowance: new BigNumber(userGraveRugInfo[index].zombieAllowance),
+      zombieBalance: new BigNumber(userGraveRugInfo[index].zombieBalance),
     }
   })
 

@@ -57,16 +57,22 @@ export const fetchGraveUserTokenInfo = async (account: string, gravesToFetch: Gr
         name: 'allowance',
         params: [account, getDrFrankensteinAddress()],
       },
+      {
+        address: getZombieAddress(),
+        name: 'balanceOf',
+        params: [account],
+      },
     ])
   }, [])
 
   const tokenInfos = await multicall(erc20ABI, calls)
   const pairedRugInfos = []
-  for (let i = 0; i < tokenInfos.length; i += 3) {
+  for (let i = 0; i < tokenInfos.length; i += 4) {
     pairedRugInfos.push({
       allowance: tokenInfos[i],
       balance: tokenInfos[i + 1],
       zombieAllowance: tokenInfos[i + 2],
+      zombieBalance: tokenInfos[i + 3]
     })
   }
   return pairedRugInfos
