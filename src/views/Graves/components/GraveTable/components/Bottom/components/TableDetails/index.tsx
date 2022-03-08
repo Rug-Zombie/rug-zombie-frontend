@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import numeral from 'numeral'
 import { LinkExternal } from '@rug-zombie-libs/uikit'
+import { useHistory } from 'react-router'
 import { getBalanceAmount, getFullDisplayBalance } from '../../../../../../../../utils/formatBalance'
 import { Grave } from '../../../../../../../../state/types'
 import { formatDays, formatDuration, now } from '../../../../../../../../utils/timerHelpers'
@@ -104,6 +105,7 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
     poolInfo: { allocPoint, withdrawCooldown, nftMintTime, tokenAmount, minimumStake, unlockFee },
   } = grave
   const { name, path, type } = useGetNftById(nftId)
+  const history = useHistory()
   const tvl = getBalanceAmount(tokenAmount.times(useGetZombiePriceUsd()))
   const unlockFeeUsd = unlockFee.times(useGetBnbPriceUsd())
   const imageOnErrorHandler = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -112,15 +114,19 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
     source.remove()
   }
 
+  const linkToNft = () => {
+    history.push(`/nfts/${nftId}`)
+  }
+
   return (
     <Container>
       <NftImageContainer>
         {type === 'video' ? (
-          <NftVideo autoPlay loop muted>
+          <NftVideo onClick={linkToNft} autoPlay loop muted>
             <source src={path} type="video/webm" />
           </NftVideo>
         ) : (
-          <NftImage src={path} onError={imageOnErrorHandler} />
+          <NftImage onClick={linkToNft} src={path} onError={imageOnErrorHandler} />
         )}
       </NftImageContainer>
       <Details>

@@ -1409,7 +1409,7 @@ const nfts: Nft[] = [
     symbol: 'DATLAS',
     description: "In a single day and night of misfortune, the island of deadlantis disappeared into the depths of the sea.",
     address: {
-      56: '0xd30CBaA2d07329737bee4e154B5Fb26334329B6d',
+      56: '0xd88931E3406Ec654326153a26dCcE368b324Fe69',
       97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
     },
     totalSupply: BIG_ZERO,
