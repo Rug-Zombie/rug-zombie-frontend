@@ -18,6 +18,7 @@ const StyledToast = styled.div`
   max-width: calc(100% - 32px);
   transition: all 250ms ease-in;
   width: 100%;
+
   ${({ theme }) => theme.mediaQueries.sm} {
     max-width: 400px;
   }
@@ -31,7 +32,7 @@ const CustomToast = styled.div<{ border: string }>`
   height: 100%;
 `
 
-const Title = styled.p`
+const Title = styled.div`
   text-align: left;
   font: normal normal normal 20px/36px Poppins;
   letter-spacing: 0px;
@@ -86,8 +87,10 @@ const Toast: React.FC<ToastProps> = ({ toast, onRemove, style, ttl, ...props }) 
       <StyledToast ref={ref} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         <CustomToast border={color || '#B8C00D'}>
           <Title style={{ color: color || '#B8C00D' }}>{title}</Title>
-          <br />
-          <SubTitle>{description}</SubTitle>
+          {description ? <>
+            <br />
+            <SubTitle>{description}</SubTitle>
+          </> : null}
         </CustomToast>
       </StyledToast>
     </CSSTransition>
