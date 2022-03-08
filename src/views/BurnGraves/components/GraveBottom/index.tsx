@@ -7,7 +7,8 @@ import { getBalanceAmount, getFullDisplayBalance } from 'utils/formatBalance'
 import BigNumber from 'bignumber.js'
 import numeral from 'numeral'
 import { registerToken } from 'utils/wallet'
-import { bnbPriceUsd, grave } from '../../../../redux/get'
+import { grave } from '../../../../redux/get'
+import { useGetBnbPriceUsd } from '../../../../state/hooks'
 import { formatDuration } from '../../../../utils/timerHelpers'
 import Video from '../../../../components/Video'
 
@@ -106,7 +107,7 @@ const GraveBottom: React.FC<RugInDetailsProps> = ({ pid, zombieUsdPrice, account
       </div>
       <div className="direction-column">
         <span className="indetails-type">
-          Unlock Fees: {unlockFee} BNB ({(unlockFee * bnbPriceUsd()).toFixed(2)} in USD)
+          Unlock Fees: {unlockFee} BNB ({(unlockFee * useGetBnbPriceUsd()).toFixed(2)} in USD)
         </span>
         <span className="indetails-title">
           Early Withdrawal Fee:

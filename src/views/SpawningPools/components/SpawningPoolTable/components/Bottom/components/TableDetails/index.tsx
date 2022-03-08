@@ -1,11 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import numeral from 'numeral'
-import { bnbPriceUsd, zombiePriceUsd } from '../../../../../../../../redux/get'
 import { getBalanceAmount, getFullDisplayBalance } from '../../../../../../../../utils/formatBalance'
 import { SpawningPool } from '../../../../../../../../state/types'
 import { formatDays, formatDuration, now } from '../../../../../../../../utils/timerHelpers'
-import { useGetNftById } from '../../../../../../../../state/hooks'
+import { useGetBnbPriceUsd, useGetNftById, useGetZombiePriceUsd } from '../../../../../../../../state/hooks'
 
 export enum SpawningPoolItemType {
   Number,
@@ -95,9 +94,9 @@ const TableDetails: React.FC<TableDetailsProps> = ({ spawningPool }) => {
     poolInfo: { withdrawCooldown, nftMintTime, totalAmount, minimumStake, unlockFee },
   } = spawningPool
   const { name, path, type } = useGetNftById(nftId)
-  const tvl = getBalanceAmount(totalAmount.times(zombiePriceUsd()))
+  const tvl = getBalanceAmount(totalAmount.times(useGetZombiePriceUsd()))
 
-  const unlockFeeUsd = unlockFee.times(bnbPriceUsd())
+  const unlockFeeUsd = unlockFee.times(useGetBnbPriceUsd())
   const imageOnErrorHandler = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const source = event.target as HTMLImageElement
     source.onerror = null

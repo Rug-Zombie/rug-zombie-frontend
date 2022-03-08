@@ -20,21 +20,6 @@ export interface PoolInfo {
   nftRevivalTime: number
 }
 
-export interface TombPoolInfo {
-  allocPoint: BigNumber
-  totalStaked: BigNumber
-  minimumStake: BigNumber
-  lpTotalSupply: BigNumber
-  reserves: [BigNumber, BigNumber]
-}
-
-export interface TombUserInfo {
-  amount: BigNumber
-  tokenWithdrawalDate: number
-  lpAllowance: BigNumber
-  pendingZombie: BigNumber
-}
-
 export interface SpawningPoolInfo {
   rewardPerBlock: BigNumber
   unlockFee: BigNumber
@@ -102,22 +87,6 @@ export interface Grave {
   rarity: string
   isFeatured?: boolean
   isRetired?: boolean
-}
-
-export interface Tomb {
-  id: number
-  pid: Id
-  overlayId?: Id
-  name: string
-  withdrawalCooldown: string
-  token: Token
-  quoteToken: Token
-  exchange: string
-  lpAddress: Address
-  notNativeDex?: boolean
-  isNew?: boolean
-  userInfo: TombUserInfo
-  poolInfo: TombPoolInfo
 }
 
 export interface SpawningPool {
@@ -204,33 +173,6 @@ export interface Auction {
   additionalDetails?: any
   userInfo: AuctionUserInfo
   auctionInfo: AuctionInfo
-}
-
-export interface TombOverlayPoolInfo {
-  poolId: number
-  isEnabled: boolean
-  mintingTime: number
-  mintingFee: BigNumber
-}
-
-export interface TombOverlayUserInfo {
-  nextNftMintDate: number
-  isMinting: boolean
-  randomNumber: number
-  nftMintTime: BigNumber
-}
-
-export interface TombOverlay {
-  id: number
-  pid: Id
-  poolId: Id
-  mintingTime: string
-  commonId: number
-  uncommonId: number
-  rareId: number
-  legendaryId: number
-  userInfo: TombOverlayUserInfo
-  poolInfo: TombOverlayPoolInfo
 }
 
 export interface BurnGrave {

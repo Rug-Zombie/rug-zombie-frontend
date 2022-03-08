@@ -2,8 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import numeral from 'numeral'
-import { useGetTombs } from '../../../../state/hooks'
-import { bnbPriceUsd } from '../../../../redux/get'
+import { useGetBnbPriceUsd, useGetTombs } from '../../../../state/hooks'
 import { getBalanceNumber } from '../../../../utils/formatBalance'
 import { BIG_ZERO } from '../../../../utils/bigNumber'
 
@@ -87,9 +86,10 @@ const Shadow = styled.div`
 `
 
 const HeaderCard: React.FC = () => {
+  const bnbPriceUsd = useGetBnbPriceUsd()
   const tombSum = useGetTombs().data.reduce(
     (sum, { poolInfo: { tokenAmount, lpPriceBnb }, userInfo: { amount } }) => {
-      const lpPrice = lpPriceBnb.times(bnbPriceUsd()).toNumber()
+      const lpPrice = lpPriceBnb.times(bnbPriceUsd).toNumber()
       return {
         amountTvl: sum.amountTvl.plus(getBalanceNumber(amount.times(lpPrice))),
         tokenAmountTvl: sum.tokenAmountTvl.plus(getBalanceNumber(tokenAmount.times(lpPrice))),

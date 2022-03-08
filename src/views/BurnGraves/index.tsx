@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import PageHeader from 'components/PageHeader'
 import { Flex, Heading } from '@rug-zombie-libs/uikit'
-import { burnGraves, zombiePriceUsd } from 'redux/get'
+import { burnGraves } from 'redux/get'
 import { burnGrave, initialBurnGraveData } from 'redux/fetch'
 import { getId } from 'utils'
 import Page from 'components/layout/Page'
+import { useGetZombiePriceUsd } from '../../state/hooks'
 import Table from './components/Table'
 
 const BurnGraves: React.FC = () => {
   const [updateUserInfo, setUpdateUserInfo] = useState(false)
   const [updatePoolInfo, setUpdatePoolInfo] = useState(false)
-  const liveZmbePrice = zombiePriceUsd()
+  const liveZmbePrice = useGetZombiePriceUsd()
   const [zmbePrice, setZmbePrice] = useState(liveZmbePrice)
 
   useEffect(() => {

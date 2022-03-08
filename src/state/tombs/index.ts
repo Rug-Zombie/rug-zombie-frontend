@@ -20,6 +20,8 @@ const noAccountTombConfig: Tomb[] = tombsConfig.map((tomb) => ({
     nftMintTime: BIG_ZERO,
     mintingFee: BIG_ZERO,
     lpPriceBnb: BIG_ZERO,
+    lpReserves: [BIG_ZERO, BIG_ZERO],
+    lpTotalSupply: BIG_ZERO,
   },
   userInfo: {
     tokenWithdrawalDate: BIG_ZERO,

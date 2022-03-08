@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { LinkExternal } from '@rug-zombie-libs/uikit'
-import { sharkPoolById, bnbPriceUsd } from 'redux/get'
+import { sharkPoolById } from 'redux/get'
 import { useSharkpool } from 'hooks/useContract'
 import { getFullDisplayBalance } from 'utils/formatBalance'
 import BigNumber from 'bignumber.js'
-import { useGetNftById } from '../../state/hooks'
+import { useGetBnbPriceUsd, useGetNftById } from '../../state/hooks'
 
 interface DetailsPanelProps {
   id: number
@@ -64,7 +64,7 @@ const DetailsPanel: React.FC<DetailsPanelProps> = ({ id }) => {
       </div>
       <div className="direction-column">
         <span className="indetails-type">
-          Unlock Fees: {unlockFee} BNB ({(unlockFee * bnbPriceUsd()).toFixed(2)} in USD)
+          Unlock Fees: {unlockFee} BNB ({(unlockFee * useGetBnbPriceUsd()).toFixed(2)} in USD)
         </span>
         <span className="indetails-title">
           NFT Minting Time:<span className="indetails-value">{pool.mintTime}</span>

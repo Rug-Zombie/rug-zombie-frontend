@@ -2,8 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import numeral from 'numeral'
-import { useGetSpawningPools } from '../../../../state/hooks'
-import { zombiePriceUsd } from '../../../../redux/get'
+import { useGetSpawningPools, useGetZombiePriceUsd } from '../../../../state/hooks'
 import { getBalanceNumber } from '../../../../utils/formatBalance'
 import { BIG_ZERO } from '../../../../utils/bigNumber'
 
@@ -97,8 +96,9 @@ const HeaderCard: React.FC = () => {
     { amount: BIG_ZERO, totalAmount: BIG_ZERO },
   )
 
-  const spawningPoolsTvl = getBalanceNumber(spawningPoolSum.totalAmount) * zombiePriceUsd()
-  const userTvl = getBalanceNumber(spawningPoolSum.amount) * zombiePriceUsd()
+  const zombiePriceUsd = useGetZombiePriceUsd()
+  const spawningPoolsTvl = getBalanceNumber(spawningPoolSum.totalAmount) * zombiePriceUsd
+  const userTvl = getBalanceNumber(spawningPoolSum.amount) * zombiePriceUsd
 
   return (
     <>
