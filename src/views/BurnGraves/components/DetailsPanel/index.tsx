@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import { LinkExternal } from '@rug-zombie-libs/uikit'
-import { bnbPriceUsd, burnGraveById } from '../../../../redux/get'
+import { burnGraveById } from '../../../../redux/get'
 import { useDrBurnenstein } from '../../../../hooks/useContract'
 import { getFullDisplayBalance } from '../../../../utils/formatBalance'
 import { formatDuration } from '../../../../utils/timerHelpers'
-import { useGetNftById } from '../../../../state/hooks'
+import { useGetBnbPriceUsd, useGetNftById } from '../../../../state/hooks'
 
 export interface DetailsPanelProps {
   id: number
@@ -51,7 +51,7 @@ const DetailsPanel: React.FC<DetailsPanelProps> = ({ id }) => {
       </div>
       <div className="direction-column">
         <span className="indetails-type">
-          Unlock Fees: {unlockFee} BNB ({(unlockFee * bnbPriceUsd()).toFixed(2)} in USD)
+          Unlock Fees: {unlockFee} BNB ({(unlockFee * useGetBnbPriceUsd()).toFixed(2)} in USD)
         </span>
         <span className="indetails-title">
           NFT Minting Time:<span className="indetails-value">{grave.mintingTime}</span>

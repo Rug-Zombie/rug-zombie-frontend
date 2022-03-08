@@ -4,8 +4,8 @@ import { useWeb3React } from '@web3-react/core'
 import { languageList, Language } from 'config/localization/languages'
 import { useTranslation } from 'contexts/Localization'
 import useAuth from 'hooks/useAuth'
+import { useGetZombiePriceUsd } from '../../state/hooks'
 import config from './config'
-import { zombiePriceUsd } from '../../redux/get'
 
 const Menu = (props) => {
   const { account } = useWeb3React()
@@ -22,7 +22,7 @@ const Menu = (props) => {
       setLang={(langType) => {
         setLanguage(langType as Language)
       }}
-      cakePriceUsd={zombiePriceUsd()}
+      cakePriceUsd={useGetZombiePriceUsd()}
       links={config}
       profile={{
         username: undefined,

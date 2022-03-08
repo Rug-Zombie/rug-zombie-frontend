@@ -1,5 +1,10 @@
 import tokens from 'config/constants/tokens'
-import { Dex, TombConfig } from './types'
+import { Dex, Id, TombConfig } from './types'
+
+export const PCS_ZMBE_BNB_TOMB_PID: Id = {
+  56: 11,
+  97: 2,
+}
 
 const tombs: TombConfig[] = [
   {
@@ -54,10 +59,7 @@ const tombs: TombConfig[] = [
   },
   {
     id: 3,
-    pid: {
-      56: 11,
-      97: 2,
-    },
+    pid: PCS_ZMBE_BNB_TOMB_PID,
     lpAddress: {
       97: '0x72427E9ee25CC6e9e4Cee3C52a77EEA7eE33A83B',
       56: '0x4dbaf6479f0afa9f03c2a7d611151fa5b53ecdc8',

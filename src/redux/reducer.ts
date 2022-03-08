@@ -1,25 +1,20 @@
 import { BIG_ZERO } from '../utils/bigNumber'
 import * as types from './actionTypes'
-import tombs from './tombs'
 import graves from './graves'
 import spawningPools from './spawningPools'
 import sharkPools from './sharkPools'
 import auctions from './auctions'
 import burnGraves from './burnGraves'
 import { getId } from '../utils'
-import tombOverlays from './tombOverlays'
 import rugMarketListings from './rugMarketListings'
 import { RugMarketListing } from './types'
 
 const defaultState = {
   account: '',
-  tombs,
-  tombOverlays,
   graves,
   burnGraves,
   spawningPools,
   sharkPools,
-  bnbPriceUsd: 0,
   auctions,
   rugMarketListings,
   bnbBalance: BIG_ZERO,
@@ -27,7 +22,6 @@ const defaultState = {
     allowance: BIG_ZERO,
     totalSupply: BIG_ZERO,
     balance: BIG_ZERO,
-    priceBnb: BIG_ZERO,
   },
   drFrankenstein: {
     zombieBalance: BIG_ZERO,
@@ -57,16 +51,6 @@ export default function reducer(state = defaultState, action) {
         ...state,
         zombie: { ...state.zombie, balance: action.payload.balance },
       }
-    case types.UPDATE_ZOMBIE_PRICE_BNB:
-      return {
-        ...state,
-        zombie: { ...state.zombie, priceBnb: action.payload.zombiePriceBnb },
-      }
-    case types.UPDATE_BNB_PRICE_USD:
-      return {
-        ...state,
-        bnbPriceUsd: action.payload.bnbPriceUsd,
-      }
     case types.UPDATE_GRAVE_POOL_INFO:
       return {
         ...state,
@@ -83,24 +67,6 @@ export default function reducer(state = defaultState, action) {
           getId(grave.pid) === action.payload.pid
             ? { ...grave, userInfo: { ...grave.userInfo, ...action.payload.userInfo } }
             : grave,
-        ),
-      }
-    case types.UPDATE_TOMB_USER_INFO:
-      return {
-        ...state,
-        tombs: state.tombs.map((tomb) =>
-          getId(tomb.pid) === action.payload.pid
-            ? { ...tomb, userInfo: { ...tomb.userInfo, ...action.payload.userInfo } }
-            : tomb,
-        ),
-      }
-    case types.UPDATE_TOMB_POOL_INFO:
-      return {
-        ...state,
-        tombs: state.tombs.map((tomb) =>
-          getId(tomb.pid) === action.payload.pid
-            ? { ...tomb, poolInfo: { ...tomb.poolInfo, ...action.payload.poolInfo } }
-            : tomb,
         ),
       }
     case types.UPDATE_SPAWNING_POOL_INFO:
@@ -153,24 +119,6 @@ export default function reducer(state = defaultState, action) {
       return {
         ...state,
         bnbBalance: action.payload.bnbBalance,
-      }
-    case types.UPDATE_TOMB_OVERLAY_POOL_INFO:
-      return {
-        ...state,
-        tombOverlays: state.tombOverlays.map((tombOverlay) =>
-          getId(tombOverlay.pid) === action.payload.pid
-            ? { ...tombOverlay, poolInfo: { ...tombOverlay.poolInfo, ...action.payload.poolInfo } }
-            : tombOverlay,
-        ),
-      }
-    case types.UPDATE_TOMB_OVERLAY_USER_INFO:
-      return {
-        ...state,
-        tombOverlays: state.tombOverlays.map((tombOverlay) =>
-          getId(tombOverlay.pid) === action.payload.pid
-            ? { ...tombOverlay, userInfo: { ...tombOverlay.userInfo, ...action.payload.userInfo } }
-            : tombOverlay,
-        ),
       }
     case types.UPDATE_SHARKPOOL_INFO:
       return {

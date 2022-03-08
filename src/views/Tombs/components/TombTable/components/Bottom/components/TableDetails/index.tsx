@@ -1,11 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import numeral from 'numeral'
-import { bnbPriceUsd } from '../../../../../../../../redux/get'
 import { getFullDisplayBalance } from '../../../../../../../../utils/formatBalance'
 import { Tomb } from '../../../../../../../../state/types'
 import { formatDays } from '../../../../../../../../utils/timerHelpers'
-import { useGetNftById } from '../../../../../../../../state/hooks'
+import { useGetBnbPriceUsd, useGetNftById } from '../../../../../../../../state/hooks'
 
 export enum TombItemType {
   Number,
@@ -95,8 +94,9 @@ const TableDetails: React.FC<TableDetailsProps> = ({ tomb }) => {
   } = tomb
   const { name, path, type } = useGetNftById(legendaryId)
 
-  const tvl = tokenAmount.times(lpPriceBnb).times(bnbPriceUsd())
-  const mintingFeeUsd = mintingFee.times(bnbPriceUsd())
+  const bnbPriceUsd = useGetBnbPriceUsd()
+  const tvl = tokenAmount.times(lpPriceBnb).times(bnbPriceUsd)
+  const mintingFeeUsd = mintingFee.times(bnbPriceUsd)
 
   const imageOnErrorHandler = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const source = event.target as HTMLImageElement

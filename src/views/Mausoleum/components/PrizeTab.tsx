@@ -1,8 +1,9 @@
 import React from 'react'
 import { BaseLayout, Box, LinkExternal } from '@rug-zombie-libs/uikit'
 import styled from 'styled-components'
+import { useGetBnbPriceUsd } from '../../../state/hooks'
 import { getBalanceAmount } from '../../../utils/formatBalance'
-import { auctionById, bnbPriceUsd } from '../../../redux/get'
+import { auctionById } from '../../../redux/get'
 
 const TableCards = styled(BaseLayout)`
   align-items: stretch;
@@ -28,6 +29,8 @@ const PrizeTab: React.FC<PrizeTabProps> = ({ id }) => {
     artist: { twitter },
     auctionInfo: { unlockFeeInBnb },
   } = auctionById(id)
+
+  const bnbPriceUsd = useGetBnbPriceUsd()
 
   const type = 'image'
   return (
@@ -77,7 +80,7 @@ const PrizeTab: React.FC<PrizeTabProps> = ({ id }) => {
                   <div className="direction-column">
                     <span className="indetails-type">
                       Unlock Fees: {getBalanceAmount(unlockFeeInBnb).toString()} BNB (
-                      {Math.round(getBalanceAmount(unlockFeeInBnb).times(bnbPriceUsd()).toNumber() * 100) / 100} in USD)
+                      {Math.round(getBalanceAmount(unlockFeeInBnb).times(bnbPriceUsd).toNumber() * 100) / 100} in USD)
                     </span>
                   </div>
                 ) : (

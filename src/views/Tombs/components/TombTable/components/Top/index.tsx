@@ -2,9 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import uppointer from 'images/tombs/Hide_Dropdown.svg'
 import downpointer from 'images/tombs/Dropdown_icon.svg'
-import { bnbPriceUsd, zombiePriceUsd } from 'redux/get'
 import { Token } from 'config/constants/types'
 import BigNumber from 'bignumber.js'
+import { useGetBnbPriceUsd, useGetZombiePriceUsd } from '../../../../../../state/hooks'
 import { Tomb } from '../../../../../../state/types'
 import { getBalanceNumber, getDecimalAmount } from '../../../../../../utils/formatBalance'
 import { getGraveTombApr } from '../../../../../../utils/apr'
@@ -138,9 +138,9 @@ const Top: React.FC<TopProps> = ({ tomb, open, setOpen }) => {
   const tokenImage = (token: Token) => {
     return token.tokenLogo ? token.tokenLogo : `images/tokens/${token.symbol}.png`
   }
-  const bigTvl = tokenAmount.times(lpPriceBnb).times(bnbPriceUsd())
+  const bigTvl = tokenAmount.times(lpPriceBnb).times(useGetBnbPriceUsd())
   const tvl = getBalanceNumber(bigTvl)
-  const bigZombiePrice = getDecimalAmount(new BigNumber(zombiePriceUsd()))
+  const bigZombiePrice = getDecimalAmount(new BigNumber(useGetZombiePriceUsd()))
   const yearly = getGraveTombApr(weight, bigZombiePrice, bigTvl)
   const daily = yearly / 365
   const now = Math.floor(Date.now() / 1000)

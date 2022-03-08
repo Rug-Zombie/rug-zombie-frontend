@@ -2,11 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import numeral from 'numeral'
 import { LinkExternal } from '@rug-zombie-libs/uikit'
-import { bnbPriceUsd, zombiePriceUsd } from '../../../../../../../../redux/get'
 import { getBalanceAmount, getFullDisplayBalance } from '../../../../../../../../utils/formatBalance'
 import { Grave } from '../../../../../../../../state/types'
 import { formatDays, formatDuration, now } from '../../../../../../../../utils/timerHelpers'
-import { useGetNftById } from '../../../../../../../../state/hooks'
+import { useGetBnbPriceUsd, useGetNftById, useGetZombiePriceUsd } from '../../../../../../../../state/hooks'
 import { BASE_EXCHANGE_URL } from '../../../../../../../../config'
 import { getAddress } from '../../../../../../../../utils/addressHelpers'
 import { Dex } from '../../../../../../../../config/constants/types'
@@ -105,8 +104,8 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
     poolInfo: { allocPoint, withdrawCooldown, nftMintTime, tokenAmount, minimumStake, unlockFee },
   } = grave
   const { name, path, type } = useGetNftById(nftId)
-  const tvl = getBalanceAmount(tokenAmount.times(zombiePriceUsd()))
-  const unlockFeeUsd = unlockFee.times(bnbPriceUsd())
+  const tvl = getBalanceAmount(tokenAmount.times(useGetZombiePriceUsd()))
+  const unlockFeeUsd = unlockFee.times(useGetBnbPriceUsd())
   const imageOnErrorHandler = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const source = event.target as HTMLImageElement
     source.onerror = null

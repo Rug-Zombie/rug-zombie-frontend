@@ -51,7 +51,9 @@ export function getDrFPoolName(pid: number): string {
   if (tombPids().includes(pid)) {
     return `${DEXS[tombs.find((t) => getId(t.pid) === pid).dex]}`
   }
-  return `${graves.find((g) => getId(g.pid) === pid).name}`
+
+  const grave = graves.find((g) => getId(g.pid) === pid)
+  return grave && grave.name
 }
 
 export function tombPids(): number[] {
