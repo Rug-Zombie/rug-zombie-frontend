@@ -134,6 +134,7 @@ const TabRight = styled.div`
   padding: 15px 25px;
   box-shadow: 0 20px 20px -20px #000000;
   border-radius: 10px;
+  z-index: 1;
   @media (max-width: 1083px) {
     display: flex;
     flex-direction: column;
