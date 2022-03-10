@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import { Flex } from "@rug-zombie-libs/uikit";
 import React, { useEffect, useState } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
@@ -70,6 +71,8 @@ const SpawningPools: React.FC = () => {
   const handleFilter = (condition: string) => setFilter(condition)
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)
 
+  const isUserDependentFilter = filter === 'Staked'
+
   return (
     <>
       <SpawningPoolPage>
@@ -79,9 +82,12 @@ const SpawningPools: React.FC = () => {
           </Header>
           <SpawningPoolsColumn>
             <Filter searchValue={search} handleFilter={handleFilter} handleSearch={handleSearch} />
-            {spawningPools.map((sp) => {
-              return <SpawningPoolTable spawningPool={sp} key={sp.id} />
-            })}
+            {(isUserDependentFilter && !account) ? (
+              <Flex style={{ paddingTop: '10px', width: '100%', justifyContent: 'center' }}>
+                <div className="total-earned text-shadow">Connect Wallet to view staked spawning pools</div>
+              </Flex>
+            ) : spawningPools.map((sp) => <SpawningPoolTable spawningPool={sp} key={sp.id} />)
+            }
           </SpawningPoolsColumn>
         </Row>
       </SpawningPoolPage>
