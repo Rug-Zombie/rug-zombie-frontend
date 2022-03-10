@@ -59,22 +59,8 @@ const TabFlex = styled.div`
   }
 `
 
-const GreenTab = styled.div`
-  width: 49px;
-  height: 30px;
-  border: 2px solid #b8c00d;
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 5px;
-  @media (max-width: 527px) {
-    margin: 0;
-  }
-`
-
 const GreyTab = styled.div`
-  width: 60px;
+  padding: 0 10px;
   height: 30px;
   border: 2px solid #6b7682;
   border-radius: 15px;
@@ -86,14 +72,31 @@ const GreyTab = styled.div`
   }
 `
 
-const GreenTabText = styled.div`
-  font: normal normal normal 12px/30px Poppins;
-  color: #ffffff;
+const GreenTab = styled(GreyTab)`
+  border: 2px solid #b8c00d;
+  margin: 0 5px;
+  @media (max-width: 527px) {
+    margin: 0;
+  }
+`
+
+const BlueTab = styled(GreyTab)`
+  border: 2px solid #4b7bdc;
+  margin-left: 5px;
+`
+
+const PinkTab = styled(GreyTab)`
+  border: 2px solid #ae32aa;
+  margin-left: 5px;
 `
 
 const GreyTabText = styled.div`
   font: normal normal normal 12px/30px Poppins;
   color: #6b7682;
+`
+
+const WhiteTabText = styled(GreyTabText)`
+  color: #ffffff;
 `
 
 const GraveSubRow = styled.div`
@@ -132,6 +135,7 @@ const Top: React.FC<TopProps> = ({ grave, open, setOpen }) => {
     isNew,
     poolInfo: { allocPoint, tokenAmount, weight },
     userInfo: { pendingZombie, nftMintDate, tokenWithdrawalDate, amount },
+    isRetired,
   } = grave
   const toggleOpen = () => setOpen(!open)
   const tokenImage = (token: Token) => {
@@ -157,6 +161,44 @@ const Top: React.FC<TopProps> = ({ grave, open, setOpen }) => {
     return <CardItem label="Withdrawal Timer" value={remainingCooldownTime} valueType={CardItemValueType.Duration} />
   }
 
+  const isNftOnly: boolean = allocPoint.isZero() && !isRetired
+  const getTabs = () => {
+    const tabs = []
+
+    if (isNftOnly) {
+      tabs.push(
+        <BlueTab>
+          <WhiteTabText>NFT-ONLY</WhiteTabText>
+        </BlueTab>,
+      )
+    } else if (isRetired) {
+      tabs.push(
+        <PinkTab>
+          <WhiteTabText>RETIRED</WhiteTabText>
+        </PinkTab>,
+      )
+    } else {
+      tabs.push(
+        <GreenTab>
+          <WhiteTabText>{allocPoint.div(100).toString()}X</WhiteTabText>
+        </GreenTab>,
+        <GreyTab>
+          <GreyTabText>ZMBE</GreyTabText>
+        </GreyTab>,
+      )
+    }
+
+    if (isNew) {
+      tabs.push(
+        <GreenTab>
+          <WhiteTabText>NEW</WhiteTabText>
+        </GreenTab>,
+      )
+    }
+
+    return <TabFlex>{tabs}</TabFlex>
+  }
+
   return (
     <GraveColumn onClick={toggleOpen}>
       <GraveHeaderRow>
@@ -165,31 +207,23 @@ const Top: React.FC<TopProps> = ({ grave, open, setOpen }) => {
           <img src={tokenImage(rug)} style={{ width: '30px', height: '30px' }} alt="Rug token logo" />
         </TokenFlex>
         <GraveTitle>{name}</GraveTitle>
-        <TabFlex>
-          <GreenTab>
-            <GreenTabText>{allocPoint.div(100).toString()}X</GreenTabText>
-          </GreenTab>
-          <GreyTab>
-            <GreyTabText>ZMBE</GreyTabText>
-          </GreyTab>
-          {isNew ? (
-            <GreenTab>
-              <GreenTabText>NEW</GreenTabText>
-            </GreenTab>
-          ) : null}
-        </TabFlex>
+        {getTabs()}
       </GraveHeaderRow>
       <GraveSubRow>
         <Amounts>
-          <CardItem
-            label="Earned"
-            unit="ZMBE"
-            value={getBalanceNumber(pendingZombie)}
-            highlightable
-            valueType={CardItemValueType.Number}
-          />
-          <CardItem label="Yearly" value={yearly} valueType={CardItemValueType.Percentage} />
-          <CardItem label="Daily" value={daily} valueType={CardItemValueType.Percentage} />
+          {!isNftOnly && (
+            <>
+              <CardItem
+                label="Earned"
+                unit="ZMBE"
+                value={getBalanceNumber(pendingZombie)}
+                highlightable
+                valueType={CardItemValueType.Number}
+              />
+              <CardItem label="Yearly" value={yearly} valueType={CardItemValueType.Percentage} />
+              <CardItem label="Daily" value={daily} valueType={CardItemValueType.Percentage} />
+            </>
+          )}
           <CardItem label="TVL" value={tvl} valueType={CardItemValueType.Money} />
         </Amounts>
         <Percentages>
