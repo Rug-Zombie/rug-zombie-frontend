@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import { Flex } from "@rug-zombie-libs/uikit";
 import React, { useEffect, useState } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
@@ -97,6 +98,8 @@ const Graves: React.FC = () => {
   const handleFilter = (condition: string) => setFilter(condition)
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value)
 
+  const isUserDependentFilter: boolean = filter === 'Staked'
+
   return (
     <>
       <GravePage>
@@ -106,9 +109,14 @@ const Graves: React.FC = () => {
           </Header>
           <GravesColumn>
             <Filter searchValue={search} handleFilter={handleFilter} handleSearch={handleSearch} />
-            {orderedGraves.map((g) => {
-              return <GraveTable grave={g} key={getId(g.pid)} />
-            })}
+            {(isUserDependentFilter && !account) ?
+              <Flex style={{ paddingTop: '10px', width: '100%', justifyContent: 'center' }}>
+                <div className="total-earned text-shadow">Connect Wallet to view staked graves</div>
+              </Flex>
+              : orderedGraves.map((g) => {
+                return <GraveTable grave={g} key={getId(g.pid)} />
+              })
+            }
           </GravesColumn>
         </Row>
       </GravePage>

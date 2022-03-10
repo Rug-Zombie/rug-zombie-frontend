@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+import { Flex } from "@rug-zombie-libs/uikit";
 import React, { useEffect, useState } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
@@ -84,6 +85,8 @@ const Tombs: React.FC = () => {
     })
   }
 
+  const isUserDependentFilter = tombFilter === TombFilter.Staked
+
   return (
     <>
       <TombPage>
@@ -99,9 +102,12 @@ const Tombs: React.FC = () => {
               rarityFilter={{ value: rarityFilter, set: setRarityFilter }}
               setSearch={setSearchFilter}
             />
-            {tombs.map((g) => {
-              return <TombTable tomb={g} key={getId(g.pid)} />
-            })}
+            {(isUserDependentFilter && !account) ? (
+              <Flex style={{ paddingTop: '10px', width: '100%', justifyContent: 'center' }}>
+                <div className="total-earned text-shadow">Connect Wallet to view staked tombs</div>
+              </Flex>
+              ) : tombs.map((g) => <TombTable tomb={g} key={getId(g.pid)} />)
+            }
           </TombsColumn>
         </Row>
       </TombPage>
