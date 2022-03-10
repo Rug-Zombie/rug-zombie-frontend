@@ -121,6 +121,33 @@ const tokens = {
     decimals: 9,
     tokenLogo: 'https://assets.coingecko.com/coins/images/20922/small/15211.png?1637926873',
   },
+  babe: {
+    symbol: 'BABE',
+    address: {
+      56: '0x23974EeE90e80B49EcF5A53e9512b0D747Fa88c9',
+      97: '',
+    },
+    decimals: 0,
+    tokenLogo: 'https://ipfs.io/ipfs/QmVGjzRvf2WD5JKjh5wNVjVtimPv9R2mzeuYUNin2cFsc7',
+  },
+  mutant: {
+    symbol: 'MUTANT',
+    address: {
+      56: '0xD3c83C4d51cF4d719fe5678ABE59009D24c6E1bF',
+      97: '',
+    },
+    decimals: 0,
+    tokenLogo: 'https://storage.googleapis.com/rug-zombie/Zombi_Monkey-min.jpg',
+  },
+  cthuhlu: {
+    symbol: 'CTHULHU',
+    address: {
+      56: '0x318744eE512d5B0BF7CB556D8170700E0a4a469e',
+      97: '',
+    },
+    decimals: 0,
+    tokenLogo: 'https://ipfs.io/ipfs/QmQ11oNLDfg7c3k1S6sfBEhcHWHtc9ykTQJhXhNU25fp7V',
+  },
   rugbiden: {
     symbol: 'RUGBIDEN',
     address: {

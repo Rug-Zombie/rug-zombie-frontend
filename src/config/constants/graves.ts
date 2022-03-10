@@ -72,6 +72,43 @@ const graves: GraveConfig[] = [
   },
   {
     pid: {
+      56: 52,
+      97: 1,
+    },
+    name: 'AtmosSoft Legendary',
+    nftId: 91,
+    depositNftId: 34,
+    rug: tokens.babe,
+    nftConverterPid: 5,
+    isNew: true,
+  },
+
+  {
+    pid: {
+      56: 53,
+      97: 1,
+    },
+    name: 'Monkey Coin Legendary',
+    nftId: 92,
+    rug: tokens.mutant,
+    depositNftId: 33,
+    nftConverterPid: 7,
+    isNew: true,
+  },
+  {
+    pid: {
+      56: 54,
+      97: 1,
+    },
+    name: 'Squid Stake Legendary',
+    nftId: 93,
+    rug: tokens.cthuhlu,
+    depositNftId: 64,
+    nftConverterPid: 6,
+    isNew: true,
+  },
+  {
+    pid: {
       56: 48,
       97: 1,
     },

@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Button, Flex, Modal, Text } from '@rug-zombie-libs/uikit'
 import { useWeb3React } from '@web3-react/core'
+import styled from 'styled-components'
 import { useERC721, useNftConverter } from '../../../../../../../../hooks/useContract'
 import { getAddress, getNftConverterAddress } from '../../../../../../../../utils/addressHelpers'
 import { equalAddresses } from '../../../../../../../../utils'
@@ -8,6 +9,51 @@ import { useAppDispatch } from '../../../../../../../../state'
 import { fetchNftUserDataAsync } from '../../../../../../../../state/nfts'
 import { useGetNftById } from '../../../../../../../../state/hooks'
 import { useConvertNft } from '../../../../../../../../hooks/useNftConverter'
+
+
+const PrimaryStakeButton = styled.button`
+  height: 60px;
+  width: 150px;
+  background: #b8c00d 0% 0% no-repeat padding-box;
+  border-radius: 10px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 2px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`
+
+const SecondaryStakeButton = styled.button`
+  height: 60px;
+  width: 150px;
+  border: 2px solid #b8c00d;
+  border-radius: 10px;
+  background: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 2px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`
+
+const PrimaryStakeButtonText = styled.div`
+  text-align: center;
+  font: normal normal normal 16px/25px Poppins;
+  color: #010202;
+`
+
+const SecondaryStakeButtonText = styled.div`
+  text-align: center;
+  font: normal normal normal 16px/25px Poppins;
+  color: #ffffff;
+`
 
 export interface ConvertNftModalProps {
   depositNftId: number
@@ -62,6 +108,7 @@ const ConvertNftModal: React.FC<ConvertNftModalProps> = ({ depositNftId, nftConv
   }, [onDismiss, onNftConvert])
 
   const handleApprove = () => {
+    console.log(!approved)
     if (account && !approved) {
       setApproving(true)
       nftContract.methods
@@ -76,6 +123,12 @@ const ConvertNftModal: React.FC<ConvertNftModalProps> = ({ depositNftId, nftConv
         })
     }
   }
+
+  // const handleConvert = async () => {
+  //   if (selected && depositButton) {
+  //     await handleConvert()
+  //   }
+  // }
 
   const approveButton = selected && !approved
   const depositButton = selected && approved
@@ -113,46 +166,40 @@ const ConvertNftModal: React.FC<ConvertNftModalProps> = ({ depositNftId, nftConv
         {ownedIds.map((currentId) => {
           return (
             <div id={currentId.toString()} key={currentId} style={{ padding: '10px' }}>
-              <Button
-                onClick={() => {
-                  setSelected(currentId)
-                }}
-                variant={currentId === selected ? 'secondary' : 'primary'}
-              >
-                {currentId}
-              </Button>
+              {currentId === selected ? <PrimaryStakeButton  style={{width: "70px"}}  onClick={() => setSelected(currentId)}>
+                <PrimaryStakeButtonText>
+                  {currentId}
+                </PrimaryStakeButtonText>
+              </PrimaryStakeButton> : <SecondaryStakeButton  style={{width: "70px"}}  onClick={() => setSelected(currentId)}>
+                <SecondaryStakeButtonText>
+                  {currentId}
+                </SecondaryStakeButtonText>
+              </SecondaryStakeButton>}
             </div>
           )
         })}
       </Flex>
       <Flex justifyContent="center">
-        <Button
-          onClick={() => {
-            if (selected) {
-              handleApprove()
-            }
-          }}
-          disabled={!approveButton}
-          mt="8px"
-          as="a"
-          variant={selected ? 'secondary' : 'primary'}
-        >
-          {approving ? 'Approving...' : 'Approve NFT'}
-        </Button>
+
+        {approveButton ? <PrimaryStakeButton onClick={handleApprove} >
+          <PrimaryStakeButtonText>
+        {approving ? 'Approving...' : `Approve NFT`}
+          </PrimaryStakeButtonText>
+          </PrimaryStakeButton> : <SecondaryStakeButton disabled>
+          <SecondaryStakeButtonText>
+            Approve NFT
+          </SecondaryStakeButtonText>
+        </SecondaryStakeButton>}
         <Text mt="8px" color="textSubtle" fontSize="12px" mb="8px" style={{ width: '10%' }} />
-        <Button
-          onClick={async () => {
-            if (selected && depositButton) {
-              await handleConvert()
-            }
-          }}
-          disabled={!depositButton}
-          mt="8px"
-          as="a"
-          variant={selected ? 'secondary' : 'primary'}
-        >
-          {converting ? 'Converting...' : `Convert ${symbol}`}
-        </Button>
+        {selected && approved ? <PrimaryStakeButton onClick={handleConvert} >
+          <PrimaryStakeButtonText>
+            {converting ? 'Converting...' : `Convert ${symbol}`}
+          </PrimaryStakeButtonText>
+        </PrimaryStakeButton> : <SecondaryStakeButton onClick={handleConvert} disabled={!depositButton}>
+          <SecondaryStakeButtonText>
+            Convert {symbol}
+          </SecondaryStakeButtonText>
+        </SecondaryStakeButton>}
       </Flex>
     </Modal>
   )
