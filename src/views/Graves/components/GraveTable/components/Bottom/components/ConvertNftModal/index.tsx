@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Button, Flex, Modal, Text } from '@rug-zombie-libs/uikit'
+import { Flex, Modal, Text } from '@rug-zombie-libs/uikit'
 import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
 import { useERC721, useNftConverter } from '../../../../../../../../hooks/useContract'
@@ -108,7 +108,6 @@ const ConvertNftModal: React.FC<ConvertNftModalProps> = ({ depositNftId, nftConv
   }, [onDismiss, onNftConvert])
 
   const handleApprove = () => {
-    console.log(!approved)
     if (account && !approved) {
       setApproving(true)
       nftContract.methods
