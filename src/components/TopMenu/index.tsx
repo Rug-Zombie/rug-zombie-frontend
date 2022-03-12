@@ -100,7 +100,9 @@ const TopMenu = () => {
           ) : null}
         </DropdownMenu>
         <Buttons>
-          <TokenButton style={{ flexDirection: 'row' }}>
+          <TokenButton style={{ flexDirection: 'row' }} onClick={() => {
+            window.location.href = 'https://dex.guru/token/0x50ba8bf9e34f0f83f96a340387d1d3888ba4b3b5-bsc'
+          }}>
             <img src={zombiehead} alt="Zombie Icon" style={{ height: '70%', paddingRight: '20px' }} />
             <Text style={{ fontWeight: 'bold' }}>${useGetZombiePriceUsd().toPrecision(1)}</Text>
           </TokenButton>
