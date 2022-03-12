@@ -1467,6 +1467,22 @@ const nfts: Nft[] = [
     artist: artists.canadiancryptojunkie,
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 94,
+    name: 'Dead Ken',
+    symbol: 'KEN',
+    description: "",
+    address: {
+      56: '0x3A35474A6cb0731445BE1aC08493653BF169e60a',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmR2KkjTGdFyShoQxAZ7DHJ25qP3ttbRqxZ8beJ6gbcUw4',
+    type: 'image',
+    rarity: 'Legendary',
+    artist: artists.jussjoshinduh,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts

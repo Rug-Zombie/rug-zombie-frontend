@@ -3,6 +3,39 @@ import tokens from './tokens'
 
 const spawningPools: SpawningPoolConfig[] = [
   {
+    id: 20,
+    name: 'Street Punks Legendary V2',
+    nftId: 94,
+    address: {
+      56: '0xEF42B4651B50429d38E054900396f0E444001F60',
+      97: '0xFaAa54ec46a9BA92694DdA390a54A713b9Ce1332',
+    },
+    endBlock: 18681000,
+    endDate: 1655179199,
+    project: {
+      name: 'Street Punks',
+      description:
+        'StreetPunks is a spinoff inspired by the CryptoPunks project created by a small group of CryptoPunk fans. They strive to contribute to the CryptoPunks hype by creatively adding streetwear and (popular) theme orientated costumes. StreetPunks offers the average CyberPunk lover to invest early into the next stage of the CryptoPunks hype.',
+      additionalDetails: [
+        {
+          name: 'Project website',
+          url: tokens.punks.projectLink,
+        },
+        {
+          name: 'Whitepaper',
+          url: 'https://streetpunks.org/wp-content/uploads/2021/11/Streetpunks-Whitepaper-2021-1.pdf',
+        },
+        {
+          name: 'Telegram',
+          url: 'https://t.me/StreetPunksOfficial',
+        },
+      ],
+    },
+    rewardToken: tokens.punksv2,
+    dex: Dex.PCS_V2,
+    isNew: true,
+  },
+  {
     id: 19,
     name: 'Farmaggedon Legendary',
     nftId: 85,
@@ -33,7 +66,6 @@ const spawningPools: SpawningPoolConfig[] = [
     },
     rewardToken: tokens.frt,
     dex: Dex.PCS_V2,
-    isNew: true,
   },
   {
     id: 18,

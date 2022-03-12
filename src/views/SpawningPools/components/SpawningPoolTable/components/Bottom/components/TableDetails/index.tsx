@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import numeral from 'numeral'
+import { useHistory } from 'react-router'
 import { getBalanceAmount, getFullDisplayBalance } from '../../../../../../../../utils/formatBalance'
 import { SpawningPool } from '../../../../../../../../state/types'
 import { formatDays, formatDuration, now } from '../../../../../../../../utils/timerHelpers'
@@ -31,6 +32,10 @@ const NftImageContainer = styled.div`
   height: 150px;
   background: #0d1417;
   border-radius: 10px;
+  
+  &:hover {
+    cursor: pointer;
+  }
 `
 
 const NftImage = styled.img`
@@ -95,8 +100,8 @@ const TableDetails: React.FC<TableDetailsProps> = ({ spawningPool }) => {
   } = spawningPool
   const { name, path, type } = useGetNftById(nftId)
   const tvl = getBalanceAmount(totalAmount.times(useGetZombiePriceUsd()))
-
   const unlockFeeUsd = unlockFee.times(useGetBnbPriceUsd())
+  const history = useHistory()
   const imageOnErrorHandler = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const source = event.target as HTMLImageElement
     source.onerror = null
@@ -105,7 +110,7 @@ const TableDetails: React.FC<TableDetailsProps> = ({ spawningPool }) => {
 
   return (
     <Container>
-      <NftImageContainer>
+      <NftImageContainer onClick={() => history.push(`/nfts/${nftId}`)}>
         {type === 'video' ? (
           <NftVideo autoPlay loop muted>
             <source src={path} type="video/webm" />

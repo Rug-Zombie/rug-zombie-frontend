@@ -82,7 +82,6 @@ const graves: GraveConfig[] = [
     nftConverterPid: 5,
     isNew: true,
   },
-
   {
     pid: {
       56: 53,

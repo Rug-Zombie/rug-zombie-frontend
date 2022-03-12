@@ -92,6 +92,17 @@ const tokens = {
     tokenLogo:
       'https://i0.wp.com/streetpunks.org/wp-content/uploads/2021/11/cropped-2021-11-16_20h34_53-1.png?w=826&ssl=1',
   },
+  punksv2: {
+    symbol: 'PUNKS',
+    address: {
+      56: '0x3ca35c4f8bc33D44d10d379F3fE601bA67bBbE7f',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://streetpunks.org/',
+    tokenLogo:
+      'https://i0.wp.com/streetpunks.org/wp-content/uploads/2021/11/cropped-2021-11-16_20h34_53-1.png?w=826&ssl=1',
+  },
   l1ghtv2: {
     symbol: 'L1ght',
     address: {
