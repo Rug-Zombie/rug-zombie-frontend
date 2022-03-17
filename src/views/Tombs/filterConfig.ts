@@ -18,7 +18,7 @@ export enum RarityFilter {
 export const tombFilters = [
   {
     label: 'All tombs',
-    filter: (gs) => gs.filter((g) => !g.isRetired && g.poolInfo.allocPoint.gt(0)),
+    filter: (gs) => gs.filter((g) => !g.isRetired),
   },
   {
     label: 'Staked',
