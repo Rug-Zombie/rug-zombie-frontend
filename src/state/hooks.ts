@@ -65,21 +65,21 @@ const selectFilteredGraves = createSelector(
     switch (filter[1]) {
       case 'All graves':
       case 'All types':
-        return graves.data.filter((g) => !g.isRetired && g.poolInfo.allocPoint.gt(0))
+        return graves.data.filter((g) => !g.isRetired && g.poolInfo.allocPoint.gt(0) && (!g.endDate || g.endDate > now()))
       case 'Staked':
         return graves.data.filter((g) => g.userInfo.amount.gt(0))
       case 'NFT-only':
-        return graves.data.filter((g) => !g.isRetired && g.poolInfo.allocPoint.isZero())
+        return graves.data.filter((g) => !g.isRetired && g.poolInfo.allocPoint.isZero() && !g.isRetired && (!g.endDate || g.endDate > now()))
       case 'Retired':
         return graves.data.filter((g) => g.isRetired || now() > g.endDate)
       case 'Legendary':
-        return graves.data.filter((g) => nfts.data.find((n) => n.id === g.nftId).rarity === 'Legendary')
+        return graves.data.filter((g) => nfts.data.find((n) => n.id === g.nftId).rarity === 'Legendary' && !g.isRetired && (!g.endDate || g.endDate > now()))
       case 'Rare':
-        return graves.data.filter((g) => nfts.data.find((n) => n.id === g.nftId).rarity === 'Rare')
+        return graves.data.filter((g) => nfts.data.find((n) => n.id === g.nftId).rarity === 'Rare' && !g.isRetired && (!g.endDate || g.endDate > now()))
       case 'Uncommon':
-        return graves.data.filter((g) => nfts.data.find((n) => n.id === g.nftId).rarity === 'Uncommon')
+        return graves.data.filter((g) => nfts.data.find((n) => n.id === g.nftId).rarity === 'Uncommon' && !g.isRetired && (!g.endDate || g.endDate > now()))
       case 'Common':
-        return graves.data.filter((g) => nfts.data.find((n) => n.id === g.nftId).rarity === 'Common')
+        return graves.data.filter((g) => nfts.data.find((n) => n.id === g.nftId).rarity === 'Common' && !g.isRetired && (!g.endDate || g.endDate > now()))
       default:
         return graves.data
     }

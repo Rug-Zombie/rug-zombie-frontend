@@ -1483,6 +1483,22 @@ const nfts: Nft[] = [
     artist: artists.jussjoshinduh,
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 95,
+    name: 'Zombie of the Void',
+    symbol: 'VOID',
+    description: "Heart in a blender.",
+    address: {
+      56: '0x7D13a163b242A815FCcf5C58E5C78b0f307A4003',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmYQ8fa8YcmjPt99NkJLZEFmv9Y3zevj29HB39RT5R6VJs',
+    type: 'image',
+    rarity: 'Special',
+    artist: artists.rugzombie,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts
