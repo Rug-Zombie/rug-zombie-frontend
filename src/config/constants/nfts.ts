@@ -1499,6 +1499,22 @@ const nfts: Nft[] = [
     artist: artists.rugzombie,
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 96,
+    name: 'Zombie Jester',
+    symbol: 'JESTER',
+    description: "Wanna play a game?",
+    address: {
+      56: '0x042476AB10E41D757380F83C9E160E9dD0D0f58F',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmYzVbVibR5TxwfndWiTZbxDRXbzRXam7dkj2ophTYMZ4Y',
+    type: 'image',
+    rarity: 'Uncommon',
+    artist: artists.jussjoshinduh,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts
