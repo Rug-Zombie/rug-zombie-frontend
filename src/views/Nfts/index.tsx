@@ -332,7 +332,7 @@ const Nfts: React.FC = () => {
               <DetailFlex>
                 <DetailName>Oblivion Marketplace</DetailName>
                 <SecondaryButton onClick={() => {
-                  window.location.href = `https://oblivion.art/create/${getAddress(nft.address)}`
+                  window.location.href = `https://oblivion.art/create/listing/${getAddress(nft.address)}`
                 }}><OblivionButtonText>List now</OblivionButtonText></SecondaryButton>
               </DetailFlex>
             </DetailsContainer>
