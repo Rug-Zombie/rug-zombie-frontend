@@ -404,7 +404,7 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
         <Inputs>
           <InputControl>
             <BalanceText onClick={maxStakeAmount}>
-              Wallet Balance: <AmountText>{numeral(getFullDisplayBalance(lpBalance)).format('(0.00 a)')} LP</AmountText>
+              Wallet Balance: <AmountText>{numeral(getFullDisplayBalance(lpBalance)).format('(0.00 a)', Math.floor)} LP</AmountText>
             </BalanceText>
             <StakingInput
               onInput={changeStakeInput}
@@ -415,7 +415,7 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
           </InputControl>
           <InputControl>
             <BalanceText onClick={maxUnstakeAmount}>
-              Your Staked: <AmountText>{numeral(getFullDisplayBalance(amount)).format('(0.00 a)')} LP</AmountText>
+              Your Staked: <AmountText>{numeral(getFullDisplayBalance(amount)).format('(0.00 a)', Math.floor)} LP</AmountText>
             </BalanceText>
             <StakingInput
               onInput={changeUnstakeInput}
