@@ -1,21 +1,21 @@
 import React from 'react'
 import { PrimaryButtonText } from 'components/Buttons'
 import numeral from 'numeral'
-import tokens from 'config/constants/tokens'
-import { getAddress } from 'utils/addressHelpers'
+import { getZombieAddress } from 'utils/addressHelpers'
 
 import {
+  ButtonsDiv,
   HeroContainer,
   HeroContent,
-  TitleTextBox,
-  SubTextBox,
-  TvlText,
-  TvlNumber,
-  ButtonsDiv,
   PrimaryLinkButton,
   StakeNowButton,
   StakeNowButtonText,
+  SubTextBox,
+  TitleTextBox,
+  TvlNumber,
+  TvlText,
 } from './styles'
+import { BASE_EXCHANGE_URL } from '../../../../config'
 
 interface HeroProps {
   tvl: any
@@ -36,7 +36,7 @@ const Hero: React.FC<HeroProps> = ({ tvl, history }) => {
         <ButtonsDiv>
           <PrimaryLinkButton
             onClick={() => {
-              window.location.href = `https://swap.rugzombie.io/swap?outputCurrency=${getAddress(tokens.zmbe.address)}`
+              window.location.href = `${BASE_EXCHANGE_URL}/swap?outputCurrency=${getZombieAddress()}`
             }}
           >
             <PrimaryButtonText>Buy $ZMBE</PrimaryButtonText>

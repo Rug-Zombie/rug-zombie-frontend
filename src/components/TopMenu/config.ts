@@ -3,7 +3,13 @@ export enum MenuItem {
   External,
 }
 
-const config = [
+interface Config {
+  label: string
+  href: string
+  type?: MenuItem
+}
+
+const config: Config[] = [
   {
     label: 'Graves',
     href: '/graves',
@@ -16,11 +22,11 @@ const config = [
     label: 'Spawning Pools',
     href: '/spawning_pools',
   },
-  {
-    label: 'Exchange',
-    href: 'https://swap.rugzombie.io/',
-    type: MenuItem.External,
-  },
+  // {
+  //   label: 'Exchange',
+  //   href: 'https://swap.rugzombie.io/',
+  //   type: MenuItem.External,
+  // },
   {
     label: 'Graveyard',
     href: '/graveyard',

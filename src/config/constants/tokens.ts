@@ -40,6 +40,15 @@ const tokens = {
     geckoId: 'spartan-token',
     tokenLogo: 'https://assets.coingecko.com/coins/images/22787/small/Spartan_Logo.png?1642580873',
   },
+  slvn: {
+    symbol: 'SLVN',
+    address: {
+      56: '0x8Fd95dF18D6c39088e8eC03208A3fe27D5FCCd83',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
+    },
+    decimals: 18,
+    tokenLogo: 'https://assets.coingecko.com/coins/images/15949/small/2-B3-EF9-B0-7-C1-E-4-DAB-942-A-23-BEDACFE8-B6.jpg?1622512270',
+  },
   frt: {
     symbol: 'FRT',
     address: {

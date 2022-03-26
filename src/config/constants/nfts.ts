@@ -1515,6 +1515,21 @@ const nfts: Nft[] = [
     artist: artists.jussjoshinduh,
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 97,
+    name: 'Crimson',
+    symbol: 'CRIMSON',
+    description: "For you are not destined for wrath…",
+    address: {
+      56: '0xb5f4548674Ff7d2275b06951284e21577361a880',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmNesjQkKpRJGE1qD71SihrSCKg2JfGySbjUpVkCFTC47d',
+    type: 'image',
+    rarity: 'Common',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts

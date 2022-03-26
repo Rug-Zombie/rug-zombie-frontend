@@ -33,6 +33,27 @@ const tombs: TombConfig[] = [
     },
   },
   {
+    id: 3,
+    pid: PCS_ZMBE_BNB_TOMB_PID,
+    lpAddress: {
+      97: '0x72427E9ee25CC6e9e4Cee3C52a77EEA7eE33A83B',
+      56: '0x4dbaf6479f0afa9f03c2a7d611151fa5b53ecdc8',
+    },
+    token1: tokens.zmbe,
+    token2: tokens.wbnb,
+    dex: Dex.PCS_V2,
+    overlay: {
+      pid: {
+        56: 2,
+        97: 0,
+      },
+      commonId: 44,
+      uncommonId: 45,
+      rareId: 46,
+      legendaryId: 78,
+    },
+  },
+  {
     id: 2,
     pid: {
       56: 29,
@@ -55,27 +76,6 @@ const tombs: TombConfig[] = [
       uncommonId: 45,
       rareId: 46,
       legendaryId: 47,
-    },
-  },
-  {
-    id: 3,
-    pid: PCS_ZMBE_BNB_TOMB_PID,
-    lpAddress: {
-      97: '0x72427E9ee25CC6e9e4Cee3C52a77EEA7eE33A83B',
-      56: '0x4dbaf6479f0afa9f03c2a7d611151fa5b53ecdc8',
-    },
-    token1: tokens.zmbe,
-    token2: tokens.wbnb,
-    dex: Dex.PCS_V2,
-    overlay: {
-      pid: {
-        56: 2,
-        97: 0,
-      },
-      commonId: 44,
-      uncommonId: 45,
-      rareId: 46,
-      legendaryId: 78,
     },
   },
 ]

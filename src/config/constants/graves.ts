@@ -72,6 +72,17 @@ const graves: GraveConfig[] = [
   },
   {
     pid: {
+      56: 55,
+      97: 1,
+    },
+    name: 'Salvation Finance Common',
+    nftId: 97,
+    rug: tokens.slvn,
+    isNew: true,
+    rugDex: Dex.PCS_V2
+  },
+  {
+    pid: {
       56: 52,
       97: 1,
     },

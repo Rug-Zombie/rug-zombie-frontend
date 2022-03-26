@@ -7,7 +7,7 @@ import ProgressBar from './components/ProgressBar'
 import TableDetails from './components/TableDetails'
 import { Grave } from '../../../../../../state/types'
 import useApprove from '../../../../../../hooks/useApprove'
-import { getAddress, getDrFrankensteinAddress } from '../../../../../../utils/addressHelpers'
+import { getAddress, getDrFrankensteinAddress, getZombieAddress } from '../../../../../../utils/addressHelpers'
 import { useDrFrankenstein, useERC20, useZombie } from '../../../../../../hooks/useContract'
 import {
   useDepositRug,
@@ -26,6 +26,7 @@ import BurnZombieModal from './components/BurnZombieModal'
 import useToast from '../../../../../../hooks/useToast'
 import { formatDuration, now } from '../../../../../../utils/timerHelpers'
 import PreApprovalProgressBar from './components/PreApprovalProgressBar'
+import { BASE_EXCHANGE_URL } from '../../../../../../config'
 
 const Separator = styled.div`
   height: 0px;
@@ -315,7 +316,7 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
         if (insufficientZombieBalance) {
           toastGraves(
             'Insufficient ZMBE balance',
-            <Link href={`https://swap.rugzombie.io/swap?outputCurrency=${getAddress(tokens.zmbe.address)}`}>
+            <Link href={`${BASE_EXCHANGE_URL}/swap?outputCurrency=${getZombieAddress()}`}>
               Buy ZMBE
             </Link>,
           )
