@@ -47,7 +47,7 @@ const tokens = {
       97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
-    tokenLogo: 'https://assets.coingecko.com/coins/images/15949/small/2-B3-EF9-B0-7-C1-E-4-DAB-942-A-23-BEDACFE8-B6.jpg?1622512270',
+    tokenLogo: 'https://storage.googleapis.com/rug-zombie/slvn.svg',
   },
   frt: {
     symbol: 'FRT',
