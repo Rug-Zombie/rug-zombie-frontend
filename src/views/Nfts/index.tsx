@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { useWeb3React } from '@web3-react/core'
-import { LinkExternal } from '@rug-zombie-libs/uikit'
+import { LinkExternal, useModal } from '@rug-zombie-libs/uikit'
 import Page from '../../components/layout/Page'
 // import badge from '../../images/icons/Icon feather-award.svg'
 // import user from '../../images/icons/Icon feather-user-check.svg'
@@ -15,6 +15,7 @@ import { formatAddress, getBscScanLink } from '../../utils'
 import { PreviewVideo, SmallPreviewVideo } from '../../components/Video/NftVideo'
 import Footer from '../../components/Footer'
 import { SecondaryButton } from '../../components/Buttons'
+import TransferNftModal from './components/TransferNftModal'
 
 const Image = styled.img`
   margin-top: 20px;
@@ -25,10 +26,10 @@ const Image = styled.img`
   box-shadow: 5px 15px 20px 0px #000000;
 `
 
-const Small = styled.img`
+const Small = styled.img<{isSelected: boolean}>`
   position: relative;
-  max-width: 100px;
-  min-width: 70px;
+  max-width: ${({ isSelected }) => (isSelected ? '130px' : '100px')};
+  min-width: ${({ isSelected }) => (isSelected ? '100px' : '70px')};
   width: 100%;
   border-radius: 15px;
   padding: 8px;
@@ -69,7 +70,7 @@ const RowItem = styled.div`
   white-space: nowrap;
 `
 
-const Subtle = styled.p`
+const Subtle = styled.div`
   max-width: 350px;
   text-align: left;
   font: normal normal 300 18px/42px Poppins;
@@ -128,7 +129,6 @@ const Right = styled.div`
 
 const TabRight = styled.div`
   position: relative;
-  top: 50px;
   background: #151e21;
   max-width: 690px;
   padding: 15px 25px;
@@ -143,6 +143,11 @@ const TabRight = styled.div`
   }
 `
 
+const TabLeft = styled(TabRight)`
+  margin: auto;
+  border-color: red;
+`
+
 const Variant = styled.div`
   display: flex;
   flex-direction: column;
@@ -152,8 +157,10 @@ const Variant = styled.div`
 const Variants = styled.div`
   display: flex;
   align-items: center;
-  max-width: 350px;
+  max-width: 90%;
   overflow-x: scroll;
+  margin: auto;
+
 `
 
 const DetailName = styled.div`
@@ -236,13 +243,64 @@ const Nfts: React.FC = () => {
   const { id } = useParams<ParamTypes>()
   const { account } = useWeb3React()
   const dispatch = useAppDispatch()
+  const [isSingleColumn, setIsSingleColumn] = useState(window.innerWidth < 1084)
+  const [selectedVariant, setSelectedVariant] = useState(null)
+  const updateMedia = () => setIsSingleColumn(window.innerWidth < 1084)
+  const nft = useGetNftById(parseInt(id))
+
+  const [onTransferNft] = useModal(<TransferNftModal nft={nft} id={selectedVariant} />)
+
+
+  useEffect(() => {
+    window.addEventListener('resize', updateMedia)
+    return () => window.removeEventListener('resize', updateMedia)
+  })
+
   useEffect(() => {
     if (account) {
       dispatch(fetchNftUserDataAsync(account))
     }
   }, [account, dispatch])
 
-  const nft = useGetNftById(parseInt(id))
+
+  const variantsTab = <div><TabLeft>
+    <Row>
+      <RowItem>
+        <Regular>Owned Variants</Regular>
+      </RowItem>
+    </Row>
+    <Row>
+      <RowItem>
+        <Normal>You own {nft.userInfo.ownedIds.length} variants of this nft</Normal>
+      </RowItem>
+    </Row>
+    <Row>
+      <Variants >
+        {nft.userInfo.ownedIds.map((value) => (
+          <Variant  onClick={() => setSelectedVariant(value) }>
+            {nft.type === 'image' ? (
+              <Small isSelected={value === selectedVariant} src={nft.path} />
+            ) : (
+              <VidDiv>
+                <SmallVid path={nft.path} />
+              </VidDiv>
+            )}
+            <HighlightSmall>{value}</HighlightSmall>
+          </Variant>
+        ))}
+      </Variants>
+    </Row>
+  </TabLeft>
+    <br/>
+    <TabLeft>
+      <DetailsContainer>
+        <DetailFlex>
+          <DetailName>Would you like to transfer?</DetailName>
+          <SecondaryButton onClick={onTransferNft}><OblivionButtonText>Transfer now</OblivionButtonText></SecondaryButton>
+        </DetailFlex>
+      </DetailsContainer>
+    </TabLeft>
+  </div>
 
   return (
     <>
@@ -254,14 +312,17 @@ const Nfts: React.FC = () => {
             <VidDiv>
               <PreviewVid path={nft.path} />
             </VidDiv>
-          )}
+          )}]
+          {!isSingleColumn ? variantsTab : null }
         </Left>
         <Right>
+
           <Title>{nft.name}</Title>
           <Subtle>{nft.description}</Subtle>
           <Subtle>
             Rarity: <Highlighted>{nft.rarity}</Highlighted>
           </Subtle>
+
           <Row>
             <RowItem>
               <Subtle>Collection By</Subtle>
@@ -280,35 +341,10 @@ const Nfts: React.FC = () => {
               </RowItem>
             </Row>
           ) : null}
-          <TabRight>
-            <Row>
-              <RowItem>
-                <Regular>Owned Variants</Regular>
-              </RowItem>
-            </Row>
-            <Row>
-              <RowItem>
-                <Normal>You own {nft.userInfo.ownedIds.length} variants of this nft</Normal>
-              </RowItem>
-            </Row>
-            <Row>
-              <Variants>
-                {nft.userInfo.ownedIds.map((value) => (
-                  <Variant>
-                    {nft.type === 'image' ? (
-                      <Small src={nft.path} />
-                    ) : (
-                      <VidDiv>
-                        <SmallVid path={nft.path} />
-                      </VidDiv>
-                    )}
-                    <HighlightSmall>{value}</HighlightSmall>
-                  </Variant>
-                ))}
-              </Variants>
-            </Row>
-          </TabRight>
+
           <br />
+          {isSingleColumn ? variantsTab : null }
+          <br/>
           <TabRight>
             <DetailsContainer>
               <DetailFlex>
