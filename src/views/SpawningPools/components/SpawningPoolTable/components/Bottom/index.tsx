@@ -266,6 +266,23 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
 
 
   const handleStakeTx = useCallback(async () => {
+    if(stakeAmount.isNaN() && [Step.Staked, Step.StakeZombie].includes(currentStep)) {
+      toastSpawningPools(
+          'Invalid Input',
+          "Please enter valid stake amount"
+      )
+    }else if((stakeAmount.lt(minimumStake)) && [Step.Staked, Step.StakeZombie].includes(currentStep)) {
+      toastSpawningPools(
+          'Must stake minimum amount',
+          <PrimaryStakeButton
+              onClick={() => {
+                setStakeAmount(minimumStake)
+              }}
+          >
+            <PrimaryStakeButtonText>Leave minimum</PrimaryStakeButtonText>
+          </PrimaryStakeButton>
+      )
+    }
     setConfirmingStake(true)
     const step = steps[currentStep]
     step
@@ -279,11 +296,17 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
       .catch(() => {
         setConfirmingStake(false)
       })
-  }, [currentStep, steps, toastSpawningPools])
+  }, [Step.StakeZombie, Step.Staked, currentStep, minimumStake, stakeAmount, steps, toastSpawningPools])
 
   const validUnstakeAmount = amount.minus(unstakeAmount).gte(minimumStake) || amount.minus(unstakeAmount).isZero()
 
   const handleUnstakeTx = async () => {
+    if(stakeAmount.isNaN() || stakeAmount.lte(0)){
+      toastSpawningPools(
+          'Invalid Input',
+          "Please enter valid stake amount"
+      )
+    }
     if(amount.gt(0)){
       if (!validUnstakeAmount) {
         toastSpawningPools(
