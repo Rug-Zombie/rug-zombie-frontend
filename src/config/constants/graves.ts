@@ -72,6 +72,32 @@ const graves: GraveConfig[] = [
   },
   {
     pid: {
+      56: 57,
+      97: 1,
+    },
+    name: 'Unlegendary Chompers',
+    nftId: 99,
+    rug: tokens.basicZmbe,
+    liquidityDetails: 'None! You must earn the Basic Zombie NFT from the RugZombie Common TombTable to gain access.',
+    depositNftId: 6,
+    nftConverterPid: 0,
+    isNew: true,
+  },  {
+    pid: {
+      56: 56,
+      97: 1,
+    },
+    name: 'Disappointing DragonFarm',
+    nftId: 98,
+    rug: tokens.basicZmbe,
+    liquidityDetails: 'None! You must earn the Basic Zombie NFT from the RugZombie Common TombTable to gain access.',
+    depositNftId: 6,
+    nftConverterPid: 0,
+    isNew: true,
+  },
+
+  {
+    pid: {
       56: 55,
       97: 1,
     },
