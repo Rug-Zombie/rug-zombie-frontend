@@ -68,7 +68,6 @@ const graves: GraveConfig[] = [
     nftConverterPid: 0,
     graveNftToken: '0x22e42D9425b55FD2262bfF72a316bb052DDb2a77',
     endDate: 1648051200,
-    isFeatured: true,
   },
   {
     pid: {
@@ -81,9 +80,9 @@ const graves: GraveConfig[] = [
     liquidityDetails: 'None! You must earn the Basic Zombie NFT from the RugZombie Common TombTable to gain access.',
     depositNftId: 6,
     nftConverterPid: 0,
-    isNew: true,
     isFeatured: true
-  },  {
+  },
+  {
     pid: {
       56: 56,
       97: 1,
@@ -94,7 +93,6 @@ const graves: GraveConfig[] = [
     liquidityDetails: 'None! You must earn the Basic Zombie NFT from the RugZombie Common TombTable to gain access.',
     depositNftId: 6,
     nftConverterPid: 0,
-    isNew: true,
     isFeatured: true
   },
 
