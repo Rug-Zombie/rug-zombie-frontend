@@ -82,6 +82,7 @@ const graves: GraveConfig[] = [
     depositNftId: 6,
     nftConverterPid: 0,
     isNew: true,
+    isFeatured: true
   },  {
     pid: {
       56: 56,
@@ -94,6 +95,7 @@ const graves: GraveConfig[] = [
     depositNftId: 6,
     nftConverterPid: 0,
     isNew: true,
+    isFeatured: true
   },
 
   {
