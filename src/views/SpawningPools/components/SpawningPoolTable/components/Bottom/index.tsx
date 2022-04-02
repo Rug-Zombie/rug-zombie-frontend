@@ -11,6 +11,10 @@ import { useSpawningPool, useZombie } from '../../../../../../hooks/useContract'
 import { useHarvest, useStake, useUnlock, useUnstake, useUnstakeEarly } from '../../../../../../hooks/useSpawningPool'
 import { getBalanceNumber, getDecimalAmount, getFullDisplayBalance } from '../../../../../../utils/formatBalance'
 import useToast from '../../../../../../hooks/useToast'
+// import {useModal} from "@rug-zombie-libs/uikit";
+// import ConvertNftModal from "../../../../../Graves/components/GraveTable/components/Bottom/components/ConvertNftModal";
+// import BurnZombieModal from "../../../../../Graves/components/GraveTable/components/Bottom/components/BurnZombieModal";
+// import {getId} from "../../../../../../utils";
 
 const Separator = styled.div`
   height: 0px;
@@ -131,7 +135,7 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
   const {
     address,
     userInfo: { zombieBalance, paidUnlockFee, amount, zombieAllowance, nftMintDate, tokenWithdrawalDate },
-    poolInfo: { unlockFee },
+    poolInfo: { unlockFee, minimumStake },
   } = spawningPool
   const [stakeAmount, setStakeAmount] = useState(new BigNumber(null))
   const [unstakeAmount, setUnstakeAmount] = useState(new BigNumber(null))
@@ -208,6 +212,16 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
       })
   }, [currentStep, steps, toastDefault])
 
+
+  const { toastSpawningPools } = useToast()
+
+  // const insufficientStakeAmount = amount.plus(stakeAmount).lt(minimumStake)
+  // const insufficientZombieBalance = stakeAmount.gt(zombieBalance)
+  const validUnstakeAmount = amount.minus(unstakeAmount).gte(minimumStake) || amount.minus(unstakeAmount).isZero()
+  // const insufficientStakedBalance = unstakeAmount.gt(amount)
+
+
+
   const changeStakeInput = (e) => {
     setStakeAmount(getDecimalAmount(new BigNumber(e.target.value)))
   }
@@ -225,6 +239,30 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
   }
 
   const withdrawButton = () => {
+    if (!validUnstakeAmount) {
+      return (toastSpawningPools(
+          'Invalid amount',
+          <Separator>
+            <text>You must leave a minimum of {getFullDisplayBalance(minimumStake)} ZMBE in the Spawning Pool</text>
+            <StakingContainer>
+              <PrimaryStakeButton
+                  onClick={() => {
+                    setUnstakeAmount(amount.minus(minimumStake))
+                  }}
+              >
+                <PrimaryStakeButtonText>Leave minimum</PrimaryStakeButtonText>
+              </PrimaryStakeButton>
+              <SecondaryStakeButton
+                  onClick={() => {
+                    setUnstakeAmount(amount)
+                  }}>
+                <SecondaryStakeButtonText>Withdraw max</SecondaryStakeButtonText>
+              </SecondaryStakeButton>
+            </StakingContainer>
+          </Separator>,
+      ))
+    }
+
     if (amount.gt(0)) {
       if (nftMintDate.lte(now)) {
         return (
@@ -239,6 +277,7 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
             <SecondaryStakeButtonText>Harvest</SecondaryStakeButtonText>
           </SecondaryStakeButton>
         )
+
       }
       if (tokenWithdrawalDate.gt(now)) {
         return (
@@ -255,6 +294,7 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
       </SecondaryStakeButton>
     )
   }
+
 
   return (
     <>

@@ -43,6 +43,9 @@ export const ToastsProvider: React.FC = ({ children }) => {
   const toastTombs = (title: string, description?: ReactNode) => {
     return toast({ title, description, type: types.TOMBS })
   }
+  const toastSpawningPools = (title: string, description?: ReactNode) => {
+    return toast({ title, description, type: types.SPAWNING_POOLS})
+  }
   const toastDefault = (title: string, description?: ReactNode) => {
     return toast({ title, description, type: types.DEFAULT })
   }
@@ -56,7 +59,7 @@ export const ToastsProvider: React.FC = ({ children }) => {
 
   return (
     <ToastsContext.Provider
-      value={{ toasts, clear, remove, toastError, toastInfo, toastDefault, toastGraves, toastTombs, toastWarning }}
+      value={{ toasts, clear, remove, toastError, toastInfo, toastDefault, toastGraves, toastTombs, toastSpawningPools, toastWarning }}
     >
       {children}
     </ToastsContext.Provider>
