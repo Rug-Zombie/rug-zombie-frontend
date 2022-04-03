@@ -285,7 +285,7 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
 
   const handleUnstakeTx = async () => {
     if(amount.gt(0)){
-      if (!validUnstakeAmount) {
+      if (!validUnstakeAmount && [UnstakeStep.Unstake, UnstakeStep.UnstakeEarly].includes(currentUnstakeStep)) {
         toastDefault(
           'Invalid amount',
           <FlexColumn>
