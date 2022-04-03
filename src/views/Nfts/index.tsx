@@ -320,22 +320,20 @@ const Nfts: React.FC = () => {
               </Row>
             </TabLeft>
             <br/>
-            {nft.userInfo.ownedIds.length !== 0 ? (
-                <TabLeft>
-                  <DetailName3>Click on one of your variants if you would like to transfer it</DetailName3>
-                </TabLeft>
-            ) : null
-            }
-            {selectedVariant === true ? (
-                <TabLeft>
-                  <DetailsContainer>
-                    <DetailFlex>
-                      <DetailName2>Would you like to transfer # {selectedVariant}?</DetailName2>
-                      <SecondaryButton onClick={onTransferNft}><OblivionButtonText>Transfer now</OblivionButtonText></SecondaryButton>
-                    </DetailFlex>
-                  </DetailsContainer>
-                </TabLeft>
-            ) : null
+            {nft.userInfo.ownedIds.length === 0 ? null :
+              <TabLeft>
+                <DetailName3>Click on one of your variants if you would like to transfer it</DetailName3>
+              </TabLeft>
+            }{selectedVariant ? (
+              <TabLeft>
+              <DetailsContainer>
+              <DetailFlex>
+              <DetailName2>Would you like to transfer # {selectedVariant}?</DetailName2>
+              <SecondaryButton onClick={onTransferNft}><OblivionButtonText>Transfer now</OblivionButtonText></SecondaryButton>
+              </DetailFlex>
+              </DetailsContainer>
+              </TabLeft>
+              ) : null
             }
           </div>
       ) : null
