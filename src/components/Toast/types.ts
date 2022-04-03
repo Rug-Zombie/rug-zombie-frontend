@@ -3,7 +3,6 @@ import { ReactNode } from 'react'
 export const types = {
   GRAVES: 'graves',
   TOMBS: 'tombs',
-  SPAWNING_POOLS: 'spawning pools',
   DEFAULT: 'default',
   DANGER: 'danger',
   WARNING: 'warning',

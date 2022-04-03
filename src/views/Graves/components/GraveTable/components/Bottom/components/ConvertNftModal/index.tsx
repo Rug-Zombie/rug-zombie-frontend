@@ -55,6 +55,12 @@ const SecondaryStakeButtonText = styled.div`
   color: #ffffff;
 `
 
+const OverflowFlex = styled(Flex)`
+  overflow-x: scroll;
+  justify-content: center;
+  margin-bottom: 10px;
+`
+
 export interface ConvertNftModalProps {
   depositNftId: number
   nftConverterPid: number
@@ -133,7 +139,7 @@ const ConvertNftModal: React.FC<ConvertNftModalProps> = ({ depositNftId, nftConv
   const depositButton = selected && approved
 
   return (
-    <Modal onDismiss={onDismiss} title={`Convert ${symbol}`} headerBackground="black">
+    <Modal style={{maxWidth: "450px"}} onDismiss={onDismiss} title={`Convert ${symbol}`} headerBackground="black">
       <Flex alignItems="center" justifyContent="space-between" mb="8px">
         <Text bold>Select ID of NFT:</Text>
         <Flex alignItems="center" minWidth="70px">
@@ -142,7 +148,7 @@ const ConvertNftModal: React.FC<ConvertNftModalProps> = ({ depositNftId, nftConv
           </Text>
         </Flex>
       </Flex>
-      <Flex justifyContent="center" style={{ maxHeight: '200px', maxWidth: '400px' }}>
+      <Flex justifyContent="center" style={{ maxHeight: '200px' }}>
         {type === 'image' ? (
           <img src={path} alt="test" style={{ maxWidth: '90%', maxHeight: '100%', objectFit: 'contain' }} />
         ) : (
@@ -161,7 +167,7 @@ const ConvertNftModal: React.FC<ConvertNftModalProps> = ({ depositNftId, nftConv
           <Text bold>IDS in your wallet:</Text>
         )}
       </Text>
-      <Flex justifyContent="center">
+      <OverflowFlex justifyContent="center">
         {ownedIds.map((currentId) => {
           return (
             <div id={currentId.toString()} key={currentId} style={{ padding: '10px' }}>
@@ -177,7 +183,7 @@ const ConvertNftModal: React.FC<ConvertNftModalProps> = ({ depositNftId, nftConv
             </div>
           )
         })}
-      </Flex>
+      </OverflowFlex>
       <Flex justifyContent="center">
 
         {approveButton ? <PrimaryStakeButton onClick={handleApprove} >

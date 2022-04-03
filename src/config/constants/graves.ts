@@ -68,8 +68,34 @@ const graves: GraveConfig[] = [
     nftConverterPid: 0,
     graveNftToken: '0x22e42D9425b55FD2262bfF72a316bb052DDb2a77',
     endDate: 1648051200,
-    isFeatured: true,
   },
+  {
+    pid: {
+      56: 57,
+      97: 1,
+    },
+    name: 'Unlegendary Chompers',
+    nftId: 99,
+    rug: tokens.basicZmbe,
+    liquidityDetails: 'None! You must earn the Basic Zombie NFT from the RugZombie Common TombTable to gain access.',
+    depositNftId: 6,
+    nftConverterPid: 0,
+    isFeatured: true
+  },
+  {
+    pid: {
+      56: 56,
+      97: 1,
+    },
+    name: 'Disappointing DragonFarm',
+    nftId: 98,
+    rug: tokens.basicZmbe,
+    liquidityDetails: 'None! You must earn the Basic Zombie NFT from the RugZombie Common TombTable to gain access.',
+    depositNftId: 6,
+    nftConverterPid: 0,
+    isFeatured: true
+  },
+
   {
     pid: {
       56: 55,
