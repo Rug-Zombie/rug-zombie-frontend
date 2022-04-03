@@ -11,11 +11,6 @@ import { useSpawningPool, useZombie } from '../../../../../../hooks/useContract'
 import { useHarvest, useStake, useUnlock, useUnstake, useUnstakeEarly } from '../../../../../../hooks/useSpawningPool'
 import { getBalanceNumber, getDecimalAmount, getFullDisplayBalance } from '../../../../../../utils/formatBalance'
 import useToast from '../../../../../../hooks/useToast'
-import { useGetNftById } from '../../../../../../state/hooks'
-// import {useModal} from "@rug-zombie-libs/uikit";
-// import ConvertNftModal from "../../../../../Graves/components/GraveTable/components/Bottom/components/ConvertNftModal";
-// import BurnZombieModal from "../../../../../Graves/components/GraveTable/components/Bottom/components/BurnZombieModal";
-// import {getId} from "../../../../../../utils";
 
 const Separator = styled.div`
   height: 0px;
@@ -128,19 +123,6 @@ const AmountText = styled.p`
   margin: 0;
 `
 
-
-const FlexColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`
-
-const FlexRow = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: space-around;
-`
-
 interface BottomProps {
   spawningPool: SpawningPool
 }
@@ -148,11 +130,9 @@ interface BottomProps {
 const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
   const {
     address,
-    nftId,
     userInfo: { zombieBalance, paidUnlockFee, amount, zombieAllowance, nftMintDate, tokenWithdrawalDate },
-    poolInfo: { unlockFee, minimumStake },
+    poolInfo: { unlockFee },
   } = spawningPool
-  const nft = useGetNftById(nftId)
   const [stakeAmount, setStakeAmount] = useState(new BigNumber(null))
   const [unstakeAmount, setUnstakeAmount] = useState(new BigNumber(null))
   const spawningPoolContract = useSpawningPool(getAddress(address))
@@ -162,13 +142,10 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
   const { onUnstake } = useUnstake(spawningPoolContract, unstakeAmount)
   const { onUnstakeEarly } = useUnstakeEarly(spawningPoolContract, unstakeAmount)
   const { onHarvest } = useHarvest(spawningPoolContract)
-  const [confirmingStake, setConfirmingStake] = useState(false)
-  const [confirmingUnstake, setConfirmingUnstake] = useState(false)
+  const [confirming, setConfirming] = useState(false)
   const steps = useMemo(() => [], [])
-  const unstakeSteps = useMemo(() => [], [])
   const now = Math.floor(Date.now() / 1000)
-  const { toastSpawningPools } = useToast()
-
+  const { toastDefault } = useToast()
   enum Step {
     UnlockSpawningPool,
     ApproveZombie,
@@ -176,14 +153,6 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
     Staked,
   }
 
-  enum UnstakeStep {
-    MintNft,
-    Harvest,
-    UnstakeEarly,
-    Unstake,
-  }
-
-  // Defining Stake steps
   steps[Step.UnlockSpawningPool] = {
     label: `Unlock`,
     sent: `Unlocking...`,
@@ -209,7 +178,6 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
     toast: { title: 'Staked ZMBE' },
   }
 
-  // Setting current stake step
   let currentStep = Step.UnlockSpawningPool
   if (paidUnlockFee) {
     currentStep = Step.ApproveZombie
@@ -267,17 +235,18 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
 
   const handleStakeTx = useCallback(async () => {
     setConfirmingStake(true)
+
     const step = steps[currentStep]
     step
       .func()
       .then((succeeded) => {
         if (succeeded) {
-          toastSpawningPools(step.toast.title, step.toast.description)
+          toastDefault(step.toast.title, step.toast.description)
         }
-        setConfirmingStake(false)
+        setConfirming(false)
       })
       .catch(() => {
-        setConfirmingStake(false)
+        setConfirming(false)
       })
   }, [currentStep, steps, toastSpawningPools])
 
@@ -343,7 +312,6 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
     setUnstakeAmount(amount)
   }
 
-
   return (
     <>
       <Separator />
@@ -357,27 +325,26 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
             <StakingInput
               onInput={changeStakeInput}
               value={getBalanceNumber(stakeAmount)}
-              placeholder='Stake amount'
-              type='number'
+              placeholder="Stake amount"
+              type="number"
             />
           </InputControl>
           <InputControl>
             <BalanceText onClick={maxUnstakeAmount}>
-              Your
-              Staked: <AmountText>{numeral(getFullDisplayBalance(amount)).format('(0.00 a)', Math.floor)} ZMBE</AmountText>
+              Your Staked: <AmountText>{numeral(getFullDisplayBalance(amount)).format('(0.00 a)', Math.floor)} ZMBE</AmountText>
             </BalanceText>
             <StakingInput
               onInput={changeUnstakeInput}
               value={getBalanceNumber(unstakeAmount)}
-              placeholder='Unstake amount'
-              type='number'
+              placeholder="Unstake amount"
+              type="number"
             />
           </InputControl>
         </Inputs>
         <Buttons>
-          <PrimaryStakeButton onClick={handleStakeTx}>
+          <PrimaryStakeButton onClick={handleTx}>
             <PrimaryStakeButtonText>
-              {confirmingStake ? steps[currentStep].sent : steps[currentStep].label}
+              {confirming ? steps[currentStep].sent : steps[currentStep].label}
             </PrimaryStakeButtonText>
           </PrimaryStakeButton>
            <SecondaryStakeButton onClick={handleUnstakeTx}>

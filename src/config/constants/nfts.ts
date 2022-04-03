@@ -1530,6 +1530,36 @@ const nfts: Nft[] = [
     rarity: 'Common',
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 98,
+    name: 'Disappointing DragonFarm',
+    symbol: 'DISAPPOINTING',
+    description: "not by beeple",
+    address: {
+      56: '0xA9CD544Fa7B9b3861e00760916c5dD2c05743017',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmWxZBQdbokXE5gdfNHJBsxnwzS8tSbsayqvrgdZh6k1SX',
+    type: 'image',
+    rarity: 'Special',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
+  {
+    id: 99,
+    name: 'Unlegendary Chompers',
+    symbol: 'UN-CHOMP',
+    description: "not by beeple",
+    address: {
+      56: '0x40c66bb737C7a1dE6caA42a109F1f49b96F12EaA',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmZyMmaT9Nt3xGosSWDZBAWUmj4u67cwMZJcwPHL3rPe1Q',
+    type: 'image',
+    rarity: 'Special',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts

@@ -11,6 +11,5 @@ export interface ToastContextApi {
   toastDefault: ToastSignature
   toastGraves: ToastSignature
   toastTombs: ToastSignature
-  toastSpawningPools: ToastSignature
   toastWarning: ToastSignature
 }
