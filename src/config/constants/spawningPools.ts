@@ -102,7 +102,6 @@ const spawningPools: SpawningPoolConfig[] = [
     },
     rewardToken: tokens.spa,
     dex: Dex.PCS_V2,
-    isNew: true,
     color: 'orange',
   },
   {
