@@ -49,6 +49,7 @@ const config = [
     {
       label: 'Contact',
       href: 'https://rugzombie.gitbook.io/docs/untitled',
+      type: Type.ExternalLink,
     },
     {
       label: 'Github',
