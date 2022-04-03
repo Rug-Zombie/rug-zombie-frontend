@@ -19,6 +19,7 @@ import TransferNftModal from './components/TransferNftModal'
 
 const Image = styled.img`
   margin-top: 20px;
+  margin-bottom: 15px;
   max-width: 520px;
   min-width: 320px;
   width: 100%;
@@ -173,6 +174,29 @@ const DetailName = styled.div`
   letter-spacing: 0;
   color: #777bab;
 `
+const DetailName2 = styled.div`
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  line-height: initial;
+  text-align: left;
+  margin-top: 5px;
+  margin-right: 30px;
+  font: normal normal 300 16px/30px Poppins;
+  letter-spacing: 0;
+  color: #777bab;
+`
+const DetailName3 = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  line-height: initial;
+  text-align: center;
+  margin-top: 5px;
+  font: normal normal 300 16px/30px Poppins;
+  letter-spacing: 0;
+  color: #777bab;
+`
 
 const DetailValue = styled.a`
   width: 50%;
@@ -263,44 +287,60 @@ const Nfts: React.FC = () => {
   }, [account, dispatch])
 
 
-  const variantsTab = <div><TabLeft>
-    <Row>
-      <RowItem>
-        <Regular>Owned Variants</Regular>
-      </RowItem>
-    </Row>
-    <Row>
-      <RowItem>
-        <Normal>You own {nft.userInfo.ownedIds.length} variants of this nft</Normal>
-      </RowItem>
-    </Row>
-    <Row>
-      <Variants >
-        {nft.userInfo.ownedIds.map((value) => (
-          <Variant  onClick={() => setSelectedVariant(value) }>
-            {nft.type === 'image' ? (
-              <Small isSelected={value === selectedVariant} src={nft.path} />
-            ) : (
-              <VidDiv>
-                <SmallVid path={nft.path} />
-              </VidDiv>
-            )}
-            <HighlightSmall>{value}</HighlightSmall>
-          </Variant>
-        ))}
-      </Variants>
-    </Row>
-  </TabLeft>
-    <br/>
-    <TabLeft>
-      <DetailsContainer>
-        <DetailFlex>
-          <DetailName>Would you like to transfer?</DetailName>
-          <SecondaryButton onClick={onTransferNft}><OblivionButtonText>Transfer now</OblivionButtonText></SecondaryButton>
-        </DetailFlex>
-      </DetailsContainer>
-    </TabLeft>
-  </div>
+  const variantsTab =
+    <div>
+      {account != null ? (
+          <div>
+            <TabLeft>
+              <Row>
+                <RowItem>
+                  <Regular>Owned Variants</Regular>
+                </RowItem>
+              </Row>
+              <Row>
+                <RowItem>
+                  <Normal>You own {nft.userInfo.ownedIds.length} variants of this nft</Normal>
+                </RowItem>
+              </Row>
+              <Row>
+                <Variants>
+                  {nft.userInfo.ownedIds.map((value) => (
+                      <Variant  onClick={() => setSelectedVariant(value) }>
+                        {nft.type === 'image' ? (
+                            <Small isSelected={value === selectedVariant} src={nft.path} />
+                        ) : (
+                            <VidDiv>
+                              <SmallVid path={nft.path} />
+                            </VidDiv>
+                        )}
+                        <HighlightSmall>{value}</HighlightSmall>
+                      </Variant>
+                  ))}
+                </Variants>
+              </Row>
+            </TabLeft>
+            <br/>
+            {nft.userInfo.ownedIds.length === 0 ? null :
+                <div>
+                  {selectedVariant ? (
+                      <TabLeft>
+                        <DetailsContainer>
+                          <DetailFlex>
+                            <DetailName2>Would you like to transfer # {selectedVariant}?</DetailName2>
+                            <SecondaryButton onClick={onTransferNft}><OblivionButtonText>Transfer now</OblivionButtonText></SecondaryButton>
+                          </DetailFlex>
+                        </DetailsContainer>
+                      </TabLeft>
+                  ) : <TabLeft>
+                    <DetailName3>Click on one of your variants if you would like to transfer it</DetailName3>
+                  </TabLeft>
+                  }
+                </div>
+            }
+          </div>
+      ) : null
+      }
+    </div>
 
   return (
     <>
@@ -312,11 +352,10 @@ const Nfts: React.FC = () => {
             <VidDiv>
               <PreviewVid path={nft.path} />
             </VidDiv>
-          )}]
+          )}
           {!isSingleColumn ? variantsTab : null }
         </Left>
         <Right>
-
           <Title>{nft.name}</Title>
           <Subtle>{nft.description}</Subtle>
           <Subtle>

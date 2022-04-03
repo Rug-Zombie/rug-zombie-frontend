@@ -192,8 +192,49 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
     currentStep = Step.ApproveZombie
   }
 
-  const handleTx = useCallback(async () => {
-    setConfirming(true)
+  // Defining unstake steps
+  unstakeSteps[UnstakeStep.MintNft] = {
+    label: `Mint NFT`,
+    sent: `Minting...`,
+    func: onHarvest,
+    toast: { title: `Minted ${nft.symbol} NFT` },
+  }
+  unstakeSteps[UnstakeStep.Harvest] = {
+    label: `Harvest`,
+    sent: `Harvesting...`,
+    func: onHarvest,
+    toast: { title: `Harvested ZMBE` },
+  }
+  unstakeSteps[UnstakeStep.Unstake] = {
+    label: `Unstake`,
+    sent: `Unstaking...`,
+    func: onUnstake,
+    toast: { title: `Unstaked ZMBE` },
+  }
+  unstakeSteps[UnstakeStep.UnstakeEarly] = {
+    label: `Unstake Early`,
+    sent: `Unstaking...`,
+    func: onUnstakeEarly,
+    toast: { title: `Unstaked ZMBE early` },
+  }
+
+
+  let currentUnstakeStep = UnstakeStep.Unstake
+  if (amount.gt(0)){
+    if ((unstakeAmount.isZero() || unstakeAmount.isNaN())) {
+      currentUnstakeStep = UnstakeStep.Harvest
+    }
+    else if((nftMintDate.lte(now))) {
+      currentUnstakeStep = UnstakeStep.MintNft
+    }
+    else if((nftMintDate.gte(now))) {
+      currentUnstakeStep = UnstakeStep.UnstakeEarly
+    }
+  }
+
+
+  const handleStakeTx = useCallback(async () => {
+    setConfirmingStake(true)
     const step = steps[currentStep]
     step
       .func()
@@ -206,7 +247,53 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
       .catch(() => {
         setConfirming(false)
       })
-  }, [currentStep, steps, toastDefault])
+  }, [currentStep, steps, toastSpawningPools])
+
+  const validUnstakeAmount = amount.minus(unstakeAmount).gte(minimumStake) || amount.minus(unstakeAmount).isZero()
+
+  const handleUnstakeTx = async () => {
+    if(amount.gt(0)){
+      if (!validUnstakeAmount) {
+        toastSpawningPools(
+            'Invalid amount',
+            <FlexColumn>
+              <text>You must leave a minimum of {getFullDisplayBalance(minimumStake)} ZMBE in the spawning pool</text>
+              <FlexRow>
+                <PrimaryStakeButton
+                    onClick={() => {
+                      setUnstakeAmount(amount.minus(minimumStake))
+                    }}
+                >
+                  <PrimaryStakeButtonText>Leave minimum</PrimaryStakeButtonText>
+                </PrimaryStakeButton>
+                <SecondaryStakeButton
+                    onClick={() => {
+                      setUnstakeAmount(amount)
+                    }}
+                >
+                  <SecondaryStakeButtonText>Withdraw max</SecondaryStakeButtonText>
+                </SecondaryStakeButton>
+              </FlexRow>
+            </FlexColumn>,
+        )
+      } else {
+        setConfirmingUnstake(true)
+        const step = unstakeSteps[currentUnstakeStep]
+        step
+            .func()
+            .then((succeeded) => {
+              if (succeeded) {
+                toastSpawningPools(step.toast.title, step.toast.description)
+              }
+              setConfirmingStake(false)
+            })
+            .catch(() => {
+              setConfirmingStake(false)
+            })
+      }
+    }
+
+  }
 
   const changeStakeInput = (e) => {
     setStakeAmount(getDecimalAmount(new BigNumber(e.target.value)))
@@ -222,38 +309,6 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
 
   const maxUnstakeAmount = () => {
     setUnstakeAmount(amount)
-  }
-
-  const withdrawButton = () => {
-    if (amount.gt(0)) {
-      if (nftMintDate.lte(now)) {
-        return (
-          <SecondaryStakeButton onClick={onHarvest}>
-            <SecondaryStakeButtonText>Mint NFT</SecondaryStakeButtonText>
-          </SecondaryStakeButton>
-        )
-      }
-      if (unstakeAmount.isZero() || unstakeAmount.isNaN()) {
-        return (
-          <SecondaryStakeButton onClick={onHarvest}>
-            <SecondaryStakeButtonText>Harvest</SecondaryStakeButtonText>
-          </SecondaryStakeButton>
-        )
-      }
-      if (tokenWithdrawalDate.gt(now)) {
-        return (
-          <SecondaryStakeButton onClick={onUnstakeEarly}>
-            <SecondaryStakeButtonText>Unstake Early</SecondaryStakeButtonText>
-          </SecondaryStakeButton>
-        )
-      }
-    }
-
-    return (
-      <SecondaryStakeButton onClick={onUnstake}>
-        <SecondaryStakeButtonText>Unstake</SecondaryStakeButtonText>
-      </SecondaryStakeButton>
-    )
   }
 
   return (
@@ -291,7 +346,11 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
               {confirming ? steps[currentStep].sent : steps[currentStep].label}
             </PrimaryStakeButtonText>
           </PrimaryStakeButton>
-          {withdrawButton()}
+           <SecondaryStakeButton onClick={handleUnstakeTx}>
+            <SecondaryStakeButtonText>
+              {confirmingUnstake ? unstakeSteps[currentUnstakeStep].sent : unstakeSteps[currentUnstakeStep].label}
+            </SecondaryStakeButtonText>
+           </SecondaryStakeButton>
         </Buttons>
       </StakingContainer>
       <ProgressBar spawningPool={spawningPool} />
