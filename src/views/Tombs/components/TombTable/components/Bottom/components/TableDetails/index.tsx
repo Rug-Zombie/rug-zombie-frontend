@@ -1,6 +1,8 @@
+import ContractLink from 'components/ContractLink'
 import React from 'react'
 import styled from 'styled-components'
 import numeral from 'numeral'
+import { getAddress } from 'utils/addressHelpers'
 import { getFullDisplayBalance } from '../../../../../../../../utils/formatBalance'
 import { Tomb } from '../../../../../../../../state/types'
 import { formatDays } from '../../../../../../../../utils/timerHelpers'
@@ -89,6 +91,7 @@ const Text = styled.span`
 
 const TableDetails: React.FC<TableDetailsProps> = ({ tomb }) => {
   const {
+    lpAddress,
     poolInfo: { allocPoint, withdrawCooldown, nftMintTime, tokenAmount, lpPriceBnb, mintingFee },
     overlay: { legendaryId },
   } = tomb
@@ -123,6 +126,9 @@ const TableDetails: React.FC<TableDetailsProps> = ({ tomb }) => {
           </SubHeaderText>
           <SubHeaderText>
             Tomb TVL: <Text>{numeral(getFullDisplayBalance(tvl)).format('$ (0.00 a)')}</Text>
+          </SubHeaderText>
+          <SubHeaderText>
+            <ContractLink  address={getAddress(lpAddress)} linkText="LP Contract" />
           </SubHeaderText>
         </TombInfo>
         <TombInfo>

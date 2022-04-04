@@ -1,7 +1,9 @@
 /* eslint-disable no-param-reassign */
+import ContractLink from 'components/ContractLink'
 import React from 'react'
 import styled from 'styled-components'
 import numeral from 'numeral'
+import { getDrFrankensteinAddress } from 'utils/addressHelpers'
 import { BIG_ZERO } from '../../../../utils/bigNumber'
 import { getBalanceNumber } from '../../../../utils/formatBalance'
 import { useGetGraveByPid, useGetGraves, useGetZombiePriceUsd } from '../../../../state/hooks'
@@ -111,6 +113,7 @@ const HeaderCard: React.FC = () => {
           <InfoCardTitle>Graves</InfoCardTitle>
           <InfoCardSubHeader>
             Use your dead tokens to unlock graves then stake ZMBE to earn Zombie & NFT rewards.
+            <ContractLink address={getDrFrankensteinAddress()} />
           </InfoCardSubHeader>
         </InfoCardHeader>
         <InfoCardContent>

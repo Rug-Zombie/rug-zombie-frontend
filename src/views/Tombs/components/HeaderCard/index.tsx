@@ -1,7 +1,9 @@
 /* eslint-disable no-param-reassign */
+import ContractLink from 'components/ContractLink'
 import React from 'react'
 import styled from 'styled-components'
 import numeral from 'numeral'
+import { getDrFrankensteinAddress } from 'utils/addressHelpers'
 import { useGetBnbPriceUsd, useGetTombs } from '../../../../state/hooks'
 import { getBalanceNumber } from '../../../../utils/formatBalance'
 import { BIG_ZERO } from '../../../../utils/bigNumber'
@@ -107,6 +109,7 @@ const HeaderCard: React.FC = () => {
           <InfoCardSubHeader>
             Provide liquidity to roll for various NFTs. Increase your stake in the tombs to increase your chance at
             rolling rare NFTs.
+            <ContractLink address={getDrFrankensteinAddress()} />
           </InfoCardSubHeader>
         </InfoCardHeader>
         <InfoCardContent>
