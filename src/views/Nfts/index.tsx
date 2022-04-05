@@ -64,6 +64,7 @@ const Row = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  max-width: 100%;
 `
 
 const RowItem = styled.div`
@@ -108,7 +109,7 @@ const Left = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 100%;
+    max-width: 90vh;
   }
 `
 
@@ -146,7 +147,7 @@ const TabRight = styled.div`
 
 const TabLeft = styled(TabRight)`
   margin: auto;
-  border-color: red;
+  max-width: 90vw;
 `
 
 const Variant = styled.div`
@@ -161,7 +162,6 @@ const Variants = styled.div`
   max-width: 90%;
   overflow-x: scroll;
   margin: auto;
-
 `
 
 const DetailName = styled.div`

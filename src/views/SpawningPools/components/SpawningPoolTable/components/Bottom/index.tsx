@@ -149,7 +149,7 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
   const {
     address,
     nftId,
-    userInfo: { zombieBalance, paidUnlockFee, amount, zombieAllowance, nftMintDate, tokenWithdrawalDate },
+    userInfo: { zombieBalance, paidUnlockFee, amount, zombieAllowance, nftMintDate },
     poolInfo: { unlockFee, minimumStake },
   } = spawningPool
   const nft = useGetNftById(nftId)
