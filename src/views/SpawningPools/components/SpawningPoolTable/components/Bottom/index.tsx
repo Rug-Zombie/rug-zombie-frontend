@@ -149,7 +149,7 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
   const {
     address,
     nftId,
-    userInfo: { zombieBalance, paidUnlockFee, amount, zombieAllowance, nftMintDate },
+    userInfo: { zombieBalance, paidUnlockFee, amount, zombieAllowance, nftMintDate, tokenWithdrawalDate },
     poolInfo: { unlockFee, minimumStake },
   } = spawningPool
   const nft = useGetNftById(nftId)
@@ -259,7 +259,7 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
     else if((nftMintDate.lte(now))) {
       currentUnstakeStep = UnstakeStep.MintNft
     }
-    else if((nftMintDate.gte(now))) {
+    else if((tokenWithdrawalDate.gte(now))) {
       currentUnstakeStep = UnstakeStep.UnstakeEarly
     }
   }
