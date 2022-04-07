@@ -1,12 +1,11 @@
-export interface Address {
-  97?: string
-  56: string
+export enum ChainId {
+  BSC = 56,
+  BSCTestnet = 97,
 }
+export type ChainIdMapping<T> = { [key in ChainId]: T }
 
-export interface Id {
-  97?: number
-  56: number
-}
+export type Address = ChainIdMapping<string>
+export type Id = ChainIdMapping<number>
 
 export interface AnnouncementSubject {
   announcementIds: number[],
