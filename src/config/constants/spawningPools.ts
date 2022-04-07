@@ -34,6 +34,7 @@ const spawningPools: SpawningPoolConfig[] = [
     rewardToken: tokens.punksv2,
     dex: Dex.PCS_V2,
     isNew: true,
+    announcementIds: [131],
   },
   {
     id: 19,
@@ -66,6 +67,7 @@ const spawningPools: SpawningPoolConfig[] = [
     },
     rewardToken: tokens.frt,
     dex: Dex.PCS_V2,
+    announcementIds: [125],
   },
   {
     id: 18,
@@ -103,6 +105,7 @@ const spawningPools: SpawningPoolConfig[] = [
     rewardToken: tokens.spa,
     dex: Dex.PCS_V2,
     color: 'orange',
+    announcementIds: [126],
   },
   {
     id: 17,
@@ -141,6 +144,7 @@ const spawningPools: SpawningPoolConfig[] = [
     dex: Dex.APESWAP,
     color: 'orange',
     unknownPrice: true,
+    announcementIds: [121],
   },
   {
     id: 16,
@@ -174,6 +178,7 @@ const spawningPools: SpawningPoolConfig[] = [
     rewardToken: tokens.fcf,
     dex: Dex.PCS_V2,
     color: 'brown',
+    announcementIds: [120],
   },
   {
     id: 15,
@@ -206,6 +211,7 @@ const spawningPools: SpawningPoolConfig[] = [
     },
     rewardToken: tokens.l1ghtv2,
     dex: Dex.PCS_V2,
+    announcementIds: [110],
   },
   {
     id: 14,
@@ -239,6 +245,7 @@ const spawningPools: SpawningPoolConfig[] = [
     rewardToken: tokens.punks,
     dex: Dex.PCS_V2,
     color: 'silver',
+    announcementIds: [109],
   },
   {
     id: 13,
@@ -272,6 +279,7 @@ const spawningPools: SpawningPoolConfig[] = [
     rewardToken: tokens.byg,
     dex: Dex.PCS_V2,
     color: 'silver',
+    announcementIds: [101],
   },
   {
     id: 12,
@@ -305,6 +313,8 @@ const spawningPools: SpawningPoolConfig[] = [
     rewardToken: tokens.if1,
     dex: Dex.PCS_V2,
     color: 'grey',
+    // TODO
+    announcementIds: [],
   },
   {
     id: 11,
@@ -337,6 +347,7 @@ const spawningPools: SpawningPoolConfig[] = [
     rewardToken: tokens.squidstake,
     dex: Dex.PCS_V2,
     color: 'pink',
+    announcementIds: [99],
   },
   {
     id: 10,
@@ -370,6 +381,7 @@ const spawningPools: SpawningPoolConfig[] = [
     rewardToken: tokens.fcf,
     dex: Dex.PCS_V2,
     color: 'brown',
+    announcementIds: [78],
   },
   {
     id: 9,
@@ -403,6 +415,7 @@ const spawningPools: SpawningPoolConfig[] = [
     rewardToken: tokens.fins,
     dex: Dex.AUTOSHARK,
     color: '#9400d3',
+    announcementIds: [72],
   },
   {
     id: 8,
@@ -436,6 +449,7 @@ const spawningPools: SpawningPoolConfig[] = [
     rewardToken: tokens.bingus,
     dex: Dex.APESWAP,
     color: '#C4A484',
+    announcementIds: [71],
   },
   {
     id: 7,
@@ -469,6 +483,7 @@ const spawningPools: SpawningPoolConfig[] = [
     rewardToken: tokens.plx,
     dex: Dex.PCS_V2,
     color: 'violet',
+    announcementIds: [70],
   },
   {
     id: 6,
@@ -502,6 +517,7 @@ const spawningPools: SpawningPoolConfig[] = [
     rewardToken: tokens.atmssft,
     dex: Dex.PCS_V2,
     color: 'red',
+    announcementIds: [69],
   },
   {
     id: 5,
@@ -539,6 +555,7 @@ const spawningPools: SpawningPoolConfig[] = [
     rewardToken: tokens.mkc,
     dex: Dex.PCS_V2,
     color: 'red',
+    announcementIds: [67],
   },
   {
     id: 4,
@@ -568,6 +585,7 @@ const spawningPools: SpawningPoolConfig[] = [
     rewardToken: tokens.wnow,
     dex: Dex.PCS_V2,
     color: 'rgb(0, 150, 255)',
+    announcementIds: [65],
   },
   {
     id: 3,
@@ -596,6 +614,7 @@ const spawningPools: SpawningPoolConfig[] = [
     },
     rewardToken: tokens.nalis,
     dex: Dex.APESWAP,
+    announcementIds: [62],
   },
   {
     id: 2,
@@ -624,6 +643,7 @@ const spawningPools: SpawningPoolConfig[] = [
     },
     rewardToken: tokens.mainst,
     dex: Dex.PCS_V2,
+    announcementIds: [54],
   },
   {
     id: 1,
@@ -660,6 +680,7 @@ const spawningPools: SpawningPoolConfig[] = [
     },
     rewardToken: tokens.euler,
     dex: Dex.PCS_V2,
+    announcementIds: [48],
   },
   {
     id: 0,
@@ -697,6 +718,7 @@ const spawningPools: SpawningPoolConfig[] = [
     rewardToken: tokens.gfi,
     dex: Dex.PCS_V2,
     color: 'rgb(0, 150, 255)',
+    announcementIds: [38],
   },
 ]
 
