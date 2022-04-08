@@ -1560,6 +1560,21 @@ const nfts: Nft[] = [
     rarity: 'Special',
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 100,
+    name: 'Photographic Memory',
+    symbol: 'MEMORY',
+    description: "It's not called the Zombie Walk, it's called the Zombie Race.",
+    address: {
+      56: '0xC9cB50678DDc8c2a8D13322ec1df854A7aaC2476',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmcUuCj9A9eUXf9tQ6Qk1iiWuZEz3HKjjCMidy9uDsw4Ae',
+    type: 'image',
+    rarity: 'Uncommon',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts
