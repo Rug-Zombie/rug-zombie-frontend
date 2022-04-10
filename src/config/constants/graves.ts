@@ -126,6 +126,7 @@ const graves: GraveConfig[] = [
     rug: tokens.babe,
     nftConverterPid: 5,
     isNew: true,
+    endDate: 1651982400,
     announcementIds: [69],
   },
   {
@@ -139,6 +140,7 @@ const graves: GraveConfig[] = [
     depositNftId: 33,
     nftConverterPid: 7,
     isNew: true,
+    endDate: 1651982400,
     announcementIds: [67],
   },
   {
@@ -152,6 +154,7 @@ const graves: GraveConfig[] = [
     depositNftId: 64,
     nftConverterPid: 6,
     isNew: true,
+    endDate: 1651982400,
     announcementIds: [99],
   },
   {
