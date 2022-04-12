@@ -3,6 +3,7 @@ import { useHistory } from 'react-router'
 import logo from 'images/Logo.svg'
 import telegram from 'images/footer/Telegram.svg'
 import twitter from 'images/footer/Twitter.svg'
+import discord from 'images/footer/Discord.svg'
 import config, { Type } from './config'
 
 import {
@@ -60,6 +61,9 @@ const Footer: React.FC = () => {
           </FooterIconLink>
           <FooterIconLink href="https://twitter.com/rugzombie" target="_blank" rel="noopener noreferrer">
             <FooterIcon src={twitter} alt="Twitter Icon" />
+          </FooterIconLink>
+          <FooterIconLink href="https://discord.gg/TK8uueH4wQ" target="_blank" rel="noopener noreferrer">
+            <FooterIcon src={discord} alt="Discord Icon" />
           </FooterIconLink>
         </FooterIcons>
       </FooterContent>
