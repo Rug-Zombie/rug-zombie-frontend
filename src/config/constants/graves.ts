@@ -76,6 +76,19 @@ const graves: GraveConfig[] = [
   },
   {
     pid: {
+      56: 58,
+      97: 1,
+    },
+    name: 'Axie Infinity Rare',
+    nftId: 101,
+    rug: tokens.axs,
+    isNew: true,
+    isFeatured: true,
+    rugDex: Dex.PCS_V2,
+    announcementIds: [134],
+  },
+  {
+    pid: {
       56: 57,
       97: 1,
     },
@@ -102,7 +115,6 @@ const graves: GraveConfig[] = [
     isFeatured: true,
     announcementIds: [133],
   },
-
   {
     pid: {
       56: 55,
@@ -178,7 +190,6 @@ const graves: GraveConfig[] = [
     nftId: 89,
     rug: tokens.cx,
     rugDex: Dex.PCS_V2,
-    isNew: true,
     announcementIds: [127],
   },
   {
@@ -190,7 +201,6 @@ const graves: GraveConfig[] = [
     nftId: 88,
     rug: tokens.cx,
     rugDex: Dex.PCS_V2,
-    isNew: true,
     announcementIds: [127],
   },
   {

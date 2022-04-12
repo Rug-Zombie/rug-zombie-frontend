@@ -31,6 +31,16 @@ const tokens: { [key: string]: Token } = {
     projectLink: 'https://rugzombie.io/',
     geckoId: 'rugzombie',
   },
+  axs: {
+    symbol: 'AXS',
+    address: {
+      56: '0x715d400f88c167884bbcc41c5fea407ed4d2f8a0',
+      97: '0x715d400f88c167884bbcc41c5fea407ed4d2f8a0',
+    },
+    decimals: 18,
+    projectLink: 'https://axieinfinity.com/',
+    tokenLogo: 'https://assets.coingecko.com/coins/images/13029/small/axie_infinity_logo.png?1604471082',
+  },
   spa: {
     symbol: 'SPA',
     address: {

@@ -1575,6 +1575,21 @@ const nfts: Nft[] = [
     rarity: 'Uncommon',
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 101,
+    name: 'Smooth Smooth Love',
+    symbol: 'SLOVE',
+    description: "To the spirit in the sky; That's where you're gonna go when you die.",
+    address: {
+      56: '0xE5594628AcB264686D27788fbaC78a2371a9f350',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmSpuxcTm64dWq54UKFPiF48qkygG3HAnadxBiy8pFP5nB',
+    type: 'image',
+    rarity: 'Rare',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts
