@@ -252,6 +252,10 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
   }
 
   const handleTx = useCallback(async () => {
+    if ([Step.StakeLp, Step.Staked].includes(currentStep) && stakeAmount.isNaN()) {
+      toastTombs('Please enter a stake amount')
+      return
+    }
     setConfirming(true)
     const step = steps[currentStep]
     step
@@ -265,7 +269,7 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
       .catch(() => {
         setConfirming(false)
       })
-  }, [currentStep, steps, toastTombs])
+  }, [Step.StakeLp, Step.Staked, currentStep, stakeAmount, steps, toastTombs])
 
   enum UnstakingStep {
     StartMinting,

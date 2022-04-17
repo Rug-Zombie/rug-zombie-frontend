@@ -266,6 +266,10 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
 
 
   const handleStakeTx = useCallback(async () => {
+    if ([Step.StakeZombie, Step.Staked].includes(currentStep) && stakeAmount.isNaN()) {
+      toastDefault('Please enter a stake amount')
+      return
+    }
     setConfirmingStake(true)
     const step = steps[currentStep]
     step
@@ -279,7 +283,7 @@ const Bottom: React.FC<BottomProps> = ({ spawningPool }) => {
       .catch(() => {
         setConfirmingStake(false)
       })
-  }, [currentStep, steps, toastDefault])
+  }, [Step.StakeZombie, Step.Staked, currentStep, stakeAmount, steps, toastDefault])
 
   const validUnstakeAmount = amount.minus(unstakeAmount).gte(minimumStake) || amount.minus(unstakeAmount).isZero()
 
