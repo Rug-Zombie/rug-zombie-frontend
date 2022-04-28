@@ -35,6 +35,7 @@ import { fetchNftPublicDataAsync } from './state/nfts'
 import Nfts from './views/Nfts'
 import BurnGraves from './views/BurnGraves'
 import { fetchPricesAsync } from './state/prices'
+import WhalePools from "./views/WhalePools";
 
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page
@@ -192,6 +193,14 @@ const App: React.FC = () => {
               <TopMenu />
               <AppContainer>
                 <BurnGraves />
+              </AppContainer>
+            </>
+          </Route>
+          <Route exact path={routes.WHALE_POOLS}>
+            <>
+              <TopMenu />
+              <AppContainer>
+                <WhalePools />
               </AppContainer>
             </>
           </Route>

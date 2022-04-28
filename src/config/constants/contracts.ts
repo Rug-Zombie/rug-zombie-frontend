@@ -80,4 +80,8 @@ export default {
     56: '0x07C953A44Dc83EfeE503C2Df43eA216A880C2B35',
     97: '0x5e0B065De8aeDfF0ef509c8cA77d0eebD6c5C16b',
   },
+  whalePool: {
+    56: '',
+    97: '0xd93a10aB33bbD562BF0b3E4E58BB1ccd92a5DC8B',
+  },
 }

@@ -21,6 +21,7 @@ import {
   getSharkpoolContract,
   getDrBurnensteinContract,
   getRugMarketContract,
+  getWhalePoolContract,
 } from 'utils/contractHelpers'
 
 /**
@@ -128,4 +129,9 @@ export const useDrBurnenstein = () => {
 export const useRugMarket = () => {
   const web3 = useWeb3()
   return useMemo(() => getRugMarketContract(web3), [web3])
+}
+
+export const useWhalePoolContract = () => {
+  const web3 = useWeb3()
+  return useMemo(() => getWhalePoolContract(web3), [web3])
 }
