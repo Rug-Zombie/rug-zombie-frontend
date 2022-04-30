@@ -619,7 +619,7 @@ const nfts: Nft[] = [
     description: 'I try all things, I achieve what I can.',
     address: {
       56: '0xADEbC6fe47Baf315bfbD66F8Ce515fBc78Bf42EB',
-      97: '0x45E5DF371E7653Fbe9713DD49c6E264a0798819f',
+      97: '0xd01f05F73B383d3AE49005cee17Cc1c3BBD06fDE',
     },
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/QmQnj8i4k2kwoboNN2TMoJ5ugH1Mxav4r8zAsz6PmXvP7P',

@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import ProgressCircle from './components/ProgressCircle'
 import ProgressLine from './components/ProgressLine'
 import ProgressText from './components/ProgressText'
-import { Grave } from '../../../../../../../../state/types'
 import { getId } from '../../../../../../../../utils'
 
 const ProgressFlex = styled.div`
@@ -30,55 +29,35 @@ const TextFlex = styled.div`
 `
 
 interface StakingProgressBarProps {
-  grave: Grave
+  isApproved: boolean
+  isDeposited: boolean
+  mintRequested: boolean
+  mintFinished: boolean
 }
 
 enum Step {
-  ApproveRug,
-  DepositRug,
-  UnlockGrave,
-  ApproveZombie,
-  StakeZombie,
-  Staked,
+  ApproveWhaleNft,
+  DepositWhaleNft,
+  RequestMint,
+  MintFinished,
 }
 
-const ProgressBar: React.FC<StakingProgressBarProps> = ({ grave }) => {
-  const {
-    pid,
-    depositNftId,
-    userInfo: { rugDeposited, rugAllowance, zombieAllowance, paidUnlockFee, amount },
-  } = grave
-  const steps = ['Approve rug', 'Deposit rug', 'Unlock grave', 'Stake ZMBE']
-  if (depositNftId) {
-    steps[Step.ApproveRug] = 'Convert Nft'
-    steps[Step.DepositRug] = 'Deposit Nft'
-  }
+const WhalePoolProgressBar: React.FC<StakingProgressBarProps> = ({ isApproved, isDeposited, mintRequested, mintFinished }) => {
 
-  const isFirstGrave = getId(pid) === 22
-  if (isFirstGrave) {
-    steps[Step.ApproveRug] = 'Approve ZMBE'
-    steps[Step.DepositRug] = 'Burn ZMBE'
-  }
+  const steps = ['Approve Whale NFT', 'Deposit Whale NFT', 'Request Mint', 'Claim NFT']
 
-  let currentStep = Step.ApproveRug
-  if (rugAllowance.gt(0)) {
-    currentStep = Step.DepositRug
+  let currentStep = Step.ApproveWhaleNft
+  if (isApproved) {
+    currentStep = Step.ApproveWhaleNft
   }
-  if (rugDeposited.gt(0)) {
-    currentStep = Step.UnlockGrave
+  if (isApproved && isDeposited) {
+    currentStep = Step.DepositWhaleNft
   }
-  if (paidUnlockFee) {
-    currentStep = Step.ApproveZombie
+  if (isApproved && isDeposited && mintRequested) {
+    currentStep = Step.RequestMint
   }
-  // if ((zombieAllowance.gt(0) && paidUnlockFee) || isFirstGrave) {
-  //   steps.splice(Step.ApproveZombie, 1)
-  //   // currentStep -= 1
-  // }
-  if (amount.gt(0)) {
-    currentStep = Step.Staked
-  }
-  if (zombieAllowance.isZero() && amount.gt(0)) {
-    currentStep = Step.ApproveZombie
+  if (isApproved && isDeposited && mintRequested && mintFinished) {
+    currentStep = Step.MintFinished
   }
 
   return (
@@ -102,4 +81,4 @@ const ProgressBar: React.FC<StakingProgressBarProps> = ({ grave }) => {
   )
 }
 
-export default ProgressBar
+export default WhalePoolProgressBar

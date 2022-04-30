@@ -7,6 +7,7 @@ import Page from '../../components/layout/Page'
 import HeaderCard from './components/HeaderCard'
 import Footer from '../../components/Footer'
 import WhalePoolCard from "./components/WhalePoolCard";
+import {useWhalePoolContract} from "../../hooks/useContract";
 
 const WhalePoolPage = styled(Page)`
   min-width: 80vw;
@@ -51,18 +52,6 @@ const DetailsColumn = styled.div`
 
 const WhalePools: React.FC = () => {
 
-    const _pool: WhalePool = {
-        nftId: 39,
-        isApproved: false,
-        isStaked: false,
-        mintRequested: false,
-        mintingTime: 10000,
-        mintOver: false,
-        isNew: true,
-        mintingFeeBNB: new BigNumber(0),
-        endDate: 4564812
-    }
-
     return (
         <>
             <WhalePoolPage>
@@ -71,7 +60,7 @@ const WhalePools: React.FC = () => {
                         <HeaderCard/>
                     </Header>
                     <DetailsColumn>
-                        <WhalePoolCard pool={_pool}/>
+                        <WhalePoolCard/>
                     </DetailsColumn>
                 </Row>
             </WhalePoolPage>

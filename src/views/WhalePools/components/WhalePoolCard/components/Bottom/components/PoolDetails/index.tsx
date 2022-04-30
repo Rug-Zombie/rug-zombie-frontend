@@ -62,10 +62,10 @@ const HeaderText = styled.div`
 `
 
 interface TableDetailsProps {
-    pool: WhalePool
+    nftId: number
 }
 
-const PoolDetails: React.FC<TableDetailsProps> = ({pool}) => {
+const PoolDetails: React.FC<TableDetailsProps> = ({nftId}) => {
 
     const history = useHistory()
     const imageOnErrorHandler = (event: React.SyntheticEvent<HTMLImageElement, Event>) => {
@@ -75,7 +75,7 @@ const PoolDetails: React.FC<TableDetailsProps> = ({pool}) => {
     }
 
     const linkToNft = () => {
-        history.push(`/nfts/${pool.nftId}`)
+        history.push(`/nfts/${nftId}`)
     }
 
     return (
@@ -83,15 +83,15 @@ const PoolDetails: React.FC<TableDetailsProps> = ({pool}) => {
             <HeaderText>Potential rewards</HeaderText>
             <NftImageContainer>
                 {
-                    whalePoolRewardNfts.map(nft => {
+                    whalePoolRewardNfts.map((nft, index) => {
                         if (nft.type === 'video') {
                             return (
-                                <NftVideo onClick={linkToNft} autoPlay loop muted>
+                                <NftVideo key={nft.id} onClick={linkToNft} autoPlay loop muted>
                                     <source src={nft.path} type="video/webm"/>
                                 </NftVideo>
                             )
                         }
-                        return (<NftImage onClick={linkToNft} src={nft.path} onError={imageOnErrorHandler}/>)
+                        return (<NftImage key={nft.id} onClick={linkToNft} src={nft.path} onError={imageOnErrorHandler}/>)
                     })
                 }
             </NftImageContainer>
