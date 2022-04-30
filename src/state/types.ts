@@ -40,6 +40,20 @@ export interface Grave extends GraveConfig {
   poolInfo: GravePoolInfo
 }
 
+export interface WhalePool {
+  nftId: 39 // nft id for whale nfts
+  stakedNftId: number
+  mintingFeeUSD: number
+  isApproved: boolean
+  isStaked: boolean
+  isMintable: boolean
+  mintRequested: boolean
+  mintingTime: number
+  mintOver: boolean
+  isNew: boolean
+  endDate: number
+}
+
 export interface TombUserInfo {
   tokenWithdrawalDate: BigNumber
   nftMintTime: BigNumber

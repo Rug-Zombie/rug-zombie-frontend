@@ -21,15 +21,8 @@ const Separator = styled.div`
 const StakingContainer = styled.div`
   width: 100%;
   display: flex;
-  justify-content: stretch;
+  justify-content: center;
   flex-wrap: wrap;
-`
-
-const Inputs = styled.div`
-  display: flex;
-  flex-grow: 1;
-  justify-content: space-evenly;
-  margin: 10px 0 0 0;
 `
 
 const Buttons = styled.div`
@@ -92,9 +85,10 @@ const BalanceText = styled.button`
   background: none;
   border: none;
   width: 150px;
-
-  &:hover {
-    cursor: pointer;
+  margin: 30px 0px 0px 30px;
+  
+  @media (max-width: 723px) {
+    margin: 10px 0 0 0;
   }
 `
 
@@ -113,6 +107,8 @@ interface BottomProps {
     claimPrize: boolean,
     mintingTime: BigNumber,
     mintFee: BigNumber,
+    updateMintRequested: () => void
+    updateMintingTime: () => void
 }
 
 const Bottom: React.FC<BottomProps> = (
@@ -125,7 +121,9 @@ const Bottom: React.FC<BottomProps> = (
         mintRequested,
         claimPrize,
         mintingTime,
-        mintFee
+        mintFee,
+        updateMintRequested,
+        updateMintingTime,
     }) => {
 
     const {toastGraves} = useToast()
@@ -172,8 +170,10 @@ const Bottom: React.FC<BottomProps> = (
                 .then(res => {
                     setNftIsStaked(true)
                     setStakedId(selectedTokenId)
+                    toastGraves(stakingSteps[currentStep.current].toast.title)
                     currentStep.current = StakingStep.CanRequestMint
                     setConfirmingStake(false)
+                    updateMintingTime()
                 })
         }
     }
@@ -184,8 +184,10 @@ const Bottom: React.FC<BottomProps> = (
             whalePoolContract.methods.startMinting().send({from: account(), value: mintFee})
                 .then(res => {
                     setMintInProgress(true)
+                    toastGraves(stakingSteps[currentStep.current].toast.title)
                     currentStep.current = StakingStep.MintRequested
                     setConfirmingStake(false)
+                    updateMintRequested()
                 })
         } else {
             toastGraves("Mint time not passed yet.")
@@ -200,8 +202,23 @@ const Bottom: React.FC<BottomProps> = (
         if (nftIsStaked && claimPrize) {
             whalePoolContract.methods.finishMinting().send({from: account()})
                 .then(res => {
-                    console.log(res)
-                    currentStep.current = StakingStep.CanRequestMint
+                    toastGraves(stakingSteps[currentStep.current].toast.title)
+                    currentStep.current = StakingStep.Unstake
+                })
+        }
+    }
+
+    const unstakeWhaleNft = () => {
+        if (nftIsStaked) {
+            whalePoolContract.methods.unstake().send({from: account()})
+                .then(res => {
+                    setNftIsApproved(false)
+                    setNftIsStaked(false)
+                    setMintInProgress(false)
+                    setUserCanRequestMint(false)
+                    setStakedId(0)
+                    toastGraves(stakingSteps[currentStep.current].toast.title)
+                    currentStep.current = StakingStep.ApproveWhaleNft
                 })
         }
     }
@@ -212,6 +229,7 @@ const Bottom: React.FC<BottomProps> = (
         CanRequestMint,
         MintRequested,
         ClaimPrize,
+        Unstake,
     }
 
     const currentStep = useRef(StakingStep.ApproveWhaleNft)
@@ -259,7 +277,7 @@ const Bottom: React.FC<BottomProps> = (
         toast: {title: `Approved`},
     }
     stakingSteps[StakingStep.DepositWhaleNft] = {
-        label: `Deposit whale NFT`,
+        label: `Deposit Approved Whale`,
         sent: `Depositing...`,
         func: onDepositNft,
         toast: {title: `Deposited`},
@@ -271,7 +289,7 @@ const Bottom: React.FC<BottomProps> = (
         toast: {title: `Mint Requested`},
     }
     stakingSteps[StakingStep.MintRequested] = {
-        label: `Request mint`,
+        label: `Mint Requested`,
         sent: `Requesting...`,
         func: showMintInProgress,
         toast: {title: `Mint Requested`},
@@ -282,52 +300,27 @@ const Bottom: React.FC<BottomProps> = (
         func: finishMint,
         toast: {title: `Prize claimed successfully`},
     }
-
-    const unstakeWhaleNft = () => {
-        if (nftIsStaked) {
-            whalePoolContract.methods.unstake().send({from: account()})
-                .then(res => {
-                    console.log(res, ' < unstaked')
-                })
-        }
-    }
-
-    const unstakeEarly = () => {
-        if (nftIsStaked) {
-            whalePoolContract.methods.emergencyUnstake().send({from: account()})
-                .then(res => {
-                    console.log(res, ' < unstaked')
-                })
-        }
-    }
-
-    enum UnstakingStep {
-        Unstake,
-        UnstakeEarly,
-    }
-
-    const currentUnstakingStep = (nftIsStaked && mintFinished) ? UnstakingStep.Unstake : UnstakingStep.UnstakeEarly
-
-    unstakingSteps[UnstakingStep.Unstake] = {
-        label: `Unstake`,
+    stakingSteps[StakingStep.Unstake] = {
+        label: `Unstake Whale NFT`,
         sent: `Unstaking...`,
         func: unstakeWhaleNft,
         toast: {title: `Unstaked successfully`},
     }
 
-    unstakingSteps[UnstakingStep.UnstakeEarly] = {
-        label: `Unstake Early`,
-        sent: `Unstaking...`,
-        func: unstakeEarly,
-        toast: {title: `Unstaked successfully`},
+    const unstakeEarly = () => {
+        if (nftIsStaked) {
+            setConfirmingUnstake(true)
+            whalePoolContract.methods.emergencyUnstake().send({from: account()})
+                .then(res => {
+                    setConfirmingUnstake(false)
+                    toastGraves("Unstaked successfully")
+                })
+        }
     }
+
 
     const handleTx = () => {
         stakingSteps[currentStep.current].func()
-    }
-
-    const handleUnstakeTx = () => {
-        unstakingSteps[currentUnstakingStep].func()
     }
 
     return (
@@ -343,11 +336,9 @@ const Bottom: React.FC<BottomProps> = (
                             {confirmingStake ? stakingSteps[currentStep.current].sent : stakingSteps[currentStep.current].label}
                         </PrimaryStakeButtonText>
                     </PrimaryStakeButton>
-                    <SecondaryStakeButton onClick={handleUnstakeTx} disabled={!isStaked}>
+                    <SecondaryStakeButton onClick={unstakeEarly} disabled={!isStaked}>
                         <SecondaryStakeButtonText>
-                            {confirmingUnstake
-                                ? unstakingSteps[currentUnstakingStep].sent
-                                : unstakingSteps[currentUnstakingStep].label}
+                            {confirmingUnstake ? 'Confirming Unstake...' : 'Unstake Early'}
                         </SecondaryStakeButtonText>
                     </SecondaryStakeButton>
                 </Buttons>

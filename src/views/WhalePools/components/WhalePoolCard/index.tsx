@@ -122,6 +122,15 @@ const WhalePoolCard: React.FC = () => {
         }
     }, [account, whalePoolContract.methods, isStaked])
 
+    const updateMintingTime = () => {
+        updateUserNftMintingTime()
+    }
+
+    const updateMinRequested = () => {
+        console.log('function called')
+        setMintRequested(true)
+    }
+
     useEffect(() => {
         getDepositNftId()
         getMintTime()
@@ -164,6 +173,8 @@ const WhalePoolCard: React.FC = () => {
                         mintRequested={mintRequested}
                         claimPrize={claimPrize}
                         mintFee={mintFeeBNB}
+                        updateMintRequested={updateMinRequested}
+                        updateMintingTime={updateMintingTime}
                     /> : null}
             </DetailsCard>
             <Shadow/>

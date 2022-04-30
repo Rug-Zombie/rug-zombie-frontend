@@ -1,23 +1,36 @@
 import React from 'react'
 import styled from 'styled-components'
 import {useHistory} from 'react-router'
-import {WhalePool} from '../../../../../../../../state/types'
+import {Swiper, SwiperSlide} from 'swiper/react'
 import whalePoolRewardNfts from "../../../../../../../../config/constants/whalePoolRewardNfts";
 
+const StyledSwiper = styled.div`
+  .swiper-wrapper {
+    height: 100%;
+    align-items: center;
+    display: flex;
+  }
+
+  .swiper-slide {
+    width: 400px;
+    margin-bottom: 20px;
+  }
+`
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  flex-direction: column;
+  //flex-direction: column;
 `
 
 const NftImageContainer = styled.div`
   margin: 25px 0 15px 0;
   border-radius: 10px;
-  width: 100%;
+  max-width: 400px;
+  overflow-x: scroll;
   display: flex;
-  justify-content: space-around;
-  
+  justify-content: center;
+
   @media only screen and (max-width: 412px) {
     flex-direction: column;
     justify-content: center;
@@ -30,7 +43,8 @@ const NftImage = styled.img`
   height: 150px;
   object-fit: cover;
   border-radius: 10px;
-  
+  cursor: pointer;
+
   @media only screen and (max-width: 412px) {
     max-width: 250px;
     align-self: center;
@@ -45,20 +59,29 @@ const NftVideo = styled.video`
   object-fit: cover;
   border-radius: 10px;
   @media only screen and (max-width: 412px) {
-    max-width: 250px;
+    max-width: 150px;
     align-self: center;
     margin-top: 10px;
   }
 `
 
-const HeaderText = styled.div`
-  margin-top: 10px;
+const SubHeaderText = styled.p`
   text-align: left;
-  font: normal normal normal 16px/30px Poppins;
+  font: normal normal normal 14px/21px Poppins;
   color: #ffffff;
-  width: 100%;
+  word-break: break-all;
+`
+
+const SwiperSlideContainer = styled.div`
   display: flex;
   justify-content: center;
+  flex-direction: row;
+`
+
+const SwiperSlideContainerText = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
 `
 
 interface TableDetailsProps {
@@ -80,20 +103,55 @@ const PoolDetails: React.FC<TableDetailsProps> = ({nftId}) => {
 
     return (
         <Container>
-            <HeaderText>Potential rewards</HeaderText>
             <NftImageContainer>
-                {
-                    whalePoolRewardNfts.map((nft, index) => {
-                        if (nft.type === 'video') {
-                            return (
-                                <NftVideo key={nft.id} onClick={linkToNft} autoPlay loop muted>
-                                    <source src={nft.path} type="video/webm"/>
-                                </NftVideo>
-                            )
+                <StyledSwiper>
+                    <Swiper
+                        initialSlide={1}
+                        spaceBetween={75}
+                        slidesPerView="auto"
+                        freeMode
+                        freeModeSticky
+                        centeredSlides
+                        mousewheel
+                        keyboard
+                        resizeObserver
+                    >
+                        {
+                            whalePoolRewardNfts.map((nft, index) => {
+                                if (nft.type === 'video') {
+                                    return (
+                                        <>
+                                            <SwiperSlide>
+                                                <SwiperSlideContainer>
+                                                    <NftVideo key={nft.id} onClick={linkToNft} autoPlay loop muted>
+                                                        <source src={nft.path} type="video/webm"/>
+                                                    </NftVideo>
+                                                    <SwiperSlideContainerText>
+                                                        <SubHeaderText>{nft.name}</SubHeaderText><br/>
+                                                        <SubHeaderText>{nft.description}</SubHeaderText>
+                                                    </SwiperSlideContainerText>
+                                                </SwiperSlideContainer>
+                                            </SwiperSlide>
+                                        </>
+                                    )
+                                }
+                                return (
+                                    <>
+                                        <SwiperSlide>
+                                            <SwiperSlideContainer>
+                                                <NftImage key={nft.id} onClick={linkToNft} src={nft.path} onError={imageOnErrorHandler}/>
+                                                <SwiperSlideContainerText>
+                                                    <SubHeaderText>{nft.name}</SubHeaderText><br/>
+                                                    <SubHeaderText>{nft.description}</SubHeaderText>
+                                                </SwiperSlideContainerText>
+                                            </SwiperSlideContainer>
+                                        </SwiperSlide>
+                                    </>
+                                )
+                            })
                         }
-                        return (<NftImage key={nft.id} onClick={linkToNft} src={nft.path} onError={imageOnErrorHandler}/>)
-                    })
-                }
+                    </Swiper>
+                </StyledSwiper>
             </NftImageContainer>
         </Container>
     )

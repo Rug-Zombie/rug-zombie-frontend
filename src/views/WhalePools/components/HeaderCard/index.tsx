@@ -90,7 +90,6 @@ const Shadow = styled.div`
 const HeaderCard: React.FC = () => {
 
   const [totalStakers, setTotalStakers] = useState(0)
-  const [userStaked, setUserStaked] = useState('0')
   const whalePoolContract = useWhalePoolContract()
 
   useEffect(() => {
@@ -99,19 +98,6 @@ const HeaderCard: React.FC = () => {
           setTotalStakers(res)
         })
   })
-
-  useEffect(() => {
-      if (account() !== '') {
-        whalePoolContract.methods.userInfo(account()).call()
-            .then(res => {
-                if (res.isStaked) {
-                    setUserStaked(res.stakedId.toString())
-                } else {
-                    setUserStaked('Not Staked yet')
-                }
-            })
-      }
-  }, [whalePoolContract.methods])
 
   return (
     <>
@@ -127,8 +113,6 @@ const HeaderCard: React.FC = () => {
         <InfoCardContent>
           <InfoCardSubtitle>Total Stakers</InfoCardSubtitle>
           <InfoCardValue>{numeral(totalStakers).format('(0)')}</InfoCardValue>
-          <InfoCardSubtitle>Staked Id</InfoCardSubtitle>
-          <InfoCardValue>{userStaked}</InfoCardValue>
         </InfoCardContent>
       </InfoCard>
       <Shadow />

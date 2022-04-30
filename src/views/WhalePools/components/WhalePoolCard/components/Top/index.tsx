@@ -183,7 +183,7 @@ const Top: React.FC<TopProps> = (
                         isStaked ?
                             <>
                                 {
-                                    remainingTime > 0 ? <NftTimerCardItem mintDate={mintTimeRemaining} amountStaked={new BigNumber(1)}/>
+                                    remainingTime > 0 ? <NftTimerCardItem mintDate={mintTimeRemaining} amountStaked={new BigNumber(1)} secondsUntilMintable={Number(mintTimeRemaining)} />
                                     : <NftTimerCardItem mintDate={mintTimeRemaining} amountStaked={new BigNumber(1)} secondsUntilMintable={0}/>}
                             </>
                             : (<NftTimerCardItem mintDate={mintTimeRemaining} amountStaked={new BigNumber(0)}/>)

@@ -67,7 +67,7 @@ const WhalePoolProgressBar: React.FC<StakingProgressBarProps> = ({ isApproved, i
           return (
             <>
               <ProgressCircle active={index < currentStep} step={index + 1} />
-              {index !== steps.length - 1 ? <ProgressLine active={index + 1 < currentStep} /> : null}
+              {index !== steps.length - 1 ? <ProgressLine active={index < currentStep} /> : null}
             </>
           )
         })}
