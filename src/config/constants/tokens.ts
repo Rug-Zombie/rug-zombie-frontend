@@ -110,7 +110,7 @@ const tokens: { [key: string]: Token } = {
     },
     decimals: 18,
     projectLink: 'https://infiniteone.io/',
-    tokenLogo: 'public/images/tokens/IF1.png'
+    tokenLogo: 'images/tokens/IF1.png'
   },
   byg: {
     symbol: 'BYG',
