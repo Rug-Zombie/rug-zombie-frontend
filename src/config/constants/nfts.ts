@@ -1617,7 +1617,7 @@ const nfts: Nft[] = [
     totalSupply: BIG_ZERO,
     path: 'https://storage.googleapis.com/rug-zombie/Infinity%20Times%20Infinity.jpg',
     type: 'image',
-    rarity: 'Rare',
+    rarity: 'Legendary',
     userInfo: { ...DEFAULT_USER_INFO },
   },
 ]
