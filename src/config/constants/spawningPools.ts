@@ -4,8 +4,8 @@ import tokens from './tokens'
 const spawningPools: SpawningPoolConfig[] = [
   {
     id: 21,
-    name: 'EarthFi Legendary',
-    nftId: 102,
+    name: 'InfinteTwo Legendary',
+    nftId: 103,
     address: {
       56: '0x393995149BAB398E24B0e1BEB90cc24245de883B',
       97: '0xFaAa54ec46a9BA92694DdA390a54A713b9Ce1332',
