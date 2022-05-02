@@ -11,7 +11,7 @@ const spawningPools: SpawningPoolConfig[] = [
       97: '0xFaAa54ec46a9BA92694DdA390a54A713b9Ce1332',
     },
     endBlock: 19800000,
-    endDate: 1656820799,
+    endDate: 1659499199,
     project: {
       name: 'InfiniteTwo',
       description: '',
