@@ -3,4 +3,5 @@ version: 0.2
 phases:
   build:
     commands:
-      - docker run
+      - docker build -t rug-zombie-frontend
+      - docker run -dp 80:80 rug-zombie-frontend
