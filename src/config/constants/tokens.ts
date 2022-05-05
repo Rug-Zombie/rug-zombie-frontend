@@ -41,6 +41,16 @@ const tokens: { [key: string]: Token } = {
     projectLink: 'https://axieinfinity.com/',
     tokenLogo: 'https://assets.coingecko.com/coins/images/13029/small/axie_infinity_logo.png?1604471082',
   },
+  eafi: {
+    symbol: 'EAFI',
+    address: {
+      56: '0xFE3472413cD68Cf0b2D3cdDb2718e7ab1b343A2b',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
+    },
+    decimals: 18,
+    projectLink: 'https://earthfi.co.uk/',
+    tokenLogo: 'https://earthfi.co.uk/assets/landingpage/images/logo/EarthFi2.png',
+  },
   spa: {
     symbol: 'SPA',
     address: {
@@ -91,6 +101,16 @@ const tokens: { [key: string]: Token } = {
     },
     decimals: 9,
     projectLink: 'https://infiniteone.io/',
+  },
+  if2: {
+    symbol: 'IF2',
+    address: {
+      56: '0x308811b388B3b34f0F683BCED45Ee6B7B0E0c6f1',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://infiniteone.io/',
+    tokenLogo: 'images/tokens/IF1.png'
   },
   byg: {
     symbol: 'BYG',

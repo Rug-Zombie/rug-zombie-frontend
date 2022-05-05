@@ -3,6 +3,46 @@ import tokens from './tokens'
 
 const spawningPools: SpawningPoolConfig[] = [
   {
+    id: 22,
+    name: 'InfinteTwo Legendary',
+    nftId: 103,
+    address: {
+      56: '0x393995149BAB398E24B0e1BEB90cc24245de883B',
+      97: '0xFaAa54ec46a9BA92694DdA390a54A713b9Ce1332',
+    },
+    endBlock: 19800000,
+    endDate: 1659499199,
+    project: {
+      name: 'InfiniteTwo',
+      description: '',
+      additionalDetails: [],
+    },
+    rewardToken: tokens.if2,
+    dex: Dex.PCS_V2,
+    isNew: true,
+    announcementIds: [136],
+  },
+    {
+    id: 21,
+    name: 'EarthFi Legendary',
+    nftId: 102,
+    address: {
+      56: '0xa1310654Ca0Ef335Eb2c12963792EcB628099F09',
+      97: '0xFaAa54ec46a9BA92694DdA390a54A713b9Ce1332',
+    },
+    endBlock: 19800000,
+    endDate: 1658548799,
+    project: {
+      name: 'EarthFi',
+      description: '',
+      additionalDetails: [],
+    },
+    rewardToken: tokens.eafi,
+    dex: Dex.PCS_V2,
+    isNew: true,
+    announcementIds: [135],
+  },
+  {
     id: 20,
     name: 'Street Punks Legendary V2',
     nftId: 94,
