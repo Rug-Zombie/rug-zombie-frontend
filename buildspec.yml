@@ -21,7 +21,5 @@ phases:
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
-      - printf '{"AWSEBDockerrunVersion":"1","Image":{"Name":"564300296892.dkr.ecr.us-east-1.amazonaws.com/rug-zombie-frontend:latest","Update":"true"},"Ports":[{"ContainerPort":"80"}],"Logging":"/var/log/nginx"}' > Dockerrun.aws.json
-      - cat Dockerrun.aws.json
 artifacts:
   files: Dockerrun.aws.json
