@@ -164,7 +164,7 @@ const Top: React.FC<TopProps> = (
                 <TokenFlex>
                     <img src={tokenImage(tokens.zmbe)} style={{width: '30px', height: '30px'}} alt='Zombie Token logo'/>
                 </TokenFlex>
-                <GraveTitle>WhalePool NFTs</GraveTitle>
+                <GraveTitle>WhalePool Season 1</GraveTitle>
                 {getTabs()}
             </GraveHeaderRow>
             <GraveSubRow>

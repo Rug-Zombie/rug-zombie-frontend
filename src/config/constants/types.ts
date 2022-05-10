@@ -112,6 +112,11 @@ export interface GraveConfig extends AnnouncementSubject {
   isRetired?: boolean
 }
 
+export interface WhalePoolConfig {
+  address: Address,
+  nftId: 39
+}
+
 export interface TombOverlayConfig {
   pid: Id
   commonId: number

@@ -1,15 +1,23 @@
 import BigNumber from 'bignumber.js'
 
-import { Address, Artist, GraveConfig, SpawningPoolConfig, TombConfig, UserActivityType } from 'config/constants/types'
+import {
+  Address,
+  Artist,
+  GraveConfig,
+  SpawningPoolConfig,
+  TombConfig,
+  UserActivityType,
+  WhalePoolConfig
+} from 'config/constants/types'
 
 export type TranslatableText =
   | string
   | {
-      key: string
-      data?: {
-        [key: string]: string | number
-      }
-    }
+  key: string
+  data?: {
+    [key: string]: string | number
+  }
+}
 
 export interface GraveUserInfo {
   paidUnlockFee: boolean
@@ -40,9 +48,7 @@ export interface Grave extends GraveConfig {
   poolInfo: GravePoolInfo
 }
 
-export interface WhalePool {
-  nftId: 39 // nft id for whale nfts
-  stakedNftId: number
+export interface WhalePoolInfo {
   mintingFeeUSD: number
   isApproved: boolean
   isStaked: boolean
@@ -52,6 +58,21 @@ export interface WhalePool {
   mintOver: boolean
   isNew: boolean
   endDate: number
+}
+
+export interface WhalePoolUserInfo {
+  stakedNft: string,
+  stakedId: BigNumber,
+  lastNftMint: BigNumber,
+  isStaked: boolean,
+  isMinting: boolean,
+  hasRandom: boolean,
+  randomNumber: BigNumber
+}
+
+export interface WhalePool extends WhalePoolConfig {
+  poolInfo: WhalePoolInfo
+  userInfo: WhalePoolUserInfo
 }
 
 export interface TombUserInfo {
@@ -120,6 +141,12 @@ export interface GravesState {
   userDataLoaded: boolean
 }
 
+export interface WhalePoolState {
+  data: WhalePool
+  userDataLoaded: boolean
+}
+
+
 export interface TombsState {
   data: Tomb[]
   userDataLoaded: boolean
@@ -139,6 +166,7 @@ export interface GraveState {
   data: Grave[]
   userDataLoaded: boolean
 }
+
 
 export interface TokenPrices {
   priceUsd: number

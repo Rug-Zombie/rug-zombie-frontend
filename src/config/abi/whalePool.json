@@ -37,23 +37,34 @@
         "type": "address"
       },
       {
-        "internalType": "address",
-        "name": "_linkToken",
-        "type": "address"
-      },
-      {
         "internalType": "bytes32",
         "name": "_keyHash",
         "type": "bytes32"
       },
       {
-        "internalType": "uint256",
-        "name": "_linkFee",
-        "type": "uint256"
+        "internalType": "uint64",
+        "name": "_vrfSubId",
+        "type": "uint64"
       }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "have",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "want",
+        "type": "address"
+      }
+    ],
+    "name": "OnlyCoordinatorCanFulfill",
+    "type": "error"
   },
   {
     "anonymous": false,
@@ -272,19 +283,6 @@
   },
   {
     "inputs": [],
-    "name": "linkFee",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "mintingFee",
     "outputs": [
       {
@@ -370,9 +368,9 @@
   {
     "inputs": [
       {
-        "internalType": "bytes32",
+        "internalType": "uint256",
         "name": "",
-        "type": "bytes32"
+        "type": "uint256"
       }
     ],
     "name": "randomRequests",
@@ -389,24 +387,17 @@
   {
     "inputs": [
       {
-        "internalType": "bytes32",
+        "internalType": "uint256",
         "name": "requestId",
-        "type": "bytes32"
+        "type": "uint256"
       },
       {
-        "internalType": "uint256",
-        "name": "randomness",
-        "type": "uint256"
+        "internalType": "uint256[]",
+        "name": "randomWords",
+        "type": "uint256[]"
       }
     ],
-    "name": "rawFulfillRandomness",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "recoverLink",
+    "name": "rawFulfillRandomWords",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -543,9 +534,9 @@
     "name": "startMinting",
     "outputs": [
       {
-        "internalType": "bytes32",
+        "internalType": "uint256",
         "name": "",
-        "type": "bytes32"
+        "type": "uint256"
       }
     ],
     "stateMutability": "payable",
@@ -628,6 +619,71 @@
         "internalType": "uint256",
         "name": "randomNumber",
         "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "vrfConfirms",
+    "outputs": [
+      {
+        "internalType": "uint16",
+        "name": "",
+        "type": "uint16"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "vrfCoordinator",
+    "outputs": [
+      {
+        "internalType": "contract VRFCoordinatorV2Interface",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "vrfGasLimit",
+    "outputs": [
+      {
+        "internalType": "uint32",
+        "name": "",
+        "type": "uint32"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "vrfSubId",
+    "outputs": [
+      {
+        "internalType": "uint64",
+        "name": "",
+        "type": "uint64"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "vrfWords",
+    "outputs": [
+      {
+        "internalType": "uint32",
+        "name": "",
+        "type": "uint32"
       }
     ],
     "stateMutability": "view",
