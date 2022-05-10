@@ -10,6 +10,7 @@ import ApproveNftModal from "./components/ApproveNftModal";
 import WhalePoolProgressBar from "./components/ProgressBar";
 import { useAppDispatch } from "../../../../../../state";
 import { fetchNftUserDataAsync } from "../../../../../../state/nfts";
+import { WhalePool } from "../../../../../../state/types";
 
 const Separator = styled.div`
   height: 0px;
@@ -97,49 +98,16 @@ const AmountText = styled.p`
 `
 
 interface BottomProps {
-  nftId: number, // the nft to stake
-  stakedNftId: number,
-  isApproved: boolean,
-  isStaked: boolean,
-  canRequestMint: boolean,
-  mintRequested: boolean,
-  claimPrize: boolean,
-  mintingTime: BigNumber,
-  mintFee: BigNumber,
-  updateMintRequested: () => void
-  updateMintingTime: () => void
+  whalePool: WhalePool
 }
 
-const Bottom: React.FC<BottomProps> = (
-  {
-    nftId,
-    stakedNftId,
-    isApproved,
-    isStaked,
-    canRequestMint,
-    mintRequested,
-    claimPrize,
-    mintingTime,
-    mintFee,
-    updateMintRequested,
-    updateMintingTime,
-  }) => {
+const Bottom: React.FC<BottomProps> = ({ whalePool }) => {
   const { account } = useWeb3React()
   const { toastGraves } = useToast()
   const whalePoolContract = useWhalePoolContract()
-  const [stakedId, setStakedId] = useState(stakedNftId) // id of the staked whale nft
-  const [nftIsApproved, setNftIsApproved] = useState(isApproved) // is the selected whale nft is approved
-  const [nftIsStaked, setNftIsStaked] = useState(isStaked)
-  const [userCanRequestMint, setUserCanRequestMint] = useState(canRequestMint)
-  const [mintInProgress, setMintInProgress] = useState(mintRequested)
-  const [canClaimPrize, setCanClaimPrize] = useState(claimPrize)
 
-  const [selectedTokenId, setSelectedTokenId] = useState(0) // selected whale nft to approve and stake
-  const [mintFinished, setMintFinished] = useState(false) // if mint finished/rewards claimed
-  const [mintDate, setMintDate] = useState(Number(mintingTime)) // if staked then time remaining to mint an nft
 
   const stakingSteps = useMemo(() => [], [])
-  const unstakingSteps = useMemo(() => [], [])
 
   const [confirmingStake, setConfirmingStake] = useState(false)
   const [confirmingUnstake, setConfirmingUnstake] = useState(false)
@@ -148,13 +116,6 @@ const Bottom: React.FC<BottomProps> = (
     dispatch(fetchNftUserDataAsync(account))
   }, [account, dispatch])
 
-  useEffect(() => {
-    setStakedId(stakedNftId)
-  }, [stakedNftId])
-
-  const selectToken = (id) => {
-    setSelectedTokenId(id)
-  }
 
   const approvedFromModal = (approved) => {
     setNftIsApproved(approved)
@@ -162,7 +123,7 @@ const Bottom: React.FC<BottomProps> = (
   }
 
   const [onApproveNftModal] = useModal(
-    <ApproveNftModal approveNftId={nftId} idSelected={selectToken} approval={approvedFromModal}/>
+    <ApproveNftModal approveNftId={nftId} approval={approvedFromModal}/>
   )
 
   const requestMint = () => {

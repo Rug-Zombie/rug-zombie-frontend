@@ -1,30 +1,31 @@
 import BigNumber from 'bignumber.js'
-import { BigNumber as EthersBigNumber } from 'ethers'
-import { chunk } from 'lodash'
+import { WhalePoolInfo, WhalePoolUserInfo } from '../types'
+import { getWhalePoolContract } from "../../utils/contractHelpers";
+import { getWhalePoolAddress } from "../../utils/addressHelpers";
 
-import drFrankenstein from 'config/abi/drFrankenstein.json'
-import bep20Abi from 'config/abi/erc20.json'
-import multicall from 'utils/multicall'
-import { getDrFrankensteinAddress } from 'utils/addressHelpers'
-import { GraveConfig, WhalePoolConfig } from 'config/constants/types'
-import { getId } from '../../utils'
-import { Grave, WhalePool, WhalePoolInfo } from '../types'
-
-const fetchGraves = async (whalepoolConfig: WhalePoolConfig): Promise<WhalePoolInfo> => {
-
+export const fetchWhalePool = async (): Promise<WhalePoolInfo> => {
+  const mintingFee = await getWhalePoolContract().methods.mintingFeeInBnb().call()
+  const totalStakers = await getWhalePoolContract().methods.totalStakers().call()
+  const mintingTime = await getWhalePoolContract().methods.mintingTime().call()
 
   return {
-    mintingFeeUSD: 0,
-    isApproved: false,
-    isStaked: false,
-    isMintable: false,
-    mintRequested: false,
-    mintingTime: 0,
-    mintOver: false,
-    isNew: false,
-    endDate: 0,
+    mintingFeeBnb: new BigNumber(mintingFee),
+    totalStakers: parseInt(totalStakers),
+    mintingTime: new BigNumber(mintingTime),
   }
-
 }
 
-export default fetchGraves
+export const fetchWhalePoolUser = async (account: string): Promise<WhalePoolUserInfo> => {
+  const nftMintTime = await getWhalePoolContract().methods.nftMintTime(account).call()
+  const userInfo = await getWhalePoolContract().methods.userInfo(account).call()
+
+  return {
+    nftMintTime: new BigNumber(nftMintTime),
+    isStaked: userInfo.isStaked,
+    isMinting: userInfo.isMinting,
+    stakedNft: userInfo.stakedNft,
+    stakedId: userInfo.stakedId,
+    hasRandom: userInfo.hasRandom,
+    randomNumber: userInfo.randomNumber
+  }
+}

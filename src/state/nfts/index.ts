@@ -43,7 +43,6 @@ export const fetchNftPublicDataAsync = () => async (dispatch) => {
   dispatch(setNftInfo(nfts))
 }
 export const fetchNftUserDataAsync = (account: string) => async (dispatch) => {
-  console.log('yoo')
   const nftIdAndUserInfos = await fetchNftsUser(account, nftConfig)
   dispatch(setNftUserInfo(nftIdAndUserInfos))
 }

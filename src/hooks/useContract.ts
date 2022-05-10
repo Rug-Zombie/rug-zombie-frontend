@@ -25,7 +25,7 @@ import {
 } from 'utils/contractHelpers'
 
 /**
- * Helper hooks to get specific contracts (by ABI)
+ * Helper hooks.ts to get specific contracts (by ABI)
  */
 
 export const useERC20 = (address: string) => {

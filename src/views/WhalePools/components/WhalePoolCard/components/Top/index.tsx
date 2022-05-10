@@ -1,9 +1,11 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import tokens from 'config/constants/tokens'
-import {Token} from 'config/constants/types'
-import CardItem, {CardItemValueType, NftTimerCardItem} from 'components/CardItem'
-import {BigNumber} from "bignumber.js";
+import { Token } from 'config/constants/types'
+import CardItem, { CardItemValueType, NftTimerCardItem } from 'components/CardItem'
+import { BigNumber } from "bignumber.js";
+import { WhalePool } from "../../../../../../state/types";
+import { useGetBnbPriceUsd } from "../../../../../../state/hooks";
 
 const GraveColumn = styled.div`
   height: 100%;
@@ -119,79 +121,73 @@ const Percentages = styled.div`
 `
 
 interface TopProps {
-    open: boolean
-    setOpen: any
-    fee: number
-    isStaked: boolean
-    mintTime: BigNumber
-    mintTimeRemaining: BigNumber
-    isMinting: boolean
+  open: boolean
+  setOpen: any
+  whalePool: WhalePool
 }
 
 const Top: React.FC<TopProps> = (
-    {
-        open,
-        setOpen,
-        fee,
-        isStaked,
-        mintTime,
-        mintTimeRemaining,
-        isMinting,
-    }) => {
+  {
+    open,
+    setOpen,
+    whalePool
+  }) => {
+  const { poolInfo: { mintingTime, mintingFeeBnb }, userInfo: { nftMintTime, isMinting, isStaked } } = whalePool
+  const toggleOpen = () => setOpen(!open)
+  const tokenImage = (token: Token) => {
+    return token.tokenLogo ? token.tokenLogo : `images/tokens/${token.symbol}.png`
+  }
+  const bnbUsdPrice = useGetBnbPriceUsd()
 
-    const remainingTime = Number(mintTimeRemaining)
-    const toggleOpen = () => setOpen(!open)
-    const tokenImage = (token: Token) => {
-        return token.tokenLogo ? token.tokenLogo : `images/tokens/${token.symbol}.png`
-    }
-
-    const getTabs = () => {
-        return (
-            <TabFlex>
-                <BlueTab>
-                    <WhiteTabText>NFT-ONLY</WhiteTabText>
-                </BlueTab>
-                <GreenTab>
-                    <WhiteTabText>NEW</WhiteTabText>
-                </GreenTab>
-            </TabFlex>
-        )
-    }
-
+  const getTabs = () => {
     return (
-        <GraveColumn onClick={toggleOpen}>
-            <GraveHeaderRow>
-                <TokenFlex>
-                    <img src={tokenImage(tokens.zmbe)} style={{width: '30px', height: '30px'}} alt='Zombie Token logo'/>
-                </TokenFlex>
-                <GraveTitle>WhalePool Season 1</GraveTitle>
-                {getTabs()}
-            </GraveHeaderRow>
-            <GraveSubRow>
-                <Amounts>
-                    <CardItem label="Pool fee" value={fee} valueType={CardItemValueType.Money}/>
-                    <CardItem label="NFT Minting time" value={Number(mintTime)} valueType={CardItemValueType.Duration}/>
-                    {
-                        isMinting ?
-                            <CardItem label="Mint Requested" value="Yes" valueType={CardItemValueType.Text}/>
-                            :
-                            <CardItem label="Mint Requested" value="Nope" valueType={CardItemValueType.Text}/>
-                    }
-                </Amounts>
-                <Percentages>
-                    {
-                        isStaked ?
-                            <>
-                                {
-                                    remainingTime > 0 ? <NftTimerCardItem mintDate={mintTimeRemaining} amountStaked={new BigNumber(1)} secondsUntilMintable={Number(mintTimeRemaining)} />
-                                    : <NftTimerCardItem mintDate={mintTimeRemaining} amountStaked={new BigNumber(1)} secondsUntilMintable={0}/>}
-                            </>
-                            : (<NftTimerCardItem mintDate={mintTimeRemaining} amountStaked={new BigNumber(0)}/>)
-                    }
-                </Percentages>
-            </GraveSubRow>
-        </GraveColumn>
+      <TabFlex>
+        <BlueTab>
+          <WhiteTabText>NFT-ONLY</WhiteTabText>
+        </BlueTab>
+        <GreenTab>
+          <WhiteTabText>NEW</WhiteTabText>
+        </GreenTab>
+      </TabFlex>
     )
+  }
+
+  return (
+    <GraveColumn onClick={toggleOpen}>
+      <GraveHeaderRow>
+        <TokenFlex>
+          <img src={tokenImage(tokens.zmbe)} style={{ width: '30px', height: '30px' }} alt='Zombie Token logo'/>
+        </TokenFlex>
+        <GraveTitle>WhalePool Season 1</GraveTitle>
+        {getTabs()}
+      </GraveHeaderRow>
+      <GraveSubRow>
+        <Amounts>
+          <CardItem label="Pool fee" value={mintingFeeBnb.times(bnbUsdPrice).toNumber()} valueType={CardItemValueType.Money}/>
+          <CardItem label="NFT Minting time" value={Number(mintingTime)} valueType={CardItemValueType.Duration}/>
+          {
+            isMinting ?
+              <CardItem label="Mint Requested" value="Yes" valueType={CardItemValueType.Text}/>
+              :
+              <CardItem label="Mint Requested" value="Nope" valueType={CardItemValueType.Text}/>
+          }
+        </Amounts>
+        <Percentages>
+          {
+            isStaked ?
+              <>
+                {
+                  nftMintTime.gt(0) ? <NftTimerCardItem mintDate={nftMintTime} amountStaked={new BigNumber(1)}
+                                                        secondsUntilMintable={nftMintTime.toNumber()}/>
+                    : <NftTimerCardItem mintDate={nftMintTime} amountStaked={new BigNumber(1)}
+                                        secondsUntilMintable={0}/>}
+              </>
+              : (<NftTimerCardItem mintDate={nftMintTime} amountStaked={new BigNumber(0)}/>)
+          }
+        </Percentages>
+      </GraveSubRow>
+    </GraveColumn>
+  )
 }
 
 export default Top

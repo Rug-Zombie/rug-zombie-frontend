@@ -1,14 +1,9 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit'
-import gravesConfig from 'config/constants/graves'
-import { BigNumber } from 'bignumber.js'
-import fetchWhalePool from './fetchWhalePool'
-import { fetchGraveUserEarnings, fetchGraveUserInfo, fetchGraveUserTokenInfo } from './fetchGraveUser'
-import { GravesState, Grave, WhalePool, WhalePoolState, WhalePoolInfo, WhalePoolUserInfo } from '../types'
+import { fetchWhalePool, fetchWhalePoolUser } from './fetchWhalePool'
+import { WhalePool, WhalePoolState, WhalePoolInfo, WhalePoolUserInfo } from '../types'
 import { BIG_ZERO } from '../../utils/bigNumber'
-import { getId } from '../../utils'
 import { ZERO_ADDRESS } from '../../config'
-import { getWhalePoolAddress } from "../../utils/addressHelpers";
 import { contracts } from "../../config/constants";
 
 const WHALE_POOL_NFT = 39
@@ -17,20 +12,14 @@ const noAccountWhalePoolConfig: WhalePool = {
   address: contracts.whalePool,
   nftId: WHALE_POOL_NFT,
   poolInfo: {
-    mintingFeeUSD: 0,
-    isApproved: false,
-    isStaked: false,
-    isMintable: false,
-    mintRequested: false,
-    mintingTime: 0,
-    mintOver: false,
-    isNew: false,
-    endDate: 0,
+    mintingFeeBnb: BIG_ZERO,
+    totalStakers: 0,
+    mintingTime: BIG_ZERO
   },
   userInfo: {
     stakedNft: ZERO_ADDRESS,
     stakedId: BIG_ZERO,
-    lastNftMint: BIG_ZERO,
+    nftMintTime: BIG_ZERO,
     isStaked: false,
     isMinting: false,
     hasRandom: false,
@@ -60,32 +49,15 @@ export const whalePoolSlice = createSlice({
 export const { setWhalePoolInfo, setWhalePoolUserInfo } = whalePoolSlice.actions
 
 // Thunks
-export const fetchGravesPublicDataAsync = () => async (dispatch) => {
-  const graves = await fetchWhalePool(gravesConfig)
-  dispatch(setGravePoolInfo(graves))
+export const fetchWhalePoolPublicDataAsync = () => async (dispatch) => {
+  const poolInfo = await fetchWhalePool()
+  dispatch(setWhalePoolInfo(poolInfo))
 }
-export const fetchGravesUserDataAsync = (account: string) => async (dispatch) => {
-  const userInfos = await fetchGraveUserInfo(account, gravesConfig)
-  const userGraveEarnings = await fetchGraveUserEarnings(account, gravesConfig)
-  const userGraveRugInfo = await fetchGraveUserTokenInfo(account, gravesConfig)
 
-  const arrayOfUserDataObjects = userInfos.map((userInfo, index) => {
-    return {
-      pid: getId(gravesConfig[index].pid),
-      paidUnlockFee: userInfo.paidUnlockFee,
-      rugDeposited: new BigNumber(userInfo.rugDeposited._hex),
-      tokenWithdrawalDate: new BigNumber(userInfo.tokenWithdrawalDate._hex),
-      nftMintDate: new BigNumber(userInfo.nftRevivalDate._hex),
-      amount: new BigNumber(userInfo.amount._hex),
-      pendingZombie: new BigNumber(userGraveEarnings[index]),
-      rugAllowance: new BigNumber(userGraveRugInfo[index].allowance),
-      rugBalance: new BigNumber(userGraveRugInfo[index].balance),
-      zombieAllowance: new BigNumber(userGraveRugInfo[index].zombieAllowance),
-      zombieBalance: new BigNumber(userGraveRugInfo[index].zombieBalance),
-    }
-  })
-
-  dispatch(setGraveUserInfo({ arrayOfUserDataObjects }))
+export const fetchWhalePoolUserDataAsync = (account: string) => async (dispatch) => {
+  const userInfo = await fetchWhalePoolUser(account)
+  dispatch(setWhalePoolUserInfo(userInfo))
 }
+
 
 export default whalePoolSlice.reducer

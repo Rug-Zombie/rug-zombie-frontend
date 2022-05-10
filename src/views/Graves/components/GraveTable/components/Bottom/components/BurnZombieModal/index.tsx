@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useCallback, useState } from 'react'
 import { Button, Flex, Image, Modal, Text } from '@rug-zombie-libs/uikit'
 

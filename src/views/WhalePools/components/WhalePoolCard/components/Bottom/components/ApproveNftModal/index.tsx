@@ -67,7 +67,7 @@ interface ApproveNftModalProps {
 const WHALE_PASS_ID = 39
 
 
-const ApproveNftModal: React.FC<ApproveNftModalProps> = ({ approveNftId, idSelected, approval, onDismiss }) => {
+const ApproveNftModal: React.FC<ApproveNftModalProps> = ({ approveNftId, approval, onDismiss }) => {
   const { account } = useWeb3React()
   const whalePoolContract = useWhalePoolContract()
   const {
@@ -86,7 +86,6 @@ const ApproveNftModal: React.FC<ApproveNftModalProps> = ({ approveNftId, idSelec
   const balance = ownedIds.length
 
   useEffect(() => {
-    idSelected(selected)
     if(selected && account) {
       nftContract.methods
         .getApproved(selected)
@@ -100,7 +99,7 @@ const ApproveNftModal: React.FC<ApproveNftModalProps> = ({ approveNftId, idSelec
           }
         })
     }
-  }, [selected, nftContract.methods, account, idSelected, approval, onDismiss])
+  }, [selected, nftContract.methods, account, approval, onDismiss])
 
   const onDepositNft = () => {
     console.log("here")

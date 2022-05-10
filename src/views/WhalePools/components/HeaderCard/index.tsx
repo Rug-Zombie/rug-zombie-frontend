@@ -6,6 +6,7 @@ import numeral from 'numeral'
 import {getWhalePoolAddress} from 'utils/addressHelpers'
 import {useWhalePoolContract} from "../../../../hooks/useContract";
 import { account } from '../../../../redux/get'
+import { WhalePool } from "../../../../state/types";
 
 
 const InfoCard = styled.header`
@@ -87,18 +88,12 @@ const Shadow = styled.div`
   z-index: -1;
 `
 
-const HeaderCard: React.FC = () => {
+interface HeaderCardProps {
+  whalePool: WhalePool
+}
 
-  const [totalStakers, setTotalStakers] = useState(0)
-  const whalePoolContract = useWhalePoolContract()
-
-  useEffect(() => {
-    whalePoolContract.methods.totalStakers().call()
-        .then(res => {
-          setTotalStakers(res)
-        })
-  })
-
+const HeaderCard:  React.FC<HeaderCardProps> = ({ whalePool }) => {
+  const { poolInfo: { totalStakers } } = whalePool
   return (
     <>
       <InfoCard>
@@ -112,7 +107,7 @@ const HeaderCard: React.FC = () => {
         </InfoCardHeader>
         <InfoCardContent>
           <InfoCardSubtitle>Total Stakers</InfoCardSubtitle>
-          <InfoCardValue>{numeral(totalStakers).format('(0)')}</InfoCardValue>
+          <InfoCardValue>{totalStakers}</InfoCardValue>
         </InfoCardContent>
       </InfoCard>
       <Shadow />

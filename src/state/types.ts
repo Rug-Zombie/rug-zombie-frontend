@@ -49,21 +49,15 @@ export interface Grave extends GraveConfig {
 }
 
 export interface WhalePoolInfo {
-  mintingFeeUSD: number
-  isApproved: boolean
-  isStaked: boolean
-  isMintable: boolean
-  mintRequested: boolean
-  mintingTime: number
-  mintOver: boolean
-  isNew: boolean
-  endDate: number
+  mintingFeeBnb: BigNumber
+  totalStakers: number
+  mintingTime: BigNumber
 }
 
 export interface WhalePoolUserInfo {
   stakedNft: string,
   stakedId: BigNumber,
-  lastNftMint: BigNumber,
+  nftMintTime: BigNumber,
   isStaked: boolean,
   isMinting: boolean,
   hasRandom: boolean,
@@ -327,4 +321,5 @@ export interface State {
   userActivity: UserActivityState
   predictions: PredictionsState
   nfts: NftState
+  whalePool: WhalePoolState
 }

@@ -1,13 +1,13 @@
 /* eslint-disable no-param-reassign */
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import {WhalePool} from "state/types";
-import {BigNumber} from "bignumber.js";
+import { useWeb3React } from "@web3-react/core";
 import Page from '../../components/layout/Page'
 import HeaderCard from './components/HeaderCard'
 import Footer from '../../components/Footer'
 import WhalePoolCard from "./components/WhalePoolCard";
-import {useWhalePoolContract} from "../../hooks/useContract";
+import { useAppDispatch } from "../../state";
+import { fetchWhalePoolPublicDataAsync, fetchWhalePoolUserDataAsync } from "../../state/whalePools";
 
 const WhalePoolPage = styled(Page)`
   min-width: 80vw;
@@ -51,6 +51,15 @@ const DetailsColumn = styled.div`
 `
 
 const WhalePools: React.FC = () => {
+  const dispatch = useAppDispatch()
+  const { account } = useWeb3React()
+  useEffect(() => {
+    dispatch(fetchWhalePoolPublicDataAsync())
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch(fetchWhalePoolUserDataAsync(account))
+  }, [account, dispatch])
 
     return (
         <>

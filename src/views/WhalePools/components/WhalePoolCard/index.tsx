@@ -8,6 +8,7 @@ import Top from './components/Top'
 import Bottom from './components/Bottom'
 import {useWhalePoolContract} from "../../../../hooks/useContract";
 import {getFullDisplayBalance} from '../../../../utils/formatBalance';
+import { useGetWhalePool } from "../../../../state/whalePools/hooks";
 
 
 const DetailsCard = styled.div<{ open: boolean }>`
@@ -42,10 +43,9 @@ const Shadow = styled.div`
 
 
 const WhalePoolCard: React.FC = () => {
-
-    const {account} = useWeb3React()
     const [open, setOpen] = useState(true)
-    const whalePoolContract = useWhalePoolContract()
+    const whalePool = useGetWhalePool()
+
 
     const [nftId, setNftId] = useState(0)
     const [stakedNftId, setStakedNftId] = useState(0)
@@ -59,96 +59,8 @@ const WhalePoolCard: React.FC = () => {
     const [mintingFeeUSD, setMintingFeeUSD] = useState(0)
     const [mintFeeBNB, setMintFeeBNB] = useState(new BigNumber(0))
 
-    const getMintFeeInBnb = useCallback(() => {
-        whalePoolContract.methods.mintingFeeInBnb().call()
-            .then(res => {
-                setMintFeeBNB(res)
-            })
-    },[whalePoolContract.methods])
 
-    const getDepositNftId = useCallback(() => {
-        whalePoolContract.methods.stakeNft().call()
-            .then(res => {
-                setNftId(getNftConfigByAddress(res).id)
-            })
-    }, [whalePoolContract.methods])
 
-    const getMintTime = useCallback(() => {
-        whalePoolContract.methods.mintingTime().call()
-            .then(res => {
-                setMintTime(res)
-            })
-    }, [whalePoolContract.methods])
-
-    const getMintingFee = useCallback(() => {
-        whalePoolContract.methods.mintingFee().call()
-            .then(res => {
-                setMintingFeeUSD(Number(getFullDisplayBalance(new BigNumber(res))))
-            })
-    }, [whalePoolContract.methods])
-
-    const checkIsStaked = useCallback(() => {
-        if (account) {
-            whalePoolContract.methods.checkUserStaked(account).call()
-                .then(res => {
-                    setIsStaked(res)
-                })
-        }
-    }, [account, whalePoolContract.methods])
-
-    const updateUserPoolInfo = useCallback(() => {
-        if (account && isStaked) {
-            whalePoolContract.methods.userInfo(account).call()
-                .then(res => {
-                    setStakedNftId(res.stakedId)
-                    setIsApproved(true)
-                    setMintRequested(res.isMinting)
-                    if (res.hasRandom) {
-                        setCanClaimPrize(true)
-                    }
-                })
-        }
-    }, [account, whalePoolContract.methods, isStaked])
-
-    const updateUserNftMintingTime = useCallback(() => {
-        if (account && isStaked) {
-            whalePoolContract.methods.nftMintTime(account).call()
-                .then(res => {
-                    setMintingTime(res)
-                    if (Number(res) === 0) {
-                        setCanRequestMint(true)
-                    }
-                })
-        }
-    }, [account, whalePoolContract.methods, isStaked])
-
-    const updateMintingTime = () => {
-        updateUserNftMintingTime()
-    }
-
-    const updateMinRequested = () => {
-        console.log('function called')
-        setMintRequested(true)
-    }
-
-    useEffect(() => {
-        getDepositNftId()
-        getMintTime()
-        getMintingFee()
-        getMintFeeInBnb()
-    })
-
-    useEffect(() => {
-        checkIsStaked()
-    }, [account, checkIsStaked])
-
-    useEffect(() => {
-        updateUserPoolInfo()
-    }, [account, isStaked, updateUserPoolInfo])
-
-    useEffect(() => {
-        updateUserNftMintingTime()
-    }, [account, isStaked, updateUserNftMintingTime])
 
     return (
         <>
@@ -156,25 +68,11 @@ const WhalePoolCard: React.FC = () => {
                 <Top
                     open={open}
                     setOpen={setOpen}
-                    fee={mintingFeeUSD}
-                    isStaked={isStaked}
-                    isMinting={mintRequested}
-                    mintTime={mintTime}
-                    mintTimeRemaining={mintingTime}
+                    whalePool={whalePool}
                 />
                 {
                     open ? <Bottom
-                        nftId={nftId}
-                        stakedNftId={stakedNftId}
-                        mintingTime={mintingTime}
-                        isApproved={isApproved}
-                        isStaked={isStaked}
-                        canRequestMint={canRequestMint}
-                        mintRequested={mintRequested}
-                        claimPrize={claimPrize}
-                        mintFee={mintFeeBNB}
-                        updateMintRequested={updateMinRequested}
-                        updateMintingTime={updateMintingTime}
+                        whalePool={whalePool}
                     /> : null}
             </DetailsCard>
             <Shadow/>
