@@ -11,7 +11,7 @@ const WHALE_POOL_NFT = 39
 const noAccountWhalePoolConfig: WhalePool = {
   address: contracts.whalePool,
   nftId: WHALE_POOL_NFT,
-  rewardNftIds: [95, 47, 75, 76, 80],
+  rewardNftIds: [95, 47, 75, 76, 80, 48],
   poolInfo: {
     mintingFeeBnb: BIG_ZERO,
     totalStakers: 0,

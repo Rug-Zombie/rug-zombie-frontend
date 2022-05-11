@@ -94,7 +94,6 @@ function truncateString(str, num) {
     return `${str.slice(0, num)}...`;
   }
   return str;
-
 }
 
 const PoolDetails: React.FC<TableDetailsProps> = ({ whalePool }) => {
