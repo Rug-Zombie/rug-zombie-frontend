@@ -102,6 +102,16 @@ const tokens: { [key: string]: Token } = {
     decimals: 9,
     projectLink: 'https://infiniteone.io/',
   },
+  if2: {
+    symbol: 'IF2',
+    address: {
+      56: '0x308811b388B3b34f0F683BCED45Ee6B7B0E0c6f1',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://infiniteone.io/',
+    tokenLogo: 'images/tokens/IF1.png'
+  },
   byg: {
     symbol: 'BYG',
     address: {

@@ -1,0 +1,1 @@
+{"AWSEBDockerrunVersion":"1","Image":{"Name":"564300296892.dkr.ecr.us-east-1.amazonaws.com/rug-zombie-frontend:latest","Update":"true"},"Ports":[{"ContainerPort":"80"}],"Logging":"/var/log/nginx"}

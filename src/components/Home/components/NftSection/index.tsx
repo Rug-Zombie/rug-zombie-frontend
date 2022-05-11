@@ -16,6 +16,7 @@ import {
   NftCardContent,
   NftCardTitleText,
   NftCardSubText,
+  NftCardTextDiv,
   NftCardText,
   NftCardFooter,
   NftCardFooterAction,
@@ -46,8 +47,10 @@ const NftSection: React.FC<NftSectionProps> = ({ history }) => {
                 history.push('/graves')
               }}
             >
-              <NftCardText color="#AE32AA">enter graves </NftCardText>
-              <img src={gravesArrow} alt="Grave Card Arrow" />
+              <NftCardTextDiv>
+                <NftCardText color="#AE32AA">enter graves </NftCardText>
+                <img src={gravesArrow} alt="Grave Card Arrow" />
+              </NftCardTextDiv>
             </NftCardFooterAction>
           </NftCardFooter>
         </NftCard>
@@ -68,8 +71,10 @@ const NftSection: React.FC<NftSectionProps> = ({ history }) => {
                 history.push('/tombs')
               }}
             >
-              <NftCardText color="#4B7BDC">enter tombs </NftCardText>
-              <img src={tombsArrow} alt="Tomb Card Arrow" />
+              <NftCardTextDiv>
+                <NftCardText color="#4B7BDC">enter tombs </NftCardText>
+                <img src={tombsArrow} alt="Tomb Card Arrow" />
+              </NftCardTextDiv>
             </NftCardFooterAction>
           </NftCardFooter>
         </NftCard>
@@ -89,8 +94,10 @@ const NftSection: React.FC<NftSectionProps> = ({ history }) => {
                 history.push('/spawning_pools')
               }}
             >
-              <NftCardText color="#30C00D">enter spawning pools </NftCardText>
-              <img src={spArrow} alt="Spawning Pool Card Arrow" />
+              <NftCardTextDiv>
+                <NftCardText color="#30C00D">enter spawning pools </NftCardText>
+                <img src={spArrow} alt="Spawning Pool Card Arrow" />
+              </NftCardTextDiv>
             </NftCardFooterAction>
           </NftCardFooter>
         </NftCard>
