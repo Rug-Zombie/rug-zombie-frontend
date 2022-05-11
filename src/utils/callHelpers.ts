@@ -165,3 +165,39 @@ export const convertNft = async (nftSwapper, nftConverterPid, tokenId, account) 
       return tx.transactionHash
     })
 }
+
+export const whalePoolStake = (whalePool, tokenId, account) => {
+  return whalePool.methods
+    .stake(tokenId)
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const whalePoolUnstake = (whalePool, account) => {
+  return whalePool.methods
+    .unstake()
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const whalePoolStartMinting = (whalePool, fee, account) => {
+  return whalePool.methods
+    .startMinting()
+    .send({ from: account, value: fee.toString() })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
+export const whalePoolFinishMinting = (whalePool, account) => {
+  return whalePool.methods
+    .finishMinting()
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}

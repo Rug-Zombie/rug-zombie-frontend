@@ -3,6 +3,7 @@ import tokens from './tokens'
 
 const spawningPools: SpawningPoolConfig[] = [
   {
+    {
     id: 22,
     name: 'InfinteTwo Legendary',
     nftId: 103,

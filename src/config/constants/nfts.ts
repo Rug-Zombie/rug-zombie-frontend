@@ -105,7 +105,7 @@ const nfts: Nft[] = [
     description: "This grave's multiplier is suspiciously low, what could frankenstein be planning.",
     address: {
       56: '0x6209E17d98ba2089571476940751802AAc4249e8',
-      97: '0xe06DdB8c0cC6c0CB35e252f9c333dCa7b0362Dc4',
+      97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
     },
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/QmQHNfP5LmY9efTWRDZ1vzj48wSAA1J6tCySjqjmMQyV1r',
@@ -619,7 +619,7 @@ const nfts: Nft[] = [
     description: 'I try all things, I achieve what I can.',
     address: {
       56: '0xADEbC6fe47Baf315bfbD66F8Ce515fBc78Bf42EB',
-      97: '0x2d8b022125f4afbf9594a4dff269eb44e15ae295',
+      97: '0x9322A3683eB5b788C4F3A4D0D5e564D67c4BC83A',
     },
     totalSupply: BIG_ZERO,
     path: 'https://ipfs.io/ipfs/QmQnj8i4k2kwoboNN2TMoJ5ugH1Mxav4r8zAsz6PmXvP7P',

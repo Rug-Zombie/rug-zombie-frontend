@@ -21,10 +21,11 @@ import {
   getSharkpoolContract,
   getDrBurnensteinContract,
   getRugMarketContract,
+  getWhalePoolContract,
 } from 'utils/contractHelpers'
 
 /**
- * Helper hooks to get specific contracts (by ABI)
+ * Helper hooks.ts to get specific contracts (by ABI)
  */
 
 export const useERC20 = (address: string) => {
@@ -128,4 +129,9 @@ export const useDrBurnenstein = () => {
 export const useRugMarket = () => {
   const web3 = useWeb3()
   return useMemo(() => getRugMarketContract(web3), [web3])
+}
+
+export const useWhalePoolContract = () => {
+  const web3 = useWeb3()
+  return useMemo(() => getWhalePoolContract(web3), [web3])
 }

@@ -12,6 +12,12 @@ export const getAddress = (address: Address): string => {
 export const getZombieAddress = () => {
   return getAddress(tokens.zmbe.address)
 }
+
+// the prices API doesn't recognize testnet ZMBE and throws error on testnet, that's why returning main net ZMBE address for prices api in testnet too
+export const getZombieAddressForPrices = () => {
+  return tokens.zmbe.address[56]
+}
+
 export const getDrFrankensteinAddress = () => {
   return getAddress(addresses.drFrankenstein)
 }
@@ -96,4 +102,8 @@ export const getApeswapFactoryAddress = () => {
 
 export const getRugMarketAddress = () => {
   return getAddress(addresses.rugMarket)
+}
+
+export const getWhalePoolAddress = () => {
+  return getAddress(addresses.whalePool)
 }

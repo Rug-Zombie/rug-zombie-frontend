@@ -25,8 +25,7 @@ const CommunityRequestedTokens: React.FC = () => {
       .catch(() => {
         toastError('Failed to fetch form responses')
       })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [toastError])
   const { t } = useTranslation()
   return (
     <Container>
