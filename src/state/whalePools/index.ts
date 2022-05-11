@@ -46,6 +46,7 @@ export const whalePoolSlice = createSlice({
   },
 })
 
+
 // Actions
 export const { setWhalePoolInfo, setWhalePoolUserInfo } = whalePoolSlice.actions
 
