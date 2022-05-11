@@ -29,34 +29,31 @@ const TextFlex = styled.div`
 `
 
 interface StakingProgressBarProps {
-  isApproved: boolean
   isDeposited: boolean
   mintRequested: boolean
   mintFinished: boolean
 }
 
 enum Step {
-  ApproveWhaleNft,
   DepositWhaleNft,
   RequestMint,
   MintFinished,
 }
 
-const WhalePoolProgressBar: React.FC<StakingProgressBarProps> = ({ isApproved, isDeposited, mintRequested, mintFinished }) => {
+const WhalePoolProgressBar: React.FC<StakingProgressBarProps> = ({
+                                                                   isDeposited,
+                                                                   mintRequested,
+                                                                   mintFinished
+                                                                 }) => {
 
-  const steps = ['Approve Whale NFT', 'Deposit Whale NFT', 'Request Mint', 'Claim NFT']
+  const steps = ['Deposit Whale NFT', 'Request Mint', 'Claim NFT']
 
-  let currentStep = Step.ApproveWhaleNft
-  if (isApproved) {
-    currentStep = Step.ApproveWhaleNft
-  }
-  if (isApproved && isDeposited) {
-    currentStep = Step.DepositWhaleNft
-  }
-  if (isApproved && isDeposited && mintRequested) {
+  let currentStep = Step.DepositWhaleNft
+
+  if(isDeposited && mintRequested) {
     currentStep = Step.RequestMint
   }
-  if (isApproved && isDeposited && mintRequested && mintFinished) {
+  if(isDeposited && mintRequested && mintFinished) {
     currentStep = Step.MintFinished
   }
 
@@ -66,8 +63,8 @@ const WhalePoolProgressBar: React.FC<StakingProgressBarProps> = ({ isApproved, i
         {steps.map((step, index) => {
           return (
             <>
-              <ProgressCircle active={index < currentStep} step={index + 1} />
-              {index !== steps.length - 1 ? <ProgressLine active={index < currentStep} /> : null}
+              <ProgressCircle active={index < currentStep} step={index + 1}/>
+              {index !== steps.length - 1 ? <ProgressLine active={index < currentStep}/> : null}
             </>
           )
         })}

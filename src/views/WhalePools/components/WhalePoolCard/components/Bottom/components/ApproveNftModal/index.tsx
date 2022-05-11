@@ -6,6 +6,8 @@ import { useERC721, useWhalePoolContract } from '../../../../../../../../hooks/u
 import { getAddress, getWhalePoolAddress } from '../../../../../../../../utils/addressHelpers'
 import { getNftConfigById, useGetNftById } from "../../../../../../../../state/nfts/hooks";
 import useToast from "../../../../../../../../hooks/useToast";
+import { fetchWhalePoolUserDataAsync } from "../../../../../../../../state/whalePools";
+import { useAppDispatch } from "../../../../../../../../state";
 
 const PrimaryStakeButton = styled.button`
   height: 60px;
@@ -58,24 +60,23 @@ const OverflowFlex = styled(Flex)`
 `
 
 interface ApproveNftModalProps {
-  approveNftId: number
-  idSelected: (id: any) => void
-  approval: (approved: any) => void
+  nftId: number
   onDismiss?: () => void
 }
 
 const WHALE_PASS_ID = 39
 
 
-const ApproveNftModal: React.FC<ApproveNftModalProps> = ({ approveNftId, approval, onDismiss }) => {
+const ApproveNftModal: React.FC<ApproveNftModalProps> = ({ nftId, onDismiss }) => {
   const { account } = useWeb3React()
+  const dispatch = useAppDispatch()
   const whalePoolContract = useWhalePoolContract()
   const {
     symbol,
     type,
     path,
     address,
-  } = getNftConfigById(approveNftId)
+  } = getNftConfigById(nftId)
   const nftContract = useERC721(getAddress(address))
   const [selected, setSelected] = useState(null)
   const [approved, setApproved] = useState(false)
@@ -92,24 +93,22 @@ const ApproveNftModal: React.FC<ApproveNftModalProps> = ({ approveNftId, approva
         .call()
         .then((res) => {
           if(res === getWhalePoolAddress()) { // the selected id is already approved, so, dismissing the modal
-            approval(true)
             setApproved(true)
           } else {
             setApproved(false)
           }
         })
     }
-  }, [selected, nftContract.methods, account, approval, onDismiss])
+  }, [selected, nftContract.methods, account, onDismiss])
 
   const onDepositNft = () => {
-    console.log("here")
 
     if(approved && selected) {
-      console.log("hey")
       setDepositing(true)
       whalePoolContract.methods.stake(selected).send({ from: account })
         .then(() => {
           toastError('Whale pass staked', 'We appreciate the support, stay tuned for more zombie whale perks ;)')
+          dispatch(fetchWhalePoolUserDataAsync(account))
           onDismiss()
         })
     }
@@ -124,7 +123,6 @@ const ApproveNftModal: React.FC<ApproveNftModalProps> = ({ approveNftId, approva
         .then(() => {
           setApproved(true)
           setApproving(false)
-          approval(true)
           toastError('Approved Whale Pass', 'You can now stake your pass')
         })
         .catch(() => {
@@ -136,8 +134,6 @@ const ApproveNftModal: React.FC<ApproveNftModalProps> = ({ approveNftId, approva
   const approveButton = selected && !approved
 
   const onDismissModal = () => {
-    idSelected(0)
-    approval(false)
     onDismiss()
   }
 

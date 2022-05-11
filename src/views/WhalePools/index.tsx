@@ -8,6 +8,8 @@ import Footer from '../../components/Footer'
 import WhalePoolCard from "./components/WhalePoolCard";
 import { useAppDispatch } from "../../state";
 import { fetchWhalePoolPublicDataAsync, fetchWhalePoolUserDataAsync } from "../../state/whalePools";
+import { fetchNftUserDataAsync } from "../../state/nfts";
+import { useGetWhalePool } from "../../state/whalePools/hooks";
 
 const WhalePoolPage = styled(Page)`
   min-width: 80vw;
@@ -53,12 +55,16 @@ const DetailsColumn = styled.div`
 const WhalePools: React.FC = () => {
   const dispatch = useAppDispatch()
   const { account } = useWeb3React()
+  const whalePool = useGetWhalePool().data
   useEffect(() => {
     dispatch(fetchWhalePoolPublicDataAsync())
   }, [dispatch])
 
   useEffect(() => {
-    dispatch(fetchWhalePoolUserDataAsync(account))
+    if(account) {
+      dispatch(fetchWhalePoolUserDataAsync(account))
+      dispatch(fetchNftUserDataAsync(account))
+    }
   }, [account, dispatch])
 
     return (
@@ -66,10 +72,10 @@ const WhalePools: React.FC = () => {
             <WhalePoolPage>
                 <Row>
                     <Header>
-                        <HeaderCard/>
+                        <HeaderCard whalePool={whalePool}/>
                     </Header>
                     <DetailsColumn>
-                        <WhalePoolCard/>
+                        <WhalePoolCard whalePool={whalePool}/>
                     </DetailsColumn>
                 </Row>
             </WhalePoolPage>

@@ -163,8 +163,14 @@ const Top: React.FC<TopProps> = (
       </GraveHeaderRow>
       <GraveSubRow>
         <Amounts>
-          <CardItem label="Pool fee" value={mintingFeeBnb.times(bnbUsdPrice).toNumber()} valueType={CardItemValueType.Money}/>
-          <CardItem label="NFT Minting time" value={Number(mintingTime)} valueType={CardItemValueType.Duration}/>
+          <CardItem label="Pool fee" value={mintingFeeBnb.times(bnbUsdPrice).toNumber()}
+                    valueType={CardItemValueType.Money}/>
+          {/* eslint-disable-next-line no-nested-ternary */}
+          {isStaked ?
+            nftMintTime.gt(0) ? <CardItem label="NFT Minting time" value={nftMintTime.toNumber()}
+                                          valueType={CardItemValueType.Duration}/> :
+              <CardItem label="NFT Minting time" value="None" valueType={CardItemValueType.Text}/> :
+            <CardItem label="NFT Minting time" value="N/A" valueType={CardItemValueType.Text}/>}
           {
             isMinting ?
               <CardItem label="Mint Requested" value="Yes" valueType={CardItemValueType.Text}/>

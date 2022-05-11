@@ -1,7 +1,6 @@
 import BigNumber from 'bignumber.js'
 import { WhalePoolInfo, WhalePoolUserInfo } from '../types'
 import { getWhalePoolContract } from "../../utils/contractHelpers";
-import { getWhalePoolAddress } from "../../utils/addressHelpers";
 
 export const fetchWhalePool = async (): Promise<WhalePoolInfo> => {
   const mintingFee = await getWhalePoolContract().methods.mintingFeeInBnb().call()
@@ -18,7 +17,6 @@ export const fetchWhalePool = async (): Promise<WhalePoolInfo> => {
 export const fetchWhalePoolUser = async (account: string): Promise<WhalePoolUserInfo> => {
   const nftMintTime = await getWhalePoolContract().methods.nftMintTime(account).call()
   const userInfo = await getWhalePoolContract().methods.userInfo(account).call()
-
   return {
     nftMintTime: new BigNumber(nftMintTime),
     isStaked: userInfo.isStaked,

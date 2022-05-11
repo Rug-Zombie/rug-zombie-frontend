@@ -9,6 +9,7 @@ import Bottom from './components/Bottom'
 import {useWhalePoolContract} from "../../../../hooks/useContract";
 import {getFullDisplayBalance} from '../../../../utils/formatBalance';
 import { useGetWhalePool } from "../../../../state/whalePools/hooks";
+import { WhalePool } from "../../../../state/types";
 
 
 const DetailsCard = styled.div<{ open: boolean }>`
@@ -17,7 +18,7 @@ const DetailsCard = styled.div<{ open: boolean }>`
   min-height: 130px;
   background-color: #151e21;
   border-radius: 10px;
-  border: ${(props) => (props.open ? '2px solid #AE32AA' : '2px solid #151E21')};
+  border: ${(props) => (props.open ? '2px solid red' : '2px solid #151E21')};
   padding: 20px;
   margin: 0 0 0 0;
   display: flex;
@@ -41,27 +42,12 @@ const Shadow = styled.div`
   z-index: -1;
 `
 
+interface WhalePoolCardProps {
+    whalePool: WhalePool
+}
 
-const WhalePoolCard: React.FC = () => {
+const WhalePoolCard: React.FC<WhalePoolCardProps> = ({ whalePool }) => {
     const [open, setOpen] = useState(true)
-    const whalePool = useGetWhalePool()
-
-
-    const [nftId, setNftId] = useState(0)
-    const [stakedNftId, setStakedNftId] = useState(0)
-    const [isApproved, setIsApproved] = useState(false)
-    const [isStaked, setIsStaked] = useState(false)
-    const [canRequestMint, setCanRequestMint] = useState(false)
-    const [mintRequested, setMintRequested] = useState(false)
-    const [claimPrize, setCanClaimPrize] = useState(false)
-    const [mintTime, setMintTime] = useState(new BigNumber(0))// time required to mint an nft
-    const [mintingTime, setMintingTime] = useState(new BigNumber(0)) // time remaining to mint an nft if staked
-    const [mintingFeeUSD, setMintingFeeUSD] = useState(0)
-    const [mintFeeBNB, setMintFeeBNB] = useState(new BigNumber(0))
-
-
-
-
     return (
         <>
             <DetailsCard open={open}>
