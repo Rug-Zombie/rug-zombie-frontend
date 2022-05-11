@@ -1,9 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import ProgressCircle from './components/ProgressCircle'
-import ProgressLine from './components/ProgressLine'
+import ProgressLine, { ProgressLineState } from './components/ProgressLine'
 import ProgressText from './components/ProgressText'
-import { getId } from '../../../../../../../../utils'
 
 const ProgressFlex = styled.div`
   width: 100%;
@@ -40,6 +39,8 @@ enum Step {
   MintFinished,
 }
 
+
+
 const WhalePoolProgressBar: React.FC<StakingProgressBarProps> = ({
                                                                    isDeposited,
                                                                    mintRequested,
@@ -53,18 +54,28 @@ const WhalePoolProgressBar: React.FC<StakingProgressBarProps> = ({
   if(isDeposited && mintRequested) {
     currentStep = Step.RequestMint
   }
-  if(isDeposited && mintRequested && mintFinished) {
+  if(isDeposited && mintFinished) {
     currentStep = Step.MintFinished
   }
+
+  console.log(mintFinished)
 
   return (
     <ProgressFlex>
       <IconFlex>
         {steps.map((step, index) => {
+          let state
+          if(currentStep > index + 1) {
+            state = ProgressLineState.Active
+          } else if(currentStep === index + 1) {
+            state = ProgressLineState.PartiallyActive
+          } else {
+            state = ProgressLineState.Inactive
+          }
           return (
             <>
               <ProgressCircle active={index < currentStep} step={index + 1}/>
-              {index !== steps.length - 1 ? <ProgressLine active={index < currentStep}/> : null}
+              {index !== steps.length - 1 ? <ProgressLine state={state}/> : null}
             </>
           )
         })}

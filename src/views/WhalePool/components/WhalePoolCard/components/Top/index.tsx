@@ -6,6 +6,7 @@ import CardItem, { CardItemValueType, NftTimerCardItem } from 'components/CardIt
 import { BigNumber } from "bignumber.js";
 import { WhalePool } from "../../../../../../state/types";
 import { useGetBnbPriceUsd } from "../../../../../../state/hooks";
+import { getBalanceNumber } from "../../../../../../utils/formatBalance";
 
 const GraveColumn = styled.div`
   height: 100%;
@@ -163,14 +164,11 @@ const Top: React.FC<TopProps> = (
       </GraveHeaderRow>
       <GraveSubRow>
         <Amounts>
-          <CardItem label="Pool fee" value={mintingFeeBnb.times(bnbUsdPrice).toNumber()}
+          <CardItem label="Pool fee" value={getBalanceNumber(mintingFeeBnb.times(bnbUsdPrice))}
                     valueType={CardItemValueType.Money}/>
           {/* eslint-disable-next-line no-nested-ternary */}
-          {isStaked ?
-            nftMintTime.gt(0) ? <CardItem label="NFT Minting time" value={nftMintTime.toNumber()}
-                                          valueType={CardItemValueType.Duration}/> :
-              <CardItem label="NFT Minting time" value="None" valueType={CardItemValueType.Text}/> :
-            <CardItem label="NFT Minting time" value="N/A" valueType={CardItemValueType.Text}/>}
+            <CardItem label="NFT Minting time" value="30 days"
+                                          valueType={CardItemValueType.Text}/>
           {
             isMinting ?
               <CardItem label="Mint Requested" value="Yes" valueType={CardItemValueType.Text}/>

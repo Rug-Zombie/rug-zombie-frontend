@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Flex, Modal, Text } from '@rug-zombie-libs/uikit'
 import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
 import { useERC721, useWhalePoolContract } from '../../../../../../../../hooks/useContract'
-import { getAddress, getWhalePoolAddress } from '../../../../../../../../utils/addressHelpers'
+import { getAddress, getWhalePoolAddress, getZombieAddress } from '../../../../../../../../utils/addressHelpers'
 import { getNftConfigById, useGetNftById } from "../../../../../../../../state/nfts/hooks";
 import useToast from "../../../../../../../../hooks/useToast";
 import { fetchWhalePoolUserDataAsync } from "../../../../../../../../state/whalePools";
 import { useAppDispatch } from "../../../../../../../../state";
+import { useStake } from "../../../../../../../../hooks/useWhalePool";
+import { BASE_EXCHANGE_URL } from "../../../../../../../../config";
+import { getFullDisplayBalance } from "../../../../../../../../utils/formatBalance";
+import { formatDuration, now } from "../../../../../../../../utils/timerHelpers";
 
 const PrimaryStakeButton = styled.button`
   height: 60px;
@@ -59,15 +63,14 @@ const OverflowFlex = styled(Flex)`
   margin-bottom: 10px;
 `
 
-interface ApproveNftModalProps {
+interface DepositNftModalProps {
   nftId: number
   onDismiss?: () => void
 }
 
 const WHALE_PASS_ID = 39
 
-
-const ApproveNftModal: React.FC<ApproveNftModalProps> = ({ nftId, onDismiss }) => {
+const DepositNftModal: React.FC<DepositNftModalProps> = ({ nftId, onDismiss }) => {
   const { account } = useWeb3React()
   const dispatch = useAppDispatch()
   const whalePoolContract = useWhalePoolContract()
@@ -82,6 +85,7 @@ const ApproveNftModal: React.FC<ApproveNftModalProps> = ({ nftId, onDismiss }) =
   const [approved, setApproved] = useState(false)
   const [approving, setApproving] = useState(false)
   const [depositing, setDepositing] = useState(false)
+  const { onStake } = useStake(whalePoolContract, selected)
   const { toastError } = useToast()
   const { userInfo: { ownedIds } } = useGetNftById(WHALE_PASS_ID)
   const balance = ownedIds.length
@@ -102,14 +106,19 @@ const ApproveNftModal: React.FC<ApproveNftModalProps> = ({ nftId, onDismiss }) =
   }, [selected, nftContract.methods, account, onDismiss])
 
   const onDepositNft = () => {
-
     if(approved && selected) {
       setDepositing(true)
-      whalePoolContract.methods.stake(selected).send({ from: account })
-        .then(() => {
-          toastError('Whale pass staked', 'We appreciate the support, stay tuned for more zombie whale perks ;)')
-          dispatch(fetchWhalePoolUserDataAsync(account))
+      onStake()
+        .then((succeeded) => {
+          if (succeeded) {
+            toastError('Whale pass staked', 'We appreciate the support, stay tuned for more zombie whale perks ;)')
+          }
+          setDepositing(false)
           onDismiss()
+
+        })
+        .catch(() => {
+          setDepositing(false)
         })
     }
   }
@@ -210,4 +219,4 @@ const ApproveNftModal: React.FC<ApproveNftModalProps> = ({ nftId, onDismiss }) =
   )
 }
 
-export default ApproveNftModal
+export default DepositNftModal

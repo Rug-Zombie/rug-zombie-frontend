@@ -11,6 +11,7 @@ const WHALE_POOL_NFT = 39
 const noAccountWhalePoolConfig: WhalePool = {
   address: contracts.whalePool,
   nftId: WHALE_POOL_NFT,
+  rewardNftIds: [95, 47, 75, 76, 80],
   poolInfo: {
     mintingFeeBnb: BIG_ZERO,
     totalStakers: 0,
@@ -58,6 +59,5 @@ export const fetchWhalePoolUserDataAsync = (account: string) => async (dispatch)
   const userInfo = await fetchWhalePoolUser(account)
   dispatch(setWhalePoolUserInfo(userInfo))
 }
-
 
 export default whalePoolSlice.reducer

@@ -113,8 +113,9 @@ export interface GraveConfig extends AnnouncementSubject {
 }
 
 export interface WhalePoolConfig {
-  address: Address,
-  nftId: 39
+  address: Address
+  nftId: number
+  rewardNftIds: number[]
 }
 
 export interface TombOverlayConfig {

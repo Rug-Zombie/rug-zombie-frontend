@@ -35,7 +35,7 @@ import { fetchNftPublicDataAsync } from './state/nfts'
 import Nfts from './views/Nfts'
 import BurnGraves from './views/BurnGraves'
 import { fetchPricesAsync } from './state/prices'
-import WhalePools from "./views/WhalePools";
+import WhalePools from "./views/WhalePool";
 
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page

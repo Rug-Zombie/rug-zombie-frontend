@@ -1,15 +1,16 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { useCallback, useMemo, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { useModal } from '@rug-zombie-libs/uikit'
-import { BigNumber } from "bignumber.js";
 import { useWeb3React } from "@web3-react/core";
 import { useWhalePoolContract } from '../../../../../../hooks/useContract'
 import useToast from '../../../../../../hooks/useToast'
 import PoolDetails from "./components/PoolDetails";
-import ApproveNftModal from "./components/ApproveNftModal";
+import DepositNftModal from "./components/DepositNftModal";
 import WhalePoolProgressBar from "./components/ProgressBar";
-import { useAppDispatch } from "../../../../../../state";
 import { WhalePool } from "../../../../../../state/types";
+import { useFinishMinting, useStartMinting, useUnstake } from "../../../../../../hooks/useWhalePool";
+import { formatDuration } from "../../../../../../utils/timerHelpers";
+import { useAppDispatch } from "../../../../../../state";
 import { fetchWhalePoolUserDataAsync } from "../../../../../../state/whalePools";
 
 const Separator = styled.div`
@@ -103,7 +104,6 @@ interface BottomProps {
 
 const Bottom: React.FC<BottomProps> = ({ whalePool }) => {
   const { account } = useWeb3React()
-  const dispatch = useAppDispatch()
   const { toastError } = useToast()
   const whalePoolContract = useWhalePoolContract()
   const {
@@ -121,61 +121,30 @@ const Bottom: React.FC<BottomProps> = ({ whalePool }) => {
   const canMint = !isMinting && canRequestMint
   const mintRequested = !hasRandom && isMinting
 
-  const [onApproveNftModal] = useModal(
-    <ApproveNftModal nftId={nftId}/>
+  const { onStartMinting } = useStartMinting(whalePoolContract, mintingFeeBnb)
+  const { onFinishMinting } = useFinishMinting(whalePoolContract)
+  const { onUnstake } = useUnstake(whalePoolContract)
+  const dispatch = useAppDispatch()
+  const [openModal] = useModal(
+    <DepositNftModal nftId={nftId}/>
   )
 
-  const requestMint = () => {
-    if(isStaked && canRequestMint) {
-      setConfirmingStake(true)
-      whalePoolContract.methods.startMinting().send({ from: account, value: mintingFeeBnb.toString() })
-        .then(() => {
-          toastError(stakingSteps[currentStep.current].toast.title)
-          currentStep.current = StakingStep.MintRequested
-          setConfirmingStake(false)
-        })
-    } else {
-      toastError("Mint time not passed yet.")
-    }
+  const onDepositNftModal = async () => {
+    openModal()
+    return true
   }
 
-  const showMintInProgress = () => {
+  const showMintInProgress = async () => {
     toastError("Mint is still in progress.")
+    dispatch(fetchWhalePoolUserDataAsync(account))
+    return true
   }
-
-  const finishMint = () => {
-    setConfirmingStake(true)
-    whalePoolContract.methods.finishMinting().send({ from: account })
-      .then(() => {
-        toastError(stakingSteps[currentStep.current].toast.title)
-        currentUnstakingStep.current = UnstakingStep.Unstake
-        setConfirmingStake(false)
-      })
-      .catch(() => {
-        setConfirmingStake(false)
-      })
-  }
-
-  const unstakeWhaleNft = useCallback(() => {
-    if(isStaked && account) {
-      setConfirmingUnstake(true)
-      whalePoolContract.methods.unstake().send({ from: account })
-        .then(() => {
-          toastError(unstakingSteps[currentUnstakingStep.current].toast.title)
-          setConfirmingUnstake(false)
-        })
-        .catch(() => {
-          setConfirmingUnstake(false)
-        })
-    }
-  } , [account, isStaked, toastError, unstakingSteps, whalePoolContract.methods])
 
   enum StakingStep {
     DepositWhaleNft,
     CanRequestMint,
     MintRequested,
     ClaimPrize,
-    Staked,
   }
 
   enum UnstakingStep {
@@ -183,34 +152,34 @@ const Bottom: React.FC<BottomProps> = ({ whalePool }) => {
     Unstake,
   }
 
-  const currentStep = useRef(StakingStep.DepositWhaleNft)
-  const currentUnstakingStep = useRef(UnstakingStep.NA)
+  let currentStep = StakingStep.DepositWhaleNft
+  let currentUnstakingStep = UnstakingStep.NA
 
   if(isStaked) {
-    currentStep.current = StakingStep.CanRequestMint
+    currentStep = StakingStep.CanRequestMint
   }
 
   if(mintRequested) {
-    currentStep.current = StakingStep.MintRequested
+    currentStep = StakingStep.MintRequested
   }
 
   if(hasRandom && isMinting) {
-    currentStep.current = StakingStep.ClaimPrize
+    currentStep = StakingStep.ClaimPrize
   }
 
   if(canMint) {
-    currentStep.current = StakingStep.CanRequestMint
+    currentStep = StakingStep.CanRequestMint
   }
 
   stakingSteps[StakingStep.DepositWhaleNft] = {
     label: `Deposit Whale Pass`,
     sent: `Depositing...`,
-    func: onApproveNftModal,
+    func: onDepositNftModal,
   }
   stakingSteps[StakingStep.CanRequestMint] = {
     label: `Request mint`,
     sent: `Requesting...`,
-    func: requestMint,
+    func: onStartMinting,
     toast: { title: `Mint Requested` },
   }
   stakingSteps[StakingStep.MintRequested] = {
@@ -222,12 +191,12 @@ const Bottom: React.FC<BottomProps> = ({ whalePool }) => {
   stakingSteps[StakingStep.ClaimPrize] = {
     label: `Claim Prize`,
     sent: `Claiming...`,
-    func: finishMint,
+    func: onFinishMinting,
     toast: { title: `Prize claimed successfully` },
   }
 
   if(isStaked) {
-    currentUnstakingStep.current = UnstakingStep.Unstake
+    currentUnstakingStep = UnstakingStep.Unstake
   }
 
   unstakingSteps[UnstakingStep.NA] = {
@@ -239,18 +208,39 @@ const Bottom: React.FC<BottomProps> = ({ whalePool }) => {
   unstakingSteps[UnstakingStep.Unstake] = {
     label: `Unstake Whale Pass`,
     sent: `Unstaking...`,
-    func: unstakeWhaleNft,
+    func: onUnstake,
     toast: { title: `Unstaked successfully` },
   }
 
-  const handleTx = () => {
-    stakingSteps[currentStep.current].func()
-    dispatch(fetchWhalePoolUserDataAsync(account))
-  }
+  const handleTx = useCallback(() => {
+    const step = stakingSteps[currentStep]
+    if(currentStep === StakingStep.CanRequestMint && nftMintTime.gt(0)) {
+      toastError("NFT is not ready", `${formatDuration(nftMintTime.toNumber(), false, true)} remaining.`)
+      dispatch(fetchWhalePoolUserDataAsync(account))
+      return
+    }
+    setConfirmingStake(true)
+    step.func()
+      .then((succeeded) => {
+        if(succeeded) {
+          if(step.toast) {
+            toastError(step.toast.title, step.toast.description)
+          }
+        }
+        setConfirmingStake(false)
+      })
+  }, [StakingStep.CanRequestMint, account, currentStep, dispatch, nftMintTime, stakingSteps, toastError])
 
   const handleUnstakeTx = () => {
-    unstakingSteps[currentUnstakingStep.current].func()
-    dispatch(fetchWhalePoolUserDataAsync(account))
+    const step = unstakingSteps[currentUnstakingStep]
+    setConfirmingUnstake(true)
+    step.func()
+      .then((succeeded) => {
+        if(succeeded) {
+          toastError(step.toast.title, step.toast.description)
+        }
+        setConfirmingUnstake(false)
+      })
   }
 
   return (
@@ -258,25 +248,25 @@ const Bottom: React.FC<BottomProps> = ({ whalePool }) => {
       <Separator/>
       <StakingContainer>
         <BalanceText>
-          Staked NFT id : <AmountText>{stakedId ? stakedId.toString() : 'None'}</AmountText>
+          Staked NFT ID : <AmountText>{isStaked ? stakedId.toString() : 'None'}</AmountText>
         </BalanceText>
         <Buttons>
           <PrimaryStakeButton onClick={handleTx}>
             <PrimaryStakeButtonText>
-              {confirmingStake ? stakingSteps[currentStep.current].sent : stakingSteps[currentStep.current].label}
+              {confirmingStake ? stakingSteps[currentStep].sent : stakingSteps[currentStep].label}
             </PrimaryStakeButtonText>
           </PrimaryStakeButton>
           <SecondaryStakeButton onClick={handleUnstakeTx} disabled={!isStaked}>
             <SecondaryStakeButtonText>
-              {confirmingUnstake ? unstakingSteps[currentUnstakingStep.current].sent : unstakingSteps[currentUnstakingStep.current].label}
+              {confirmingUnstake ? unstakingSteps[currentUnstakingStep].sent : unstakingSteps[currentUnstakingStep].label}
             </SecondaryStakeButtonText>
           </SecondaryStakeButton>
         </Buttons>
       </StakingContainer>
       <WhalePoolProgressBar isDeposited={isStaked} mintRequested={canRequestMint}
-                            mintFinished={mintRequested}/>
+                            mintFinished={hasRandom && isMinting}/>
       <Separator/>
-      <PoolDetails nftId={nftId}/>
+      <PoolDetails whalePool={whalePool}/>
     </>
   )
 }
