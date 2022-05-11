@@ -27,12 +27,13 @@ const Container = styled.div`
 const NftSliderContainer = styled.div`
   margin: 25px 0 15px 0;
   border-radius: 10px;
-  max-width: 300px;
   max-width: 400px;
   overflow-x: scroll;
   display: flex;
   justify-content: flex-start;
-  flex-direction: row;
+  @media only screen and (max-width: 470px) {
+    max-width: 300px;
+  }
 `
 
 const NftContainer = styled.div`
