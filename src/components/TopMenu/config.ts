@@ -35,6 +35,10 @@ const config: Config[] = [
     label: 'Catacombs',
     href: '/catacombs',
   },
+  {
+    label: 'WhalePool',
+    href: '/whalepool'
+  }
 ]
 
 export default config

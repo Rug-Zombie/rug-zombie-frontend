@@ -1,4 +1,4 @@
-import { getZombieAddress } from '../../utils/addressHelpers'
+import {getZombieAddress, getZombieAddressForPrices} from '../../utils/addressHelpers'
 import { TokenPrices } from '../types'
 
 export interface PriceApiResultInfo {
@@ -27,7 +27,7 @@ const infoToTokenPrices = ({ price, price_BNB }: PriceApiResultInfo): TokenPrice
 })
 
 const fetchPrices = async () => {
-  const zombieAddress = getZombieAddress()
+  const zombieAddress = getZombieAddressForPrices()
   const [topTokensResponse, zombieResponse] = await Promise.all([
     fetch('https://api.pancakeswap.info/api/v2/tokens'),
     fetch(`https://api.pancakeswap.info/api/v2/tokens/${zombieAddress}`),

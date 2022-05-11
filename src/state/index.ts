@@ -6,6 +6,7 @@ import spawningPoolsReducer from './spawningPools'
 import nftReducer from './nfts'
 import pricesReducer from './prices'
 import userActivityReducer from './userActivites'
+import whalePoolReducer from './whalePools'
 
 const store = configureStore({
   devTools: process.env.NODE_ENV !== 'production',
@@ -16,6 +17,7 @@ const store = configureStore({
     nfts: nftReducer,
     prices: pricesReducer,
     userActivity: userActivityReducer,
+    whalePool: whalePoolReducer,
   },
 })
 
