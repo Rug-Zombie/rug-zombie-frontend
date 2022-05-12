@@ -101,7 +101,7 @@ const HeaderCard:  React.FC<HeaderCardProps> = ({ whalePool }) => {
         <InfoCardHeader>
           <InfoCardTitle>WhalePools</InfoCardTitle>
           <InfoCardSubHeader>
-            Use your Whale NFTs to stake into Whalepool and earn random NFTs.
+            Stake your Whale Pass to earn random retired and exclusive NFTs.
             <ContractLink address={getWhalePoolAddress()} />
           </InfoCardSubHeader>
         </InfoCardHeader>
