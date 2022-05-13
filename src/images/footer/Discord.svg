@@ -1,7 +1,7 @@
 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="00 00 200 200">
     <defs>
         <style>
-            .cls-1{fill:#17181b;stroke:#b5bd00;stroke-miterlimit:10;stroke-width:5px;}.cls-2{fill:#b5bd00;}.cls-3{fill:none;}
+            .cls-1{fill:none;stroke:#b8c00d;stroke-miterlimit:10;stroke-width:5px;}.cls-2{fill:#b8c00d;}.cls-3{fill:none;}
         </style>
     </defs>
     <path class="cls-1" d="M46,94a85.8,85.8,0,1,1,85.8,85.8h0A85.91,85.91,0,0,1,46,94Z"
