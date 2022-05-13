@@ -90,6 +90,8 @@ export interface TombPoolInfo {
   lpPriceBnb: BigNumber
   lpReserves: [BigNumber, BigNumber]
   lpTotalSupply: BigNumber
+  bracketBStart: number
+  bracketCStart: number
 }
 
 export interface Tomb extends TombConfig {

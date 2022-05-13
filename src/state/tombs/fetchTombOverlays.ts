@@ -18,16 +18,20 @@ const fetchTombOverlays = async (tombsToFetch: TombConfig[]) => {
   const calls = tombsToFetch.flatMap((tomb) => [
     { address: tombOverlayAddress, name: 'poolInfo', params: [getId(tomb.overlay.pid)] },
     { address: tombOverlayAddress, name: 'mintingFeeInBnb', params: [] },
+    { address: tombOverlayAddress, name: 'bracketBStart', params: [] },
+    { address: tombOverlayAddress, name: 'bracketCStart', params: [] },
   ])
 
   const responses = await multicall(tombOverlay, calls)
 
-  return zipWith(tombsToFetch, chunk(responses, 2) as [TombPoolInfo, number][], (tomb, [info, fee]) => ({
+  return zipWith(tombsToFetch, chunk(responses, 4) as [TombPoolInfo, number, number, number][], (tomb, [info, fee, bStart, cStart]) => ({
     ...tomb,
     poolInfo: {
       mintingIsEnabled: info.isEnabled,
       nftMintTime: new BigNumber(info.mintingTime._hex),
       mintingFee: new BigNumber(fee),
+      bracketBStart: Number(bStart),
+      bracketCStart: Number(cStart)
     },
   }))
 }
