@@ -220,7 +220,6 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     ConvertDepositNft,
   }
 
-  const noStakeInput = Number.isNaN(stakeAmount)
   const insufficientStakeAmount = amount.plus(stakeAmount).lt(minimumStake)
   const insufficientZombieBalance = stakeAmount.gt(zombieBalance)
   const validUnstakeAmount = amount.minus(unstakeAmount).gte(minimumStake) || amount.minus(unstakeAmount).isZero()
@@ -314,25 +313,6 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
       step.func()
     } else {
       if (currentStep === StakingStep.StakeZombie) {
-
-
-
-
-        // if ( noStakeInput ){
-        //   toastGraves(
-        //     'Please enter',
-        //     `an amount`,
-        //   )
-        //   return
-        // }
-
-
-
-
-
-
-
-
         if (insufficientZombieBalance) {
           toastGraves(
             'Insufficient ZMBE balance',
