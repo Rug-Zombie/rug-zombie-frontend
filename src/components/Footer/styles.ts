@@ -83,3 +83,10 @@ export const FooterIcon = styled.img`
   border-radius: 25px;
   border: 1px solid #b8c00d;
 `
+
+export const DiscordFooterIcon = styled.img`
+  width: 40px;
+  height: 40px;
+  transform: scale(1.15);
+  
+`

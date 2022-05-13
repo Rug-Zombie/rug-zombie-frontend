@@ -4,6 +4,7 @@ import logo from 'images/Logo.svg'
 import telegram from 'images/footer/Telegram.svg'
 import twitter from 'images/footer/Twitter.svg'
 import discord from 'images/footer/Discord.svg'
+import reddit from 'images/Reddit_Logo.svg'
 import config, { Type } from './config'
 
 import {
@@ -18,6 +19,7 @@ import {
   FooterIcons,
   FooterIconLink,
   FooterIcon,
+  DiscordFooterIcon,
 } from './styles'
 
 const Footer: React.FC = () => {
@@ -63,7 +65,7 @@ const Footer: React.FC = () => {
             <FooterIcon src={twitter} alt="Twitter Icon" />
           </FooterIconLink>
           <FooterIconLink href="https://discord.gg/TK8uueH4wQ" target="_blank" rel="noopener noreferrer">
-            <FooterIcon src={discord} alt="Discord Icon" />
+            <DiscordFooterIcon src={discord} alt="Discord Icon" />
           </FooterIconLink>
         </FooterIcons>
       </FooterContent>
