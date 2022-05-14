@@ -88,4 +88,5 @@ export const DiscordFooterIcon = styled.img`
   width: 40px;
   height: 40px;
   transform: scale(1.15);
+  
 `
