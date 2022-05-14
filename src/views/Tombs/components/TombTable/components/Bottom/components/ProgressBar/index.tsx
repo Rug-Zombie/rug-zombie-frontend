@@ -3,6 +3,9 @@ import styled from 'styled-components'
 import ProgressCircle from './components/ProgressCircle'
 import ProgressLine from './components/ProgressLine'
 import ProgressText from './components/ProgressText'
+import BracketCircle from "./components/BracketCircle";
+import BracketLine from "./components/BracketLine";
+import BracketText from "./components/BracketText";
 import { Tomb } from '../../../../../../../../state/types'
 
 const ProgressFlex = styled.div`
@@ -22,11 +25,27 @@ const IconFlex = styled.div`
 `
 
 const TextFlex = styled.div`
-  width: 96%;
+  width: 91%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 `
+
+const IconFlexBracket = styled.div`
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 20px;
+  align-items: center;
+`
+
+const BracketFlex = styled.div`
+  width: 85%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
 
 interface StakingProgressBarProps {
   tomb: Tomb
@@ -39,11 +58,20 @@ enum Step {
   Staked,
 }
 
+enum Bracket {
+  O,
+  A,
+  B,
+  C,
+}
+
 const ProgressBar: React.FC<StakingProgressBarProps> = ({ tomb }) => {
   const {
     userInfo: { lpBalance, lpAllowance, amount },
   } = tomb
   const steps = ['Pair LP', 'Approve LP', 'Stake LP']
+  const brackets = ['Bracket A', 'Bracket B', 'Bracket C']
+
 
   let currentStep = Step.PairLp
   if (lpBalance.gt(0)) {
@@ -54,6 +82,20 @@ const ProgressBar: React.FC<StakingProgressBarProps> = ({ tomb }) => {
   }
   if (amount.gt(0)) {
     currentStep = Step.Staked
+  }
+
+  let currentBracket = Bracket.O
+  if (tomb.userInfo.amount.eq(0)){
+    currentBracket = Bracket.O
+  }
+  if (tomb.userInfo.amount.dividedBy(tomb.poolInfo.tokenAmount).lt(0.05) && tomb.userInfo.amount.gt(0)){
+    currentBracket = Bracket.A
+  }
+  if (tomb.userInfo.amount.dividedBy(tomb.poolInfo.tokenAmount).gte(0.05) && tomb.userInfo.amount.dividedBy(tomb.poolInfo.tokenAmount).lte(0.1)){
+    currentBracket = Bracket.B
+  }
+  if (tomb.userInfo.amount.dividedBy(tomb.poolInfo.tokenAmount).gt(0.1)){
+    currentBracket = Bracket.C
   }
 
   return (
@@ -73,6 +115,22 @@ const ProgressBar: React.FC<StakingProgressBarProps> = ({ tomb }) => {
           return <ProgressText active={index <= currentStep}>{step}</ProgressText>
         })}
       </TextFlex>
+
+      <IconFlexBracket>
+        {brackets.map((step, index) => {
+          return (
+              <>
+                <BracketCircle active={index < currentBracket} step={index} />
+                {index !== brackets.length - 1 ? <BracketLine active={index + 1 < currentBracket} /> : null}
+              </>
+          )
+        })}
+      </IconFlexBracket>
+      <BracketFlex>
+        {brackets.map((step, index) => {
+          return <BracketText active={index <= currentBracket}>{step}</BracketText>
+        })}
+      </BracketFlex>
     </ProgressFlex>
   )
 }
