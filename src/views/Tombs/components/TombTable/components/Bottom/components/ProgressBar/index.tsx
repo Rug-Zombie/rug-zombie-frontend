@@ -7,6 +7,8 @@ import BracketCircle from "./components/BracketCircle";
 import BracketLine from "./components/BracketLine";
 import BracketText from "./components/BracketText";
 import { Tomb } from '../../../../../../../../state/types'
+import {formatNumber} from "../../../../../../../../utils/formatBalance";
+
 
 const ProgressFlex = styled.div`
   width: 100%;
@@ -40,7 +42,7 @@ const IconFlexBracket = styled.div`
 `
 
 const BracketFlex = styled.div`
-  width: 85%;
+  width: 86%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -70,7 +72,11 @@ const ProgressBar: React.FC<StakingProgressBarProps> = ({ tomb }) => {
     userInfo: { lpBalance, lpAllowance, amount },
   } = tomb
   const steps = ['Pair LP', 'Approve LP', 'Stake LP']
-  const brackets = ['Bracket A', 'Bracket B', 'Bracket C']
+
+  const bracketA = (tomb.poolInfo.tokenAmount.times(0.05e-18).toNumber())
+  const bracketB = (tomb.poolInfo.tokenAmount.times(0.1e-18).toNumber())
+
+  const brackets = [['Less than ', bracketA, ' LP'], [bracketA,' LP to ',bracketB, ' LP'], ['More than ', bracketB, ' LP']]
 
 
   let currentStep = Step.PairLp
@@ -128,9 +134,11 @@ const ProgressBar: React.FC<StakingProgressBarProps> = ({ tomb }) => {
       </IconFlexBracket>
       <BracketFlex>
         {brackets.map((step, index) => {
-          return <BracketText active={index <= currentBracket}>{step}</BracketText>
+          return <BracketText active={index < currentBracket}>{step}</BracketText>
         })}
       </BracketFlex>
+      <br/><br/>
+      <BracketText active>The users owned percentage of Tombs total LP determines which bracket they will be in.</BracketText>
     </ProgressFlex>
   )
 }

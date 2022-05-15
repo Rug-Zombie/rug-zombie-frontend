@@ -13,7 +13,7 @@ const ActiveText = styled.p`
 
 const InactiveText = styled.p`
   text-align: center;
-  font: normal normal 100 14px/21px Poppins;
+  font: normal normal 300 14px/17px Poppins;
   color: #6b7682;
 `
 
