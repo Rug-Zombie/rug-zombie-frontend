@@ -19,16 +19,13 @@ export const TutorialItem = styled.div<{ selected: boolean }>`
   display: flex;
   justify-content: left;
   align-items: center;
-  
 `
-
 
 export const TutorialItemIconPlus = styled(PlusIcon)`
   padding-left: 25px;
 `
 
 export const TutorialItemIconMinus = styled(MinusIcon)`
-
   padding-left: 25px;
 `
 

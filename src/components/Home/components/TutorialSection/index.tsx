@@ -34,7 +34,7 @@ const TutorialSection: React.FC = () => {
                   Use your ZMBE, LP tokens, and dead tokens to earn NFTs and ZMBE rewards
                   <br/>
                   <SubTitle>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad beatae distinctio doloribus est fugit ipsam libero, saepe ullam! Eos illo, rerum? Dolores error facere fuga illo magnam voluptate voluptates voluptatum!
+                    Our GRAVES allow users to earn custom NFTs for their dead tokens! Never held a dead/rugged token? No problem! Stake LP tokens in our TOMBS to mint exclusive NFTs, or join our SPAWNING POOLS to receive partner tokens.
                   </SubTitle>
                 </TutorialItemTextSelected>
               </TutorialSelected>
@@ -60,7 +60,7 @@ const TutorialSection: React.FC = () => {
                   Play and win assets in a variety of NFT powered games
                   <br/>
                   <SubTitle>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad beatae distinctio doloribus est fugit ipsam libero, saepe ullam! Eos illo, rerum? Dolores error facere fuga illo magnam voluptate voluptates voluptatum!
+                    Through our gaming partner, Dead Games Studio, use your NFT to play and earn in our various games. Whether you venture into the catacombs, or find out more about Patient Zero, there are many ways to play using your NFTs.
                   </SubTitle>
                 </TutorialItemTextSelected>
               </TutorialSelected>
@@ -75,9 +75,6 @@ const TutorialSection: React.FC = () => {
             )
           }
         </TutorialItem>
-
-
-
         <TutorialItem selected={selected3}>
           {selected3 === true ? (
               <TutorialSelected onClick={() => setSelected3(false)}>
@@ -86,7 +83,7 @@ const TutorialSection: React.FC = () => {
                   Earn passive income holding your NFTs
                   <br/>
                   <SubTitle>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad beatae distinctio doloribus est fugit ipsam libero, saepe ullam! Eos illo, rerum? Dolores error facere fuga illo magnam voluptate voluptates voluptatum!
+                    While this feature is not implemented yet, ZMBE NFT holders will eventually benefit from passive earnings from their assets in our upcoming ecommerce partners.
                   </SubTitle>
                 </TutorialItemTextSelected>
               </TutorialSelected>
@@ -109,11 +106,12 @@ const TutorialSection: React.FC = () => {
               <TutorialSelected onClick={() => setSelected4(false)}>
                 <TutorialItemIconMinus /><TutorialItemIconMinus />
                 <TutorialItemTextSelected>
-                  Trade your NFTs on a sister project, the Oblivion Marketplace; and take advantage of low fees, ZMBE rebates
-                  and special NFT Drops
+                  Trade on the Oblivion Marketplace
                   <br/>
                   <SubTitle>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad beatae distinctio doloribus est fugit ipsam libero, saepe ullam! Eos illo, rerum? Dolores error facere fuga illo magnam voluptate voluptates voluptatum!
+                    Trade your NFTs on a sister project, the Oblivion Marketplace.
+                    Earn passive income renting your NFTS to others, giving them others temporary ownership for use in our games.
+                    Take advantage of low fees, ZMBE rebates and special NFT Drops.
                   </SubTitle>
                 </TutorialItemTextSelected>
               </TutorialSelected>
@@ -122,8 +120,7 @@ const TutorialSection: React.FC = () => {
               <TutorialUnSelected onClick={() => setSelected4(true)}>
                 <TutorialItemIconPlus />
                 <TutorialItemText>
-                  Trade your NFTs on a sister project, the Oblivion Marketplace; and take advantage of low fees, ZMBE rebates
-                  and special NFT Drops
+                  Trade on the Oblivion Marketplace
                 </TutorialItemText >
               </TutorialUnSelected>
             )
