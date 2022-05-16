@@ -312,7 +312,11 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
     if (step.nonAsync) {
       step.func()
     } else {
-      if (currentStep === StakingStep.StakeZombie) {
+      if ([StakingStep.StakeZombie, StakingStep.Staked].includes(currentStep)) {
+        if (stakeAmount.isNaN()) {
+          toastGraves('Please enter a stake amount')
+          return
+        }
         if (insufficientZombieBalance) {
           toastGraves(
             'Insufficient ZMBE balance',
@@ -369,7 +373,9 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   }, [
     stakingSteps,
     currentStep,
+    stakeAmount,
     StakingStep.StakeZombie,
+    StakingStep.Staked,
     StakingStep.DepositRug,
     StakingStep.UnlockGrave,
     nftMintTime,
@@ -428,7 +434,7 @@ const Bottom: React.FC<BottomProps> = ({ grave }) => {
   }
 
   const handleUnstakeTx = useCallback(async () => {
-    if (currentUnstakingStep === UnstakingStep.Unstake || currentUnstakingStep === UnstakingStep.UnstakeEarly) {
+    if ([UnstakingStep.Unstake, UnstakingStep.UnstakeEarly].includes(currentUnstakingStep)) {
       if (insufficientStakedBalance) {
         toastGraves('Insufficient staked balance', 'The amount specified exceeds your staked balance')
         return

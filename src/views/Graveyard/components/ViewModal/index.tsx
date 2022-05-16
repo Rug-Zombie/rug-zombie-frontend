@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable react-hooks.ts/rules-of-hooks.ts */
 import React from 'react'
 import { Modal } from '@rug-zombie-libs/uikit'
 import useTheme from 'hooks/useTheme'

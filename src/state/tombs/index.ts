@@ -22,6 +22,8 @@ const noAccountTombConfig: Tomb[] = tombsConfig.map((tomb) => ({
     lpPriceBnb: BIG_ZERO,
     lpReserves: [BIG_ZERO, BIG_ZERO],
     lpTotalSupply: BIG_ZERO,
+    bracketBStart: 0,
+    bracketCStart: 0
   },
   userInfo: {
     tokenWithdrawalDate: BIG_ZERO,

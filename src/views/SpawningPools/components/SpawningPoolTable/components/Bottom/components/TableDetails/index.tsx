@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import numeral from 'numeral'
 import { useHistory } from 'react-router'
+import { getAddress } from 'utils/addressHelpers'
+import ContractLink from 'components/ContractLink'
 import { getBalanceAmount, getFullDisplayBalance } from '../../../../../../../../utils/formatBalance'
 import { SpawningPool } from '../../../../../../../../state/types'
 import { formatDays, formatDuration, now } from '../../../../../../../../utils/timerHelpers'
@@ -94,6 +96,7 @@ const Text = styled.span`
 
 const TableDetails: React.FC<TableDetailsProps> = ({ spawningPool }) => {
   const {
+    address,
     nftId,
     endDate,
     poolInfo: { withdrawCooldown, nftMintTime, totalAmount, minimumStake, unlockFee },
@@ -124,6 +127,9 @@ const TableDetails: React.FC<TableDetailsProps> = ({ spawningPool }) => {
           <HeaderText>{name}</HeaderText>
           <SubHeaderText>
             Pool TVL: <Text>{numeral(tvl.toString()).format('$ (0.00 a)')}</Text>
+          </SubHeaderText>
+          <SubHeaderText>
+            <ContractLink address={getAddress(address)} linkText="Pool Contract" />
           </SubHeaderText>
         </SpawningPoolInfo>
         <SpawningPoolInfo>

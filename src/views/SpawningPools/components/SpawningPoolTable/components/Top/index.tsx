@@ -1,3 +1,4 @@
+import AnnouncementLink from 'components/AnnouncementLink'
 import React from 'react'
 import styled from 'styled-components'
 import tokens from 'config/constants/tokens'
@@ -51,10 +52,15 @@ const SpawningPoolTitle = styled.div`
 const TabFlex = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  column-gap: 5px;
+  margin-left: 5px;
+  
   @media (max-width: 527px) {
     flex-direction: column;
     align-items: flex-end;
     justify-content: center;
+    row-gap: 5px;
   }
 `
 
@@ -68,10 +74,6 @@ const GreenTab = styled.div`
   justify-content: center;
   padding-left: 10px;
   padding-right: 10px;
-  margin: 0 5px;
-  @media (max-width: 527px) {
-    margin: 0;
-  }
 `
 
 const GreyTab = styled.div`
@@ -82,9 +84,6 @@ const GreyTab = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  @media (max-width: 527px) {
-    margin: 5px 0;
-  }
 `
 
 const GreenTabText = styled.div`
@@ -185,6 +184,7 @@ const Top: React.FC<TopProps> = ({ spawningPool, open, setOpen }) => {
               <GreenTabText>NEW</GreenTabText>
             </GreenTab>
           ) : null}
+          <AnnouncementLink subject={spawningPool} />
         </TabFlex>
       </SpawningPoolHeaderRow>
       <SpawningPoolSubRow>

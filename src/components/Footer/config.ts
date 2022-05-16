@@ -48,7 +48,8 @@ const config = [
     },
     {
       label: 'Contact',
-      href: '/mausoleum',
+      href: 'https://rugzombie.gitbook.io/docs/untitled',
+      type: Type.ExternalLink,
     },
     {
       label: 'Github',

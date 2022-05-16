@@ -1,3 +1,4 @@
+import AnnouncementLink from 'components/AnnouncementLink'
 import React from 'react'
 import styled from 'styled-components'
 import uppointer from 'images/tombs/Hide_Dropdown.svg'
@@ -52,10 +53,15 @@ const TombTitle = styled.div`
 const TabFlex = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  column-gap: 5px;
+  margin-left: 5px;
+  
   @media (max-width: 527px) {
     flex-direction: column;
     align-items: flex-end;
     justify-content: center;
+    row-gap: 5px;
   }
 `
 
@@ -67,10 +73,6 @@ const GreenTab = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 5px;
-  @media (max-width: 527px) {
-    margin: 0;
-  }
 `
 
 const GreyTab = styled.div`
@@ -81,9 +83,6 @@ const GreyTab = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  @media (max-width: 527px) {
-    margin: 5px 0;
-  }
 `
 
 const GreenTabText = styled.div`
@@ -179,6 +178,7 @@ const Top: React.FC<TopProps> = ({ tomb, open, setOpen }) => {
               <GreenTabText>NEW</GreenTabText>
             </GreenTab>
           ) : null}
+          <AnnouncementLink subject={tomb} />
         </TabFlex>
       </TombHeaderRow>
       <TombSubRow>

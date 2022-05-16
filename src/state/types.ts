@@ -1,15 +1,23 @@
 import BigNumber from 'bignumber.js'
 
-import { Address, Artist, GraveConfig, SpawningPoolConfig, TombConfig, UserActivityType } from 'config/constants/types'
+import {
+  Address,
+  Artist,
+  GraveConfig,
+  SpawningPoolConfig,
+  TombConfig,
+  UserActivityType,
+  WhalePoolConfig
+} from 'config/constants/types'
 
 export type TranslatableText =
   | string
   | {
-      key: string
-      data?: {
-        [key: string]: string | number
-      }
-    }
+  key: string
+  data?: {
+    [key: string]: string | number
+  }
+}
 
 export interface GraveUserInfo {
   paidUnlockFee: boolean
@@ -40,6 +48,27 @@ export interface Grave extends GraveConfig {
   poolInfo: GravePoolInfo
 }
 
+export interface WhalePoolInfo {
+  mintingFeeBnb: BigNumber
+  totalStakers: number
+  mintingTime: BigNumber
+}
+
+export interface WhalePoolUserInfo {
+  stakedNft: string,
+  stakedId: BigNumber,
+  nftMintTime: BigNumber,
+  isStaked: boolean,
+  isMinting: boolean,
+  hasRandom: boolean,
+  randomNumber: BigNumber
+}
+
+export interface WhalePool extends WhalePoolConfig {
+  poolInfo: WhalePoolInfo
+  userInfo: WhalePoolUserInfo
+}
+
 export interface TombUserInfo {
   tokenWithdrawalDate: BigNumber
   nftMintTime: BigNumber
@@ -61,6 +90,8 @@ export interface TombPoolInfo {
   lpPriceBnb: BigNumber
   lpReserves: [BigNumber, BigNumber]
   lpTotalSupply: BigNumber
+  bracketBStart: number
+  bracketCStart: number
 }
 
 export interface Tomb extends TombConfig {
@@ -106,6 +137,12 @@ export interface GravesState {
   userDataLoaded: boolean
 }
 
+export interface WhalePoolState {
+  data: WhalePool
+  userDataLoaded: boolean
+}
+
+
 export interface TombsState {
   data: Tomb[]
   userDataLoaded: boolean
@@ -125,6 +162,7 @@ export interface GraveState {
   data: Grave[]
   userDataLoaded: boolean
 }
+
 
 export interface TokenPrices {
   priceUsd: number
@@ -285,4 +323,5 @@ export interface State {
   userActivity: UserActivityState
   predictions: PredictionsState
   nfts: NftState
+  whalePool: WhalePoolState
 }

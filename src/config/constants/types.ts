@@ -1,11 +1,20 @@
-export interface Address {
-  97?: string
-  56: string
+export enum ChainId {
+  BSC = 56,
+  BSCTestnet = 97,
+}
+export type ChainIdMapping<T> = { [key in ChainId]: T }
+
+export type Address = ChainIdMapping<string>
+export type Id = ChainIdMapping<number>
+
+export interface AnnouncementSubject {
+  announcementIds: number[],
 }
 
-export interface Id {
-  97?: number
-  56: number
+export interface Announcement {
+  title: string
+  url: string
+  published: number
 }
 
 export interface Token {
@@ -14,6 +23,7 @@ export interface Token {
   decimals?: number
   projectLink?: string
   tokenLogo?: string
+  geckoId?: string
 }
 
 export enum PoolIds {
@@ -82,7 +92,7 @@ export enum UserActivityType {
   DrFMintNft,
 }
 
-export interface GraveConfig {
+export interface GraveConfig extends AnnouncementSubject {
   pid: Id
   name: string
   nftId: number
@@ -102,6 +112,12 @@ export interface GraveConfig {
   isRetired?: boolean
 }
 
+export interface WhalePoolConfig {
+  address: Address
+  nftId: number
+  rewardNftIds: number[]
+}
+
 export interface TombOverlayConfig {
   pid: Id
   commonId: number
@@ -110,7 +126,7 @@ export interface TombOverlayConfig {
   legendaryId: number
 }
 
-export interface TombConfig {
+export interface TombConfig extends AnnouncementSubject{
   id: number
   pid: Id
   token1: Token
@@ -122,7 +138,7 @@ export interface TombConfig {
   overlay: TombOverlayConfig
 }
 
-export interface SpawningPoolConfig {
+export interface SpawningPoolConfig extends AnnouncementSubject{
   id: number
   name: string
   address: Address

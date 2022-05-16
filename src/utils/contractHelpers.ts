@@ -24,6 +24,7 @@ import {
   getDrBurnensteinAddress,
   getPancakeFactoryAddress,
   getApeswapFactoryAddress,
+  getWhalePoolAddress,
 } from 'utils/addressHelpers'
 
 // ABI
@@ -51,6 +52,7 @@ import sharkpoolAbi from 'config/abi/autosharkPool.json'
 import drBurnensteinAbi from 'config/abi/drBurnenstein.json'
 import pancakeFactory from 'config/abi/pancakeFactoryAbi.json'
 import rugMarketAbi from 'config/abi/rugMarket.json'
+import whalePoolAbi from 'config/abi/whalePool.json'
 
 export const getContract = (abi: any, address: string, web3?: Web3) => {
   const _web3 = web3 ?? web3NoAccount
@@ -143,4 +145,8 @@ export const getApeswapFactoryContract = (web3?: Web3) => {
 
 export const getRugMarketContract = (web3?: Web3) => {
   return getContract(rugMarketAbi, getRugMarketAddress(), web3)
+}
+
+export const getWhalePoolContract = (web3?: Web3) => {
+  return getContract(whalePoolAbi, getWhalePoolAddress(), web3)
 }
