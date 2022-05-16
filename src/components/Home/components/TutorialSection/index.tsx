@@ -3,7 +3,7 @@ import React, {useState} from 'react'
 import SectionContainer from '../SectionContainer'
 import SectionHeader from '../SectionHeader'
 
-import { TutorialItems, TutorialItem, TutorialItemIconPlus, TutorialItemIconMinus, TutorialItemText, TutorialSelected, TutorialUnSelected, SubTitle } from './styles'
+import { TutorialItems, TutorialItem, TutorialItemIconPlus, TutorialItemIconMinus, TutorialItemText, TutorialSelected, TutorialUnSelected, TutorialItemTextSelected, SubTitle } from './styles'
 
 
 
@@ -19,28 +19,28 @@ const TutorialSection: React.FC = () => {
   const [selected4, setSelected4] = useState(null)
 
 
+
+
   return (
     <SectionContainer backgroundColor="#0d1517">
       <SectionHeader title="How does RugZombie work" />
       <TutorialItems>
 
-
-
-
-        <TutorialItem>
+        <TutorialItem selected={selected1}>
           {selected1 === true ? (
               <TutorialSelected onClick={() => setSelected1(false)}>
                 <TutorialItemIconMinus /><TutorialItemIconMinus />
-                <TutorialItemText>
+                <TutorialItemTextSelected>
                   Use your ZMBE, LP tokens, and dead tokens to earn NFTs and ZMBE rewards
                   <br/>
                   <SubTitle>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad beatae distinctio doloribus est fugit ipsam libero, saepe ullam! Eos illo, rerum? Dolores error facere fuga illo magnam voluptate voluptates voluptatum!
                   </SubTitle>
-                </TutorialItemText>
+                </TutorialItemTextSelected>
               </TutorialSelected>
             ):
-            (<TutorialUnSelected onClick={() => setSelected1(true)}>
+            (
+              <TutorialUnSelected onClick={() => setSelected1(true)}>
                 <TutorialItemIconPlus />
                 <TutorialItemText>
                   Use your ZMBE, LP tokens, and dead tokens to earn NFTs and ZMBE rewards
@@ -52,20 +52,21 @@ const TutorialSection: React.FC = () => {
 
 
 
-        <TutorialItem>
+        <TutorialItem selected={selected2}>
           {selected2 === true ? (
               <TutorialSelected onClick={() => setSelected2(false)}>
                 <TutorialItemIconMinus /><TutorialItemIconMinus />
-                <TutorialItemText>
+                <TutorialItemTextSelected>
                   Play and win assets in a variety of NFT powered games
                   <br/>
                   <SubTitle>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad beatae distinctio doloribus est fugit ipsam libero, saepe ullam! Eos illo, rerum? Dolores error facere fuga illo magnam voluptate voluptates voluptatum!
                   </SubTitle>
-                </TutorialItemText>
+                </TutorialItemTextSelected>
               </TutorialSelected>
             ):
-            (<TutorialUnSelected onClick={() => setSelected2(true)}>
+            (
+              <TutorialUnSelected onClick={() => setSelected2(true)}>
                 <TutorialItemIconPlus />
                 <TutorialItemText>
                   Play and win assets in a variety of NFT powered games
@@ -77,20 +78,21 @@ const TutorialSection: React.FC = () => {
 
 
 
-        <TutorialItem>
+        <TutorialItem selected={selected3}>
           {selected3 === true ? (
               <TutorialSelected onClick={() => setSelected3(false)}>
                 <TutorialItemIconMinus /><TutorialItemIconMinus />
-                <TutorialItemText>
+                <TutorialItemTextSelected>
                   Earn passive income holding your NFTs
                   <br/>
                   <SubTitle>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad beatae distinctio doloribus est fugit ipsam libero, saepe ullam! Eos illo, rerum? Dolores error facere fuga illo magnam voluptate voluptates voluptatum!
                   </SubTitle>
-                </TutorialItemText>
+                </TutorialItemTextSelected>
               </TutorialSelected>
             ):
-            (<TutorialUnSelected onClick={() => setSelected3(true)}>
+            (
+              <TutorialUnSelected onClick={() => setSelected3(true)}>
                 <TutorialItemIconPlus />
                 <TutorialItemText>
                   Earn passive income holding your NFTs
@@ -102,21 +104,22 @@ const TutorialSection: React.FC = () => {
 
 
 
-        <TutorialItem>
+        <TutorialItem selected={selected4}>
           {selected4 === true ? (
               <TutorialSelected onClick={() => setSelected4(false)}>
                 <TutorialItemIconMinus /><TutorialItemIconMinus />
-                <TutorialItemText>
+                <TutorialItemTextSelected>
                   Trade your NFTs on a sister project, the Oblivion Marketplace; and take advantage of low fees, ZMBE rebates
                   and special NFT Drops
                   <br/>
                   <SubTitle>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad beatae distinctio doloribus est fugit ipsam libero, saepe ullam! Eos illo, rerum? Dolores error facere fuga illo magnam voluptate voluptates voluptatum!
                   </SubTitle>
-                </TutorialItemText>
+                </TutorialItemTextSelected>
               </TutorialSelected>
             ):
-            (<TutorialUnSelected onClick={() => setSelected4(true)}>
+            (
+              <TutorialUnSelected onClick={() => setSelected4(true)}>
                 <TutorialItemIconPlus />
                 <TutorialItemText>
                   Trade your NFTs on a sister project, the Oblivion Marketplace; and take advantage of low fees, ZMBE rebates

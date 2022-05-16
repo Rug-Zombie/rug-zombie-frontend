@@ -10,16 +10,18 @@ export const TutorialItems = styled.div`
   margin-bottom: 60px;
 `
 
-export const TutorialItem = styled.div`
+export const TutorialItem = styled.div<{ selected: boolean }>`
   width: 90vw;
   max-width: 850px;
   padding: 20px 30px;
   margin-bottom: 20px;
-  border: 1px solid #162635;
+  border: ${(props) => (props.selected ? '1px solid #30C00D' : '1px solid #162635')};
   display: flex;
   justify-content: left;
   align-items: center;
+  
 `
+
 
 export const TutorialItemIconPlus = styled(PlusIcon)`
   padding-left: 25px;
@@ -37,10 +39,18 @@ export const TutorialItemText = styled.p`
   padding-left: 25px;
 `
 
-export const TutorialSelected = styled.div`
+export const TutorialItemTextSelected = styled.p`
+  text-align: left;
+  font: normal normal normal 18px/36px Poppins;
+  color: #30C00D;
+  padding-left: 25px;
+`
 
-  width: 100%;
+
+export const TutorialSelected = styled.div`
+  width: 90vw;
   max-width: 850px;
+  padding-top 50px;
   display: flex;
   justify-content: left;
   position: relative;
@@ -69,6 +79,7 @@ export const TutorialUnSelected = styled.div`
 
 export const SubTitle = styled.small`
   font: normal normal normal 16px/30px Poppins;
-  color: #777BAB;
+  color: #939EB4;
 `;
+
 
