@@ -68,7 +68,7 @@ const Footer: React.FC = () => {
             <DiscordFooterIcon src={discord} alt="Discord Icon" />
           </FooterIconLink>
           <FooterIconLink href="https://www.reddit.com/r/Rugzombie/" target="_blank" rel="noopener noreferrer">
-            <FooterIcon src={reddit} alt="Discord Icon" />
+            <FooterIcon src={reddit} alt="Reddit Icon" />
           </FooterIconLink>
 
         </FooterIcons>
