@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { PlusIcon } from 'components/Icons'
+import { PlusIcon, MinusIcon } from 'components/Icons'
+
 
 export const TutorialItems = styled.div`
   padding: 20px 30px;
@@ -20,7 +21,12 @@ export const TutorialItem = styled.div`
   align-items: center;
 `
 
-export const TutorialItemIcon = styled(PlusIcon)`
+export const TutorialItemIconPlus = styled(PlusIcon)`
+  padding-left: 25px;
+`
+
+export const TutorialItemIconMinus = styled(MinusIcon)`
+
   padding-left: 25px;
 `
 
@@ -30,3 +36,39 @@ export const TutorialItemText = styled.p`
   color: #ffffff;
   padding-left: 25px;
 `
+
+export const TutorialSelected = styled.div`
+
+  width: 100%;
+  max-width: 850px;
+  display: flex;
+  justify-content: left;
+  position: relative;
+  z-index: 1;     
+  padding: 2em;     
+  margin: -2em; 
+  &:hover {
+    cursor: pointer;
+  }
+`
+
+export const TutorialUnSelected = styled.div`
+  width: 90vw;
+  max-width: 850px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  position: relative;
+  z-index: 1;     
+  padding: 2em;     
+  margin: -2em; 
+  &:hover {
+    cursor: pointer;
+  }
+`
+
+export const SubTitle = styled.small`
+  font: normal normal normal 16px/30px Poppins;
+  color: #777BAB;
+`;
+
