@@ -98,7 +98,7 @@ const graves: GraveConfig[] = [
     liquidityDetails: 'None! You must earn the Basic Zombie NFT from the RugZombie Common TombTable to gain access.',
     depositNftId: 6,
     nftConverterPid: 0,
-    isFeatured: true,
+    isRetired: true,
     announcementIds: [133],
   },
   {
@@ -112,7 +112,7 @@ const graves: GraveConfig[] = [
     liquidityDetails: 'None! You must earn the Basic Zombie NFT from the RugZombie Common TombTable to gain access.',
     depositNftId: 6,
     nftConverterPid: 0,
-    isFeatured: true,
+    isRetired: true,
     announcementIds: [133],
   },
   {
