@@ -65,7 +65,7 @@ const selectFilteredGraves = createSelector(
     switch (filter[1]) {
       case 'All graves':
       case 'All types':
-        return graves.data.filter((g) => !g.isRetired && g.poolInfo.allocPoint.gt(0) && (!g.endDate || g.endDate > now()) || g.isFeatured )
+        return graves.data.filter((g) => !g.isRetired && (!g.endDate || g.endDate > now()) || g.isFeatured )
       case 'Staked':
         return graves.data.filter((g) => g.userInfo.amount.gt(0))
       case 'NFT-only':
