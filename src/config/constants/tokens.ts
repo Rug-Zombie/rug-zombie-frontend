@@ -41,6 +41,16 @@ const tokens: { [key: string]: Token } = {
     projectLink: 'https://axieinfinity.com/',
     tokenLogo: 'https://assets.coingecko.com/coins/images/13029/small/axie_infinity_logo.png?1604471082',
   },
+  luna: {
+    symbol: 'LUNA',
+    address: {
+      56: '0x156ab3346823b651294766e23e6cf87254d68962',
+      97: '0x715d400f88c167884bbcc41c5fea407ed4d2f8a0',
+    },
+    decimals: 6,
+    projectLink: 'https://www.terra.money/',
+    tokenLogo: 'https://assets.coingecko.com/coins/images/22951/small/LUNA_wh_small.png?1644226405',
+  },
   eafi: {
     symbol: 'EAFI',
     address: {

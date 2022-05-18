@@ -131,7 +131,7 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
       </NftImageContainer>
       <Details>
         <GraveInfo>
-          <HeaderText>{name}</HeaderText>
+          <HeaderText>{nftId === 52 ? 'Artwork coming soon!' : name}</HeaderText>
           <SubHeaderText>
             Weight: <Text>{allocPoint.div(100).toString()}X</Text>
           </SubHeaderText>
