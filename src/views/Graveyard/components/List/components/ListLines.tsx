@@ -53,6 +53,8 @@ const Title = styled.div`
   letter-spacing: 0px;
   color: #ffffff;
   margin-top: 25px;
+  padding-left: 20px;
+  padding-right: 20px;
   width: 50%;
 `
 
@@ -61,6 +63,7 @@ const RarityText = styled.div`
   font: normal normal normal 20px/30px Poppins;
   letter-spacing: 0px;
   color: #30c00d;
+  width: 25%;
   margin-top: 25px;
 
 `
@@ -70,6 +73,7 @@ const SubText = styled.span`
   font: normal normal normal 16px/30px Poppins;
   letter-spacing: 0px;
   margin-top: 25px;
+  padding-right: 20px;
   color: #6B7682;
 `
 
@@ -102,7 +106,7 @@ const ListLines: React.FC<CollectionCardProps> = ({ id, showOwned, showTotalSupp
                 <RarityText>{rarity}</RarityText>
 
                 {showTotalSupply ? (
-                    <p style={{ marginLeft: '175px', marginTop: '25px'}}>
+                    <p style={{ marginTop: '25px'}}>
                         <SubText>Total supply:&nbsp;&nbsp;</SubText>
                         <SubText style={{ color: '#FFFFFF' }}>{totalSupply.toString()}</SubText>
                     </p>

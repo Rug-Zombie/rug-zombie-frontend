@@ -8,7 +8,6 @@ const NftsContainer = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  min-width: 1000px;
   padding-bottom: 30px;
 `
 
