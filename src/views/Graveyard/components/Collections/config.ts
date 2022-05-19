@@ -1,18 +1,10 @@
-import {Normal} from "../../../../components/Icons";
-
 interface Collection {
-  title: any
+  title: string
   description: string
   nftId: number
 }
 
 const config: Collection[] = [
-  {
-    title: Normal,
-    description: 'None',
-    nftId: 0,
-  },
-
   {
     title: 'All',
     description: 'None',
