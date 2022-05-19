@@ -76,6 +76,19 @@ const graves: GraveConfig[] = [
   },
   {
     pid: {
+      56: 60,
+      97: 1,
+    },
+    name: 'TerraUSD Legendary',
+    nftId: 52,
+    rug: tokens.ust,
+    isNew: true,
+    isFeatured: true,
+    rugDex: Dex.PCS_V2,
+    announcementIds: [],
+  },
+  {
+    pid: {
       56: 59,
       97: 1,
     },
