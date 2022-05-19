@@ -305,7 +305,7 @@ const Nfts: React.FC = () => {
               <Row>
                 <Variants>
                   {nft.userInfo.ownedIds.map((value) => (
-                      <Variant  onClick={() => setSelectedVariant(value) }>
+                      <Variant  onClick={() => setSelectedVariant(value)  }>
                         {nft.type === 'image' ? (
                             <Small isSelected={value === selectedVariant} src={nft.path} />
                         ) : (

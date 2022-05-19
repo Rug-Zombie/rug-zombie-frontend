@@ -352,7 +352,7 @@ table td {
     border-style: none;
     margin: 0;
   }
-  .info-icon .icon:last-child() {
+  .info-icon .icon:last-child {
     margin-left: -10px;
   }
   .info-td-one {

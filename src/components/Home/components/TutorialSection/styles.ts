@@ -10,13 +10,11 @@ export const TutorialItems = styled.div`
 `
 
 export const TutorialItem = styled.div`
-  width: 90vw;
-  max-width: 850px;
+  width: 850px;
   padding: 20px 30px;
   margin-bottom: 20px;
   border: 1px solid #162635;
   display: flex;
-  justify-content: left;
   align-items: center;
 `
 
