@@ -10,6 +10,7 @@ export const TutorialItems = styled.div`
   margin-bottom: 60px;
 `
 
+
 export const TutorialItem = styled.div<{ selected: boolean }>`
   width: 90vw;
   max-width: 850px;
@@ -17,7 +18,6 @@ export const TutorialItem = styled.div<{ selected: boolean }>`
   margin-bottom: 20px;
   border: ${(props) => (props.selected ? '1px solid #30C00D' : '1px solid #162635')};
   display: flex;
-  justify-content: left;
   align-items: center;
 `
 

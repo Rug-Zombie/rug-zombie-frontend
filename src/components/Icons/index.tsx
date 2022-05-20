@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components'
 import telegram from 'images/footer/Telegram.svg'
 import twitter from 'images/footer/Twitter.svg'
+import ListIcon from 'images/icons/ListIcon.png'
+import IconView from 'images/icons/IconView.png'
 
 
 
@@ -18,6 +20,23 @@ const VerticalLine = styled.div`
   border: 1px solid #b8c00d;
   opacity: 1;
 `
+
+
+export const Normal = () => {
+    return (
+        <div>
+            <img style={{ position: 'relative', bottom: '32px', left: '13px' }} src={IconView} alt="Icon View"/>
+        </div>
+    )
+}
+
+export const List = () => {
+    return (
+        <div>
+            <img style={{ position: 'relative', bottom: '32px', left: '13px' }} src={ListIcon} alt="List Icon"/>
+        </div>
+    )
+}
 
 export const PlusIcon = () => {
   return (
