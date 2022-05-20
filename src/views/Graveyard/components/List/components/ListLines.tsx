@@ -56,6 +56,13 @@ const Title = styled.div`
   padding-left: 20px;
   padding-right: 20px;
   width: 50%;
+  @media (max-width: 1083px){
+    font: normal normal normal 16px/30px Poppins;
+  }
+  @media (max-width: 730px){
+    font: normal normal normal 10px/30px Poppins;
+    width: 40%;
+  }
 `
 
 const RarityText = styled.div`
@@ -65,7 +72,14 @@ const RarityText = styled.div`
   color: #30c00d;
   width: 25%;
   margin-top: 25px;
-
+  @media (max-width: 1083px){
+    font: normal normal normal 16px/30px Poppins;
+    width: 20%;
+  }
+  @media (max-width: 730px){
+    font: normal normal normal 10px/30px Poppins;
+    width: 15%;
+  }
 `
 
 const SubText = styled.span`
@@ -73,8 +87,13 @@ const SubText = styled.span`
   font: normal normal normal 16px/30px Poppins;
   letter-spacing: 0px;
   margin-top: 25px;
-  padding-right: 20px;
   color: #6B7682;
+  @media (max-width: 1083px){
+    font: normal normal normal 14px/30px Poppins;
+  }
+  @media (max-width: 730px){
+    font: normal normal normal 10px/30px Poppins;
+  }
 `
 
 interface CollectionCardProps {
