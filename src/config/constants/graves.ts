@@ -76,6 +76,32 @@ const graves: GraveConfig[] = [
   },
   {
     pid: {
+      56: 60,
+      97: 1,
+    },
+    name: 'TerraUSD Legendary',
+    nftId: 52,
+    rug: tokens.ust,
+    isNew: true,
+    isFeatured: true,
+    rugDex: Dex.PCS_V2,
+    announcementIds: [],
+  },
+  {
+    pid: {
+      56: 59,
+      97: 1,
+    },
+    name: 'Luna Legendary',
+    nftId: 52,
+    rug: tokens.luna,
+    isNew: true,
+    isFeatured: true,
+    rugDex: Dex.PCS_V2,
+    announcementIds: [],
+  },
+  {
+    pid: {
       56: 58,
       97: 1,
     },
@@ -98,7 +124,7 @@ const graves: GraveConfig[] = [
     liquidityDetails: 'None! You must earn the Basic Zombie NFT from the RugZombie Common TombTable to gain access.',
     depositNftId: 6,
     nftConverterPid: 0,
-    isFeatured: true,
+    isRetired: true,
     announcementIds: [133],
   },
   {
@@ -112,7 +138,7 @@ const graves: GraveConfig[] = [
     liquidityDetails: 'None! You must earn the Basic Zombie NFT from the RugZombie Common TombTable to gain access.',
     depositNftId: 6,
     nftConverterPid: 0,
-    isFeatured: true,
+    isRetired: true,
     announcementIds: [133],
   },
   {
@@ -137,7 +163,6 @@ const graves: GraveConfig[] = [
     depositNftId: 34,
     rug: tokens.babe,
     nftConverterPid: 5,
-    isNew: true,
     endDate: 1651982400,
     announcementIds: [69],
   },
@@ -151,7 +176,6 @@ const graves: GraveConfig[] = [
     rug: tokens.mutant,
     depositNftId: 33,
     nftConverterPid: 7,
-    isNew: true,
     endDate: 1651982400,
     announcementIds: [67],
   },
@@ -165,7 +189,6 @@ const graves: GraveConfig[] = [
     rug: tokens.cthuhlu,
     depositNftId: 64,
     nftConverterPid: 6,
-    isNew: true,
     endDate: 1651982400,
     announcementIds: [99],
   },
@@ -178,7 +201,6 @@ const graves: GraveConfig[] = [
     nftId: 90,
     rug: tokens.atlas,
     rugDex: Dex.PCS_V2,
-    isNew: true,
     announcementIds: [129],
   },
   {
