@@ -63,9 +63,8 @@ const Title = styled.div`
     font: normal normal normal 10px/30px Poppins;
     width: 40%;
   }
-  @media (max-width: 500px){
+  @media (max-width: 450px){
     font: normal normal normal 8px/15px Poppins;
-    height: 30px;
     width: 25%;
   }
   @media (max-width: 310px){
@@ -93,8 +92,12 @@ const RarityText = styled.div`
     width: 20%;
   }
   @media (max-width: 730px){
-    font: normal normal normal 10px/15px Poppins;
+    font: normal normal normal 10px/30px Poppins;
     width: 20%;
+  }
+  @media (max-width: 450px){
+    font: normal normal normal 8px/15px Poppins;
+    width: 25%;
   }
   @media (max-width: 310px){
     font: normal normal normal 8px/15px Poppins;
@@ -112,7 +115,7 @@ const SubText = styled.span`
     font: normal normal normal 14px/30px Poppins;
   }
   @media (max-width: 730px){
-    font: normal normal normal 10px/15px Poppins;
+    font: normal normal normal 10px/30px Poppins;
   }
   @media (max-width: 450px){
     font: normal normal normal 8px/15px Poppins;
