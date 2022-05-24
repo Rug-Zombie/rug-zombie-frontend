@@ -85,6 +85,10 @@ const GreenTab = styled(GreyTab)`
   border: 2px solid #b8c00d;
 `
 
+const RedTab = styled(GreyTab)`
+  border: 2px solid #fc0303;
+`
+
 const BlueTab = styled(GreyTab)`
   border: 2px solid #4b7bdc;
 `
@@ -195,9 +199,9 @@ const Top: React.FC<TopProps> = ({ grave, open, setOpen }) => {
 
     if (isNew) {
       tabs.push(
-        <GreenTab>
+        <RedTab>
           <WhiteTabText>NEW</WhiteTabText>
-        </GreenTab>,
+        </RedTab>,
       )
     }
 
