@@ -84,7 +84,8 @@ const graves: GraveConfig[] = [
     rug: tokens.zape,
     isNew: true,
     isFeatured: true,
-    announcementIds: [],
+    liquidityDetails: 'ZAPE token can be found in the Catacombs (RugMarket / RugRoll), you can also ask a community member in the  RugZombie telegram.',
+    announcementIds: [137],
   },
   {
     pid: {

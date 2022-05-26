@@ -92,6 +92,13 @@ const Text = styled.span`
   white-space: nowrap;
 `
 
+const LiquidityText = styled(Text)`
+  text-align: left;
+  font: normal normal normal 14px/21px Poppins;
+  color: #AE32AA;
+  white-space: normal;
+`
+
 const Link = styled(LinkExternal)`
   color: #ae32aa;
 `
@@ -102,6 +109,7 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
     endDate,
     rug,
     rugDex,
+    liquidityDetails,
     poolInfo: { allocPoint, withdrawCooldown, nftMintTime, tokenAmount, minimumStake, unlockFee },
   } = grave
   const { name, path, type } = useGetNftById(nftId)
@@ -141,6 +149,9 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
           {rugDex === Dex.PCS_V2 ? (
             <Link href={`${BASE_EXCHANGE_URL}/swap?outputCurrency=${getAddress(rug.address)}`}>Get {rug.symbol}</Link>
           ) : null}
+          {liquidityDetails ? <SubHeaderText style={{ maxWidth: '300px' }}>
+            Liquidity: <LiquidityText>{liquidityDetails}</LiquidityText>
+          </SubHeaderText> : null}
         </GraveInfo>
         <GraveInfo>
           <HeaderText>
