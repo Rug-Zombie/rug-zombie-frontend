@@ -351,6 +351,16 @@ const tokens: { [key: string]: Token } = {
     projectLink: '',
     tokenLogo: 'https://assets.coingecko.com/coins/images/19203/small/logo_200x200_%285%29.png?1634682332',
   },
+  zape: {
+    symbol: 'ZAPE',
+    address: {
+      56: '0xaC1F2445F8E1Bd750762120df97b1b7b9f994775',
+      97: '',
+    },
+    decimals: 0,
+    projectLink: '',
+    tokenLogo: 'https://assets.coingecko.com/coins/images/24383/small/apecoin.jpg?1647476455',
+  },
   hunny: {
     symbol: 'HUNNY',
     address: {

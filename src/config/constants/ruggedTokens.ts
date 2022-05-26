@@ -1,4 +1,6 @@
 const ruggedTokens = [
+  'zape',
+  'luna',
   'bonfire',
   'tndr',
   'rugbiden',

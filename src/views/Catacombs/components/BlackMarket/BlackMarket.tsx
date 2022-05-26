@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Flex, useMatchBreakpoints } from '@catacombs-libs/uikit'
+import { sortBy } from "lodash";
 import Menu from '../../../../components/Catacombs/Menu'
 import Page from '../../../../components/layout/Page'
 import * as get from '../../../../redux/get'
+import { account, cancelRugMarketListing, markRugMarketListingSold } from '../../../../redux/get'
 import CatacombsBackgroundDesktopSVG from '../../../../images/CatacombsMain-1920x1080px.svg'
 import CatacombsBackgroundMobileSVG from '../../../../images/CatacombsMain-414x720px.svg'
 import Table from './components/Table'
-import { updateRugMarketListings, addRugMarketListings } from '../../../../redux/fetch'
+import { addRugMarketListings, updateRugMarketListings } from '../../../../redux/fetch'
 import TabButtons from './components/TabButtons'
-import { account, cancelRugMarketListing, markRugMarketListingSold } from '../../../../redux/get'
 import { useRugMarket } from '../../../../hooks/useContract'
 import { tokenByAddress } from '../../../../utils/tokenHelper'
 
@@ -74,6 +75,8 @@ const BlackMarket: React.FC = () => {
     updateRugMarketListings()
   }, [])
 
+  console.log(visibleListings)
+
   return (
     <Menu>
       <Flex justifyContent="center">
@@ -85,7 +88,7 @@ const BlackMarket: React.FC = () => {
           <Page style={{ paddingTop: '5%' }}>
             <TabButtons setFilter={setFilter} />
             <div>
-              {visibleListings.map((listing) => {
+              {sortBy(visibleListings, l => -l.id).map((listing) => {
                 return <Table id={listing.id} />
               })}
             </div>

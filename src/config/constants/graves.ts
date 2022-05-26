@@ -76,6 +76,18 @@ const graves: GraveConfig[] = [
   },
   {
     pid: {
+      56: 61,
+      97: 1,
+    },
+    name: 'BAYC Rare',
+    nftId: 104,
+    rug: tokens.zape,
+    isNew: true,
+    isFeatured: true,
+    announcementIds: [],
+  },
+  {
+    pid: {
       56: 60,
       97: 1,
     },

@@ -1620,6 +1620,21 @@ const nfts: Nft[] = [
     rarity: 'Legendary',
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 104,
+    name: 'Bored to Death',
+    symbol: 'BTD',
+    description: "I know you’re bored like me.",
+    address: {
+      56: '0x6f07CD3fdF7a4637E4a0420605cE2eDAE12d6Bfa',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://storage.googleapis.com/rug-zombie/Bored%20to%20Death.jpg',
+    type: 'image',
+    rarity: 'Rare',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts
