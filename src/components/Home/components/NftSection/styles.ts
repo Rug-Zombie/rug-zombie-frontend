@@ -27,6 +27,7 @@ export const HalfLine = styled.div`
 `
 
 export const NftCardImg = styled.img`
+  align-items: center;
   max-height: 200px;
   padding-top: 55px;
 `
@@ -68,11 +69,20 @@ export const NftCardFooter = styled.div`
   align-self: flex-end;
   padding: 0 10% 40px 10%;
   margin-top: auto;
+  text-align: right;
 `
 
-export const NftCardFooterAction = styled.div`
-  text-align: right;
+export const NftCardCursorHover = styled.div`
+  text-align: center;
   &:hover {
     cursor: pointer;
   }
 `
+
+export const NFTCardTextRight = styled.div`
+  text-align: right;
+  font: normal normal normal 16px/30px Poppins;
+  color: ${({ color }) => color || '#6B7682'};
+  margin: 0 0.5em;
+`
+
