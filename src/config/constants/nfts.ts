@@ -1607,11 +1607,11 @@ const nfts: Nft[] = [
   },
   {
     id: 103,
-    name: 'Infinity Times Infinity',
-    symbol: 'IFI',
+    name: 'Infinity X Infinity',
+    symbol: 'IXI',
     description: "We are the dust of dust.",
     address: {
-      56: '0x6f07CD3fdF7a4637E4a0420605cE2eDAE12d6Bfa',
+      56: '0x8f89461A411C7D1f3662F8298b983fC3FcD6fb6E',
       97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
     },
     totalSupply: BIG_ZERO,
