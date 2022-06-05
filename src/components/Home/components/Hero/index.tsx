@@ -2,6 +2,7 @@ import React from 'react'
 import { PrimaryButtonText } from 'components/Buttons'
 import numeral from 'numeral'
 import { getZombieAddress } from 'utils/addressHelpers'
+import '../Components.Styles.css'
 
 import {
   ButtonsDiv,

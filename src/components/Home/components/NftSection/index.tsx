@@ -7,6 +7,8 @@ import spLogo from 'images/home/SpawningPools.svg'
 import spArrow from 'images/home/SpawningPoolArrow.svg'
 import SectionContainer from '../SectionContainer'
 import SectionHeader from '../SectionHeader'
+import '../Components.Styles.css'
+
 
 import {
   NftCards,

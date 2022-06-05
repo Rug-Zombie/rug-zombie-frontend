@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 
 import SectionContainer from '../SectionContainer'
 import SectionHeader from '../SectionHeader'
+import '../Components.Styles.css'
+
 
 import { TutorialItems, TutorialItem, TutorialItemIconPlus, TutorialItemIconMinus, TutorialItemText, TutorialSelected, TutorialUnSelected, TutorialItemTextSelected, SubTitle } from './styles'
 
