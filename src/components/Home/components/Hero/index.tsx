@@ -2,6 +2,7 @@ import React from 'react'
 import { PrimaryButtonText } from 'components/Buttons'
 import numeral from 'numeral'
 import { getZombieAddress } from 'utils/addressHelpers'
+import {useInView} from "react-intersection-observer";
 import '../Components.Styles.css'
 
 import {
@@ -24,9 +25,11 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ tvl, history }) => {
+  const {ref, inView, entry} = useInView();
+
   return (
-    <HeroContainer>
-      <HeroContent>
+    <HeroContainer >
+      <HeroContent ref={ref} className={entry?.boundingClientRect?.top > 100 || !entry?.boundingClientRect?.top ? `fade-in-section ${inView ? 'is-visible' : ''}` : ''}>
         <TitleTextBox>Resurrect Your Dead Tokens</TitleTextBox>
         <SubTextBox>
           Turn your worthless tokens into assets. RugZombie is introducing the next generation of NFT utility, with
