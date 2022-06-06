@@ -106,7 +106,7 @@ const graves: GraveConfig[] = [
       97: 1,
     },
     name: 'Luna Legendary',
-    nftId: 52,
+    nftId: 105,
     rug: tokens.luna,
     isNew: true,
     isFeatured: true,

@@ -1635,6 +1635,21 @@ const nfts: Nft[] = [
     rarity: 'Rare',
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 105,
+    name: 'Sub Optimal Size',
+    symbol: 'SOS',
+    description: "Oh you think you got size?",
+    address: {
+      56: '0xaFeb8d4423F4A86c35e546ba7E5AcbD2198CA84B',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmY59acze88fF2VB27kPcrfiJEEuPshfWPrGQdv8AKmiEf',
+    type: 'image',
+    rarity: 'Legendary',
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts
