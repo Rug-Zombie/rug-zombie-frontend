@@ -11,14 +11,36 @@ export const TutorialItems = styled.div`
 `
 
 
-export const TutorialItem = styled.div<{ selected: boolean }>`
+export const TutorialItem = styled.div`
+  position: relative;
   width: 90vw;
   max-width: 850px;
   padding: 20px 30px;
   margin-bottom: 20px;
-  border: ${(props) => (props.selected ? '1px solid #30C00D' : '1px solid #162635')};
+  border: 1px solid #162635;
   display: flex;
+  justify-content: left;
   align-items: center;
+  z-index: 1000;
+  &:hover{
+    cursor: pointer;
+  }
+`
+
+export const TutorialItemSelected = styled.div`
+  position: relative;
+  width: 90vw;
+  max-width: 850px;
+  padding: 20px 30px;
+  margin-bottom: 20px;
+  border: 1px solid #30C00D;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  z-index: 1000;
+  &:hover{
+    cursor: pointer;
+  }
 `
 
 export const TutorialItemIconPlus = styled(PlusIcon)`
@@ -45,15 +67,13 @@ export const TutorialItemTextSelected = styled.p`
 
 
 export const TutorialSelected = styled.div`
-  width: 90vw;
+  height: 10%;
+  width: 100%;
   max-width: 850px;
-  padding-top 50px;
   display: flex;
   justify-content: left;
   position: relative;
-  z-index: 1;     
-  padding: 2em;     
-  margin: -2em; 
+  z-index: 1000;
   &:hover {
     cursor: pointer;
   }
@@ -66,9 +86,7 @@ export const TutorialUnSelected = styled.div`
   justify-content: left;
   align-items: center;
   position: relative;
-  z-index: 1;     
-  padding: 2em;     
-  margin: -2em; 
+  z-index: 1;
   &:hover {
     cursor: pointer;
   }

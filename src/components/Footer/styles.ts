@@ -11,6 +11,7 @@ export const FooterImage = styled.div`
   position: relative;
   top: -310px;
   height: 354px;
+  z-index: 0;
   background-image: url(${backgroundImage});
   background-size: cover;
   background-position: center center;

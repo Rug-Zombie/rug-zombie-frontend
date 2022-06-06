@@ -8,7 +8,7 @@ import IconView from 'images/icons/IconView.png'
 
 
 const HorizontalLine = styled.div`
-  width: 20px;
+  min-width: 20px;
   height: 0px;
   border: 1px solid #b8c00d;
   opacity: 1;
