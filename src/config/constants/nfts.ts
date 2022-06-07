@@ -1626,7 +1626,7 @@ const nfts: Nft[] = [
     symbol: 'BTD',
     description: "I know you’re bored like me.",
     address: {
-      56: '0x6f07CD3fdF7a4637E4a0420605cE2eDAE12d6Bfa',
+      56: '0xA5482fb8647C5F496cF7f95955f41C8792947315',
       97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
     },
     totalSupply: BIG_ZERO,
