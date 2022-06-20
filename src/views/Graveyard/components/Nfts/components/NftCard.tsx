@@ -102,7 +102,6 @@ const NftCard: React.FC<CollectionCardProps> = ({ id, showOwned, showTotalSupply
   } = useGetNftById(id)
   const history = useHistory()
   const [error, setError] = useState(false)
-  const imageUrl = error ? getHighResImage(getAddress(address)) : getLowResImage(getAddress(address))
   return (
     <Container>
       <Card
@@ -111,7 +110,7 @@ const NftCard: React.FC<CollectionCardProps> = ({ id, showOwned, showTotalSupply
         }}
       >
         <PreviewDiv>
-          {type === 'image' ? <PreviewImage src={imageUrl} onError={() => setError(true)} alt={`${name} NFT`} /> :
+          {type === 'image' ? <PreviewImage src={getHighResImage(getAddress(address))} alt={`${name} NFT`} /> :
             <PreviewVid path={getHighResImage(getAddress(address))} />}
         </PreviewDiv>
         <div style={{ paddingTop: '20px' }} />
