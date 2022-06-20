@@ -821,7 +821,7 @@ const nfts: Nft[] = [
     symbol: 'ENIGMA',
     description: 'With this artefact, I am certain of nothing.',
     address: {
-      56: '0xBE15d0213Acb06151EC62044972DEb035717eD3B',
+      56: '0xE2624202F05040BFffA5253A808a0423A24f5ad6',
       97: '0x701855c54F7084D494DA18157bD164d3AB32a0a0',
     },
     totalSupply: BIG_ZERO,
