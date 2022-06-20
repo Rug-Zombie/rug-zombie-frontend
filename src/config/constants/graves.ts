@@ -93,7 +93,7 @@ const graves: GraveConfig[] = [
       97: 1,
     },
     name: 'TerraUSD Legendary',
-    nftId: 52,
+    nftId: 106,
     rug: tokens.ust,
     isNew: true,
     isFeatured: true,

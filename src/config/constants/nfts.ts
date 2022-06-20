@@ -1588,6 +1588,7 @@ const nfts: Nft[] = [
     path: 'https://ipfs.io/ipfs/QmSpuxcTm64dWq54UKFPiF48qkygG3HAnadxBiy8pFP5nB',
     type: 'image',
     rarity: 'Rare',
+    artist: artists.jussjoshinduh,
     userInfo: { ...DEFAULT_USER_INFO },
   },
   {
@@ -1633,6 +1634,7 @@ const nfts: Nft[] = [
     path: 'https://storage.googleapis.com/rug-zombie/Bored%20to%20Death.jpg',
     type: 'image',
     rarity: 'Rare',
+    artist: artists.jussjoshinduh,
     userInfo: { ...DEFAULT_USER_INFO },
   },
   {
@@ -1648,6 +1650,23 @@ const nfts: Nft[] = [
     path: 'https://ipfs.io/ipfs/QmY59acze88fF2VB27kPcrfiJEEuPshfWPrGQdv8AKmiEf',
     type: 'image',
     rarity: 'Legendary',
+    artist: artists.jussjoshinduh,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
+  {
+    id: 106,
+    name: 'Unbalanced',
+    symbol: 'UNBALANCED',
+    description: "The scales have been tipped.",
+    address: {
+      56: '0xfb34026c38B98c62D059686Cc0358E1dE1fbf70C',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmRe1snje7uXKA2mVdfoiqTQyj86K2dwYX1prSTrwbrJXb',
+    type: 'image',
+    rarity: 'Legendary',
+    artist: artists.canadiancryptojunkie,
     userInfo: { ...DEFAULT_USER_INFO },
   },
 ]
