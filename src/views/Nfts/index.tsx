@@ -11,7 +11,7 @@ import { fetchNftUserDataAsync } from '../../state/nfts'
 import { useGetNftById } from '../../state/hooks'
 import './Nfts.styles.css'
 import { getAddress } from '../../utils/addressHelpers'
-import { formatAddress, getBscScanLink } from '../../utils'
+import { formatAddress, getBscScanLink, getHighResImage } from '../../utils'
 import { PreviewVideo, SmallPreviewVideo } from '../../components/Video/NftVideo'
 import Footer from '../../components/Footer'
 import { SecondaryButton } from '../../components/Buttons'
@@ -307,10 +307,10 @@ const Nfts: React.FC = () => {
                   {nft.userInfo.ownedIds.map((value) => (
                       <Variant  onClick={() => setSelectedVariant(value)  }>
                         {nft.type === 'image' ? (
-                            <Small isSelected={value === selectedVariant} src={nft.path} />
+                            <Small isSelected={value === selectedVariant} src={getHighResImage(getAddress(nft.address))} />
                         ) : (
                             <VidDiv>
-                              <SmallVid path={nft.path} />
+                              <SmallVid path={getHighResImage(getAddress(nft.address))} />
                             </VidDiv>
                         )}
                         <HighlightSmall>{value}</HighlightSmall>
@@ -347,10 +347,10 @@ const Nfts: React.FC = () => {
       <NftPage>
         <Left>
           {nft.type === 'image' ? (
-            <Image src={nft.path} />
+            <Image src={getHighResImage(getAddress(nft.address))} />
           ) : (
             <VidDiv>
-              <PreviewVid path={nft.path} />
+              <PreviewVid path={getHighResImage(getAddress(nft.address))} />
             </VidDiv>
           )}
           {!isSingleColumn ? variantsTab : null }
