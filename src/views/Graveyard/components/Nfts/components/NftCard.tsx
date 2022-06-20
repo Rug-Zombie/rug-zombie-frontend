@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import PreviewVideo from 'components/Video/PreviewVideo'
 import { useHistory } from 'react-router'
 import { useGetNftById } from '../../../../../state/nfts/hooks'
+import { getAddress } from "../../../../../utils/addressHelpers";
+import { getHighResImage, getLowResImage } from "../../../../../utils";
 
 const Container = styled.div`
   display: flex;
@@ -91,14 +93,15 @@ interface CollectionCardProps {
 
 const NftCard: React.FC<CollectionCardProps> = ({ id, showOwned, showTotalSupply }) => {
   const {
+    address,
     name,
-    path,
     totalSupply,
     rarity,
     type,
     userInfo: { ownedIds },
   } = useGetNftById(id)
   const history = useHistory()
+  const [error, setError] = useState(false)
   return (
     <Container>
       <Card
@@ -107,7 +110,8 @@ const NftCard: React.FC<CollectionCardProps> = ({ id, showOwned, showTotalSupply
         }}
       >
         <PreviewDiv>
-          {type === 'image' ? <PreviewImage src={path} alt={`${name} NFT`} /> : <PreviewVid path={path} />}
+          {type === 'image' ? <PreviewImage src={getHighResImage(getAddress(address))} alt={`${name} NFT`} /> :
+            <PreviewVid path={getHighResImage(getAddress(address))} />}
         </PreviewDiv>
         <div style={{ paddingTop: '20px' }} />
         <RarityText>{rarity}</RarityText>

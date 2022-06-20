@@ -8,6 +8,7 @@ import { getBalanceAmount, getFullDisplayBalance } from '../../../../../../../..
 import { SpawningPool } from '../../../../../../../../state/types'
 import { formatDays, formatDuration, now } from '../../../../../../../../utils/timerHelpers'
 import { useGetBnbPriceUsd, useGetNftById, useGetZombiePriceUsd } from '../../../../../../../../state/hooks'
+import { getHighResImage } from "../../../../../../../../utils";
 
 export enum SpawningPoolItemType {
   Number,
@@ -101,7 +102,7 @@ const TableDetails: React.FC<TableDetailsProps> = ({ spawningPool }) => {
     endDate,
     poolInfo: { withdrawCooldown, nftMintTime, totalAmount, minimumStake, unlockFee },
   } = spawningPool
-  const { name, path, type } = useGetNftById(nftId)
+  const { name, address: nftAddress, type } = useGetNftById(nftId)
   const tvl = getBalanceAmount(totalAmount.times(useGetZombiePriceUsd()))
   const unlockFeeUsd = unlockFee.times(useGetBnbPriceUsd())
   const history = useHistory()
@@ -116,10 +117,10 @@ const TableDetails: React.FC<TableDetailsProps> = ({ spawningPool }) => {
       <NftImageContainer onClick={() => history.push(`/nfts/${nftId}`)}>
         {type === 'video' ? (
           <NftVideo autoPlay loop muted>
-            <source src={path} type="video/webm" />
+            <source src={getHighResImage(getAddress(nftAddress))} type="video/webm" />
           </NftVideo>
         ) : (
-          <NftImage src={path} onError={imageOnErrorHandler} />
+          <NftImage src={getHighResImage(getAddress(nftAddress))} onError={imageOnErrorHandler} />
         )}
       </NftImageContainer>
       <Details>
