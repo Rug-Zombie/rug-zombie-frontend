@@ -7,6 +7,7 @@ import { getFullDisplayBalance } from '../../../../../../../../utils/formatBalan
 import { Tomb } from '../../../../../../../../state/types'
 import { formatDays } from '../../../../../../../../utils/timerHelpers'
 import { useGetBnbPriceUsd, useGetNftById } from '../../../../../../../../state/hooks'
+import { getHighResImage } from "../../../../../../../../utils";
 
 export enum TombItemType {
   Number,
@@ -95,7 +96,7 @@ const TableDetails: React.FC<TableDetailsProps> = ({ tomb }) => {
     poolInfo: { allocPoint, withdrawCooldown, nftMintTime, tokenAmount, lpPriceBnb, mintingFee },
     overlay: { legendaryId },
   } = tomb
-  const { name, path, type } = useGetNftById(legendaryId)
+  const { name, address, type } = useGetNftById(legendaryId)
 
   const bnbPriceUsd = useGetBnbPriceUsd()
   const tvl = tokenAmount.times(lpPriceBnb).times(bnbPriceUsd)
@@ -112,10 +113,10 @@ const TableDetails: React.FC<TableDetailsProps> = ({ tomb }) => {
       <NftImageContainer>
         {type === 'video' ? (
           <NftVideo autoPlay loop muted>
-            <source src={path} type="video/webm" />
+            <source src={getHighResImage(getAddress(address))} type="video/webm" />
           </NftVideo>
         ) : (
-          <NftImage src={path} onError={imageOnErrorHandler} />
+          <NftImage src={getHighResImage(getAddress(address))} onError={imageOnErrorHandler} />
         )}
       </NftImageContainer>
       <Details>
