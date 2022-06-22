@@ -63,9 +63,9 @@ export function tombPids(): number[] {
 export const range = (start, end) => Array.from(Array(end - start + 1).keys()).map((x) => x + start)
 
 export const getHighResImage = (nftAddress: string): string => {
-  return `https://api.oblivion.art/image-cache/${nftAddress}_1_high`
+  return `https://api.oblivion.art/image-cache/${nftAddress.toLowerCase()}_1_high`
 }
 
 export const getLowResImage = (nftAddress: string): string => {
-  return `https://api.oblivion.art/image-cache/${nftAddress}_1_low`
+  return `https://api.oblivion.art/image-cache/${nftAddress.toLowerCase()}_1_low`
 }
