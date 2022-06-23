@@ -1669,6 +1669,22 @@ const nfts: Nft[] = [
     artist: artists.canadiancryptojunkie,
     userInfo: { ...DEFAULT_USER_INFO },
   },
+  {
+    id: 107,
+    name: 'Le Woof',
+    symbol: 'WOOF',
+    description: "Outside of a dog, a book is man's best friend. Inside of a dog it's too dark to read.",
+    address: {
+      56: '0x439B03e440A4b10803deBA21086bE22539cFA350',
+      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+    },
+    totalSupply: BIG_ZERO,
+    path: 'https://ipfs.io/ipfs/QmRe1snje7uXKA2mVdfoiqTQyj86K2dwYX1prSTrwbrJXb',
+    type: 'image',
+    rarity: 'Legendary',
+    artist: artists.canadiancryptojunkie,
+    userInfo: { ...DEFAULT_USER_INFO },
+  },
 ]
 
 export default nfts

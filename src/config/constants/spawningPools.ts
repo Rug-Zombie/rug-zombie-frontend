@@ -3,6 +3,26 @@ import tokens from './tokens'
 
 const spawningPools: SpawningPoolConfig[] = [
   {
+    id: 23,
+    name: 'French Connection Legendary',
+    nftId: 107,
+    address: {
+      56: '0x8d5A3dE5A77b36f272764B33A82069e6e58480FA',
+      97: '0xFaAa54ec46a9BA92694DdA390a54A713b9Ce1332',
+    },
+    endBlock: 21600000,
+    endDate: 1664078399,
+    project: {
+      name: 'French Connection Finance',
+      description: '',
+      additionalDetails: [],
+    },
+    rewardToken: tokens.fcf,
+    dex: Dex.PCS_V2,
+    isNew: true,
+    announcementIds: [],
+  },
+  {
     id: 22,
     name: 'InfinteTwo Legendary',
     nftId: 103,
@@ -19,7 +39,6 @@ const spawningPools: SpawningPoolConfig[] = [
     },
     rewardToken: tokens.if2,
     dex: Dex.PCS_V2,
-    isNew: true,
     announcementIds: [136],
   },
     {
@@ -39,7 +58,6 @@ const spawningPools: SpawningPoolConfig[] = [
     },
     rewardToken: tokens.eafi,
     dex: Dex.PCS_V2,
-    isNew: true,
     announcementIds: [135],
   },
   {
@@ -73,7 +91,6 @@ const spawningPools: SpawningPoolConfig[] = [
     },
     rewardToken: tokens.punksv2,
     dex: Dex.PCS_V2,
-    isNew: true,
     announcementIds: [131],
   },
   {
