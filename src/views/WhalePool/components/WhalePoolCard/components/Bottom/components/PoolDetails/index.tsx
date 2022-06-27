@@ -4,6 +4,8 @@ import { useHistory } from 'react-router'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { WhalePool } from "../../../../../../../../state/types";
 import { useGetNfts } from "../../../../../../../../state/hooks";
+import { getAddress } from "../../../../../../../../utils/addressHelpers";
+import { getHighResImage } from "../../../../../../../../utils";
 
 const StyledSwiper = styled.div`
   .swiper-wrapper {
@@ -114,7 +116,7 @@ const PoolDetails: React.FC<TableDetailsProps> = ({ whalePool }) => {
               return (
                 <NftContainer>
                   <div><NftVideo key={nft.id} onClick={() => history.push(`/nfts/${nft.id}`)} autoPlay loop muted>
-                    <source src={nft.path} type="video/webm"/>
+                    <source src={getHighResImage(getAddress(nft.address))} type="video/webm"/>
                   </NftVideo>
                     <SwiperSlideContainerText>
                       <SubHeaderText>{nft.name}</SubHeaderText><br/>
@@ -126,7 +128,7 @@ const PoolDetails: React.FC<TableDetailsProps> = ({ whalePool }) => {
             }
             return (
               <NftContainer>
-                <NftImage key={nft.id} onClick={() => history.push(`/nfts/${nft.id}`)} src={nft.path} onError={imageOnErrorHandler}/>
+                <NftImage key={nft.id} onClick={() => history.push(`/nfts/${nft.id}`)} src={getHighResImage(getAddress(nft.address))} onError={imageOnErrorHandler}/>
                 <SwiperSlideContainerText>
                   <SubHeaderText>{nft.name}</SubHeaderText><br/>
                   <SubHeaderText>{truncateString(nft.description,80)}</SubHeaderText>
