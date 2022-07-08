@@ -76,6 +76,19 @@ const graves: GraveConfig[] = [
   },
   {
     pid: {
+      56: 62,
+      97: 1,
+    },
+    name: 'Harmony One Rare',
+    nftId: 108,
+    rug: tokens.one,
+    isNew: true,
+    isFeatured: true,
+    rugDex: Dex.PCS_V2,
+    announcementIds: [],
+  },
+  {
+    pid: {
       56: 61,
       97: 1,
     },

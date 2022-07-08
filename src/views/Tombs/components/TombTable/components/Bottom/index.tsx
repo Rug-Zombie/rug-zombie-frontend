@@ -30,6 +30,7 @@ import tokens from '../../../../../../config/constants/tokens'
 import { Dex } from '../../../../../../config/constants/types'
 import useToast from '../../../../../../hooks/useToast'
 import { formatDuration, now } from '../../../../../../utils/timerHelpers'
+import { getNftConfigByAddress } from "../../../../../../state/nfts/hooks";
 
 const Separator = styled.div`
   height: 0px;
@@ -367,7 +368,13 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
       .func()
       .then((succeeded) => {
         if (succeeded) {
-          toastTombs(step.toast.title, step.toast.description)
+          if(currentUnstakingStep === UnstakingStep.FinishMinting) {
+            const nft = succeeded.events.MintNft.returnValues.nft
+
+            toastTombs(`Minted ${getNftConfigByAddress(nft)?.symbol} NFT`)
+          } else {
+            toastTombs(step.toast.title, step.toast.description)
+          }
         }
         setConfirmingUnstake(false)
       })
@@ -376,6 +383,7 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
       })
   }, [
     UnstakingStep.EmergencyWithdraw,
+    UnstakingStep.FinishMinting,
     amount,
     currentUnstakingStep,
     onEmergencyWithdraw,

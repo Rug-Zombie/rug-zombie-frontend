@@ -61,6 +61,15 @@ const tokens: { [key: string]: Token } = {
     projectLink: 'https://www.terra.money/',
     tokenLogo: 'https://assets.coingecko.com/coins/images/12681/small/UST.png?1601612407',
   },
+  one: {
+    symbol: 'ONE',
+    address: {
+      56: '0x03fF0ff224f904be3118461335064bB48Df47938',
+      97: '0x715d400f88c167884bbcc41c5fea407ed4d2f8a0',
+    },
+    decimals: 18,
+    tokenLogo: 'https://assets.coingecko.com/coins/images/4344/small/Y88JAze.png?1565065793',
+  },
   eafi: {
     symbol: 'EAFI',
     address: {
