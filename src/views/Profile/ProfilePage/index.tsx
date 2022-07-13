@@ -116,7 +116,9 @@ const ProfilePage: React.FC = () => {
           <UserAddress href={`https://bscscan.com/address/${account}`}>{displayAccount}</UserAddress>
         </UserDiv>
         <TabDiv>
-          <Tab style={{ marginRight: '10px' }} src={OblivionTab} alt="Oblivion tab" />
+          <a href="https://oblivion.art/" target="_blank" rel="noreferrer">
+            <Tab style={{ marginRight: '10px' }} src={OblivionTab} alt="Oblivion tab" />
+          </a>
           <Tab style={{ marginLeft: '10px' }} src={RugZombieTab} alt="RugZombie tab" />
         </TabDiv>
         <Separator />
