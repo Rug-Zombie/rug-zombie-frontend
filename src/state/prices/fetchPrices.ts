@@ -1,22 +1,20 @@
-import {getZombieAddress, getZombieAddressForPrices} from '../../utils/addressHelpers'
+/* eslint-disable camelcase */
+import { getZombieAddressForPrices } from '../../utils/addressHelpers'
 import { TokenPrices } from '../types'
 
 export interface PriceApiResultInfo {
   name: string
   symbol: string
   price: string
-  // eslint-disable-next-line camelcase
   price_BNB: string
 }
 
 export interface PriceApiResponse {
-  /* eslint-disable camelcase */
   updated_at: string
   data: PriceApiResultInfo
 }
 
 export interface PluralPriceApiResponse {
-  /* eslint-disable camelcase */
   updated_at: string
   data: { [key: string]: PriceApiResultInfo }
 }
@@ -48,7 +46,6 @@ const fetchPrices = async () => {
   // Return normalized token names
   return {
     updatedAt: data.updated_at,
-    // eslint-disable-next-line camelcase
     prices,
   }
 }

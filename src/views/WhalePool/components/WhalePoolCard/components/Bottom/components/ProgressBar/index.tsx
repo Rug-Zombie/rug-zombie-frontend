@@ -39,43 +39,36 @@ enum Step {
   MintFinished,
 }
 
-
-
-const WhalePoolProgressBar: React.FC<StakingProgressBarProps> = ({
-                                                                   isDeposited,
-                                                                   mintRequested,
-                                                                   mintFinished
-                                                                 }) => {
-
+const WhalePoolProgressBar: React.FC<StakingProgressBarProps> = ({ isDeposited, mintRequested, mintFinished }) => {
   const steps = ['Deposit Whale NFT', 'Request Mint', 'Claim NFT']
 
   let currentStep = Step.DepositWhaleNft
 
-  if(isDeposited && mintRequested) {
+  if (isDeposited && mintRequested) {
     currentStep = Step.RequestMint
   }
-  if(isDeposited && mintFinished) {
+  if (isDeposited && mintFinished) {
     currentStep = Step.MintFinished
   }
 
-  console.log(mintFinished)
+  console.info(mintFinished)
 
   return (
     <ProgressFlex>
       <IconFlex>
         {steps.map((step, index) => {
           let state
-          if(currentStep > index + 1) {
+          if (currentStep > index + 1) {
             state = ProgressLineState.Active
-          } else if(currentStep === index + 1) {
+          } else if (currentStep === index + 1) {
             state = ProgressLineState.PartiallyActive
           } else {
             state = ProgressLineState.Inactive
           }
           return (
             <>
-              <ProgressCircle active={index < currentStep} step={index + 1}/>
-              {index !== steps.length - 1 ? <ProgressLine state={state}/> : null}
+              <ProgressCircle active={index < currentStep} step={index + 1} />
+              {index !== steps.length - 1 ? <ProgressLine state={state} /> : null}
             </>
           )
         })}
