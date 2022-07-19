@@ -34,8 +34,8 @@ const tokens: { [key: string]: Token } = {
   axs: {
     symbol: 'AXS',
     address: {
-      56: '0x715d400f88c167884bbcc41c5fea407ed4d2f8a0',
-      97: '0x715d400f88c167884bbcc41c5fea407ed4d2f8a0',
+      56: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://axieinfinity.com/',
@@ -45,9 +45,9 @@ const tokens: { [key: string]: Token } = {
     symbol: 'LUNA',
     address: {
       56: '0x156ab3346823b651294766e23e6cf87254d68962',
-      97: '0x715d400f88c167884bbcc41c5fea407ed4d2f8a0',
+      97: '0x66587E39406fb38D5Eba12b64dd6683FfF6E3Aa1',
     },
-    decimals: 6,
+    decimals: 0,
     projectLink: 'https://www.terra.money/',
     tokenLogo: 'https://assets.coingecko.com/coins/images/22951/small/LUNA_wh_small.png?1644226405',
   },
@@ -55,7 +55,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'UST',
     address: {
       56: '0x23396cF899Ca06c4472205fC903bDB4de249D6fC',
-      97: '0x715d400f88c167884bbcc41c5fea407ed4d2f8a0',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://www.terra.money/',
@@ -65,7 +65,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'ONE',
     address: {
       56: '0x03fF0ff224f904be3118461335064bB48Df47938',
-      97: '0x715d400f88c167884bbcc41c5fea407ed4d2f8a0',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     tokenLogo: 'https://assets.coingecko.com/coins/images/4344/small/Y88JAze.png?1565065793',
@@ -104,7 +104,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'FRT',
     address: {
       56: '0xd51237a6f3219d186f0c8d8dd957b1bcb3ce5d48',
-      97: '0xd51237a6f3219d186f0c8d8dd957b1bcb3ce5d48',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://farmageddon.farm/',
@@ -116,7 +116,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'EULER',
     address: {
       56: '0x3920123482070c1a2dff73aad695c60e7c6f6862',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://euler.tools/',
@@ -126,7 +126,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'IF1',
     address: {
       56: '0xfCaC1a3eDE7b55Cc51e3eBff2885a67FBfE01a1A',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 9,
     projectLink: 'https://infiniteone.io/',
@@ -135,7 +135,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'IF2',
     address: {
       56: '0x308811b388B3b34f0F683BCED45Ee6B7B0E0c6f1',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://infiniteone.io/',
@@ -145,7 +145,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'BYG',
     address: {
       56: '0x4f7b627b88651e3dddca0240bca68a3062632c8c',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://www.blackeyegalaxy.space/',
@@ -155,7 +155,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'PUNKS',
     address: {
       56: '0xf428fc1126b7c1b1bd266f1e415ac05255fa7748',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 9,
     projectLink: 'https://streetpunks.org/',
@@ -166,7 +166,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'PUNKS',
     address: {
       56: '0x3ca35c4f8bc33D44d10d379F3fE601bA67bBbE7f',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://streetpunks.org/',
@@ -177,7 +177,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'L1ght',
     address: {
       56: '0x6052327e918ccc2f24fe0a2b6fa2649e30339d04',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 9,
     projectLink: 'https://l1ghtl1st.io/',
@@ -188,7 +188,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'CX',
     address: {
       56: '0xd09092b1c9c495eb7e0a043927492cf2dee68a86',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 9,
     tokenLogo: 'https://assets.coingecko.com/coins/images/17129/small/X2zoTDW.png?1626410291',
@@ -197,7 +197,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'ATLAS',
     address: {
       56: '0xcf87Ccf958d728f50d8ae5E4f15Bc4cA5733cDf5',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 9,
     tokenLogo: 'https://assets.coingecko.com/coins/images/20922/small/15211.png?1637926873',
@@ -206,7 +206,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'BABE',
     address: {
       56: '0x23974EeE90e80B49EcF5A53e9512b0D747Fa88c9',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 0,
     tokenLogo: 'https://ipfs.io/ipfs/QmVGjzRvf2WD5JKjh5wNVjVtimPv9R2mzeuYUNin2cFsc7',
@@ -215,7 +215,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'MUTANT',
     address: {
       56: '0xD3c83C4d51cF4d719fe5678ABE59009D24c6E1bF',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 0,
     tokenLogo: 'https://storage.googleapis.com/rug-zombie/Zombi_Monkey-min.jpg',
@@ -224,7 +224,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'CTHULHU',
     address: {
       56: '0x318744eE512d5B0BF7CB556D8170700E0a4a469e',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 0,
     tokenLogo: 'https://ipfs.io/ipfs/QmQ11oNLDfg7c3k1S6sfBEhcHWHtc9ykTQJhXhNU25fp7V',
@@ -233,7 +233,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'RUGBIDEN',
     address: {
       56: '0x7f84a94ba46ccdc78325d0484f62451f3e4b8076',
-      97: '0x7f84a94ba46ccdc78325d0484f62451f3e4b8076',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 9,
     projectLink: '/',
@@ -242,7 +242,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'BURGER',
     address: {
       56: '0xae9269f27437f0fcbc232d39ec814844a51d6b8f',
-      97: '0xae9269f27437f0fcbc232d39ec814844a51d6b8f',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: '/',
@@ -251,7 +251,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'ZSHARK',
     address: {
       56: '0x40ab94f28fbf07ae45b9e50132da643a720e0e32',
-      97: '0x40ab94f28fbf07ae45b9e50132da643a720e0e32',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: '',
@@ -260,7 +260,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'G-Fi',
     address: {
       56: '0xc82C80E03E491B252Cae745575ea2d1c2fDDe25A',
-      97: '0xc82C80E03E491B252Cae745575ea2d1c2fDDe25A',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 8,
     projectLink: 'https://www.gorillafi.com/',
@@ -270,7 +270,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'MERL',
     address: {
       56: '0xda360309c59cb8c434b28a91b823344a96444278',
-      97: '0xda360309c59cb8c434b28a91b823344a96444278',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: '',
@@ -279,7 +279,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'UNDEAD',
     address: {
       56: '0xa2394aff511de6661b8178dfc9cecfd04cc614e8',
-      97: '0x85537ef782bab72e65704aa59e5C71131561D422',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://rugzombie.io/',
@@ -288,7 +288,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'FAIRMOON',
     address: {
       56: '0xfe75cD11E283813eC44B4592476109Ba3706cef6',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 9,
     projectLink: 'https://fairmoon.org/',
@@ -297,7 +297,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'BONFIRE',
     address: {
       56: '0x5e90253fbae4dab78aa351f4e6fed08a64ab5590',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 9,
     projectLink: 'https://www.bonfiretoken.co/',
@@ -306,7 +306,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'U92',
     address: {
       56: '0x670De9f45561a2D02f283248F65cbd26EAd861C8',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: '',
@@ -315,7 +315,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'DRAGON',
     address: {
       56: '0x251a3184857488dc90fa9c9a52fd2d8df473d92c',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 8,
     projectLink: 'https://dragonfarm.finance/',
@@ -324,7 +324,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'SQUID',
     address: {
       56: '0x87230146e138d3f296a9a77e497a2a83012e9bc5',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: '',
@@ -334,7 +334,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'IRON',
     address: {
       56: '0x7b65B489fE53fCE1F6548Db886C08aD73111DDd8',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: '',
@@ -344,7 +344,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'RONINGMZ',
     address: {
       56: '0x980b37a82b60a32965b6e56356d14e0410ea440f',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: '',
@@ -354,7 +354,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'ZRONINGMZ',
     address: {
       56: '0x1e25f2da754ebe4eb1cc11c255da8cafa37b9472',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 0,
     projectLink: '',
@@ -364,7 +364,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'ZAPE',
     address: {
       56: '0xaC1F2445F8E1Bd750762120df97b1b7b9f994775',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 0,
     projectLink: '',
@@ -374,7 +374,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'HUNNY',
     address: {
       56: '0x565b72163f17849832a692a3c5928cc502f46d69',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: '',
@@ -385,7 +385,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'MNEB',
     address: {
       56: '0xd22202d23fe7de9e3dbe11a2a88f42f4cb9507cf',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 8,
     projectLink: '',
@@ -395,7 +395,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'zMNEB',
     address: {
       56: '0x043EfaF7aC4Efb1E373D0368FC2DB33f063DF82d',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 0,
     projectLink: '',
@@ -405,7 +405,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'yAPE',
     address: {
       56: '0x64b783a80d0c05bed0e2f1a638465a7ba3f4a6fb',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 8,
     projectLink: 'https://gorillayield.finance/',
@@ -414,7 +414,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'yPANDA',
     address: {
       56: '0x9806aec346064183b5cE441313231DFf89811f7A',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 8,
     projectLink: 'https://pandayield.com/#/',
@@ -423,7 +423,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'VIKING',
     address: {
       56: '0x896eDE222D3f7f3414e136a2791BDB08AAa25Ce0',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://www.vikingswap.finance/',
@@ -432,7 +432,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'ZMPR',
     address: {
       56: '0x103ED7038914AB877cfA4A8961333D9af8236852',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 0,
   },
@@ -440,7 +440,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'RUPEE',
     address: {
       56: '0x7b0409a3a3f79baa284035d48e1dfd581d7d7654',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://app.hyruleswap.com/',
@@ -449,7 +449,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'gRUPEE',
     address: {
       56: '0x8efa59bf5f47c6fe0e97c15cad12f2be6bb899a1',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://app.hyruleswap.com/',
@@ -458,7 +458,7 @@ const tokens: { [key: string]: Token } = {
     symbol: '$MAINST',
     address: {
       56: '0x8fc1a944c149762b6b578a06c0de2abd6b7d2b89',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 9,
     projectLink: 'https://www.buymainstreet.com/',
@@ -467,7 +467,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'NALIS',
     address: {
       56: '0xb2ebaa0ad65e9c888008bf10646016f7fcdd73c3',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://app.koaladefi.finance/',
@@ -476,7 +476,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'PANTHER',
     address: {
       56: '0x1f546ad641b56b86fd9dceac473d1c7a357276b7',
-      97: '0x8CD20B92A5853b50AADbf355e46A0E995A170286',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://pantherswap.com/',
@@ -485,7 +485,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'TNDR',
     address: {
       56: '0x7cc46141ab1057b1928de5ad5ee78bb37efc4868',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://www.thunderswap.finance/',
@@ -494,7 +494,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'D100',
     address: {
       56: '0x9d8aac497a4b8fe697dd63101d793f0c6a6eebb6',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 9,
     projectLink: 'https://defi100.org/',
@@ -503,7 +503,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'MSC',
     address: {
       56: '0x8c784c49097dcc637b93232e15810d53871992bf',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://monsterslayer.finance/',
@@ -512,7 +512,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'BASIC-ZMBE',
     address: {
       56: '0x22e42D9425b55FD2262bfF72a316bb052DDb2a77',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 0,
     projectLink: '',
@@ -521,7 +521,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'WNOW',
     address: {
       56: '0x56aa0237244c67b9a854b4efe8479cca0b105289',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://walletnow.net/',
@@ -531,7 +531,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'BINGUS',
     address: {
       56: '0x12adadddc8d86081561a3ff107a2cb347779e717',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 9,
     projectLink: 'https://bingus.io/',
@@ -540,7 +540,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'POKECOIN',
     address: {
       56: '0x8364c57ba219dfbc8033f1368123f29beb75b4dc',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: '',
@@ -549,7 +549,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'Zombie (No Relation)',
     address: {
       56: '0x99d6b719D78f75A0A8f34d7443630dF58973fF41',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: '',
@@ -558,7 +558,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'LLT',
     address: {
       56: '0xd37c1417da7bf5b02ffdea8d5427022dc88a0ee2',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 8,
     projectLink: '',
@@ -567,7 +567,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'BJT',
     address: {
       56: '0x37f3ef4e065f3415d1b6f9284389cc9d9439f658',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: '',
@@ -576,7 +576,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'FINS',
     address: {
       56: '0x1b219aca875f8c74c33cff9ff98f3a9b62fcbff5',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://autoshark.finance/',
@@ -586,7 +586,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'FINS-BNB LP',
     address: {
       56: '0x14B5a6d26577970953F9E6608d6604e4676Ac5b7',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://autoshark.finance/',
@@ -596,7 +596,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'JAWS-BNB LP',
     address: {
       56: '0x1BbA5C6Cc38EF04066042237b4298dC23405304D',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://autoshark.finance/',
@@ -605,7 +605,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'DIAMONDS',
     address: {
       56: '0x37c4bcf0b8fc6f074be933af7fb9d1dde55f979c',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 12,
   },
@@ -613,7 +613,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'KIDS',
     address: {
       56: '0x7acf49997e9598843cb9051389fa755969e551bb',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 9,
   },
@@ -621,7 +621,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'ZDIAMONDS',
     address: {
       56: '0xCDB6FC41a78ca570e9e27C627eC4a9d165F44A10',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 0,
   },
@@ -629,7 +629,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'ZBOG',
     address: {
       56: '0xeaaD9e5Ab71E5B21492a6686afdbB4A598A641ab',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 0,
   },
@@ -637,7 +637,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'BOG',
     address: {
       56: '0xb09fe1613fe03e7361319d2a43edc17422f36b09',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
   },
@@ -645,7 +645,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'HORDE',
     address: {
       56: '0xE30043524ADb329169b11eDfe833a9beDd4D2A11',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 0,
     projectLink: '',
@@ -654,7 +654,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'KCAKE',
     address: {
       56: '0xc22e8114818a918260662375450e19ac73d32852',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: '',
@@ -663,7 +663,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'MKC',
     address: {
       56: '0x92cc2c999ade41c71d1c8136d5b57d12564e045f',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://www.milkyway.games/',
@@ -672,7 +672,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'ATMSSFT',
     address: {
       56: '0xc53c65c4a925039cc149fa99fd011490d40270a3',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://www.atmossoftdefi.app/',
@@ -682,7 +682,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'PLX',
     address: {
       56: '0x57022edd5c7ed7b6bd870488853fe961dfdd3fb6',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://octaplex.io/',
@@ -692,7 +692,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'FCF',
     address: {
       56: '0x4673f018cc6d401AAD0402BdBf2abcBF43dd69F3',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://frenchconnection.finance/',
@@ -701,7 +701,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'GOLDBAR',
     address: {
       56: '0x24f6ECAF0B9E99D42413F518812d2c4f3EeFEB12',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://block-mine.io/',
@@ -711,7 +711,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'PIRATE',
     address: {
       56: '0x63041a8770c4cfe8193d784f3dc7826eab5b7fd2',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: '',
@@ -721,7 +721,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'TXL',
     address: {
       56: '0x1ffd0b47127fdd4097e54521c9e2c7f0d66aafc5',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://tixl.org/',
@@ -730,7 +730,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'APE-LP',
     address: {
       56: '0x46Da2455D212bf8BC78D5fE557074dc7602969C0',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: '',
@@ -739,7 +739,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'COS',
     address: {
       56: '0x96Dd399F9c3AFda1F194182F71600F1B65946501',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://www.contentos.io/',
@@ -748,7 +748,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'ALICE',
     address: {
       56: '0xac51066d7bec65dc4589368da368b212745d63e8',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 6,
     projectLink: 'https://www.myneighboralice.com/',
@@ -757,7 +757,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'FOR',
     address: {
       56: '0x658A109C5900BC6d2357c87549B651670E5b0539',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://www.for.tube/home',
@@ -766,7 +766,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'BUX',
     address: {
       56: '0x211ffbe424b90e25a15531ca322adf1559779e45',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://getbux.com/bux-crypto/',
@@ -775,7 +775,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'NULS',
     address: {
       56: '0x8cd6e29d3686d24d3c2018cee54621ea0f89313b',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 8,
     projectLink: 'https://www.nuls.io/',
@@ -784,7 +784,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'BELT',
     address: {
       56: '0xE0e514c71282b6f4e823703a39374Cf58dc3eA4f',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://beta.belt.fi/',
@@ -793,7 +793,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'RAMP',
     address: {
       56: '0x8519ea49c997f50ceffa444d240fb655e89248aa',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://rampdefi.com/',
@@ -802,7 +802,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'BFI',
     address: {
       56: '0x81859801b01764d4f0fa5e64729f5a6c3b91435b',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://bearn.fi/',
@@ -811,7 +811,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'DEXE',
     address: {
       56: '0x039cb485212f996a9dbb85a9a75d898f94d38da6',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://dexe.network/',
@@ -820,7 +820,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'BEL',
     address: {
       56: '0x8443f091997f06a61670b735ed92734f5628692f',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://bella.fi/',
@@ -829,7 +829,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'TPT',
     address: {
       56: '0xeca41281c24451168a37211f0bc2b8645af45092',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 4,
     projectLink: 'https://www.tokenpocket.pro/',
@@ -838,7 +838,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'WATCH',
     address: {
       56: '0x7a9f28eb62c791422aa23ceae1da9c847cbec9b0',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://yieldwatch.net/',
@@ -847,7 +847,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'xMARK',
     address: {
       56: '0x26a5dfab467d4f58fb266648cae769503cec9580',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 9,
     projectLink: 'https://benchmarkprotocol.finance/',
@@ -856,7 +856,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'bMXX',
     address: {
       56: '0x4131b87f74415190425ccd873048c708f8005823',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://multiplier.finance/',
@@ -865,7 +865,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'IOTX',
     address: {
       56: '0x9678e42cebeb63f23197d726b29b1cb20d0064e5',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://iotex.io/',
@@ -874,7 +874,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'BOR',
     address: {
       56: '0x92d7756c60dcfd4c689290e8a9f4d263b3b32241',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://www.boringdao.com/',
@@ -883,7 +883,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'bOPEN',
     address: {
       56: '0xf35262a9d427f96d2437379ef090db986eae5d42',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://opendao.io/',
@@ -892,7 +892,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'DODO',
     address: {
       56: '0x67ee3cb086f8a16f34bee3ca72fad36f7db929e2',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://dodoex.io/',
@@ -901,7 +901,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'SWINGBY',
     address: {
       56: '0x71de20e0c4616e7fcbfdd3f875d568492cbe4739',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://swingby.network/',
@@ -910,7 +910,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'BRY',
     address: {
       56: '0xf859bf77cbe8699013d6dbc7c2b926aaf307f830',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://berrydata.co/',
@@ -919,7 +919,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'ZEE',
     address: {
       56: '0x44754455564474a89358b2c2265883df993b12f0',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://zeroswap.io/',
@@ -928,7 +928,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'SWGb',
     address: {
       56: '0xe40255c5d7fa7ceec5120408c78c787cecb4cfdb',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://swirgepay.com/',
@@ -937,7 +937,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'SFP',
     address: {
       56: '0xd41fdb03ba84762dd66a0af1a6c8540ff1ba5dfb',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://www.safepal.io/',
@@ -946,7 +946,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'LINA',
     address: {
       56: '0x762539b45a1dcce3d36d080f74d1aed37844b878',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://linear.finance/',
@@ -955,7 +955,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'LIT',
     address: {
       56: '0xb59490ab09a0f526cc7305822ac65f2ab12f9723',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://www.litentry.com/',
@@ -964,7 +964,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'HGET',
     address: {
       56: '0xc7d8d35eba58a0935ff2d5a33df105dd9f071731',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 6,
     projectLink: 'https://www.hedget.com/',
@@ -973,7 +973,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'BDO',
     address: {
       56: '0x190b589cf9fb8ddeabbfeae36a813ffb2a702454',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://bdollar.fi/',
@@ -982,7 +982,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'EGLD',
     address: {
       56: '0xbf7c81fff98bbe61b40ed186e4afd6ddd01337fe',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://elrond.com/',
@@ -991,7 +991,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'wSOTE',
     address: {
       56: '0x541e619858737031a1244a5d0cd47e5ef480342c',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://soteria.finance/#/',
@@ -1000,7 +1000,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'FRONT',
     address: {
       56: '0x928e55dab735aa8260af3cedada18b5f70c72f1b',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://frontier.xyz/',
@@ -1009,7 +1009,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'Helmet',
     address: {
       56: '0x948d2a81086a075b3130bac19e4c6dee1d2e3fe8',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://www.helmet.insure/',
@@ -1018,7 +1018,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'BTCST',
     address: {
       56: '0x78650b139471520656b9e7aa7a5e9276814a38e9',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 17,
     projectLink: 'https://www.1-b.tc/',
@@ -1027,7 +1027,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'BSCX',
     address: {
       56: '0x5ac52ee5b2a633895292ff6d8a89bb9190451587',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://bscex.org/',
@@ -1036,7 +1036,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'TEN',
     address: {
       56: '0xdff8cb622790b7f92686c722b02cab55592f152c',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://www.tenet.farm/',
@@ -1045,7 +1045,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'bALBT',
     address: {
       56: '0x72faa679e1008ad8382959ff48e392042a8b06f7',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://allianceblock.io/',
@@ -1054,7 +1054,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'ASR',
     address: {
       56: '0x80d5f92c2c8c682070c95495313ddb680b267320',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 2,
     projectLink: 'https://www.chiliz.com',
@@ -1063,7 +1063,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'ATM',
     address: {
       56: '0x25e9d05365c867e59c1904e7463af9f312296f9e',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 2,
     projectLink: 'https://www.chiliz.com',
@@ -1072,7 +1072,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'OG',
     address: {
       56: '0xf05e45ad22150677a017fbd94b84fbb63dc9b44c',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 2,
     projectLink: 'https://www.chiliz.com',
@@ -1081,7 +1081,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'REEF',
     address: {
       56: '0xf21768ccbc73ea5b6fd3c687208a7c2def2d966e',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://reef.finance/',
@@ -1090,7 +1090,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'DITTO',
     address: {
       56: '0x233d91a0713155003fc4dce0afa871b508b3b715',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 9,
     projectLink: 'https://ditto.money/',
@@ -1099,7 +1099,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'JUV',
     address: {
       56: '0xc40c9a843e1c6d01b7578284a9028854f6683b1b',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 2,
     projectLink: 'https://www.chiliz.com',
@@ -1108,7 +1108,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'PSG',
     address: {
       56: '0xbc5609612b7c44bef426de600b5fd1379db2ecf1',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 2,
     projectLink: 'https://www.chiliz.com',
@@ -1117,7 +1117,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'VAI',
     address: {
       56: '0x4bd17003473389a42daf6a0a729f6fdb328bbbd7',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://venus.io/',
@@ -1145,7 +1145,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'SUSHI',
     address: {
       56: '0x947950bcc74888a40ffa2593c5798f11fc9124c4',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://sushi.com/',
@@ -1172,7 +1172,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'ETH',
     address: {
       56: '0x2170ed0880ac9a755fd29b2688956bd959f933f8',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://ethereum.org/en/',
@@ -1181,7 +1181,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'BETH',
     address: {
       56: '0x250632378e573c6be1ac2f97fcdf00515d0aa91b',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://ethereum.org/en/eth2/beacon-chain/',
@@ -1190,7 +1190,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'USDC',
     address: {
       56: '0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'https://www.centre.io/usdc',
@@ -1199,7 +1199,7 @@ const tokens: { [key: string]: Token } = {
     symbol: 'DAI',
     address: {
       56: '0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: 'http://www.makerdao.com/',
@@ -1289,7 +1289,7 @@ const tokens: { [key: string]: Token } = {
     symbol: '',
     address: {
       56: '0x50ba8BF9E34f0F83F96a340387d1d3888BA4B3b5',
-      97: '',
+      97: '0xB8EE810b15553A7f11eC813C0FDF7C25bab89C4E',
     },
     decimals: 18,
     projectLink: '',

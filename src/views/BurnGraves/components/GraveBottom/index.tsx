@@ -49,6 +49,8 @@ const GraveBottom: React.FC<RugInDetailsProps> = ({ pid, zombieUsdPrice, account
       })
   })
 
+  console.log(path)
+
   let allocPoint = BIG_ZERO
   if (poolInfo.allocPoint) {
     allocPoint = new BigNumber(poolInfo.allocPoint)

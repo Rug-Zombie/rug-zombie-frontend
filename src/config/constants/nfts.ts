@@ -1644,7 +1644,7 @@ const nfts: Nft[] = [
     description: "Oh you think you got size?",
     address: {
       56: '0xaFeb8d4423F4A86c35e546ba7E5AcbD2198CA84B',
-      97: '0x4f134fcFCe1476ebB8bA76Bd54524D1CfE59BDe6',
+      97: '0x31eF0D4CB4f1FD27a7CAE9c5af7b4Ea2b4cd7061',
     },
     totalSupply: BIG_ZERO,
     path: 'http://ipfs.deadgames.io:8080/ipfs/QmY59acze88fF2VB27kPcrfiJEEuPshfWPrGQdv8AKmiEf',

@@ -307,10 +307,10 @@ const Nfts: React.FC = () => {
                   {nft.userInfo.ownedIds.map((value) => (
                       <Variant  onClick={() => setSelectedVariant(value)  }>
                         {nft.type === 'image' ? (
-                            <Small isSelected={value === selectedVariant} src={getHighResImage(getAddress(nft.address))} />
+                            <Small isSelected={value === selectedVariant} src={getHighResImage(nft.address)} />
                         ) : (
                             <VidDiv>
-                              <SmallVid path={getHighResImage(getAddress(nft.address))} />
+                              <SmallVid path={getHighResImage(nft.address)} />
                             </VidDiv>
                         )}
                         <HighlightSmall>{value}</HighlightSmall>
@@ -347,10 +347,10 @@ const Nfts: React.FC = () => {
       <NftPage>
         <Left>
           {nft.type === 'image' ? (
-            <Image src={getHighResImage(getAddress(nft.address))} />
+            <Image src={getHighResImage(nft.address)} />
           ) : (
             <VidDiv>
-              <PreviewVid path={getHighResImage(getAddress(nft.address))} />
+              <PreviewVid path={getHighResImage(nft.address)} />
             </VidDiv>
           )}
           {!isSingleColumn ? variantsTab : null }

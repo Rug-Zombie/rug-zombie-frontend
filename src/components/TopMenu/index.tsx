@@ -107,7 +107,7 @@ const TopMenu = () => {
             }}
           >
             <img src={zombiehead} alt="Zombie Icon" style={{ height: '70%', paddingRight: '20px' }} />
-            <Text style={{ fontWeight: 'bold' }}>${useGetZombiePriceUsd().toPrecision(2)}</Text>
+            <Text style={{ fontWeight: 'bold' }}>$0.0014</Text>
           </TokenButton>
           <UnlockButton />
           <ProfileImage onClick={() => history.push(routes.PROFILE)} src={basiczombie} alt="Profile Image" />

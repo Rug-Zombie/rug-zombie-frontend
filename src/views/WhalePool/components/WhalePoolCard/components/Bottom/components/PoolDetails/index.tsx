@@ -116,7 +116,7 @@ const PoolDetails: React.FC<TableDetailsProps> = ({ whalePool }) => {
               return (
                 <NftContainer>
                   <div><NftVideo key={nft.id} onClick={() => history.push(`/nfts/${nft.id}`)} autoPlay loop muted>
-                    <source src={getHighResImage(getAddress(nft.address))} type="video/webm"/>
+                    <source src={getHighResImage(nft.address)} type="video/webm"/>
                   </NftVideo>
                     <SwiperSlideContainerText>
                       <SubHeaderText>{nft.name}</SubHeaderText><br/>
@@ -128,7 +128,7 @@ const PoolDetails: React.FC<TableDetailsProps> = ({ whalePool }) => {
             }
             return (
               <NftContainer>
-                <NftImage key={nft.id} onClick={() => history.push(`/nfts/${nft.id}`)} src={getHighResImage(getAddress(nft.address))} onError={imageOnErrorHandler}/>
+                <NftImage key={nft.id} onClick={() => history.push(`/nfts/${nft.id}`)} src={getHighResImage(nft.address)} onError={imageOnErrorHandler}/>
                 <SwiperSlideContainerText>
                   <SubHeaderText>{nft.name}</SubHeaderText><br/>
                   <SubHeaderText>{truncateString(nft.description,80)}</SubHeaderText>

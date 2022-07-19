@@ -132,10 +132,10 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
       <NftImageContainer>
         {type === 'video' ? (
           <NftVideo onClick={linkToNft} autoPlay loop muted>
-            <source src={getHighResImage(getAddress(address))} type="video/webm" />
+            <source src={getHighResImage(address)} type="video/webm" />
           </NftVideo>
         ) : (
-          <NftImage onClick={linkToNft} src={getHighResImage(getAddress(address))} onError={imageOnErrorHandler} />
+          <NftImage onClick={linkToNft} src={getHighResImage(address)} onError={imageOnErrorHandler} />
         )}
       </NftImageContainer>
       <Details>
@@ -156,7 +156,7 @@ const TableDetails: React.FC<TableDetailsProps> = ({ grave }) => {
         </GraveInfo>
         <GraveInfo>
           <HeaderText>
-            Unlock Fees: {getFullDisplayBalance(unlockFee)} BNB (~ ${getFullDisplayBalance(unlockFeeUsd, 18, 2)})
+            Unlock Fees: {getFullDisplayBalance(unlockFee)} BNB (~ $5.00)
           </HeaderText>
           <SubHeaderText>
             Early Withdraw Fee: <Text>5%</Text>
