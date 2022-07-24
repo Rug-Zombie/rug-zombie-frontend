@@ -4,8 +4,6 @@ import styled from 'styled-components'
 import { useWeb3React } from '@web3-react/core'
 import { LinkExternal, useModal } from '@rug-zombie-libs/uikit'
 import Page from '../../components/layout/Page'
-// import badge from '../../images/icons/Icon feather-award.svg'
-// import user from '../../images/icons/Icon feather-user-check.svg'
 import { useAppDispatch } from '../../state'
 import { fetchNftUserDataAsync } from '../../state/nfts'
 import { useGetNftById } from '../../state/hooks'
@@ -27,7 +25,7 @@ const Image = styled.img`
   box-shadow: 5px 15px 20px 0px #000000;
 `
 
-const Small = styled.img<{isSelected: boolean}>`
+const Small = styled.img<{ isSelected: boolean }>`
   position: relative;
   max-width: ${({ isSelected }) => (isSelected ? '130px' : '100px')};
   min-width: ${({ isSelected }) => (isSelected ? '100px' : '70px')};
@@ -92,11 +90,6 @@ const HighlightSmall = styled.div`
   letter-spacing: 0;
   color: #00b1ff;
 `
-
-// const Icon = styled.img`
-//  width: 17px;
-//  height: 20px;
-// `
 
 const Left = styled.div`
   float: left;
@@ -250,10 +243,9 @@ const OblivionButtonText = styled.div`
   text-align: center;
   font: normal normal 600 16px/25px Poppins;
   letter-spacing: 0;
-  color: #FFFFFF;
+  color: #ffffff;
   white-space: nowrap;
 `
-
 
 const NftPage = styled(Page)`
   margin-bottom: 200px;
@@ -274,7 +266,6 @@ const Nfts: React.FC = () => {
 
   const [onTransferNft] = useModal(<TransferNftModal nft={nft} id={selectedVariant} />)
 
-
   useEffect(() => {
     window.addEventListener('resize', updateMedia)
     return () => window.removeEventListener('resize', updateMedia)
@@ -286,61 +277,63 @@ const Nfts: React.FC = () => {
     }
   }, [account, dispatch])
 
-
-  const variantsTab =
+  const variantsTab = (
     <div>
       {account != null ? (
-          <div>
-            <TabLeft>
-              <Row>
-                <RowItem>
-                  <Regular>Owned Variants</Regular>
-                </RowItem>
-              </Row>
-              <Row>
-                <RowItem>
-                  <Normal>You own {nft.userInfo.ownedIds.length} variants of this nft</Normal>
-                </RowItem>
-              </Row>
-              <Row>
-                <Variants>
-                  {nft.userInfo.ownedIds.map((value) => (
-                      <Variant  onClick={() => setSelectedVariant(value)  }>
-                        {nft.type === 'image' ? (
-                            <Small isSelected={value === selectedVariant} src={getHighResImage(getAddress(nft.address))} />
-                        ) : (
-                            <VidDiv>
-                              <SmallVid path={getHighResImage(getAddress(nft.address))} />
-                            </VidDiv>
-                        )}
-                        <HighlightSmall>{value}</HighlightSmall>
-                      </Variant>
-                  ))}
-                </Variants>
-              </Row>
-            </TabLeft>
-            <br/>
-            {nft.userInfo.ownedIds.length === 0 ? null :
-                <div>
-                  {selectedVariant ? (
-                      <TabLeft>
-                        <DetailsContainer>
-                          <DetailFlex>
-                            <DetailName2>Would you like to transfer # {selectedVariant}?</DetailName2>
-                            <SecondaryButton onClick={onTransferNft}><OblivionButtonText>Transfer now</OblivionButtonText></SecondaryButton>
-                          </DetailFlex>
-                        </DetailsContainer>
-                      </TabLeft>
-                  ) : <TabLeft>
-                    <DetailName3>Click on one of your variants if you would like to transfer it</DetailName3>
-                  </TabLeft>
-                  }
-                </div>
-            }
-          </div>
-      ) : null
-      }
+        <div>
+          <TabLeft>
+            <Row>
+              <RowItem>
+                <Regular>Owned Variants</Regular>
+              </RowItem>
+            </Row>
+            <Row>
+              <RowItem>
+                <Normal>You own {nft.userInfo.ownedIds.length} variants of this nft</Normal>
+              </RowItem>
+            </Row>
+            <Row>
+              <Variants>
+                {nft.userInfo.ownedIds.map((value) => (
+                  <Variant onClick={() => setSelectedVariant(value)}>
+                    {nft.type === 'image' ? (
+                      <Small isSelected={value === selectedVariant} src={getHighResImage(getAddress(nft.address))} />
+                    ) : (
+                      <VidDiv>
+                        <SmallVid path={getHighResImage(getAddress(nft.address))} />
+                      </VidDiv>
+                    )}
+                    <HighlightSmall>{value}</HighlightSmall>
+                  </Variant>
+                ))}
+              </Variants>
+            </Row>
+          </TabLeft>
+          <br />
+          {nft.userInfo.ownedIds.length === 0 ? null : (
+            <div>
+              {selectedVariant ? (
+                <TabLeft>
+                  <DetailsContainer>
+                    <DetailFlex>
+                      <DetailName2>Would you like to transfer # {selectedVariant}?</DetailName2>
+                      <SecondaryButton onClick={onTransferNft}>
+                        <OblivionButtonText>Transfer now</OblivionButtonText>
+                      </SecondaryButton>
+                    </DetailFlex>
+                  </DetailsContainer>
+                </TabLeft>
+              ) : (
+                <TabLeft>
+                  <DetailName3>Click on one of your variants if you would like to transfer it</DetailName3>
+                </TabLeft>
+              )}
+            </div>
+          )}
+        </div>
+      ) : null}
     </div>
+  )
 
   return (
     <>
@@ -353,7 +346,7 @@ const Nfts: React.FC = () => {
               <PreviewVid path={getHighResImage(getAddress(nft.address))} />
             </VidDiv>
           )}
-          {!isSingleColumn ? variantsTab : null }
+          {!isSingleColumn ? variantsTab : null}
         </Left>
         <Right>
           <Title>{nft.name}</Title>
@@ -382,8 +375,8 @@ const Nfts: React.FC = () => {
           ) : null}
 
           <br />
-          {isSingleColumn ? variantsTab : null }
-          <br/>
+          {isSingleColumn ? variantsTab : null}
+          <br />
           <TabRight>
             <DetailsContainer>
               <DetailFlex>
@@ -392,8 +385,9 @@ const Nfts: React.FC = () => {
               </DetailFlex>
               <DetailFlex>
                 <DetailName>Contract Address</DetailName>
-                <DetailValue
-                  href={getBscScanLink(getAddress(nft.address), 'address')}>{formatAddress(getAddress(nft.address))}</DetailValue>
+                <DetailValue href={getBscScanLink(getAddress(nft.address), 'address')}>
+                  {formatAddress(getAddress(nft.address))}
+                </DetailValue>
               </DetailFlex>
               <DetailFlex>
                 <DetailName>Token Standard</DetailName>
@@ -406,9 +400,15 @@ const Nfts: React.FC = () => {
             <DetailsContainer>
               <DetailFlex>
                 <DetailName>Oblivion Marketplace</DetailName>
-                <SecondaryButton onClick={() => {
-                  window.location.href = `https://oblivion.art/create/listing/${getAddress(nft.address)}`
-                }}><OblivionButtonText>List now</OblivionButtonText></SecondaryButton>
+                <a
+                  href={`https://oblivion.art/create/listing/${getAddress(nft.address)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <SecondaryButton>
+                    <OblivionButtonText>List now</OblivionButtonText>
+                  </SecondaryButton>
+                </a>
               </DetailFlex>
             </DetailsContainer>
           </TabRight>

@@ -1,13 +1,8 @@
-/* eslint-disable no-param-reassign */
+import React from 'react'
 import ContractLink from 'components/ContractLink'
-import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
-import numeral from 'numeral'
-import {getWhalePoolAddress} from 'utils/addressHelpers'
-import {useWhalePoolContract} from "../../../../hooks/useContract";
-import { account } from '../../../../redux/get'
-import { WhalePool } from "../../../../state/types";
-
+import { getWhalePoolAddress } from 'utils/addressHelpers'
+import { WhalePool } from '../../../../state/types'
 
 const InfoCard = styled.header`
   background-color: #151e21;
@@ -92,8 +87,10 @@ interface HeaderCardProps {
   whalePool: WhalePool
 }
 
-const HeaderCard:  React.FC<HeaderCardProps> = ({ whalePool }) => {
-  const { poolInfo: { totalStakers } } = whalePool
+const HeaderCard: React.FC<HeaderCardProps> = ({ whalePool }) => {
+  const {
+    poolInfo: { totalStakers },
+  } = whalePool
   return (
     <>
       <InfoCard>

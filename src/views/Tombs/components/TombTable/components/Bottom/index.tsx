@@ -30,7 +30,7 @@ import tokens from '../../../../../../config/constants/tokens'
 import { Dex } from '../../../../../../config/constants/types'
 import useToast from '../../../../../../hooks/useToast'
 import { formatDuration, now } from '../../../../../../utils/timerHelpers'
-import { getNftConfigByAddress } from "../../../../../../state/nfts/hooks";
+import { getNftConfigByAddress } from '../../../../../../state/nfts/hooks'
 
 const Separator = styled.div`
   height: 0px;
@@ -368,8 +368,8 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
       .func()
       .then((succeeded) => {
         if (succeeded) {
-          if(currentUnstakingStep === UnstakingStep.FinishMinting) {
-            const nft = succeeded.events.MintNft.returnValues.nft
+          if (currentUnstakingStep === UnstakingStep.FinishMinting) {
+            const { nft } = succeeded.events.MintNft.returnValues
 
             toastTombs(`Minted ${getNftConfigByAddress(nft)?.symbol} NFT`)
           } else {
@@ -416,7 +416,8 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
         <Inputs>
           <InputControl>
             <BalanceText onClick={maxStakeAmount}>
-              Wallet Balance: <AmountText>{numeral(getFullDisplayBalance(lpBalance)).format('(0.00 a)', Math.floor)} LP</AmountText>
+              Wallet Balance:{' '}
+              <AmountText>{numeral(getFullDisplayBalance(lpBalance)).format('(0.00 a)', Math.floor)} LP</AmountText>
             </BalanceText>
             <StakingInput
               onInput={changeStakeInput}
@@ -427,7 +428,8 @@ const Bottom: React.FC<BottomProps> = ({ tomb }) => {
           </InputControl>
           <InputControl>
             <BalanceText onClick={maxUnstakeAmount}>
-              Your Staked: <AmountText>{numeral(getFullDisplayBalance(amount)).format('(0.00 a)', Math.floor)} LP</AmountText>
+              Your Staked:{' '}
+              <AmountText>{numeral(getFullDisplayBalance(amount)).format('(0.00 a)', Math.floor)} LP</AmountText>
             </BalanceText>
             <StakingInput
               onInput={changeUnstakeInput}

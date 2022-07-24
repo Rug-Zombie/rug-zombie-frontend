@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Flex, useMatchBreakpoints } from '@catacombs-libs/uikit'
-import { sortBy } from "lodash";
+import { sortBy } from 'lodash'
 import Menu from '../../../../components/Catacombs/Menu'
 import Page from '../../../../components/layout/Page'
 import * as get from '../../../../redux/get'
@@ -48,7 +48,6 @@ const BlackMarket: React.FC = () => {
         setUpdate(!update)
       }
     })
-    // eslint-disable-next-line
   }, [rugMarketContract.events])
 
   useEffect(() => {
@@ -58,7 +57,6 @@ const BlackMarket: React.FC = () => {
         setUpdate(!update)
       }
     })
-    // eslint-disable-next-line
   }, [rugMarketContract.events])
 
   useEffect(() => {
@@ -68,14 +66,13 @@ const BlackMarket: React.FC = () => {
         setUpdate(!update)
       }
     })
-    // eslint-disable-next-line
   }, [rugMarketContract.events])
 
   useEffect(() => {
     updateRugMarketListings()
   }, [])
 
-  console.log(visibleListings)
+  console.info(visibleListings)
 
   return (
     <Menu>
@@ -88,7 +85,7 @@ const BlackMarket: React.FC = () => {
           <Page style={{ paddingTop: '5%' }}>
             <TabButtons setFilter={setFilter} />
             <div>
-              {sortBy(visibleListings, l => -l.id).map((listing) => {
+              {sortBy(visibleListings, (l) => -l.id).map((listing) => {
                 return <Table id={listing.id} />
               })}
             </div>

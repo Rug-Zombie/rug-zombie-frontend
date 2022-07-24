@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import tokens from 'config/constants/tokens'
 import { Token } from 'config/constants/types'
 import CardItem, { CardItemValueType, NftTimerCardItem } from 'components/CardItem'
-import { BigNumber } from "bignumber.js";
-import { WhalePool } from "../../../../../../state/types";
-import { useGetBnbPriceUsd } from "../../../../../../state/hooks";
-import { getBalanceNumber } from "../../../../../../utils/formatBalance";
+import { BigNumber } from 'bignumber.js'
+import { WhalePool } from '../../../../../../state/types'
+import { useGetBnbPriceUsd } from '../../../../../../state/hooks'
+import { getBalanceNumber } from '../../../../../../utils/formatBalance'
 
 const GraveColumn = styled.div`
   height: 100%;
@@ -84,10 +84,6 @@ const BlueTab = styled(GreyTab)`
   border: 2px solid #4b7bdc;
 `
 
-const PinkTab = styled(GreyTab)`
-  border: 2px solid #ae32aa;
-`
-
 const GreyTabText = styled.div`
   font: normal normal normal 12px/30px Poppins;
   color: #6b7682;
@@ -127,13 +123,11 @@ interface TopProps {
   whalePool: WhalePool
 }
 
-const Top: React.FC<TopProps> = (
-  {
-    open,
-    setOpen,
-    whalePool
-  }) => {
-  const { poolInfo: { mintingTime, mintingFeeBnb }, userInfo: { nftMintTime, isMinting, isStaked } } = whalePool
+const Top: React.FC<TopProps> = ({ open, setOpen, whalePool }) => {
+  const {
+    poolInfo: { mintingFeeBnb },
+    userInfo: { nftMintTime, isMinting, isStaked },
+  } = whalePool
   const toggleOpen = () => setOpen(!open)
   const tokenImage = (token: Token) => {
     return token.tokenLogo ? token.tokenLogo : `images/tokens/${token.symbol}.png`
@@ -157,37 +151,42 @@ const Top: React.FC<TopProps> = (
     <GraveColumn onClick={toggleOpen}>
       <GraveHeaderRow>
         <TokenFlex>
-          <img src={tokenImage(tokens.zmbe)} style={{ width: '30px', height: '30px' }} alt='Zombie Token logo'/>
+          <img src={tokenImage(tokens.zmbe)} style={{ width: '30px', height: '30px' }} alt="Zombie Token logo" />
         </TokenFlex>
         <GraveTitle>WhalePool Season 1</GraveTitle>
         {getTabs()}
       </GraveHeaderRow>
       <GraveSubRow>
         <Amounts>
-          <CardItem label="Pool fee" value={getBalanceNumber(mintingFeeBnb.times(bnbUsdPrice))}
-                    valueType={CardItemValueType.Money}/>
+          <CardItem
+            label="Pool fee"
+            value={getBalanceNumber(mintingFeeBnb.times(bnbUsdPrice))}
+            valueType={CardItemValueType.Money}
+          />
           {/* eslint-disable-next-line no-nested-ternary */}
-            <CardItem label="NFT Minting time" value="30 days"
-                                          valueType={CardItemValueType.Text}/>
-          {
-            isMinting ?
-              <CardItem label="Mint Requested" value="Yes" valueType={CardItemValueType.Text}/>
-              :
-              <CardItem label="Mint Requested" value="Nope" valueType={CardItemValueType.Text}/>
-          }
+          <CardItem label="NFT Minting time" value="30 days" valueType={CardItemValueType.Text} />
+          {isMinting ? (
+            <CardItem label="Mint Requested" value="Yes" valueType={CardItemValueType.Text} />
+          ) : (
+            <CardItem label="Mint Requested" value="Nope" valueType={CardItemValueType.Text} />
+          )}
         </Amounts>
         <Percentages>
-          {
-            isStaked ?
-              <>
-                {
-                  nftMintTime.gt(0) ? <NftTimerCardItem mintDate={nftMintTime} amountStaked={new BigNumber(1)}
-                                                        secondsUntilMintable={nftMintTime.toNumber()}/>
-                    : <NftTimerCardItem mintDate={nftMintTime} amountStaked={new BigNumber(1)}
-                                        secondsUntilMintable={0}/>}
-              </>
-              : (<NftTimerCardItem mintDate={nftMintTime} amountStaked={new BigNumber(0)}/>)
-          }
+          {isStaked ? (
+            <>
+              {nftMintTime.gt(0) ? (
+                <NftTimerCardItem
+                  mintDate={nftMintTime}
+                  amountStaked={new BigNumber(1)}
+                  secondsUntilMintable={nftMintTime.toNumber()}
+                />
+              ) : (
+                <NftTimerCardItem mintDate={nftMintTime} amountStaked={new BigNumber(1)} secondsUntilMintable={0} />
+              )}
+            </>
+          ) : (
+            <NftTimerCardItem mintDate={nftMintTime} amountStaked={new BigNumber(0)} />
+          )}
         </Percentages>
       </GraveSubRow>
     </GraveColumn>

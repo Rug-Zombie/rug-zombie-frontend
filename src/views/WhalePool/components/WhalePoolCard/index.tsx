@@ -1,16 +1,8 @@
-/* eslint-disable no-param-reassign */
-import React, {useCallback, useEffect, useMemo, useState} from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import {useWeb3React} from "@web3-react/core";
-import {BigNumber} from 'bignumber.js';
-import {getNftConfigByAddress} from '../../../../state/nfts/hooks';
 import Top from './components/Top'
 import Bottom from './components/Bottom'
-import {useWhalePoolContract} from "../../../../hooks/useContract";
-import {getFullDisplayBalance} from '../../../../utils/formatBalance';
-import { useGetWhalePool } from "../../../../state/whalePools/hooks";
-import { WhalePool } from "../../../../state/types";
-
+import { WhalePool } from '../../../../state/types'
 
 const DetailsCard = styled.div<{ open: boolean }>`
   width: 100%;
@@ -43,27 +35,20 @@ const Shadow = styled.div`
 `
 
 interface WhalePoolCardProps {
-    whalePool: WhalePool
+  whalePool: WhalePool
 }
 
 const WhalePoolCard: React.FC<WhalePoolCardProps> = ({ whalePool }) => {
-    const [open, setOpen] = useState(true)
-    return (
-        <>
-            <DetailsCard open={open}>
-                <Top
-                    open={open}
-                    setOpen={setOpen}
-                    whalePool={whalePool}
-                />
-                {
-                    open ? <Bottom
-                        whalePool={whalePool}
-                    /> : null}
-            </DetailsCard>
-            <Shadow/>
-        </>
-    )
+  const [open, setOpen] = useState(true)
+  return (
+    <>
+      <DetailsCard open={open}>
+        <Top open={open} setOpen={setOpen} whalePool={whalePool} />
+        {open ? <Bottom whalePool={whalePool} /> : null}
+      </DetailsCard>
+      <Shadow />
+    </>
+  )
 }
 
 export default WhalePoolCard

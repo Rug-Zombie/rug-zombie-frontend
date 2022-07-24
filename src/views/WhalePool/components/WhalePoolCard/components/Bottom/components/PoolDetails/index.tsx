@@ -1,29 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useHistory } from 'react-router'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { WhalePool } from "../../../../../../../../state/types";
-import { useGetNfts } from "../../../../../../../../state/hooks";
-import { getAddress } from "../../../../../../../../utils/addressHelpers";
-import { getHighResImage } from "../../../../../../../../utils";
-
-const StyledSwiper = styled.div`
-  .swiper-wrapper {
-    height: 100%;
-    align-items: center;
-    display: flex;
-  }
-
-  .swiper-slide {
-    width: 400px;
-    margin-bottom: 20px;
-  }
-`
+import { WhalePool } from '../../../../../../../../state/types'
+import { useGetNfts } from '../../../../../../../../state/hooks'
+import { getAddress } from '../../../../../../../../utils/addressHelpers'
+import { getHighResImage } from '../../../../../../../../utils'
 
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  //flex-direction: column;
 `
 
 const NftSliderContainer = styled.div`
@@ -90,10 +75,10 @@ interface TableDetailsProps {
 }
 
 function truncateString(str, num) {
-  if(str.length > num) {
-    return `${str.slice(0, num)}...`;
+  if (str.length > num) {
+    return `${str.slice(0, num)}...`
   }
-  return str;
+  return str
 }
 
 const PoolDetails: React.FC<TableDetailsProps> = ({ whalePool }) => {
@@ -105,38 +90,44 @@ const PoolDetails: React.FC<TableDetailsProps> = ({ whalePool }) => {
   }
   const { rewardNftIds } = whalePool
 
-  const nfts = useGetNfts().data.filter(nft => rewardNftIds.includes(nft.id))
+  const nfts = useGetNfts().data.filter((nft) => rewardNftIds.includes(nft.id))
   nfts.reverse()
   return (
     <Container>
       <NftSliderContainer>
-        {
-          nfts.map((nft) => {
-            if(nft.type === 'video') {
-              return (
-                <NftContainer>
-                  <div><NftVideo key={nft.id} onClick={() => history.push(`/nfts/${nft.id}`)} autoPlay loop muted>
-                    <source src={getHighResImage(getAddress(nft.address))} type="video/webm"/>
-                  </NftVideo>
-                    <SwiperSlideContainerText>
-                      <SubHeaderText>{nft.name}</SubHeaderText><br/>
-                      <SubHeaderText>{truncateString(nft.description,80)}</SubHeaderText>
-                    </SwiperSlideContainerText>
-                  </div>
-                </NftContainer>
-              )
-            }
+        {nfts.map((nft) => {
+          if (nft.type === 'video') {
             return (
               <NftContainer>
-                <NftImage key={nft.id} onClick={() => history.push(`/nfts/${nft.id}`)} src={getHighResImage(getAddress(nft.address))} onError={imageOnErrorHandler}/>
-                <SwiperSlideContainerText>
-                  <SubHeaderText>{nft.name}</SubHeaderText><br/>
-                  <SubHeaderText>{truncateString(nft.description,80)}</SubHeaderText>
-                </SwiperSlideContainerText>
+                <div>
+                  <NftVideo key={nft.id} onClick={() => history.push(`/nfts/${nft.id}`)} autoPlay loop muted>
+                    <source src={getHighResImage(getAddress(nft.address))} type="video/webm" />
+                  </NftVideo>
+                  <SwiperSlideContainerText>
+                    <SubHeaderText>{nft.name}</SubHeaderText>
+                    <br />
+                    <SubHeaderText>{truncateString(nft.description, 80)}</SubHeaderText>
+                  </SwiperSlideContainerText>
+                </div>
               </NftContainer>
             )
-          })
-        }
+          }
+          return (
+            <NftContainer>
+              <NftImage
+                key={nft.id}
+                onClick={() => history.push(`/nfts/${nft.id}`)}
+                src={getHighResImage(getAddress(nft.address))}
+                onError={imageOnErrorHandler}
+              />
+              <SwiperSlideContainerText>
+                <SubHeaderText>{nft.name}</SubHeaderText>
+                <br />
+                <SubHeaderText>{truncateString(nft.description, 80)}</SubHeaderText>
+              </SwiperSlideContainerText>
+            </NftContainer>
+          )
+        })}
       </NftSliderContainer>
     </Container>
   )
