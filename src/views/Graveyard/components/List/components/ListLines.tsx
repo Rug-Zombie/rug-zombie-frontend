@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import SmallPreviewVideo from 'components/Video/PreviewVideo'
 import { useHistory } from 'react-router'
 import { useGetNftById } from '../../../../../state/nfts/hooks'
+import { getAddress } from "../../../../../utils/addressHelpers";
+import { getHighResImage } from "../../../../../utils";
 
 
 const Container = styled.div`
@@ -135,13 +137,14 @@ interface CollectionCardProps {
 const ListLines: React.FC<CollectionCardProps> = ({ id, showOwned, showTotalSupply }) => {
     const {
         name,
-        path,
+        address,
         totalSupply,
         rarity,
         type,
         userInfo: { ownedIds },
     } = useGetNftById(id)
     const history = useHistory()
+    const path = getHighResImage(getAddress(address))
     return (
         <Container>
             <Card
